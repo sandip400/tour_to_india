@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Himachal Pradesh Itinerary - Alternate Routes</title>
+    
+    <!-- Leaflet.js CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    {% load static %}
+    <style>
+        #map {
+            height: 100vh;
+            width: 100%;
+        }
+        .map {
+      text-align: center;
+      font-weight: 900;
+      background: wheat;
+      padding: 20px;
+      border-radius: 20px;
+      width: 60%;
+    }
+    </style>
+</head>
+<body>
+
+    <h2 style="text-align: center;">Himachal Pradesh Itinerary with Alternate Routes</h2>
+    <div id="map"></div>
+
+    <!-- Leaflet.js JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+
+    <script>
+        // Initialize the map centered in Himachal Pradesh
+        var map = L.map('map').setView([31.1048, 77.1734], 7); 
+
+        // Add OpenStreetMap tile layer (Free alternative to Google Maps)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Primary itinerary locations
+        var primaryLocations = [
+            { name: "Shimla", lat: 31.1048, lng: 77.1734, alternate: "Via Chail" },
+            { name: "Kufri", lat: 31.0982, lng: 77.2674, alternate: "Via Mashobra" },
+            { name: "Naldehra", lat: 31.1716, lng: 77.1872, alternate: "Via Fagu" },
+            { name: "Manali", lat: 32.2432, lng: 77.1892, alternate: "Via Mandi" },
+            { name: "Solang Valley", lat: 32.3167, lng: 77.1667, alternate: "Via Old Manali" },
+            { name: "Kullu", lat: 31.9579, lng: 77.1095, alternate: "Via Bhuntar" },
+        ];
+
+        // Alternative routes between locations (in case of roadblocks)
+        var alternateRoutes = [
+            [[31.1048, 77.1734], [30.9717, 77.1836], [31.0982, 77.2674]], // Shimla -> Kufri via Chail
+            [[31.0982, 77.2674], [31.1446, 77.2181], [31.1716, 77.1872]], // Kufri -> Naldehra via Mashobra
+            [[31.1716, 77.1872], [31.0109, 77.2840], [32.2432, 77.1892]], // Naldehra -> Manali via Fagu
+            [[32.2432, 77.1892], [31.7055, 76.9326], [31.9579, 77.1095]], // Manali -> Kullu via Mandi
+            [[32.2432, 77.1892], [32.2565, 77.1745], [32.3167, 77.1667]], // Manali -> Solang Valley via Old Manali
+            [[31.9579, 77.1095], [31.8786, 77.1556], [31.8715, 77.2028]]  // Kullu -> Bhuntar
+        ];
+
+        // Add primary route markers
+        primaryLocations.forEach(function(location) {
+            L.marker([location.lat, location.lng]).addTo(map)
+                .bindPopup("<b>" + location.name + "</b><br>Alternate Route: " + location.alternate);
+        });
+
+        // Draw primary route (blue)
+        var primaryRouteCoordinates = primaryLocations.map(loc => [loc.lat, loc.lng]);
+        L.polyline(primaryRouteCoordinates, { color: 'blue', weight: 5 }).addTo(map)
+            .bindPopup("Primary Route");
+
+        // Draw alternate routes (red)
+        alternateRoutes.forEach(route => {
+            L.polyline(route, { color: 'red', weight: 4, dashArray: '10, 10' }).addTo(map)
+                .bindPopup("Alternate Route");
+        });
+
+        // Fit map to show all routes
+        map.fitBounds(L.polyline(primaryRouteCoordinates).getBounds());
+    </script>
+    <div style="justify-content: center;display: flex;">
+        <h2 class="map"> <a href="{% url 'eq_weather2'%}" >About my location</a> </h2>
+    </div>
+</body>
+</html>

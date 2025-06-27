@@ -1,0 +1,2560 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Goa</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> -->
+  <style>
+    .wb {
+      font-size: 10vw;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+      border-spacing: 0;
+      border: 1px solid #ddd;
+    }
+
+    td,
+    th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+      font-size: 1.5vw;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+
+    .trip {
+      text-align: center;
+      font-weight: 900;
+      background: orangered;
+      padding: 20px;
+      border-radius: 20px;
+      width: 60%;
+    }
+
+    p,
+    li,
+    .text {
+      font-size: 1.5vw;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-weight: 600;
+    }
+
+    h4 {
+      font-weight: 900;
+    }
+
+    img {
+      border-radius: 10px;
+      display: block;
+      margin: auto;
+    }
+
+    @media screen and (max-width: 850px) {
+
+      p,
+      li,
+      .text,
+      td,
+      th {
+        font-size: 2vw;
+        ;
+      }
+
+    }
+
+    @media screen and (max-width: 500px) {
+
+      p,
+      li,
+      .text,
+      td,
+      th {
+        font-size: 4.5vw;
+        ;
+      }
+
+    }
+
+    .box:nth-of-type(odd) {
+      background: #f3b37185;
+      padding: 10px;
+    }
+
+    .weather-container {
+            border-radius: 15px;
+            background: #f0fdf4;
+            padding: 15px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .weather-card {
+            text-align: center;
+            border-radius: 10px;
+            padding: 10px;
+            background: white;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+        .aqi {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            color: white;
+        }
+        .aqi-bad { background: purple; }
+        .aqi-moderate { background: orange; }
+        .aqi-good { background: green; }
+        .best-time {
+            background: #d1fae5;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 15px;
+            color: green;
+        }
+        .wet {
+            max-width: 50px;
+        }
+        
+        .trip {
+          font-size: 18px;
+          padding: 10px 20px;
+          cursor: pointer;
+          background-color:rgb(231, 36, 36);
+          color: white;
+          border: none;
+          border-radius: 5px;
+      }
+      .modal {
+          display: none;
+          position: fixed;
+          z-index: 1;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0,0,0,0.5);
+      }
+      .modal-content {
+          background-color: #fff;
+          margin: 10% auto;
+          padding: 20px;
+          border-radius: 10px;
+          width: 40%;
+          box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+          text-align: center;
+      }
+      .close {
+          color: #aaa;
+          float: right;
+          font-size: 28px;
+          font-weight: bold;
+          cursor: pointer;
+      }
+      .trip-options {
+          display: flex;
+          justify-content: center;
+          gap: 20px;
+          margin-top: 20px;
+      }
+      .trip-options a {
+          display: block;
+          width: 120px;
+          padding: 10px;
+          background-color: #28a745;
+          color: white;
+          text-decoration: none;
+          border-radius: 5px;
+      }
+  </style>
+</head>
+
+<body>
+
+
+  <!-- <h2>Carousel Example</h2> -->
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+      <li data-target="#myCarousel" data-slide-to="4"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+
+      <div class="item active">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Palolem_Beach_Goa.jpg" alt="Palolem Beach" style="width:100%; height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Palolem Beach</h3>
+          <p>We love the pristine beaches and coastal beauty!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5d/Basilica_of_Bom_Jesus_Goa.jpg" alt="Basilica of Bom Jesus" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Basilica of Bom Jesus</h3>
+          <p>The amazing architecture and Portuguese heritage!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Dudhsagar_waterfalls.jpg" alt="Dudhsagar Falls" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Dudhsagar Falls</h3>
+          <p>A magnificent waterfall in the Western Ghats!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Anjuna_Beach_Goa.jpg" alt="Anjuna Beach" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Anjuna Beach</h3>
+          <p>We love the vibrant beach life!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Spice_plantation_in_Goa.jpg" alt="Spice Plantation" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Spice Plantation</h3>
+          <p>We love the aroma of the spice gardens!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+  <div class="container">
+    <br><br>
+    <h1 class="wb"> GOA</h1><br>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Goa_district_map.png" alt="" style="height:700px; width: -webkit-fill-available;">
+
+        </div>
+        <div class="col-sm-6">
+          <h1> Goa: India's Tropical Paradise</h1>
+          <p class="text">Goa is a vibrant and picturesque state on India's western coast, known for its pristine beaches, Portuguese heritage, rich culture, delicious cuisine, and laid-back lifestyle. It's a popular destination for both domestic and international tourists seeking sun, sand, and a unique blend of Indian and European influences.</p>
+
+          <ul>
+            <li><b>Location --</b> Western India (Konkan Coast)</li>
+            <li><b>Capital --</b> Panaji (Panjim)</li>
+            <li><b>Official Language --</b> Konkani, Marathi</li>
+            <li><b>Area --</b> 3,702 sq. km (smallest state in India)</li>
+            <li><b>Population --</b> ~1.5 million</li>
+            <li><b>Borders --</b> Maharashtra (North), Karnataka (East & South), Arabian Sea (West)</li>
+            <li><b>Major Rivers --</b> Mandovi, Zuari, Chapora, Sal</li>
+            <li><b>Major Festivals --</b> Carnival, Shigmo, Christmas, Ganesh Chaturthi, Diwali, Feast of St. Francis Xavier</li>
+            <li><b>State Animal --</b> Gaur (Indian Bison)</li>
+            <li><b>State Flower --</b> Jasmine</li>
+            <li><b>State Tree --</b> Matti (Terminalia elliptica)</li>
+            <li><b>State Bird --</b> Black Crested Bulbul</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <br>
+    <hr>
+    <div>
+      <h1>📌 Divisions & Districts of Goa</h1>
+      <br>
+      <div style="overflow-x:auto;">
+        <table>
+          <tr>
+            <th>Division</th>
+            <th>Districts</th>
+            <th>Key Highlights</th>
+          </tr>
+          <tr>
+            <td>North Goa</td>
+            <td>Bardez, Bicholim, Pernem, Ponda, Sattari, Tiswadi</td>
+            <td>Calangute, Anjuna, Baga beaches, Fort Aguada, Basilica of Bom Jesus, Mapusa Market</td>
+          </tr>
+          <tr>
+            <td>South Goa</td>
+            <td>Canacona, Dharbandora, Mormugao, Quepem, Salcete, Sanguem</td>
+            <td>Colva, Palolem, Agonda beaches, Dudhsagar Falls, Spice Plantations, Butterfly Beach</td>
+          </tr>
+        </table>
+      </div>
+      <br><br>
+      <h1>🔹 Major Highlights of Some Key Areas</h1><br><br>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <ul>
+              <li><b>Panaji --</b> Capital of Goa, cultural & administrative hub.</li>
+              <li><b>Old Goa --</b> UNESCO World Heritage site with historic churches and cathedrals.</li>
+              <li><b>Calangute & Baga --</b> Popular beaches known for water sports and nightlife.</li>
+              <li><b>Anjuna & Vagator --</b> Famous for flea markets, beach parties, and scenic views.</li>
+              <li><b>Ponda --</b> Known for spice plantations and Hindu temples.</li>
+              <li><b>Dudhsagar --</b> One of India's tallest waterfalls in the Western Ghats.</li>
+              <li><b>Palolem & Agonda --</b> Serene beaches in South Goa with pristine waters.</li>
+              <li><b>Mormugao --</b> Major port and naval base with beautiful beaches.</li>
+              <li><b>Divar & Chorao --</b> Scenic islands with Portuguese-era churches and bird sanctuary.</li>
+            </ul>
+          </div>
+          <div class="col-sm-6">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Goa_district_map.png" alt="" style="height:450px;width: -webkit-fill-available;">
+
+          </div>
+        </div>
+      </div>
+    </div><br><br>
+    <div class="container">
+      <div class="weather-container">
+          <h4 class="text-center"><strong>Weather in Goa</strong></h4>
+          <div class="row">
+              <!-- January -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Jan</h6>
+                      <p>20/32°C</p>
+                      <span class="aqi aqi-good">AQI 45</span>
+                  </div>
+              </div>
+              <!-- February -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Feb</h6>
+                      <p>21/32°C</p>
+                      <span class="aqi aqi-good">AQI 50</span>
+                  </div>
+              </div>
+              <!-- March -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Mar</h6>
+                      <p>23/33°C</p>
+                      <span class="aqi aqi-good">AQI 55</span>
+                  </div>
+              </div>
+              <!-- April -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Apr</h6>
+                      <p>25/33°C</p>
+                      <span class="aqi aqi-good">AQI 60</span>
+                  </div>
+              </div>
+              <!-- May -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>May</h6>
+                      <p>26/33°C</p>
+                      <span class="aqi aqi-good">AQI 65</span>
+                  </div>
+              </div>
+              <!-- June -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Jun</h6>
+                      <p>25/30°C</p>
+                      <span class="aqi aqi-good">AQI 40</span>
+                  </div>
+              </div>
+              <!-- July -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="rain.png" alt="rain">
+                      <h6>Jul</h6>
+                      <p>24/28°C</p>
+                      <span class="aqi aqi-good">AQI 30</span>
+                  </div>
+              </div>
+              <!-- August -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Aug</h6>
+                      <p>24/28°C</p>
+                      <span class="aqi aqi-good">AQI 35</span>
+                  </div>
+              </div>
+              <!-- September -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Sep</h6>
+                      <p>24/29°C</p>
+                      <span class="aqi aqi-good">AQI 40</span>
+                  </div>
+              </div>
+              <!-- October -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Oct</h6>
+                      <p>24/32°C</p>
+                      <span class="aqi aqi-good">AQI 45</span>
+                  </div>
+              </div>
+              <!-- November -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Nov</h6>
+                      <p>22/33°C</p>
+                      <span class="aqi aqi-good">AQI 50</span>
+                  </div>
+              </div>
+              <!-- December -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Dec</h6>
+                      <p>21/32°C</p>
+                      <span class="aqi aqi-good">AQI 45</span>
+                  </div>
+              </div>
+          </div>
+          <div class="text-center">
+              <div class="best-time">🏆 Best time to visit: October - March</div>
+          </div>
+      </div>
+    </div>
+    
+
+    <br><br>
+    <button class="trip" id="openModal">Let's go on a trip</button>
+    
+    <div id="tripModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Select Your Trip</h2>
+            <button type="button" class="btn btn-warning" style="margin-bottom: 8px;color:black; border-radius: 5px;" onclick="location.href='{% url 'goa_7days' %}'" >7 days trip</button><br>
+            <button type="button" class="btn btn-warning" style="margin-bottom: 8px;color:black; border-radius: 5px;" onclick="location.href='{% url 'goa_12days' %}'" >12 days trip</button>
+        </div>
+    </div>
+    
+    <script>
+        var modal = document.getElementById("tripModal");
+        var btn = document.getElementById("openModal");
+        var span = document.getElementsByClassName("close")[0];
+        
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+        
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+        
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script><br><br>
+    <div class="container">
+      <ul class="nav nav-tabs">
+        <li class="nav-item"><a data-toggle="tab" href="#wbculture"> Culture</a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbtradition "> Tradition</a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbfestivals"> Festivals </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbfood"> Foods </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbhistory"> History </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbartacraft"> Art and Craft </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbseason"> Season to Visit </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbtourist"> Tourist Spots </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbwild"> Wildlife & Crops </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbedu"> Institutions </a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="wbculture" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Culture of Goa</h1>
+          <p class="text">Goa has a unique and diverse culture, shaped by its history, Portuguese colonial influence, indigenous traditions, music, festivals, and cuisine. Here's an overview of some key aspects of its culture:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Language</h3>
+                  <ul>
+                    <li>Konkani is the official language of Goa and a major part of the cultural identity. Marathi is also widely spoken, especially in the border areas. Due to Portuguese influence, many older Goans also speak Portuguese, and English is widely understood due to tourism.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Konkani_in_Devanagari_script.svg/800px-Konkani_in_Devanagari_script.svg.png" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>2. Literature</h3>
+                  <ul>
+                    <li>Goan literature has a rich tradition in Konkani, Marathi, Portuguese, and English. Notable Goan writers include Laxmanrao Sardessai, Ravindra Kelekar, and Damodar Mauzo (Jnanpith Award winner).</li>
+                    <li>The Konkani language movement has been significant in preserving Goan cultural identity.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Damodar_Mauzo.jpg/800px-Damodar_Mauzo.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div><br>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Goan_handicrafts.jpg/800px-Goan_handicrafts.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Art and Craft</h3>
+                  <ul>
+                    <li>Goan art reflects a blend of Indian and European influences. Traditional crafts include terracotta pottery, bamboo crafts, shell work, and coconut crafts.</li>
+                    <li>The state is known for its distinctive architecture, with Portuguese-style houses featuring colorful facades, verandas, and ornate balconies.</li>
+                  </ul>
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Goan_Tiatr.jpg/800px-Goan_Tiatr.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>4. Music</h3>
+                  <ul>
+                    <li>Goan music is diverse, with traditional forms like Mando (romantic ballads) and Dulpod (faster folk songs).</li>
+                    <li>Portuguese influence led to the development of Goan Fado music.</li>
+                    <li>Tiatr (Konkani theater with music) is a popular form of entertainment.</li>
+                    <li>Goa is also famous for its electronic music scene, particularly Goa trance, which emerged in the late 1980s.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Dance</h3>
+                  <ul>
+                    <li>Dekni is a traditional folk dance performed during the harvest season.</li>
+                    <li>Fugdi is a popular dance form performed by women during Hindu festivals.</li>
+                    <li>Corridinho is a Portuguese-influenced dance popular during Carnival.</li>
+                  </ul>
+                  <h3>6. Cuisine</h3>
+                  <ul>
+                    <li>Goan cuisine is famous for its seafood, coconut, rice, and spices. Popular dishes include Vindaloo, Xacuti, Sorpotel, and Fish Curry Rice.</li>
+                    <li>Portuguese influence is evident in dishes like Bebinca (layered pudding) and Feni (cashew or coconut liquor).</li>
+                    <li>Street food is also popular, such as Ros Omelette and Choris Pao (Goan sausage bread).</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Goan_folk_dancers.jpg/800px-Goan_folk_dancers.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Basilica_of_Bom_Jesus_Goa.jpg/800px-Basilica_of_Bom_Jesus_Goa.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>7. Architecture</h3>
+                  <ul>
+                    <li>Goan architecture is a unique blend of Indian and Portuguese styles. The churches and cathedrals of Old Goa, including the Basilica of Bom Jesus and Sé Cathedral, are UNESCO World Heritage sites.</li>
+                    <li>Traditional Goan houses (balcãos) feature distinctive elements like oyster shell windows, colorful facades, and inner courtyards.</li>
+                  </ul>
+                  <h3>8. Religious Diversity</h3>
+                  <ul>
+                    <li>Goa has a diverse religious landscape with Hinduism, Christianity, and Islam coexisting harmoniously. This diversity is reflected in the state's festivals, rituals, and cultural practices.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Goa_Carnival.jpg/800px-Goa_Carnival.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>9. Festivals</h3>
+                  <ul>
+                    <li>Goa is famous for its vibrant festivals that blend Hindu, Christian, and Portuguese traditions. The Goa Carnival is the most famous, featuring colorful parades, music, and dance.</li>
+                    <li>Other significant festivals include Shigmo (spring festival), Ganesh Chaturthi, Christmas, and the Feast of St. Francis Xavier.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>10. Lifestyle</h3>
+                  <ul>
+                    <li>Goans are known for their laid-back, relaxed lifestyle, often referred to as "susegad" (derived from Portuguese "sossegado" meaning quiet).</li>
+                    <li>The siesta culture is still prevalent, with many businesses closing in the afternoon for a few hours.</li>
+
+                  </ul>
+                  <h3>11. Tourism Influence</h3>
+                  <ul>
+                    <li>Tourism has significantly influenced Goan culture, bringing in global influences while also creating a renewed interest in preserving local traditions.</li>
+                    <li>Beach shacks, flea markets, and nightlife have become part of modern Goan cultural identity.</li>
+
+                  </ul>
+                  <h3>12. Handicrafts</h3>
+                  <ul>
+                    <li>Goa is known for its handicrafts such as seashell crafts, coconut and bamboo products, terracotta, and brass items.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Goa_beach_shack.jpg/800px-Goa_beach_shack.jpg" alt="" style="height:300px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br><br>
+
+          <p>Goa's culture is a fascinating blend of Eastern and Western influences, creating a unique identity that continues to evolve while maintaining strong connections to its heritage. It's a place where tradition and modernity, spirituality and revelry coexist beautifully!</p><br><br>
+        </div>
+        <div id="wbtradition" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Tradition of Goa</h1>
+          <p>Goa has a rich and diverse tradition deeply rooted in its history, culture, and social practices. Here's an overview of some key traditional aspects of the state:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Clothing Tradition</h3>
+                  <h4>Men</h4>
+                  <ul>
+                    <li><b>Pud'ven:</b> Traditional Goan Hindu men wear a dhoti-like garment, especially during religious ceremonies and festivals.</li>
+                    <li><b>Western Attire:</b> Due to Portuguese influence, many Goan men adopted Western-style clothing earlier than other parts of India.</li>
+                  </ul>
+                  <h4>Women</h4>
+                  <ul>
+                    <li><b>Kapodd:</b> Traditional nine-yard saree worn by Hindu women in a distinctive style.</li>
+                    <li><b>Pano Bhaju:</b> A traditional outfit consisting of a blouse and a long skirt, often worn by Christian women for special occasions.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Traditional_Goan_attire.jpg/800px-Traditional_Goan_attire.jpg" alt="" style="height:250px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>2. Wedding Traditions</h3>
+                  <ul>
+                    <li><b>Hindu Weddings:</b> Include unique rituals like Ros (similar to Haldi ceremony) and Saddo (where the bride and groom are blessed with coconut water).</li>
+                    <li><b>Catholic Weddings:</b> Blend Portuguese customs with Indian traditions, featuring the traditional bridal gown, church ceremony, and reception with Goan food and music.</li>
+                    <li><b>Roce Ceremony:</b> A pre-wedding ritual in Catholic weddings where coconut milk is applied to the bride and groom.</li>
+                    <li><b>Chuddo:</b> A Hindu pre-wedding ceremony where the bride wears green glass bangles.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Goan_Catholic_wedding.jpg/800px-Goan_Catholic_wedding.jpg" alt="" style="height:250px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Goan_Tiatr.jpg/800px-Goan_Tiatr.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Music & Dance Traditions</h3>
+                  <ul>
+                    <li><b>Mando:</b> A traditional dance and music form performed by couples, often expressing love and social commentary.</li>
+                    <li><b>Tiatr:</b> A popular musical theater form unique to Goa, addressing social issues through drama and music.</li>
+                    <li><b>Dhalo:</b> A traditional women's folk dance performed during the spring festival of Shigmo.</li>
+                    <li><b>Fugdi:</b> A fast-paced dance performed by women during Ganesh Chaturthi and other Hindu festivals.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Goa_Carnival.jpg/800px-Goa_Carnival.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+
+                  <h3>4. Social & Religious Traditions</h3>
+                  <ul>
+                    <li><b>Carnival:</b> A pre-Lenten celebration with parades, music, and dance, reflecting Goa's Portuguese heritage.</li>
+                    <li><b>Zagor:</b> A traditional folk performance involving music, dance, and theater, performed to honor village deities.</li>
+                    <li><b>Touxeachem Fest:</b> A harvest festival celebrated by Christians, featuring the blessing of new crops.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Architectural & Handicraft Traditions</h3>
+                  <ul>
+                    <li><b>Indo-Portuguese Houses:</b> Traditional Goan homes feature distinctive elements like balcãos (covered porches), azulejos (painted tiles), and inner courtyards.</li>
+                    <li><b>Churches & Temples:</b> Goa is famous for its baroque churches in Old Goa and colorful Hindu temples with unique architectural styles.</li>
+                    <li><b>Terracotta Craft:</b> Traditional pottery and terracotta work, especially from Bicholim.</li>
+                    <li><b>Coconut & Seashell Craft:</b> Artisans create decorative items from coconut shells and seashells.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Traditional_Goan_house.jpg/800px-Traditional_Goan_house.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>6. Sports & Games</h3>
+                  <ul>
+                    <li><b>Football:</b> Goa is passionate about football, with clubs like FC Goa and Dempo SC being popular.</li>
+                    <li><b>Bull Fighting (Dhirio):</b> A traditional sport (now banned) that was once popular in rural Goa.</li>
+                    <li><b>Boat Racing:</b> Traditional boat races are held during festivals, especially in the coastal villages.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/FC_Goa_fans.jpg/800px-FC_Goa_fans.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br><br>
+          <p>Goa's traditions beautifully combine Indian, Portuguese, and indigenous influences, creating a unique cultural tapestry that reflects its diverse history and cosmopolitan character.</p><br><br>
+        </div>
+        <div id="wbfestivals" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Festivals of Goa</h1>
+          <p>Goa is known for its vibrant and diverse festivals, which reflect its rich cultural heritage, religious harmony, and unique blend of Indian and Portuguese influences. Here's a list of some of the major festivals celebrated in the state:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Goa Carnival (Biggest Festival of Goa)</h3>
+                  <ul>
+                    <li>A vibrant pre-Lenten celebration with colorful parades, music, dance, and floats.</li>
+                    <li>King Momo presides over the festivities, declaring several days of eating, drinking, and merry-making.</li>
+                    <li>Features street parties, masked balls, and live music performances.</li>
+                    <li>Celebrated primarily in Panaji, Margao, Vasco, and Mapusa.</li>
+                  </ul>
+                  <p><b>📍 Time: February (before Lent)</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Goa_Carnival.jpg/800px-Goa_Carnival.jpg" alt="" style="height:230px;width: 200px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Shigmo_festival_Goa.jpg/800px-Shigmo_festival_Goa.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Shigmo</h3>
+                  <ul>
+                    <li>A spring festival celebrated by the Hindu community of Goa.</li>
+                    <li>Features colorful processions, folk dances like Ghode Modni and Fugdi, and traditional music.</li>
+                    <li>Rural celebrations include Dhalo dance performed by women and Romta Mel folk performances.</li>
+                  </ul>
+                  <p><b>📍 Time: March (Phalguna month)</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Ganesh Chaturthi (Chavath)</h3>
+                  <ul>
+                    <li>One of the most important Hindu festivals in Goa, celebrated with great enthusiasm.</li>
+                    <li>Families bring home Ganesh idols for 1.5, 3, 5, 7, or 11 days.</li>
+                    <li>Features special prayers, aartis, and traditional Goan sweets like Nevri and Modak.</li>
+                    <li>Concludes with immersion processions (Visarjan) to nearby water bodies.</li>
+                  </ul>
+                  <p><b>📍 Time: August-September</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Ganesh_Chaturthi_in_Goa.jpg/800px-Ganesh_Chaturthi_in_Goa.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Basilica_of_Bom_Jesus_Goa.jpg/800px-Basilica_of_Bom_Jesus_Goa.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Feast of St. Francis Xavier</h3>
+                  <ul>
+                    <li>Celebrated at the Basilica of Bom Jesus in Old Goa, where the saint's mortal remains are kept.</li>
+                    <li>Pilgrims from around the world attend the novenas and feast day mass.</li>
+                    <li>Every ten years, the saint's body is displayed in a glass coffin for public veneration (Exposition).</li>
+                  </ul>
+                  <p><b>📍 Time: December 3</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Christmas</h3>
+                  <ul>
+                    <li>Celebrated with great fervor in Goa, with midnight mass, carol singing, and festive decorations.</li>
+                    <li>Homes are decorated with Christmas stars, nativity scenes, and Christmas trees.</li>
+                    <li>Traditional Goan sweets like Neureos, Dodol, and Bebinca are prepared.</li>
+                    <li>Panaji and Old Goa are beautifully illuminated during this time.</li>
+                  </ul>
+                  <p><b>📍 Time: December 25</b></p>
+                  <h3>6. Diwali</h3>
+                  <ul>
+                    <li>Celebrated by the Hindu community with oil lamps, fireworks, and rangoli.</li>
+                    <li>In Goa, a unique tradition involves burning effigies of the demon Narakasura on Naraka Chaturdashi.</li>
+                    <li>Communities compete to build the largest and most creative Narkasur effigies.</li>
+                  </ul>
+                  <p><b>📍 Time: October-November</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Christmas_in_Goa.jpg/800px-Christmas_in_Goa.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Sao_Joao_festival_Goa.jpg/800px-Sao_Joao_festival_Goa.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>7. Sao Joao (Feast of St. John the Baptist)</h3>
+                  <ul>
+                    <li>A unique monsoon festival where young men jump into wells and water bodies to retrieve gifts.</li>
+                    <li>People wear crowns of fresh fruits and flowers (Kopel) and celebrate with music and feni.</li>
+                    <li>Boat races and other water activities are organized in villages like Siolim and Anjuna.</li>
+                  </ul>
+                  <p><b>📍 Time: June 24</b></p>
+                  <h3>8. Bonderam</h3>
+                  <ul>
+                    <li>A colorful flag festival celebrated on Divar Island, commemorating a historical land dispute.</li>
+                    <li>Features a parade with traditional music, colorful flags, and mock fights with soft weapons called 'fotashes'.</li>
+                  </ul>
+                  <p><b>📍 Time: August</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>9. Feast of Our Lady of Miracles</h3>
+                  <ul>
+                    <li>Celebrated at the Milagres Church in Mapusa, attracting devotees from all religions.</li>
+                    <li>A fair (Milagres Feast Fair) is held with stalls selling candles, religious items, and local products.</li>
+                    <li>Coincides with the Hindu festival of Shigmo, showcasing Goa's religious harmony.</li>
+                  </ul>
+                  <p><b>📍 Time: March-April</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Milagres_Church_Mapusa.jpg/800px-Milagres_Church_Mapusa.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Goa_Sunburn_Festival.jpg/800px-Goa_Sunburn_Festival.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>10. Sunburn Festival</h3>
+                  <ul>
+                    <li>Asia's largest electronic dance music festival, attracting thousands of music lovers.</li>
+                    <li>Features performances by international and Indian DJs across multiple stages.</li>
+                    <li>Held at Vagator Beach, with food stalls, merchandise, and adventure activities.</li>
+                  </ul>
+                  <p><b>📍 Time: December (year-end)</b></p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>11. Goa International Film Festival (IFFI)</h3>
+                  <ul>
+                    <li>One of Asia's oldest and India's most prestigious film festivals.</li>
+                    <li>Showcases international and Indian cinema, with screenings, masterclasses, and panel discussions.</li>
+                    <li>Attended by filmmakers, actors, and cinema enthusiasts from around the world.</li>
+                  </ul>
+                  <p><b>📍 Time: November</b></p>
+
+                  <h3>12. Goa Food and Cultural Festival</h3>
+                  <ul>
+                    <li>Celebrates Goan cuisine, music, and culture.</li>
+                    <li>Features food stalls offering traditional Goan dishes, cooking demonstrations, and cultural performances.</li>
+                  </ul>
+                  <p><b>📍 Time: February-March</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/IFFI_Goa.jpg/800px-IFFI_Goa.jpg" alt="" style="height:200px;width: 230px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Goa_Zatras.jpg/800px-Goa_Zatras.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>13. Zatras (Temple Festivals)</h3>
+                  <ul>
+                    <li>Annual temple festivals celebrated across Goa, with processions of deities, music, and cultural programs.</li>
+                    <li>Notable ones include the Shantadurga Zatra at Kavlem and the Mangeshi Temple Zatra.</li>
+                  </ul>
+                  <p><b>📍 Time: Throughout the year, depending on the temple</b></p>
+                  <h3>14. Goa Grape Escapade</h3>
+                  <ul>
+                    <li>Goa's premier wine festival showcasing Indian and international wines.</li>
+                    <li>Features wine tasting sessions, grape stomping, food pairing, and live music.</li>
+                  </ul>
+                  <p><b>📍 Time: January-February</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Goa's festivals are a vibrant blend of religious, cultural, and modern celebrations, reflecting the state's diverse heritage and cosmopolitan character! 🎉</p><br><br>
+        </div>
+        <div id="wbfood" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Foods of Goa</h1>
+          <p>Goan cuisine is a delicious blend of Indian and Portuguese influences, featuring seafood, coconut, rice, and distinctive spices. The food varies between Hindu and Catholic communities, each with their unique preparations. Here's a look at some of the most iconic foods of Goa:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Staple Food of Goa</h3>
+                  <ul>
+                    <li><b>Fish Curry Rice:</b> The quintessential Goan meal, featuring spicy coconut-based curry with local fish.</li>
+                    <li><b>Sannas:</b> Steamed rice cakes made from fermented rice batter, often served with curries.</li>
+                  </ul>
+                  <h3>2. Goan Breads</h3>
+                  <ul>
+                    <li><b>Pao:</b> Soft, fluffy bread rolls, a Portuguese influence in Goan cuisine.</li>
+                    <li><b>Poee:</b> Traditional Goan whole wheat bread with a hollow center, perfect for stuffing.</li>
+                    <li><b>Katro Pao:</b> Four-segment bread, ideal for sandwiches and accompaniments.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Goan_Fish_Curry_Rice.jpg/800px-Goan_Fish_Curry_Rice.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Goan_Vegetable_Curry.jpg/800px-Goan_Vegetable_Curry.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Famous Goan Dishes</h3>
+                  <h4>Fish & Seafood</h4>
+                  <ul>
+                    <li><b>Goan Fish Curry:</b> Made with kokum, coconut, and red chillies, usually with kingfish or pomfret.</li>
+                    <li><b>Prawn Balchão:</b> Spicy, tangy prawn pickle with Portuguese influences.</li>
+                    <li><b>Crab Xec Xec:</b> Spicy crab curry made with roasted coconut.</li>
+                    <li><b>Fish Recheado:</b> Stuffed fish with a spicy red masala, typically mackerel or pomfret.</li>
+                  </ul>
+                  <h4>Vegetarian Dishes</h4>
+                  <ul>
+                    <li><b>Khatkhate:</b> A mixed vegetable stew with coconut and dal, often served during festivals.</li>
+                    <li><b>Bhaji:</b> Various vegetable preparations, like Moong Bhaji (sprouted mung beans) and Alsande Bhaji (cowpeas).</li>
+                    <li><b>Varan:</b> Traditional Goan dal preparation, often served with rice.</li>
+                    <li><b>Tendli Bhaji:</b> Ivy gourd stir-fry, a common side dish.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Goan_Pork_Vindaloo.jpg/800px-Goan_Pork_Vindaloo.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h4>Meat Dishes</h4>
+                  <ul>
+                    <li><b>Pork Vindaloo:</b> A fiery curry made with pork, vinegar, and spices, a Portuguese-influenced dish.</li>
+                    <li><b>Chicken Cafreal:</b> Green spiced chicken, marinated with coriander, mint, and other herbs.</li>
+                    <li><b>Sorpotel:</b> A spicy pork dish made with meat and offal, traditionally served at Christmas.</li>
+                    <li><b>Xacuti:</b> A complex curry with roasted coconut and spices, made with chicken or lamb.</li>
+                  </ul>
+                  <h4>Rice Dishes</h4>
+                  <ul>
+                    <li><b>Arroz Doce:</b> Portuguese-influenced sweet rice pudding with coconut milk.</li>
+                    <li><b>Goan Pulao:</b> Fragrant rice cooked with spices, vegetables, and sometimes meat.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>4. Goan Sweets & Desserts</h3>
+                  <ul>
+                    <li><b>Bebinca:</b> A multi-layered pudding made with coconut milk, eggs, and ghee, a traditional Christmas dessert.</li>
+                    <li><b>Dodol:</b> A toffee-like sweet made with coconut, jaggery, and rice flour.</li>
+                    <li><b>Neureos:</b> Sweet dumplings filled with coconut, jaggery, and dry fruits, similar to gujiya.</li>
+                    <li><b>Perad:</b> Guava cheese, a firm sweet made from guava pulp and sugar.</li>
+                    <li><b>Alle Belle:</b> Pancakes stuffed with coconut and jaggery filling.</li>
+                  </ul>
+
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Bebinca_Goan_Dessert.jpg/800px-Bebinca_Goan_Dessert.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Goan_Ros_Omelette.jpg/800px-Goan_Ros_Omelette.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>5. Street Food of Goa</h3>
+                  <ul>
+                    <li><b>Ros Omelette:</b> Fluffy omelette topped with spicy chicken or chickpea gravy (ros).</li>
+                    <li><b>Choris Pao:</b> Goan pork sausage (choris) served in bread rolls.</li>
+                    <li><b>Cutlet Pao:</b> Spiced meat or fish patties served in bread.</li>
+                    <li><b>Samosas & Chamuças:</b> Triangular pastries with savory fillings, the latter being the Portuguese version.</li>
+                    <li><b>Bhaji Pao:</b> Spicy vegetable curry served with bread rolls.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>6. Famous Drinks</h3>
+                  <ul>
+                    <li><b>Feni:</b> Traditional Goan liquor made from either cashew apples or coconut sap.</li>
+                    <li><b>Urrak:</b> A milder alcoholic drink, the first distillate of cashew apple fermentation.</li>
+                    <li><b>Kokum Juice:</b> A refreshing summer drink made from kokum fruit, known for its cooling properties.</li>
+                    <li><b>Sol Kadhi:</b> A pink-colored digestive drink made with kokum and coconut milk.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Goan_Feni.jpg/800px-Goan_Feni.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Special Festival Foods</h3>
+                  <ul>
+                    <li><b>Sanna-Sorpotel:</b> Traditional Christmas combination of steamed rice cakes and spicy pork dish.</li>
+                    <li><b>Patoleo:</b> Turmeric leaves stuffed with rice, jaggery, and coconut, steamed and served during monsoon festivals.</li>
+                    <li><b>Nevri:</b> Sweet dumplings made during Ganesh Chaturthi and Diwali.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Goan_Festival_Food.jpg/800px-Goan_Festival_Food.jpg" alt="" style="height:200px;width: 200px;">
+
+                  alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Goan cuisine is a delightful fusion of flavors, spices, and cooking techniques from various cultures, making it one of the most distinctive and delicious regional cuisines in India! 🍛🐟🍬</p><br><br>
+        </div>
+        <div id="wbhistory" class="tab-pane fade in active" style="background-color: white;">
+          <h1>History of Goa</h1>
+          <p>Goa has a rich and diverse history that spans ancient civilizations, medieval kingdoms, Portuguese colonial rule, and the modern era. The region has played a significant role in India's maritime, cultural, and political history.</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Ancient Goa (Before 3rd Century BCE)</h3>
+                  <ul>
+                    <li><b>Prehistoric Period:</b> Archaeological evidence suggests human habitation in Goa dates back to the Paleolithic and Mesolithic eras.</li>
+                    <li><b>Maurya Empire (322-185 BCE):</b> Goa was part of Emperor Ashoka's vast empire, introducing Buddhism to the region.</li>
+                    <li><b>Satavahana Rule (1st-2nd Century CE):</b> After the decline of the Mauryas, the Satavahanas controlled the region, promoting trade and commerce.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Ancient_Goa_artifacts.jpg/800px-Ancient_Goa_artifacts.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Kadamba_dynasty_coin.jpg/800px-Kadamba_dynasty_coin.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Medieval Goa (3rd - 16th Century)</h3>
+                  <h4>Bhojas, Chalukyas, and Rashtrakutas (3rd-10th Century):</h4>
+                  <ul>
+                    <li>These dynasties ruled over parts of Goa at different times, contributing to its cultural development.</li>
+                    <li>Trade flourished with Arab merchants and other maritime powers.</li>
+                  </ul>
+                  <h4>Kadamba Dynasty (10th-14th Century):</h4>
+                  <ul>
+                    <li>Established their capital at Chandor and later at Gopakapattana (modern Goa Velha).</li>
+                    <li>Promoted art, culture, and maritime trade, considered Goa's first golden age.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Vijayanagara_Empire_map.jpg/800px-Vijayanagara_Empire_map.jpg" alt="" style="height:220px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h4>Bahmani and Vijayanagara Period (14th-15th Century):</h4>
+                  <ul>
+                    <li>Goa became a battleground between the Muslim Bahmani Sultanate and the Hindu Vijayanagara Empire.</li>
+                    <li>Vijayanagara rulers promoted Hindu culture and temple building in Goa.</li>
+                  </ul>
+                  <h4>Adil Shahi Dynasty (15th-16th Century):</h4>
+                  <ul>
+                    <li>The Bijapur-based Adil Shahi dynasty controlled Goa before the Portuguese arrival.</li>
+                    <li>Yusuf Adil Shah built the city of Ela (Old Goa) as a port city.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Portuguese Colonial Period (1510-1961)</h3>
+                  <ul>
+                    <li>Alfonso de Albuquerque conquered Goa from the Adil Shahis in 1510, establishing the first European colony in Asia.</li>
+                    <li>The Portuguese gradually expanded their territory to include what is now known as "Old Conquests" (Tiswadi, Bardez, and Salcete) and later the "New Conquests."</li>
+                    <li>Goa became the capital of the Portuguese State of India, controlling Portuguese territories from East Africa to East Asia.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Basilica_of_Bom_Jesus_Goa.jpg/800px-Basilica_of_Bom_Jesus_Goa.jpg" alt="" style="height:200px;width: 250px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Portuguese_Goa.jpg/800px-Portuguese_Goa.jpg" alt="" style="height:230px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h2>4. Portuguese Colonial Rule (1510 - 1961)</h3>
+                    <h3>Religious and Cultural Changes</h3>
+                    <ul>
+                      <li>The Portuguese introduced Christianity through missionary activities and the Inquisition (1560-1812).</li>
+                      <li>Many Hindu temples were destroyed, and a significant portion of the population converted to Christianity.</li>
+                      <li>Portuguese language, architecture, cuisine, music, and customs blended with local traditions, creating a unique Indo-Portuguese culture.</li>
+                    </ul>
+                    <h3>Economic Development</h3>
+                    <ul>
+                      <li>Goa became a major trading hub in the Indian Ocean trade network.</li>
+                      <li>The economy was based on spice trade, shipbuilding, and agriculture.</li>
+                    </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Old_Goa_churches.jpg/800px-Old_Goa_churches.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>Golden Age of Goa (16th-17th Century)</h3>
+                  <ul>
+                    <li>Old Goa became known as "Rome of the East" with magnificent churches and cathedrals.</li>
+                    <li>The city's population reached 200,000, making it one of the largest cities in the world at that time.</li>
+                    <li>St. Francis Xavier arrived in Goa in 1542, establishing educational institutions and missionary activities.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Goa_liberation_movement.jpg/800px-Goa_liberation_movement.jpg" alt="" style="height:230px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>Decline and Freedom Movement</h3>
+                  <ul>
+                    <li>By the 18th century, Portuguese power declined with the rise of British and Dutch colonial powers.</li>
+                    <li>Epidemics and shifting of the Mandovi River led to the abandonment of Old Goa, with Panjim becoming the new capital in 1843.</li>
+                    <li>After India's independence in 1947, the Goan freedom movement intensified:</li>
+                    <ul>
+                      <li>Civil disobedience movements led by Ram Manohar Lohia and T.B. Cunha.</li>
+                      <li>Armed resistance by Azad Gomantak Dal and other groups.</li>
+                      <li>Diplomatic pressure from the Indian government under Nehru.</li>
+                    </ul>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Liberation & Post-Independence (1961 - Present)</h3>
+                  <h4>Operation Vijay (1961)</h4>
+                  <ul>
+                    <li>On December 18-19, 1961, the Indian Armed Forces launched Operation Vijay to liberate Goa.</li>
+                    <li>After minimal resistance, Portuguese Governor General Vassalo e Silva surrendered, ending 451 years of colonial rule.</li>
+                    <li>Goa, along with Daman and Diu, became a Union Territory of India.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Indian_troops_in_Goa_1961.jpg/800px-Indian_troops_in_Goa_1961.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h4>Post-Liberation Developments</h4>
+                  <ul>
+                    <li>Opinion Poll (1967): Goans voted to remain a separate entity rather than merge with Maharashtra.</li>
+                    <li>Statehood (1987): Goa became India's 25th state, while Daman and Diu remained a Union Territory.</li>
+                    <li>Economic Transformation: From an agriculture-based economy to one driven by tourism, mining, pharmaceuticals, and IT.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Modern_Panjim_Goa.jpg/800px-Modern_Panjim_Goa.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>6. Present-Day Goa</h3>
+                  <ul>
+                    <li><b>Tourism Hub:</b> Goa has become one of India's most popular tourist destinations, known for its beaches, heritage sites, and vibrant culture.</li>
+                    <li><b>Economic Growth:</b> Tourism, pharmaceuticals, mining, agriculture, and fishing are key sectors.</li>
+                    <li><b>Cultural Identity:</b> Goa maintains its unique blend of Indian and Portuguese influences in architecture, cuisine, music, and festivals.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Palolem_Beach_Goa.jpg/800px-Palolem_Beach_Goa.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Goa's history is a fascinating tapestry of ancient Indian civilizations, Portuguese colonialism, and modern Indian statehood. This unique historical journey has created a distinctive cultural identity that continues to evolve while preserving its rich heritage. 🚩📜</p>
+          <br><br>
+        </div>
+        <div id="wbartacraft" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Art & Craft of Goa 🎨🖌️</h1>
+          <p>Goa has a rich artistic heritage, blending traditional Indian craftsmanship with Portuguese influences. Goan artisans are known for their unique creations that reflect the state's multicultural history, religious diversity, and natural resources.</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Terracotta & Pottery 🏺</h3>
+                  <h4>🔸 Goan Terracotta Art</h4>
+                  <ul>
+                    <li><b>Famous for:</b> Clay figurines, decorative items, and utilitarian pottery.</li>
+                    <li><b>Where?</b> Bicholim and Pernem talukas.</li>
+                    <li><b>Used in:</b> Home decor, religious ceremonies, and garden ornaments.</li>
+                  </ul>
+                  <h4>🔸 Clay & Pottery Work</h4>
+                  <ul>
+                    <li><b>Traditional Pottery:</b> Handmade clay pots, urns, and cooking vessels.</li>
+                    <li><b>Modern Adaptations:</b> Contemporary designs incorporating traditional techniques.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Goan_terracotta.jpg/800px-Goan_terracotta.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Goan_Kunbi_saree.jpg/800px-Goan_Kunbi_saree.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Textile & Weaving 🧵</h3>
+                  <h4>🔸 Kunbi Sarees</h4>
+                  <ul>
+                    <li><b>Origin:</b> Traditional attire of the Kunbi tribe, indigenous to Goa.</li>
+                    <li><b>Features:</b> Handwoven cotton sarees with distinctive red and black checkered patterns.</li>
+                  </ul>
+                  <h4>🔸 Goan Embroidery</h4>
+                  <ul>
+                    <li><b>Origin:</b> Blend of Portuguese and Indian techniques.</li>
+                    <li><b>Features:</b> Intricate needlework on clothing, household linens, and religious items.</li>
+                  </ul>
+                  <h4>🔸 Crochet Work</h4>
+                  <ul>
+                    <li><b>Origin:</b> Introduced by Portuguese missionaries.</li>
+                    <li><b>Features:</b> Delicate lace doilies, table cloths, and decorative items.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Coconut & Seashell Craft 🥥</h3>
+                  <ul>
+                    <li><b>Origin:</b> Coastal communities of Goa.</li>
+                    <li><b>Material:</b> Coconut shells, seashells, and palm leaves.</li>
+                    <li><b>Designs:</b> Decorative items, jewelry, lamps, and household utilities.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Goan_coconut_shell_craft.jpg/800px-Goan_coconut_shell_craft.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Traditional_Goan_house.jpg/800px-Traditional_Goan_house.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Wooden Craft & Furniture 🌳</h3>
+                  <h4>🔸 Goan Furniture</h4>
+                  <ul>
+                    <li><b>Origin:</b> Indo-Portuguese fusion style.</li>
+                    <li><b>Famous pieces:</b> Rosewood chairs, tables, almirahs, and four-poster beds.</li>
+                  </ul>
+                  <h4>🔸 Wood Carving</h4>
+                  <ul>
+                    <li><b>Popular in:</b> Religious artifacts, door panels, and furniture decoration.</li>
+                    <li><b>Materials:</b> Teak, rosewood, and jackfruit wood.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Goan Azulejos (Painted Tiles) 🎨</h3>
+                  <ul>
+                    <li><b>Origin:</b> Portuguese influence, adapted by local artisans.</li>
+                    <li><b>Style:</b> Hand-painted ceramic tiles with floral, geometric, and religious motifs.</li>
+                    <li><b>Usage:</b> Home decoration, especially in traditional Portuguese-style houses.</li>
+                  </ul>
+                  <h3>6. Brass & Metal Craft 🔨</h3>
+                  <ul>
+                    <li><b>Famous in:</b> Bicholim and Marcela.</li>
+                    <li><b>Items:</b> Lamps, utensils, religious artifacts, and decorative pieces.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Goan_azulejos.jpg/800px-Goan_azulejos.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Goan_paper_mache.jpg/800px-Goan_paper_mache.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>7. Paper Mache & Carnival Masks 🎭</h3>
+                  <ul>
+                    <li><b>Origin:</b> Associated with Goa's Carnival celebrations.</li>
+                    <li><b>Features:</b> Colorful masks, figurines, and decorative items made from paper pulp.</li>
+                  </ul>
+                  <h3>8. Bamboo & Cane Craft 🎋</h3>
+                  <ul>
+                    <li><b>Location:</b> Rural areas of Goa.</li>
+                    <li><b>Uses:</b> Baskets, furniture, fishing equipment, and household items.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>9. Religious Art & Craft ⛪</h3>
+                  <h4>🔸 Christian Religious Art</h4>
+                  <ul>
+                    <li><b>Items:</b> Altarpieces, statues, crosses, and religious paintings.</li>
+                    <li><b>Style:</b> Blend of European Baroque and Indian artistic traditions.</li>
+                  </ul>
+                  <h4>🔸 Hindu Religious Art</h4>
+                  <ul>
+                    <li><b>Items:</b> Temple carvings, Ganesha idols, and ritual objects.</li>
+                    <li><b>Materials:</b> Wood, stone, and metal.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Goan_religious_art.jpg/800px-Goan_religious_art.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>📌 Summary: Goa's Art & Craft Forms</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Art Form</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Terracotta & Pottery</td>
+                <td>Bicholim, Pernem</td>
+                <td>Clay figurines, Decorative pottery</td>
+              </tr>
+              <tr>
+                <td>Kunbi Sarees</td>
+                <td>Rural Goa</td>
+                <td>Red & Black checkered handwoven cotton sarees</td>
+              </tr>
+              <tr>
+                <td>Goan Embroidery</td>
+                <td>Throughout Goa</td>
+                <td>Portuguese-influenced needlework</td>
+              </tr>
+              <tr>
+                <td>Coconut & Seashell Craft</td>
+                <td>Coastal areas</td>
+                <td>Decorative items, Jewelry</td>
+              </tr>
+              <tr>
+                <td>Indo-Portuguese Furniture</td>
+                <td>Urban centers</td>
+                <td>Rosewood chairs, Four-poster beds</td>
+              </tr>
+              <tr>
+                <td>Azulejos (Painted Tiles)</td>
+                <td>Traditional Goan homes</td>
+                <td>Hand-painted ceramic tiles</td>
+              </tr>
+              <tr>
+                <td>Brass & Metal Craft</td>
+                <td>Bicholim, Marcela</td>
+                <td>Lamps, Religious artifacts</td>
+              </tr>
+              <tr>
+                <td>Paper Mache & Carnival Masks</td>
+                <td>Panaji, Margao</td>
+                <td>Colorful masks, Carnival decorations</td>
+              </tr>
+              <tr>
+                <td>Bamboo & Cane Craft</td>
+                <td>Rural Goa</td>
+                <td>Baskets, Furniture</td>
+              </tr>
+              <tr>
+                <td>Religious Art</td>
+                <td>Churches & Temples</td>
+                <td>Altarpieces, Statues, Temple carvings</td>
+              </tr>
+            </table>
+          </div>
+          <br><br>
+          <p>Goa's art and crafts are a beautiful reflection of its multicultural heritage, blending Indian traditions with Portuguese influences. From the indigenous Kunbi sarees to the European-inspired azulejos, Goan crafts showcase the state's unique cultural identity and continue to evolve while preserving traditional techniques. 🎭✨</p>
+          <br><br>
+        </div>
+        <div id="wbseason" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Seasons to visit Goa 🌧️☀️ </h1>
+          <p>Goa, with its tropical climate, offers different experiences throughout the year. The best time to visit depends on what you're looking for - whether it's beach activities, cultural experiences, or budget travel.</p>
+
+          <br><br>
+
+          <h2> Season-wise Breakdown for Visiting Goa</h2>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🌸 Winter (November - February)</h3>
+                  <ul>
+                    <li>Peak tourist season with perfect weather - sunny days and cool evenings.</li>
+                    <li>Ideal for beach activities, water sports, and outdoor exploration.</li>
+                    <li>Major festivals like Carnival, Christmas, and New Year celebrations.</li>
+                    <li>Higher prices and crowded beaches, especially during December-January.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Christmas_in_Goa.jpg/800px-Christmas_in_Goa.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Anjuna_Beach_Goa.jpg/800px-Anjuna_Beach_Goa.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>☀️ Summer (March – May)</h3>
+                  <ul>
+                    <li>Hot and humid with temperatures reaching 33-35°C.</li>
+                    <li>Less crowded beaches and lower accommodation rates.</li>
+                    <li>Good for budget travelers and those who enjoy hot weather.</li>
+                    <li>Many beach shacks close by mid-May as monsoon approaches.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🌧️ Monsoon (June - September)</h3>
+                  <ul>
+                    <li>Heavy rainfall transforms Goa into a lush green paradise.</li>
+                    <li>Perfect for experiencing Goa's natural beauty - waterfalls, spice plantations, and wildlife.</li>
+                    <li>Sao Joao (monsoon festival) and Bonderam are celebrated during this season.</li>
+                    <li>Most water sports are suspended, and some beaches have strong currents.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Dudhsagar_waterfalls.jpg/800px-Dudhsagar_waterfalls.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Ganesh_Chaturthi_in_Goa.jpg/800px-Ganesh_Chaturthi_in_Goa.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🍁 Post-Monsoon (October)</h3>
+                  <ul>
+                    <li>Transition period with occasional showers and increasing sunshine.</li>
+                    <li>Lush green landscapes after the monsoon with fewer tourists.</li>
+                    <li>Beach shacks begin to set up for the upcoming tourist season.</li>
+                    <li>Good time for budget travelers before peak season prices kick in.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <h2>📌 Summary: Best Time to Visit Different Places in Goa</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Region</th>
+                <th>Best Season</th>
+                <th>Recommended Months</th>
+                <th>Why Visit?</th>
+              </tr>
+              <tr>
+                <td>North Goa Beaches (Baga, Calangute, Anjuna)</td>
+                <td>Winter, Post-Monsoon</td>
+                <td>October - March</td>
+                <td>Perfect beach weather, nightlife, water sports, flea markets</td>
+              </tr>
+              <tr>
+                <td>South Goa Beaches (Palolem, Agonda, Colva)</td>
+                <td>Winter, Post-Monsoon</td>
+                <td>October - March</td>
+                <td>Serene beaches, less crowded, dolphin watching</td>
+              </tr>
+              <tr>
+                <td>Old Goa (Churches & Heritage Sites)</td>
+                <td>Winter, Post-Monsoon</td>
+                <td>October - March</td>
+                <td>Comfortable weather for sightseeing, Feast of St. Francis Xavier (Dec)</td>
+              </tr>
+              <tr>
+                  Feast of St. Francis Xavier (Dec)</td>
+              </tr>
+              <tr>
+                <td>Dudhsagar Falls & Spice Plantations</td>
+                <td>Monsoon, Post-Monsoon</td>
+                <td>July - October</td>
+                <td>Waterfall at its full glory, lush green spice plantations</td>
+              </tr>
+              <tr>
+                <td>Wildlife Sanctuaries (Bhagwan Mahavir, Cotigao)</td>
+                <td>Winter, Post-Monsoon</td>
+                <td>October - March</td>
+                <td>Best time for wildlife spotting, comfortable hiking weather</td>
+              </tr>
+              <tr>
+                <td>Panaji & Urban Areas</td>
+                <td>Winter</td>
+                <td>November - February</td>
+                <td>Pleasant weather for city exploration, IFFI (Nov), Carnival (Feb)</td>
+              </tr>
+              <tr>
+                <td>Divar & Chorao Islands</td>
+                <td>Winter, Post-Monsoon</td>
+                <td>October - March</td>
+                <td>Bird watching at Salim Ali Bird Sanctuary, peaceful rural Goa</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="container">
+            <div class="row">
+              <h1 style=" text-align: center;">📌 Summary: When to Visit Goa</h1><br>
+              <ul>
+                <li><b>For beaches & water sports:</b> November - February (peak season with perfect weather)</li>
+                <li><b>For festivals & nightlife:</b> December - February (Christmas, New Year, Carnival)</li>
+                <li><b>For budget travel:</b> March - May, October (shoulder seasons with fewer tourists)</li>
+                <li><b>For nature & waterfalls:</b> June - September (monsoon season with lush landscapes)</li>
+                <li><b>For cultural experiences:</b> October - March (comfortable weather for sightseeing)</li>
+              </ul>
+
+            </div>
+          </div>
+          <br><br>
+        </div>
+        <div id="wbtourist" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Tourist Spots of Goa 🏖️⛪</h1>
+          <p>Goa is a diverse state with beautiful beaches, historic churches, wildlife sanctuaries, spice plantations, and vibrant markets. Here's a categorized list of the best tourist places in Goa:</p>
+
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Popular Beaches 🏖️</h3>
+                  <ul>
+                    <li><b>North Goa -</b> Baga, Calangute, Anjuna, Vagator, Candolim, Morjim</li>
+                    <li><b>South Goa -</b> Palolem, Agonda, Colva, Benaulim, Butterfly Beach, Majorda</li>
+                    <li><b>Hidden Gems -</b> Cola, Kakolem, Galgibaga, Hollant</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Palolem_Beach_Goa.jpg/800px-Palolem_Beach_Goa.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Basilica_of_Bom_Jesus_Goa.jpg/800px-Basilica_of_Bom_Jesus_Goa.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Heritage & Cultural Sites 🏛️</h3>
+                  <ul>
+                    <li><b>Old Goa (UNESCO World Heritage Site) -</b> Basilica of Bom Jesus, Sé Cathedral, Church of St. Francis of Assisi, St. Augustine Tower.</li>
+                    <li><b>Fontainhas (Latin Quarter) -</b> Colorful Portuguese-era houses, narrow streets, art galleries.</li>
+                    <li><b>Ancestral Goa -</b> Open-air museum showcasing traditional Goan lifestyle.</li>
+                    <li><b>Temples -</b> Shantadurga Temple, Mangeshi Temple, Mahalasa Temple.</li>
+                    <li><b>Forts -</b> Aguada Fort, Chapora Fort, Reis Magos Fort, Cabo de Rama Fort.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Wildlife & Nature Destinations 🌳🐯</h3>
+                  <ul>
+                    <li><b>Dudhsagar Waterfalls -</b> One of India's tallest waterfalls, especially magnificent during monsoon.</li>
+                    <li><b>Bhagwan Mahavir Wildlife Sanctuary -</b> Home to diverse flora and fauna.</li>
+                    <li><b>Cotigao Wildlife Sanctuary -</b> Dense forests with nature trails.</li>
+                    <li><b>Mollem National Park -</b> Rich biodiversity and Devil's Canyon.</li>
+                    <li><b>Salim Ali Bird Sanctuary -</b> Mangrove habitat with numerous bird species.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Dudhsagar_waterfalls.jpg/800px-Dudhsagar_waterfalls.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Spice_plantation_in_Goa.jpg/800px-Spice_plantation_in_Goa.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Plantations & Rural Experiences 🌱</h3>
+                  <ul>
+                    <li><b>Spice Plantations -</b> Sahakari, Tropical, Pascoal, and Savoi plantations offering tours and traditional meals.</li>
+                    <li><b>Cashew & Coconut Groves -</b> Learn about local agriculture and processing.</li>
+                    <li><b>Goa Chitra Museum -</b> Ethnographic museum showcasing traditional farming implements.</li>
+                    <li><b>Divar & Chorao Islands -</b> Rural Goan life, bird watching, and heritage houses.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Markets & Shopping Destinations 🛍️</h3>
+                  <ul>
+                    <li><b>Anjuna Flea Market -</b> Wednesday market with handicrafts, clothing, and souvenirs.</li>
+                    <li><b>Mapusa Friday Market -</b> Local produce, spices, and authentic Goan products.</li>
+                    <li><b>Arpora Saturday Night Market -</b> Vibrant night bazaar with food, music, and shopping.</li>
+                    <li><b>Panjim Municipal Market -</b> Fresh seafood, spices, and local produce.</li>
+                    <li><b>Calangute Market Square -</b> Tourist-friendly shopping area with various goods.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Anjuna_Flea_Market.jpg/800px-Anjuna_Flea_Market.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Goa_beach_shack.jpg/800px-Goa_beach_shack.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>6. Food & Nightlife Hotspots 🍛🎵</h3>
+                  <ul>
+                    <li><b>Beach Shacks -</b> Curlies (Anjuna), Brittos (Baga), Martin's Corner (Betalbatim).</li>
+                    <li><b>Nightclubs -</b> Tito's, LPK Waterfront, SinQ, Club Cubana.</li>
+                    <li><b>Authentic Goan Restaurants -</b> Viva Panjim, Venite, Mum's Kitchen, Spice Goa.</li>
+                    <li><b>Cruise & Casino -</b> Mandovi River cruise, floating casinos like Deltin Royale.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Adventure & Water Sports 🏄‍♂️</h3>
+                  <ul>
+                    <li><b>Water Sports Hubs -</b> Baga, Calangute, Candolim, and Palolem beaches.</li>
+                    <li><b>Activities -</b> Parasailing, jet skiing, banana boat rides, scuba diving, snorkeling.</li>
+                    <li><b>Dolphin Watching -</b> Tours from Sinquerim, Candolim, and Palolem.</li>
+                    <li><b>White Water Rafting -</b> Mhadei River (seasonal).</li>
+                    <li><b>Trekking -</b> Netravali Wildlife Sanctuary, Tambdi Surla.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Water_sports_in_Goa.jpg/800px-Water_sports_in_Goa.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br><br>
+
+        </div>
+        <div id="wbwild" class="tab-pane fade in active" style="background-color: white;">
+          <h1> Wildlife & Crops of Goa 🌿</h1>
+          <p>Goa has diverse wildlife and a rich agricultural landscape due to its varied geography, from the Western Ghats to the coastal plains and mangroves.</p>
+
+          <br>
+          <h2>Wildlife of Goa </h2>
+          <p>Goa has several wildlife sanctuaries and one national park, making it a significant biodiversity hotspot in the Western Ghats.</p>
+
+          <br>
+          <h2>🔹 Major Wildlife Sanctuaries & National Parks</h2>
+          <div>
+            <table>
+              <tr>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Bhagwan Mahavir Wildlife Sanctuary & Mollem National Park</td>
+                <td>Eastern Goa</td>
+                <td>Dudhsagar Falls, Gaur (Indian Bison) 🐃, Leopards 🐆, Diverse Bird Species</td>
+              </tr>
+              <tr>
+                <td>Cotigao Wildlife Sanctuary</td>
+                <td>South Goa</td>
+                <td>Flying Squirrels, Slender Loris, Nature Trails</td>
+              </tr>
+              <tr>
+                <td>Bondla Wildlife Sanctuary</td>
+                <td>North-East Goa</td>
+                <td>Mini Zoo, Elephant Rides, Sambar Deer</td>
+              </tr>
+              <tr>
+                <td>Salim Ali Bird Sanctuary</td>
+                <td>Chorao Island</td>
+                <td>Mangrove Forests, Migratory Birds, Crocodiles 🐊</td>
+              </tr>
+              <tr>
+                <td>Netravali Wildlife Sanctuary</td>
+                <td>South-East Goa</td>
+                <td>Arvalem Waterfalls, Dense Forests, Butterflies 🦋</td>
+              </tr>
+              <tr>
+                <td>Mhadei Wildlife Sanctuary</td>
+                <td>North-East Goa</td>
+                <td>Tigers 🐅, Black Panthers, Gaur</td>
+              </tr>
+            </table>
+          </div>
+          <bt><br></bt>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3> 🔹 Other Notable Wildlife in Goa</h3>
+                <ul>
+                  <li><b>Mammals:</b> Gaur (State Animal), Leopards, Wild Boars, Sloth Bears, Pangolins.</li>
+                  <li><b>Birds:</b> Black Crested Bulbul (State Bird), Kingfishers, Egrets, Herons, Hornbills.</li>
+                  <li><b>Reptiles:</b> King Cobras, Monitor Lizards, Crocodiles, Sea Turtles.</li>
+                  <li><b>Marine Life:</b> Dolphins, Whale Sharks (seasonal), Various Fish Species.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Indian_Gaur.jpg/800px-Indian_Gaur.jpg" alt="" style="height:200px;width: 200px;">
+
+              </div>
+
+            </div>
+          </div>
+          <hr><br>
+          <h2>🌾 Agriculture & Major Crops in Goa </h2>
+          <p>Goa's agriculture is characterized by its tropical climate, with a focus on cash crops, plantation crops, and paddy cultivation.</p>
+
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Key Agricultural Features</h3>
+                <ul>
+                  <li>Major producer of Cashew, Coconut, Areca Nut, and Spices.</li>
+                  <li><b>Fertile Land:</b> Alluvial soil in river valleys and laterite soil in uplands.</li>
+                  <li><b>Climate:</b> Tropical monsoon climate supporting diverse crops.</li>
+                  <li><b>Irrigation:</b> Mandovi, Zuari, and Chapora rivers support farming.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Spice_plantation_in_Goa.jpg/800px-Spice_plantation_in_Goa.jpg" alt="" style="height:200px;width: 220px;">
+
+              </div>
+            </div>
+          </div>
+          <h2>🔹 Major Crops of Goa</h2>
+          <div>
+            <table>
+              <tr>
+                <th>Category</th>
+                <th>Crops</th>
+              </tr>
+              <tr>
+                <td>Cereals</td>
+                <td>Rice 🍚, Ragi, Jowar</td>
+              </tr>
+              <tr>
+                <td>Cash Crops</td>
+                <td>Cashew 🥜, Coconut 🥥, Areca Nut, Sugarcane</td>
+              </tr>
+              <tr>
+                <td>Pulses</td>
+                <td>Black Gram, Green Gram, Cowpea</td>
+              </tr>
+              <tr>
+                <td>Vegetables</td>
+                <td>Brinjal 🍆, Okra, Chillies 🌶️, Cucumber 🥒, Gourds</td>
+              </tr>
+              <tr>
+                <td>Fruits</td>
+                <td>Mango 🥭, Jackfruit, Banana 🍌, Pineapple 🍍, Kokum</td>
+              </tr>
+              <tr>
+                <td>Spices</td>
+                <td>Black Pepper, Cardamom, Nutmeg, Cinnamon, Vanilla</td>
+              </tr>
+              <tr>
+                <td>Plantation Crops</td>
+                <td>Coconut, Cashew, Areca Nut</td>
+              </tr>
+              <tr>
+                <td>Flowers</td>
+                <td>Jasmine, Marigold 🌼, Orchids 🌸</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Special Agricultural Products</h3>
+                <ul>
+                  <li>Goan Coconuts (Known for their sweet water and thick kernel).</li>
+                  <li>Goan Cashews (Used for making the famous Feni liquor).</li>
+                  <li>Kokum (Used in Goan cuisine and for making refreshing drinks).</li>
+                  <li>Spices (Grown in plantations that are popular tourist attractions).</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Cashew_apples.jpg/800px-Cashew_apples.jpg" alt="" style="height:200px;width: 200px;">
+
+              </div>
+            </div>
+          </div><br>
+          <hr>
+          <div class="box" style=" background: #f3b37185;padding: 10px;">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3> Sustainable Agriculture & Modern Trends 🌾</h3>
+                  <ul>
+                    <li><b>Organic Farming:</b> Growing in popularity, especially in spice plantations.</li>
+                    <li><b>Agro-Tourism:</b> Spice plantations offering tours, meals, and experiences.</li>
+                    <li><b>Fisheries:</b> Goa has a thriving fishing industry with mackerel, kingfish, and prawns 🦐 being major catches.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Goan_fishing_boats.jpg/800px-Goan_fishing_boats.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Goa is a paradise for both nature lovers and agricultural enthusiasts. It has rich wildlife sanctuaries, lush spice plantations, and fertile farmlands that support a diverse ecosystem and economy.</p>
+          <br><br>
+        </div>
+        <div id="wbedu" class="tab-pane fade in active" style="background-color: white;">
+          <h1>🎓 Education & Institutions in Goa</h1>
+          <p>Goa has a unique educational heritage influenced by its Portuguese colonial past and Indian educational systems. The state has made significant progress in education with a high literacy rate of over 88%.</p>
+
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>📌 Education System in Goa</h3>
+                  <ul>
+                    <li><b>School Education:</b> Follows Goa Board of Secondary and Higher Secondary Education, CBSE, and ICSE boards.</li>
+                    <li><b>Higher Education:</b> Managed by Goa University, technical institutions, and professional colleges.</li>
+                    <li><b>Major Fields:</b> Medicine, Engineering, Pharmacy, Hospitality, Marine Studies, and Arts.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Goa_University.jpg/800px-Goa_University.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>🏛️ Top Universities & Institutions </h2>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Universities</h3>
+                <ol>
+                  <li><b>Goa University -</b> The state's primary university offering various undergraduate and postgraduate programs.</li>
+                  <li><b>BITS Pilani, Goa Campus -</b> A prestigious private engineering institute with excellent infrastructure.</li>
+                  <li><b>National Institute of Oceanography -</b> A premier research institution focused on marine sciences.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/BITS_Pilani_Goa.jpg/800px-BITS_Pilani_Goa.jpg" alt="" style="height:200px;width: 230px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Engineering & Technical Institutions</h3>
+                <ol>
+                  <li><b>Goa College of Engineering -</b> The oldest engineering college in Goa, established in 1967.</li>
+                  <li><b>National Institute of Technology (NIT) Goa -</b> One of India's premier technical institutions.</li>
+                  <li><b>Don Bosco College of Engineering -</b> Private engineering college with modern facilities.</li>
+                  <li><b>Padre Conceicao College of Engineering -</b> Known for quality technical education.</li>
+                  <li><b>Shree Rayeshwar Institute of Engineering and Information Technology -</b> Focuses on IT education.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Goa_College_of_Engineering.jpg/800px-Goa_College_of_Engineering.jpg" alt="" style="height:200px;width: 230px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Institution</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Goa University</td>
+                <td>Taleigao Plateau</td>
+                <td>Comprehensive programs in Arts, Science, Commerce, and Management</td>
+              </tr>
+              <tr>
+                <td>BITS Pilani, Goa Campus</td>
+                <td>Zuarinagar</td>
+                <td>Engineering, Science, and Technology programs</td>
+              </tr>
+              <tr>
+                <td>National Institute of Oceanography</td>
+                <td>Dona Paula</td>
+                <td>Marine research and oceanography studies</td>
+              </tr>
+              <tr>
+                <td>Goa Medical College</td>
+                <td>Bambolim</td>
+                <td>Oldest medical institution in Asia (est. 1842)</td>
+              </tr>
+              <tr>
+                <td>Goa Institute of Management</td>
+                <td>Sanquelim</td>
+                <td>Top-ranked business school in Western India</td>
+              </tr>
+              <tr>
+                <td>NIT Goa</td>
+                <td>Ponda</td>
+                <td>Technical education and research</td>
+              </tr>
+              <tr>
+                <td>Goa College of Pharmacy</td>
+                <td>Panaji</td>
+                <td>Pharmaceutical education and research</td>
+              </tr>
+              <tr>
+                <td>V.M. Salgaocar College of Law</td>
+                <td>Miramar</td>
+                <td>Legal education and moot courts</td>
+              </tr>
+              <tr>
+                <td>Goa College of Architecture</td>
+                <td>Panaji</td>
+                <td>Architectural education with focus on Goan heritage</td>
+              </tr>
+            </table>
+          </div>
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Goa_Medical_College.jpg/800px-Goa_Medical_College.jpg" alt="" style="height:200px;width: 240px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🔹 Medical & Healthcare Institutions</h3>
+                  <ol>
+                    <li><b>Goa Medical College -</b> One of Asia's oldest medical institutions, established in 1842 during Portuguese rule.</li>
+                    <li><b>Goa Dental College -</b> Premier dental education institution in the state.</li>
+                    <li><b>Institute of Psychiatry and Human Behaviour -</b> Specialized mental health institution.</li>
+                    <li><b>Goa College of Pharmacy -</b> Offering pharmaceutical education since 1963.</li>
+                    <li><b>Goa Nursing College -</b> Training healthcare professionals for the region.</li>
+                  </ol>
+                </div>
+
+                <br><br>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Medical Institution</th>
+                <th>Location</th>
+                <th>Specialization</th>
+              </tr>
+              <tr>
+                <td>Goa Medical College</td>
+                <td>Bambolim</td>
+                <td>Comprehensive medical education and tertiary care</td>
+              </tr>
+              <tr>
+                <td>Goa Dental College</td>
+                <td>Bambolim</td>
+                <td>Dental education and specialized dental care</td>
+              </tr>
+              <tr>
+                <td>Institute of Psychiatry and Human Behaviour</td>
+                <td>Bambolim</td>
+                <td>Mental health education and treatment</td>
+              </tr>
+              <tr>
+                <td>Victor Hospital</td>
+                <td>Margao</td>
+                <td>Multi-specialty private healthcare</td>
+              </tr>
+              <tr>
+                <td>Manipal Hospital</td>
+                <td>Dona Paula</td>
+                <td>Tertiary care and medical education</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🔹 Management & Law Institutions</h3>
+                  <ol>
+                    <li><b>Goa Institute of Management (GIM) -</b> One of India's top business schools.</li>
+                    <li><b>V.M. Salgaocar College of Law -</b> Premier legal education institution.</li>
+                    <li><b>Goa Business School -</b> Part of Goa University, offering management programs.</li>
+                  </ol>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Goa_Institute_of_Management.jpg/800px-Goa_Institute_of_Management.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Institution</th>
+                <th>Location</th>
+                <th>Specialization</th>
+              </tr>
+              <tr>
+                <td>Goa Institute of Management</td>
+                <td>Sanquelim</td>
+                <td>MBA, PGDM, and Executive Education programs</td>
+              </tr>
+              <tr>
+                <td>V.M. Salgaocar College of Law</td>
+                <td>Miramar</td>
+                <td>Legal education and research</td>
+              </tr>
+              <tr>
+                <td>Goa Business School</td>
+                <td>Taleigao</td>
+                <td>Management and commerce education</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Goa_College_of_Arts.jpg/800px-Goa_College_of_Arts.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🔹 Arts, Music & Cultural Institutions</h3>
+                  <ul>
+                    <li><b>Goa College of Art -</b> Fostering artistic talent and preserving Goan art forms.</li>
+                    <li><b>Kala Academy -</b> Cultural center promoting music, dance, drama, and fine arts.</li>
+                    <li><b>Goa College of Music -</b> Offering training in Western and Indian classical music.</li>
+                    <li><b>Xavier Centre of Historical Research -</b> Preserving Goan history and cultural heritage.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Institution</th>
+                <th>Location</th>
+                <th>Specialization</th>
+              </tr>
+              <tr>
+                <td>Goa College of Art</td>
+                <td>Altinho, Panaji</td>
+                <td>Fine arts education and traditional Goan art forms</td>
+              </tr>
+              <tr>
+                <td>Kala Academy</td>
+                <td>Campal, Panaji</td>
+                <td>Cultural center for performing arts</td>
+              </tr>
+              <tr>
+                <td>Goa College of Music</td>
+                <td>Altinho, Panaji</td>
+                <td>Western and Indian classical music education</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <h2>🏫 School Education in Goa </h2>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Major School Boards</h3>
+                <ol>
+                  <li><b>Goa Board of Secondary and Higher Secondary Education -</b> State board conducting SSC (10th) and HSSC (12th) exams.</li>
+                  <li><b>CBSE & ICSE -</b> National boards with several affiliated schools in Goa.</li>
+                  <li><b>International Boards -</b> A few schools offer IB and Cambridge curricula.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Goa_Board_of_Education.jpg/800px-Goa_Board_of_Education.jpg" alt="" style="height:200px;width: 200px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/St_Xavier%27s_High_School_Goa.jpg/800px-St_Xavier%27s_High_School_Goa.jpg" alt="" style="height:200px;width: 230px;">
+
+              </div>
+              <div class="col-sm-8">
+
+                <h3>🔹 Famous Schools in Goa</h3>
+                <ol>
+                  <li><b>Our Lady of the Rosary High School -</b> One of the oldest schools in Goa.</li>
+                  <li><b>Sharada Mandir School -</b> Premier ICSE school in Panaji.</li>
+                  <li><b>Loyola High School -</b> Jesuit institution known for academic excellence.</li>
+                  <li><b>The Kings School -</b> International curriculum with modern facilities.</li>
+                  <li><b>Mushtifund High School -</b> Traditional Goan school with strong academic record.</li>
+                  <li><b>St. Xavier's High School -</b> Historic institution with quality education.</li>
+                </ol>
+
+              </div>
+
+            </div>
+          </div>
+          <div class="box">
+            <h2>🔬 Research & Specialized Institutions</h2>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <p>Goa hosts several specialized research institutions:</p>
+                  <ol>
+                    <li><b>National Institute of Oceanography (NIO) -</b> Premier marine research center.</li>
+                    <li><b>Indian Council of Agricultural Research (ICAR) -</b> Research on coastal agriculture.</li>
+                    <li><b>National Centre for Antarctic and Ocean Research -</b> Polar and ocean studies.</li>
+                  </ol>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/National_Institute_of_Oceanography_Goa.jpg/800px-National_Institute_of_Oceanography_Goa.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <h2>📚 Other Notable Institutions</h2>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <ol>
+                    <li><b>Goa College of Hospitality and Culinary Education -</b> Training professionals for tourism industry. 🍽️</li>
+                    <li><b>Goa College of Home Science -</b> Specializing in nutrition and family resources.</li>
+                    <li><b>Goa College of Architecture -</b> Focusing on sustainable and heritage architecture.</li>
+                    <li><b>Indian Institute of Tourism and Travel Management -</b> Tourism education and research.</li>
+                    <li><b>National Institute of Watersports -</b> Training in water sports and safety.</li>
+                  </ol>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Goa_College_of_Hospitality.jpg/800px-Goa_College_of_Hospitality.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Goa's educational landscape reflects its unique cultural heritage and modern aspirations. From traditional institutions with Portuguese influences to modern technical and research centers, the state offers diverse educational opportunities for students from India and abroad.</p>
+        </div>
+        <br><br>
+
+      </div>
+
+
+    </div>
+  </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,2529 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Puducherry</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> -->
+  <style>
+    .wb {
+      font-size: 10vw;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+      border-spacing: 0;
+      border: 1px solid #ddd;
+    }
+
+    td,
+    th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+      font-size: 1.5vw;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+
+    .trip {
+      text-align: center;
+      font-weight: 900;
+      background: orangered;
+      padding: 20px;
+      border-radius: 20px;
+      width: 60%;
+    }
+
+    p,
+    li,
+    .text {
+      font-size: 1.5vw;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-weight: 600;
+    }
+
+    h4 {
+      font-weight: 900;
+    }
+
+    img {
+      border-radius: 10px;
+      display: block;
+      margin: auto;
+    }
+
+    @media screen and (max-width: 850px) {
+
+      p,
+      li,
+      .text,
+      td,
+      th {
+        font-size: 2vw;
+        ;
+      }
+
+    }
+
+    @media screen and (max-width: 500px) {
+
+      p,
+      li,
+      .text,
+      td,
+      th {
+        font-size: 4.5vw;
+        ;
+      }
+
+    }
+
+    .box:nth-of-type(odd) {
+      background: #f3b37185;
+      padding: 10px;
+    }
+
+    .weather-container {
+            border-radius: 15px;
+            background: #f0fdf4;
+            padding: 15px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .weather-card {
+            text-align: center;
+            border-radius: 10px;
+            padding: 10px;
+            background: white;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+        .aqi {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            color: white;
+        }
+        .aqi-bad { background: purple; }
+        .aqi-moderate { background: orange; }
+        .aqi-good { background: green; }
+        .best-time {
+            background: #d1fae5;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 15px;
+            color: green;
+        }
+        .wet {
+            max-width: 50px;
+        }
+        
+        .trip {
+          font-size: 18px;
+          padding: 10px 20px;
+          cursor: pointer;
+          background-color:rgb(231, 36, 36);
+          color: white;
+          border: none;
+          border-radius: 5px;
+      }
+      .modal {
+          display: none;
+          position: fixed;
+          z-index: 1;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0,0,0,0.5);
+      }
+      .modal-content {
+          background-color: #fff;
+          margin: 10% auto;
+          padding: 20px;
+          border-radius: 10px;
+          width: 40%;
+          box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+          text-align: center;
+      }
+      .close {
+          color: #aaa;
+          float: right;
+          font-size: 28px;
+          font-weight: bold;
+          cursor: pointer;
+      }
+      .trip-options {
+          display: flex;
+          justify-content: center;
+          gap: 20px;
+          margin-top: 20px;
+      }
+      .trip-options a {
+          display: block;
+          width: 120px;
+          padding: 10px;
+          background-color: #28a745;
+          color: white;
+          text-decoration: none;
+          border-radius: 5px;
+      }
+  </style>
+</head>
+
+<body>
+
+
+  <!-- <h2>Carousel Example</h2> -->
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+      <li data-target="#myCarousel" data-slide-to="4"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+
+      <div class="item active">
+        <img src="/placeholder.svg?height=500&width=1200" alt="Promenade Beach" style="width:100%; height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Promenade Beach</h3>
+          <p>We love the beautiful coastline and French architecture!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="/placeholder.svg?height=500&width=1200" alt="Auroville" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Auroville</h3>
+          <p>The spiritual community and Matrimandir!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="/placeholder.svg?height=500&width=1200" alt="French Quarter" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">French Quarter</h3>
+          <p>Colonial charm and colorful streets!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="/placeholder.svg?height=500&width=1200" alt="Paradise Beach" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Paradise Beach</h3>
+          <p>We love the pristine sands and clear waters!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="/placeholder.svg?height=500&width=1200" alt="Chunnambar Backwaters" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Chunnambar Backwaters</h3>
+          <p>We love the serene boat rides and natural beauty!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+  <div class="container">
+    <br><br>
+    <h1 class="wb"> PUDUCHERRY</h1><br>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <img src="/placeholder.svg?height=700&width=500" alt="Puducherry Map" style="height:700px; width: -webkit-fill-available;">
+
+        </div>
+        <div class="col-sm-6">
+          <h1> Puducherry: The French Riviera of the East</h1>
+          <p class="text">Puducherry (formerly Pondicherry) is a charming union territory on the southeastern coast of India, known for its French colonial heritage, spiritual significance, beautiful beaches, and unique blend of Indian and European cultures. It offers a tranquil escape with its clean streets, colorful houses, and serene atmosphere.</p>
+
+          <ul>
+            <li><b>Location --</b> Southeastern coast of India</li>
+            <li><b>Capital --</b> Puducherry</li>
+            <li><b>Official Languages --</b> Tamil, French, English, Telugu, Malayalam</li>
+            <li><b>Area --</b> 492 sq. km</li>
+            <li><b>Population --</b> ~1.5 million</li>
+            <li><b>Borders --</b> Tamil Nadu (Villupuram and Cuddalore districts)</li>
+            <li><b>Districts --</b> Puducherry, Karaikal, Mahe, Yanam</li>
+            <li><b>Major Festivals --</b> Pongal, Masi Magam, Bastille Day, International Yoga Day, Aurobindo Jayanti</li>
+            <li><b>Famous For --</b> French colonial architecture, Auroville, Beaches, Spirituality</li>
+            <li><b>Nickname --</b> "Paris of the East" or "Little France"</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <br>
+    <hr>
+    <div>
+      <h1>📌 Regions & Districts of Puducherry</h1>
+      <br>
+      <div style="overflow-x:auto;">
+        <table>
+          <tr>
+            <th>District</th>
+            <th>Location</th>
+            <th>Key Highlights</th>
+          </tr>
+          <tr>
+            <td>Puducherry</td>
+            <td>Tamil Nadu coast</td>
+            <td>French Quarter, Promenade Beach, Auroville, Sri Aurobindo Ashram</td>
+          </tr>
+          <tr>
+            <td>Karaikal</td>
+            <td>Tamil Nadu coast (Nagapattinam district)</td>
+            <td>Karaikal Beach, Thirunallar Temple, Fishing harbor</td>
+          </tr>
+          <tr>
+            <td>Mahe</td>
+            <td>Kerala coast (Kannur district)</td>
+            <td>St. Theresa's Church, Mahe Beach, Tagore Park</td>
+          </tr>
+          <tr>
+            <td>Yanam</td>
+            <td>Andhra Pradesh (East Godavari district)</td>
+            <td>Yanam Beach, French colonial buildings, Godavari River</td>
+          </tr>
+        </table>
+      </div>
+      <br><br>
+      <h1>🔹 Major Highlights of Puducherry</h1><br><br>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <ul>
+              <li><b>French Quarter (White Town) --</b> Colonial buildings, cafes, and boutiques.</li>
+              <li><b>Auroville --</b> International township dedicated to human unity with the iconic Matrimandir.</li>
+              <li><b>Sri Aurobindo Ashram --</b> Spiritual center founded by Sri Aurobindo and The Mother.</li>
+              <li><b>Promenade Beach --</b> 1.5 km long seafront with Gandhi statue and War Memorial.</li>
+              <li><b>Paradise Beach --</b> Pristine beach accessible by boat through Chunnambar backwaters.</li>
+              <li><b>Serenity Beach --</b> Popular for surfing and water sports.</li>
+              <li><b>Bharathi Park --</b> Central park with Aayi Mandapam, a white monument.</li>
+              <li><b>Puducherry Museum --</b> Houses artifacts from the colonial era.</li>
+              <li><b>Churches & Temples --</b> Sacred Heart Basilica, Immaculate Conception Cathedral, Manakula Vinayagar Temple.</li>
+            </ul>
+          </div>
+          <div class="col-sm-6">
+            <img src="/placeholder.svg?height=450&width=500" alt="Puducherry Map" style="height:450px;width: -webkit-fill-available;">
+
+          </div>
+        </div>
+      </div>
+    </div><br><br>
+    <div class="container">
+      <div class="weather-container">
+          <h4 class="text-center"><strong>Weather in Puducherry</strong></h4>
+          <div class="row">
+              <!-- January -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Jan</h6>
+                      <p>22/30°C</p>
+                      <span class="aqi aqi-good">AQI 45</span>
+                  </div>
+              </div>
+              <!-- February -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Feb</h6>
+                      <p>23/31°C</p>
+                      <span class="aqi aqi-good">AQI 50</span>
+                  </div>
+              </div>
+              <!-- March -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Mar</h6>
+                      <p>25/33°C</p>
+                      <span class="aqi aqi-good">AQI 55</span>
+                  </div>
+              </div>
+              <!-- April -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Apr</h6>
+                      <p>27/35°C</p>
+                      <span class="aqi aqi-moderate">AQI 65</span>
+                  </div>
+              </div>
+              <!-- May -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>May</h6>
+                      <p>28/37°C</p>
+                      <span class="aqi aqi-moderate">AQI 70</span>
+                  </div>
+              </div>
+              <!-- June -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Jun</h6>
+                      <p>28/36°C</p>
+                      <span class="aqi aqi-good">AQI 60</span>
+                  </div>
+              </div>
+              <!-- July -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Jul</h6>
+                      <p>27/35°C</p>
+                      <span class="aqi aqi-good">AQI 55</span>
+                  </div>
+              </div>
+              <!-- August -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Aug</h6>
+                      <p>27/34°C</p>
+                      <span class="aqi aqi-good">AQI 50</span>
+                  </div>
+              </div>
+              <!-- September -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Sep</h6>
+                      <p>26/33°C</p>
+                      <span class="aqi aqi-good">AQI 45</span>
+                  </div>
+              </div>
+              <!-- October -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="rain.png" alt="rain">
+                      <h6>Oct</h6>
+                      <p>25/31°C</p>
+                      <span class="aqi aqi-good">AQI 40</span>
+                  </div>
+              </div>
+              <!-- November -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="rain.png" alt="rain">
+                      <h6>Nov</h6>
+                      <p>24/29°C</p>
+                      <span class="aqi aqi-good">AQI 45</span>
+                  </div>
+              </div>
+              <!-- December -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Dec</h6>
+                      <p>23/29°C</p>
+                      <span class="aqi aqi-good">AQI 50</span>
+                  </div>
+              </div>
+          </div>
+          <div class="text-center">
+              <div class="best-time">🏆 Best time to visit: October - March</div>
+          </div>
+      </div>
+    </div>
+    
+
+    <br><br>
+    <button class="trip" id="openModal">Let's go on a trip</button>
+    
+    <div id="tripModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Select Your Trip</h2>
+            <button type="button" class="btn btn-warning" style="margin-bottom: 8px;color:black; border-radius: 5px;" onclick="location.href='{% url 'puducherry_4days' %}'">4 days trip</button><br>
+        </div>
+    </div>
+    
+    <script>
+        var modal = document.getElementById("tripModal");
+        var btn = document.getElementById("openModal");
+        var span = document.getElementsByClassName("close")[0];
+        
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+        
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+        
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script><br><br>
+    <div class="container">
+      <ul class="nav nav-tabs">
+        <li class="nav-item"><a data-toggle="tab" href="#wbculture"> Culture</a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbtradition "> Tradition</a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbfestivals"> Festivals </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbfood"> Foods </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbhistory"> History </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbartacraft"> Art and Craft </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbseason"> Season to Visit </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbtourist"> Tourist Spots </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbwild"> Wildlife & Crops </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbedu"> Institutions </a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="wbculture" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Culture of Puducherry</h1>
+          <p class="text">Puducherry has a unique and diverse culture, shaped by its French colonial history, Tamil traditions, and spiritual influences. Here's an overview of some key aspects of its culture:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Language</h3>
+                  <ul>
+                    <li>Puducherry is a multilingual territory with Tamil, French, English, Telugu, and Malayalam being spoken. Tamil is the most widely spoken language, while French remains an official language due to the colonial heritage. Many street signs, buildings, and official documents are in both Tamil and French.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Languages of Puducherry" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>2. Franco-Tamil Architecture</h3>
+                  <ul>
+                    <li>Puducherry's architecture is a unique blend of French colonial and Tamil styles. The French Quarter (White Town) features colonial mansions with long compounds, courtyards, and large windows with louvered shutters painted in yellow, pink, white, and gray.</li>
+                    <li>The Tamil Quarter (Black Town) has traditional Tamil houses with thinnais (raised platforms) and inner courtyards.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Franco-Tamil Architecture" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div><br>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Spiritual Culture" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Spiritual Culture</h3>
+                  <ul>
+                    <li>Puducherry is a major spiritual center, home to Sri Aurobindo Ashram founded by Sri Aurobindo and The Mother. The ashram attracts spiritual seekers from around the world.</li>
+                    <li>Auroville, an experimental township dedicated to human unity, was established in 1968 and is based on the vision of The Mother. The Matrimandir, a golden spherical meditation chamber, is its spiritual center.</li>
+                  </ul>
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Music and Dance" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>4. Music and Dance</h3>
+                  <ul>
+                    <li>Classical Tamil music and dance forms like Bharatanatyam are popular in Puducherry.</li>
+                    <li>French music and dance also have influence, with events like the Fête de la Musique (Music Festival) celebrated annually.</li>
+                    <li>Villuppattu (bow song), a traditional Tamil art form of storytelling with music, is practiced in rural areas.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Religious Diversity</h3>
+                  <ul>
+                    <li>Puducherry is home to various religions, with Hinduism, Christianity, Islam, and Buddhism coexisting harmoniously.</li>
+                    <li>The territory has numerous temples, churches, and mosques, reflecting its religious diversity.</li>
+                    <li>Sacred Heart Basilica, Immaculate Conception Cathedral, and Manakula Vinayagar Temple are prominent religious sites.</li>
+                  </ul>
+                  <h3>6. Cuisine</h3>
+                  <ul>
+                    <li>Puducherry cuisine is a unique fusion of French and Tamil flavors. French bread, croissants, and pastries are widely available alongside traditional South Indian dishes.</li>
+                    <li>Seafood is a specialty, with dishes like fish curry, prawn masala, and crab masala being popular.</li>
+                    <li>French-influenced dishes like bouillabaisse (fish stew) and coq au vin have been adapted with local spices.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Religious Diversity" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Arts and Crafts" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>7. Arts and Crafts</h3>
+                  <ul>
+                    <li>Puducherry is known for its handmade paper products, pottery, incense sticks, and aromatic candles.</li>
+                    <li>The Auroville community produces eco-friendly crafts, furniture, clothing, and accessories.</li>
+                    <li>Traditional Tamil crafts like terracotta work and palm leaf crafts are also practiced.</li>
+                  </ul>
+                  <h3>8. Festivals</h3>
+                  <ul>
+                    <li>Puducherry celebrates both Tamil and French festivals with equal enthusiasm. Pongal, Diwali, and Masi Magam are important Tamil festivals.</li>
+                    <li>Bastille Day (July 14) is celebrated with parades and cultural events, commemorating the French connection.</li>
+                    <li>International Yoga Day (June 21) is a major event, with mass yoga sessions held at the beach.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Lifestyle" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>9. Lifestyle</h3>
+                  <ul>
+                    <li>Puducherry has a relaxed, laid-back atmosphere compared to other Indian cities. The French influence is evident in the café culture, with numerous cafés and bakeries lining the streets.</li>
+                    <li>The territory has a vibrant nightlife, with beach parties, live music, and cultural events.</li>
+                    <li>Cycling is a popular mode of transportation, especially in the French Quarter and along the promenade.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>10. Education and Intellectual Culture</h3>
+                  <ul>
+                    <li>Puducherry has a strong intellectual culture, with institutions like Pondicherry University and the French Institute of Pondicherry promoting research and academic excellence.</li>
+                    <li>The Sri Aurobindo International Centre of Education offers an alternative education system based on Sri Aurobindo's philosophy.</li>
+                  </ul>
+                  <h3>11. Beach Culture</h3>
+                  <ul>
+                    <li>The beaches of Puducherry are central to its culture, with the Promenade Beach being a social hub where locals and tourists gather in the evenings.</li>
+                    <li>Water sports like surfing, kayaking, and scuba diving are gaining popularity, especially at Serenity Beach.</li>
+                  </ul>
+                  <h3>12. Yoga and Wellness</h3>
+                  <ul>
+                    <li>Puducherry is a major center for yoga and wellness, with numerous ashrams and centers offering yoga classes, meditation sessions, and Ayurvedic treatments.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=300&width=200" alt="Education and Beach Culture" style="height:300px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br><br>
+
+          <p>Puducherry's culture is a beautiful blend of East and West, spirituality and modernity, creating a unique atmosphere that attracts visitors from around the world. The territory continues to preserve its colonial heritage while embracing its Indian roots.</p><br><br>
+        </div>
+        <div id="wbtradition" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Tradition of Puducherry</h1>
+          <p>Puducherry has a unique blend of traditions influenced by its French colonial past and Tamil cultural heritage. Here's an overview of some key traditional aspects of the territory:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Traditional Clothing</h3>
+                  <h4>Men</h4>
+                  <ul>
+                    <li><b>Dhoti and Shirt:</b> Traditional Tamil men wear white or colored dhoti with a shirt, especially during festivals and ceremonies.</li>
+                    <li><b>Western Attire:</b> Due to French influence, Western formal wear is also common for special occasions.</li>
+                  </ul>
+                  <h4>Women</h4>
+                  <ul>
+                    <li><b>Saree:</b> Tamil women traditionally wear silk sarees, particularly during festivals and ceremonies. The Puducherry style often incorporates French design elements.</li>
+                    <li><b>Salwar Kameez:</b> Popular everyday wear, often with unique Indo-French patterns and designs.</li>
+                    <li><b>Pottu:</b> The traditional dot worn on the forehead by Tamil women.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=250&width=200" alt="Traditional Clothing" style="height:250px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>2. Wedding Traditions</h3>
+                  <ul>
+                    <li><b>Tamil Hindu Weddings:</b> Follow traditional Tamil customs with rituals like Kashi Yatra, Oonjal, and Thali (Mangalsutra) tying.</li>
+                    <li><b>Christian Weddings:</b> Often held in the historic churches of Puducherry, blending French Catholic and local traditions.</li>
+                    <li><b>Franco-Tamil Fusion:</b> Some weddings incorporate elements from both cultures, especially in families with mixed heritage.</li>
+                    <li><b>Wedding Feast:</b> Traditional Tamil dishes served alongside French-influenced cuisine.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=250&width=200" alt="Wedding Traditions" style="height:250px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Music and Dance" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Music & Dance Traditions</h3>
+                  <ul>
+                    <li><b>Bharatanatyam:</b> Classical Tamil dance form practiced and performed during cultural events.</li>
+                    <li><b>Villuppattu:</b> Traditional Tamil art form where stories are narrated through songs using a bow-like instrument.</li>
+                    <li><b>Oyilattam:</b> Folk dance performed during festivals and celebrations in rural areas.</li>
+                    <li><b>French Classical Music:</b> Performances of French classical music are common, especially during Bastille Day celebrations.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Religious Traditions" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+
+                  <h3>4. Religious & Spiritual Traditions</h3>
+                  <ul>
+                    <li><b>Temple Rituals:</b> Traditional Tamil Hindu rituals are performed in temples like Manakula Vinayagar Temple, with special ceremonies during festivals.</li>
+                    <li><b>Church Services:</b> Catholic masses are conducted in French, Tamil, and English in the historic churches of Puducherry.</li>
+                    <li><b>Meditation:</b> Daily meditation practices at Sri Aurobindo Ashram and Auroville, following the spiritual teachings of Sri Aurobindo and The Mother.</li>
+                    <li><b>Collective Meditation:</b> Silent group meditation at Matrimandir in Auroville, a unique spiritual practice.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Culinary Traditions</h3>
+                  <ul>
+                    <li><b>Franco-Tamil Cuisine:</b> A unique fusion of French and Tamil cooking techniques and flavors.</li>
+                    <li><b>Seafood Preparation:</b> Traditional methods of preparing seafood dishes using local spices and French techniques.</li>
+                    <li><b>Bakery Culture:</b> French-style bakeries producing baguettes, croissants, and pastries using traditional methods.</li>
+                    <li><b>Traditional Tamil Meals:</b> Served on banana leaves during special occasions and festivals.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Culinary Traditions" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>6. Festivals & Celebrations</h3>
+                  <ul>
+                    <li><b>Pongal Celebrations:</b> The harvest festival is celebrated with traditional decorations, special dishes, and cultural events.</li>
+                    <li><b>Masi Magam:</b> A Tamil festival where deities from various temples are taken in procession to the sea for a ceremonial bath.</li>
+                    <li><b>Bastille Day:</b> Celebrated on July 14th with parades, cultural performances, and French food festivals.</li>
+                    <li><b>Fête de la Musique:</b> Annual music festival celebrating French musical traditions.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Festivals" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br><br>
+          <p>Puducherry's traditions beautifully blend French colonial influences with Tamil cultural heritage, creating a unique cultural identity that sets it apart from other regions in India. This harmonious fusion is evident in its architecture, cuisine, festivals, and daily life.</p><br><br>
+        </div>
+        <div id="wbfestivals" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Festivals of Puducherry</h1>
+          <p>Puducherry celebrates a diverse range of festivals that reflect its unique blend of Tamil and French cultural heritage. These festivals showcase the territory's multicultural identity and spiritual significance. Here's a list of some of the major festivals celebrated in Puducherry:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Pongal (Tamil Harvest Festival)</h3>
+                  <ul>
+                    <li>A four-day harvest festival celebrated with great enthusiasm throughout Puducherry.</li>
+                    <li>Includes Bhogi Pongal (discarding old belongings), Thai Pongal (cooking sweet rice), Mattu Pongal (honoring cattle), and Kaanum Pongal (family gatherings).</li>
+                    <li>Houses are decorated with kolam (rangoli), and traditional dishes like sweet pongal and sugarcane are shared.</li>
+                  </ul>
+                  <p><b>📍 Time: Mid-January (January 14-17)</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=230&width=200" alt="Pongal Festival" style="height:230px;width: 200px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Bastille Day" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Bastille Day (French National Day)</h3>
+                  <ul>
+                    <li>Commemorates the French connection to Puducherry with parades, cultural performances, and flag-hoisting ceremonies.</li>
+                    <li>The French Consulate organizes special events, and the French War Memorial is illuminated.</li>
+                    <li>French cuisine festivals, art exhibitions, and music concerts are held throughout the territory.</li>
+                  </ul>
+                  <p><b>📍 Time: July 14</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Masi Magam</h3>
+                  <ul>
+                    <li>A significant Tamil festival where deities from various temples are taken in a grand procession to the sea for a ceremonial bath.</li>
+                    <li>The main procession starts from Manakula Vinayagar Temple and proceeds to the beach.</li>
+                    <li>Devotees perform special pujas and rituals, and the event attracts thousands of visitors.</li>
+                  </ul>
+                  <p><b>📍 Time: February-March (Full moon day in Tamil month of Masi)</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Masi Magam" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="International Yoga Day" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. International Yoga Day</h3>
+                  <ul>
+                    <li>Celebrated with great enthusiasm in Puducherry, given its status as a spiritual center.</li>
+                    <li>Mass yoga sessions are organized at the Beach Promenade, Sri Aurobindo Ashram, and Auroville.</li>
+                    <li>Special workshops, lectures, and demonstrations on various yoga techniques are conducted.</li>
+                  </ul>
+                  <p><b>📍 Time: June 21</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Auroville Birthday</h3>
+                  <ul>
+                    <li>Commemorates the founding of Auroville, the experimental township, on February 28, 1968.</li>
+                    <li>Special meditation sessions are held at the Matrimandir, and cultural performances showcase Auroville's international character.</li>
+                    <li>The Mother's message is read out in different languages, symbolizing human unity.</li>
+                  </ul>
+                  <p><b>📍 Time: February 28</b></p>
+                  <h3>6. Sri Aurobindo's Birthday</h3>
+                  <ul>
+                    <li>Celebrates the birth anniversary of Sri Aurobindo, the spiritual leader and founder of Sri Aurobindo Ashram.</li>
+                    <li>Special prayers, meditation sessions, and cultural programs are organized at the Ashram.</li>
+                    <li>Devotees from around the world visit Puducherry during this time.</li>
+                  </ul>
+                  <p><b>📍 Time: August 15</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Auroville Birthday" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Villianur Temple Car Festival" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>7. Villianur Temple Car Festival</h3>
+                  <ul>
+                    <li>A grand celebration at the Thirukameeswarar Temple in Villianur, where the temple chariot is pulled through the streets by devotees.</li>
+                    <li>The 15-meter-high wooden chariot is decorated with flowers and sculptures.</li>
+                    <li>Special pujas and rituals are performed, and thousands of devotees participate in the event.</li>
+                  </ul>
+                  <p><b>📍 Time: May-June</b></p>
+                  <h3>8. Fête de la Musique (Music Festival)</h3>
+                  <ul>
+                    <li>A French music festival celebrated worldwide, with special significance in Puducherry.</li>
+                    <li>Musicians perform at various venues across the territory, including the Beach Promenade and French Quarter.</li>
+                    <li>Features a diverse range of music styles, from classical to contemporary, French to Tamil.</li>
+                  </ul>
+                  <p><b>📍 Time: June 21</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>9. Puducherry Heritage Festival</h3>
+                  <ul>
+                    <li>A celebration of Puducherry's unique architectural and cultural heritage.</li>
+                    <li>Includes heritage walks, exhibitions, cultural performances, and food festivals.</li>
+                    <li>Aims to promote awareness and preservation of Puducherry's Franco-Tamil heritage.</li>
+                  </ul>
+                  <p><b>📍 Time: February</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Heritage Festival" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Diwali" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>10. Diwali (Festival of Lights)</h3>
+                  <ul>
+                    <li>Celebrated with traditional fervor, with homes and streets illuminated with oil lamps and electric lights.</li>
+                    <li>Fireworks displays, special prayers, and family gatherings mark the occasion.</li>
+                    <li>Sweet and savory snacks are prepared and shared with friends and neighbors.</li>
+                  </ul>
+                  <p><b>📍 Time: October-November</b></p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>11. Panguni Uthiram</h3>
+                  <ul>
+                    <li>A Tamil Hindu festival celebrated at the Sithananda Swamy Temple in Karaikal.</li>
+                    <li>Devotees carry kavadis (decorated wooden arches) and perform various rituals to fulfill their vows.</li>
+                    <li>A grand procession of deities is taken through the streets, accompanied by music and dance.</li>
+                  </ul>
+                  <p><b>📍 Time: March-April</b></p>
+
+                  <h3>12. Christmas </h3>
+                  <ul>
+                    <li>Celebrated with great enthusiasm in Puducherry, given its significant Christian population and French heritage.</li>
+                    <li>Churches like the Sacred Heart Basilica and Immaculate Conception Cathedral are beautifully decorated.</li>
+                    <li>Midnight Mass, carol singing, and Christmas markets are organized throughout the territory.</li>
+                  </ul>
+                  <p><b>📍 Time: December 25</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Christmas" style="height:200px;width: 230px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Puducherry Beach Festival" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>13. Puducherry Beach Festival</h3>
+                  <ul>
+                    <li>A vibrant celebration of Puducherry's coastal culture and tourism.</li>
+                    <li>Features water sports competitions, sand art displays, cultural performances, and food stalls.</li>
+                    <li>Attracts tourists and locals alike to the beautiful beaches of Puducherry.</li>
+                  </ul>
+                  <p><b>📍 Time: January-February</b></p>
+                  <h3>14. Maasi Theppotsavam (Float Festival)</h3>
+                  <ul>
+                    <li>A traditional Tamil festival celebrated at the Bahour Lake, where deities are taken on a decorated float around the lake.</li>
+                    <li>Special pujas and rituals are performed, and cultural programs are organized.</li>
+                    <li>The event attracts devotees from neighboring districts as well.</li>
+                  </ul>
+                  <p><b>📍 Time: February-March</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Puducherry's festivals are a beautiful blend of Tamil traditions, French heritage, and spiritual practices, reflecting the territory's unique cultural identity. These celebrations attract visitors from around the world, offering a glimpse into Puducherry's rich and diverse cultural tapestry. 🎉</p><br><br>
+        </div>
+        <div id="wbfood" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Foods of Puducherry</h1>
+          <p>Puducherry's cuisine is a delightful fusion of French and Tamil flavors, creating a unique culinary experience that can't be found elsewhere in India. The territory's food culture reflects its colonial history and coastal location, with seafood, French techniques, and local spices coming together harmoniously.</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Franco-Tamil Fusion</h3>
+                  <ul>
+                    <li><b>Bouillabaisse:</b> A French fish stew adapted with local spices and seafood.</li>
+                    <li><b>Vindaye:</b> A spicy pickled fish dish with French-Creole origins, popular in Puducherry.</li>
+                    <li><b>Poulet Cafreal:</b> Chicken marinated with local herbs and spices, then grilled in French style.</li>
+                    <li><b>Creme de Caramel:</b> A French dessert with a local twist, often flavored with cardamom or saffron.</li>
+                  </ul>
+                  <h3>2. French Influence</h3>
+                  <ul>
+                    <li><b>Baguettes & Croissants:</b> Freshly baked French bread available in local bakeries.</li>
+                    <li><b>Quiche:</b> Savory tarts with local ingredients like coconut and curry leaves.</li>
+                    <li><b>Coq au Vin:</b> Chicken cooked in wine, adapted with Indian spices.</li>
+                    <li><b>Eclairs & Profiteroles:</b> French pastries popular in Puducherry's cafes.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=220" alt="Franco-Tamil Fusion" style="height:200px;width: 220px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=220" alt="Seafood" style="height:200px;width: 220px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Seafood Specialties</h3>
+                  <ul>
+                    <li><b>Meen Puyabaisse:</b> A local adaptation of the French bouillabaisse, with tamarind and local spices.</li>
+                    <li><b>Crab Masala:</b> Fresh crabs cooked with a blend of Tamil spices.</li>
+                    <li><b>Prawn Curry:</b> Prawns cooked in coconut milk with mustard seeds and curry leaves.</li>
+                    <li><b>Fish Vadouvan:</b> Fish marinated with a Franco-Indian spice blend called vadouvan.</li>
+                    <li><b>Seafood Platter:</b> A French-style assortment of grilled and fried seafood with local dipping sauces.</li>
+                  </ul>
+                  <h3>4. Traditional Tamil Dishes</h3>
+                  <ul>
+                    <li><b>Puducherry Fish Curry:</b> A tangy fish curry made with tamarind, tomatoes, and local spices.</li>
+                    <li><b>Karaikal Crab Curry:</b> A specialty from the Karaikal region, with a rich coconut base.</li>
+                    <li><b>Vazhakkai Varuval:</b> Raw banana fry, a popular side dish.</li>
+                    <li><b>Kothu Parotta:</b> Shredded parotta mixed with eggs, meat, and spices.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=220" alt="Vegetarian Dishes" style="height:200px;width: 220px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>5. Vegetarian Delights</h3>
+                  <ul>
+                    <li><b>Aubergine Quiche:</b> A French tart filled with local eggplant and spices.</li>
+                    <li><b>Vegetable Ratatouille:</b> French vegetable stew with Indian spices.</li>
+                    <li><b>Poriyal:</b> Stir-fried vegetables with coconut, a Tamil specialty.</li>
+                    <li><b>Sambar:</b> Lentil stew with vegetables, served with rice or idli.</li>
+                    <li><b>Auroville Cheese:</b> Locally produced artisanal cheese, often used in salads and sandwiches.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>6. Breads & Rice Dishes</h3>
+                  <ul>
+                    <li><b>Puducherry Biryani:</b> A unique biryani with French herbs and local spices.</li>
+                    <li><b>Pain de Puducherry:</b> Local bread with a crispy crust and soft interior.</li>
+                    <li><b>Coconut Rice:</b> Rice cooked with coconut milk and tempered with mustard seeds and curry leaves.</li>
+                    <li><b>Garlic Bread:</b> French-style garlic bread with local herbs.</li>
+                  </ul>
+
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=220" alt="Breads and Rice" style="height:200px;width: 220px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Desserts" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>7. Desserts & Sweets</h3>
+                  <ul>
+                    <li><b>Puducherry Macarons:</b> French macarons with local flavors like cardamom, saffron, and coconut.</li>
+                    <li><b>Pain au Chocolat:</b> Chocolate-filled pastry, a French bakery staple.</li>
+                    <li><b>Payasam:</b> Traditional Tamil rice pudding with jaggery and nuts.</li>
+                    <li><b>Sago Pudding:</b> A popular dessert made with tapioca pearls, coconut milk, and palm sugar.</li>
+                    <li><b>Tarte Tatin:</b> French upside-down caramelized fruit tart, often made with local fruits like mango or banana.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>8. Street Food</h3>
+                  <ul>
+                    <li><b>Puducherry Dosa:</b> Crispy dosa with a unique local twist.</li>
+                    <li><b>Bonda:</b> Deep-fried potato dumplings, a popular snack.</li>
+                    <li><b>Crepes:</b> French-style crepes with both sweet and savory fillings.</li>
+                    <li><b>Vada:</b> Savory fried snack made from lentils.</li>
+                    <li><b>Bajji:</b> Vegetable fritters, especially popular during monsoon season.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Street Food" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>9. Beverages</h3>
+                  <ul>
+                    <li><b>Filter Coffee:</b> Strong South Indian coffee served with milk and sugar.</li>
+                    <li><b>French Press Coffee:</b> Available in many cafes, often using locally sourced coffee beans.</li>
+                    <li><b>Wine:</b> Local and imported wines are popular, with some restaurants offering wine pairing menus.</li>
+                    <li><b>Coconut Water:</b> Fresh coconut water, widely available on beaches and streets.</li>
+                    <li><b>Masala Chai:</b> Spiced tea, often served with French pastries in local cafes.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Beverages" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Puducherry's cuisine is a delightful journey through its multicultural heritage, offering a unique blend of French sophistication and Tamil flavors. Whether you're enjoying a croissant at a beachside cafe or savoring a spicy seafood curry, the food of Puducherry tells the story of its rich cultural tapestry. 🍽️🥐🦐</p><br><br>
+        </div>
+        <div id="wbhistory" class="tab-pane fade in active" style="background-color: white;">
+          <h1>History of Puducherry</h1>
+          <p>Puducherry has a rich and diverse history that spans ancient trading ports, colonial conquests, freedom struggles, and modern development. The territory's unique blend of Indian and European influences has shaped its distinct identity.</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Ancient Period (Before 16th Century)</h3>
+                  <ul>
+                    <li><b>Early Settlements:</b> Archaeological evidence suggests that Puducherry was part of the Roman trade network as early as the 1st century CE.</li>
+                    <li><b>Chola Rule (9th-13th Century):</b> The region was under the control of the Chola dynasty, who developed it as a trading port.</li>
+                    <li><b>Vijayanagara Empire (14th-16th Century):</b> Puducherry came under the rule of the Vijayanagara Empire, continuing as an important trading center.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Ancient Puducherry" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="French Colonial Era" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. French Colonial Era (1674-1954)</h3>
+                  <h4>Establishment of French Control:</h4>
+                  <ul>
+                    <li><b>1673:</b> François Martin, a French merchant, established a trading center in Puducherry.</li>
+                    <li><b>1674:</b> The French East India Company officially purchased the village of Puducherry from the Sultan of Bijapur.</li>
+                    <li><b>1693:</b> The Dutch briefly captured Puducherry but returned it to France in 1699 under the Treaty of  The Dutch briefly captured Puducherry but returned it to France in 1699 under the Treaty of Ryswick.</li>
+                    <li><b>1701-1761:</b> Puducherry flourished as the capital of French India under governors like Pierre Christophe Le Noir and Joseph François Dupleix.</li>
+                    <li><b>1746-1748:</b> The British captured Puducherry during the First Carnatic War but returned it to France.</li>
+                  </ul>
+                  <h4>Anglo-French Rivalry:</h4>
+                  <ul>
+                    <li><b>1761:</b> The British captured Puducherry again during the Seven Years' War and severely damaged the town.</li>
+                    <li><b>1765:</b> Puducherry was returned to France, beginning a cycle of British capture and French reclamation.</li>
+                    <li><b>1816:</b> After the Napoleonic Wars, Puducherry was finally restored to France and remained French territory.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=220&width=200" alt="French India" style="height:220px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h4>French India Development:</h4>
+                  <ul>
+                    <li><b>1816-1954:</b> Puducherry, along with Karaikal, Mahe, Yanam, and Chandernagore, formed French India.</li>
+                    <li><b>19th Century:</b> The French implemented their administrative, educational, and legal systems.</li>
+                    <li><b>1872:</b> French citizenship was granted to all residents of Puducherry, regardless of ethnicity.</li>
+                    <li><b>1900-1954:</b> French architectural influence shaped the town planning, with a grid pattern and colonial buildings.</li>
+                  </ul>
+                  <h4>Cultural Impact:</h4>
+                  <ul>
+                    <li>French became an official language alongside Tamil.</li>
+                    <li>The educational system followed French curriculum.</li>
+                    <li>Roman Catholicism spread, leading to the construction of churches and cathedrals.</li>
+                    <li>A unique Franco-Tamil culture emerged, blending European and Indian traditions.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Freedom Movement & Integration with India (1947-1954)</h3>
+                  <ul>
+                    <li><b>1947:</b> After India's independence, the movement for Puducherry's integration with India gained momentum.</li>
+                    <li><b>1948:</b> The French India Socialist Party led by V. Subbiah advocated for merger with India.</li>
+                    <li><b>1954 (October 21):</b> The French territories of Puducherry, Karaikal, Mahe, and Yanam were transferred to the Indian Union following a referendum.</li>
+                    <li><b>1962:</b> The formal de jure transfer was completed when the French Parliament ratified the treaty.</li>
+                    <li><b>1963:</b> Puducherry officially became a Union Territory of India.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=250" alt="Integration with India" style="height:200px;width: 250px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=230&width=200" alt="Spiritual Heritage" style="height:230px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h2>4. Spiritual Heritage</h3>
+                    <h3>Sri Aurobindo & The Mother</h3>
+                    <ul>
+                      <li><b>1910:</b> Sri Aurobindo, a revolutionary turned spiritual leader, arrived in Puducherry seeking refuge from British persecution.</li>
+                      <li><b>1914:</b> Mirra Alfassa (The Mother), a French spiritual seeker, joined Sri Aurobindo in Puducherry.</li>
+                      <li><b>1926:</b> Sri Aurobindo Ashram was formally established, becoming a center for spiritual seekers worldwide.</li>
+                    </ul>
+                    <h3>Auroville</h3>
+                    <ul>
+                      <li><b>1968 (February 28):</b> Auroville, an experimental township dedicated to human unity, was inaugurated by The Mother.</li>
+                      <li><b>1970s-Present:</b> Auroville has grown into an international community with residents from over 50 countries.</li>
+                    </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Modern Puducherry" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>5. Post-Integration Development</h3>
+                  <ul>
+                    <li><b>1963-1980:</b> Puducherry underwent significant infrastructure development while preserving its French heritage.</li>
+                    <li><b>1985:</b> Pondicherry University was established, enhancing the territory's educational status.</li>
+                    <li><b>1990s:</b> Tourism emerged as a major industry, with the government focusing on heritage conservation.</li>
+                    <li><b>2006:</b> Pondicherry was officially renamed Puducherry, reflecting its Tamil etymology (Puducheri, meaning "new village").</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=230&width=200" alt="Contemporary Puducherry" style="height:230px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>6. Contemporary Puducherry</h3>
+                  <ul>
+                    <li><b>Economic Development:</b></li>
+                    <ul>
+                      <li>Tourism has become a major industry, with the French Quarter being designated as a UNESCO Heritage site candidate.</li>
+                      <li>Industries like textiles, chemicals, and information technology have grown significantly.</li>
+                    </ul>
+                    <li><b>Cultural Preservation:</b></li>
+                    <ul>
+                      <li>The French influence continues in architecture, cuisine, and language.</li>
+                      <li>The Alliance Française and French Institute of Pondicherry maintain cultural ties with France.</li>
+                    </ul>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Puducherry Today</h3>
+                  <ul>
+                    <li><b>Governance:</b> As a Union Territory with a Legislative Assembly, Puducherry has a unique administrative structure.</li>
+                    <li><b>Tourism:</b> Known as the "French Riviera of the East," Puducherry attracts tourists for its beaches, spiritual centers, and colonial architecture.</li>
+                    <li><b>Education:</b> Home to prestigious institutions like Pondicherry University, JIPMER, and the French Institute.</li>
+                    <li><b>Culture:</b> A melting pot of Tamil, French, and international influences, especially visible in its cuisine, festivals, and lifestyle.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Puducherry Today" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>8. Timeline of Puducherry's History</h3>
+                  <ul>
+                    <li><b>1st Century CE:</b> Evidence of Roman trade connections.</li>
+                    <li><b>9th-13th Century:</b> Under Chola dynasty rule.</li>
+                    <li><b>1674:</b> French East India Company establishes control.</li>
+                    <li><b>1693-1699:</b> Brief Dutch occupation.</li>
+                    <li><b>1761-1765:</b> British occupation during Seven Years' War.</li>
+                    <li><b>1816:</b> Final restoration to France after Napoleonic Wars.</li>
+                    <li><b>1910:</b> Sri Aurobindo arrives in Puducherry.</li>
+                    <li><b>1926:</b> Sri Aurobindo Ashram established.</li>
+                    <li><b>1954:</b> De facto transfer to India.</li>
+                    <li><b>1962:</b> De jure transfer completed.</li>
+                    <li><b>1963:</b> Becomes a Union Territory of India.</li>
+                    <li><b>1968:</b> Auroville founded.</li>
+                    <li><b>2006:</b> Renamed from Pondicherry to Puducherry.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Timeline" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Puducherry's history is a fascinating tapestry of Indian and European influences, spiritual movements, and cultural exchanges. From ancient trading port to French colonial outpost to modern tourist destination, Puducherry has maintained its unique character while adapting to changing times. 🏛️🇫🇷🇮🇳</p>
+          <br><br>
+        </div>
+        <div id="wbartacraft" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Art & Craft of Puducherry 🎨🖌️</h1>
+          <p>Puducherry has a rich artistic heritage that blends French colonial influences with traditional Tamil craftsmanship. The territory's unique cultural fusion has given rise to distinctive art forms and crafts that are sought after by collectors and tourists alike.</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Handmade Paper Products 📜</h3>
+                  <h4>🔸 Auroville Paper</h4>
+                  <ul>
+                    <li><b>Famous for:</b> Eco-friendly handmade paper made from cotton rags, flax, and other natural fibers.</li>
+                    <li><b>Where?</b> Auroville Paper Factory, established in 1997.</li>
+                    <li><b>Used in:</b> Stationery, journals, greeting cards, lampshades, and art paper.</li>
+                  </ul>
+                  <h4>🔸 Paper Crafts</h4>
+                  <ul>
+                    <li><b>Paper Mache:</b> Decorative items, masks, and figurines made from recycled paper.</li>
+                    <li><b>Marbled Paper:</b> Unique designs created by floating colors on water and transferring them to paper.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Handmade Paper" style="height:200px;width: 230px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Pottery and Ceramics" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Pottery & Ceramics 🏺</h3>
+                  <h4>🔸 Golden Bridge Pottery</h4>
+                  <ul>
+                    <li><b>Origin:</b> Established in 1971 by Ray Meeker and Deborah Smith, pioneers of studio pottery in India.</li>
+                    <li><b>Features:</b> High-fired stoneware and porcelain with unique glazes and designs.</li>
+                  </ul>
+                  <h4>🔸 Auroville Ceramics</h4>
+                  <ul>
+                    <li><b>Origin:</b> Various studios in Auroville producing functional and decorative ceramics.</li>
+                    <li><b>Features:</b> Eco-friendly production methods and innovative designs combining Eastern and Western influences.</li>
+                  </ul>
+                  <h4>🔸 Traditional Terracotta</h4>
+                  <ul>
+                    <li><b>Origin:</b> Rural areas of Puducherry, particularly Villianur.</li>
+                    <li><b>Features:</b> Traditional clay items like pots, lamps, and figurines, often with Tamil motifs.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Textiles & Embroidery 🧵</h3>
+                  <ul>
+                    <li><b>Origin:</b> Blend of French embroidery techniques and traditional Tamil textile arts.</li>
+                    <li><b>Material:</b> Cotton, silk, and linen fabrics with intricate needlework.</li>
+                    <li><b>Designs:</b> Franco-Tamil motifs, nature-inspired patterns, and geometric designs.</li>
+                    <li><b>Products:</b> Sarees, scarves, table linens, cushion covers, and wall hangings.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Textiles and Embroidery" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Incense and Aromatics" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Incense & Aromatics 🌿</h3>
+                  <h4>🔸 Auroville Incense</h4>
+                  <ul>
+                    <li><b>Origin:</b> Auroville and surrounding areas.</li>
+                    <li><b>Features:</b> Hand-rolled incense sticks made from natural ingredients and essential oils.</li>
+                    <li><b>Varieties:</b> Over 100 different fragrances, including traditional Indian scents and French perfume-inspired blends.</li>
+                  </ul>
+                  <h4>🔸 Aromatic Candles</h4>
+                  <ul>
+                    <li><b>Features:</b> Handmade candles with natural waxes and essential oils.</li>
+                    <li><b>Designs:</b> Artistic candles with embedded flowers, leaves, and decorative elements.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Wooden Crafts 🪵</h3>
+                  <ul>
+                    <li><b>Origin:</b> Traditional Tamil woodworking with French design influences.</li>
+                    <li><b>Materials:</b> Locally sourced wood like rosewood, teak, and sandalwood.</li>
+                    <li><b>Products:</b> Furniture, decorative items, toys, and household objects.</li>
+                    <li><b>Specialties:</b> Intricately carved wooden screens, colonial-style furniture, and miniature wooden boats.</li>
+                  </ul>
+                  <h3>6. Leather Crafts 🧳</h3>
+                  <ul>
+                    <li><b>Origin:</b> Blend of French leather-working techniques and Indian craftsmanship.</li>
+                    <li><b>Products:</b> Bags, wallets, belts, journals, and footwear.</li>
+                    <li><b>Features:</b> Hand-stitched items with minimal use of machinery, often incorporating traditional Tamil patterns.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Wooden Crafts" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Paintings and Fine Arts" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>7. Paintings & Fine Arts 🖌️</h3>
+                  <ul>
+                    <li><b>Puducherry School of Art:</b> A unique style blending French techniques with Indian themes and colors.</li>
+                    <li><b>Auroville Artists:</b> International community of artists creating contemporary works influenced by spiritual philosophy.</li>
+                    <li><b>Traditional Tamil Art:</b> Kolam (floor designs), Tanjore paintings, and folk art forms.</li>
+                    <li><b>Street Art:</b> Murals and graffiti in the French Quarter, often depicting the territory's cultural fusion.</li>
+                  </ul>
+                  <h3>8. Shell Craft 🐚</h3>
+                  <ul>
+                    <li><b>Origin:</b> Coastal villages of Puducherry.</li>
+                    <li><b>Materials:</b> Seashells collected from local beaches.</li>
+                    <li><b>Products:</b> Jewelry, decorative items, wind chimes, and mirror frames.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>9. Metal Crafts 🔨</h3>
+                  <h4>🔸 Bronze Casting</h4>
+                  <ul>
+                    <li><b>Origin:</b> Traditional Tamil craft with French artistic influences.</li>
+                    <li><b>Products:</b> Statues, lamps, bells, and decorative items.</li>
+                    <li><b>Features:</b> Lost-wax casting technique (cire perdue) used to create intricate designs.</li>
+                  </ul>
+                  <h4>🔸 Brass Work</h4>
+                  <ul>
+                    <li><b>Products:</b> Lamps, utensils, and decorative objects.</li>
+                    <li><b>Features:</b> Hand-hammered and engraved with traditional and contemporary designs.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Metal Crafts" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>📌 Summary: Puducherry's Art & Craft Forms</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Art Form</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Handmade Paper</td>
+                <td>Auroville</td>
+                <td>Eco-friendly stationery, journals, and art paper</td>
+              </tr>
+              <tr>
+                <td>Pottery & Ceramics</td>
+                <td>Golden Bridge Pottery, Auroville</td>
+                <td>High-fired stoneware, porcelain, and terracotta</td>
+              </tr>
+              <tr>
+                <td>Textiles & Embroidery</td>
+                <td>Throughout Puducherry</td>
+                <td>Franco-Tamil designs on cotton and silk</td>
+              </tr>
+              <tr>
+                <td>Incense & Aromatics</td>
+                <td>Auroville, Puducherry town</td>
+                <td>Hand-rolled incense sticks and aromatic candles</td>
+              </tr>
+              <tr>
+                <td>Wooden Crafts</td>
+                <td>Traditional workshops</td>
+                <td>Colonial-style furniture and decorative items</td>
+              </tr>
+              <tr>
+                <td>Leather Crafts</td>
+                <td>Artisan workshops</td>
+                <td>Hand-stitched bags, wallets, and journals</td>
+              </tr>
+              <tr>
+                <td>Paintings & Fine Arts</td>
+                <td>French Quarter, Auroville</td>
+                <td>Fusion of French techniques and Indian themes</td>
+              </tr>
+              <tr>
+                <td>Shell Craft</td>
+                <td>Coastal villages</td>
+                <td>Decorative items made from seashells</td>
+              </tr>
+              <tr>
+                <td>Metal Crafts</td>
+                <td>Traditional workshops</td>
+                <td>Bronze statues and brass decorative items</td>
+              </tr>
+            </table>
+          </div>
+          <br><br>
+          <p>Puducherry's arts and crafts scene is a vibrant reflection of its unique cultural identity, where French aesthetics meet Tamil traditions. The territory continues to attract artists and craftspeople from around the world, particularly to Auroville, where creativity and sustainability go hand in hand. Whether it's handmade paper, studio pottery, or aromatic incense, Puducherry's crafts carry the distinctive stamp of its multicultural heritage. 🎭✨</p>
+          <br><br>
+        </div>
+        <div id="wbseason" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Seasons to visit Puducherry 🌧️☀️ </h1>
+          <p>Puducherry has a tropical climate with warm temperatures throughout the year. However, certain seasons offer better experiences for different activities and interests. Here's a comprehensive guide to help you plan your visit to this charming coastal territory.</p>
+
+          <br><br>
+
+          <h2> Season-wise Breakdown for Visiting Puducherry</h2>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🌸 Winter (October - February)</h3>
+                  <ul>
+                    <li>The best and most popular time to visit Puducherry with pleasant temperatures ranging from 20°C to 30°C.</li>
+                    <li>Perfect weather for exploring the French Quarter, beaches, and outdoor attractions.</li>
+                    <li>Ideal for cycling around the town and enjoying the colonial architecture.</li>
+                    <li>Christmas and New Year celebrations add a festive charm to the French Quarter.</li>
+                    <li>Pongal celebrations in January offer a glimpse into Tamil cultural traditions.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Winter in Puducherry" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Summer in Puducherry" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>☀️ Summer (March – June)</h3>
+                  <ul>
+                    <li>Hot and humid with temperatures ranging from 25°C to 40°C.</li>
+                    <li>Best for budget travelers as accommodation rates drop significantly.</li>
+                    <li>Early mornings and evenings are good for beach visits and water activities.</li>
+                    <li>Indoor activities like museum visits, shopping, and café hopping are recommended during peak afternoon heat.</li>
+                    <li>International Yoga Day (June 21) is celebrated with special events at the beach and in Auroville.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🌧️ Monsoon (July - September)</h3>
+                  <ul>
+                    <li>Moderate rainfall with occasional heavy showers, temperatures between 23°C and 35°C.</li>
+                    <li>The landscape turns lush green, offering beautiful scenery for photography.</li>
+                    <li>Fewer tourists mean more peaceful exploration of attractions.</li>
+                    <li>Beach activities may be limited due to rough seas and occasional warnings.</li>
+                    <li>Perfect time for ayurvedic treatments and spa experiences.</li>
+                    <li>Festivals like Sri Aurobindo's Birthday (August 15) and Ganesh Chaturthi are celebrated during this period.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Monsoon in Puducherry" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>📌 Summary: Best Time to Visit Different Places in Puducherry</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Attraction</th>
+                <th>Best Season</th>
+                <th>Recommended Months</th>
+                <th>Why Visit?</th>
+              </tr>
+              <tr>
+                <td>French Quarter (White Town)</td>
+                <td>Winter, Early Summer</td>
+                <td>October - March</td>
+                <td>Pleasant weather for walking tours, photography, and café hopping</td>
+              </tr>
+              <tr>
+                <td>Beaches (Promenade, Paradise, Serenity)</td>
+                <td>Winter, Early Summer</td>
+                <td>October - March</td>
+                <td>Calm seas, clear skies, perfect for swimming and water sports</td>
+              </tr>
+              <tr>
+                <td>Auroville & Matrimandir</td>
+                <td>Winter, Post-Monsoon</td>
+                <td>October - February</td>
+                <td>Comfortable weather for exploring the township and gardens</td>
+              </tr>
+              <tr>
+                <td>Sri Aurobindo Ashram</td>
+                <td>Any time</td>
+                <td>Year-round</td>
+                <td>Indoor spiritual center, though winter offers more comfortable conditions</td>
+              </tr>
+              <tr>
+                <td>Chunnambar Backwaters</td>
+                <td>Winter, Post-Monsoon</td>
+                <td>October - February</td>
+                <td>Lush greenery after monsoon, pleasant boat rides</td>
+              </tr>
+              <tr>
+                <td>Ousteri Lake (Bird Watching)</td>
+                <td>Winter</td>
+                <td>November - February</td>
+                <td>Migratory birds visit during this period</td>
+              </tr>
+              <tr>
+                <td>Temples & Churches</td>
+                <td>Any time</td>
+                <td>Year-round</td>
+                <td>Indoor religious sites, though festivals add special charm</td>
+              </tr>
+              <tr>
+                <td>Shopping & Culinary Experiences</td>
+                <td>Any time</td>
+                <td>Year-round</td>
+                <td>Indoor activities perfect for any season</td>
+              </tr>
+              <tr>
+                <td>Surfing at Serenity Beach</td>
+                <td>Post-Monsoon</td>
+                <td>October - November</td>
+                <td>Good waves and relatively fewer crowds</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="container">
+            <div class="row">
+              <h1 style=" text-align: center;">📌 Summary: When to Visit Puducherry</h1><br>
+              <ul>
+                <li><b>For sightseeing & outdoor activities:</b> October - February (Winter)</li>
+                <li><b>For budget travel:</b> April - June (Summer) and July - September (Monsoon)</li>
+                <li><b>For water sports:</b> October - March (excluding monsoon months)</li>
+                <li><b>For festivals:</b> January (Pongal), July (Bastille Day), August (Sri Aurobindo's Birthday), December (Christmas)</li>
+                <li><b>For spiritual retreats:</b> Any time of year, though winter offers more comfortable conditions</li>
+                <li><b>For photography:</b> Post-monsoon (October) for lush landscapes, December - February for clear skies</li>
+              </ul>
+
+            </div>
+          </div>
+          <br><br>
+        </div>
+        <div id="wbtourist" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Tourist Spots of Puducherry 🏖️🏛️</h1>
+          <p>Puducherry offers a unique blend of French colonial charm, spiritual centers, pristine beaches, and cultural attractions. Here's a categorized list of the best tourist places in Puducherry:</p>
+
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. French Colonial Heritage 🏛️</h3>
+                  <ul>
+                    <li><b>French Quarter (White Town) -</b> Colonial buildings, tree-lined streets, colorful facades, and French architecture</li>
+                    <li><b>Rue Dumas & Rue Suffren -</b> Charming streets with French colonial buildings and cafes</li>
+                    <li><b>French War Memorial -</b> Monument honoring soldiers who died in World War I</li>
+                    <li><b>Puducherry Museum -</b> Artifacts from the colonial era, sculptures, and archaeological findings</li>
+                    <li><b>Old Lighthouse -</b> Historic lighthouse offering panoramic views of the coastline</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="French Quarter" style="height:200px;width: 230px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Auroville" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Spiritual Destinations 🧘‍♀️</h3>
+                  <ul>
+                    <li><b>Sri Aurobindo Ashram -</b> Spiritual community founded by Sri Aurobindo and The Mother</li>
+                    <li><b>Auroville -</b> Experimental township dedicated to human unity with the iconic Matrimandir</li>
+                    <li><b>Matrimandir -</b> Golden spherical meditation chamber at the center of Auroville</li>
+                    <li><b>Auroville Visitors Center -</b> Information about Auroville's vision and activities</li>
+                    <li><b>Samadhi of Sri Aurobindo & The Mother -</b> Sacred memorial at the Ashram</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Beaches & Coastal Attractions 🏖️</h3>
+                  <ul>
+                    <li><b>Promenade Beach -</b> 1.5 km long seafront with Gandhi statue and War Memorial</li>
+                    <li><b>Paradise Beach -</b> Pristine beach accessible by boat through Chunnambar backwaters</li>
+                    <li><b>Serenity Beach -</b> Popular for surfing and water sports</li>
+                    <li><b>Auroville Beach -</b> Quiet beach near Auroville with golden sands</li>
+                    <li><b>Chunnambar Backwaters -</b> Scenic boat rides through mangroves to Paradise Beach</li>
+                    <li><b>Karaikal Beach -</b> Beautiful beach in the Karaikal district of Puducherry</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Promenade Beach" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Sacred Heart Basilica" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Religious Sites ⛪🕍</h3>
+                  <ul>
+                    <li><b>Sacred Heart Basilica -</b> Gothic architecture with beautiful stained glass windows</li>
+                    <li><b>Immaculate Conception Cathedral -</b> 300-year-old church with French and Portuguese influences</li>
+                    <li><b>Manakula Vinayagar Temple -</b> Ancient temple dedicated to Lord Ganesha with the famous temple elephant</li>
+                    <li><b>Varadaraja Perumal Temple -</b> Dravidian-style temple dedicated to Lord Vishnu</li>
+                    <li><b>Thirukameswarar Temple (Villianur) -</b> Ancient Shiva temple known for its annual chariot festival</li>
+                    <li><b>Kanniga Parameswari Temple -</b> Temple dedicated to Goddess Shakti</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Parks & Gardens 🌳</h3>
+                  <ul>
+                    <li><b>Bharathi Park -</b> Central park with Aayi Mandapam, a white monument</li>
+                    <li><b>Botanical Garden -</b> 22-acre garden established in 1826 with a musical fountain</li>
+                    <li><b>Ousteri Lake (Osudu Lake) -</b> Bird sanctuary and wetland ecosystem</li>
+                    <li><b>Auroville Botanical Gardens -</b> Conservation center with indigenous plant species</li>
+                    <li><b>French War Cemetery -</b> Historic cemetery with well-maintained gardens</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Bharathi Park" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Puducherry Museum" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>6. Museums & Cultural Centers 🏛️</h3>
+                  <ul>
+                    <li><b>Puducherry Museum -</b> Collection of French and Indian artifacts, sculptures, and archaeological findings</li>
+                    <li><b>Jawahar Toy Museum -</b> Collection of over 120 dolls representing different states of India</li>
+                    <li><b>Ananda Ranga Pillai Mansion -</b> 18th-century colonial building with Franco-Tamil architecture</li>
+                    <li><b>French Institute of Pondicherry -</b> Research center with a library of rare manuscripts</li>
+                    <li><b>Cluny Embroidery Centre -</b> Traditional embroidery and handicrafts by local women</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Shopping & Culinary Destinations 🛍️🍽️</h3>
+                  <ul>
+                    <li><b>Mission Street -</b> Main shopping area with boutiques, handicraft stores, and textiles</li>
+                    <li><b>Goubert Market -</b> Traditional market for fresh produce, spices, and local goods</li>
+                    <li><b>Auroville Visitors Centre -</b> Handicrafts, handmade paper products, incense, and organic products</li>
+                    <li><b>Cafe des Arts -</b> Iconic French cafe with colonial ambiance</li>
+                    <li><b>Baker Street -</b> Famous for French pastries and baked goods</li>
+                    <li><b>La Maison Rose -</b> Pink colonial building housing a boutique and cafe</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Shopping in Puducherry" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Mahe" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>8. Other Districts of Puducherry 🗺️</h3>
+                  <ul>
+                    <li><b>Karaikal -</b> Coastal enclave with beaches, temples, and the annual Karaikal Ammaiyar festival</li>
+                    <li><b>Mahe -</b> Surrounded by Kerala, known for St. Theresa's Church, Mahe Beach, and Tagore Park</li>
+                    <li><b>Yanam -</b> Enclave in Andhra Pradesh with Dutch and French colonial influences, located on the banks of the Godavari River</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>9. Adventure & Activities 🏄‍♂️</h3>
+                  <ul>
+                    <li><b>Surfing at Serenity Beach -</b> Surf schools offering lessons for beginners and advanced surfers</li>
+                    <li><b>Scuba Diving -</b> Explore underwater marine life with certified diving centers</li>
+                    <li><b>Boating in Chunnambar -</b> Motorboat rides through backwaters to Paradise Beach</li>
+                    <li><b>Cycling Tours -</b> Guided bicycle tours through the French Quarter and rural villages</li>
+                    <li><b>Yoga & Meditation -</b> Classes and workshops at various centers including Auroville and Sri Aurobindo Ashram</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Surfing at Serenity Beach" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br><br>
+          <p>Puducherry offers a perfect blend of French colonial heritage, spiritual experiences, beach activities, and cultural attractions. Whether you're seeking relaxation, adventure, spiritual growth, or cultural exploration, this charming coastal territory has something for everyone. 🌊🏛️🧘‍♀️</p>
+
+        </div>
+        <div id="wbwild" class="tab-pane fade in active" style="background-color: white;">
+          <h1> Wildlife & Crops of Puducherry 🌿</h1>
+          <p>Puducherry, despite its small size, has diverse ecosystems including coastal areas, mangroves, backwaters, and agricultural lands that support various wildlife species and agricultural activities.</p>
+
+          <br>
+          <h2>Wildlife of Puducherry </h2>
+          <p>Puducherry has several wildlife sanctuaries and natural habitats that are home to various species of birds, animals, and marine life.</p>
+
+          <br>
+          <h2>🔹 Major Wildlife Areas</h2>
+          <div>
+            <table>
+              <tr>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Ousteri Lake (Osudu Lake)</td>
+                <td>Outskirts of Puducherry town</td>
+                <td>Migratory birds, wetland ecosystem, recognized as an Important Bird Area by BirdLife International</td>
+              </tr>
+              <tr>
+                <td>Chunnambar Backwaters</td>
+                <td>8 km from Puducherry town</td>
+                <td>Mangrove forests, estuarine ecosystem, boat rides to Paradise Beach</td>
+              </tr>
+              <tr>
+                <td>Auroville Botanical Gardens</td>
+                <td>Auroville</td>
+                <td>Conservation of indigenous plant species, butterfly garden, educational programs</td>
+              </tr>
+              <tr>
+                <td>Bahour Lake</td>
+                <td>Bahour, 16 km from Puducherry</td>
+                <td>Freshwater ecosystem, bird watching, fishing</td>
+              </tr>
+              <tr>
+                <td>Coastal Areas</td>
+                <td>Puducherry, Karaikal</td>
+                <td>Marine life, sea turtles, coastal birds</td>
+              </tr>
+            </table>
+          </div>
+          <bt><br></bt>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3> 🔹 Notable Wildlife in Puducherry</h3>
+                <ul>
+                  <li><b>Birds:</b> Over 160 species including painted storks, spot-billed pelicans, open-billed storks, egrets, herons, kingfishers, and migratory birds like flamingos and Siberian cranes.</li>
+                  <li><b>Marine Life:</b> Dolphins, sea turtles (Olive Ridley), various fish species, crabs, and mollusks.</li>
+                  <li><b>Reptiles:</b> Monitor lizards, various snake species, garden lizards.</li>
+                  <li><b>Mammals:</b> Jackals, mongooses, civets, and various rodent species.</li>
+                  <li><b>Butterflies:</b> Over 100 species of butterflies, especially in the Auroville Botanical Gardens.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=200" alt="Birds at Ousteri Lake" style="height:200px;width: 200px;">
+
+              </div>
+
+            </div>
+          </div>
+          <hr><br>
+          <h2>🌾 Agriculture & Major Crops in Puducherry </h2>
+          <p>Agriculture is an important economic activity in Puducherry, with about 30% of the territory's land used for cultivation. The fertile soil and favorable climate support a variety of crops.</p>
+
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Key Agricultural Features</h3>
+                <ul>
+                  <li><b>Irrigation:</b> Well-developed irrigation systems using canals, tanks, and wells.</li>
+                  <li><b>Farming Practices:</b> Mix of traditional and modern techniques, with increasing focus on organic farming, especially in Auroville.</li>
+                  <li><b>Land Holdings:</b> Mostly small and marginal farmers with landholdings less than 2 hectares.</li>
+                  <li><b>Agricultural Seasons:</b> Kuruvai (June-September), Samba (August-January), and Navarai (December-March).</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=220" alt="Rice Fields in Puducherry" style="height:200px;width: 220px;">
+
+              </div>
+            </div>
+          </div>
+          <h2>🔹 Major Crops of Puducherry</h2>
+          <div>
+            <table>
+              <tr>
+                <th>Category</th>
+                <th>Crops</th>
+              </tr>
+              <tr>
+                <td>Cereals</td>
+                <td>Rice 🍚 (main crop), Millets, Maize 🌽</td>
+              </tr>
+              <tr>
+                <td>Pulses</td>
+                <td>Black Gram, Green Gram, Red Gram, Cowpea</td>
+              </tr>
+              <tr>
+                <td>Oilseeds</td>
+                <td>Groundnut 🥜, Sesame, Coconut 🥥</td>
+              </tr>
+              <tr>
+                <td>Vegetables</td>
+                <td>Brinjal (Eggplant), Tomato 🍅, Okra, Cucumber 🥒, Bitter Gourd, Snake Gourd, Pumpkin 🎃</td>
+              </tr>
+              <tr>
+                <td>Fruits</td>
+                <td>Banana 🍌, Mango 🥭, Jackfruit, Papaya, Guava, Sapota</td>
+              </tr>
+              <tr>
+                <td>Spices</td>
+                <td>Chili 🌶️, Turmeric, Coriander, Curry Leaves</td>
+              </tr>
+              <tr>
+                <td>Commercial Crops</td>
+                <td>Sugarcane, Cotton, Cashew, Betel Vine</td>
+              </tr>
+              <tr>
+                <td>Plantation Crops</td>
+                <td>Coconut 🥥, Casuarina, Teak</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Special Agricultural Initiatives</h3>
+                <ul>
+                  <li><b>Organic Farming:</b> Promoted especially in Auroville, with focus on sustainable agricultural practices.</li>
+                  <li><b>Integrated Farming:</b> Combining agriculture with fisheries and livestock.</li>
+                  <li><b>Urban Agriculture:</b> Rooftop gardens and community farming initiatives in urban areas.</li>
+                  <li><b>Seed Conservation:</b> Preservation of traditional seed varieties, particularly at Auroville's Sustainable Agriculture Center.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=200" alt="Organic Farming in Auroville" style="height:200px;width: 200px;">
+
+              </div>
+            </div>
+          </div><br>
+          <hr>
+          <div class="box" style=" background: #f3b37185;padding: 10px;">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3> Fisheries & Aquaculture 🐟</h3>
+                  <ul>
+                    <li><b>Marine Fishing:</b> Important economic activity in coastal areas of Puducherry and Karaikal.</li>
+                    <li><b>Common Fish Species:</b> Sardines, mackerel, tuna, prawns, crabs, and lobsters.</li>
+                    <li><b>Inland Fisheries:</b> Practiced in tanks, ponds, and backwaters.</li>
+                    <li><b>Aquaculture:</b> Growing sector with focus on shrimp farming and freshwater fish cultivation.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Fishing Boats in Puducherry" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Puducherry's diverse ecosystems support a variety of wildlife, particularly birds and marine species. The territory's agricultural sector, though small in area, is productive and diverse, with rice being the principal crop. The focus on sustainable and organic farming practices, especially in Auroville, is helping to preserve biodiversity while ensuring food security.</p>
+          <br><br>
+        </div>
+        <div id="wbedu" class="tab-pane fade in active" style="background-color: white;">
+          <h1>🎓 Education & Institutions in Puducherry</h1>
+          <p>Puducherry has a unique educational landscape influenced by both French and Indian systems. The territory boasts prestigious institutions, a high literacy rate, and a blend of traditional and alternative educational approaches.</p>
+
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>📌 Education System in Puducherry</h3>
+                  <ul>
+                    <li><b>School Education:</b> Follows both Tamil Nadu State Board and Central Board of Secondary Education (CBSE) curricula.</li>
+                    <li><b>French Education:</b> Some schools follow the French educational system, with French as the medium of instruction.</li>
+                    <li><b>Higher Education:</b> Managed by UGC, AICTE, and territorial universities.</li>
+                    <li><b>Literacy Rate:</b> Over 85%, one of the highest in India.</li>
+                    <li><b>Languages of Instruction:</b> Tamil, English, French, and Telugu.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Education in Puducherry" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>🏛️ Top Universities & Institutions </h2>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Universities</h3>
+                <ol>
+                  <li><b>Pondicherry University -</b> A Central University established in 1985, offering diverse programs in arts, science, commerce, management, and technology.</li>
+                  <li><b>Sri Balaji Vidyapeeth -</b> Deemed University focusing on medical and health sciences education.</li>
+                  <li><b>Puducherry Technological University (formerly PTEC) -</b> Specializing in engineering and technology education.</li>
+                  <li><b>Perunthalaivar Kamarajar Institute of Engineering and Technology -</b> Government engineering college in Karaikal.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=230" alt="Pondicherry University" style="height:200px;width: 230px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Medical Institutions</h3>
+                <ol>
+                  <li><b>Jawaharlal Institute of Postgraduate Medical Education & Research (JIPMER) -</b> Premier medical institution of national importance, offering medical education and advanced healthcare.</li>
+                  <li><b>Mahatma Gandhi Medical College and Research Institute -</b> Private medical college affiliated with Sri Balaji Vidyapeeth.</li>
+                  <li><b>Indira Gandhi Medical College and Research Institute -</b> Government medical college established in 2010.</li>
+                  <li><b>Pondicherry Institute of Medical Sciences -</b> Christian minority institution offering medical and nursing education.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=230" alt="JIPMER" style="height:200px;width: 230px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Institution</th>
+                <th>Type</th>
+                <th>Established</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Pondicherry University</td>
+                <td>Central University</td>
+                <td>1985</td>
+                <td>Diverse academic programs, beautiful campus, research facilities</td>
+              </tr>
+              <tr>
+                <td>JIPMER</td>
+                <td>Medical Institution</td>
+                <td>1964</td>
+                <td>Medical education, research, and healthcare services</td>
+              </tr>
+              <tr>
+                <td>Puducherry Technological University</td>
+                <td>State University</td>
+                <td>2020 (formerly PTEC, 1986)</td>
+                <td>Engineering and technology education</td>
+              </tr>
+              <tr>
+                <td>Sri Aurobindo International Centre of Education</td>
+                <td>Alternative Education</td>
+                <td>1943</td>
+                <td>Integral education based on Sri Aurobindo's philosophy</td>
+              </tr>
+              <tr>
+                <td>French Institute of Pondicherry</td>
+                <td>Research Institution</td>
+                <td>1955</td>
+                <td>Research in Indology, ecology, and social sciences</td>
+              </tr>
+            </table>
+          </div>
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=240" alt="Sri Aurobindo International Centre of Education" style="height:200px;width: 240px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🔹 Alternative & Specialized Education</h3>
+                  <ol>
+                    <li><b>Sri Aurobindo International Centre of Education -</b> Offers integral education based on Sri Aurobindo's educational philosophy, focusing on physical, vital, mental, and spiritual development.</li>
+                    <li><b>Auroville Educational Centers -</b> Various schools in Auroville following alternative educational approaches like Montessori, Steiner, and project-based learning.</li>
+                    <li><b>Lycée Français de Pondichéry -</b> French school following the French national curriculum, established in 1826.</li>
+                    <li><b>École française d'Extrême-Orient -</b> French research center focusing on Asian studies.</li>
+                  </ol>
+                </div>
+
+                <br><br>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🔹 Research Institutions</h3>
+                  <ol>
+                    <li><b>French Institute of Pondicherry -</b> Research institution focusing on Indology, ecology, and social sciences.</li>
+                    <li><b>M.S. Swaminathan Research Foundation (MSSRF) -</b> Working on sustainable agriculture and rural development.</li>
+                    <li><b>Puducherry Science Centre & Planetarium -</b> Science education and awareness center.</li>
+                    <li><b>National Institute of Technology, Puducherry -</b> Located in Karaikal, focusing on engineering education and research.</li>
+                  </ol>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="French Institute of Pondicherry" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Law and Management Institutions" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🔹 Law & Management Institutions</h3>
+                  <ul>
+                    <li><b>Pondicherry University Department of Management Studies -</b> Offering MBA and other management programs.</li>
+                    <li><b>Rajiv Gandhi School of Intellectual Property Law -</b> Specializing in intellectual property law education.</li>
+                    <li><b>Dr. B.R. Ambedkar Government Law College -</b> Offering undergraduate and postgraduate law programs.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>🏫 School Education in Puducherry </h2>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Major School Boards</h3>
+                <ol>
+                  <li><b>State Board of School Examinations -</b> Following Tamil Nadu curriculum.</li>
+                  <li><b>Central Board of Secondary Education (CBSE) -</b> National curriculum followed by many private schools.</li>
+                  <li><b>French Educational System -</b> Schools like Lycée Français following the French national curriculum.</li>
+                  <li><b>Alternative Schools -</b> Following various educational philosophies, especially in Auroville.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=200" alt="School Education in Puducherry" style="height:200px;width: 200px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=230" alt="Notable Schools in Puducherry" style="height:200px;width: 230px;">
+
+              </div>
+              <div class="col-sm-8">
+
+                <h3>🔹 Notable Schools in Puducherry</h3>
+                <ol>
+                  <li><b>Lycée Français de Pondichéry -</b> Historic French school established in 1826.</li>
+                  <li><b>Sri Aurobindo International Centre of Education -</b> Following integral education philosophy.</li>
+                  <li><b>Petit Seminaire Higher Secondary School -</b> One of the oldest schools in Puducherry.</li>
+                  <li><b>Auroville Schools (Transition, Future, Last School) -</b> Alternative education centers in Auroville following progressive teaching methods.</li>
+                  <li><b>Kendriya Vidyalaya -</b> Central government school following CBSE curriculum.</li>
+                  <li><b>Bharathidasan Government Higher Secondary School -</b> One of the premier government schools.</li>
+                </ol>
+
+              </div>
+
+            </div>
+          </div>
+          <div class="box">
+            <h2>🔬 Research & Innovation</h2>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <p>Puducherry has several institutions engaged in cutting-edge research across various fields:</p>
+                  <ol>
+                    <li><b>JIPMER Research Department -</b> Medical research in various specialties.</li>
+                    <li><b>Centre for Pollution Control & Environmental Engineering (Pondicherry University) -</b> Research on environmental issues and sustainable solutions.</li>
+                    <li><b>Auroville Earth Institute -</b> Research on sustainable building technologies and earth architecture.</li>
+                    <li><b>CSR Parvathavarthini Centre for Bioinformatics -</b> Research in computational biology and bioinformatics.</li>
+                  </ol>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Research in Puducherry" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <h2>📚 Libraries & Knowledge Centers</h2>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <ol>
+                    <li><b>Romain Rolland Library -</b> Indo-French cultural center with a vast collection of French literature.</li>
+                    <li><b>Pondicherry University Central Library -</b> Comprehensive academic library.</li>
+                    <li><b>Sri Aurobindo Ashram Library -</b> Collection of spiritual and philosophical works.</li>
+                    <li><b>French Institute of Pondicherry Library -</b> Specialized collection on Indology, ecology, and social sciences.</li>
+                    <li><b>Auroville Library -</b> Diverse collection reflecting the international character of Auroville.</li>
+                  </ol>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Libraries in Puducherry" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Puducherry's educational landscape is characterized by its unique blend of French and Indian influences, traditional and alternative approaches, and a strong focus on research and innovation. The territory's high literacy rate and prestigious institutions like JIPMER and Pondicherry University have established it as an important educational hub in South India.</p>
+        </div>
+        <br><br>
+
+      </div>
+
+
+    </div>
+  </div>
+  </div>
+</body>
+
+</html>

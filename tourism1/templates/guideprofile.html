@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Create Guide Profile</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px 0;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+      color: white;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .header h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: -0.5px;
+    }
+
+    .header p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      font-weight: 300;
+    }
+
+    form {
+      padding: 40px;
+    }
+
+    .section {
+      margin-bottom: 50px;
+    }
+
+    .section:last-child {
+      margin-bottom: 0;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 25px;
+      padding-bottom: 15px;
+      border-bottom: 3px solid #3498db;
+      position: relative;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: #e74c3c;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 25px;
+    }
+
+    .form-group {
+      margin-bottom: 25px;
+    }
+
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      display: block;
+      font-weight: 500;
+      color: #2c3e50;
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+    }
+
+    .required::after {
+      content: ' *';
+      color: #e74c3c;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 15px;
+      border: 2px solid #e1e8ed;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: all 0.3s ease;
+      background: #fff;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: #3498db;
+      box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+      transform: translateY(-1px);
+    }
+
+    input:hover, textarea:hover, select:hover {
+      border-color: #bdc3c7;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    input[type="file"] {
+      padding: 12px;
+      border: 2px dashed #bdc3c7;
+      background: #f8f9fa;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    input[type="file"]:hover {
+      border-color: #3498db;
+      background: #ebf3fd;
+    }
+
+    input[type="checkbox"] {
+      width: auto;
+      margin-right: 10px;
+      transform: scale(1.2);
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      background: #f8f9fa;
+      border-radius: 12px;
+      border: 2px solid #e1e8ed;
+      transition: all 0.3s ease;
+    }
+
+    .checkbox-group:hover {
+      background: #e3f2fd;
+      border-color: #3498db;
+    }
+
+    .checkbox-group label {
+      margin: 0;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .form-actions {
+      margin-top: 40px;
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid #e1e8ed;
+    }
+
+    button {
+      background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+      color: white;
+      border: none;
+      padding: 18px 40px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 35px rgba(52, 152, 219, 0.4);
+      background: linear-gradient(135deg, #2980b9 0%, #3498db 100%);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    .info-card {
+      background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+      color: white;
+      padding: 20px;
+      border-radius: 15px;
+      margin-bottom: 30px;
+    }
+
+    .info-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .info-card p {
+      opacity: 0.9;
+      line-height: 1.5;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      body {
+        padding: 10px 0;
+      }
+
+      .container {
+        margin: 0 10px;
+        border-radius: 15px;
+      }
+
+      .header {
+        padding: 30px 20px;
+      }
+
+      .header h1 {
+        font-size: 2rem;
+      }
+
+      form {
+        padding: 30px 20px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      button {
+        width: 100%;
+        padding: 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header h1 {
+        font-size: 1.8rem;
+      }
+
+      .header p {
+        font-size: 1rem;
+      }
+
+      form {
+        padding: 20px 15px;
+      }
+    }
+
+    /* Animation for form sections */
+    .section {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    .section:nth-child(1) { animation-delay: 0.1s; }
+    .section:nth-child(2) { animation-delay: 0.2s; }
+    .section:nth-child(3) { animation-delay: 0.3s; }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Custom select styling */
+    select {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+      background-position: right 12px center;
+      background-repeat: no-repeat;
+      background-size: 16px;
+      padding-right: 40px;
+      appearance: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1>Create Guide Profile</h1>
+    <p>Join our community of professional tour guides and share your expertise with travelers worldwide</p>
+  </div>
+
+  <form>
+    <!-- 1. Basic Info -->
+    <div class="section">
+      <h2>Basic Information</h2>
+      
+      <div class="info-card">
+        <h3>📋 Personal Details</h3>
+        <p>Help travelers get to know you better by providing your basic information and background.</p>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="required">Full Name</label>
+          <input type="text" name="fullname" required placeholder="Enter your full name" />
+        </div>
+
+        <div class="form-group">
+          <label>Gender</label>
+          <select name="gender">
+            <option value="">Select Gender</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="required">Age</label>
+          <input type="number" name="age" min="18" required placeholder="Your age" />
+        </div>
+
+        <div class="form-group">
+          <label class="required">City & Country</label>
+          <input type="text" name="location" required placeholder="e.g., Mumbai, India" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Languages Spoken</label>
+        <input type="text" name="languages" placeholder="e.g., English, Hindi, French" />
+      </div>
+
+      <div class="form-group">
+        <label>Profile Picture</label>
+        <input type="file" name="profile_pic" accept="image/*" />
+      </div>
+    </div>
+
+    <!-- 2. Professional Info -->
+    <div class="section">
+      <h2>Professional Information</h2>
+      
+      <div class="info-card">
+        <h3>🎯 Your Expertise</h3>
+        <p>Showcase your professional qualifications and experience to build trust with potential clients.</p>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Tour Types Offered</label>
+          <input type="text" name="tours" placeholder="e.g., Food Tours, Cultural Heritage, Nature Walks" />
+        </div>
+
+        <div class="form-group">
+          <label>Experience (in years)</label>
+          <input type="number" name="experience" min="0" placeholder="Years of experience" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Certifications (Upload)</label>
+          <input type="file" name="certification" accept=".pdf,.jpg,.jpeg,.png" />
+        </div>
+
+        <div class="form-group">
+          <label>Government ID (for verification)</label>
+          <input type="file" name="id" accept=".pdf,.jpg,.jpeg,.png" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>License Number (if applicable)</label>
+          <input type="text" name="license" placeholder="Professional license number" />
+        </div>
+
+        <div class="form-group">
+          <label>Previous Tour Companies (Optional)</label>
+          <input type="text" name="companies" placeholder="Companies you've worked with" />
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Availability & Rates -->
+    <div class="section">
+      <h2>Availability & Rates</h2>
+      
+      <div class="info-card">
+        <h3>💰 Pricing & Schedule</h3>
+        <p>Set your availability and competitive rates to attract more bookings from travelers.</p>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Available Days/Time</label>
+          <textarea name="availability" placeholder="e.g., Monday to Friday, 10:00 AM – 5:00 PM&#10;Weekends available on request"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Timezone</label>
+          <input type="text" name="timezone" placeholder="e.g., IST (UTC+5:30)" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Hourly Rate (INR)</label>
+          <input type="number" name="hourly_rate" placeholder="₹ per hour" />
+        </div>
+
+        <div class="form-group">
+          <label>Half-Day Rate (INR)</label>
+          <input type="number" name="halfday_rate" placeholder="₹ for 4 hours" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Full-Day Rate (INR)</label>
+          <input type="number" name="fullday_rate" placeholder="₹ for 8 hours" />
+        </div>
+
+        <div class="form-group">
+          <label>Group Discounts Offered?</label>
+          <select name="discount">
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>About Me</label>
+        <textarea name="bio" placeholder="Tell travelers about your background, interests, and what makes you passionate about guiding tours. Share your story and connect with potential clients."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Why Should Tourists Book You?</label>
+        <textarea name="why_book" placeholder="Highlight your unique strengths, local knowledge, and what sets you apart from other guides. What special experience can you offer?"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Photo Gallery (Upload multiple)</label>
+        <input type="file" name="gallery" accept="image/*" multiple />
+      </div>
+
+      <div class="form-group">
+        <label>Intro Video (YouTube link)</label>
+        <input type="url" name="intro_video" placeholder="https://youtube.com/watch?v=..." />
+      </div>
+
+      <div class="form-group">
+        <div class="checkbox-group">
+          <input type="checkbox" name="terms" required id="terms" />
+          <label for="terms">I agree to the terms and conditions and privacy policy</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit">Submit Profile for Review</button>
+    </div>
+  </form>
+</div>
+
+</body>
+</html>

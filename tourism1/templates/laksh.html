@@ -1,0 +1,2523 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Lakshadweep</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> -->
+  <style>
+    .wb {
+      font-size: 10vw;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+      border-spacing: 0;
+      border: 1px solid #ddd;
+    }
+
+    td,
+    th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+      font-size: 1.5vw;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+
+    .trip {
+      text-align: center;
+      font-weight: 900;
+      background: orangered;
+      padding: 20px;
+      border-radius: 20px;
+      width: 60%;
+    }
+
+    p,
+    li,
+    .text {
+      font-size: 1.5vw;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-weight: 600;
+    }
+
+    h4 {
+      font-weight: 900;
+    }
+
+    img {
+      border-radius: 10px;
+      display: block;
+      margin: auto;
+    }
+
+    @media screen and (max-width: 850px) {
+
+      p,
+      li,
+      .text,
+      td,
+      th {
+        font-size: 2vw;
+        ;
+      }
+
+    }
+
+    @media screen and (max-width: 500px) {
+
+      p,
+      li,
+      .text,
+      td,
+      th {
+        font-size: 4.5vw;
+        ;
+      }
+
+    }
+
+    .box:nth-of-type(odd) {
+      background: #f3b37185;
+      padding: 10px;
+    }
+
+    .weather-container {
+            border-radius: 15px;
+            background: #f0fdf4;
+            padding: 15px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .weather-card {
+            text-align: center;
+            border-radius: 10px;
+            padding: 10px;
+            background: white;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+        .aqi {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            color: white;
+        }
+        .aqi-bad { background: purple; }
+        .aqi-moderate { background: orange; }
+        .aqi-good { background: green; }
+        .best-time {
+            background: #d1fae5;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 15px;
+            color: green;
+        }
+        .wet {
+            max-width: 50px;
+        }
+        
+        .trip {
+          font-size: 18px;
+          padding: 10px 20px;
+          cursor: pointer;
+          background-color:rgb(231, 36, 36);
+          color: white;
+          border: none;
+          border-radius: 5px;
+      }
+      .modal {
+          display: none;
+          position: fixed;
+          z-index: 1;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0,0,0,0.5);
+      }
+      .modal-content {
+          background-color: #fff;
+          margin: 10% auto;
+          padding: 20px;
+          border-radius: 10px;
+          width: 40%;
+          box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+          text-align: center;
+      }
+      .close {
+          color: #aaa;
+          float: right;
+          font-size: 28px;
+          font-weight: bold;
+          cursor: pointer;
+      }
+      .trip-options {
+          display: flex;
+          justify-content: center;
+          gap: 20px;
+          margin-top: 20px;
+      }
+      .trip-options a {
+          display: block;
+          width: 120px;
+          padding: 10px;
+          background-color: #28a745;
+          color: white;
+          text-decoration: none;
+          border-radius: 5px;
+      }
+  </style>
+</head>
+
+<body>
+
+
+  <!-- <h2>Carousel Example</h2> -->
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+      <li data-target="#myCarousel" data-slide-to="4"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+
+      <div class="item active">
+        <img src="/placeholder.svg?height=800&width=1200" alt="Agatti Island" style="width:100%; height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Agatti Island</h3>
+          <p>We love the pristine beaches and crystal clear waters!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="/placeholder.svg?height=800&width=1200" alt="Kavaratti" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Kavaratti</h3>
+          <p>The capital with beautiful mosques and marine life!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="/placeholder.svg?height=800&width=1200" alt="Bangaram" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Bangaram</h3>
+          <p>A paradise for water sports enthusiasts!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="/placeholder.svg?height=800&width=1200" alt="Minicoy" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Minicoy</h3>
+          <p>We love the lighthouse and unique culture!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="/placeholder.svg?height=800&width=1200" alt="Coral Reefs" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Coral Reefs</h3>
+          <p>We love the vibrant marine ecosystem!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+  <div class="container">
+    <br><br>
+    <h1 class="wb">LAKSHADWEEP</h1><br>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <img src="/placeholder.svg?height=700&width=500" alt="Lakshadweep Map" style="height:700px; width: -webkit-fill-available;">
+
+        </div>
+        <div class="col-sm-6">
+          <h1>Lakshadweep: India's Tropical Paradise in the Arabian Sea</h1>
+          <p class="text">Lakshadweep is India's smallest union territory, consisting of 36 islands (of which 10 are inhabited) known for their pristine beaches, coral reefs, marine life, and unique culture. These tropical islands offer a perfect getaway for those seeking tranquility, water sports, and natural beauty.</p>
+
+          <ul>
+            <li><b>Location --</b> Arabian Sea, 200-440 km off Kerala's coast</li>
+            <li><b>Capital --</b> Kavaratti</li>
+            <li><b>Official Languages --</b> Malayalam, Jeseri (Dweep Bhasha), English</li>
+            <li><b>Area --</b> 32.62 sq. km</li>
+            <li><b>Population --</b> ~64,000 (Least populous UT in India)</li>
+            <li><b>Borders --</b> No land borders, nearest to Kerala coast</li>
+            <li><b>Major Islands --</b> Kavaratti, Agatti, Bangaram, Kadmat, Minicoy, Kalpeni</li>
+            <li><b>Major Festivals --</b> Eid, Milad-un-Nabi, Muharram, Ratheeb</li>
+            <li><b>State Animal --</b> Butterfly Fish</li>
+            <li><b>State Flower --</b> Kavaratti Lily</li>
+            <li><b>State Tree --</b> Coconut Palm</li>
+            <li><b>State Bird --</b> Sooty Tern</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <br>
+    <hr>
+    <div>
+      <h1>📌 Islands & Districts of Lakshadweep</h1>
+      <br>
+      <div style="overflow-x:auto;">
+        <table>
+          <tr>
+            <th>Island Group</th>
+            <th>Islands</th>
+            <th>Key Highlights</th>
+          </tr>
+          <tr>
+            <td>Amindivi Group</td>
+            <td>1. Amini 2. Kadmat 3. Kiltan 4. Chetlat 5. Bitra</td>
+            <td>Northernmost islands, Bitra is the smallest inhabited island, great for bird watching</td>
+          </tr>
+          <tr>
+            <td>Laccadive Group</td>
+            <td>6. Kavaratti 7. Agatti 8. Andrott 9. Kalpeni 10. Bangaram</td>
+            <td>Central islands including the capital, airport, and tourist resorts</td>
+          </tr>
+          <tr>
+            <td>Minicoy Group</td>
+            <td>11. Minicoy</td>
+            <td>Southernmost island, unique culture influenced by Maldives, famous lighthouse</td>
+          </tr>
+          <tr>
+            <td>Uninhabited Islands</td>
+            <td>Suheli Par, Cheriyam, Tinnakara, Parali, Pitti, and others</td>
+            <td>Bird sanctuaries, pristine beaches, coral reefs</td>
+          </tr>
+        </table>
+      </div>
+      <br><br>
+      <h1>🔹 Major Highlights of Key Islands</h1><br><br>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <ul>
+              <li><b>Kavaratti --</b> Capital, administrative center, Ujra Mosque, Marine Aquarium.</li>
+              <li><b>Agatti --</b> Airport island, gateway to Lakshadweep, water sports hub.</li>
+              <li><b>Bangaram --</b> Tourist resort island, open to foreign tourists, lagoon.</li>
+              <li><b>Kadmat --</b> Known for long beaches, water sports, and marine life.</li>
+              <li><b>Minicoy --</b> Southernmost island, lighthouse, unique Mahl culture.</li>
+              <li><b>Kalpeni --</b> Famous for coral formation called "Kalpeni Reef".</li>
+              <li><b>Andrott --</b> Largest island by area, historical sites, tombs of saints.</li>
+              <li><b>Kiltan --</b> Known for traditional folk dances and coconut cultivation.</li>
+              <li><b>Bitra --</b> Smallest inhabited island, bird sanctuary.</li>
+            </ul>
+          </div>
+          <div class="col-sm-6">
+            <img src="/placeholder.svg?height=450&width=500" alt="Lakshadweep Map" style="height:450px;width: -webkit-fill-available;">
+
+          </div>
+        </div>
+      </div>
+    </div><br><br>
+    <div class="container">
+      <div class="weather-container">
+          <h4 class="text-center"><strong>Weather in Lakshadweep</strong></h4>
+          <div class="row">
+              <!-- January -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Jan</h6>
+                      <p>25/30°C</p>
+                      <span class="aqi aqi-good">AQI 25</span>
+                  </div>
+              </div>
+              <!-- February -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Feb</h6>
+                      <p>25/31°C</p>
+                      <span class="aqi aqi-good">AQI 22</span>
+                  </div>
+              </div>
+              <!-- March -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Mar</h6>
+                      <p>26/32°C</p>
+                      <span class="aqi aqi-good">AQI 20</span>
+                  </div>
+              </div>
+              <!-- April -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Apr</h6>
+                      <p>27/33°C</p>
+                      <span class="aqi aqi-good">AQI 18</span>
+                  </div>
+              </div>
+              <!-- May -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>May</h6>
+                      <p>27/33°C</p>
+                      <span class="aqi aqi-good">AQI 15</span>
+                  </div>
+              </div>
+              <!-- June -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Jun</h6>
+                      <p>26/31°C</p>
+                      <span class="aqi aqi-good">AQI 12</span>
+                  </div>
+              </div>
+              <!-- July -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="rain.png" alt="rain">
+                      <h6>Jul</h6>
+                      <p>25/30°C</p>
+                      <span class="aqi aqi-good">AQI 10</span>
+                  </div>
+              </div>
+              <!-- August -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Aug</h6>
+                      <p>25/30°C</p>
+                      <span class="aqi aqi-good">AQI 12</span>
+                  </div>
+              </div>
+              <!-- September -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Sep</h6>
+                      <p>25/30°C</p>
+                      <span class="aqi aqi-good">AQI 15</span>
+                  </div>
+              </div>
+              <!-- October -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Oct</h6>
+                      <p>25/31°C</p>
+                      <span class="aqi aqi-good">AQI 18</span>
+                  </div>
+              </div>
+              <!-- November -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Nov</h6>
+                      <p>25/31°C</p>
+                      <span class="aqi aqi-good">AQI 20</span>
+                  </div>
+              </div>
+              <!-- December -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Dec</h6>
+                      <p>25/30°C</p>
+                      <span class="aqi aqi-good">AQI 22</span>
+                  </div>
+              </div>
+          </div>
+          <div class="text-center">
+              <div class="best-time">🏆 Best time to visit: October - May</div>
+          </div>
+      </div>
+    </div>
+    
+
+    <br><br>
+    <button class="trip" id="openModal">Let's go on a trip</button>
+    
+    <div id="tripModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Select Your Trip</h2>
+            <button type="button" class="btn btn-warning" style="margin-bottom: 8px;color:black; border-radius: 5px;">7 days trip</button><br>
+            <button type="button" class="btn btn-warning" style="margin-bottom: 8px;color:black; border-radius: 5px;">12 days trip</button>
+        </div>
+    </div>
+    
+    <script>
+        var modal = document.getElementById("tripModal");
+        var btn = document.getElementById("openModal");
+        var span = document.getElementsByClassName("close")[0];
+        
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+        
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+        
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script><br><br>
+    <div class="container">
+      <ul class="nav nav-tabs">
+        <li class="nav-item"><a data-toggle="tab" href="#wbculture"> Culture</a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbtradition "> Tradition</a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbfestivals"> Festivals </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbfood"> Foods </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbhistory"> History </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbartacraft"> Art and Craft </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbseason"> Season to Visit </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbtourist"> Tourist Spots </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbwild"> Wildlife & Crops </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbedu"> Institutions </a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="wbculture" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Culture of Lakshadweep</h1>
+          <p class="text">Lakshadweep has a unique and vibrant culture, shaped by its island geography, Islamic heritage, and influences from mainland Kerala. Here's an overview of some key aspects of its culture:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Language</h3>
+                  <ul>
+                    <li>Malayalam is the official language of Lakshadweep, but with a distinct dialect. In Minicoy, people speak Mahl, which is similar to Divehi (spoken in Maldives). Jeseri (Dweep Bhasha) is a dialect spoken across the islands with Arabic and Tamil influences.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Language" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>2. Religion & Traditions</h3>
+                  <ul>
+                    <li>Islam is the predominant religion, with over 96% of the population being Muslim. The islands follow a unique blend of Islamic traditions with local customs.</li>
+                    <li>The mosques (Juma Masjid) in Lakshadweep are architectural marvels, especially the Ujra Mosque in Kavaratti with its ornate woodwork.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Religion" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div><br>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Art" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Art and Craft</h3>
+                  <ul>
+                    <li>The islands are known for their coconut-based handicrafts, including coir products, coconut shell artifacts, and traditional boat models.</li>
+                    <li>Minicoy is famous for its lacquerware, where wooden items are decorated with colorful lacquer.</li>
+                  </ul>
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Music" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>4. Music and Dance</h3>
+                  <ul>
+                    <li>Lava Dance is a popular folk dance performed during festivals and celebrations.</li>
+                    <li>Kolkali is a stick dance performed by men, similar to the Kolattam of Kerala.</li>
+                    <li>Parichakali is a traditional sword and shield dance performed during festive occasions.</li>
+                    <li>Oppana is a wedding dance performed by women to welcome the bridegroom.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Social Structure</h3>
+                  <ul>
+                    <li>The society is matrilineal in some islands, where property and family names pass through the female line.</li>
+                    <li>The islands have a unique social hierarchy with Koyas (landowners) at the top, followed by Malumis (navigators) and Melacheris (laborers).</li>
+                  </ul>
+                  <h3>6. Cuisine</h3>
+                  <ul>
+                    <li>Seafood dominates the cuisine, with tuna (called "mas") being the staple protein.</li>
+                    <li>Coconut is used extensively in cooking, both as oil and as coconut milk.</li>
+                    <li>Rice and fish curry (meen curry) is the most common meal.</li>
+                    <li>Unique dishes include Mus Kavaab (tuna dumplings) and Kilanji (fish curry with coconut).</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Social" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Maritime" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>7. Maritime Traditions</h3>
+                  <ul>
+                    <li>Lakshadweep has a rich maritime heritage, with traditional wooden boats called "Odams" used for fishing and transportation.</li>
+                    <li>Navigation skills are highly valued, and traditional knowledge of stars and currents is passed down through generations.</li>
+                  </ul>
+                  <h3>8. Architecture</h3>
+                  <ul>
+                    <li>Traditional houses are made of coral stones and lime with thatched roofs made of coconut leaves.</li>
+                    <li>Modern buildings maintain elements of traditional architecture while incorporating concrete structures for durability against tropical weather.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Festivals" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>9. Festivals and Celebrations</h3>
+                  <ul>
+                    <li>Islamic festivals like Eid-ul-Fitr, Eid-ul-Adha, and Milad-un-Nabi are celebrated with great enthusiasm.</li>
+                    <li>Ratheeb is a unique religious performance involving body piercing, demonstrating devotion and spiritual strength.</li>
+                    <li>The Lakshadweep Festival is held annually to showcase the islands' culture and attract tourism.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>10. Clothing</h3>
+                  <ul>
+                    <li>Traditional Muslim attire is common, with men wearing mundus (sarongs) and shirts, while women wear colorful thattam (headscarves) and long dresses.</li>
+                    <li>In Minicoy, women wear a distinctive red and black striped garment called the "libas" for special occasions.</li>
+                  </ul>
+                  <h3>11. Education and Literacy</h3>
+                  <ul>
+                    <li>Lakshadweep has a high literacy rate of over 92%, among the highest in India.</li>
+                    <li>Traditional Islamic education through madrasas exists alongside modern education system.</li>
+                  </ul>
+                  <h3>12. Sports and Recreation</h3>
+                  <ul>
+                    <li>Water sports like swimming, sailing, and fishing competitions are popular.</li>
+                    <li>Football and volleyball are widely played across the islands.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=300&width=200" alt="Clothing" style="height:300px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br><br>
+
+          <p>Lakshadweep's culture is a fascinating blend of Islamic traditions, maritime heritage, and island lifestyle. The isolation of these islands has helped preserve many unique cultural aspects while also developing distinct traditions not found elsewhere in India.</p><br><br>
+        </div>
+        <div id="wbtradition" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Tradition of Lakshadweep</h1>
+          <p>Lakshadweep has a rich and unique tradition deeply influenced by its island geography, Islamic faith, and historical connections with the Maldives and Kerala mainland. Here's an overview of some key traditional aspects of the islands:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Clothing Tradition</h3>
+                  <h4>Men</h4>
+                  <ul>
+                    <li><b>Mundu and Shirt:</b> Traditional Lakshadweep men wear white or colored mundus (similar to sarongs) with shirts, especially during religious ceremonies and festivals.</li>
+                    <li><b>Thorthu:</b> A small towel carried on the shoulder, used for various purposes.</li>
+                  </ul>
+                  <h4>Women</h4>
+                  <ul>
+                    <li><b>Kachi:</b> Traditional attire consisting of a long dress with a headscarf (thattam).</li>
+                    <li><b>Libas:</b> In Minicoy, women wear a distinctive red and black striped garment for special occasions.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=250&width=200" alt="Clothing" style="height:250px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>2. Wedding Traditions</h3>
+                  <ul>
+                    <li><b>Nikah:</b> The Islamic marriage ceremony performed by an Imam in the presence of witnesses.</li>
+                    <li><b>Oppana:</b> A traditional dance performed by women to welcome the bridegroom.</li>
+                    <li><b>Mahr:</b> The mandatory gift given by the groom to the bride as part of Islamic marriage.</li>
+                    <li><b>Koodu Kudi:</b> The ceremonial entry of the bride into the groom's house.</li>
+                    <li><b>Banthige:</b> In Minicoy, a special ceremony where the bride is adorned with flowers and jewelry.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=250&width=200" alt="Wedding" style="height:250px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Dance" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Music & Dance Traditions</h3>
+                  <ul>
+                    <li><b>Lava Dance:</b> A traditional folk dance performed during celebrations and festivals.</li>
+                    <li><b>Parichakali:</b> A martial dance performed with swords and shields, showcasing valor and skill.</li>
+                    <li><b>Kolkali:</b> A rhythmic stick dance performed by men in a circle.</li>
+                    <li><b>Duff Music:</b> Traditional percussion music played on a duff (frame drum), especially during religious ceremonies.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Social" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+
+                  <h3>4. Social & Religious Traditions</h3>
+                  <ul>
+                    <li><b>Ratheeb:</b> A religious performance involving body piercing to demonstrate spiritual strength and devotion.</li>
+                    <li><b>Moulood:</b> Celebration of the Prophet Muhammad's birthday with recitations and communal feasts.</li>
+                    <li><b>Ziyarat:</b> Visiting the tombs of saints and religious leaders, especially during specific days.</li>
+                    <li><b>Madrasa Education:</b> Traditional Islamic education system where children learn Quran and Islamic principles.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Maritime & Fishing Traditions</h3>
+                  <ul>
+                    <li><b>Odam Building:</b> Traditional wooden boat construction using coconut timber and coir.</li>
+                    <li><b>Mas Fishing:</b> Tuna fishing using traditional methods passed down through generations.</li>
+                    <li><b>Navigation Skills:</b> Traditional knowledge of stars, currents, and winds for navigation.</li>
+                    <li><b>Fishing Rituals:</b> Prayers and ceremonies before setting out to sea for safety and good catch.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Maritime" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>6. Crafts & Skills</h3>
+                  <ul>
+                    <li><b>Coir Making:</b> Traditional extraction and processing of coconut fiber for ropes and mats.</li>
+                    <li><b>Coconut Crafts:</b> Creating utensils, decorative items, and tools from coconut shells.</li>
+                    <li><b>Lacquerware:</b> In Minicoy, the art of decorating wooden items with colorful lacquer.</li>
+                    <li><b>Shell Craft:</b> Creating jewelry and decorative items from seashells.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Crafts" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br><br>
+          <p>Lakshadweep's traditions beautifully blend Islamic practices with island life, maritime skills, and cultural influences from Kerala and the Maldives, creating a unique cultural identity that has been preserved through generations.</p><br><br>
+        </div>
+        <div id="wbfestivals" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Festivals of Lakshadweep</h1>
+          <p>Lakshadweep celebrates a variety of festivals that reflect its Islamic heritage, maritime culture, and island traditions. Here's a list of some of the major festivals celebrated in the islands:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Eid-ul-Fitr (Biggest Festival)</h3>
+                  <ul>
+                    <li>Marks the end of Ramadan, the holy month of fasting.</li>
+                    <li>Celebrated with special prayers, new clothes, feasting, and community gatherings.</li>
+                    <li>Homes are decorated, and special sweets like "Kaipola" (sweet rice pancakes) are prepared.</li>
+                    <li>People visit relatives and friends, exchanging gifts and greetings.</li>
+                  </ul>
+                  <p><b>📍 Time: Varies according to the Islamic lunar calendar</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=230&width=200" alt="Eid" style="height:230px;width: 200px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Eid Adha" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Eid-ul-Adha (Bakrid)</h3>
+                  <ul>
+                    <li>Commemorates Prophet Ibrahim's willingness to sacrifice his son as an act of obedience to God.</li>
+                    <li>Special prayers are held, followed by the sacrifice of goats or other livestock.</li>
+                    <li>The meat is divided into three parts: for family, friends, and the poor.</li>
+                    <li>Community feasts and gatherings are organized across the islands.</li>
+                  </ul>
+                  <p><b>📍 Time: Varies according to the Islamic lunar calendar</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Milad-un-Nabi</h3>
+                  <ul>
+                    <li>Celebrates the birthday of Prophet Muhammad.</li>
+                    <li>Mosques are decorated with lights and flags.</li>
+                    <li>Special prayers, recitations from the Quran, and speeches about the Prophet's life are organized.</li>
+                    <li>Community feasts and processions are common in many islands.</li>
+                  </ul>
+                  <p><b>📍 Time: 12th day of Rabi' al-awwal in the Islamic calendar</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Milad" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Muharram" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Muharram</h3>
+                  <ul>
+                    <li>Commemorates the martyrdom of Imam Hussein, grandson of Prophet Muhammad, at the Battle of Karbala.</li>
+                    <li>Observed with fasting, prayers, and recitation of elegies.</li>
+                    <li>In some islands, symbolic processions are taken out.</li>
+                    <li>A solemn occasion marked by reflection and remembrance.</li>
+                  </ul>
+                  <p><b>📍 Time: First month of the Islamic calendar</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Ratheeb Festival</h3>
+                  <ul>
+                    <li>A unique religious performance involving body piercing to demonstrate spiritual strength.</li>
+                    <li>Participants enter a trance-like state while reciting prayers.</li>
+                    <li>Believed to ward off evil spirits and bring blessings.</li>
+                    <li>Mainly observed in Kavaratti, Andrott, and some other islands.</li>
+                  </ul>
+                  <p><b>📍 Time: Throughout the year on special occasions</b></p>
+                  <h3>6. Lakshadweep Festival</h3>
+                  <ul>
+                    <li>A cultural festival organized to promote tourism and showcase the islands' heritage.</li>
+                    <li>Features traditional dances, music performances, handicraft exhibitions, and water sports.</li>
+                    <li>Held in different islands and sometimes in mainland cities like Kochi.</li>
+                  </ul>
+                  <p><b>📍 Time: Usually between December and February</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Festival" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Moulood" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>7. Moulood</h3>
+                  <ul>
+                    <li>Religious gatherings where verses from the Quran and poems praising Prophet Muhammad are recited.</li>
+                    <li>Usually held in mosques or community centers.</li>
+                    <li>Followed by community feasts and distribution of sweets.</li>
+                  </ul>
+                  <p><b>📍 Time: Throughout the year on special occasions</b></p>
+                  <h3>8. Independence Day & Republic Day</h3>
+                  <ul>
+                    <li>National festivals celebrated with flag hoisting, parades, and cultural programs.</li>
+                    <li>Schools and government institutions organize special events.</li>
+                    <li>Traditional boat races and sports competitions are often held.</li>
+                  </ul>
+                  <p><b>📍 Time: August 15 and January 26 respectively</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>9. Fishing Festival</h3>
+                  <ul>
+                    <li>Traditional festival marking the beginning of the fishing season.</li>
+                    <li>Boats are decorated and blessed before setting out to sea.</li>
+                    <li>Competitions for the best catch and fastest boat are organized.</li>
+                    <li>Community feasts featuring seafood are a highlight.</li>
+                  </ul>
+                  <p><b>📍 Time: After monsoon (September-October)</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Fishing" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Minicoy" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>10. Minicoy Mauli Habba</h3>
+                  <ul>
+                    <li>A unique festival celebrated only in Minicoy Island.</li>
+                    <li>Features traditional dances, music, and boat races.</li>
+                    <li>Women wear special attire called "libas" for the celebrations.</li>
+                    <li>Showcases the distinct cultural heritage of Minicoy, which has Maldivian influences.</li>
+                  </ul>
+                  <p><b>📍 Time: Usually in December-January</b></p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>11. Coconut Festival</h3>
+                  <ul>
+                    <li>Celebrates the importance of coconut in island life and economy.</li>
+                    <li>Competitions for coconut climbing, dehusking, and crafts are organized.</li>
+                    <li>Exhibition of coconut-based products and foods.</li>
+                    <li>Cultural programs highlighting the role of coconut in island traditions.</li>
+                  </ul>
+                  <p><b>📍 Time: Varies across islands</b></p>
+
+                  <h3>12. Ramadan </h3>
+                  <ul>
+                    <li>The holy month of fasting observed by Muslims across the islands.</li>
+                    <li>Special prayers (Taraweeh) are held in mosques every night.</li>
+                    <li>Community iftars (breaking of fast) are organized.</li>
+                    <li>The last ten days are particularly significant for night prayers and charity.</li>
+                  </ul>
+                  <p><b>📍 Time: Ninth month of the Islamic calendar</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Ramadan" style="height:200px;width: 230px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Boat" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>13. Traditional Boat Festival</h3>
+                  <ul>
+                    <li>Celebrates the maritime heritage of the islands.</li>
+                    <li>Traditional wooden boats (Odams) participate in races and displays.</li>
+                    <li>Demonstrations of traditional navigation and fishing techniques.</li>
+                    <li>Cultural programs highlighting seafaring traditions.</li>
+                  </ul>
+                  <p><b>📍 Time: Post-monsoon season (October-November)</b></p>
+                  <h3>14. World Tourism Day Celebrations</h3>
+                  <ul>
+                    <li>Special events to promote tourism in the islands.</li>
+                    <li>Cultural performances, water sports demonstrations, and food festivals.</li>
+                    <li>Discounts on tourist activities and accommodations.</li>
+                  </ul>
+                  <p><b>📍 Time: September 27</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Lakshadweep's festivals are a beautiful blend of Islamic traditions, maritime culture, and island heritage, offering visitors a glimpse into the unique way of life in these remote coral islands. 🎉</p><br><br>
+        </div>
+        <div id="wbfood" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Foods of Lakshadweep</h1>
+          <p>Lakshadweep cuisine is a delightful blend of Kerala, Arabic, and indigenous island flavors. The food is heavily influenced by the abundant seafood available and the omnipresent coconut. Here's a look at some of the most iconic foods of Lakshadweep:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Staple Food of Lakshadweep</h3>
+                  <ul>
+                    <li><b>Rice and Fish Curry:</b> The most common daily meal, with rice served with spicy fish curry.</li>
+                    <li><b>Roti:</b> Flatbreads made from wheat flour, often served with fish curry or vegetable dishes.</li>
+                  </ul>
+                  <h3>2. Seafood Specialties</h3>
+                  <ul>
+                    <li><b>Mas (Tuna):</b> The most important fish in Lakshadweep cuisine, prepared in various ways.</li>
+                    <li><b>Mus Kavaab:</b> Tuna dumplings made with spices and coconut.</li>
+                    <li><b>Fried Mas:</b> Tuna marinated with spices and deep-fried.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=220" alt="Staple" style="height:200px;width: 220px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=220" alt="Fish" style="height:200px;width: 220px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Famous Lakshadweep Dishes</h3>
+                  <h4>Fish & Seafood</h4>
+                  <ul>
+                    <li><b>Kilanji:</b> A spicy fish curry made with coconut milk and local spices.</li>
+                    <li><b>Mas Podichathu:</b> Tuna cooked with grated coconut, chili, and spices.</li>
+                    <li><b>Thakkali Mas Curry:</b> Fish cooked in a tangy tomato-based gravy.</li>
+                    <li><b>Athishaya Mas:</b> Tuna fish cooked with special spices and coconut oil.</li>
+                  </ul>
+                  <h4>Vegetarian Dishes</h4>
+                  <ul>
+                    <li><b>Avial:</b> Mixed vegetables cooked with coconut and yogurt.</li>
+                    <li><b>Thoran:</b> Stir-fried vegetables with grated coconut and spices.</li>
+                    <li><b>Olan:</b> White pumpkin and black-eyed peas in coconut milk.</li>
+                    <li><b>Coconut Rice:</b> Rice cooked with fresh coconut and mild spices.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=220" alt="Biryani" style="height:200px;width: 220px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h4>Rice Dishes</h4>
+                  <ul>
+                    <li><b>Fish Biryani:</b> Fragrant rice cooked with fish, spices, and herbs.</li>
+                    <li><b>Neichoru:</b> Ghee rice often served with fish curry on special occasions.</li>
+                    <li><b>Pulao:</b> Rice cooked with vegetables and mild spices.</li>
+                  </ul>
+                  <h4>Breads & Accompaniments</h4>
+                  <ul>
+                    <li><b>Pathiri:</b> Rice flour flatbreads, a staple in many meals.</li>
+                    <li><b>Coconut Chutney:</b> Fresh coconut ground with green chilies and spices.</li>
+                    <li><b>Pickle:</b> Various fish and mango pickles preserved in oil and spices.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>4. Sweets & Desserts</h3>
+                  <ul>
+                    <li><b>Kaipola:</b> Sweet rice pancakes made during Eid and other celebrations.</li>
+                    <li><b>Unnakai:</b> Sweet dumplings made from ripe bananas and coconut.</li>
+                    <li><b>Mutta Mala:</b> A dessert made from egg yolks and sugar syrup.</li>
+                    <li><b>Coconut Ladoo:</b> Sweet balls made from coconut, jaggery, and cardamom.</li>
+                    <li><b>Halwa:</b> A sweet pudding made from rice flour, coconut milk, and jaggery.</li>
+                  </ul>
+
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=220" alt="Sweets" style="height:200px;width: 220px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Snacks" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>5. Snacks & Street Food</h3>
+                  <ul>
+                    <li><b>Masroshi:</b> Spicy tuna-filled pastries, a popular snack in Minicoy.</li>
+                    <li><b>Bajji:</b> Deep-fried fritters made from various vegetables.</li>
+                    <li><b>Pazham Pori:</b> Banana fritters, a popular evening snack.</li>
+                    <li><b>Coconut Rolls:</b> Sweet rolls made from coconut and jaggery.</li>
+                    <li><b>Mas Roti:</b> Flatbread stuffed with spicy tuna filling.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>6. Beverages</h3>
+                  <ul>
+                    <li><b>Coconut Water:</b> Fresh and naturally sweet, available everywhere on the islands.</li>
+                    <li><b>Sulaimani Tea:</b> Black tea with lemon, a popular drink after meals.</li>
+                    <li><b>Kahwa:</b> A traditional Arabic coffee with cardamom and saffron.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Beverages" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Festival Foods</h3>
+                  <ul>
+                    <li><b>Biriyani:</b> Special fish or chicken biryani prepared during Eid and other celebrations.</li>
+                    <li><b>Muttamala & Aleesa:</b> Sweet dishes prepared during Ramadan and Eid.</li>
+                    <li><b>Pathiri with Special Curry:</b> Served during festive occasions and family gatherings.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Festival" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Lakshadweep's cuisine is a delightful reflection of its island culture, with seafood, coconut, and spices creating a unique culinary experience that combines the best of Kerala flavors with Arabic influences and indigenous island traditions. 🍛🐟🥥</p><br><br>
+        </div>
+        <div id="wbhistory" class="tab-pane fade in active" style="background-color: white;">
+          <h1>History of Lakshadweep</h1>
+          <p>Lakshadweep has a fascinating history shaped by its strategic location in the Arabian Sea, maritime trade routes, and cultural exchanges with mainland India and other seafaring nations. The islands have witnessed various rulers and influences over the centuries.</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Ancient Period (Before 7th Century CE)</h3>
+                  <ul>
+                    <li><b>Early Settlements:</b> Archaeological evidence suggests that the islands were inhabited as early as 1500 BCE.</li>
+                    <li><b>Mentions in Ancient Texts:</b> References to these islands can be found in ancient Indian, Greek, and Roman texts.</li>
+                    <li><b>Maritime Trade:</b> The islands were important landmarks for sailors and traders crossing the Arabian Sea.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Ancient" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Islamic" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Arrival of Islam (7th - 14th Century)</h3>
+                  <h4>Introduction of Islam:</h4>
+                  <ul>
+                    <li>Islam reached the islands around the 7th century through Arab traders.</li>
+                    <li>Legend has it that Ubaidullah, an Arab saint, brought Islam to Amini Island.</li>
+                    <li>By the 14th century, most islanders had converted to Islam.</li>
+                  </ul>
+                  <h4>Cultural Transformation:</h4>
+                  <ul>
+                    <li>Islamic customs and traditions became integrated with local practices.</li>
+                    <li>Arabic influences on language, architecture, and social customs.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=220&width=200" alt="Arakkal" style="height:220px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h4>Arakkal Kingdom Connection:</h4>
+                  <ul>
+                    <li>Some islands came under the influence of the Arakkal Kingdom of Kannur (Kerala).</li>
+                    <li>The Arakkal royal family was the only Muslim royal family of Kerala.</li>
+                  </ul>
+                  <h4>Kolattiri Rule:</h4>
+                  <ul>
+                    <li>Some islands were under the control of the Kolattiri Rajas of North Malabar.</li>
+                    <li>Local chieftains called Koya ruled on behalf of the mainland rulers.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Portuguese Influence (16th Century)</h3>
+                  <ul>
+                    <li>Portuguese explorers discovered the islands in the early 16th century.</li>
+                    <li>Vasco da Gama is believed to have visited the islands during his voyages.</li>
+                    <li>The Portuguese attempted to establish control but faced resistance from the islanders.</li>
+                    <li>They referred to the islands as "Laccadives" (Laksha Dweep means "hundred thousand islands" in Sanskrit).</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=250" alt="Portuguese" style="height:200px;width: 250px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=230&width=200" alt="Tipu" style="height:230px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h2>4. Mysore and British Rule (18th - 20th Century)</h3>
+                    <h3>Tipu Sultan's Rule</h3>
+                    <ul>
+                      <li>In the late 18th century, Tipu Sultan of Mysore gained control over most of the islands.</li>
+                      <li>He established administrative systems and collected taxes from the islands.</li>
+                      <li>After Tipu's defeat by the British in 1799, the islands came under British influence.</li>
+                    </ul>
+                    <h3>British Colonial Period</h3>
+                    <ul>
+                      <li>The British East India Company took control of the islands in the early 19th century.</li>
+                      <li>In 1847, they were attached to the Malabar district of the Madras Presidency.</li>
+                      <li>The British introduced modern administration, education, and healthcare systems.</li>
+                    </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Colonial" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>Colonial Administration</h3>
+                  <ul>
+                    <li>The British appointed Amindars (local administrators) to collect taxes and maintain law and order.</li>
+                    <li>They established schools, healthcare facilities, and improved transportation.</li>
+                    <li>The islands remained relatively isolated, preserving their unique culture and traditions.</li>
+                  </ul>
+                  <h3>World War II Impact</h3>
+                  <ul>
+                    <li>During World War II, the islands gained strategic importance in the Indian Ocean.</li>
+                    <li>The British established military facilities on some islands.</li>
+                    <li>The war brought increased contact with the outside world and modern influences.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Post-Independence Era (1947 - Present)</h3>
+                  <h4>Integration with India</h4>
+                  <ul>
+                    <li>After India's independence in 1947, Lakshadweep became part of the Indian Union.</li>
+                    <li>Initially administered as part of Malabar district of Madras State.</li>
+                    <li>In 1956, the islands were organized into a separate Union Territory.</li>
+                    <li>The name was officially changed from "Laccadive, Minicoy, and Amindivi Islands" to "Lakshadweep" in 1973.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Independence" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h4>Development in Modern Times</h4>
+                  <ul>
+                    <li>Significant improvements in infrastructure, education, and healthcare since independence.</li>
+                    <li>The first airstrip was built on Agatti Island in 1987, improving connectivity.</li>
+                    <li>Tourism development began in the 1980s, with Bangaram Island opened to foreign tourists.</li>
+                    <li>High literacy rate achieved (over 92%), among the highest in India.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Modern" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>6. Recent Developments</h3>
+                  <ul>
+                    <li><b>Tourism Focus:</b> Increased emphasis on sustainable tourism development.</li>
+                    <li><b>Environmental Protection:</b> Efforts to preserve the fragile coral ecosystem and marine biodiversity.</li>
+                    <li><b>Infrastructure Development:</b> Improved transportation, communication, and healthcare facilities.</li>
+                    <li><b>Renewable Energy:</b> Implementation of solar power projects to reduce dependence on diesel generators.</li>
+                    <li><b>Digital Connectivity:</b> Submarine optical fiber cable connection established in 2020, improving internet connectivity.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Recent" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Lakshadweep's history reflects its strategic location in the Arabian Sea, with influences from Arab traders, various Indian kingdoms, European colonial powers, and finally as part of independent India. Despite these external influences, the islands have maintained their unique cultural identity and traditions. 🏝️📜</p>
+          <br><br>
+        </div>
+        <div id="wbartacraft" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Art & Craft of Lakshadweep 🎨🖌️</h1>
+          <p>Lakshadweep has a rich tradition of arts and crafts that reflect the islands' maritime culture, Islamic heritage, and the resourceful use of locally available materials, particularly coconut. The isolation of these islands has helped preserve many unique art forms that have been passed down through generations.</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Coconut-Based Crafts 🥥</h3>
+                  <h4>🔸 Coir Products</h4>
+                  <ul>
+                    <li><b>Famous for:</b> Ropes, mats, brushes, and decorative items made from coconut fiber.</li>
+                    <li><b>Process:</b> Coconut husks are soaked in water, beaten to extract fibers, and then woven or twisted.</li>
+                    <li><b>Used in:</b> Fishing nets, boat ropes, floor mats, and household items.</li>
+                  </ul>
+                  <h4>🔸 Coconut Shell Crafts</h4>
+                  <ul>
+                    <li><b>Products:</b> Ladles, cups, decorative items, jewelry, and musical instruments.</li>
+                    <li><b>Technique:</b> Shells are cleaned, polished, carved, and sometimes decorated with intricate designs.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Coconut" style="height:200px;width: 230px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Boat" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Boat Building & Models 🚣</h3>
+                  <h4>🔸 Traditional Odam (Boat) Crafting</h4>
+                  <ul>
+                    <li><b>Origin:</b> Ancient maritime tradition passed down through generations.</li>
+                    <li><b>Features:</b> Wooden boats built without nails, using coconut coir for binding.</li>
+                    <li><b>Significance:</b> Essential for fishing and inter-island transportation.</li>
+                  </ul>
+                  <h4>🔸 Miniature Boat Models</h4>
+                  <ul>
+                    <li><b>Craftsmanship:</b> Detailed replicas of traditional fishing vessels and dhows.</li>
+                    <li><b>Materials:</b> Wood, coconut leaves, and coir.</li>
+                    <li><b>Purpose:</b> Decorative items and souvenirs for tourists.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Lacquerware (Minicoy Specialty) 🎨</h3>
+                  <ul>
+                    <li><b>Origin:</b> Unique to Minicoy Island, showing Maldivian influence.</li>
+                    <li><b>Process:</b> Wooden items are coated with colored lacquer derived from natural materials.</li>
+                    <li><b>Products:</b> Decorative boxes, containers, walking sticks, and household items.</li>
+                    <li><b>Designs:</b> Geometric patterns and floral motifs in vibrant colors.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Lacquer" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Shell" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Shell Craft 🐚</h3>
+                  <ul>
+                    <li><b>Materials:</b> Various seashells collected from the beaches.</li>
+                    <li><b>Products:</b> Jewelry, decorative items, wind chimes, and wall hangings.</li>
+                    <li><b>Technique:</b> Shells are cleaned, polished, and assembled into artistic creations.</li>
+                    <li><b>Significance:</b> Represents the islands' rich marine biodiversity.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Coconut Leaf Handicrafts 🌴</h3>
+                  <ul>
+                    <li><b>Materials:</b> Fresh and dried coconut leaves.</li>
+                    <li><b>Products:</b> Mats, baskets, hats, fans, decorative items, and temporary shelters.</li>
+                    <li><b>Technique:</b> Leaves are woven, plaited, or folded into various shapes.</li>
+                    <li><b>Cultural Significance:</b> Used in daily life and during festivals and ceremonies.</li>
+                  </ul>
+                  <h3>6. Traditional Fishing Equipment 🎣</h3>
+                  <ul>
+                    <li><b>Products:</b> Handcrafted fishing nets, traps, hooks, and lines.</li>
+                    <li><b>Materials:</b> Coir ropes, wood, and locally available resources.</li>
+                    <li><b>Significance:</b> Represents the islands' fishing heritage and sustainable practices.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Leaf" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Textile" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>7. Textile Arts 🧵</h3>
+                  <h4>🔸 Traditional Attire</h4>
+                  <ul>
+                    <li><b>Minicoy Libas:</b> Distinctive red and black striped garment worn by women in Minicoy.</li>
+                    <li><b>Embroidery:</b> Intricate needlework on traditional clothing, especially for ceremonies.</li>
+                  </ul>
+                  <h4>🔸 Weaving</h4>
+                  <ul>
+                    <li><b>Products:</b> Traditional mats, prayer rugs, and decorative wall hangings.</li>
+                    <li><b>Materials:</b> Cotton threads, sometimes combined with coir.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>8. Calligraphy & Religious Art 📜</h3>
+                  <ul>
+                    <li><b>Islamic Calligraphy:</b> Artistic writing of Quranic verses and prayers.</li>
+                    <li><b>Mosque Decorations:</b> Intricate woodwork and calligraphy in mosques, especially in Kavaratti's Ujra Mosque.</li>
+                    <li><b>Materials:</b> Wood, paper, and traditional inks.</li>
+                    <li><b>Significance:</b> Represents the islands' Islamic heritage and artistic expression.</li>
+                  </ul>
+                  <h3>9. Musical Instruments 🎵</h3>
+                  <ul>
+                    <li><b>Boduberu:</b> Large drums made from coconut wood and goat skin, used in traditional music.</li>
+                    <li><b>Tamburu:</b> String instrument made from coconut shell and wood.</li>
+                    <li><b>Flutes:</b> Made from local bamboo or similar materials.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Calligraphy" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>📌 Summary: Lakshadweep's Art & Craft Forms</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Art Form</th>
+                <th>Materials Used</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Coir Products</td>
+                <td>Coconut Fiber</td>
+                <td>Ropes, Mats, Fishing Nets</td>
+              </tr>
+              <tr>
+                <td>Coconut Shell Crafts</td>
+                <td>Coconut Shells</td>
+                <td>Utensils, Decorative Items</td>
+              </tr>
+              <tr>
+                <td>Boat Building</td>
+                <td>Wood, Coir</td>
+                <td>Traditional Odams, Miniature Models</td>
+              </tr>
+              <tr>
+                <td>Lacquerware</td>
+                <td>Wood, Natural Lacquer</td>
+                <td>Colorful Boxes, Containers (Minicoy)</td>
+              </tr>
+              <tr>
+                <td>Shell Craft</td>
+                <td>Seashells</td>
+                <td>Jewelry, Decorative Items</td>
+              </tr>
+              <tr>
+                <td>Coconut Leaf Crafts</td>
+                <td>Coconut Leaves</td>
+                <td>Mats, Baskets, Temporary Shelters</td>
+              </tr>
+              <tr>
+                <td>Fishing Equipment</td>
+                <td>Coir, Wood</td>
+                <td>Nets, Traps, Hooks</td>
+              </tr>
+              <tr>
+                <td>Textile Arts</td>
+                <td>Cotton, Natural Dyes</td>
+                <td>Traditional Clothing, Embroidery</td>
+              </tr>
+              <tr>
+                <td>Calligraphy</td>
+                <td>Wood, Paper, Ink</td>
+                <td>Mosque Decorations, Religious Art</td>
+              </tr>
+              <tr>
+                <td>Musical Instruments</td>
+                <td>Coconut Wood, Goat Skin</td>
+                <td>Boduberu Drums, Tamburu</td>
+              </tr>
+            </table>
+          </div>
+          <br><br>
+          <p>Lakshadweep's arts and crafts are a testament to the islanders' resourcefulness, creativity, and deep connection to their environment. These traditional crafts not only serve practical purposes but also preserve the cultural heritage of these remote coral islands. Most crafts utilize sustainable, locally available materials, particularly the versatile coconut tree, which is central to island life. 🌴🎭✨</p>
+          <br><br>
+        </div>
+        <div id="wbseason" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Seasons to visit Lakshadweep 🌧️☀️ </h1>
+          <p>Lakshadweep has a tropical climate with warm temperatures throughout the year. However, different seasons offer varying experiences for visitors. Understanding the seasonal patterns can help you plan your perfect island getaway.</p>
+
+          <br><br>
+
+          <h2> Season-wise Breakdown for Visiting Lakshadweep</h2>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🌞 Winter (October - March)</h3>
+                  <ul>
+                    <li>The peak tourist season with perfect weather conditions.</li>
+                    <li>Clear blue skies, calm seas, and excellent visibility for water activities.</li>
+                    <li>Ideal for snorkeling, scuba diving, and glass-bottom boat rides.</li>
+                    <li>Temperatures range from 22-32°C with low humidity.</li>
+                    <li>December-February sees the highest tourist influx, so book accommodations well in advance.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Winter" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Summer" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>☀️ Summer (April – May)</h3>
+                  <ul>
+                    <li>Hot and humid with temperatures ranging from 25-35°C.</li>
+                    <li>Still good for water activities, but midday heat can be intense.</li>
+                    <li>Less crowded than winter months, making it easier to book accommodations.</li>
+                    <li>Water visibility remains good for snorkeling and diving.</li>
+                    <li>Evening sea breezes provide relief from the daytime heat.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🌧️ Monsoon (June - September)</h3>
+                  <ul>
+                    <li>Southwest monsoon brings heavy rainfall, especially in June and July.</li>
+                    <li>Rough seas make water activities difficult and sometimes dangerous.</li>
+                    <li>Many resorts and water sports operators close during this period.</li>
+                    <li>Ferry services may be irregular or canceled due to weather conditions.</li>
+                    <li>Not recommended for tourists unless you enjoy the rainy atmosphere and don't mind limited activities.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Monsoon" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Post-Monsoon" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🍁 Post-Monsoon (September - October)</h3>
+                  <ul>
+                    <li>Transition period as the monsoon recedes and weather improves.</li>
+                    <li>Lush green landscapes and refreshed coral reefs after the rains.</li>
+                    <li>Gradually improving sea conditions for water activities.</li>
+                    <li>Lower tourist numbers mean better deals on accommodations.</li>
+                    <li>Good time to visit if you want to avoid crowds but still enjoy decent weather.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <h2>📌 Summary: Best Time to Visit Different Islands in Lakshadweep</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Island</th>
+                <th>Best Season</th>
+                <th>Recommended Months</th>
+                <th>Why Visit?</th>
+              </tr>
+              <tr>
+                <td>Kavaratti (Capital)</td>
+                <td>Winter, Early Summer</td>
+                <td>October - April</td>
+                <td>Marine aquarium, Ujra Mosque, water sports, administrative center</td>
+              </tr>
+              <tr>
+                <td>Agatti</td>
+                <td>Winter, Early Summer</td>
+                <td>October - April</td>
+                <td>Airport island, gateway to Lakshadweep, beautiful lagoon, water sports</td>
+              </tr>
+              <tr>
+                <td>Bangaram</td>
+                <td>Winter</td>
+                <td>November - March</td>
+                <td>Tourist resort, scuba diving, snorkeling, uninhabited beaches</td>
+              </tr>
+              <tr>
+                <td>Minicoy</td>
+                <td>Winter</td>
+                <td>November - March</td>
+                <td>Lighthouse, unique Maldivian-influenced culture, tuna fishing</td>
+              </tr>
+              <tr>
+                <td>Kadmat</td>
+                <td>Winter, Early Summer</td>
+                <td>October - April</td>
+                <td>Long beaches, water sports, marine life, tourist cottages</td>
+              </tr>
+              <tr>
+                <td>Kalpeni</td>
+                <td>Winter</td>
+                <td>November - March</td>
+                <td>Coral formation, traditional boat building, water sports</td>
+              </tr>
+              <tr>
+                <td>Andrott</td>
+                <td>Winter</td>
+                <td>November - March</td>
+                <td>Largest island, historical sites, tombs of saints</td>
+              </tr>
+              <tr>
+                <td>Kiltan</td>
+                <td>Winter</td>
+                <td>November - March</td>
+                <td>Traditional folk dances, coconut cultivation</td>
+              </tr>
+              <tr>
+                <td>Bitra</td>
+                <td>Winter</td>
+                <td>December - February</td>
+                <td>Smallest inhabited island, bird sanctuary, pristine beaches</td>
+              </tr>
+
+            </table>
+          </div><br><br>
+          <div class="container">
+            <div class="row">
+              <h1 style=" text-align: center;">📌 Summary: When to Visit Lakshadweep</h1><br>
+              <ul>
+                <li><b>For water sports & diving:</b> November - April (best underwater visibility and calm seas)</li>
+                <li><b>For avoiding crowds:</b> April - May, September - October (shoulder seasons)</li>
+                <li><b>For budget travel:</b> April - May (off-peak rates with still good weather)</li>
+                <li><b>For photography:</b> October - March (clear skies and vibrant colors)</li>
+                <li><b>Not recommended:</b> June - August (monsoon season with rough seas and limited activities)</li>
+              </ul>
+
+            </div>
+          </div>
+          <br><br>
+        </div>
+        <div id="wbtourist" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Tourist Spots of Lakshadweep 🏖️🐠</h1>
+          <p>Lakshadweep offers pristine beaches, vibrant coral reefs, and a unique island culture. Here's a categorized list of the best tourist places in Lakshadweep:</p>
+
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Popular Islands & Beaches 🏝️</h3>
+                  <ul>
+                    <li><b>Agatti Island -</b> Gateway to Lakshadweep with an airport, beautiful lagoon, water sports</li>
+                    <li><b>Bangaram Island -</b> International tourist resort, pristine beaches, coral reefs</li>
+                    <li><b>Kavaratti Island -</b> Capital with beautiful mosques, marine aquarium, water sports</li>
+                    <li><b>Kadmat Island -</b> Long sandy beaches, tourist cottages, water sports facilities</li>
+                    <li><b>Minicoy Island -</b> Southernmost island with lighthouse, unique culture, tuna fishing</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Beach" style="height:200px;width: 230px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Cultural" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Cultural & Historical Attractions 🕌</h3>
+                  <ul>
+                    <li><b>Ujra Mosque (Kavaratti) -</b> Beautiful mosque with intricate woodwork and mirrored interiors</li>
+                    <li><b>Juma Mosque (Kavaratti) -</b> Historic mosque with unique architecture</li>
+                    <li><b>Minicoy Lighthouse -</b> Built in 1885, offering panoramic views of the island</li>
+                    <li><b>Buddhist Archaeological Remains (Andrott) -</b> Ancient ruins suggesting pre-Islamic settlements</li>
+                    <li><b>Tomb of Saint Ubaidullah (Andrott) -</b> Sacred site where Islam was first introduced to the islands</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Marine & Nature Attractions 🐠🌊</h3>
+                  <ul>
+                    <li><b>Marine Aquarium (Kavaratti) -</b> Showcasing the rich marine biodiversity of Lakshadweep</li>
+                    <li><b>Coral Reefs -</b> Vibrant underwater ecosystems surrounding all islands</li>
+                    <li><b>Pitti Bird Sanctuary -</b> Uninhabited island serving as a nesting ground for seabirds</li>
+                    <li><b>Kalpeni Coral Reef -</b> Famous coral formation with a natural swimming pool</li>
+                    <li><b>Parali Beach (Bangaram) -</b> Uninhabited beach with pristine sands and clear waters</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Marine" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Water Sports" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Water Sports & Adventure Activities 🏄‍♂️</h3>
+                  <ul>
+                    <li><b>Scuba Diving -</b> Explore vibrant coral reefs and marine life (best at Bangaram and Kadmat)</li>
+                    <li><b>Snorkeling -</b> Available at all tourist islands, especially good at Agatti and Kavaratti</li>
+                    <li><b>Kayaking -</b> Paddle through calm lagoons at Kavaratti and Minicoy</li>
+                    <li><b>Glass-Bottom Boat Rides -</b> View coral reefs without getting wet, available at most islands</li>
+                    <li><b>Parasailing -</b> Experience flying over the turquoise waters at Bangaram and Kadmat</li>
+                    <li><b>Wind Surfing -</b> Available at Kadmat and Kavaratti for adventure enthusiasts</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Island Hopping & Tours 🚢</h3>
+                  <ul>
+                    <li><b>Day Trips -</b> Visit uninhabited islands like Parali, Thinnakara, and Suheli Par</li>
+                    <li><b>Cruise Tours -</b> Multi-day cruises visiting several islands</li>
+                    <li><b>Fishing Expeditions -</b> Join local fishermen for traditional tuna fishing, especially in Minicoy</li>
+                    <li><b>Sunset Cruises -</b> Evening boat rides offering spectacular sunset views</li>
+                    <li><b>Coral Reef Tours -</b> Guided tours explaining the coral ecosystem</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Island Hopping" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Cultural Experience" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>6. Cultural Experiences & Activities 🎭</h3>
+                  <ul>
+                    <li><b>Traditional Dance Performances -</b> Watch Lava Dance, Parichakali, and Kolkali performances</li>
+                    <li><b>Coconut Harvesting Demonstrations -</b> Learn about the importance of coconut in island life</li>
+                    <li><b>Handicraft Workshops -</b> Observe and participate in coir making and coconut craft</li>
+                    <li><b>Local Cuisine Tasting -</b> Sample traditional tuna dishes and coconut-based foods</li>
+                    <li><b>Village Tours -</b> Visit local communities to experience authentic island life</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Unique Experiences 🌟</h3>
+                  <ul>
+                    <li><b>Bioluminescent Beaches -</b> Witness the magical blue glow at night on certain beaches</li>
+                    <li><b>Stargazing -</b> Experience clear night skies away from light pollution</li>
+                    <li><b>Turtle Nesting Sites -</b> Seasonal opportunity to see turtles nesting (with proper guidance)</li>
+                    <li><b>Traditional Boat Building -</b> Watch craftsmen build wooden Odams using ancient techniques</li>
+                    <li><b>Coconut Tree Climbing -</b> Watch skilled climbers harvest coconuts from tall palms</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Unique" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br><br>
+          <h2>📌 Island-wise Tourist Attractions</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Island</th>
+                <th>Must-Visit Attractions</th>
+                <th>Special Activities</th>
+              </tr>
+              <tr>
+                <td>Kavaratti</td>
+                <td>Ujra Mosque, Marine Aquarium, Dolphin Dive Center</td>
+                <td>Scuba diving, glass-bottom boat rides, mosque tours</td>
+              </tr>
+              <tr>
+                <td>Agatti</td>
+                <td>Agatti Beach, Blue Lagoon, Airport View</td>
+                <td>Snorkeling, kayaking, sunset photography</td>
+              </tr>
+              <tr>
+                <td>Bangaram</td>
+                <td>Bangaram Atoll, Parali Beach, Coral Reefs</td>
+                <td>Scuba diving, night swimming, beach camping</td>
+              </tr>
+              <tr>
+                <td>Minicoy</td>
+                <td>Lighthouse, Viringili Island, Traditional Villages</td>
+                <td>Cultural tours, tuna fishing, traditional dance</td>
+              </tr>
+              <tr>
+                <td>Kadmat</td>
+                <td>Long Beach, Coral Reefs, Tourist Huts</td>
+                <td>Water sports, beach volleyball, nature walks</td>
+              </tr>
+              <tr>
+                <td>Kalpeni</td>
+                <td>Kalpeni Reef, Tip Beach, Koomel Beach</td>
+                <td>Coral viewing, kayaking, traditional boat rides</td>
+              </tr>
+              <tr>
+                <td>Andrott</td>
+                <td>Saint Ubaidullah Tomb, Buddhist Remains, Beaches</td>
+                <td>Historical tours, religious site visits</td>
+              </tr>
+            </table>
+          </div>
+
+          <br><br>
+          <p>Lakshadweep offers a perfect blend of natural beauty, marine adventures, cultural experiences, and peaceful relaxation. The pristine beaches, vibrant coral reefs, and unique island culture make it a paradise for travelers seeking an off-the-beaten-path destination in India. 🏝️🐠🌊</p>
+
+        </div>
+        <div id="wbwild" class="tab-pane fade in active" style="background-color: white;">
+          <h1> Wildlife & Crops of Lakshadweep 🌿</h1>
+          <p>Lakshadweep has a unique ecosystem dominated by marine life and limited terrestrial biodiversity due to its coral island geography. The agricultural landscape is primarily focused on coconut cultivation and fishing.</p>
+
+          <br>
+          <h2>Marine Wildlife of Lakshadweep </h2>
+          <p>Lakshadweep's waters are home to rich marine biodiversity, with coral reefs forming the foundation of the ecosystem.</p>
+
+          <br>
+          <h2>🔹 Marine Ecosystem</h2>
+          <div>
+            <table>
+              <tr>
+                <th>Category</th>
+                <th>Species</th>
+                <th>Notable Features</th>
+              </tr>
+              <tr>
+                <td>Coral Reefs</td>
+                <td>Over 100 species of corals</td>
+                <td>Fringing reefs, patch reefs, and atolls forming the foundation of marine life 🪸</td>
+              </tr>
+              <tr>
+                <td>Fish Species</td>
+                <td>Over 600 species</td>
+                <td>Butterfly fish, parrotfish, clownfish, groupers, snappers, tuna 🐠</td>
+              </tr>
+              <tr>
+                <td>Marine Mammals</td>
+                <td>Dolphins, whales</td>
+                <td>Spinner dolphins, bottlenose dolphins, occasional whale sightings 🐬</td>
+              </tr>
+              <tr>
+                <td>Sea Turtles</td>
+                <td>4 species</td>
+                <td>Green, hawksbill, olive ridley, and leatherback turtles 🐢</td>
+              </tr>
+              <tr>
+                <td>Sharks & Rays</td>
+                <td>Various species</td>
+                <td>Reef sharks, manta rays, eagle rays, stingrays 🦈</td>
+              </tr>
+              <tr>
+                <td>Mollusks</td>
+                <td>Numerous species</td>
+                <td>Giant clams, cowries, conches, octopus 🐙</td>
+              </tr>
+              <tr>
+                <td>Crustaceans</td>
+                <td>Crabs, lobsters, shrimps</td>
+                <td>Hermit crabs, spiny lobsters, mantis shrimps 🦀</td>
+              </tr>
+            </table>
+          </div>
+          <bt><br></bt>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3> 🔹 Terrestrial Wildlife</h3>
+                <ul>
+                  <li><b>Birds:</b> Seabirds like terns, gulls, herons, and migratory birds. Pitti Island is a designated bird sanctuary.</li>
+                  <li><b>Reptiles:</b> House geckos, garden lizards, and occasional sea snakes.</li>
+                  <li><b>Mammals:</b> Very limited, mostly introduced species like rats and cats. No native land mammals.</li>
+                  <li><b>Insects:</b> Butterflies, beetles, ants, and various other insects adapted to island life.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=200" alt="Marine Life" style="height:200px;width: 200px;">
+
+              </div>
+
+            </div>
+          </div>
+          <hr><br>
+          <h2>🌾 Agriculture & Major Crops in Lakshadweep </h2>
+          <p>Lakshadweep has limited agricultural activities due to its small land area and coral soil. Coconut cultivation dominates the agricultural landscape, with fishing being the main livelihood.</p>
+
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Key Agricultural Features</h3>
+                <ul>
+                  <li>Coconut is the primary crop, with over 90% of cultivable land under coconut plantations.</li>
+                  <li><b>Limited Land:</b> Only about 4,200 hectares of land area across all islands combined.</li>
+                  <li><b>Soil Type:</b> Coral sandy soil with limited fertility, suitable mainly for coconut cultivation.</li>
+                  <li><b>Water Resources:</b> Limited freshwater resources, dependent on rainwater and groundwater.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=220" alt="Coconut" style="height:200px;width: 220px;">
+
+              </div>
+            </div>
+          </div>
+          <h2>🔹 Major Crops of Lakshadweep</h2>
+          <div>
+            <table>
+              <tr>
+                <th>Category</th>
+                <th>Crops</th>
+              </tr>
+              <tr>
+                <td>Primary Crop</td>
+                <td>Coconut 🥥 (Over 10 million trees across the islands)</td>
+              </tr>
+              <tr>
+                <td>Vegetables</td>
+                <td>Limited cultivation of drumstick, chili, brinjal, bitter gourd, and leafy vegetables</td>
+              </tr>
+              <tr>
+                <td>Fruits</td>
+                <td>Banana 🍌, papaya 🍈, breadfruit, and some citrus fruits in small quantities</td>
+              </tr>
+              <tr>
+                <td>Tubers</td>
+                <td>Sweet potato, tapioca, and colocasia in small home gardens</td>
+              </tr>
+              <tr>
+                <td>Grains</td>
+                <td>Almost none; rice and wheat are imported from the mainland</td>
+              </tr>
+              <tr>
+                <td>Spices</td>
+                <td>Small-scale cultivation of chili, turmeric, and ginger</td>
+              </tr>
+              <tr>
+                <td>Other Plants</td>
+                <td>Pandanus (screw pine), used for making mats and handicrafts</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Coconut-Based Products</h3>
+                <ul>
+                  <li><b>Copra:</b> Dried coconut kernel, a major export item.</li>
+                  <li><b>Coconut Oil:</b> Produced traditionally and used for cooking and cosmetic purposes.</li>
+                  <li><b>Coir:</b> Fiber extracted from coconut husks, used for making ropes, mats, and handicrafts.</li>
+                  <li><b>Coconut Vinegar:</b> Traditional product made from fermented coconut water.</li>
+                  <li><b>Neera:</b> Sweet sap collected from coconut inflorescence.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=200" alt="Coconut Products" style="height:200px;width: 200px;">
+
+              </div>
+            </div>
+          </div><br>
+          <hr>
+          <div class="box" style=" background: #f3b37185;padding: 10px;">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3> Fishing Industry 🐟</h3>
+                  <ul>
+                    <li><b>Major Livelihood:</b> Fishing is the primary occupation for many islanders.</li>
+                    <li><b>Tuna Fishing:</b> Lakshadweep is famous for its sustainable pole and line tuna fishing.</li>
+                    <li><b>Fish Species:</b> Skipjack tuna, yellowfin tuna, and various reef fish are commonly caught.</li>
+                    <li><b>Processing:</b> Traditional methods of drying and smoking fish (mas) are practiced.</li>
+                    <li><b>Export Products:</b> Tuna, tuna products, and dried fish are exported to the mainland.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Fishing" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Lakshadweep's ecosystem is primarily marine-focused, with coral reefs supporting a rich diversity of aquatic life. On land, coconut cultivation dominates the agricultural landscape, providing islanders with food, building materials, and livelihood opportunities. The sustainable fishing practices, particularly for tuna, represent an important balance between human needs and environmental conservation in this fragile island ecosystem.</p>
+          <br><br>
+        </div>
+        <div id="wbedu" class="tab-pane fade in active" style="background-color: white;">
+          <h1>🎓 Education & Institutions in Lakshadweep</h1>
+          <p>Lakshadweep has made significant strides in education despite its geographical isolation and limited resources. The Union Territory has achieved a high literacy rate of over 92%, which is above the national average. The education system is designed to address the unique challenges of island life while providing quality education to all residents.</p>
+
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>📌 Education System in Lakshadweep</h3>
+                  <ul>
+                    <li><b>School Education:</b> Follows CBSE curriculum with additional focus on local culture and environment.</li>
+                    <li><b>Administration:</b> Department of Education, UT of Lakshadweep oversees all educational activities.</li>
+                    <li><b>Language of Instruction:</b> Malayalam, English, and in some schools, Mahl (in Minicoy).</li>
+                    <li><b>Special Features:</b> Emphasis on marine studies, environmental education, and vocational skills relevant to island life.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Education" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>🏫 Educational Institutions </h2>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Schools</h3>
+                <ul>
+                  <li><b>Primary Schools:</b> Present on all inhabited islands, ensuring basic education accessibility.</li>
+                  <li><b>Secondary Schools:</b> Available on most islands, with Kavaratti having the most developed facilities.</li>
+                  <li><b>Senior Secondary Schools:</b> Located in Kavaratti, Minicoy, Andrott, and Kadmat.</li>
+                  <li><b>Jawahar Navodaya Vidyalaya:</b> Special residential school in Kavaratti providing quality education to talented students from all islands.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=230" alt="School" style="height:200px;width: 230px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Higher Education</h3>
+                <ul>
+                  <li><b>Dr. B.R. Ambedkar Government College (Kavaratti):</b> The only degree college in Lakshadweep, offering undergraduate programs in Arts and Science.</li>
+                  <li><b>ITI (Industrial Training Institute):</b> Located in Kavaratti, offering vocational training in various trades.</li>
+                  <li><b>Nursing School:</b> Provides training for auxiliary nurse midwives and healthcare workers.</li>
+                  <li><b>Distance Education Centers:</b> IGNOU (Indira Gandhi National Open University) study centers provide distance learning opportunities.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=230" alt="College" style="height:200px;width: 230px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Institution Type</th>
+                <th>Number</th>
+                <th>Notable Features</th>
+              </tr>
+              <tr>
+                <td>Pre-Primary Schools</td>
+                <td>~30</td>
+                <td>Early childhood education with focus on local language and culture</td>
+              </tr>
+              <tr>
+                <td>Primary Schools</td>
+                <td>~45</td>
+                <td>Present on all inhabited islands, ensuring universal access</td>
+              </tr>
+              <tr>
+                <td>Secondary Schools</td>
+                <td>~15</td>
+                <td>Equipped with science labs and computer facilities</td>
+              </tr>
+              <tr>
+                <td>Senior Secondary Schools</td>
+                <td>4</td>
+                <td>Located in Kavaratti, Minicoy, Andrott, and Kadmat</td>
+              </tr>
+              <tr>
+                <td>Jawahar Navodaya Vidyalaya</td>
+                <td>1</td>
+                <td>Residential school with merit-based admission</td>
+              </tr>
+              <tr>
+                <td>Degree College</td>
+                <td>1</td>
+                <td>Dr. B.R. Ambedkar Government College in Kavaratti</td>
+              </tr>
+              <tr>
+                <td>ITI</td>
+                <td>1</td>
+                <td>Vocational training in marine trades and other skills</td>
+              </tr>
+              <tr>
+                <td>IGNOU Centers</td>
+                <td>2</td>
+                <td>Distance education opportunities for higher studies</td>
+              </tr>
+            </table>
+          </div>
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=240" alt="Marine" style="height:200px;width: 240px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🔹 Specialized Training Institutes</h3>
+                  <ol>
+                    <li><b>Marine Training Center (Kavaratti) -</b> Provides training in navigation, fishing techniques, and marine engine maintenance.</li>
+                    <li><b>Fisheries Training Center -</b> Offers courses in modern fishing methods, fish processing, and aquaculture.</li>
+                    <li><b>Handicraft Training Center -</b> Trains locals in traditional crafts like coir making, coconut shell crafts, and lacquerware.</li>
+                    <li><b>Tourism Training Institute -</b> Provides hospitality training for the growing tourism industry.</li>
+                  </ol>
+                </div>
+
+                <br><br>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🔹 Educational Initiatives & Schemes</h3>
+                  <ol>
+                    <li><b>Lakshadweep Education Society -</b> Provides financial assistance and scholarships to students pursuing higher education on the mainland.</li>
+                    <li><b>Mainland Scholarship Scheme -</b> Supports students studying in colleges and universities across India.</li>
+                    <li><b>Smart Classrooms -</b> Digital learning initiatives to overcome geographical isolation.</li>
+                    <li><b>Boat Schools -</b> Mobile educational facilities that travel between smaller islands.</li>
+                    <li><b>Mid-Day Meal Program -</b> Provides nutritious meals to school children.</li>
+                  </ol>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Scholarship" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Research" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🔹 Research & Scientific Institutions</h3>
+                  <ul>
+                    <li><b>Science Center (Kavaratti) -</b> Promotes scientific awareness and conducts research on local environmental issues.</li>
+                    <li><b>Marine Research Center -</b> Studies coral reefs, marine biodiversity, and sustainable fishing practices.</li>
+                    <li><b>Department of Science & Technology Field Station -</b> Conducts research on renewable energy, water desalination, and climate change impacts.</li>
+                    <li><b>Meteorological Observatory -</b> Monitors weather patterns and provides data for climate research.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🔹 Traditional & Religious Education</h3>
+                  <ul>
+                    <li><b>Madrasas -</b> Islamic religious schools present on all islands, providing Quranic education.</li>
+                    <li><b>Arabic Colleges -</b> Higher Islamic education centers in Kavaratti and Andrott.</li>
+                    <li><b>Traditional Knowledge Systems -</b> Informal education in traditional navigation, fishing, boat building, and medicinal practices.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Traditional" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <h2>🔬 Educational Challenges & Solutions</h2>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>Challenges</h3>
+                  <ul>
+                    <li><b>Geographical Isolation:</b> Limited access to educational resources and mainland institutions.</li>
+                    <li><b>Infrastructure Limitations:</b> Constraints in physical facilities and technology.</li>
+                    <li><b>Teacher Recruitment:</b> Difficulty in attracting and retaining qualified teachers.</li>
+                    <li><b>Higher Education Options:</b> Limited choices for specialized and professional courses.</li>
+                  </ul>
+                  <h3>Solutions & Innovations</h3>
+                  <ul>
+                    <li><b>Digital Learning:</b> Implementation of e-learning platforms and satellite-based education.</li>
+                    <li><b>Teacher Training Programs:</b> Special incentives and professional development for educators.</li>
+                    <li><b>Mainland Partnerships:</b> Collaborations with mainland institutions for student exchanges and faculty visits.</li>
+                    <li><b>Vocational Focus:</b> Emphasis on practical skills relevant to island economy and sustainable development.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Digital" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Despite its geographical challenges, Lakshadweep has made remarkable progress in education, achieving high literacy rates and developing an education system that balances modern knowledge with traditional wisdom. The focus on marine studies, environmental education, and vocational skills relevant to island life ensures that education serves the unique needs of this remote island territory while connecting students to broader opportunities.</p>
+        </div>
+        <br><br>
+
+      </div>
+
+
+    </div>
+  </div>
+  </div>
+</body>
+
+</html>

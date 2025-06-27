@@ -1,0 +1,2579 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Kerala</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> -->
+  <style>
+    .wb {
+      font-size: 10vw;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+      border-spacing: 0;
+      border: 1px solid #ddd;
+    }
+
+    td,
+    th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+      font-size: 1.5vw;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+
+    .trip {
+      text-align: center;
+      font-weight: 900;
+      background: orangered;
+      padding: 20px;
+      border-radius: 20px;
+      width: 60%;
+    }
+
+    p,
+    li,
+    .text {
+      font-size: 1.5vw;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-weight: 600;
+    }
+
+    h4 {
+      font-weight: 900;
+    }
+
+    img {
+      border-radius: 10px;
+      display: block;
+      margin: auto;
+    }
+
+    @media screen and (max-width: 850px) {
+
+      p,
+      li,
+      .text,
+      td,
+      th {
+        font-size: 2vw;
+        ;
+      }
+
+    }
+
+    @media screen and (max-width: 500px) {
+
+      p,
+      li,
+      .text,
+      td,
+      th {
+        font-size: 4.5vw;
+        ;
+      }
+
+    }
+
+    .box:nth-of-type(odd) {
+      background: #f3b37185;
+      padding: 10px;
+    }
+
+    .weather-container {
+            border-radius: 15px;
+            background: #f0fdf4;
+            padding: 15px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .weather-card {
+            text-align: center;
+            border-radius: 10px;
+            padding: 10px;
+            background: white;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+        .aqi {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            color: white;
+        }
+        .aqi-bad { background: purple; }
+        .aqi-moderate { background: orange; }
+        .aqi-good { background: green; }
+        .best-time {
+            background: #d1fae5;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 15px;
+            color: green;
+        }
+        .wet {
+            max-width: 50px;
+        }
+        
+        .trip {
+          font-size: 18px;
+          padding: 10px 20px;
+          cursor: pointer;
+          background-color:rgb(231, 36, 36);
+          color: white;
+          border: none;
+          border-radius: 5px;
+      }
+      .modal {
+          display: none;
+          position: fixed;
+          z-index: 1;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0,0,0,0.5);
+      }
+      .modal-content {
+          background-color: #fff;
+          margin: 10% auto;
+          padding: 20px;
+          border-radius: 10px;
+          width: 40%;
+          box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+          text-align: center;
+      }
+      .close {
+          color: #aaa;
+          float: right;
+          font-size: 28px;
+          font-weight: bold;
+          cursor: pointer;
+      }
+      .trip-options {
+          display: flex;
+          justify-content: center;
+          gap: 20px;
+          margin-top: 20px;
+      }
+      .trip-options a {
+          display: block;
+          width: 120px;
+          padding: 10px;
+          background-color: #28a745;
+          color: white;
+          text-decoration: none;
+          border-radius: 5px;
+      }
+  </style>
+</head>
+
+<body>
+
+
+  <!-- <h2>Carousel Example</h2> -->
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+      <li data-target="#myCarousel" data-slide-to="4"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+
+      <div class="item active">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Munnar_hillstation_kerala.jpg/1200px-Munnar_hillstation_kerala.jpg" alt="Munnar" style="width:100%; height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Munnar</h3>
+          <p>We love the mountains and scenic beauty!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Backwaters_of_Kerala%2C_India.jpg/1200px-Backwaters_of_Kerala%2C_India.jpg" alt="Backwaters" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Alleppey Backwaters</h3>
+          <p>The amazing waterways and houseboats!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Chinese_Fishing_Nets%2C_Kochi.jpg/1200px-Chinese_Fishing_Nets%2C_Kochi.jpg" alt="Chinese Fishing Nets" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Chinese Fishing Nets</h3>
+          <p>The iconic fishing nets of Fort Kochi!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Kovalam_Beach_Kerala.jpg/1200px-Kovalam_Beach_Kerala.jpg" alt="Kovalam" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Kovalam</h3>
+          <p>We love the beaches!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Tea_plantations_in_Munnar%2C_Kerala.jpg/1200px-Tea_plantations_in_Munnar%2C_Kerala.jpg" alt="Tea Garden" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Tea Gardens</h3>
+          <p>We love the smell of the tea gardens!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+  <div class="container">
+    <br><br>
+    <h1 class="wb"> KERALA</h1><br>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Kerala_district_map.png/800px-Kerala_district_map.png" alt="" style="height:700px; width: -webkit-fill-available;">
+
+        </div>
+        <div class="col-sm-6">
+          <h1> Kerala: God's Own Country</h1>
+          <p class="text">Kerala is a diverse and vibrant state in southern India, known for its rich history,
+            cultural heritage, literature, festivals, art, and natural beauty. It is famous for its backwaters,
+            beaches, wildlife, and Ayurvedic traditions.</p>
+
+          <ul>
+            <li><b>Location --</b> Southwestern India</li>
+            <li><b>Capital --</b> Thiruvananthapuram</li>
+            <li><b>Official Language --</b> Malayalam</li>
+            <li><b>Area --</b> 38,863 sq. km</li>
+            <li><b>Population --</b> ~35 million</li>
+            <li><b>Borders --</b> Tamil Nadu, Karnataka & Arabian Sea</li>
+            <li><b>Major Rivers --</b> Periyar, Bharathapuzha, Pamba, Chaliyar</li>
+            <li><b>Major Festivals --</b> Onam, Vishu, Thrissur Pooram, Christmas, Eid, Theyyam</li>
+            <li><b>State Animal --</b> Elephant</li>
+            <li><b>State Flower --</b> Kanikonna (Golden Shower Tree)</li>
+            <li><b>State Tree --</b> Coconut Tree</li>
+            <li><b>State Bird --</b> Great Hornbill</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <br>
+    <hr>
+    <div>
+      <h1>📌 Divisions & Districts of Kerala</h1>
+      <br>
+      <div style="overflow-x:auto;">
+        <table>
+          <tr>
+            <th>Region</th>
+            <th>Districts</th>
+            <th>Key Highlights</th>
+          </tr>
+          <tr>
+            <td>North Kerala (Malabar)</td>
+            <td>1. Kasaragod 2. Kannur 3. Wayanad 4. Kozhikode 5. Malappuram</td>
+            <td>Beaches, Spice Plantations, Wildlife, Theyyam Performances</td>
+          </tr>
+          <tr>
+            <td>Central Kerala</td>
+            <td>6. Palakkad 7. Thrissur 8. Ernakulam</td>
+            <td>Cultural Centers, Backwaters, Thrissur Pooram, Fort Kochi</td>
+          </tr>
+          <tr>
+            <td>South Kerala</td>
+            <td>9. Idukki 10. Kottayam 11. Alappuzha 12. Pathanamthitta 13. Kollam 14. Thiruvananthapuram</td>
+            <td>Hill Stations, Backwaters, Beaches, Wildlife Sanctuaries</td>
+          </tr>
+        </table>
+      </div>
+      <br><br>
+      <h1>🔹 Major Highlights of Some Key Districts</h1><br><br>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <ul>
+              <li><b>Thiruvananthapuram --</b> Capital of Kerala, beaches, cultural & economic hub.</li>
+              <li><b>Ernakulam --</b> Commercial capital, Fort Kochi, Chinese fishing nets.</li>
+              <li><b>Idukki --</b> Hill station, wildlife sanctuaries, spice plantations.</li>
+              <li><b>Alappuzha --</b> Backwaters, houseboats, coir industry.</li>
+              <li><b>Thrissur --</b> Cultural capital, home of Thrissur Pooram festival.</li>
+              <li><b>Kozhikode --</b> Historical city, beaches, spice trade center.</li>
+              <li><b>Wayanad --</b> Hill station, wildlife, tribal communities.</li>
+              <li><b>Palakkad --</b> Rice bowl of Kerala, Silent Valley National Park.</li>
+              <li><b>Kollam --</b> Cashew processing center, backwaters, beaches.</li>
+            </ul>
+          </div>
+          <div class="col-sm-6">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Kerala_district_map.png/800px-Kerala_district_map.png" alt="" style="height:450px;width: -webkit-fill-available;">
+
+          </div>
+        </div>
+      </div>
+    </div><br><br>
+    <div class="container">
+      <div class="weather-container">
+          <h4 class="text-center"><strong>Weather in Kerala</strong></h4>
+          <div class="row">
+              <!-- January -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Jan</h6>
+                      <p>22/33°C</p>
+                      <span class="aqi aqi-good">AQI 45</span>
+                  </div>
+              </div>
+              <!-- February -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Feb</h6>
+                      <p>23/33°C</p>
+                      <span class="aqi aqi-good">AQI 50</span>
+                  </div>
+              </div>
+              <!-- March -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Mar</h6>
+                      <p>24/34°C</p>
+                      <span class="aqi aqi-good">AQI 55</span>
+                  </div>
+              </div>
+              <!-- April -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Apr</h6>
+                      <p>25/34°C</p>
+                      <span class="aqi aqi-good">AQI 60</span>
+                  </div>
+              </div>
+              <!-- May -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>May</h6>
+                      <p>25/33°C</p>
+                      <span class="aqi aqi-good">AQI 45</span>
+                  </div>
+              </div>
+              <!-- June -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="rain.png" alt="rain">
+                      <h6>Jun</h6>
+                      <p>24/30°C</p>
+                      <span class="aqi aqi-good">AQI 30</span>
+                  </div>
+              </div>
+              <!-- July -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="rain.png" alt="rain">
+                      <h6>Jul</h6>
+                      <p>24/29°C</p>
+                      <span class="aqi aqi-good">AQI 25</span>
+                  </div>
+              </div>
+              <!-- August -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="rain.png" alt="rain">
+                      <h6>Aug</h6>
+                      <p>24/29°C</p>
+                      <span class="aqi aqi-good">AQI 30</span>
+                  </div>
+              </div>
+              <!-- September -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Sep</h6>
+                      <p>24/30°C</p>
+                      <span class="aqi aqi-good">AQI 35</span>
+                  </div>
+              </div>
+              <!-- October -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Oct</h6>
+                      <p>24/31°C</p>
+                      <span class="aqi aqi-good">AQI 40</span>
+                  </div>
+              </div>
+              <!-- November -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Nov</h6>
+                      <p>23/32°C</p>
+                      <span class="aqi aqi-good">AQI 45</span>
+                  </div>
+              </div>
+              <!-- December -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Dec</h6>
+                      <p>23/32°C</p>
+                      <span class="aqi aqi-good">AQI 40</span>
+                  </div>
+              </div>
+          </div>
+          <div class="text-center">
+              <div class="best-time">🏆 Best time to visit: October - March</div>
+          </div>
+      </div>
+    </div>
+    
+
+    <br><br>
+    <button class="trip" id="openModal">Let's go on a trip</button>
+    
+    <div id="tripModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Select Your Trip</h2>
+            <button type="button" class="btn btn-warning" style="margin-bottom: 8px;color:black; border-radius: 5px;" onclick="location.href='{% url 'kerala_7days' %}'" >7 days trip</button><br>
+            <button type="button" class="btn btn-warning" style="margin-bottom: 8px;color:black; border-radius: 5px;" onclick="location.href='{% url 'kerala_12days' %}'" >12 days trip</button>
+        </div>
+    </div>
+    
+    <script>
+        var modal = document.getElementById("tripModal");
+        var btn = document.getElementById("openModal");
+        var span = document.getElementsByClassName("close")[0];
+        
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+        
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+        
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script><br><br>
+    <div class="container">
+      <ul class="nav nav-tabs">
+        <li class="nav-item"><a data-toggle="tab" href="#wbculture"> Culture</a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbtradition "> Tradition</a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbfestivals"> Festivals </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbfood"> Foods </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbhistory"> History </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbartacraft"> Art and Craft </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbseason"> Season to Visit </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbtourist"> Tourist Spots </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbwild"> Wildlife & Crops </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbedu"> Institutions </a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="wbculture" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Culture of Kerala</h1>
+          <p class="text">Kerala has a rich and diverse culture, shaped by its history, literature, art, music,
+            festivals, and traditions. Here's an overview of some key aspects of its culture:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Language</h3>
+                  <ul>
+                    <li>Malayalam is the official language and a major part of the cultural identity of Kerala. It's one of the Dravidian languages with a rich literary heritage, with famous writers like Vallathol Narayana Menon, Kumaran Asan, and O.V. Vijayan.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Malayalam.svg/1200px-Malayalam.svg.png" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>2. Literature</h3>
+                  <ul>
+                    <li>Kerala has a renowned literary tradition, particularly in poetry and prose. Thunchaththu Ezhuthachan, considered the father of Malayalam literature, is one of the most significant figures.</li>
+                    <li>Modern Malayalam literature has produced many notable writers like M.T. Vasudevan Nair, O.V. Vijayan, and Kamala Surayya.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Ezhuthachan.jpg/800px-Ezhuthachan.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div><br>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Aranmula_Kannadi.jpg/800px-Aranmula_Kannadi.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Art and Craft</h3>
+                  <ul>
+                    <li>The state is known for its diverse range of art forms, from Kathakali to Mohiniyattam. Kerala mural paintings are famous for their vibrant colors and intricate details.</li>
+                    <li>Traditional crafts include Aranmula Kannadi (metal mirrors), bell metal crafts, and coir products.</li>
+                  </ul>
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Carnatic_music_concert.jpg/1200px-Carnatic_music_concert.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>4. Music</h3>
+                  <ul>
+                    <li>Carnatic music has a strong presence in Kerala.</li>
+                    <li>Sopanam, a devotional music form associated with temple rituals, is unique to Kerala.</li>
+                    <li>Folk music traditions like Vadakkan Pattukal (ballads of North Malabar) are still popular.</li>
+                    <li>Percussion instruments like Chenda, Maddalam, and Edakka are integral to Kerala's musical traditions.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Dance</h3>
+                  <ul>
+                    <li>Kathakali is Kerala's most famous classical dance-drama, known for elaborate costumes and makeup.</li>
+                    <li>Mohiniyattam, the feminine classical dance form, is characterized by graceful movements.</li>
+                    <li>Other dance forms include Koodiyattam (UNESCO recognized), Theyyam, and Thiruvathirakali.</li>
+                  </ul>
+                  <h3>6. Cuisine</h3>
+                  <ul>
+                    <li>Kerala cuisine is famous for its coconut-based dishes, seafood, and spices.</li>
+                    <li>Sadhya, a vegetarian feast served on banana leaf, is a highlight of Kerala's culinary tradition.</li>
+                    <li>Popular dishes include Appam with Stew, Kerala Parotta, Puttu, Kadala Curry, and various seafood preparations.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Kathakali_BNC.jpg/800px-Kathakali_BNC.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Malayalam_Film_Poster.jpg/800px-Malayalam_Film_Poster.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>7. Cinema</h3>
+                  <ul>
+                    <li>Malayalam cinema, often referred to as "Mollywood," is known for its artistic and realistic films.</li>
+                    <li>Directors like Adoor Gopalakrishnan, G. Aravindan, and actors like Mammootty and Mohanlal have contributed significantly to Indian cinema.</li>
+                  </ul>
+                  <h3>8. Architecture</h3>
+                  <ul>
+                    <li>Kerala's architectural style is unique, characterized by sloping roofs, courtyards, and wooden structures.</li>
+                    <li>Notable structures include the Padmanabhapuram Palace, various temples, and traditional houses (Nalukettu).</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Thrissur_Pooram_2013_DSW_5.jpg/1200px-Thrissur_Pooram_2013_DSW_5.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>9. Religious Diversity</h3>
+                  <ul>
+                    <li>The state is home to a variety of religions, with Hinduism, Islam, and Christianity having a significant presence. This diversity is reflected in the state's festivals, rituals, and cultural practices.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>10. Folk Traditions</h3>
+                  <ul>
+                    <li>Kerala is famous for its rich folk traditions, including Theyyam, Padayani, and various ritual art forms.</li>
+                    <li>Boat races (Vallam Kali), especially the Snake Boat Race (Nehru Trophy), are vibrant traditions.</li>
+
+                  </ul>
+                  <h3>11. Philosophy</h3>
+                  <ul>
+                    <li>Kerala has a rich philosophical tradition influenced by Advaita Vedanta, particularly through the works of Adi Shankaracharya.</li>
+                    <li>Social reformers like Sree Narayana Guru advocated for social equality and spiritual enlightenment.</li>
+
+                  </ul>
+                  <h3>12. Handicrafts</h3>
+                  <ul>
+                    <li>Kerala is known for its handicrafts such as coir products, handloom textiles, wood carvings, and bell metal crafts.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Sree_Narayana_Guru.jpg/800px-Sree_Narayana_Guru.jpg" alt="" style="height:300px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br><br>
+
+          <p>Kerala's culture is deeply rooted in its history, and it continues to evolve while maintaining a close
+            connection to its heritage. It's a region where modernity and tradition coexist beautifully!</p><br><br>
+        </div>
+        <div id="wbtradition" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Tradition of Kerala</h1>
+          <p>Kerala has a rich and diverse tradition deeply rooted in its history, culture, and social practices.
+            Here's an overview of some key traditional aspects of the state:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Clothing Tradition</h3>
+                  <h4>Men</h4>
+                  <ul>
+                    <li><b>Mundu and Shirt:</b> Traditional Kerala men wear white or cream-colored mundu (dhoti) with a shirt, especially during religious ceremonies, weddings, and festivals.</li>
+                    <li><b>Kasavu Mundu:</b> For special occasions, men wear mundu with golden border (kasavu).</li>
+                  </ul>
+                  <h4>Women</h4>
+                  <ul>
+                    <li><b>Set Saree (Kasavu):</b> Kerala women traditionally wear cream or white sarees with golden borders. During Onam, this attire is especially popular.</li>
+                    <li><b>Traditional Jewelry:</b> Gold jewelry like Nagapadam Necklace, Palakka Mala, and Jimikki (earrings) are worn during special occasions.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Kerala_traditional_costume.jpg/800px-Kerala_traditional_costume.jpg" alt="" style="height:250px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>2. Wedding Traditions</h3>
+                  <ul>
+                    <li><b>Nischayam:</b> The formal engagement ceremony where rings are exchanged.</li>
+                    <li><b>Thalikettu (Mangalya Dharanam):</b> The groom ties the thali (mangalsutra) around the bride's neck, symbolizing marriage.</li>
+                    <li><b>Sadya:</b> A traditional vegetarian feast served on banana leaves.</li>
+                    <li><b>Grihapravesham:</b> The ceremony where the bride enters her new home.</li>
+                    <li><b>Pudava Koda: </b>The ritual where the groom gifts a new saree to his bride.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Kerala_Hindu_wedding.jpg/800px-Kerala_Hindu_wedding.jpg" alt="" style="height:250px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Mohiniyattam_dancer_Methil_Devika.jpg/800px-Mohiniyattam_dancer_Methil_Devika.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Music & Dance Traditions</h3>
+                  <ul>
+                    <li><b>Kathakali:</b> A classical dance-drama known for elaborate costumes, makeup, and gestures.</li>
+                    <li><b>Mohiniyattam:</b> A graceful classical dance form performed by women.</li>
+                    <li><b>Koodiyattam:</b> One of the oldest theater forms in the world, recognized by UNESCO.</li>
+                    <li><b>Theyyam:</b> A ritual dance form from North Kerala with elaborate costumes and face painting.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Thrissur_Pooram_2013_DSW_5.jpg/1200px-Thrissur_Pooram_2013_DSW_5.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+
+                  <h3>4. Social & Religious Traditions</h3>
+                  <ul>
+                    <li> <b>Temple Festivals:</b> Elaborate festivals like Thrissur Pooram with elephant processions, fireworks, and traditional music.</li>
+                    <li><b>Ayurveda:</b> Kerala has a strong tradition of Ayurvedic medicine and wellness practices.</li>
+                    <li><b>Vallam Kali (Boat Races):</b> Competitive boat races, especially during Onam season, with snake boats (Chundan Vallam).</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Architectural & Handicraft Traditions</h3>
+                  <ul>
+                    <li><b>Nalukettu:</b> Traditional Kerala houses with a central courtyard and sloping roofs.</li>
+                    <li><b>Temple Architecture:</b> Unique Kerala style with sloping roofs and intricate woodwork.</li>
+                    <li><b>Aranmula Kannadi:</b> Metal mirrors made with a special alloy, considered auspicious.</li>
+                    <li><b>Coir Products:</b> Traditional crafts made from coconut fiber, including mats and decorative items.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Padmanabhapuram_Palace.jpg/1200px-Padmanabhapuram_Palace.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>6. Sports & Games</h3>
+                  <ul>
+                    <li><b>Kalaripayattu:</b> One of the oldest martial art forms in the world, originating in Kerala.</li>
+                    <li><b>Football:</b> Kerala has a strong football culture with passionate fans and clubs.</li>
+                    <li><b>Boat Racing:</b> A traditional sport, especially during Onam and other festivals.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Kalarippayattu.jpg/1200px-Kalarippayattu.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br><br>
+          <p>Kerala's traditions beautifully combine history, art, food, music, and festivals, making it one of the
+            most culturally vibrant states in India.</p><br><br>
+        </div>
+        <div id="wbfestivals" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Festivals of Kerala</h1>
+          <p>Kerala is known for its vibrant and diverse festivals, which reflect its rich cultural heritage,
+            religious harmony, and artistic traditions. Here's a list of some of the major festivals celebrated in the
+            state:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Onam (Biggest Festival of Kerala)</h3>
+                  <ul>
+                    <li>The most significant festival, celebrated with floral carpets (pookalam), boat races, traditional dances, and feasts.</li>
+                    <li>The festival lasts 10 days, commemorating the mythical King Mahabali's annual visit.</li>
+                    <li>Onasadya (grand feast) is served on banana leaves with numerous dishes.</li>
+                    <li>Cultural events, games, and competitions are organized throughout Kerala.</li>
+                  </ul>
+                  <p><b>📍 Time: August - September (Malayalam month of Chingam)</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Athachamayam_2018_Tripunithura_01.jpg/1200px-Athachamayam_2018_Tripunithura_01.jpg" alt="" style="height:230px;width: 200px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Thrissur_Pooram_2013_DSW_5.jpg/1200px-Thrissur_Pooram_2013_DSW_5.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Thrissur Pooram</h3>
+                  <ul>
+                    <li>One of the most spectacular temple festivals in Kerala, known for its elephant processions.</li>
+                    <li>Features percussion ensembles (melam), parasol displays (kudamattom), and fireworks.</li>
+                    <li>Famous places: Vadakkunnathan Temple, Thrissur.</li>
+                  </ul>
+                  <p><b>📍 Time: April - May</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Vishu (Malayalam New Year)</h3>
+                  <ul>
+                    <li>Marks the Malayalam New Year and is celebrated with Vishukkani (auspicious first sight).</li>
+                    <li>People wear new clothes, visit temples, and elders give Vishukkaineetam (money) to younger ones.</li>
+                    <li>Special meals include Vishu Sadya with various traditional dishes.</li>
+                  </ul>
+                  <p><b>📍 Time: April 14 - 15</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Vishu_Kani.jpg/1200px-Vishu_Kani.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Theyyam_at_Andaloor_Kavu.jpg/800px-Theyyam_at_Andaloor_Kavu.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Theyyam</h3>
+                  <ul>
+                    <li>A ritual dance form performed in temples of North Kerala (Kannur, Kasaragod).</li>
+                    <li>Performers wear elaborate costumes, headgear, and face paint to embody deities.</li>
+                    <li>Combines dance, music, and ritual elements with deep spiritual significance.</li>
+                  </ul>
+                  <p><b>📍 Time: November - May</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Attukal Pongala</h3>
+                  <ul>
+                    <li>One of the largest women's religious gatherings in the world, held at Attukal Bhagavathy Temple.</li>
+                    <li>Women prepare sweet rice porridge (pongala) as an offering to the goddess.</li>
+                  </ul>
+                  <p><b>📍 Time: February - March</b></p>
+                  <h3>6. Boat Races (Vallam Kali)</h3>
+                  <ul>
+                    <li>The Nehru Trophy Boat Race in Alappuzha is the most famous.</li>
+                    <li>Snake boats (Chundan Vallam) with over 100 rowers compete in these spectacular races.</li>
+                  </ul>
+                  <p><b>📍 Time: August - September</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Nehru_Trophy_Boat_Race_11-08-2012_1-25-07_PM.JPG/1200px-Nehru_Trophy_Boat_Race_11-08-2012_1-25-07_PM.JPG" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Christmas_celebration_in_Kochi.jpg/1200px-Christmas_celebration_in_Kochi.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>7. Christmas</h3>
+                  <ul>
+                    <li>Celebrated with great enthusiasm due to Kerala's significant Christian population.</li>
+                    <li>Churches are beautifully decorated, and midnight mass is attended by many.</li>
+                  </ul>
+                  <p><b>📍 Time: December 25</b></p>
+                  <h3>8. Eid-ul-Fitr & Eid-ul-Adha</h3>
+                  <ul>
+                    <li>Celebrated by the Muslim community, especially in Malabar region.</li>
+                    <li>Special prayers, feasts, and community gatherings mark these occasions.</li>
+                  </ul>
+                  <p><b>📍 Time: Based on Islamic Calendar</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>9. Thiruvathira</h3>
+                  <ul>
+                    <li>A festival dedicated to Lord Shiva, celebrated mainly by women.</li>
+                    <li>Women perform the Thiruvathirakali dance and observe fasting.</li>
+                    <li>Special dishes like Thiruvathira puzhukku are prepared.</li>
+                  </ul>
+                  <p><b>📍 Time: December - January</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Thiruvathirakali.jpg/800px-Thiruvathirakali.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Sabarimala_makara_jyothi.jpg/1200px-Sabarimala_makara_jyothi.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>10. Sabarimala Pilgrimage</h3>
+                  <ul>
+                    <li>Annual pilgrimage to the Ayyappa Temple at Sabarimala.</li>
+                    <li>Pilgrims observe 41 days of austerity before the visit.</li>
+                    <li>The Makara Jyothi (celestial light) is a highlight of the pilgrimage season.</li>
+                  </ul>
+                  <p><b>📍 Time: November - January</b></p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>11. Navaratri</h3>
+                  <ul>
+                    <li>Nine nights dedicated to the worship of Goddess Durga, Lakshmi, and Saraswati.</li>
+                    <li>Vidyarambham ceremony on Vijayadashami day initiates children into learning.</li>
+                  </ul>
+                  <p><b>📍 Time: September - October</b></p>
+
+                  <h3>12. Aranmula Boat Race</h3>
+                  <ul>
+                    <li>A traditional snake boat race associated with the Aranmula Parthasarathy Temple.</li>
+                    <li>Unlike other boat races, this is not a competition but a ritual offering.</li>
+                  </ul>
+                  <p><b>📍 Time: August - September</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Aranmula_Boat_Race_11.jpg/1200px-Aranmula_Boat_Race_11.jpg" alt="" style="height:200px;width: 230px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Kochi-Muziris_Biennale_2012_Aspinwall_House.jpg/1200px-Kochi-Muziris_Biennale_2012_Aspinwall_House.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>13. Kochi-Muziris Biennale</h3>
+                  <ul>
+                    <li>An international exhibition of contemporary art held in Kochi every two years.</li>
+                    <li>Showcases installations, paintings, films, and performances by artists from around the world.</li>
+                  </ul>
+                  <p><b>📍 Time: December - March (every two years)</b></p>
+                  <h3>14. Kerala School Kalolsavam</h3>
+                  <ul>
+                    <li>Asia's largest school arts festival with competitions in various art forms.</li>
+                    <li>Students from across Kerala participate in music, dance, and literary events.</li>
+                  </ul>
+                  <p><b>📍 Time: December - January</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Kerala's festivals are a blend of religious, cultural, and artistic celebrations, making the state one
+            of the most festive regions in India! 🎉</p><br><br>
+        </div>
+        <div id="wbfood" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Foods of Kerala</h1>
+          <p>Kerala has a rich and diverse culinary tradition that blends flavors from different regions. Kerala
+            cuisine is known for its use of coconut, curry leaves, mustard seeds, and a balance of spicy, sour, and sweet flavors. Here's a look at some of the most iconic foods of Kerala:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Staple Food of Kerala</h3>
+                  <ul>
+                    <li><b>Rice:</b> The most important staple, served with various curries and side dishes.</li>
+                    <li><b>Kappa (Tapioca):</b> A popular staple in central Kerala, often served with fish curry.</li>
+                  </ul>
+                  <h3>2. Kerala Breads</h3>
+                  <ul>
+                    <li><b>Appam:</b> Bowl-shaped fermented rice pancakes with soft center and crispy edges.</li>
+                    <li><b>Pathiri: </b>Thin rice flour pancakes, popular in Malabar cuisine.</li>
+                    <li><b>Puttu:</b> Steamed rice flour and coconut cylinders, a popular breakfast dish.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Kerala_Sadya.jpg/1200px-Kerala_Sadya.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Avial_Kerala.jpg/1200px-Avial_Kerala.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Famous Kerala Dishes</h3>
+                  <h4>Fish & Seafood</h4>
+                  <ul>
+                    <li><b>Karimeen Pollichathu (Pearl Spot Fish):</b> Fish marinated in spices and wrapped in banana leaves.</li>
+                    <li><b>Kerala Fish Curry (Meen Curry):</b> Fish cooked in coconut milk and spices.</li>
+                    <li><b>Prawn Curry:</b> Prawns cooked in coconut milk with kokum for sourness.</li>
+                    <li><b>Fish Molee:</b> A mild fish stew with coconut milk, influenced by Portuguese cuisine.</li>
+                  </ul>
+                  <h4>Vegetarian Dishes</h4>
+                  <ul>
+                    <li><b>Avial:</b> Mixed vegetables cooked with coconut and yogurt, a must-have in Kerala Sadya.</li>
+                    <li><b>Thoran:</b> Stir-fried vegetables with grated coconut and spices.</li>
+                    <li><b>Olan:</b> White pumpkin and beans cooked in coconut milk.</li>
+                    <li><b>Sambar:</b> Lentil stew with vegetables and tamarind.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Kerala_style_chicken_biriyani.jpg/1200px-Kerala_style_chicken_biriyani.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h4>Meat Dishes</h4>
+                  <ul>
+                    <li><b>Kerala Beef Fry (Erachi Ularthiyathu):</b> Spicy beef stir-fry with coconut pieces.</li>
+                    <li><b>Chicken Stew:</b> Mild chicken curry with coconut milk, often served with appam.</li>
+                    <li><b>Thalassery Biryani:</b> A unique style of biryani from Malabar region using Kaima rice.</li>
+                  </ul>
+                  <h4>Curries & Accompaniments</h4>
+                  <ul>
+                    <li><b>Rasam:</b> Spicy and sour soup, good for digestion.</li>
+                    <li><b>Pulissery:</b> Yogurt-based curry with cucumber or ash gourd.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>4. Kerala Sweets & Desserts</h3>
+                  <ul>
+                    <li><b>Payasam:</b> Sweet milk pudding with rice, vermicelli, or lentils, served during festivals.</li>
+                    <li><b>Unniyappam:</b> Sweet fried rice dumplings with banana and jaggery.</li>
+                    <li><b>Ada Pradhaman:</b> Rice flakes cooked in jaggery and coconut milk.</li>
+                    <li><b>Pazham Pori:</b> Banana fritters, a popular evening snack.</li>
+                    <li><b>Neyyappam: </b>Sweet rice pancakes with jaggery and ghee.</li>
+                  </ul>
+
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Palada_Payasam.jpg/1200px-Palada_Payasam.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Dosa_and_ghee_roast_at_Sagar_Ratna%2C_Janpath%2C_New_Delhi_%28cropped%29.jpg/1200px-Dosa_and_ghee_roast_at_Sagar_Ratna%2C_Janpath%2C_New_Delhi_%28cropped%29.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>5. Street Food of Kerala</h3>
+                  <ul>
+                    <li><b>Dosa:</b> Fermented rice and lentil crepes served with sambar and chutney.</li>
+                    <li><b>Idli:</b> Steamed rice cakes, a popular breakfast item.</li>
+                    <li><b>Pazhampori:</b> Deep-fried banana fritters.</li>
+                    <li><b>Kappa Biryani: </b>A unique dish combining tapioca with meat or fish.</li>
+                    <li><b>Parotta with Beef Curry:</b> Layered flatbread served with spicy beef curry.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>6. Famous Drinks</h3>
+                  <ul>
+                    <li><b>Sulaimani Tea:</b> Black tea with lemon, a specialty of Malabar region.</li>
+                    <li><b>Karikku (Tender Coconut Water):</b> Refreshing natural drink available throughout Kerala.</li>
+                    <li><b>Sambharam: </b>Spiced buttermilk with ginger, curry leaves, and green chilies.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Tender_coconut_water.jpg/800px-Tender_coconut_water.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Special Festival Foods</h3>
+                  <ul>
+                    <li><b>Sadya:</b> A traditional vegetarian feast served on banana leaf during Onam and other celebrations.</li>
+                    <li><b>Kozhukatta:</b> Sweet rice dumplings with coconut and jaggery filling.</li>
+                    <li><b>Ela Ada:</b> Sweet rice parcels with coconut and jaggery filling, steamed in banana leaves.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Kerala_Sadya.jpg/1200px-Kerala_Sadya.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Kerala's cuisine is a mix of rich flavors, delicate spices, and iconic dishes, making it one of
+            the most delicious regional cuisines in India! 🍛🐟🍚</p><br><br>
+        </div>
+        <div id="wbhistory" class="tab-pane fade in active" style="background-color: white;">
+          <h1>History of Kerala</h1>
+          <p>Kerala has a rich and diverse history that spans ancient civilizations, medieval kingdoms, colonial rule, and the modern era. The region has played a significant role in India's political, cultural, and commercial history.</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Ancient Kerala (Before 3rd Century CE)</h3>
+                  <ul>
+                    <li><b>Prehistoric Period:</b> Evidence of human habitation dating back to 10,000 BCE.</li>
+                    <li><b>Sangam Period (300 BCE - 300 CE):</b> Kerala was known as Chera Nadu, ruled by the Chera dynasty. It had active trade with Romans, Greeks, Arabs, and Chinese.</li>
+                    <li><b>Trade Connections:</b> Ancient Kerala was a major spice trading center, especially for black pepper, known as "black gold."</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Sangam_landscape.jpg/800px-Sangam_landscape.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Padmanabhapuram_Palace.jpg/1200px-Padmanabhapuram_Palace.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Medieval Kerala (3rd - 18th Century)</h3>
+                  <h4>Second Chera Empire (9th - 12th Century):</h4>
+                  <ul>
+                    <li>Ruled by the Kulasekhara dynasty with its capital at Mahodayapuram.</li>
+                    <li>Patronized arts, literature, and temple construction.</li>
+                    <li>Declined after repeated Chola invasions.</li>
+                  </ul>
+                  <h4>Rise of Small Kingdoms (12th - 18th Century):</h4>
+                  <ul>
+                    <li>After the fall of the Cheras, Kerala was divided into small kingdoms.</li>
+                    <li>Major kingdoms included Travancore, Cochin, Kozhikode (Calicut), and Kolathunadu.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Vasco_da_Gama_-_1838.png/800px-Vasco_da_Gama_-_1838.png" alt="" style="height:220px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h4>Arrival of Foreign Powers:</h4>
+                  <ul>
+                    <li>Arabs had established trade connections since the 7th century.</li>
+                    <li>Vasco da Gama landed in Calicut in 1498, establishing direct European contact.</li>
+                    <li>Portuguese, Dutch, French, and British competed for control of the spice trade.</li>
+                  </ul>
+                  <h4>Zamorin of Calicut:</h4>
+                  <ul>
+                    <li>The Zamorin (Samoothiri) rulers of Calicut were powerful maritime traders.</li>
+                    <li>They initially welcomed but later fought against Portuguese dominance.</li>
+                    <li>Naval commander Kunjali Marakkar led resistance against the Portuguese.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Colonial Period (18th - 20th Century)</h3>
+                  <ul>
+                    <li>The British gained control over Malabar region after defeating Tipu Sultan in 1792.</li>
+                    <li>Travancore and Cochin became princely states under British protection.</li>
+                    <li>Kerala saw significant social reforms during this period, including anti-caste movements.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Tipu_Sultan_-_Mysore.jpg/800px-Tipu_Sultan_-_Mysore.jpg" alt="" style="height:200px;width: 250px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Sree_Narayana_Guru.jpg/800px-Sree_Narayana_Guru.jpg" alt="" style="height:230px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h2>4. Social Reform Movements</h3>
+                    <h3>Major Social Reformers</h3>
+                    <ul>
+                      <li>Sree Narayana Guru led movements against caste discrimination with the message "One Caste, One Religion, One God for Mankind."</li>
+                      <li>Ayyankali fought for the rights of the underprivileged castes, including access to public roads and education.</li>
+                      <li>Chattampi Swamikal worked against social injustice and promoted education.</li>
+                    </ul>
+                    <h3>Temple Entry Proclamation</h3>
+                    <ul>
+                      <li>In 1936, Maharaja Chithira Thirunal of Travancore issued the Temple Entry Proclamation, allowing all Hindus regardless of caste to enter temples.</li>
+                      <li>This was a revolutionary step toward social equality.</li>
+                    </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/EMS_Namboodiripad.jpg/800px-EMS_Namboodiripad.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>Freedom Movement & Communist Influence</h3>
+                  <ul>
+                    <li>Kerala actively participated in the Indian freedom movement.</li>
+                    <li>The Malabar Rebellion (1921) was part of the Khilafat Movement against British rule.</li>
+                    <li>Communist movements gained strength, especially after the Punnapra-Vayalar uprising (1946).</li>
+                    <li>E.M.S. Namboodiripad became a prominent communist leader in the region.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Post-Independence Kerala (1947 - Present)</h3>
+                  <h4>Formation of Kerala State (1956)</h4>
+                  <ul>
+                    <li>Kerala was formed on November 1, 1956, by merging:</li>
+                    <ul>
+                      <li>Travancore-Cochin state (formed in 1949)</li>
+                      <li>Malabar District of Madras State</li>
+                      <li>Kasaragod taluk of South Canara</li>
+                    </ul>
+                    <li>The state was formed on linguistic basis, uniting Malayalam-speaking regions.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Kerala_Legislative_Assembly.jpg/1200px-Kerala_Legislative_Assembly.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h4>First Communist Government</h4>
+                  <ul>
+                    <li>In 1957, Kerala elected the world's first democratically elected communist government led by E.M.S. Namboodiripad.</li>
+                    <li>The government introduced radical land and education reforms.</li>
+                    <li>The central government dismissed this government in 1959 (known as the "Liberation Struggle").</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Kerala_district_map.png/800px-Kerala_district_map.png" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>6. Modern Kerala</h3>
+                  <ul>
+                    <li><b>Kerala Model of Development:</b> Known for high social indicators despite modest economic growth.</li>
+                    <li><b>100% Literacy:</b> First state in India to achieve near-total literacy.</li>
+                    <li><b>Healthcare:</b> Developed healthcare system with indicators comparable to developed nations.</li>
+                    <li><b>Tourism:</b> Emerged as a major tourist destination known as "God's Own Country."</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Munnar_hillstation_kerala.jpg/1200px-Munnar_hillstation_kerala.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Kerala has witnessed ancient empires, colonial rule, social reforms, and progressive governance. It remains a center of culture, education, and social development in India. 🚩📜</p>
+          <br><br>
+        </div>
+        <div id="wbartacraft" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Art & Craft of Kerala 🎨🖌️</h1>
+          <p>Kerala has a rich artistic heritage, blending traditional craftsmanship with cultural influences from Hindu, Islamic, and colonial periods. Kerala artisans are known for their intricate craftsmanship, storytelling through art, and diverse materials like wood, metal, and textiles.</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Traditional Performing Arts 🎭</h3>
+                  <h4>🔸 Kathakali</h4>
+                  <ul>
+                    <li><b>Famous for:</b> Elaborate costumes, facial expressions, and makeup.</li>
+                    <li><b>Origin:</b> 17th century Kerala.</li>
+                    <li><b>Features:</b> Stories from Hindu epics, detailed hand gestures (mudras).</li>
+                  </ul>
+                  <h4>🔸 Mohiniyattam</h4>
+                  <ul>
+                    <li><b>Known as:</b> "Dance of the enchantress," a classical dance form.</li>
+                    <li><b>Features:</b> Graceful, swaying movements performed by women.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Kathakali_BNC.jpg/800px-Kathakali_BNC.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Aranmula_Kannadi.jpg/800px-Aranmula_Kannadi.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Metal Crafts 🏺</h3>
+                  <h4>🔸 Aranmula Kannadi (Metal Mirror)</h4>
+                  <ul>
+                    <li><b>Origin:</b> Aranmula, Kerala.</li>
+                    <li><b>Features: </b>Handmade metal mirrors with special alloy that reflects like glass.</li>
+                    <li><b>Significance:</b> GI-tagged product, considered auspicious in Kerala homes.</li>
+                  </ul>
+                  <h4>🔸 Bell Metal Crafts</h4>
+                  <ul>
+                    <li><b>Origin:</b> Nadavaramba and other parts of Kerala.</li>
+                    <li><b>Products:</b> Lamps, utensils, and traditional items like Uruli.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Wood Crafts 🌳</h3>
+                  <ul>
+                    <li><b>Origin:</b> Throughout Kerala, especially Thrissur and Ernakulam.</li>
+                    <li><b>Materials:</b> Rosewood, teak, and jackfruit wood.</li>
+                    <li><b>Products:</b> Intricate carvings, temple chariots, masks, and furniture.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Wood_carving_in_Kerala.jpg/800px-Wood_carving_in_Kerala.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Theyyam_at_Andaloor_Kavu.jpg/800px-Theyyam_at_Andaloor_Kavu.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Ritual Arts 🎭</h3>
+                  <h4>🔸 Theyyam</h4>
+                  <ul>
+                    <li><b>Origin: </b>North Kerala (Kannur, Kasaragod).</li>
+                    <li><b>Features: </b>Performers embody deities with elaborate costumes and face paint.</li>
+                  </ul>
+                  <h4>🔸 Mudiyettu</h4>
+                  <ul>
+                    <li><b>Origin:</b> Central Kerala.</li>
+                    <li><b>Features:</b> Ritual theater depicting the victory of Goddess Kali over demon Darika.</li>
+                    <li><b>Recognition:</b> UNESCO Intangible Cultural Heritage.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Mural Paintings 🎨</h3>
+                  <ul>
+                    <li><b>Origin:</b> Ancient temple art of Kerala.</li>
+                    <li><b>Style:</b> Vibrant colors with themes from Hindu mythology.</li>
+                    <li><b>Famous sites:</b> Padmanabhapuram Palace, Mattancherry Palace, and various temples.</li>
+                  </ul>
+                  <h3>6. Coir Products 🧵</h3>
+                  <ul>
+                    <li><b>Famous in:</b> Alappuzha (Alleppey).</li>
+                    <li><b>Products:</b> Mats, carpets, decorative items, and furniture made from coconut fiber.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Kerala_Mural_Painting_at_Vaikom_Temple.jpg/800px-Kerala_Mural_Painting_at_Vaikom_Temple.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Kerala_Kasavu_Saree.jpg/1200px-Kerala_Kasavu_Saree.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>7. Textiles 🧵</h3>
+                  <ul>
+                    <li></b>Kerala Kasavu:</b> Traditional cream-colored cotton sarees and mundus with golden borders.</li>
+                    <li></b>Balaramapuram Handloom:</b> GI-tagged fine cotton textiles with intricate designs.</li>
+                  </ul>
+                  <h3>8. Nettur Petti (Jewelry Box) 🧰</h3>
+                  <ul>
+                    <li><b>Origin:</b> Nettur, near Thalassery.</li>
+                    <li><b>Features: </b>Ornate wooden boxes with brass fittings, used for storing jewelry.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>9. Coconut Shell Crafts 🥥</h3>
+                  <ul>
+                    <li>Kerala artisans create various decorative and utility items from coconut shells:</li>
+                    <ul>
+                      <li>Lamps, bowls, spoons, and decorative items.</li>
+                    </ul>
+                  </ul>
+                  <h3>10. Screw Pine Crafts</h3>
+                  <ul>
+                    <li><b>Material:</b> Made from screw pine leaves (Pandanus).</li>
+                    <li><b>Products:</b> Mats, bags, hats, and decorative items.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Coconut_shell_craft.jpg/800px-Coconut_shell_craft.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>📌 Summary: Kerala's Art & Craft Forms</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Art Form</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Kathakali</td>
+                <td>Throughout Kerala</td>
+                <td>Elaborate Costumes, Facial Expressions</td>
+              </tr>
+              <tr>
+                <td>Mohiniyattam</td>
+                <td>Throughout Kerala</td>
+                <td>Graceful Feminine Dance</td>
+              </tr>
+              <tr>
+                <td>Aranmula Kannadi</td>
+                <td>Aranmula</td>
+                <td>Metal Mirrors</td>
+              </tr>
+              <tr>
+                <td>Wood Carving</td>
+                <td>Thrissur, Ernakulam</td>
+                <td>Intricate Designs, Temple Chariots</td>
+              </tr>
+              <tr>
+                <td>Theyyam</td>
+                <td>North Kerala</td>
+                <td>Ritual Performance, Elaborate Costumes</td>
+              </tr>
+              <tr>
+                <td>Kerala Mural Painting</td>
+                <td>Throughout Kerala</td>
+                <td>Vibrant Colors, Mythological Themes</td>
+              </tr>
+              <tr>
+                <td>Coir Products</td>
+                <td>Alappuzha</td>
+                <td>Mats, Carpets, Decorative Items</td>
+              </tr>
+              <tr>
+                <td>Kerala Kasavu</td>
+                <td>Balaramapuram, Chendamangalam</td>
+                <td>Cream Sarees with Golden Borders</td>
+              </tr>
+              <tr>
+                <td>Bell Metal Crafts</td>
+                <td>Nadavaramba</td>
+                <td>Lamps, Utensils, Traditional Items</td>
+              </tr>
+              <tr>
+                <td>Coconut Shell Crafts</td>
+                <td>Throughout Kerala</td>
+                <td>Decorative Items, Utensils</td>
+              </tr>
+              <tr>
+                <td>Nettur Petti</td>
+                <td>Nettur, Thalassery</td>
+                <td>Ornate Wooden Jewelry Boxes</td>
+              </tr>
+              <tr>
+                <td>Screw Pine Crafts</td>
+                <td>Coastal Kerala</td>
+                <td>Mats, Bags, Decorative Items</td>
+              </tr>
+            </table>
+          </div>
+          <br><br>
+          <p>Kerala's art and crafts are a blend of history, culture, and traditional skills, passed down through
+            generations. Whether it's the dramatic Kathakali performances, intricate Aranmula mirrors, or the elegant Kerala Kasavu sarees, Kerala's artisans continue to preserve and innovate their heritage. 🎭✨</p>
+          <br><br>
+        </div>
+        <div id="wbseason" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Seasons to visit Kerala 🌧️☀️ </h1>
+          <p>Kerala has a tropical climate with distinct seasons, each offering a unique experience for travelers. The state's diverse geography, from beaches to hill stations, means different regions have their optimal visiting times.</p>
+
+          <br><br>
+
+          <h2> Season-wise Breakdown for Visiting Kerala</h2>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🌸 Winter (December - February)</h3>
+                  <ul>
+                    <li>The best season to visit Kerala with pleasant temperatures and minimal rainfall.</li>
+                    <li>Perfect for exploring beaches, backwaters, and wildlife sanctuaries.</li>
+                    <li>Hill stations like Munnar and Wayanad are cool but not too cold.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Backwaters_of_Kerala%2C_India.jpg/1200px-Backwaters_of_Kerala%2C_India.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Munnar_hillstation_kerala.jpg/1200px-Munnar_hillstation_kerala.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>☀️ Summer (March – May)</h3>
+                  <ul>
+                    <li>Hot and humid in coastal areas, but hill stations offer pleasant relief.</li>
+                    <li>Munnar, Wayanad, and Thekkady are popular summer retreats.</li>
+                    <li>Good time to witness temple festivals like Thrissur Pooram (April-May).</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🌧️ Monsoon (June - September)</h3>
+                  <ul>
+                    <li>Kerala receives heavy rainfall during the southwest monsoon.</li>
+                    <li>Perfect for Ayurvedic treatments as the climate is ideal for therapies.</li>
+                    <li>Waterfalls are at their majestic best, and the landscape turns lush green.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Athirappilly_Falls.jpg/1200px-Athirappilly_Falls.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Athachamayam_2018_Tripunithura_01.jpg/1200px-Athachamayam_2018_Tripunithura_01.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🍁 Post-Monsoon (October - November)</h3>
+                  <ul>
+                    <li>Weather begins to clear up with occasional showers.</li>
+                    <li>Onam festival (August-September) is celebrated during this period.</li>
+                    <li>Good time for wildlife spotting as the forests are lush after the rains.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <h2>📌 Summary: Best Time to Visit Different Places in Kerala</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Region</th>
+                <th>Best Season</th>
+                <th>Recommended Months</th>
+                <th>Why Visit?</th>
+              </tr>
+              <tr>
+                <td>Beaches (Kovalam, Varkala, Marari)</td>
+                <td>Winter </td>
+                <td>October - March</td>
+                <td>Pleasant weather, perfect for swimming and sunbathing</td>
+              </tr>
+              <tr>
+                <td>Backwaters (Alleppey, Kumarakom)</td>
+                <td>Winter, Post-Monsoon </td>
+                <td>September - March</td>
+                <td>Comfortable houseboat stays, bird watching</td>
+              </tr>
+              <tr>
+                <td>Hill Stations (Munnar, Wayanad)</td>
+                <td>Winter, Summer </td>
+                <td>September - May</td>
+                <td>Pleasant climate, tea gardens, trekking</td>
+              </tr>
+              <tr>
+                <td>Wildlife Sanctuaries (Periyar, Silent Valley)</td>
+                <td>Winter, Post-Monsoon </td>
+                <td>October - March</td>
+                <td>Best time for wildlife spotting, boat safaris</td>
+              </tr>
+              <tr>
+                <td>Ayurvedic Retreats</td>
+                <td>Monsoon </td>
+                <td>June - August</td>
+                <td>Ideal climate for treatments, body is more receptive</td>
+              </tr>
+              <tr>
+                <td>Waterfalls (Athirappilly, Thusharagiri)</td>
+                <td>Monsoon, Post-Monsoon </td>
+                <td>July - November</td>
+                <td>Waterfalls at their full glory after rains</td>
+              </tr>
+              <tr>
+                <td>Cultural Festivals</td>
+                <td>Varies </td>
+                <td>Onam (Aug-Sep), Thrissur Pooram (Apr-May)</td>
+                <td>Experience Kerala's vibrant cultural traditions</td>
+              </tr>
+              <tr>
+                <td>Fort Kochi & Heritage Sites</td>
+                <td>Winter </td>
+                <td>November - February</td>
+                <td>Comfortable weather for exploring historical sites</td>
+              </tr>
+              <tr>
+                <td>Spice Plantations (Thekkady, Idukki)</td>
+                <td>Winter, Post-Monsoon </td>
+                <td>October - March</td>
+                <td>Pleasant weather for plantation tours</td>
+              </tr>
+
+            </table>
+          </div><br><br>
+          <div class="container">
+            <div class="row">
+              <h1 style=" text-align: center;">📌 Summary: When to Visit Kerala</h1><br>
+              <ul>
+                <li><b>For beaches & backwaters:</b> October - March (dry season with pleasant temperatures)</li>
+                <li><b>For hill stations:</b> September - May (avoid heavy monsoon months)</li>
+                <li><b>For wildlife & forests:</b> October - March (post-monsoon and winter)</li>
+                <li><b>For Ayurvedic treatments:</b> June - August (monsoon season)</li>
+                <li><b>For cultural festivals:</b> August - September (Onam), April - May (Thrissur Pooram)</li>
+              </ul>
+
+            </div>
+          </div>
+          <br><br>
+        </div>
+        <div id="wbtourist" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Tourist Spots of Kerala 🏖️🏔️</h1>
+          <p>Kerala is a diverse state with beaches, backwaters, hill stations, wildlife sanctuaries, and cultural hubs. Here's a categorized list of the best tourist places in Kerala:</p>
+
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Hill Stations & Mountain Destinations 🏔️</h3>
+                  <ul>
+                    <li><b>Munnar -</b> Tea plantations, Eravikulam National Park, Anamudi Peak, Echo Point</li>
+                    <li><b>Wayanad -</b> Chembra Peak, Edakkal Caves, Banasura Sagar Dam, Pookode Lake</li>
+                    <li><b>Thekkady - </b>Periyar Wildlife Sanctuary, spice plantations, boating</li>
+                    <li><b>Vagamon - </b>Pine forests, meadows, and adventure activities</li>
+                    <li><b>Ponmudi - </b>Golden peaks, mountain streams, and trekking trails</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Munnar_hillstation_kerala.jpg/1200px-Munnar_hillstation_kerala.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Chinese_Fishing_Nets%2C_Kochi.jpg/1200px-Chinese_Fishing_Nets%2C_Kochi.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Heritage & Cultural Destinations 🏛️</h3>
+                  <ul>
+                    <li><b>Fort Kochi - </b>Chinese fishing nets, St. Francis Church, Mattancherry Palace, Jewish Synagogue.</li>
+                    <li><b>Thiruvananthapuram - </b>Padmanabhaswamy Temple, Napier Museum, Kuthira Malika Palace.</li>
+                    <li><b>Thrissur - </b>Vadakkunnathan Temple, Kerala Kalamandalam, cultural capital.</li>
+                    <li><b>Kozhikode -</b> Beypore, Kappad Beach, historical spice trading center.</li>
+                    <li><b>Palakkad -</b> Palakkad Fort, Silent Valley National Park.</li>
+                    <li><b>Aranmula -</b> Snake Boat Race, metal mirrors, ancient temples.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Wildlife & Nature Destinations 🌳🐘</h3>
+                  <ul>
+                    <li><b>Periyar Wildlife Sanctuary -</b> Tigers, elephants, boat safaris.</li>
+                    <li><b>Silent Valley National Park -</b> Rare flora and fauna, pristine rainforest.</li>
+                    <li><b>Wayanad Wildlife Sanctuary - </b>Elephants, deer, and bird watching.</li>
+                    <li><b>Parambikulam Tiger Reserve -</b> Wildlife safaris, trekking, and camping.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Periyar_Wild_Life_Sanctuary_03.jpg/1200px-Periyar_Wild_Life_Sanctuary_03.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Kovalam_Beach_Kerala.jpg/1200px-Kovalam_Beach_Kerala.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Beach Destinations 🏖️</h3>
+                  <ul>
+                    <li><b>Kovalam -</b> Lighthouse Beach, crescent-shaped shores, water sports.</li>
+                    <li><b>Varkala -</b> Cliff-side beach with stunning views, mineral springs.</li>
+                    <li><b>Marari -</b> Quiet fishing village with pristine beaches.</li>
+                    <li><b>Bekal -</b> Beach with historic fort, perfect for photography.</li>
+                    <li><b>Cherai -</b> Beach where backwaters meet the sea, dolphin spotting.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Backwater Destinations 🚣</h3>
+                  <ul>
+                    <li><b>Alleppey (Alappuzha) - </b>Houseboat cruises, Venice of the East.</li>
+                    <li><b>Kumarakom -</b> Bird sanctuary, luxury resorts, peaceful backwaters.</li>
+                    <li><b>Kollam -</b> Ashtamudi Lake, traditional coir industry.</li>
+                    <li><b>Kuttanad -</b> Farming below sea level, village life experiences.</li>
+                    <li><b>Kozhikode Backwaters -</b> Less crowded, authentic experiences.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Backwaters_of_Kerala%2C_India.jpg/1200px-Backwaters_of_Kerala%2C_India.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Athirappilly_Falls.jpg/1200px-Athirappilly_Falls.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>6. Waterfalls & Natural Wonders 🌊</h3>
+                  <ul>
+                    <li><b>Athirappilly & Vazhachal Falls -</b> Kerala's largest waterfall, filming location for many movies.</li>
+                    <li><b>Thusharagiri Falls -</b> Trekking destination with multiple cascades.</li>
+                    <li><b>Soochipara Falls - </b>Three-tiered waterfall in Wayanad.</li>
+                    <li><b>Meenmutty Falls -</b> Massive three-tiered waterfall requiring a trek.</li>
+                    <li><b>Palaruvi Falls -</b> "Stream of Milk" waterfall with medicinal properties.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Ayurveda & Wellness Destinations 🌿</h3>
+                  <ul>
+                    <li><b>Kovalam -</b> Luxury Ayurvedic resorts and treatments.</li>
+                    <li><b>Kumarakom -</b> Lakeside wellness retreats.</li>
+                    <li><b>Varkala -</b> Cliff-top Ayurvedic centers with ocean views.</li>
+                    <li><b>Thekkady -</b> Spice garden treatments and forest therapies.</li>
+                    <li><b>Palakkad -</b> Traditional Ayurvedic centers with authentic treatments.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Ayurvedic_massage_in_Kerala.jpg/1200px-Ayurvedic_massage_in_Kerala.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br><br>
+
+        </div>
+        <div id="wbwild" class="tab-pane fade in active" style="background-color: white;">
+          <h1> Wildlife & Crops of Kerala 🌿</h1>
+          <p>Kerala has diverse wildlife and a rich agricultural landscape due to its varied geography, from the Western Ghats to the coastal plains.</p>
+
+          <br>
+          <h2>Wildlife of Kerala </h2>
+          <p>Kerala has 6 national parks and 17 wildlife sanctuaries, making it one of India's most biodiverse states.</p>
+
+          <br>
+          <h2>🔹 Major National Parks & Wildlife Sanctuaries</h2>
+          <div>
+            <table>
+              <tr>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Periyar Tiger Reserve</td>
+                <td>Thekkady, Idukki </td>
+                <td>Tigers 🐅, Elephants 🐘, Boat Safaris</td>
+              </tr>
+              <tr>
+                <td>Silent Valley National Park</td>
+                <td>Palakkad </td>
+                <td>Lion-tailed Macaques, Pristine Rainforest</td>
+              </tr>
+              <tr>
+                <td>Wayanad Wildlife Sanctuary</td>
+                <td>Wayanad</td>
+                <td>Elephants, Deer, Bison</td>
+              </tr>
+              <tr>
+                <td>Eravikulam National Park</td>
+                <td>Munnar </td>
+                <td>Nilgiri Tahr (Endangered Mountain Goat), Neelakurinji Flowers</td>
+              </tr>
+              <tr>
+                <td>Parambikulam Tiger Reserve</td>
+                <td>Palakkad </td>
+                <td>Tigers, Elephants, Teak Forests</td>
+              </tr>
+              <tr>
+                <td>Kumarakom Bird Sanctuary</td>
+                <td>Kottayam </td>
+                <td>Migratory Birds, Backwater Ecosystem</td>
+              </tr>
+              <tr>
+                <td>Thattekad Bird Sanctuary</td>
+                <td>Ernakulam </td>
+                <td>300+ Bird Species, Dr. Salim Ali Bird Sanctuary</td>
+              </tr>
+            </table>
+          </div>
+          <bt><br></bt>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3> 🔹 Other Notable Wildlife in Kerala</h3>
+                <ul>
+                  <li><b>Mammals:</b> Elephant (State Animal), Tigers, Leopards, Sloth Bears, Gaur (Indian Bison).</li>
+                  <li><b>Birds: </b>Great Hornbill (State Bird), Malabar Grey Hornbill, Malabar Trogon.</li>
+                  <li><b>Reptiles:</b> King Cobra, Python, Monitor Lizards, Crocodiles.</li>
+                  <li><b>Marine Life:</b> Dolphins, Sea Turtles, various fish species.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Elephants_in_Periyar_Wildlife_Sanctuary.jpg/1200px-Elephants_in_Periyar_Wildlife_Sanctuary.jpg" alt="" style="height:200px;width: 200px;">
+
+              </div>
+
+            </div>
+          </div>
+          <hr><br>
+          <h2>🌾 Agriculture & Major Crops in Kerala </h2>
+          <p>Kerala is known for its spice production, plantation crops, and paddy cultivation, benefiting from its tropical climate and fertile soil.</p>
+
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Key Agricultural Features</h3>
+                <ul>
+                  <li>Leading producer of spices, coconut, rubber, and plantation crops in India.</li>
+                  <li></b>Fertile Land:</b> Thanks to the Western Ghats and numerous rivers.</li>
+                  <li></b>Climate:</b> Tropical climate with two monsoons supports year-round cultivation.</li>
+                  <li></b>Irrigation:</b> 44 rivers and high rainfall support farming.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Coconut_plantation_in_Kerala.jpg/1200px-Coconut_plantation_in_Kerala.jpg" alt="" style="height:200px;width: 220px;">
+
+              </div>
+            </div>
+          </div>
+          <h2>🔹 Major Crops of Kerala</h2>
+          <div>
+            <table>
+              <tr>
+                <th>Category</th>
+                <th>Crops</th>
+              </tr>
+              <tr>
+                <td>Plantation Crops</td>
+                <td>Coconut 🥥, Rubber, Tea 🍵, Coffee ☕, Cashew</td>
+              </tr>
+              <tr>
+                <td>Spices</td>
+                <td>Pepper (Black Gold), Cardamom, Ginger, Turmeric, Cinnamon, Cloves, Nutmeg</td>
+              </tr>
+              <tr>
+                <td>Cereals</td>
+                <td>Rice 🍚, Tapioca</td>
+              </tr>
+              <tr>
+                <td>Fruits</td>
+                <td>Banana 🍌, Pineapple 🍍, Jackfruit, Mango 🥭, Papaya</td>
+              </tr>
+              <tr>
+                <td>Vegetables</td>
+                <td>Bitter Gourd, Snake Gourd, Drumstick, Yam, Tapioca</td>
+              </tr>
+              <tr>
+                <td>Medicinal Plants</td>
+                <td>Ayurvedic herbs, Aromatic plants</td>
+              </tr>
+              <tr>
+                <td>Other Commercial Crops</td>
+                <td>Areca nut, Cocoa, Vanilla</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Special Agricultural Products</h3>
+                <ul>
+                  <li>Wayanad Coffee and Tea (High-altitude plantations).</li>
+                  <li>Vazhakulam Pineapple (GI-tagged, known as the "Pineapple City").</li>
+                  <li>Pokkali Rice (Salt-resistant rice variety from coastal Kerala).</li>
+                  <li>Navara Rice (Medicinal rice variety used in Ayurveda).</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Pepper_plantation_in_Kerala.jpg/1200px-Pepper_plantation_in_Kerala.jpg" alt="" style="height:200px;width: 200px;">
+
+              </div>
+            </div>
+          </div><br>
+          <hr>
+          <div class="box" style=" background: #f3b37185;padding: 10px;">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3> Sustainable Agriculture & Modern Trends 🌾</h3>
+                  <ul>
+                    <li><b>Organic Farming:</b> Growing throughout Kerala, especially in Wayanad and Idukki.</li>
+                    <li><b>Integrated Farming:</b> Combining crops, livestock, and fish farming.</li>
+                    <li><b>Aquaculture & Fisheries:</b> Kerala is a major producer of fish 🐟, with both marine and freshwater varieties.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Tea_plantations_in_Munnar%2C_Kerala.jpg/1200px-Tea_plantations_in_Munnar%2C_Kerala.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Kerala is a paradise for both nature lovers and agricultural enthusiasts. It has rich wildlife sanctuaries, lush tea and spice plantations, and fertile farmlands that support a diverse ecosystem and economy.</p>
+          <br><br>
+        </div>
+        <div id="wbedu" class="tab-pane fade in active" style="background-color: white;">
+          <h1>🎓 Education & Institutions in Kerala</h1>
+          <p>Kerala has a rich educational heritage with some of India's oldest and most prestigious universities, research institutions, and schools. It has the highest literacy rate in India (96.2%) and is known for its quality education system.</p>
+
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>📌 Education System in Kerala</h3>
+                  <ul>
+                    <li><b>School Education:</b> Follows Kerala State Board, CBSE, ICSE, and other boards.</li>
+                    <li><b>Higher Education:</b> Managed by UGC, AICTE, and state universities.</li>
+                    <li><b>Major Fields:</b> Engineering, Medical, Science, Arts, Commerce, Law, Agriculture, and Management.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Kerala_University_Senate_House.jpg/1200px-Kerala_University_Senate_House.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>🏛️ Top Universities & Institutions </h2>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 State Universities</h3>
+                <ol>
+                  <li><b>University of Kerala (Thiruvananthapuram) -</b> One of the oldest universities in India, established in 1937.</li>
+                  <li><b>Cochin University of Science and Technology (CUSAT) -</b> Leading technical university.</li>
+                  <li><b>University of Calicut -</b> Second oldest university in Kerala.</li>
+                  <li><b>Mahatma Gandhi University (Kottayam) -</b> Known for research and innovation.</li>
+                  <li><b>Kerala Agricultural University (Thrissur) -</b> Premier institution for agricultural education.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Kerala_University_Senate_House.jpg/1200px-Kerala_University_Senate_House.jpg" alt="" style="height:200px;width: 230px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Deemed Universities & Central Institutions</h3>
+                <ol>
+                  <li><b>Indian Institute of Space Science and Technology (IIST) -</b> Asia's first space university.</li>
+                  <li><b>National Institute of Technology (NIT Calicut) -</b> Premier engineering institution.</li>
+                  <li><b>Indian Institute of Management (IIM Kozhikode) -</b> Top-ranked management institute.</li>
+                  <li><b>Sree Sankaracharya University of Sanskrit -</b> Specialized in Sanskrit and Indian philosophy.</li>
+                  <li><b>Central University of Kerala -</b> Located in Kasaragod.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Indian_Institute_of_Management_Kozhikode_Campus_View.jpg/1200px-Indian_Institute_of_Management_Kozhikode_Campus_View.jpg" alt="" style="height:200px;width: 230px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>University</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>University of Kerala</td>
+                <td>Thiruvananthapuram</td>
+                <td>One of the oldest universities in India (1937), strong in arts and sciences.</td>
+              </tr>
+              <tr>
+                <td>Cochin University of Science and Technology</td>
+                <td>Kochi</td>
+                <td>Engineering, Marine Sciences, Technology.</td>
+              </tr>
+              <tr>
+                <td>University of Calicut</td>
+                <td>Kozhikode</td>
+                <td>Arts, Commerce, and traditional disciplines.</td>
+              </tr>
+              <tr>
+                <td>Kerala Agricultural University</td>
+                <td>Thrissur</td>
+                <td>Agricultural Sciences, Forestry, and Cooperation.</td>
+              </tr>
+              <tr>
+                <td>National Institute of Technology</td>
+                <td>Kozhikode</td>
+                <td>Engineering, Technology, and Research.</td>
+              </tr>
+              <tr>
+                <td>IIM Kozhikode</td>
+                <td>Kozhikode</td>
+                <td>Management Education and Research.</td>
+              </tr>
+              <tr>
+                <td>Indian Institute of Space Science and Technology</td>
+                <td>Thiruvananthapuram</td>
+                <td>Space Science, Engineering, and Research.</td>
+              </tr>
+              <tr>
+                <td>Sree Chitra Tirunal Institute for Medical Sciences</td>
+                <td>Thiruvananthapuram</td>
+                <td>Medical Sciences, Biomedical Technology.</td>
+              </tr>
+              <tr>
+                <td>Kerala University of Health Sciences</td>
+                <td>Thrissur</td>
+                <td>Medical, Dental, Ayurveda, and Health Sciences.</td>
+              </tr>
+            </table>
+          </div>
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Government_Medical_College%2C_Thiruvananthapuram.jpg/1200px-Government_Medical_College%2C_Thiruvananthapuram.jpg" alt="" style="height:200px;width: 240px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🔹 Medical Institutions</h3>
+                  <ol>
+                    <li><b>Government Medical College, Thiruvananthapuram - </b>Oldest medical college in Kerala.</li>
+                    <li><b>Sree Chitra Tirunal Institute for Medical Sciences and Technology -</b> Specialized in cardiovascular and neurological diseases.</li>
+                    <li><b>Regional Cancer Centre -</b> Premier cancer treatment and research center.</li>
+                    <li><b>Amrita Institute of Medical Sciences -</b> Advanced healthcare and research facility.</li>
+                    <li><b>Government Ayurveda College -</b> One of the oldest Ayurvedic institutions in India.</li>
+                  </ol>
+                </div>
+
+                <br><br>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Institute</th>
+                <th>Location</th>
+                <th>Specialization</th>
+              </tr>
+              <tr>
+                <td>College of Engineering, Trivandrum</td>
+                <td>Thiruvananthapuram</td>
+                <td>Oldest engineering college in Kerala (est. 1939).</td>
+              </tr>
+              <tr>
+                <td>National Institute of Technology</td>
+                <td>Kozhikode</td>
+                <td>Premier technical institution.</td>
+              </tr>
+              <tr>
+                <td>Government Engineering College</td>
+                <td>Thrissur</td>
+                <td>One of the oldest engineering colleges in Kerala.</td>
+              </tr>
+              <tr>
+                <td>Model Engineering College</td>
+                <td>Kochi</td>
+                <td>Electronics and Communication Engineering.</td>
+              </tr>
+              <tr>
+                <td>Indian Institute of Space Science and Technology</td>
+                <td>Thiruvananthapuram</td>
+                <td>Space engineering and research.</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🔹 Research Institutions</h3>
+                  <ol>
+                    <li><b>Rajiv Gandhi Centre for Biotechnology -</b> Research in molecular medicine and biotechnology.</li>
+                    <li><b>Centre for Earth Science Studies -</b> Geological and environmental research.</li>
+                    <li><b>Central Plantation Crops Research Institute -</b> Research on coconut, arecanut, and cocoa.</li>
+                    <li><b>Central Tuber Crops Research Institute -</b> Research on tuber crops.</li>
+                  </ol>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Rajiv_Gandhi_Centre_for_Biotechnology.jpg/1200px-Rajiv_Gandhi_Centre_for_Biotechnology.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Medical College</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Government Medical College</td>
+                <td>Thiruvananthapuram</td>
+                <td>Oldest medical college in Kerala (1951).</td>
+              </tr>
+              <tr>
+                <td>Sree Chitra Tirunal Institute</td>
+                <td>Thiruvananthapuram</td>
+                <td>Cardiovascular and neurological specialties.</td>
+              </tr>
+              <tr>
+                <td>Government Medical College</td>
+                <td>Kozhikode</td>
+                <td>One of the premier medical institutions in Kerala.</td>
+              </tr>
+              <tr>
+                <td>Amrita Institute of Medical Sciences</td>
+                <td>Kochi</td>
+                <td>Super-specialty hospital and research center.</td>
+              </tr>
+              <tr>
+                <td>Regional Cancer Centre</td>
+                <td>Thiruvananthapuram</td>
+                <td>Cancer treatment and research.</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Kerala_Law_Academy_Law_College.jpg/1200px-Kerala_Law_Academy_Law_College.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🔹 Law, Arts & Other Institutes</h3>
+                  <ul>
+                    <li><b>National University of Advanced Legal Studies (NUALS) -</b> Premier law university in Kerala.</li>
+                    <li><b>Kerala Kalamandalam -</b> Deemed university for performing arts.</li>
+                    <li><b>School of Drama and Fine Arts -</b> Specialized in theater and visual arts.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Institute</th>
+                <th>Location</th>
+                <th>Specialization</th>
+              </tr>
+              <tr>
+                <td>National University of Advanced Legal Studies</td>
+                <td>Kochi</td>
+                <td>Legal Education and Research.</td>
+              </tr>
+              <tr>
+                <td>Government Law College</td>
+                <td>Thiruvananthapuram</td>
+                <td>One of the oldest law colleges in Kerala.</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <h2>🏫 School Education in Kerala </h2>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Major School Boards</h3>
+                <ol>
+                  <li><b>Kerala State Board -</b> State syllabus for primary and secondary education.</li>
+                  <li><b>CBSE (Central Board of Secondary Education) -</b> National curriculum followed by many schools.</li>
+                  <li><b>ICSE (Indian Certificate of Secondary Education) -</b> English-medium schools with comprehensive curriculum.</li>
+                  <li><b>Kendriya Vidyalaya -</b> Central government schools.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Model_School_Thiruvananthapuram.jpg/1200px-Model_School_Thiruvananthapuram.jpg" alt="" style="height:200px;width: 200px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Loyola_School_Thiruvananthapuram.jpg/1200px-Loyola_School_Thiruvananthapuram.jpg" alt="" style="height:200px;width: 230px;">
+
+              </div>
+              <div class="col-sm-8">
+
+                <h3>🔹 Famous Schools in Kerala</h3>
+                <ol>
+                  <li></b>Loyola School (Thiruvananthapuram) -</b> Premier ICSE school.</li>
+                  <li></b>St. Thomas School (Thiruvananthapuram) -</b> One of the oldest schools in Kerala.</li>
+                  <li></b>Rajagiri Public School (Kochi) -</b> Top-rated CBSE school.</li>
+                  <li></b>Chinmaya Vidyalaya -</b> Chain of schools with strong value-based education.</li>
+                  <li></b>Model School (Thiruvananthapuram) -</b> Premier government school.</li>
+                </ol>
+
+              </div>
+
+            </div>
+          </div>
+          <div class="box">
+            <h2>🔬 Research & Technological Advancements</h2>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <p>Kerala is home to several research institutions in science, technology, and medical fields:</p>
+                  <ol>
+                    <li><b>Vikram Sarabhai Space Centre (VSSC) -</b> ISRO's main rocket and space systems development center.</li>
+                    <li><b>Centre for Earth Science Studies (CESS) -</b> Research in earth sciences and natural resources.</li>
+                    <li><b>National Institute for Interdisciplinary Science and Technology (NIIST) -</b> Research in chemistry, biology, and materials science.</li>
+                  </ol>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/VSSC_Entrance.jpg/1200px-VSSC_Entrance.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <h2>📚 Other Notable Institutions</h2>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <ol>
+                    <li><b>Kerala Kalamandalam -</b> Deemed university for performing arts. 🎭</li>
+                    <li><b>K R Narayanan National Institute of Visual Science and Arts -</b> Film and visual arts education.</li>
+                    <li><b>National Institute of Speech and Hearing -</b> Specialized in speech and hearing disorders.</li>
+                    <li><b>Central Marine Fisheries Research Institute -</b> Research in marine fisheries.</li>
+                    <li><b>Rubber Research Institute of India -</b> Research on rubber cultivation and processing.</li>
+                  </ol>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Kerala_Kalamandalam.jpg/1200px-Kerala_Kalamandalam.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Kerala continues to be one of India's top educational hubs, with high literacy rates and quality institutions. The state's focus on education has contributed to its high human development index and social progress.</p>
+        </div>
+        <br><br>
+
+      </div>
+
+
+    </div>
+  </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,2572 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Ladakh</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> -->
+  <style>
+    .wb {
+      font-size: 10vw;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+      border-spacing: 0;
+      border: 1px solid #ddd;
+    }
+
+    td,
+    th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+      font-size: 1.5vw;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+
+    .trip {
+      text-align: center;
+      font-weight: 900;
+      background: orangered;
+      padding: 20px;
+      border-radius: 20px;
+      width: 60%;
+    }
+
+    p,
+    li,
+    .text {
+      font-size: 1.5vw;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-weight: 600;
+    }
+
+    h4 {
+      font-weight: 900;
+    }
+
+    img {
+      border-radius: 10px;
+      display: block;
+      margin: auto;
+    }
+
+    @media screen and (max-width: 850px) {
+
+      p,
+      li,
+      .text,
+      td,
+      th {
+        font-size: 2vw;
+        ;
+      }
+
+    }
+
+    @media screen and (max-width: 500px) {
+
+      p,
+      li,
+      .text,
+      td,
+      th {
+        font-size: 4.5vw;
+        ;
+      }
+
+    }
+
+    .box:nth-of-type(odd) {
+      background: #f3b37185;
+      padding: 10px;
+    }
+
+    .weather-container {
+            border-radius: 15px;
+            background: #f0fdf4;
+            padding: 15px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .weather-card {
+            text-align: center;
+            border-radius: 10px;
+            padding: 10px;
+            background: white;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+        .aqi {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            color: white;
+        }
+        .aqi-bad { background: purple; }
+        .aqi-moderate { background: orange; }
+        .aqi-good { background: green; }
+        .best-time {
+            background: #d1fae5;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 15px;
+            color: green;
+        }
+        .wet {
+            max-width: 50px;
+        }
+        
+        .trip {
+          font-size: 18px;
+          padding: 10px 20px;
+          cursor: pointer;
+          background-color:rgb(231, 36, 36);
+          color: white;
+          border: none;
+          border-radius: 5px;
+      }
+      .modal {
+          display: none;
+          position: fixed;
+          z-index: 1;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0,0,0,0.5);
+      }
+      .modal-content {
+          background-color: #fff;
+          margin: 10% auto;
+          padding: 20px;
+          border-radius: 10px;
+          width: 40%;
+          box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+          text-align: center;
+      }
+      .close {
+          color: #aaa;
+          float: right;
+          font-size: 28px;
+          font-weight: bold;
+          cursor: pointer;
+      }
+      .trip-options {
+          display: flex;
+          justify-content: center;
+          gap: 20px;
+          margin-top: 20px;
+      }
+      .trip-options a {
+          display: block;
+          width: 120px;
+          padding: 10px;
+          background-color: #28a745;
+          color: white;
+          text-decoration: none;
+          border-radius: 5px;
+      }
+  </style>
+</head>
+
+<body>
+
+
+  <!-- <h2>Carousel Example</h2> -->
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+      <li data-target="#myCarousel" data-slide-to="4"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+
+      <div class="item active">
+        <img src="/placeholder.svg?height=500&width=1000" alt="Leh Palace" style="width:100%; height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Leh Palace</h3>
+          <p>We love the ancient architecture and mountain views!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="/placeholder.svg?height=500&width=1000" alt="Pangong Lake" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Pangong Lake</h3>
+          <p>The breathtaking blue waters and mountain backdrop!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="/placeholder.svg?height=500&width=1000" alt="Magnetic Hill" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Magnetic Hill</h3>
+          <p>A natural wonder defying gravity!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="/placeholder.svg?height=500&width=1000" alt="Nubra Valley" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Nubra Valley</h3>
+          <p>We love the sand dunes and double-humped camels!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="/placeholder.svg?height=500&width=1000" alt="Thiksey Monastery" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Thiksey Monastery</h3>
+          <p>We love the spiritual tranquility and Buddhist architecture!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+  <div class="container">
+    <br><br>
+    <h1 class="wb">LADAKH</h1><br>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <img src="/placeholder.svg?height=700&width=500" alt="Ladakh Map" style="height:700px; width: -webkit-fill-available;">
+
+        </div>
+        <div class="col-sm-6">
+          <h1>Ladakh: The Land of High Passes & Buddhist Culture</h1>
+          <p class="text">Ladakh is a high-altitude desert region in northern India, known for its stunning landscapes, Buddhist monasteries, unique culture, adventure tourism, and strategic importance. It is often called "Little Tibet" due to its cultural and geographical similarities with Tibet.</p>
+
+          <ul>
+            <li><b>Location --</b> Northern India, between the Kunlun mountain range and the Himalayas</li>
+            <li><b>Capital --</b> Leh</li>
+            <li><b>Official Languages --</b> Ladakhi, Hindi, English</li>
+            <li><b>Area --</b> 59,146 sq. km</li>
+            <li><b>Population --</b> ~290,000</li>
+            <li><b>Borders --</b> Tibet (China) to the east, Jammu & Kashmir and Himachal Pradesh to the south, Pakistan-occupied Kashmir to the west</li>
+            <li><b>Major Rivers --</b> Indus, Zanskar, Shyok</li>
+            <li><b>Major Festivals --</b> Hemis Festival, Losar, Ladakh Festival, Dosmoche, Matho Nagrang</li>
+            <li><b>State Animal --</b> Snow Leopard</li>
+            <li><b>State Flower --</b> Blue Poppy (Meconopsis aculeata)</li>
+            <li><b>State Tree --</b> Juniper</li>
+            <li><b>State Bird --</b> Black-necked Crane</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <br>
+    <hr>
+    <div>
+      <h1>📌 Divisions & Districts of Ladakh</h1>
+      <br>
+      <div style="overflow-x:auto;">
+        <table>
+          <tr>
+            <th>Division</th>
+            <th>Districts</th>
+            <th>Key Highlights</th>
+          </tr>
+          <tr>
+            <td>Leh Division</td>
+            <td>1. Leh</td>
+            <td>Leh Palace, Shanti Stupa, Pangong Lake, Nubra Valley, Magnetic Hill, Thiksey Monastery</td>
+          </tr>
+          <tr>
+            <td>Kargil Division</td>
+            <td>2. Kargil</td>
+            <td>Kargil War Memorial, Suru Valley, Zanskar Valley, Drang-Drung Glacier, Mulbekh Monastery</td>
+          </tr>
+        </table>
+      </div>
+      <br><br>
+      <h1>🔹 Major Highlights of Some Key Areas</h1><br><br>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <ul>
+              <li><b>Leh --</b> Capital of Ladakh, cultural & economic hub with historic palace and bazaars.</li>
+              <li><b>Nubra Valley --</b> Famous for sand dunes, double-humped Bactrian camels, and Diskit Monastery.</li>
+              <li><b>Pangong Lake --</b> Stunning high-altitude lake with changing blue hues, popular filming location.</li>
+              <li><b>Zanskar --</b> Remote valley known for river rafting and the famous Chadar Trek (frozen river trek).</li>
+              <li><b>Kargil --</b> Historic town known for the 1999 Kargil War, gateway to Zanskar.</li>
+              <li><b>Tso Moriri --</b> Sacred high-altitude lake and wetland conservation reserve.</li>
+              <li><b>Hemis --</b> Location of the largest monastery in Ladakh and famous Hemis Festival.</li>
+              <li><b>Dha-Hanu --</b> Valleys inhabited by the Drokpa tribe, believed to be of Aryan origin.</li>
+              <li><b>Changthang --</b> High-altitude plateau home to nomadic Changpa tribe and pashmina goats.</li>
+            </ul>
+          </div>
+          <div class="col-sm-6">
+            <img src="/placeholder.svg?height=450&width=500" alt="Ladakh Map" style="height:450px;width: -webkit-fill-available;">
+
+          </div>
+        </div>
+      </div>
+    </div><br><br>
+    <div class="container">
+      <div class="weather-container">
+          <h4 class="text-center"><strong>Weather in Ladakh</strong></h4>
+          <div class="row">
+              <!-- January -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Jan</h6>
+                      <p>-14/-2°C</p>
+                      <span class="aqi aqi-good">AQI 25</span>
+                  </div>
+              </div>
+              <!-- February -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Feb</h6>
+                      <p>-10/2°C</p>
+                      <span class="aqi aqi-good">AQI 29</span>
+                  </div>
+              </div>
+              <!-- March -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Mar</h6>
+                      <p>-5/8°C</p>
+                      <span class="aqi aqi-good">AQI 27</span>
+                  </div>
+              </div>
+              <!-- April -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Apr</h6>
+                      <p>0/13°C</p>
+                      <span class="aqi aqi-good">AQI 23</span>
+                  </div>
+              </div>
+              <!-- May -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>May</h6>
+                      <p>5/17°C</p>
+                      <span class="aqi aqi-good">AQI 25</span>
+                  </div>
+              </div>
+              <!-- June -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Jun</h6>
+                      <p>9/21°C</p>
+                      <span class="aqi aqi-good">AQI 26</span>
+                  </div>
+              </div>
+              <!-- July -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Jul</h6>
+                      <p>12/24°C</p>
+                      <span class="aqi aqi-good">AQI 28</span>
+                  </div>
+              </div>
+              <!-- August -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Aug</h6>
+                      <p>12/24°C</p>
+                      <span class="aqi aqi-good">AQI 29</span>
+                  </div>
+              </div>
+              <!-- September -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Sep</h6>
+                      <p>7/20°C</p>
+                      <span class="aqi aqi-good">AQI 29</span>
+                  </div>
+              </div>
+              <!-- October -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Oct</h6>
+                      <p>0/14°C</p>
+                      <span class="aqi aqi-good">AQI 32</span>
+                  </div>
+              </div>
+              <!-- November -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Nov</h6>
+                      <p>-7/8°C</p>
+                      <span class="aqi aqi-good">AQI 28</span>
+                  </div>
+              </div>
+              <!-- December -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Dec</h6>
+                      <p>-12/0°C</p>
+                      <span class="aqi aqi-good">AQI 30</span>
+                  </div>
+              </div>
+          </div>
+          <div class="text-center">
+              <div class="best-time">🏆 Best time to visit: June - September</div>
+          </div>
+      </div>
+    </div>
+    
+
+    <br><br>
+    <button class="trip" id="openModal">Let's go on a trip</button>
+    
+    <div id="tripModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Select Your Trip</h2>
+            <button type="button" class="btn btn-warning" style="margin-bottom: 8px;color:black; border-radius: 5px;" onclick="location.href='{% url 'ladakh_7days' %}'">7 days trip</button><br>
+            <button type="button" class="btn btn-warning" style="margin-bottom: 8px;color:black; border-radius: 5px;" onclick="location.href='{% url 'ladakh_12days' %}'">12 days trip</button>
+        </div>
+    </div>
+    
+    <script>
+        var modal = document.getElementById("tripModal");
+        var btn = document.getElementById("openModal");
+        var span = document.getElementsByClassName("close")[0];
+        
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+        
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+        
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script><br><br>
+    <div class="container">
+      <ul class="nav nav-tabs">
+        <li class="nav-item"><a data-toggle="tab" href="#wbculture"> Culture</a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbtradition "> Tradition</a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbfestivals"> Festivals </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbfood"> Foods </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbhistory"> History </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbartacraft"> Art and Craft </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbseason"> Season to Visit </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbtourist"> Tourist Spots </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbwild"> Wildlife & Crops </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbedu"> Institutions </a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="wbculture" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Culture of Ladakh</h1>
+          <p class="text">Ladakh has a rich and unique culture, heavily influenced by Tibetan Buddhism, geography, and centuries of isolation. Here's an overview of some key aspects of its culture:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Language</h3>
+                  <ul>
+                    <li>Ladakhi (a Tibetic language) is the main language spoken in Ladakh. It's closely related to Tibetan but has its own distinct features. Other languages spoken include Balti, Purgi, Shina, and Hindi. Most educated Ladakhis also speak English.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Ladakhi Script" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>2. Religion</h3>
+                  <ul>
+                    <li>Buddhism is the predominant religion in Leh district, while Islam is more common in Kargil district.</li>
+                    <li>Tibetan Buddhism (Vajrayana) has deeply influenced Ladakhi culture, art, architecture, and daily life.</li>
+                    <li>Monasteries (gompas) serve as religious, cultural, and educational centers.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Buddhist Monastery" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div><br>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Ladakhi Art" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Art and Architecture</h3>
+                  <ul>
+                    <li>Ladakhi architecture is adapted to the harsh climate, with thick walls, small windows, and flat roofs.</li>
+                    <li>Monasteries feature colorful murals, thangka paintings, and intricate wood carvings.</li>
+                    <li>Prayer flags, stupas, and mani walls (stone walls inscribed with Buddhist mantras) dot the landscape.</li>
+                  </ul>
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Ladakhi Music" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>4. Music and Dance</h3>
+                  <ul>
+                    <li>Traditional music uses instruments like the daman (drum), surna (oboe-like instrument), and lingsbu (flute).</li>
+                    <li>Cham dance is a sacred masked dance performed by monks during festivals.</li>
+                    <li>Folk dances like Jabro and Zhabs-bro are performed during celebrations and gatherings.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Social Structure</h3>
+                  <ul>
+                    <li>Traditional Ladakhi society was organized around the extended family and village community.</li>
+                    <li>Polyandry (one woman marrying multiple men, usually brothers) was practiced to prevent land fragmentation, though it's less common today.</li>
+                    <li>Village councils (goba) still play an important role in local governance and dispute resolution.</li>
+                  </ul>
+                  <h3>6. Cuisine</h3>
+                  <ul>
+                    <li>Ladakhi cuisine is adapted to the high-altitude environment with limited vegetation.</li>
+                    <li>Staples include barley (tsampa), wheat, and dairy products from yaks and goats.</li>
+                    <li>Popular dishes include thukpa (noodle soup), momos (dumplings), skyu (pasta with vegetables), and butter tea.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Ladakhi Family" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Ladakhi Festival" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>7. Festivals</h3>
+                  <ul>
+                    <li>Monastery festivals (tsechu) celebrate important Buddhist events with masked dances, music, and rituals.</li>
+                    <li>Hemis Festival is the largest, celebrating the birth of Guru Padmasambhava.</li>
+                    <li>Losar (Ladakhi New Year) is celebrated with family gatherings, feasts, and religious ceremonies.</li>
+                    <li>The Ladakh Festival in September showcases the region's cultural heritage for tourists.</li>
+                  </ul>
+                  <h3>8. Traditional Dress</h3>
+                  <ul>
+                    <li>The traditional Ladakhi dress is the goncha, a long, thick woolen robe tied at the waist with a sash.</li>
+                    <li>Women wear a headdress called perak, adorned with turquoise stones.</li>
+                    <li>Traditional jewelry includes silver necklaces, earrings, and bracelets with turquoise and coral.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Ladakhi Lifestyle" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>9. Lifestyle and Adaptation</h3>
+                  <ul>
+                    <li>Ladakhis have adapted to one of the world's harshest environments with innovative agricultural techniques, water management, and sustainable living practices.</li>
+                    <li>Traditional houses are built with mud bricks, stone, and wood, designed to maximize solar heating in winter.</li>
+                    <li>The short growing season means intensive agriculture during summer months and food preservation for winter.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>10. Nomadic Culture</h3>
+                  <ul>
+                    <li>The Changpa nomads of eastern Ladakh herd pashmina goats, producing the world's finest cashmere wool.</li>
+                    <li>They live in yak-hair tents (rebos) and move with their herds according to seasonal pastures.</li>
+                    <li>Their lifestyle represents one of the last surviving nomadic cultures in the Himalayas.</li>
+                  </ul>
+                  <h3>11. Philosophy and Values</h3>
+                  <ul>
+                    <li>Buddhist principles of compassion, non-violence, and mindfulness influence daily life.</li>
+                    <li>Environmental consciousness and sustainable living are traditional values now gaining global recognition.</li>
+                    <li>Ladakhis are known for their resilience, hospitality, and adaptability in extreme conditions.</li>
+                  </ul>
+                  <h3>12. Modern Influences</h3>
+                  <ul>
+                    <li>Tourism, military presence, and improved connectivity have brought rapid changes to traditional Ladakhi culture.</li>
+                    <li>Efforts to preserve cultural heritage include language programs, traditional arts schools, and cultural festivals.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=300&width=200" alt="Changpa Nomads" style="height:300px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br><br>
+
+          <p>Ladakh's culture is a unique blend of Tibetan Buddhist traditions adapted to high-altitude desert living. Despite modernization, Ladakhis maintain strong connections to their cultural heritage while adapting to contemporary challenges.</p><br><br>
+        </div>
+        <div id="wbtradition" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Tradition of Ladakh</h1>
+          <p>Ladakh has rich and unique traditions shaped by its high-altitude environment, Buddhist and Islamic influences, and centuries of relative isolation. Here's an overview of some key traditional aspects of the region:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Clothing Tradition</h3>
+                  <h4>Men</h4>
+                  <ul>
+                    <li><b>Goncha:</b> Traditional Ladakhi men wear this long, thick woolen robe tied at the waist with a cloth sash called skerag. It's designed to provide warmth in the cold climate.</li>
+                    <li><b>Kuntop:</b> A sheepskin hat worn during winter.</li>
+                  </ul>
+                  <h4>Women</h4>
+                  <ul>
+                    <li><b>Kuntop:</b> Similar to the men's goncha but more colorful, often with bright pink, green, or blue fabrics.</li>
+                    <li><b>Perak:</b> A distinctive headdress adorned with turquoise stones, worn by married women on special occasions. The size and number of turquoise stones traditionally indicated the family's wealth and status.</li>
+                    <li><b>Bok:</b> Traditional woolen capes worn by women for additional warmth.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=250&width=200" alt="Traditional Ladakhi Clothing" style="height:250px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>2. Wedding Traditions</h3>
+                  <ul>
+                    <li><b>Nyaems:</b> The formal proposal where the groom's family visits the bride's home with chang (barley beer) and gifts.</li>
+                    <li><b>Mepas:</b> Astrologers determine auspicious dates for the wedding ceremony.</li>
+                    <li><b>Phyiang:</b> The bride's hair is ceremonially braided in a special style.</li>
+                    <li><b>Stotma:</b> The main wedding ceremony with elaborate rituals and feasting.</li>
+                    <li><b>Bagston:</b> The bride is escorted to the groom's house with music and celebration.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=250&width=200" alt="Ladakhi Wedding" style="height:250px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Ladakhi Music and Dance" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Music & Dance Traditions</h3>
+                  <ul>
+                    <li><b>Cham Dance:</b> Sacred masked dances performed by monks during monastery festivals, depicting Buddhist stories and the victory of good over evil.</li>
+                    <li><b>Zhabs-bro:</b> Traditional folk dance performed in a circle during celebrations.</li>
+                    <li><b>Jabro:</b> A popular dance form from the Changthang region, performed with gentle movements.</li>
+                    <li><b>Traditional Instruments:</b> Include daman (drum), surna (oboe-like wind instrument), lingbu (flute), and sgra-snyan (lute).</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Ladakhi Social Traditions" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+
+                  <h3>4. Social & Religious Traditions</h3>
+                  <ul>
+                    <li><b>Polyandry:</b> The traditional practice where a woman marries multiple men (usually brothers) to prevent land fragmentation. Though less common today, it was an adaptation to the scarce arable land.</li>
+                    <li><b>Goba System:</b> Traditional village councils that manage community affairs, resolve disputes, and organize festivals.</li>
+                    <li><b>Khor:</b> The ritual circumambulation of sacred sites like monasteries, stupas, and mani walls, always in a clockwise direction.</li>
+                    <li><b>Prayer Flags:</b> Colorful flags inscribed with prayers and mantras, believed to spread blessings with the wind.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Architectural & Handicraft Traditions</h3>
+                  <ul>
+                    <li><b>Monastery Architecture:</b> Ladakhi monasteries (gompas) are built on hilltops with distinctive white-washed walls, colorful prayer flags, and golden roofs.</li>
+                    <li><b>Thangka Painting:</b> Sacred scroll paintings depicting Buddhist deities and mandalas, made with natural mineral pigments.</li>
+                    <li><b>Wood Carving:</b> Intricate designs on doors, pillars, and furniture, often featuring Buddhist symbols.</li>
+                    <li><b>Pashmina Weaving:</b> The traditional craft of weaving ultra-fine wool from Changra goats into luxurious shawls and textiles.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Ladakhi Architecture" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>6. Sports & Games</h3>
+                  <ul>
+                    <li><b>Archery:</b> Traditional archery competitions are major social events, accompanied by feasting, drinking, and dancing.</li>
+                    <li><b>Polo:</b> Introduced centuries ago, Ladakhi polo is faster and more rugged than its modern counterpart.</li>
+                    <li><b>Ice Hockey:</b> Played on frozen ponds and rivers during winter, becoming increasingly popular.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Ladakhi Archery" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br><br>
+          <p>Ladakh's traditions beautifully combine practical adaptations to a harsh environment with rich cultural and spiritual practices, creating a unique way of life that has sustained communities in this high-altitude desert for centuries.</p><br><br>
+        </div>
+        <div id="wbfestivals" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Festivals of Ladakh</h1>
+          <p>Ladakh is known for its vibrant and colorful festivals, which are primarily religious in nature and centered around monasteries. These festivals provide a glimpse into the rich Buddhist culture, monastic traditions, and local customs of the region. Here's a list of some of the major festivals celebrated in Ladakh:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Hemis Festival (Biggest Festival of Ladakh)</h3>
+                  <ul>
+                    <li>Celebrated at the famous Hemis Monastery to commemorate the birth of Guru Padmasambhava (founder of Tibetan Buddhism).</li>
+                    <li>Features spectacular Cham dances performed by monks wearing colorful masks and costumes representing various deities and demons.</li>
+                    <li>The highlight is the unfurling of the giant thangka (Buddhist painting) of Guru Padmasambhava, displayed only once every 12 years.</li>
+                    <li>Local handicrafts, food stalls, and cultural performances add to the festive atmosphere.</li>
+                  </ul>
+                  <p><b>📍 Time: June - July (10th and 11th day of the Tibetan lunar month)</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=230&width=200" alt="Hemis Festival" style="height:230px;width: 200px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Losar Festival" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Losar (Ladakhi New Year)</h3>
+                  <ul>
+                    <li>The most important social festival marking the beginning of the New Year according to the Tibetan calendar.</li>
+                    <li>Homes are cleaned and decorated, and families gather for feasts and religious ceremonies.</li>
+                    <li>Traditional foods include guthuk (soup with dough balls), khapse (fried cookies), and chang (barley beer).</li>
+                    <li>Monastery rituals, mask dances, and ibex deer dances are performed to ward off evil spirits.</li>
+                  </ul>
+                  <p><b>📍 Time: December - February (varies according to the Tibetan lunar calendar)</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Ladakh Festival</h3>
+                  <ul>
+                    <li>A modern festival organized by the Tourism Department to showcase Ladakhi culture to visitors.</li>
+                    <li>Begins with a procession through Leh, featuring cultural troupes from different regions of Ladakh.</li>
+                    <li>Includes archery competitions, polo matches, mask dances, musical performances, and handicraft exhibitions.</li>
+                    <li>Provides an excellent opportunity to experience the diverse cultural heritage of Ladakh in one place.</li>
+                  </ul>
+                  <p><b>📍 Time: September 1-15</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Ladakh Festival" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Thiksey Gustor" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Thiksey Gustor</h3>
+                  <ul>
+                    <li>Celebrated at the Thiksey Monastery, one of the most picturesque monasteries in Ladakh.</li>
+                    <li>Features sacred mask dances depicting the victory of good over evil.</li>
+                    <li>The highlight is the ritual destruction of storma (ritual figures made of dough), symbolizing the elimination of evil forces.</li>
+                    <li>Attracts both locals and tourists for its spectacular setting and religious significance.</li>
+                  </ul>
+                  <p><b>📍 Time: October - November (varies according to the Tibetan lunar calendar)</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Matho Nagrang</h3>
+                  <ul>
+                    <li>A unique festival at Matho Monastery where two oracles (monks in deep meditation) enter a trance state and make predictions for the coming year.</li>
+                    <li>The oracles perform supernatural feats like cutting themselves without bleeding and running blindfolded along the monastery parapets.</li>
+                    <li>Villagers seek blessings and advice from the oracles regarding personal matters and community issues.</li>
+                  </ul>
+                  <p><b>📍 Time: February - March (first half of the Tibetan lunar month)</b></p>
+                  <h3>6. Dosmoche</h3>
+                  <ul>
+                    <li>Known as the "Festival of the Scapegoat," celebrated in Leh and Likir Monastery.</li>
+                    <li>Monks create elaborate thread crosses and effigies to trap evil spirits.</li>
+                    <li>The effigies are ceremonially destroyed at the end of the festival to symbolize the removal of negativity from the community.</li>
+                  </ul>
+                  <p><b>📍 Time: February (varies according to the Tibetan lunar calendar)</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Matho Nagrang Festival" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Phyang Tsedup" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>7. Phyang Tsedup</h3>
+                  <ul>
+                    <li>Celebrated at Phyang Monastery with sacred mask dances and the display of a giant thangka.</li>
+                    <li>Commemorates the establishment of the monastery and honors its founder, Dchen Choeje.</li>
+                    <li>Features unique ritual dances performed only at this monastery.</li>
+                  </ul>
+                  <p><b>📍 Time: July - August (varies according to the Tibetan lunar calendar)</b></p>
+                  <h3>8. Yuru Kabgyat</h3>
+                  <ul>
+                    <li>Held at Lamayuru Monastery, one of the oldest monasteries in Ladakh.</li>
+                    <li>Features two days of mask dances depicting the eight manifestations of Guru Padmasambhava.</li>
+                    <li>The sacred dances are believed to provide spiritual liberation through seeing.</li>
+                  </ul>
+                  <p><b>📍 Time: July (varies according to the Tibetan lunar calendar)</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>9. Sindhu Darshan</h3>
+                  <ul>
+                    <li>A relatively new festival celebrating the Indus River (Sindhu), which is the lifeline of Ladakh.</li>
+                    <li>Participants from different parts of India bring water from their local rivers to mix with the Indus.</li>
+                    <li>Features cultural performances, prayers, and meditation sessions on the banks of the river.</li>
+                    <li>Promotes national integration and harmony among different faiths.</li>
+                  </ul>
+                  <p><b>📍 Time: June</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Sindhu Darshan Festival" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Galdan Namchot" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>10. Galdan Namchot</h3>
+                  <ul>
+                    <li>Celebrates the birth and enlightenment of Je Tsongkhapa, founder of the Gelugpa sect of Tibetan Buddhism.</li>
+                    <li>Monasteries and homes are illuminated with butter lamps and candles.</li>
+                    <li>Special prayers and rituals are performed in monasteries.</li>
+                    <li>The festival coincides with the traditional Ladakhi New Year in some regions.</li>
+                  </ul>
+                  <p><b>📍 Time: November - December (25th day of the 10th month in the Tibetan calendar)</b></p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>11. Stok Guru Tsechu</h3>
+                  <ul>
+                    <li>Celebrated at Stok Monastery, the residence of the royal family of Ladakh.</li>
+                    <li>Features mask dances performed by monks and the display of religious artifacts.</li>
+                    <li>The highlight is the unfurling of a giant thangka of Guru Padmasambhava.</li>
+                  </ul>
+                  <p><b>📍 Time: February - March (varies according to the Tibetan lunar calendar)</b></p>
+
+                  <h3>12. Kargil Vijay Diwas</h3>
+                  <ul>
+                    <li>Commemorates India's victory in the 1999 Kargil War.</li>
+                    <li>Features ceremonies at the Kargil War Memorial in Drass, the second coldest inhabited place in the world.</li>
+                    <li>Military parades, tributes to fallen soldiers, and cultural programs mark the occasion.</li>
+                  </ul>
+                  <p><b>📍 Time: July 26</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Kargil Vijay Diwas" style="height:200px;width: 230px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Spituk Gustor" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>13. Spituk Gustor</h3>
+                  <ul>
+                    <li>Celebrated at Spituk Monastery near Leh, featuring sacred mask dances.</li>
+                    <li>The highlight is the appearance of Dorje Jigjet (the Dharma protector) represented by a senior monk wearing an elaborate mask.</li>
+                    <li>Concludes with the ritual destruction of evil forces represented by storma (dough effigies).</li>
+                  </ul>
+                  <p><b>📍 Time: January (varies according to the Tibetan lunar calendar)</b></p>
+                  <h3>14. Tak Tok Tsechu</h3>
+                  <ul>
+                    <li>Celebrated at Tak Tok Monastery, built around a cave where Guru Padmasambhava is said to have meditated.</li>
+                    <li>Features mask dances and the display of sacred artifacts.</li>
+                    <li>The cave within the monastery is a special attraction during the festival.</li>
+                  </ul>
+                  <p><b>📍 Time: July - August (varies according to the Tibetan lunar calendar)</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Ladakh's festivals are a vibrant expression of its Buddhist heritage, monastic traditions, and cultural identity. They offer visitors a unique opportunity to witness ancient rituals, spectacular performances, and the spiritual depth of Ladakhi culture. 🎉</p><br><br>
+        </div>
+        <div id="wbfood" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Foods of Ladakh</h1>
+          <p>Ladakhi cuisine is shaped by the region's high-altitude desert environment, limited agriculture, and cultural influences from Tibet and Central Asia. The food is hearty, nutritious, and designed to provide energy in the cold climate. Here's a look at some of the most iconic foods of Ladakh:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Staple Food of Ladakh</h3>
+                  <ul>
+                    <li><b>Tsampa:</b> Roasted barley flour, a fundamental staple that can be mixed with butter tea or water to form a dough-like consistency.</li>
+                    <li><b>Khambir:</b> Traditional Ladakhi bread with a thick, cake-like texture, often served with butter tea for breakfast.</li>
+                  </ul>
+                  <h3>2. Ladakhi Breads</h3>
+                  <ul>
+                    <li><b>Tingmo:</b> Steamed bread similar to Chinese mantou, often served with stews.</li>
+                    <li><b>Tapu:</b> Flatbread cooked on a skillet, similar to naan but thicker.</li>
+                    <li><b>Chutagi:</b> Bow-shaped wheat pasta cooked with vegetables and meat.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=220" alt="Ladakhi Staple Food" style="height:200px;width: 220px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=220" alt="Ladakhi Dishes" style="height:200px;width: 220px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Famous Ladakhi Dishes</h3>
+                  <h4>Soups and Stews</h4>
+                  <ul>
+                    <li><b>Thukpa:</b> A hearty noodle soup with vegetables and meat (usually mutton), perfect for cold weather.</li>
+                    <li><b>Skyu:</b> Thumb-pressed pasta cooked with vegetables and meat in a thick stew.</li>
+                    <li><b>Paba:</b> A porridge made from roasted barley flour, peas, and vegetables.</li>
+                    <li><b>Gyathuk:</b> A variation of thukpa with hand-pulled noodles.</li>
+                  </ul>
+                  <h4>Meat Dishes</h4>
+                  <ul>
+                    <li><b>Mok Mok (Momos):</b> Steamed dumplings filled with meat (usually yak or mutton) and vegetables, served with spicy chutney.</li>
+                    <li><b>Sha Tshil:</b> Dried meat (usually yak or mutton) preserved for winter, often added to soups and stews.</li>
+                    <li><b>Khambir with Butter and Meat:</b> Bread served with butter and dried meat, a traditional breakfast.</li>
+                    <li><b>Chutagi with Meat:</b> Bow-shaped pasta cooked with meat and vegetables.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=220" alt="Ladakhi Beverages" style="height:200px;width: 220px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h4>Vegetarian Dishes</h4>
+                  <ul>
+                    <li><b>Paba:</b> A thick porridge made from roasted barley flour, peas, and vegetables.</li>
+                    <li><b>Chutagi with Vegetables:</b> Bow-shaped pasta cooked with seasonal vegetables.</li>
+                    <li><b>Zathuk:</b> A nettle soup, rich in nutrients and considered medicinal.</li>
+                  </ul>
+                  <h4>Beverages</h4>
+                  <ul>
+                    <li><b>Butter Tea (Gur Gur Cha):</b> A salty tea made with yak butter and tea leaves, churned to create a thick, creamy consistency. It provides essential calories and fat for the cold climate.</li>
+                    <li><b>Chang:</b> A mild alcoholic beverage made from fermented barley, similar to beer, often served during festivals and celebrations.</li>
+                    <li><b>Chhang:</b> A stronger alcoholic drink distilled from fermented barley or rice.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>4. Ladakhi Snacks and Sides</h3>
+                  <ul>
+                    <li><b>Churpe:</b> Dried cheese made from yak or goat milk, often chewed as a snack during long journeys.</li>
+                    <li><b>Tagi Khambir:</b> Bread stuffed with vegetables and sometimes meat.</li>
+                    <li><b>Phing:</b> Glass noodles made from mung bean starch, used in soups and stir-fries.</li>
+                    <li><b>Tangtur:</b> Pickled vegetables, especially radishes and turnips, preserved for winter.</li>
+                  </ul>
+
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=220" alt="Ladakhi Snacks" style="height:200px;width: 220px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Ladakhi Sweets" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>5. Sweets and Desserts</h3>
+                  <ul>
+                    <li><b>Khapse:</b> Deep-fried pastries made during Losar (Ladakhi New Year) and other festivals.</li>
+                    <li><b>Phemar:</b> A sweet dish made from roasted barley flour, butter, and sugar, often shaped into auspicious symbols for festivals.</li>
+                    <li><b>Dre-si:</b> Sweet rice cooked with raisins, dates, and nuts, prepared for special occasions.</li>
+                    <li><b>Chhurpi:</b> Sweet cheese made from buttermilk, often flavored with sugar or honey.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>6. Influences from Neighboring Cuisines</h3>
+                  <ul>
+                    <li><b>Tibetan Influences:</b> Momos, thukpa, and butter tea are shared with Tibetan cuisine.</li>
+                    <li><b>Kashmiri Influences:</b> Some use of saffron and dried fruits in festive dishes.</li>
+                    <li><b>Central Asian Influences:</b> Techniques for preserving meat and dairy products.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Cultural Food Influences" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Special Festival Foods</h3>
+                  <ul>
+                    <li><b>Guthuk:</b> A special noodle soup prepared on the eve of Losar (New Year), containing dough balls with hidden "fortunes" inside.</li>
+                    <li><b>Dresil:</b> Sweet rice with dried fruits and nuts, prepared for Losar celebrations.</li>
+                    <li><b>Khapse:</b> Elaborate deep-fried pastries shaped into intricate designs for festivals.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Festival Foods" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Ladakhi cuisine is a testament to human adaptation to one of the world's harshest environments. Using limited ingredients available in the high-altitude desert, Ladakhis have created nutritious, energy-rich foods that sustain life in extreme conditions while reflecting their unique cultural heritage. 🍲🍵🥟</p><br><br>
+        </div>
+        <div id="wbhistory" class="tab-pane fade in active" style="background-color: white;">
+          <h1>History of Ladakh</h1>
+          <p>Ladakh has a rich and complex history shaped by its strategic location at the crossroads of important trade routes between Tibet, Kashmir, and Central Asia. Its unique culture developed from a blend of Tibetan Buddhism, local traditions, and influences from neighboring regions.</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Ancient Ladakh (Before 10th Century CE)</h3>
+                  <ul>
+                    <li><b>Prehistoric Period:</b> Archaeological evidence suggests human habitation in Ladakh dates back to the Neolithic period (5000-3000 BCE).</li>
+                    <li><b>Dards and Mon People:</b> Early inhabitants included the Dards (Indo-Aryan) and Mon people, who practiced animistic religions.</li>
+                    <li><b>Part of Kushan Empire:</b> During the 1st-3rd centuries CE, Ladakh was likely influenced by the Kushan Empire, which controlled parts of Central Asia and northern India.</li>
+                    <li><b>Tibetan Influence:</b> By the 7th century, Tibetan culture began to influence the region as Tibet expanded under Emperor Songtsen Gampo.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Ancient Ladakh" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Namgyal Dynasty" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Medieval Ladakh (10th - 17th Century)</h3>
+                  <h4>Establishment of the Ladakhi Kingdom:</h4>
+                  <ul>
+                    <li>Around 950 CE, Nyima-Gon, a descendant of the Tibetan royal family, established the first Ladakhi dynasty after the collapse of the Tibetan Empire.</li>
+                    <li>He divided his kingdom among his three sons, with Ladakh going to the eldest.</li>
+                    <li>Buddhism became firmly established as the dominant religion during this period.</li>
+                  </ul>
+                  <h4>Namgyal Dynasty (1460-1842):</h4>
+                  <ul>
+                    <li>King Lhachen Bhagan unified Ladakh and founded the Namgyal Dynasty in 1460.</li>
+                    <li>The dynasty ruled Ladakh for nearly 400 years and expanded the kingdom to include parts of western Tibet and Baltistan.</li>
+                    <li>King Sengge Namgyal (1616-1642), known as the "Lion King," brought Ladakh to its greatest territorial extent and built many important monasteries and palaces.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=220&width=200" alt="Dogra Rule" style="height:220px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h4>Conflicts and Invasions:</h4>
+                  <ul>
+                    <li>In 1639, Ladakh was invaded by forces from Baltistan (now in Pakistan).</li>
+                    <li>In 1684, the Fifth Dalai Lama sent Tibetan-Mongol forces to invade Ladakh, resulting in the Treaty of Tingmosgang, which established Ladakh as a tributary to Tibet.</li>
+                    <li>The kingdom maintained relative independence while balancing relations with Tibet, Kashmir, and the Mughal Empire.</li>
+                  </ul>
+                  <h4>Trade and Cultural Exchange:</h4>
+                  <ul>
+                    <li>Ladakh controlled important trade routes connecting India, Tibet, and Central Asia.</li>
+                    <li>Leh became a bustling market town where traders exchanged goods like pashmina wool, salt, tea, and spices.</li>
+                    <li>This period saw the construction of many important monasteries, including Hemis, Thiksey, and Alchi.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Dogra Rule and British Influence (1834-1947)</h3>
+                  <ul>
+                    <li>In 1834, General Zorawar Singh, a commander of the Dogra Raja of Jammu, invaded and conquered Ladakh.</li>
+                    <li>Ladakh was incorporated into the princely state of Jammu and Kashmir under Maharaja Gulab Singh.</li>
+                    <li>The Treaty of Amritsar (1846) between the British and Gulab Singh confirmed Dogra rule over Ladakh.</li>
+                    <li>British influence increased in the region, with British officials and explorers mapping and documenting Ladakh.</li>
+                    <li>Traditional trade routes declined as new routes opened elsewhere, leading to economic challenges.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=250" alt="British Influence" style="height:200px;width: 250px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=230&width=200" alt="Indo-China War" style="height:230px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h2>4. Post-Independence Period (1947 - Present)</h3>
+                    <h3>Partition and Early Years</h3>
+                    <ul>
+                      <li>After India's independence in 1947, Maharaja Hari Singh of Jammu and Kashmir initially hesitated to join either India or Pakistan.</li>
+                      <li>Following a Pakistani tribal invasion, he signed the Instrument of Accession to India in October 1947.</li>
+                      <li>Ladakh became part of the Indian state of Jammu and Kashmir.</li>
+                    </ul>
+                    <h3>Border Conflicts</h3>
+                    <ul>
+                      <li>The 1962 Sino-Indian War resulted in China occupying Aksai Chin, a northeastern part of Ladakh.</li>
+                      <li>The Line of Actual Control (LAC) was established, but border disputes continue to this day.</li>
+                      <li>The 1999 Kargil War with Pakistan was fought partly in Ladakh's Kargil district.</li>
+                    </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Modern Ladakh" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>Political Developments</h3>
+                  <ul>
+                    <li>For decades, Ladakhis advocated for greater autonomy from Jammu and Kashmir state, citing cultural differences and neglect.</li>
+                    <li>In 1995, the Ladakh Autonomous Hill Development Councils were established for Leh and Kargil districts.</li>
+                    <li>On August 5, 2019, the Indian government revoked the special status of Jammu and Kashmir and bifurcated the state.</li>
+                    <li>Ladakh was separated from Jammu and Kashmir and established as a Union Territory directly administered by the central government.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=230&width=200" alt="Tourism in Ladakh" style="height:230px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>Modern Developments</h3>
+                  <ul>
+                    <li>Tourism emerged as a major industry starting in the 1970s, bringing economic benefits but also cultural and environmental challenges.</li>
+                    <li>The opening of the Siachen Glacier (the world's highest battlefield) and other border areas to tourism.</li>
+                    <li>Infrastructure development, including roads, airports, and telecommunications, has accelerated in recent decades.</li>
+                    <li>Efforts to balance development with environmental conservation and cultural preservation continue.</li>
+                    <li>Renewable energy initiatives, including solar power plants, have been established to address Ladakh's energy needs.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Contemporary Challenges and Opportunities</h3>
+                  <h4>Strategic Importance</h4>
+                  <ul>
+                    <li>Ladakh's location between China, Pakistan, and Kashmir makes it strategically crucial for India.</li>
+                    <li>Military presence has increased, especially along the borders with China and Pakistan.</li>
+                    <li>Recent border tensions with China in eastern Ladakh (2020-present) have highlighted the region's geopolitical significance.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Strategic Importance" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h4>Environmental and Cultural Preservation</h4>
+                  <ul>
+                    <li>Climate change is affecting Ladakh's glaciers, water resources, and traditional agriculture.</li>
+                    <li>Tourism has brought economic benefits but also challenges to the fragile ecosystem and traditional way of life.</li>
+                    <li>Efforts to preserve Ladakhi language, Buddhist heritage, and traditional knowledge systems are ongoing.</li>
+                    <li>Sustainable development initiatives focus on renewable energy, water conservation, and eco-tourism.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Environmental Preservation" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>6. Present-Day Ladakh</h3>
+                  <ul>
+                    <li><b>Union Territory Status:</b> As a Union Territory since 2019, Ladakh is experiencing new administrative structures and development initiatives.</li>
+                    <li><b>Tourism:</b> A major economic driver, with visitors drawn to its monasteries, landscapes, and adventure tourism opportunities.</li>
+                    <li><b>Strategic Importance:</b> Continued military presence and infrastructure development along borders.</li>
+                    <li><b>Cultural Renaissance:</b> Renewed interest in preserving Ladakhi language, Buddhist traditions, and cultural practices.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Present Day Ladakh" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Ladakh's history reflects its unique position at the crossroads of Central Asia, Tibet, and South Asia. From ancient kingdoms to modern geopolitical significance, it has maintained its distinct cultural identity while adapting to changing political realities. Today, it faces the challenge of balancing development with preservation of its unique cultural and environmental heritage. 🏔️🏯</p>
+          <br><br>
+        </div>
+        <div id="wbartacraft" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Art & Craft of Ladakh 🎨🖌️</h1>
+          <p>Ladakh has a rich artistic heritage deeply influenced by Tibetan Buddhism, geography, and centuries of cultural exchange along ancient trade routes. Ladakhi artisans create works that serve both religious and practical purposes, using locally available materials and techniques passed down through generations.</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Thangka Painting 🖼️</h3>
+                  <h4>🔸 Sacred Buddhist Art</h4>
+                  <ul>
+                    <li><b>Famous for:</b> Detailed religious scroll paintings depicting Buddhist deities, mandalas, and religious narratives.</li>
+                    <li><b>Materials:</b> Cotton canvas, natural mineral pigments, and 24k gold for highlights.</li>
+                    <li><b>Significance:</b> Used for meditation, teaching Buddhist principles, and monastery decoration.</li>
+                  </ul>
+                  <h4>🔸 Techniques & Styles</h4>
+                  <ul>
+                    <li><b>Strict Proportions:</b> Artists follow precise measurements and grids for depicting deities.</li>
+                    <li><b>Training:</b> Requires years of apprenticeship and religious knowledge.</li>
+                    <li><b>Consecration:</b> Completed thangkas are blessed by lamas before use in religious practices.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Thangka Painting" style="height:200px;width: 230px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Wood Carving" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Wood Carving & Architecture 🏯</h3>
+                  <h4>🔸 Monastery and Palace Architecture</h4>
+                  <ul>
+                    <li><b>Style:</b> Distinctive Tibetan-influenced architecture with massive walls sloping inward.</li>
+                    <li><b>Features:</b> Ornate wooden columns, beams, and balconies with intricate carvings.</li>
+                    <li><b>Examples:</b> Leh Palace, Hemis Monastery, Thiksey Monastery, Alchi Monastery.</li>
+                  </ul>
+                  <h4>🔸 Decorative Wood Carving</h4>
+                  <ul>
+                    <li><b>Designs:</b> Buddhist symbols (endless knot, lotus, dharma wheel), dragons, and floral motifs.</li>
+                    <li><b>Applications:</b> Prayer wheels, altars, doors, window frames, and furniture.</li>
+                    <li><b>Materials:</b> Primarily willow and poplar, as these are among the few trees that grow in Ladakh's harsh climate.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Clay Sculpture & Pottery 🏺</h3>
+                  <ul>
+                    <li><b>Clay Statues:</b> Large and small religious sculptures of Buddha and other deities found in monasteries.</li>
+                    <li><b>Torma:</b> Ritual sculptures made from barley flour and butter, often elaborately colored and decorated for ceremonies.</li>
+                    <li><b>Traditional Pottery:</b> Practical items like storage jars, cooking pots, and ceremonial vessels.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Clay Sculpture" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Textile Arts" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Textile Arts & Weaving 🧵</h3>
+                  <h4>🔸 Pashmina</h4>
+                  <ul>
+                    <li><b>Origin:</b> Wool from the Changra goats raised by nomadic Changpa people in eastern Ladakh.</li>
+                    <li><b>Process:</b> Hand-combing, spinning, and weaving of the ultra-fine wool (14-19 microns).</li>
+                    <li><b>Products:</b> Luxury shawls, scarves, and blankets known worldwide for their softness and warmth.</li>
+                  </ul>
+                  <h4>🔸 Traditional Costumes</h4>
+                  <ul>
+                    <li><b>Goncha:</b> Traditional woolen robe worn by both men and women, adapted for the cold climate.</li>
+                    <li><b>Perak:</b> Elaborate headdress worn by women, adorned with turquoise stones and extending down the back.</li>
+                    <li><b>Sulma:</b> Traditional women's dress with colorful embroidery and appliqué work.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Metal Craft 🔨</h3>
+                  <ul>
+                    <li><b>Silver Jewelry:</b> Intricate necklaces, earrings, and bracelets often incorporating turquoise and coral.</li>
+                    <li><b>Ritual Objects:</b> Butter lamps, prayer wheels, singing bowls, and ceremonial instruments.</li>
+                    <li><b>Techniques:</b> Lost-wax casting, repoussé (hammered relief), and filigree work.</li>
+                    <li><b>Materials:</b> Silver, copper, and brass, often with semi-precious stones.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Metal Craft" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Mask Making" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>6. Mask Making 🎭</h3>
+                  <ul>
+                    <li><b>Purpose:</b> Used in Cham dances during monastery festivals (tsechus).</li>
+                    <li><b>Materials:</b> Papier-mâché, clay, or wood with vibrant paint and decorations.</li>
+                    <li><b>Designs:</b> Represent various deities, demons, and animals from Buddhist mythology.</li>
+                    <li><b>Significance:</b> Each mask has specific religious symbolism and is treated with reverence.</li>
+                  </ul>
+                  <h3>7. Carpet Weaving 🧶</h3>
+                  <ul>
+                    <li><b>Techniques:</b> Traditional hand-knotting methods using vertical looms.</li>
+                    <li><b>Designs:</b> Geometric patterns, Buddhist symbols, and stylized dragons or snow lions.</li>
+                    <li><b>Materials:</b> Sheep wool and sometimes yak hair for durability and warmth.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>8. Stone Carving 🪨</h3>
+                  <ul>
+                    <li><b>Mani Stones:</b> Rocks carved with the Buddhist mantra "Om Mani Padme Hum" and other prayers.</li>
+                    <li><b>Mani Walls:</b> Collections of carved prayer stones, sometimes stretching for hundreds of meters.</li>
+                    <li><b>Stone Reliefs:</b> Buddhist imagery carved on cliff faces and rocks throughout Ladakh.</li>
+                  </ul>
+                  <h3>9. Butter Sculpture 🧈</h3>
+                  <ul>
+                    <li><b>Purpose:</b> Religious offerings created for monastery altars and festivals.</li>
+                    <li><b>Process:</b> Yak butter is colored with natural pigments and sculpted into intricate forms.</li>
+                    <li><b>Designs:</b> Buddhist symbols, flowers, and deities, often illuminated with butter lamps.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Mani Stones" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>📌 Summary: Ladakh's Art & Craft Forms</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Art Form</th>
+                <th>Materials</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Thangka Painting</td>
+                <td>Canvas, mineral pigments, gold</td>
+                <td>Sacred Buddhist scroll paintings</td>
+              </tr>
+              <tr>
+                <td>Wood Carving</td>
+                <td>Willow, poplar</td>
+                <td>Monastery architecture, prayer wheels</td>
+              </tr>
+              <tr>
+                <td>Clay Sculpture</td>
+                <td>Local clay, pigments</td>
+                <td>Buddha statues, ritual objects</td>
+              </tr>
+              <tr>
+                <td>Pashmina Weaving</td>
+                <td>Changra goat wool</td>
+                <td>Ultra-fine luxury shawls and scarves</td>
+              </tr>
+              <tr>
+                <td>Metal Craft</td>
+                <td>Silver, copper, brass</td>
+                <td>Jewelry, ritual objects</td>
+              </tr>
+              <tr>
+                <td>Mask Making</td>
+                <td>Papier-mâché, wood</td>
+                <td>Cham dance masks for festivals</td>
+              </tr>
+              <tr>
+                <td>Carpet Weaving</td>
+                <td>Sheep wool, yak hair</td>
+                <td>Traditional geometric patterns</td>
+              </tr>
+              <tr>
+                <td>Stone Carving</td>
+                <td>Local stone</td>
+                <td>Mani stones with Buddhist prayers</td>
+              </tr>
+              <tr>
+                <td>Butter Sculpture</td>
+                <td>Yak butter, pigments</td>
+                <td>Religious offerings for festivals</td>
+              </tr>
+              <tr>
+                <td>Traditional Costume</td>
+                <td>Wool, silk, turquoise</td>
+                <td>Goncha robes, Perak headdresses</td>
+              </tr>
+            </table>
+          </div>
+          <br><br>
+          <p>Ladakh's arts and crafts represent a unique cultural heritage that has evolved over centuries in response to the region's environment, religious traditions, and cultural exchanges. Despite modernization, these traditional art forms continue to thrive, providing both cultural continuity and economic opportunities for local artisans. 🎭✨</p>
+          <br><br>
+        </div>
+        <div id="wbseason" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Seasons to visit Ladakh 🌧️☀️ </h1>
+          <p>Ladakh's extreme climate and high altitude create distinct seasons that dramatically affect travel conditions, accessibility, and experiences. Understanding these seasonal variations is crucial for planning a visit to this high-altitude desert region.</p>
+
+          <br><br>
+
+          <h2> Season-wise Breakdown for Visiting Ladakh</h2>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>☀️ Summer (June - September)</h3>
+                  <ul>
+                    <li>The peak tourist season with pleasant daytime temperatures (15-30°C) and cool nights (5-15°C).</li>
+                    <li>All mountain passes (Khardung La, Chang La) are open, providing access to Nubra Valley, Pangong Lake, and Tso Moriri.</li>
+                    <li>Perfect for trekking, motorcycle tours, river rafting, and exploring remote areas.</li>
+                    <li>Monasteries host major festivals like Hemis Festival (June/July) and Phyang Tsedup (July/August).</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Ladakh Summer" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Ladakh Autumn" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🍁 Autumn (Late September - October)</h3>
+                  <ul>
+                    <li>A beautiful season with fewer tourists and stunning golden landscapes as vegetation changes color.</li>
+                    <li>Daytime temperatures range from 10-20°C, with nights dropping to 0-5°C.</li>
+                    <li>Most roads and passes remain open, though some may close by late October.</li>
+                    <li>The Ladakh Festival in September showcases the region's cultural heritage.</li>
+                    <li>Perfect for photography and more peaceful monastery visits.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>❄️ Winter (November - February)</h3>
+                  <ul>
+                    <li>Extremely cold with daytime temperatures between -5 to 5°C and nights plummeting to -20°C or lower.</li>
+                    <li>Most mountain passes close, and many areas become inaccessible.</li>
+                    <li>The Leh-Srinagar and Leh-Manali highways are completely closed.</li>
+                    <li>Only accessible by air, with flights often delayed or canceled due to weather.</li>
+                    <li>Unique experiences include the Chadar Trek (frozen river trek) and winter festivals like Losar (Ladakhi New Year).</li>
+                    <li>Accommodation options are limited as many hotels and guesthouses close for the season.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Ladakh Winter" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Ladakh Spring" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🌸 Spring (March - May)</h3>
+                  <ul>
+                    <li>A transitional season as Ladakh thaws from winter.</li>
+                    <li>Temperatures gradually rise from 0-10°C in March to 10-20°C by May.</li>
+                    <li>Mountain passes begin to open by late May, but road conditions can be unpredictable due to melting snow and landslides.</li>
+                    <li>Apricot and apple trees bloom in lower valleys, creating beautiful landscapes.</li>
+                    <li>Fewer tourists mean more authentic experiences and better accommodation rates.</li>
+                    <li>The Matho Nagrang festival (March) features oracle monks in trance states making predictions for the coming year.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🌧️ Monsoon (July - August)</h3>
+                  <ul>
+                    <li>Unlike most of India, Ladakh receives minimal rainfall due to its rain shadow location.</li>
+                    <li>Occasional cloudbursts and flash floods can occur, particularly in August.</li>
+                    <li>The Indus and other rivers flow at their fullest, creating dramatic landscapes.</li>
+                    <li>Road conditions on the Leh-Manali and Leh-Srinagar highways can deteriorate due to landslides in surrounding areas.</li>
+                    <li>The landscape is at its greenest, especially in valley areas.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Ladakh Monsoon" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>📌 Summary: Best Time to Visit Different Places in Ladakh</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Region</th>
+                <th>Best Season</th>
+                <th>Recommended Months</th>
+                <th>Why Visit?</th>
+              </tr>
+              <tr>
+                <td>Leh Town</td>
+                <td>Summer, Autumn</td>
+                <td>June - October</td>
+                <td>Pleasant weather, all attractions open, cultural festivals</td>
+              </tr>
+              <tr>
+                <td>Nubra Valley</td>
+                <td>Summer, Early Autumn</td>
+                <td>June - September</td>
+                <td>Double-humped camels, sand dunes, apricot orchards, Diskit Monastery</td>
+              </tr>
+              <tr>
+                <td>Pangong Lake</td>
+                <td>Summer</td>
+                <td>June - September</td>
+                <td>Vibrant blue waters, clear skies for photography</td>
+              </tr>
+              <tr>
+                <td>Tso Moriri Lake</td>
+                <td>Summer</td>
+                <td>June - September</td>
+                <td>High-altitude lake, migratory birds, nomadic settlements</td>
+              </tr>
+              <tr>
+                <td>Zanskar Valley</td>
+                <td>Summer</td>
+                <td>July - August</td>
+                <td>Remote villages, monasteries, river rafting</td>
+              </tr>
+              <tr>
+                <td>Chadar Trek (Frozen Zanskar River)</td>
+                <td>Winter</td>
+                <td>January - February</td>
+                <td>Unique frozen river trek, pristine winter landscapes</td>
+              </tr>
+              <tr>
+                <td>Kargil</td>
+                <td>Summer</td>
+                <td>June - September</td>
+                <td>War memorial, access to Zanskar, milder temperatures than Leh</td>
+              </tr>
+              <tr>
+                <td>Hemis National Park</td>
+                <td>Summer, Autumn</td>
+                <td>June - October</td>
+                <td>Wildlife spotting, including snow leopards (best in winter but extremely challenging)</td>
+              </tr>
+              <tr>
+                <td>Monastery Festivals</td>
+                <td>Summer</td>
+                <td>June - September</td>
+                <td>Hemis Festival (June/July), Phyang Tsedup (July/August), Ladakh Festival (September)</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="container">
+            <div class="row">
+              <h1 style=" text-align: center;">📌 Summary: When to Visit Ladakh</h1><br>
+              <ul>
+                <li><b>For general tourism & sightseeing:</b> June - September (summer season with optimal weather and accessibility)</li>
+                <li><b>For photography & fewer crowds:</b> Late September - October (autumn with golden landscapes)</li>
+                <li><b>For adventure activities:</b> July - August (river rafting), January - February (Chadar Trek)</li>
+                <li><b>For cultural experiences:</b> Time your visit with monastery festivals (Hemis in June/July, Phyang in July/August)</li>
+                <li><b>For budget travelers:</b> May and October (shoulder seasons with lower accommodation rates)</li>
+              </ul>
+
+            </div>
+          </div>
+          <br><br>
+        </div>
+        <div id="wbtourist" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Tourist Spots of Ladakh 🏔️🏞️</h1>
+          <p>Ladakh is a land of dramatic landscapes, ancient monasteries, high mountain passes, and unique cultural experiences. Here's a categorized list of the best tourist places in Ladakh:</p>
+
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Monasteries & Religious Sites 🏯</h3>
+                  <ul>
+                    <li><b>Hemis Monastery -</b> Largest and wealthiest monastery in Ladakh, famous for its annual festival and museum with ancient artifacts</li>
+                    <li><b>Thiksey Monastery -</b> 12-story complex resembling Tibet's Potala Palace, housing a 49-foot Buddha statue</li>
+                    <li><b>Diskit Monastery -</b> Oldest monastery in Nubra Valley with a 32-meter tall Maitreya Buddha statue</li>
+                    <li><b>Alchi Monastery -</b> Ancient monastery complex with 1000-year-old murals and Kashmiri-influenced architecture</li>
+                    <li><b>Lamayuru Monastery -</b> One of the oldest monasteries set in a "moonscape" landscape</li>
+                    <li><b>Shanti Stupa -</b> White-domed structure in Leh offering panoramic views of the surrounding mountains</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Thiksey Monastery" style="height:200px;width: 230px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Leh Palace" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Historical & Cultural Sites 🏛️</h3>
+                  <ul>
+                    <li><b>Leh Palace -</b> Nine-story royal palace built in the 17th century, modeled after Tibet's Potala Palace</li>
+                    <li><b>Stok Palace Museum -</b> Royal residence and museum housing artifacts of the Ladakhi royal family</li>
+                    <li><b>Magnetic Hill -</b> A natural wonder where vehicles appear to roll uphill against gravity</li>
+                    <li><b>Hall of Fame -</b> Museum dedicated to the Indian Army and the Kargil War</li>
+                    <li><b>Kargil War Memorial -</b> Monument in Drass commemorating the 1999 Kargil War</li>
+                    <li><b>Gurdwara Pathar Sahib -</b> Sikh shrine associated with Guru Nanak Dev Ji</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Lakes & Water Bodies 🏞️</h3>
+                  <ul>
+                    <li><b>Pangong Lake -</b> Stunning high-altitude lake with changing blue hues, straddling India and China</li>
+                    <li><b>Tso Moriri -</b> Sacred lake in the Changthang region, known for its pristine waters and migratory birds</li>
+                    <li><b>Tso Kar -</b> Salt lake surrounded by mountains and home to rare wildlife</li>
+                    <li><b>Yarab Tso -</b> Small hidden lake near Sumur considered sacred by locals</li>
+                    <li><b>Kyagar Tso -</b> Remote high-altitude lake in eastern Ladakh</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Pangong Lake" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Nubra Valley" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Valleys & Landscapes 🏜️</h3>
+                  <ul>
+                    <li><b>Nubra Valley -</b> Known for sand dunes, double-humped Bactrian camels, and apricot orchards</li>
+                    <li><b>Zanskar Valley -</b> Remote region with dramatic gorges, traditional villages, and the famous Chadar Trek</li>
+                    <li><b>Sham Valley -</b> Also called "Apricot Valley," known for easy treks and traditional villages</li>
+                    <li><b>Markha Valley -</b> Popular trekking destination with traditional homestays</li>
+                    <li><b>Changthang Plateau -</b> High-altitude plateau home to nomadic Changpa tribes and pashmina goats</li>
+                    <li><b>Dha-Hanu Valley -</b> Home to the Drokpa tribe, believed to be of Aryan origin</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Mountain Passes 🏔️</h3>
+                  <ul>
+                    <li><b>Khardung La -</b> One of the world's highest motorable passes at 17,982 feet, gateway to Nubra Valley</li>
+                    <li><b>Chang La -</b> Third highest motorable pass at 17,688 feet, en route to Pangong Lake</li>
+                    <li><b>Zoji La -</b> Gateway to Ladakh from Kashmir, offering dramatic views</li>
+                    <li><b>Tanglang La -</b> Second highest motorable pass on the Leh-Manali highway</li>
+                    <li><b>Pensi La -</b> Pass connecting Kargil to Zanskar, offering views of the Drang-Drung Glacier</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Khardung La Pass" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Hemis National Park" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>6. Wildlife & Nature 🐆</h3>
+                  <ul>
+                    <li><b>Hemis National Park -</b> Largest national park in South Asia and home to the endangered snow leopard</li>
+                    <li><b>Drang-Drung Glacier -</b> Second longest glacier in Ladakh, source of the Doda River</li>
+                    <li><b>Tso Moriri Wetland Conservation Reserve -</b> Important breeding ground for migratory birds</li>
+                    <li><b>Karakoram Wildlife Sanctuary -</b> Home to rare species like the Tibetan wild ass (kiang) and Tibetan gazelle</li>
+                    <li><b>Indus River Viewpoints -</b> Scenic spots to view the mighty Indus River that flows through Ladakh</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Adventure & Trekking Destinations 🧗‍♂️</h3>
+                  <ul>
+                    <li><b>Chadar Trek -</b> Unique winter trek on the frozen Zanskar River</li>
+                    <li><b>Markha Valley Trek -</b> Popular trek through traditional villages and high mountain passes</li>
+                    <li><b>Stok Kangri -</b> One of the highest trekkable peaks at 20,187 feet (currently closed for climbing)</li>
+                    <li><b>Rafting on Zanskar River -</b> World-class white water rafting through deep gorges</li>
+                    <li><b>Sham Valley Trek -</b> Beginner-friendly trek through picturesque villages</li>
+                    <li><b>Motorcycle Routes -</b> Leh-Manali and Leh-Srinagar highways offer epic motorcycle journeys</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Chadar Trek" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Leh Market" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>8. Markets & Shopping 🛍️</h3>
+                  <ul>
+                    <li><b>Leh Main Market -</b> Bustling bazaar selling Tibetan handicrafts, pashmina shawls, and souvenirs</li>
+                    <li><b>Tibetan Refugee Market -</b> Market run by Tibetan refugees selling authentic Tibetan goods</li>
+                    <li><b>Moti Market -</b> Known for traditional Ladakhi jewelry with turquoise and coral</li>
+                    <li><b>Alchi Kitchen -</b> Famous restaurant offering cooking classes in traditional Ladakhi cuisine</li>
+                    <li><b>Ladakh Art Palace -</b> Gallery showcasing and selling traditional thangka paintings</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>9. Unique Experiences 🌟</h3>
+                  <ul>
+                    <li><b>Monastery Festivals -</b> Colorful religious festivals with masked dances (Hemis Festival, Phyang Tsedup)</li>
+                    <li><b>Homestays in Traditional Houses -</b> Experience authentic Ladakhi lifestyle with local families</li>
+                    <li><b>Stargazing -</b> Clear skies and minimal light pollution make Ladakh perfect for astronomy</li>
+                    <li><b>Bactrian Camel Safari -</b> Ride double-humped camels in the sand dunes of Hunder</li>
+                    <li><b>Visit to Changpa Nomads -</b> Meet the nomadic tribes who produce pashmina wool</li>
+                    <li><b>River Confluences -</b> View the meeting points of major rivers like Indus-Zanskar confluence</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Monastery Festival" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br><br>
+
+        </div>
+        <div id="wbwild" class="tab-pane fade in active" style="background-color: white;">
+          <h1> Wildlife & Crops of Ladakh 🌿</h1>
+          <p>Ladakh's extreme environment - high altitude, low oxygen, minimal rainfall, and temperature extremes - has led to unique adaptations in both wildlife and agriculture. Despite being a high-altitude desert, Ladakh supports remarkable biodiversity and specialized farming practices.</p>
+
+          <br>
+          <h2>Wildlife of Ladakh </h2>
+          <p>Ladakh is home to several rare and endangered species that have adapted to its harsh environment. The region has one national park and several wildlife sanctuaries.</p>
+
+          <br>
+          <h2>🔹 Major National Parks & Wildlife Sanctuaries</h2>
+          <div>
+            <table>
+              <tr>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Hemis National Park</td>
+                <td>Eastern Ladakh</td>
+                <td>Snow Leopards 🐆, Himalayan Blue Sheep, Ladakhi Urial</td>
+              </tr>
+              <tr>
+                <td>Changthang Wildlife Sanctuary</td>
+                <td>Eastern Ladakh</td>
+                <td>Kiang (Tibetan Wild Ass), Black-necked Cranes, Tibetan Gazelle</td>
+              </tr>
+              <tr>
+                <td>Karakoram Wildlife Sanctuary</td>
+                <td>Northern Ladakh</td>
+                <td>Marco Polo Sheep, Tibetan Wolf, Eurasian Lynx</td>
+              </tr>
+              <tr>
+                <td>Tso Moriri Wetland Conservation Reserve</td>
+                <td>Southeastern Ladakh</td>
+                <td>Migratory Birds, Bar-headed Geese, Brahminy Ducks</td>
+              </tr>
+              <tr>
+                <td>Pangong Tso Wetland</td>
+                <td>Eastern Ladakh</td>
+                <td>Migratory Birds, Scenic Lake Ecosystem</td>
+              </tr>
+            </table>
+          </div>
+          <bt><br></bt>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3> 🔹 Notable Wildlife in Ladakh</h3>
+                <ul>
+                  <li><b>Mammals:</b> Snow Leopard (State Animal), Tibetan Wolf, Eurasian Brown Bear, Himalayan Marmot, Tibetan Argali, Bharal (Blue Sheep), Ibex, Ladakhi Urial, Pika.</li>
+                  <li><b>Birds:</b> Black-necked Crane (State Bird), Lammergeier (Bearded Vulture), Golden Eagle, Himalayan Griffon, Tibetan Snowcock, Chukar Partridge, Bar-headed Goose.</li>
+                  <li><b>Reptiles & Amphibians:</b> Himalayan Agama Lizard, Toad-headed Agama, few amphibians due to the arid climate.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=200" alt="Snow Leopard" style="height:200px;width: 200px;">
+
+              </div>
+
+            </div>
+          </div>
+          <hr><br>
+          <h2>🌾 Agriculture & Major Crops in Ladakh </h2>
+          <p>Ladakh's agriculture is characterized by its short growing season (4-5 months), extreme conditions, and ingenious water management systems. Farming is concentrated in river valleys where glacial meltwater is available for irrigation.</p>
+
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Key Agricultural Features</h3>
+                <ul>
+                  <li><b>Traditional Farming:</b> Sustainable practices adapted to the harsh environment over centuries.</li>
+                  <li><b>Water Management:</b> Sophisticated irrigation channels (zings) divert glacial meltwater to fields.</li>
+                  <li><b>Terraced Farming:</b> Stepped fields on hillsides maximize limited arable land.</li>
+                  <li><b>Organic by Default:</b> Most Ladakhi farming is organic due to traditional practices and limited access to chemical inputs.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=220" alt="Ladakhi Agriculture" style="height:200px;width: 220px;">
+
+              </div>
+            </div>
+          </div>
+          <h2>🔹 Major Crops of Ladakh</h2>
+          <div>
+            <table>
+              <tr>
+                <th>Category</th>
+                <th>Crops</th>
+              </tr>
+              <tr>
+                <td>Cereals</td>
+                <td>Barley (main staple), Wheat, Buckwheat, Millets</td>
+              </tr>
+              <tr>
+                <td>Vegetables</td>
+                <td>Potatoes 🥔, Turnips, Radishes, Peas, Carrots, Cabbage</td>
+              </tr>
+              <tr>
+                <td>Fruits</td>
+                <td>Apricots 🍑 (especially in Nubra Valley), Apples 🍎, Walnuts, Mulberries</td>
+              </tr>
+              <tr>
+                <td>Medicinal Plants</td>
+                <td>Sea Buckthorn, Rhodiola, Artemisia, Ephedra, Juniper</td>
+              </tr>
+              <tr>
+                <td>Fodder Crops</td>
+                <td>Alfalfa, Native Grasses</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Special Agricultural Products</h3>
+                <ul>
+                  <li><b>Pashmina Wool:</b> Ultra-fine wool from Changra goats raised by nomadic Changpa people in eastern Ladakh.</li>
+                  <li><b>Sea Buckthorn:</b> "Miracle berry" with high vitamin content, used for juices, jams, and medicinal purposes.</li>
+                  <li><b>Apricots from Nubra Valley:</b> Known for exceptional sweetness and quality.</li>
+                  <li><b>Barley:</b> Used for traditional foods like tsampa (roasted barley flour) and chang (barley beer).</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=200" alt="Pashmina Goats" style="height:200px;width: 200px;">
+
+              </div>
+            </div>
+          </div><br>
+          <hr>
+          <div class="box" style=" background: #f3b37185;padding: 10px;">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3> Sustainable Agriculture & Modern Trends 🌾</h3>
+                  <ul>
+                    <li><b>Greenhouse Technology:</b> Solar passive greenhouses extend the growing season and allow cultivation of new vegetables.</li>
+                    <li><b>Water Conservation:</b> Artificial glaciers (ice stupas) store winter water for spring irrigation.</li>
+                    <li><b>Organic Certification:</b> Efforts to certify Ladakh's naturally organic produce for premium markets.</li>
+                    <li><b>Climate Change Adaptation:</b> Shifting cultivation patterns and crop varieties to adapt to changing conditions.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Ice Stupa" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Ladakh's wildlife and agriculture represent remarkable adaptations to one of the world's most extreme environments. Both have evolved unique characteristics that allow survival in this high-altitude desert, creating ecosystems and farming systems found nowhere else on Earth.</p>
+          <br><br>
+        </div>
+        <div id="wbedu" class="tab-pane fade in active" style="background-color: white;">
+          <h1>🎓 Education & Institutions in Ladakh</h1>
+          <p>Education in Ladakh has evolved significantly over the centuries, from traditional monastic education to modern schools and higher education institutions. The region's remote location, harsh climate, and cultural uniqueness have shaped its educational landscape.</p>
+
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>📌 Traditional Education in Ladakh</h3>
+                  <ul>
+                    <li><b>Monastic Education:</b> For centuries, monasteries (gompas) were the primary centers of learning, where young monks studied Buddhist philosophy, religious texts, meditation, and traditional arts.</li>
+                    <li><b>Apprenticeship System:</b> Traditional crafts, medicine, and practical skills were taught through family-based apprenticeships.</li>
+                    <li><b>Oral Traditions:</b> Knowledge of history, folklore, and cultural practices was passed down through storytelling and oral traditions.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Monastic Education" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>🏛️ Modern Educational Institutions </h2>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Higher Education</h3>
+                <ol>
+                  <li><b>University of Ladakh -</b> Established in 2019, the first university in Ladakh with campuses in Leh and Kargil, offering undergraduate and postgraduate programs.</li>
+                  <li><b>Eliezer Joldan Memorial College (Leh) -</b> One of the oldest colleges in Ladakh, affiliated with the University of Ladakh.</li>
+                  <li><b>Government Degree College (Kargil) -</b> Major higher education institution in Kargil district.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=230" alt="University of Ladakh" style="height:200px;width: 230px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Technical and Vocational Education</h3>
+                <ol>
+                  <li><b>Industrial Training Institute (ITI), Leh -</b> Offers technical and vocational training in various trades.</li>
+                  <li><b>Ladakh Autonomous Hill Development Council Skill Development Programs -</b> Short-term vocational courses in tourism, handicrafts, and construction.</li>
+                  <li><b>Central Institute of Buddhist Studies (CIBS) -</b> Deemed university focusing on Buddhist philosophy, Tibetan language, and traditional arts.</li>
+                  <li><b>Defence Institute of High Altitude Research (DIHAR) -</b> DRDO institute conducting research on high-altitude agriculture and providing training to local farmers.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=230" alt="Technical Education" style="height:200px;width: 230px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Institution</th>
+                <th>Location</th>
+                <th>Specialization</th>
+              </tr>
+              <tr>
+                <td>University of Ladakh</td>
+                <td>Leh and Kargil</td>
+                <td>Multi-disciplinary programs in Arts, Science, Commerce</td>
+              </tr>
+              <tr>
+                <td>Central Institute of Buddhist Studies</td>
+                <td>Leh</td>
+                <td>Buddhist Philosophy, Tibetan Language, Traditional Arts</td>
+              </tr>
+              <tr>
+                <td>Eliezer Joldan Memorial College</td>
+                <td>Leh</td>
+                <td>Undergraduate programs in Arts and Science</td>
+              </tr>
+              <tr>
+                <td>Government Degree College</td>
+                <td>Kargil</td>
+                <td>Undergraduate programs in Arts, Science, and Commerce</td>
+              </tr>
+              <tr>
+                <td>Industrial Training Institute</td>
+                <td>Leh</td>
+                <td>Technical and vocational training</td>
+              </tr>
+              <tr>
+                <td>Defence Institute of High Altitude Research</td>
+                <td>Leh</td>
+                <td>High-altitude agriculture research</td>
+              </tr>
+            </table>
+          </div>
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=240" alt="School Education" style="height:200px;width: 240px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🔹 School Education</h3>
+                  <ol>
+                    <li><b>Government Schools -</b> Network of primary and secondary schools run by the Ladakh administration.</li>
+                    <li><b>Jawahar Navodaya Vidyalaya -</b> Residential schools providing quality education to talented rural students.</li>
+                    <li><b>Army Goodwill Schools -</b> Schools established by the Indian Army in remote areas.</li>
+                    <li><b>Private Schools -</b> Including Lamdon Model School, Moravian Mission School, and SOS Children's Village.</li>
+                    <li><b>Residential Schools -</b> Boarding schools that serve students from remote villages where daily commuting is impossible.</li>
+                  </ol>
+                </div>
+
+                <br><br>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>School Type</th>
+                <th>Examples</th>
+                <th>Features</th>
+              </tr>
+              <tr>
+                <td>Government Schools</td>
+                <td>Government Higher Secondary Schools in Leh, Kargil, Nubra, etc.</td>
+                <td>Follow J&K Board curriculum (transitioning to CBSE), instruction in English, Urdu, and Ladakhi</td>
+              </tr>
+              <tr>
+                <td>Private Schools</td>
+                <td>Lamdon Model School, Moravian Mission School</td>
+                <td>English-medium instruction, CBSE curriculum, better infrastructure</td>
+              </tr>
+              <tr>
+                <td>Army Goodwill Schools</td>
+                <td>AGS Kargil, AGS Hunder</td>
+                <td>Established in remote areas, subsidized education, quality infrastructure</td>
+              </tr>
+              <tr>
+                <td>Residential Schools</td>
+                <td>Jawahar Navodaya Vidyalaya, SOS Children's Village</td>
+                <td>Boarding facilities for students from remote villages</td>
+              </tr>
+              <tr>
+                <td>Monastic Schools</td>
+                <td>Drukpa Lineage Schools, Spituk Monastery School</td>
+                <td>Traditional Buddhist education combined with modern subjects</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🔹 Educational Challenges in Ladakh</h3>
+                  <ul>
+                    <li><b>Geographic Isolation:</b> Remote villages lack access to quality education, with some students walking several kilometers daily or requiring boarding facilities.</li>
+                    <li><b>Harsh Climate:</b> Schools in high-altitude areas often close for extended winter breaks (up to 3 months) due to extreme cold.</li>
+                    <li><b>Teacher Shortages:</b> Difficulty attracting and retaining qualified teachers, especially in specialized subjects.</li>
+                    <li><b>Cultural Preservation:</b> Balancing modern education with preservation of Ladakhi language and cultural traditions.</li>
+                    <li><b>Limited Higher Education Options:</b> Students often must leave Ladakh for specialized higher education.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Educational Challenges" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Educational Innovations" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🔹 Innovations in Ladakhi Education</h3>
+                  <ul>
+                    <li><b>SECMOL (Students' Educational and Cultural Movement of Ladakh):</b> Founded by education reformer Sonam Wangchuk, this alternative school helps students who have failed in the conventional system while promoting sustainable living and cultural preservation.</li>
+                    <li><b>Ice Stupa Project:</b> Educational initiative teaching students about climate change adaptation and water conservation.</li>
+                    <li><b>Solar-Powered Schools:</b> Addressing electricity shortages through renewable energy.</li>
+                    <li><b>Digital Learning Initiatives:</b> Satellite-based education and computer literacy programs to connect remote schools.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🔹 Research Institutions</h3>
+                  <ul>
+                    <li><b>Defence Institute of High Altitude Research (DIHAR):</b> DRDO laboratory researching high-altitude agriculture, animal husbandry, and food preservation.</li>
+                    <li><b>Ladakh Ecological Development Group (LEDeG):</b> Research on sustainable development, renewable energy, and appropriate technology for the region.</li>
+                    <li><b>Field Research Station, Wildlife Institute of India:</b> Research on snow leopards and high-altitude wildlife.</li>
+                    <li><b>National Research Institute for Sowa-Rigpa:</b> Research center for traditional Tibetan medicine.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Research Institutions" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <h2>🔬 Recent Developments in Education</h2>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <ul>
+                    <li><b>Union Territory Status Impact:</b> Since becoming a Union Territory in 2019, Ladakh has seen increased educational funding and infrastructure development.</li>
+                    <li><b>University of Ladakh Expansion:</b> New departments and courses being added to reduce student migration to other states.</li>
+                    <li><b>Digital Education Push:</b> Efforts to bridge the digital divide through satellite internet connections and computer labs in schools.</li>
+                    <li><b>Cultural Curriculum:</b> Development of Ladakh-specific educational materials that reflect local culture, history, and environmental conditions.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Recent Developments" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <h2>📚 Future Prospects</h2>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <ul>
+                    <li><b>Specialized Institutions:</b> Plans for specialized institutes focusing on mountain development, tourism, and renewable energy.</li>
+                    <li><b>Traditional Knowledge Documentation:</b> Efforts to document and integrate traditional ecological knowledge and cultural practices into formal education.</li>
+                    <li><b>Educational Tourism:</b> Programs allowing visitors to learn about Ladakhi culture, sustainable living, and Buddhist philosophy.</li>
+                    <li><b>Climate Change Education:</b> Increasing focus on environmental education and adaptation strategies for high-altitude regions.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Future Prospects" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Education in Ladakh continues to evolve, balancing modern knowledge with traditional wisdom. Despite challenges posed by geography and climate, innovative approaches are helping to create an educational system uniquely adapted to Ladakh's environment and cultural context.</p>
+        </div>
+        <br><br>
+
+      </div>
+
+
+    </div>
+  </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,1023 @@
+{% extends "base.html" %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PeakPulse - Mountain Trekking in India</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Custom CSS -->
+    <style>
+        .bo {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+        }
+        
+        .hero-section {
+            background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2070') no-repeat center center;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(46, 125, 50, 0.5), rgba(76, 175, 80, 0.5));
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        .hero-section h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease-in-out;
+        }
+        .hero-section p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease-in-out 0.3s;
+            animation-fill-mode: both;
+        }
+        .hero-section .btn {
+            font-size: 1.2rem;
+            padding: 12px 30px;
+            background-color: #2e7d32;
+            border: none;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            animation: fadeInUp 1s ease-in-out 0.6s;
+            animation-fill-mode: both;
+        }
+        .hero-section .btn:hover {
+            background-color: #4caf50;
+            transform: translateY(-5px) scale(1.05);
+        }
+        .treks-section {
+            background: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2070') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            padding: 80px 0;
+        }
+        .treks-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(240, 244, 248, 0.9);
+            z-index: 1;
+        }
+        .treks-section .container {
+            position: relative;
+            z-index: 2;
+        }
+        .trek-card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: #fff;
+            animation: fadeInUp 0.5s ease-out;
+            animation-fill-mode: both;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .trek-card:nth-child(1) { animation-delay: 0.1s; }
+        .trek-card:nth-child(2) { animation-delay: 0.2s; }
+        .trek-card:nth-child(3) { animation-delay: 0.3s; }
+        .trek-card:nth-child(4) { animation-delay: 0.4s; }
+        .trek-card:nth-child(5) { animation-delay: 0.5s; }
+        .trek-card:nth-child(6) { animation-delay: 0.6s; }
+        .trek-card:nth-child(7) { animation-delay: 0.7s; }
+        .trek-card:nth-child(8) { animation-delay: 0.8s; }
+        .trek-card:nth-child(9) { animation-delay: 0.9s; }
+        .trek-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        .trek-card img {
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .trek-card:hover img {
+            transform: scale(1.05);
+        }
+        .trek-card .card-body {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .trek-card .card-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            color: #2e7d32;
+            transition: color 0.3s ease;
+        }
+        .trek-card:hover .card-title {
+            color: #4caf50;
+        }
+        .trek-card .card-text {
+            color: #555;
+            flex-grow: 1;
+        }
+        .trek-card .btn {
+            background-color: #4caf50;
+            border: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .trek-card .btn:hover {
+            background-color: #2e7d32;
+            transform: translateY(-3px);
+        }
+        .activities-section {
+            background: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2070') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            padding: 80px 0;
+        }
+        .activities-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            z-index: 1;
+        }
+        .activities-section .container {
+            position: relative;
+            z-index: 2;
+        }
+        .activities-section h2, .treks-section h2, .contact-section h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: #2e7d32;
+            font-size: 2.8rem;
+            margin-bottom: 40px;
+            animation: fadeInDown 0.5s ease-out;
+        }
+        .activities-section h4 {
+            color: #4caf50;
+            font-family: 'Montserrat', sans-serif;
+            transition: color 0.3s ease;
+        }
+        .activities-section h4:hover {
+            color: #2e7d32;
+        }
+        .contact-section {
+            background: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2070') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            padding: 80px 0;
+        }
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(240, 244, 248, 0.9);
+            z-index: 1;
+        }
+        .contact-section .container {
+            position: relative;
+            z-index: 2;
+        }
+        .contact-section .form-control {
+            border-radius: 10px;
+            border: 1px solid #4caf50;
+            padding: 12px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .contact-section .form-control:focus {
+            border-color: #2e7d32;
+            box-shadow: 0 0 8px rgba(46, 125, 50, 0.3);
+        }
+        .contact-section .btn {
+            background-color: #2e7d32;
+            border: none;
+            padding: 12px;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .contact-section .btn:hover {
+            background-color: #4caf50;
+            transform: translateY(-3px);
+        }
+        footer {
+            background: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2070') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            color: #fff;
+            padding: 30px 0;
+            font-size: 1rem;
+        }
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(46, 125, 50, 0.8), rgba(76, 175, 80, 0.8));
+            z-index: 1;
+        }
+        footer .container {
+            position: relative;
+            z-index: 2;
+        }
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideInDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .section-title {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-bottom: 1rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, #2e7d32, #4caf50);
+            animation: pulse 2s infinite;
+        }
+        .card {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+        .btn {
+            border-radius: 25px;
+            padding: 10px 25px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .modal-content {
+            border-radius: 15px;
+            border: none;
+            animation: fadeInUp 0.3s ease-out;
+        }
+        .modal-header {
+            background: linear-gradient(90deg, #2e7d32, #4caf50);
+            color: white;
+            border-radius: 15px 15px 0 0;
+        }
+        .trek-card {
+            animation: slideInLeft 0.5s ease-out;
+        }
+        @keyframes slideInLeft {
+            from { transform: translateX(-50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+    </style>
+</head>
+
+<div class="bo">
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-content">
+            <h1>Conquer the Peaks of India</h1>
+            <p>Embark on thrilling trekking adventures in the majestic mountains of India.</p>
+            <a href="#treks" class="btn btn-primary btn-lg">Start Your Trek</a>
+        </div>
+    </section>
+
+    <!-- Treks Section -->
+    <section id="treks" class="treks-section">
+        <div class="container">
+            <h2 class="text-center mb-5 section-title">Top Trekking Destinations in India</h2>
+            <div class="row">
+                <!-- Card 1: Roopkund Trek -->
+                <div class="col-md-4 mb-4">
+                    <div class="card trek-card" data-trek="roopkund">
+                        <img src="https://media.istockphoto.com/id/1249121642/photo/beautiful-himalayan-mountain-face-scene-from-a-campsite-on-roopkund-trek-in-india.jpg?s=2048x2048&w=is&k=20&c=fjiHGF5ZxDe3AMdlEFVB_ESHsrY21a9z9fOrLw0Cq3o=" class="card-img-top" alt="Roopkund Trek">
+                        <div class="card-body">
+                            <h5 class="card-title">Roopkund Trek, Uttarakhand</h5>
+                            <p class="card-text">Famous for the mysterious Skeleton Lake, offering stunning Himalayan views.</p>
+                            <div class="trek-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Duration: 7-8 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Difficulty: Moderate</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-mountain"></i>
+                                    <span>Altitude: 5029m</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-hiking"></i> Trekking</span>
+                                <span><i class="fas fa-tent"></i> Camping</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Hampta Pass Trek -->
+                <div class="col-md-4 mb-4">
+                    <div class="card trek-card" data-trek="hampta">
+                        <img src="https://images.unsplash.com/photo-1688804470994-271ad19db477?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Hampta Pass Trek">
+                        <div class="card-body">
+                            <h5 class="card-title">Hampta Pass Trek, Himachal Pradesh</h5>
+                            <p class="card-text">A scenic trek connecting the lush Kullu Valley to the stark Lahaul Valley.</p>
+                            <div class="trek-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Duration: 4-5 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Difficulty: Moderate</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-mountain"></i>
+                                    <span>Altitude: 4270m</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-hiking"></i> Trekking</span>
+                                <span><i class="fas fa-camera"></i> Scenic Views</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Valley of Flowers Trek -->
+                <div class="col-md-4 mb-4">
+                    <div class="card trek-card" data-trek="valleyofflowers">
+                        <img src="https://images.unsplash.com/photo-1664730898827-7355b095c03b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Valley of Flowers Trek">
+                        <div class="card-body">
+                            <h5 class="card-title">Valley of Flowers Trek, Uttarakhand</h5>
+                            <p class="card-text">A UNESCO World Heritage Site, known for its vibrant alpine flowers and meadows.</p>
+                            <div class="trek-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Duration: 5-6 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Difficulty: Easy-Moderate</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-mountain"></i>
+                                    <span>Altitude: 3650m</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-flower"></i> Floral Meadows</span>
+                                <span><i class="fas fa-hiking"></i> Trekking</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4: Chadar Trek -->
+                <div class="col-md-4 mb-4">
+                    <div class="card trek-card" data-trek="chadar">
+                        <img src="https://images.unsplash.com/photo-1702704944450-0f3a575491a2?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Chadar Trek">
+                        <div class="card-body">
+                            <h5 class="card-title">Chadar Trek, Ladakh</h5>
+                            <p class="card-text">A unique winter trek on the frozen Zanskar River, surrounded by rugged cliffs.</p>
+                            <div class="trek-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Duration: 8-9 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Difficulty: Challenging</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-mountain"></i>
+                                    <span>Altitude: 3850m</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-snowflake"></i> Frozen River</span>
+                                <span><i class="fas fa-hiking"></i> Trekking</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5: Markha Valley Trek -->
+                <div class="col-md-4 mb-4">
+                    <div class="card trek-card" data-trek="markha">
+                        <img src="https://plus.unsplash.com/premium_photo-1663131625774-3494818790dd?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Markha Valley Trek">
+                        <div class="card-body">
+                            <h5 class="card-title">Markha Valley Trek, Ladakh</h5>
+                            <p class="card-text">A remote trek offering views of Kang Yatse peak and traditional Ladakhi villages.</p>
+                            <div class="trek-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Duration: 7-8 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Difficulty: Moderate</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-mountain"></i>
+                                    <span>Altitude: 5200m</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-hiking"></i> Trekking</span>
+                                <span><i class="fas fa-home"></i> Village Stays</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6: Goechala Trek -->
+                <div class="col-md-4 mb-4">
+                    <div class="card trek-card" data-trek="goechala">
+                        <img src="https://media.istockphoto.com/id/175012031/photo/tangsin-camp-in-goechala-trek-route-india.jpg?s=2048x2048&w=is&k=20&c=HN2fvJFNGElzqZtzeSr_bnz19weRXRgM7n2vKPQs4u0=" class="card-img-top" alt="Goechala Trek">
+                        <div class="card-body">
+                            <h5 class="card-title">Goechala Trek, Sikkim</h5>
+                            <p class="card-text">A high-altitude trek with close views of Kanchenjunga, the third highest peak in the world.</p>
+                            <div class="trek-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Duration: 9-10 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Difficulty: Challenging</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-mountain"></i>
+                                    <span>Altitude: 4940m</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-mountain"></i> Kanchenjunga Views</span>
+                                <span><i class="fas fa-hiking"></i> Trekking</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 7: Kedartal Trek -->
+                <div class="col-md-4 mb-4">
+                    <div class="card trek-card" data-trek="kedartal">
+                        <img src="https://plus.unsplash.com/premium_photo-1661810803959-f91f5195138e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Kedartal Trek">
+                        <div class="card-body">
+                            <h5 class="card-title">Kedartal Trek, Uttarakhand</h5>
+                            <p class="card-text">A challenging trek to the glacial Kedartal Lake, surrounded by Thalay Sagar and Bhrigupanth peaks.</p>
+                            <div class="trek-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Duration: 6-7 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Difficulty: Challenging</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-mountain"></i>
+                                    <span>Altitude: 4912m</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-water"></i> Glacial Lake</span>
+                                <span><i class="fas fa-hiking"></i> Trekking</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 8: Pin Parvati Trek -->
+                <div class="col-md-4 mb-4">
+                    <div class="card trek-card" data-trek="pinparvati">
+                        <img src="https://media.istockphoto.com/id/1226217872/photo/langtand-himal.jpg?s=2048x2048&w=is&k=20&c=wr7aGOwyryz3qQkBQRNwXJo41bwyDrMK0kMgWat0KQo=" class="card-img-top" alt="Pin Parvati Trek">
+                        <div class="card-body">
+                            <h5 class="card-title">Pin Parvati Trek, Himachal Pradesh</h5>
+                            <p class="card-text">A trans-Himalayan trek connecting Parvati Valley to Pin Valley, with diverse landscapes.</p>
+                            <div class="trek-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Duration: 10-11 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Difficulty: Challenging</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-mountain"></i>
+                                    <span>Altitude: 5319m</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-hiking"></i> Trekking</span>
+                                <span><i class="fas fa-mountain"></i> High Pass</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 9: Tadiandamol Trek -->
+                <div class="col-md-4 mb-4">
+                    <div class="card trek-card" data-trek="tadiandamol">
+                        <img src="https://media.istockphoto.com/id/1723523024/photo/architectural-landscape-of-qingshanguan-great-wall.jpg?s=2048x2048&w=is&k=20&c=5AEO2zLqPDNHADLap5cnfyNy7T8ZARrpDgzv6c49hVk=" class="card-img-top" alt="Tadiandamol Trek">
+                        <div class="card-body">
+                            <h5 class="card-title">Tadiandamol Trek, Karnataka</h5>
+                            <p class="card-text">The highest peak in Coorg, offering a scenic trek through lush forests and grasslands.</p>
+                            <div class="trek-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Duration: 1-2 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Difficulty: Easy-Moderate</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-mountain"></i>
+                                    <span>Altitude: 1748m</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-hiking"></i> Trekking</span>
+                                <span><i class="fas fa-tree"></i> Forests</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activities Section -->
+    <section id="activities" class="activities-section">
+        <div class="container">
+            <h2 class="text-center mb-5 section-title">Trekking Activities</h2>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <h4>High-Altitude Trekking</h4>
+                    <p>Challenge yourself with treks in the Himalayas, reaching altitudes above 4000m.</p>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <h4>Camping</h4>
+                    <p>Camp under the stars in pristine alpine meadows and rugged terrains.</p>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <h4>Wildlife Spotting</h4>
+                    <p>Encounter Himalayan wildlife like snow leopards and ibex on remote treks.</p>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <h4>Photography</h4>
+                    <p>Capture breathtaking landscapes, from snow-capped peaks to vibrant valleys.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="text-center mb-5 section-title">Share Your Trekking Adventure</h2>
+            <div class="row">
+                <div class="col-md-6 mx-auto">
+                    <div class="trek-form">
+                        <form id="trekForm">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Your Name</label>
+                                <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="trek" class="form-label">Trekking Destination</label>
+                                <select class="form-control" id="trek" required>
+                                    <option value="">Select a trek</option>
+                                    <option value="roopkund">Roopkund Trek, Uttarakhand</option>
+                                    <option value="hampta">Hampta Pass Trek, Himachal Pradesh</option>
+                                    <option value="valleyofflowers">Valley of Flowers Trek, Uttarakhand</option>
+                                    <option value="chadar">Chadar Trek, Ladakh</option>
+                                    <option value="markha">Markha Valley Trek, Ladakh</option>
+                                    <option value="goechala">Goechala Trek, Sikkim</option>
+                                    <option value="kedartal">Kedartal Trek, Uttarakhand</option>
+                                    <option value="pinparvati">Pin Parvati Trek, Himachal Pradesh</option>
+                                    <option value="tadiandamol">Tadiandamol Trek, Karnataka</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="experience" class="form-label">Your Experience</label>
+                                <textarea class="form-control" id="experience" rows="4" placeholder="Share your trekking adventure..." required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="photos" class="form-label">Upload Photos</label>
+                                <input type="file" class="form-control" id="photos" multiple accept="image/*">
+                                <div id="photoPreview" class="mt-2"></div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Share Adventure</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Trek Modal -->
+    <div class="modal fade" id="trekModal" tabindex="-1" aria-labelledby="trekModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="trekModalLabel">Trek Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="trek-detail-content">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <img src="" alt="" class="img-fluid trek-image">
+                            </div>
+                            <div class="col-md-6">
+                                <h3 class="trek-name"></h3>
+                                <p class="trek-description"></p>
+                                <div class="trek-info">
+                                    <div class="info-item">
+                                        <i class="fas fa-clock"></i>
+                                        <span class="duration"></span>
+                                    </div>
+                                    <div class="info-item">
+                                        <i class="fas fa-star"></i>
+                                        <span class="difficulty"></span>
+                                    </div>
+                                    <div class="info-item">
+                                        <i class="fas fa-mountain"></i>
+                                        <span class="altitude"></span>
+                                    </div>
+                                </div>
+                                <div class="trek-features"></div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <h4>Trek Highlights</h4>
+                                <p class="trek-highlights"></p>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <h4>Things to Do</h4>
+                                <ul class="things-to-do"></ul>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <h4>How to Reach</h4>
+                                <div class="how-to-reach"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="#" class="btn btn-primary book-now-btn">Book Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+    
+    <!-- Bootstrap JS and Custom JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Trek data
+        const treks = {
+            'roopkund': {
+                name: 'Roopkund Trek, Uttarakhand',
+                image: 'https://images.unsplash.com/photo-1603785572857-4c795ed83fa0?q=80&w=2070',
+                description: 'Famous for the mysterious Skeleton Lake, this trek offers stunning Himalayan views and a thrilling adventure.',
+                duration: '7-8 days',
+                difficulty: 'Moderate',
+                altitude: '5029m',
+                highlights: 'The trek to Roopkund is renowned for its high-altitude lake and panoramic views of Trishul and Nanda Ghunti peaks.',
+                features: ['Trekking', 'Camping'],
+                thingsToDo: [
+                    'Trek to Roopkund Lake',
+                    'Camp at Bedni Bugyal',
+                    'Enjoy views of Trishul peak',
+                    'Explore Ali Bugyal meadows',
+                    'Visit local villages'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Jolly Grant Airport, Dehradun (245 km)' },
+                    { type: 'train', text: 'Kathgodam Railway Station (200 km)' },
+                    { type: 'car', text: 'Drive to Lohajung, the base camp' }
+                ]
+            },
+            'hampta': {
+                name: 'Hampta Pass Trek, Himachal Pradesh',
+                image: 'https://images.unsplash.com/photo-1597078737119-7f76ee897dc1?q=80&w=2070',
+                description: 'A scenic trek connecting the lush Kullu Valley to the stark Lahaul Valley, with diverse landscapes.',
+                duration: '4-5 days',
+                difficulty: 'Moderate',
+                altitude: '4270m',
+                highlights: 'Hampta Pass offers a dramatic transition from green valleys to barren deserts, with views of Deo Tibba.',
+                features: ['Trekking', 'Scenic Views'],
+                thingsToDo: [
+                    'Cross Hampta Pass',
+                    'Camp at Shea Goru',
+                    'Visit Chandratal Lake',
+                    'Explore Kullu Valley',
+                    'Photography at high altitudes'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Bhuntar Airport (50 km)' },
+                    { type: 'train', text: 'Joginder Nagar Railway Station (145 km)' },
+                    { type: 'car', text: 'Drive to Jobra, the base camp' }
+                ]
+            },
+            'valleyofflowers': {
+                name: 'Valley of Flowers Trek, Uttarakhand',
+                image: 'https://images.unsplash.com/photo-1610970881699-44a5587cbbcd?q=80&w=2070',
+                description: 'A UNESCO World Heritage Site, known for its vibrant alpine flowers and meadows, with Hemkund Sahib nearby.',
+                duration: '5-6 days',
+                difficulty: 'Easy-Moderate',
+                altitude: '3650m',
+                highlights: 'The Valley of Flowers is a paradise of colorful blooms, set against the backdrop of the Zanskar ranges.',
+                features: ['Floral Meadows', 'Trekking'],
+                thingsToDo: [
+                    'Trek through the Valley of Flowers',
+                    'Visit Hemkund Sahib',
+                    'Camp at Ghangaria',
+                    'Photography of flora',
+                    'Explore Pushpawati River'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Jolly Grant Airport, Dehradun (295 km)' },
+                    { type: 'train', text: 'Rishikesh Railway Station (275 km)' },
+                    { type: 'car', text: 'Drive to Govindghat, the base camp' }
+                ]
+            },
+            'chadar': {
+                name: 'Chadar Trek, Ladakh',
+                image: 'https://images.unsplash.com/photo-1595168855117-82e61e6f27fb?q=80&w=2070',
+                description: 'A unique winter trek on the frozen Zanskar River, surrounded by rugged cliffs and icy landscapes.',
+                duration: '8-9 days',
+                difficulty: 'Challenging',
+                altitude: '3850m',
+                highlights: 'The Chadar Trek is a once-in-a-lifetime experience, walking on a frozen river in sub-zero temperatures.',
+                features: ['Frozen River', 'Trekking'],
+                thingsToDo: [
+                    'Trek on the frozen Zanskar River',
+                    'Camp in caves and campsites',
+                    'Visit Nerak Waterfall',
+                    'Experience Ladakhi culture',
+                    'Photography of icy landscapes'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Kushok Bakula Rimpochee Airport, Leh' },
+                    { type: 'car', text: 'Drive to Chilling, the base camp' }
+                ]
+            },
+            'markha': {
+                name: 'Markha Valley Trek, Ladakh',
+                image: 'https://images.unsplash.com/photo-1621330396168-6121ced03db8?q=80&w=2070',
+                description: 'A remote trek offering views of Kang Yatse peak and traditional Ladakhi villages in the Hemis National Park.',
+                duration: '7-8 days',
+                difficulty: 'Moderate',
+                altitude: '5200m',
+                highlights: 'Markha Valley combines rugged terrain, high passes, and cultural immersion in Ladakh’s heart.',
+                features: ['Trekking', 'Village Stays'],
+                thingsToDo: [
+                    'Trek through Markha Valley',
+                    'Cross Kongmaru La Pass',
+                    'Stay in local homestays',
+                    'Visit Hemis Monastery',
+                    'Spot wildlife like ibex'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Kushok Bakula Rimpochee Airport, Leh' },
+                    { type: 'car', text: 'Drive to Chilling or Jingchen, the base camp' }
+                ]
+            },
+            'goechala': {
+                name: 'Goechala Trek, Sikkim',
+                image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070',
+                description: 'A high-altitude trek with close views of Kanchenjunga, the third highest peak in the world.',
+                duration: '9-10 days',
+                difficulty: 'Challenging',
+                altitude: '4940m',
+                highlights: 'Goechala offers breathtaking views of Kanchenjunga and a trek through the Kanchenjunga National Park.',
+                features: ['Kanchenjunga Views', 'Trekking'],
+                thingsToDo: [
+                    'Trek to Goechala viewpoint',
+                    'Camp at Dzongri',
+                    'Explore Samiti Lake',
+                    'Visit Kanchenjunga National Park',
+                    'Photography of Himalayan peaks'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Bagdogra Airport (160 km)' },
+                    { type: 'train', text: 'New Jalpaiguri Railway Station (150 km)' },
+                    { type: 'car', text: 'Drive to Yuksom, the base camp' }
+                ]
+            },
+            'kedartal': {
+                name: 'Kedartal Trek, Uttarakhand',
+                image: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2070',
+                description: 'A challenging trek to the glacial Kedartal Lake, surrounded by Thalay Sagar and Bhrigupanth peaks.',
+                duration: '6-7 days',
+                difficulty: 'Challenging',
+                altitude: '4912m',
+                highlights: 'Kedartal is a pristine glacial lake trek, offering stunning views of towering Himalayan peaks.',
+                features: ['Glacial Lake', 'Trekking'],
+                thingsToDo: [
+                    'Trek to Kedartal Lake',
+                    'Camp at Bhoj Kharak',
+                    'View Thalay Sagar peak',
+                    'Explore Gangotri',
+                    'Photography of glacial landscapes'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Jolly Grant Airport, Dehradun (250 km)' },
+                    { type: 'train', text: 'Rishikesh Railway Station (230 km)' },
+                    { type: 'car', text: 'Drive to Gangotri, the base camp' }
+                ]
+            },
+            'pinparvati': {
+                name: 'Pin Parvati Trek, Himachal Pradesh',
+                image: 'https://images.unsplash.com/photo-1628084266576-6b6cb94c7b44?q=80&w=2070',
+                description: 'A trans-Himalayan trek connecting Parvati Valley to Pin Valley, with diverse landscapes and high passes.',
+                duration: '10-11 days',
+                difficulty: 'Challenging',
+                altitude: '5319m',
+                highlights: 'The Pin Parvati Trek is an epic journey through contrasting landscapes, from lush valleys to barren deserts.',
+                features: ['Trekking', 'High Pass'],
+                thingsToDo: [
+                    'Cross Pin Parvati Pass',
+                    'Camp at Mantalai Lake',
+                    'Visit Pin Valley National Park',
+                    'Explore Kheerganga',
+                    'Photography of diverse terrains'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Bhuntar Airport (50 km)' },
+                    { type: 'train', text: 'Joginder Nagar Railway Station (145 km)' },
+                    { type: 'car', text: 'Drive to Barshaini, the base camp' }
+                ]
+            },
+            'tadiandamol': {
+                name: 'Tadiandamol Trek, Karnataka',
+                image: 'https://images.unsplash.com/photo-1593697821152-8c15313125df?q=80&w=2070',
+                description: 'The highest peak in Coorg, offering a scenic trek through lush forests, grasslands, and coffee plantations.',
+                duration: '1-2 days',
+                difficulty: 'Easy-Moderate',
+                altitude: '1748m',
+                highlights: 'Tadiandamol is a beginner-friendly trek with stunning views of the Western Ghats and serene landscapes.',
+                features: ['Trekking', 'Forests'],
+                thingsToDo: [
+                    'Trek to Tadiandamol Peak',
+                    'Camp at the summit',
+                    'Explore coffee plantations',
+                    'Visit Nalaknad Palace',
+                    'Photography of Western Ghats'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Mangalore Airport (140 km)' },
+                    { type: 'train', text: 'Mysore Railway Station (120 km)' },
+                    { type: 'car', text: 'Drive to Kakkabe, the base camp' }
+                ]
+            }
+        };
+
+        // Function to open trek modal
+        function openTrekModal(trekId) {
+            const trek = treks[trekId];
+            if (!trek) return;
+
+            const modal = document.getElementById('trekModal');
+            const modalTitle = modal.querySelector('.modal-title');
+            const modalImage = modal.querySelector('.trek-image');
+            const modalName = modal.querySelector('.trek-name');
+            const modalDescription = modal.querySelector('.trek-description');
+            const modalDuration = modal.querySelector('.duration');
+            const modalDifficulty = modal.querySelector('.difficulty');
+            const modalAltitude = modal.querySelector('.altitude');
+            const modalHighlights = modal.querySelector('.trek-highlights');
+            const modalFeatures = modal.querySelector('.trek-features');
+            const modalThingsToDo = modal.querySelector('.things-to-do');
+            const modalHowToReach = modal.querySelector('.how-to-reach');
+
+            modalTitle.textContent = trek.name;
+            modalImage.src = trek.image;
+            modalImage.alt = trek.name;
+            modalName.textContent = trek.name;
+            modalDescription.textContent = trek.description;
+            modalDuration.textContent = `Duration: ${trek.duration}`;
+            modalDifficulty.textContent = `Difficulty: ${trek.difficulty}`;
+            modalAltitude.textContent = `Altitude: ${trek.altitude}`;
+            modalHighlights.textContent = trek.highlights;
+
+            modalFeatures.innerHTML = trek.features.map(feature => 
+                `<span class="card-features"><i class="fas fa-check"></i> ${feature}</span>`
+            ).join('');
+
+            modalThingsToDo.innerHTML = trek.thingsToDo.map(thing => 
+                `<li><i class="fas fa-check-circle"></i> ${thing}</li>`
+            ).join('');
+
+            modalHowToReach.innerHTML = trek.howToReach.map(option => 
+                `<div class="transport-option">
+                    <i class="fas fa-${option.type}"></i>
+                    <span>${option.text}</span>
+                </div>`
+            ).join('');
+
+            const modalInstance = new bootstrap.Modal(modal);
+            modalInstance.show();
+        }
+
+        // Add click event listeners to all Learn More buttons
+        document.querySelectorAll('.trek-card .btn-primary').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const trekId = this.closest('.trek-card').dataset.trek;
+                openTrekModal(trekId);
+            });
+        });
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a.nav-link').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                window.scrollTo({
+                    top: targetElement.offsetTop - 70,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
+{% endblock %}

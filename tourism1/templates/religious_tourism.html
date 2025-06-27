@@ -1,0 +1,1002 @@
+{% extends "base.html" %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Priceless Memories</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Custom CSS -->
+    <style>
+        .bo {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+        }
+        
+        .hero-section {
+            background: url('https://images.unsplash.com/photo-1517292987719-0369a794ec0f?q=80&w=2070') no-repeat center center;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 111, 0, 0.5), rgba(255, 215, 0, 0.5));
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        .hero-section h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease-in-out;
+        }
+        .hero-section p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease-in-out 0.3s;
+            animation-fill-mode: both;
+        }
+        .hero-section .btn {
+            font-size: 1.2rem;
+            padding: 12px 30px;
+            background-color: #ff6f00;
+            border: none;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            animation: fadeInUp 1s ease-in-out 0.6s;
+            animation-fill-mode: both;
+        }
+        .hero-section .btn:hover {
+            background-color: #ffd700;
+            transform: translateY(-5px) scale(1.05);
+        }
+        .destinations-section {
+            background: url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=2070') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            padding: 80px 0;
+        }
+        .destinations-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(240, 244, 248, 0.9);
+            z-index: 1;
+        }
+        .destinations-section .container {
+            position: relative;
+            z-index: 2;
+        }
+        .destination-card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: #fff;
+            animation: fadeInUp 0.5s ease-out;
+            animation-fill-mode: both;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .destination-card:nth-child(1) { animation-delay: 0.1s; }
+        .destination-card:nth-child(2) { animation-delay: 0.2s; }
+        .destination-card:nth-child(3) { animation-delay: 0.3s; }
+        .destination-card:nth-child(4) { animation-delay: 0.4s; }
+        .destination-card:nth-child(5) { animation-delay: 0.5s; }
+        .destination-card:nth-child(6) { animation-delay: 0.6s; }
+        .destination-card:nth-child(7) { animation-delay: 0.7s; }
+        .destination-card:nth-child(8) { animation-delay: 0.8s; }
+        .destination-card:nth-child(9) { animation-delay: 0.9s; }
+        .destination-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        .destination-card img {
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .destination-card:hover img {
+            transform: scale(1.05);
+        }
+        .destination-card .card-body {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .destination-card .card-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            color: #ff6f00;
+            transition: color 0.3s ease;
+        }
+        .destination-card:hover .card-title {
+            color: #ffd700;
+        }
+        .destination-card .card-text {
+            color: #555;
+            flex-grow: 1;
+        }
+        .destination-card .btn {
+            background-color: #ffd700;
+            border: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .destination-card .btn:hover {
+            background-color: #ff6f00;
+            transform: translateY(-3px);
+        }
+        .experiences-section {
+            background: url('https://images.unsplash.com/photo-1517292987719-0369a794ec0f?q=80&w=2070') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            padding: 80px 0;
+        }
+        .experiences-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            z-index: 1;
+        }
+        .experiences-section .container {
+            position: relative;
+            z-index: 2;
+        }
+        .experiences-section h2, .destinations-section h2, .contact-section h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: #ff6f00;
+            font-size: 2.8rem;
+            margin-bottom: 40px;
+            animation: fadeInDown 0.5s ease-out;
+        }
+        .experiences-section h4 {
+            color: #ffd700;
+            font-family: 'Montserrat', sans-serif;
+            transition: color 0.3s ease;
+        }
+        .experiences-section h4:hover {
+            color: #ff6f00;
+        }
+        .contact-section {
+            background: url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=2070') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            padding: 80px 0;
+        }
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(240, 244, 248, 0.9);
+            z-index: 1;
+        }
+        .contact-section .container {
+            position: relative;
+            z-index: 2;
+        }
+        .contact-section .form-control {
+            border-radius: 10px;
+            border: 1px solid #ffd700;
+            padding: 12px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .contact-section .form-control:focus {
+            border-color: #ff6f00;
+            box-shadow: 0 0 8px rgba(255, 111, 0, 0.3);
+        }
+        .contact-section .btn {
+            background-color: #ff6f00;
+            border: none;
+            padding: 12px;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .contact-section .btn:hover {
+            background-color: #ffd700;
+            transform: translateY(-3px);
+        }
+        
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideInDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .section-title {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-bottom: 1rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, #ff6f00, #ffd700);
+            animation: pulse 2s infinite;
+        }
+        .card {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+        .btn {
+            border-radius: 25px;
+            padding: 10px 25px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .modal-content {
+            border-radius: 15px;
+            border: none;
+            animation: fadeInUp 0.3s ease-out;
+        }
+        .modal-header {
+            background: linear-gradient(90deg, #ff6f00, #ffd700);
+            color: white;
+            border-radius: 15px 15px 0 0;
+        }
+        .destination-card {
+            animation: slideInLeft 0.5s ease-out;
+        }
+        @keyframes slideInLeft {
+            from { transform: translateX(-50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+    </style>
+</head>
+<div class="bo">
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-content">
+            <h1>Embark on a Spiritual Journey in India</h1>
+            <p>Discover sacred sites and immerse yourself in the divine heritage of India.</p>
+            <a href="#destinations" class="btn btn-primary btn-lg">Begin Your Pilgrimage</a>
+        </div>
+    </section>
+
+    <!-- Destinations Section -->
+    <section id="destinations" class="destinations-section">
+        <div class="container">
+            <h2 class="text-center mb-5 section-title">Sacred Destinations in India</h2>
+            <div class="row">
+                <!-- Card 1: Varanasi -->
+                <div class="col-md-4 mb-4">
+                    <div class="card destination-card" data-destination="varanasi">
+                        <img src="https://images.unsplash.com/photo-1599831069477-b2acdc0bcb91?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Varanasi">
+                        <div class="card-body">
+                            <h5 class="card-title">Varanasi, Uttar Pradesh</h5>
+                            <p class="card-text">One of the oldest living cities, known for its ghats, Kashi Vishwanath Temple, and evening Ganga Aarti.</p>
+                            <div class="destination-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Best Time: 2-3 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Significance: Hindu pilgrimage</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Altitude: 80m</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-temple"></i> Kashi Vishwanath</span>
+                                <span><i class="fas fa-water"></i> Ganga Aarti</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Amritsar -->
+                <div class="col-md-4 mb-4">
+                    <div class="card destination-card" data-destination="amritsar">
+                        <img src="https://plus.unsplash.com/premium_photo-1697730331435-92e07494db43?q=80&w=1925&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Amritsar">
+                        <div class="card-body">
+                            <h5 class="card-title">Amritsar, Punjab</h5>
+                            <p class="card-text">Home to the Golden Temple, the holiest Sikh shrine, and the vibrant Wagah Border ceremony.</p>
+                            <div class="destination-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Best Time: 2-3 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Significance: Sikh pilgrimage</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Altitude: 234m</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-temple"></i> Golden Temple</span>
+                                <span><i class="fas fa-flag"></i> Wagah Border</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Tirupati -->
+                <div class="col-md-4 mb-4">
+                    <div class="card destination-card" data-destination="tirupati">
+                        <img src="https://images.unsplash.com/photo-1529733772151-bab41484710a?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Tirupati">
+                        <div class="card-body">
+                            <h5 class="card-title">Tirupati, Andhra Pradesh</h5>
+                            <p class="card-text">Famous for the Sri Venkateswara Temple, one of the richest and most visited Hindu temples.</p>
+                            <div class="destination-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Best Time: 1-2 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Significance: Hindu pilgrimage</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Altitude: 150m</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-temple"></i> Venkateswara Temple</span>
+                                <span><i class="fas fa-pray"></i> Darshan</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4: Bodh Gaya -->
+                <div class="col-md-4 mb-4">
+                    <div class="card destination-card" data-destination="bodhgaya">
+                        <img src="https://images.unsplash.com/photo-1724303740927-bbb568013fd1?q=80&w=1941&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Bodh Gaya">
+                        <div class="card-body">
+                            <h5 class="card-title">Bodh Gaya, Bihar</h5>
+                            <p class="card-text">The place where Buddha attained enlightenment, home to the Mahabodhi Temple.</p>
+                            <div class="destination-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Best Time: 2-3 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Significance: Buddhist pilgrimage</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Altitude: 110m</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-temple"></i> Mahabodhi Temple</span>
+                                <span><i class="fas fa-tree"></i> Bodhi Tree</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5: Rishikesh -->
+                <div class="col-md-4 mb-4">
+                    <div class="card destination-card" data-destination="rishikesh">
+                        <img src="https://plus.unsplash.com/premium_photo-1661902094482-8844637b400e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Rishikesh">
+                        <div class="card-body">
+                            <h5 class="card-title">Rishikesh, Uttarakhand</h5>
+                            <p class="card-text">Known as the yoga capital, offering spiritual retreats and temples along the Ganges.</p>
+                            <div class="destination-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Best Time: 2-3 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Significance: Hindu pilgrimage</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Altitude: 372m</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-yoga"></i> Yoga Retreats</span>
+                                <span><i class="fas fa-temple"></i> Temples</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6: Ajmer -->
+                <div class="col-md-4 mb-4">
+                    <div class="card destination-card" data-destination="ajmer">
+                        <img src="https://images.unsplash.com/photo-1671219823712-08bce5461816?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Ajmer">
+                        <div class="card-body">
+                            <h5 class="card-title">Ajmer, Rajasthan</h5>
+                            <p class="card-text">Home to the Dargah Sharif of Khwaja Moinuddin Chishti, a major Sufi pilgrimage site.</p>
+                            <div class="destination-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Best Time: 1-2 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Significance: Sufi pilgrimage</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Altitude: 486m</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-mosque"></i> Dargah Sharif</span>
+                                <span><i class="fas fa-pray"></i> Sufi Music</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 7: Kedarnath -->
+                <div class="col-md-4 mb-4">
+                    <div class="card destination-card" data-destination="kedarnath">
+                        <img src="https://images.unsplash.com/photo-1612438214708-f428a707dd4e?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Kedarnath">
+                        <div class="card-body">
+                            <h5 class="card-title">Kedarnath, Uttarakhand</h5>
+                            <p class="card-text">A sacred Hindu pilgrimage site, home to the Kedarnath Temple, one of the Char Dham shrines.</p>
+                            <div class="destination-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Best Time: 3-4 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Significance: Hindu pilgrimage</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Altitude: 3583m</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-temple"></i> Kedarnath Temple</span>
+                                <span><i class="fas fa-mountain"></i> Himalayan Views</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 8: Dwarka -->
+                <div class="col-md-4 mb-4">
+                    <div class="card destination-card" data-destination="dwarka">
+                        <img src="https://images.unsplash.com/photo-1711547979445-a72c87dfd004?q=80&w=2127&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Dwarka">
+                        <div class="card-body">
+                            <h5 class="card-title">Dwarka, Gujarat</h5>
+                            <p class="card-text">An ancient city associated with Lord Krishna, home to the Dwarkadhish Temple.</p>
+                            <div class="destination-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Best Time: 2-3 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Significance: Hindu pilgrimage</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Altitude: Sea Level</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-temple"></i> Dwarkadhish Temple</span>
+                                <span><i class="fas fa-water"></i> Gomti River</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 9: Velankanni -->
+                <div class="col-md-4 mb-4">
+                    <div class="card destination-card" data-destination="velankanni">
+                        <img src="https://images.unsplash.com/photo-1584886670073-0e15b05bdcb2?q=80&w=1933&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Velankanni">
+                        <div class="card-body">
+                            <h5 class="card-title">Velankanni, Tamil Nadu</h5>
+                            <p class="card-text">Known for the Basilica of Our Lady of Good Health, a major Christian pilgrimage site.</p>
+                            <div class="destination-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Best Time: 1-2 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Significance: Christian pilgrimage</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Altitude: Sea Level</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-church"></i> Basilica</span>
+                                <span><i class="fas fa-pray"></i> Healing Pilgrimage</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experiences Section -->
+    <section id="experiences" class="experiences-section">
+        <div class="container">
+            <h2 class="text-center mb-5 section-title">Spiritual Experiences</h2>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <h4>Temple Darshan</h4>
+                    <p>Participate in sacred rituals and seek blessings at ancient Hindu temples across India.</p>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <h4>Ganga Aarti</h4>
+                    <p>Witness the mesmerizing evening prayers by the Ganges in Varanasi and Rishikesh.</p>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <h4>Meditation and Yoga</h4>
+                    <p>Immerse in spiritual practices at ashrams in Rishikesh and other sacred sites.</p>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <h4>Pilgrimage Circuits</h4>
+                    <p>Embark on journeys like Char Dham or the Buddhist Circuit for profound spiritual experiences.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="text-center mb-5 section-title">Share Your Spiritual Journey</h2>
+            <div class="row">
+                <div class="col-md-6 mx-auto">
+                    <div class="pilgrimage-form">
+                        <form id="pilgrimageForm">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Your Name</label>
+                                <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="destination" class="form-label">Pilgrimage Destination</label>
+                                <select class="form-control" id="destination" required>
+                                    <option value="">Select a destination</option>
+                                    <option value="varanasi">Varanasi, Uttar Pradesh</option>
+                                    <option value="amritsar">Amritsar, Punjab</option>
+                                    <option value="tirupati">Tirupati, Andhra Pradesh</option>
+                                    <option value="bodhgaya">Bodh Gaya, Bihar</option>
+                                    <option value="rishikesh">Rishikesh, Uttarakhand</option>
+                                    <option value="ajmer">Ajmer, Rajasthan</option>
+                                    <option value="kedarnath">Kedarnath, Uttarakhand</option>
+                                    <option value="dwarka">Dwarka, Gujarat</option>
+                                    <option value="velankanni">Velankanni, Tamil Nadu</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="experience" class="form-label">Your Experience</label>
+                                <textarea class="form-control" id="experience" rows="4" placeholder="Share your spiritual journey..." required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="photos" class="form-label">Upload Photos</label>
+                                <input type="file" class="form-control" id="photos" multiple accept="image/*">
+                                <div id="photoPreview" class="mt-2"></div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Share Journey</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Destination Modal -->
+    <div class="modal fade" id="destinationModal" tabindex="-1" aria-labelledby="destinationModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="destinationModalLabel">Destination Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="destination-detail-content">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <img src="" alt="" class="img-fluid destination-image">
+                            </div>
+                            <div class="col-md-6">
+                                <h3 class="destination-name"></h3>
+                                <p class="destination-description"></p>
+                                <div class="destination-info">
+                                    <div class="info-item">
+                                        <i class="fas fa-clock"></i>
+                                        <span class="best-time"></span>
+                                    </div>
+                                    <div class="info-item">
+                                        <i class="fas fa-star"></i>
+                                        <span class="significance"></span>
+                                    </div>
+                                    <div class="info-item">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <span class="altitude"></span>
+                                    </div>
+                                </div>
+                                <div class="destination-features"></div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <h4>Spiritual Highlights</h4>
+                                <p class="destination-highlights"></p>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <h4>Things to Do</h4>
+                                <ul class="things-to-do"></ul>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <h4>How to Reach</h4>
+                                <div class="how-to-reach"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="#" class="btn btn-primary book-now-btn">Plan Your Visit</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+    
+
+    
+
+    <!-- Bootstrap JS and Custom JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Destination data
+        const destinations = {
+            'varanasi': {
+                name: 'Varanasi, Uttar Pradesh',
+                image: 'https://images.unsplash.com/photo-1615473787929-0be4e7cd3616?q=80&w=2070',
+                description: 'One of the oldest living cities, Varanasi is a spiritual hub for Hindus, known for its ghats, Kashi Vishwanath Temple, and evening Ganga Aarti.',
+                bestTime: '2-3 days',
+                significance: 'Hindu pilgrimage',
+                altitude: '80m',
+                highlights: 'Varanasi is revered as the city of Lord Shiva, offering a profound spiritual experience with its sacred rituals.',
+                features: ['Kashi Vishwanath', 'Ganga Aarti'],
+                thingsToDo: [
+                    'Visit Kashi Vishwanath Temple',
+                    'Attend the Ganga Aarti at Dashashwamedh Ghat',
+                    'Take a boat ride on the Ganges',
+                    'Explore Sarnath',
+                    'Walk along the ghats'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Lal Bahadur Shastri Airport (25 km)' },
+                    { type: 'train', text: 'Varanasi Junction' },
+                    { type: 'car', text: 'Well-connected by road' }
+                ]
+            },
+            'amritsar': {
+                name: 'Amritsar, Punjab',
+                image: 'https://images.unsplash.com/photo-1604503243048-c3b258bb79bc?q=80&w=2070',
+                description: 'Home to the Golden Temple, the holiest Sikh shrine, and the vibrant Wagah Border ceremony.',
+                bestTime: '2-3 days',
+                significance: 'Sikh pilgrimage',
+                altitude: '234m',
+                highlights: 'The Golden Temple’s serene ambiance and community kitchen (langar) offer a unique spiritual experience.',
+                features: ['Golden Temple', 'Wagah Border'],
+                thingsToDo: [
+                    'Visit the Golden Temple',
+                    'Witness the Wagah Border ceremony',
+                    'Explore Jallianwala Bagh',
+                    'Enjoy langar at the temple',
+                    'Visit Durgiana Temple'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Sri Guru Ram Dass Jee International Airport (11 km)' },
+                    { type: 'train', text: 'Amritsar Railway Station' },
+                    { type: 'car', text: 'Well-connected by road' }
+                ]
+            },
+            'tirupati': {
+                name: 'Tirupati, Andhra Pradesh',
+                image: 'https://images.unsplash.com/photo-1605351354358-53d4b24f68e5?q=80&w=2070',
+                description: 'Famous for the Sri Venkateswara Temple, one of the richest and most visited Hindu temples.',
+                bestTime: '1-2 days',
+                significance: 'Hindu pilgrimage',
+                altitude: '150m',
+                highlights: 'Tirupati attracts millions for darshan of Lord Venkateswara, known for its divine blessings.',
+                features: ['Venkateswara Temple', 'Darshan'],
+                thingsToDo: [
+                    'Darshan at Sri Venkateswara Temple',
+                    'Visit Tiruchanur Padmavati Temple',
+                    'Explore Sri Kapileswara Temple',
+                    'Walk through Tirumala hills',
+                    'Visit Akasa Ganga waterfall'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Tirupati Airport (15 km)' },
+                    { type: 'train', text: 'Tirupati Railway Station' },
+                    { type: 'car', text: 'Well-connected by road' }
+                ]
+            },
+            'bodhgaya': {
+                name: 'Bodh Gaya, Bihar',
+                image: 'https://images.unsplash.com/photo-1593697821152-8c15313125df?q=80&w=2070',
+                description: 'The place where Buddha attained enlightenment, home to the Mahabodhi Temple.',
+                bestTime: '2-3 days',
+                significance: 'Buddhist pilgrimage',
+                altitude: '110m',
+                highlights: 'Bodh Gaya is a global center for Buddhist spirituality, centered around the sacred Bodhi Tree.',
+                features: ['Mahabodhi Temple', 'Bodhi Tree'],
+                thingsToDo: [
+                    'Visit Mahabodhi Temple',
+                    'Meditate under the Bodhi Tree',
+                    'Explore the Great Buddha Statue',
+                    'Visit nearby monasteries',
+                    'Attend Buddhist teachings'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Gaya Airport (12 km)' },
+                    { type: 'train', text: 'Gaya Junction (13 km)' },
+                    { type: 'car', text: 'Well-connected by road' }
+                ]
+            },
+            'rishikesh': {
+                name: 'Rishikesh, Uttarakhand',
+                image: 'https://images.unsplash.com/photo-1610970881699-44a5587cbbcd?q=80&w=2070',
+                description: 'Known as the yoga capital, offering spiritual retreats and temples along the Ganges.',
+                bestTime: '2-3 days',
+                significance: 'Hindu pilgrimage',
+                altitude: '372m',
+                highlights: 'Rishikesh combines spirituality with serene landscapes, attracting seekers of peace and divinity.',
+                features: ['Yoga Retreats', 'Temples'],
+                thingsToDo: [
+                    'Attend yoga sessions',
+                    'Visit Triveni Ghat for Ganga Aarti',
+                    'Explore Laxman Jhula',
+                    'Meditate at Beatles Ashram',
+                    'Visit Parmarth Niketan'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Jolly Grant Airport, Dehradun (20 km)' },
+                    { type: 'train', text: 'Rishikesh Railway Station' },
+                    { type: 'car', text: 'Well-connected by road' }
+                ]
+            },
+            'ajmer': {
+                name: 'Ajmer, Rajasthan',
+                image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070',
+                description: 'Home to the Dargah Sharif of Khwaja Moinuddin Chishti, a major Sufi pilgrimage site.',
+                bestTime: '1-2 days',
+                significance: 'Sufi pilgrimage',
+                altitude: '486m',
+                highlights: 'The Dargah Sharif is a beacon of Sufi spirituality, drawing devotees from all faiths.',
+                features: ['Dargah Sharif', 'Sufi Music'],
+                thingsToDo: [
+                    'Visit Dargah Sharif',
+                    'Listen to qawwali performances',
+                    'Explore Ana Sagar Lake',
+                    'Visit Adhai Din Ka Jhonpra',
+                    'Pray at Nareli Jain Temple'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Jaipur International Airport (135 km)' },
+                    { type: 'train', text: 'Ajmer Junction' },
+                    { type: 'car', text: 'Well-connected by road' }
+                ]
+            },
+            'kedarnath': {
+                name: 'Kedarnath, Uttarakhand',
+                image: 'https://images.unsplash.com/photo-1621330396168-6121ced03db8?q=80&w=2070',
+                description: 'A sacred Hindu pilgrimage site, home to the Kedarnath Temple, one of the Char Dham shrines.',
+                bestTime: '3-4 days',
+                significance: 'Hindu pilgrimage',
+                altitude: '3583m',
+                highlights: 'Nestled in the Himalayas, Kedarnath offers a divine connection with Lord Shiva.',
+                features: ['Kedarnath Temple', 'Himalayan Views'],
+                thingsToDo: [
+                    'Visit Kedarnath Temple',
+                    'Trek to Vasuki Tal',
+                    'Meditate in the serene environment',
+                    'Explore Gandhi Sarovar',
+                    'Experience Himalayan beauty'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Jolly Grant Airport, Dehradun (239 km)' },
+                    { type: 'train', text: 'Rishikesh Railway Station (216 km)' },
+                    { type: 'car', text: 'Road to Gaurikund, then trek' }
+                ]
+            },
+            'dwarka': {
+                name: 'Dwarka, Gujarat',
+                image: 'https://images.unsplash.com/photo-1628084266576-6b6cb94c7b44?q=80&w=2070',
+                description: 'An ancient city associated with Lord Krishna, home to the Dwarkadhish Temple.',
+                bestTime: '2-3 days',
+                significance: 'Hindu pilgrimage',
+                altitude: 'Sea Level',
+                highlights: 'Dwarka is one of the Char Dham sites, revered for its connection to Lord Krishna.',
+                features: ['Dwarkadhish Temple', 'Gomti River'],
+                thingsToDo: [
+                    'Visit Dwarkadhish Temple',
+                    'Take a dip in Gomti River',
+                    'Explore Nageshwar Jyotirlinga',
+                    'Visit Bet Dwarka',
+                    'Walk along Dwarka Beach'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Jamnagar Airport (137 km)' },
+                    { type: 'train', text: 'Dwarka Railway Station' },
+                    { type: 'car', text: 'Well-connected by road' }
+                ]
+            },
+            'velankanni': {
+                name: 'Velankanni, Tamil Nadu',
+                image: 'https://images.unsplash.com/photo-1516306584366-1b98397e1f33?q=80&w=2070',
+                description: 'Known for the Basilica of Our Lady of Good Health, a major Christian pilgrimage site.',
+                bestTime: '1-2 days',
+                significance: 'Christian pilgrimage',
+                altitude: 'Sea Level',
+                highlights: 'Velankanni is called the "Lourdes of the East" for its miraculous healing reputation.',
+                features: ['Basilica', 'Healing Pilgrimage'],
+                thingsToDo: [
+                    'Visit Basilica of Our Lady of Good Health',
+                    'Attend mass at the church',
+                    'Explore Velankanni Beach',
+                    'Visit the Museum of Offerings',
+                    'Pray at the Holy Path'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Tiruchirappalli Airport (165 km)' },
+                    { type: 'train', text: 'Nagapattinam Railway Station (12 km)' },
+                    { type: 'car', text: 'Well-connected by road' }
+                ]
+            }
+        };
+
+        // Function to open destination modal
+        function openDestinationModal(destinationId) {
+            const destination = destinations[destinationId];
+            if (!destination) return;
+
+            const modal = document.getElementById('destinationModal');
+            const modalTitle = modal.querySelector('.modal-title');
+            const modalImage = modal.querySelector('.destination-image');
+            const modalName = modal.querySelector('.destination-name');
+            const modalDescription = modal.querySelector('.destination-description');
+            const modalBestTime = modal.querySelector('.best-time');
+            const modalSignificance = modal.querySelector('.significance');
+            const modalAltitude = modal.querySelector('.altitude');
+            const modalHighlights = modal.querySelector('.destination-highlights');
+            const modalFeatures = modal.querySelector('.destination-features');
+            const modalThingsToDo = modal.querySelector('.things-to-do');
+            const modalHowToReach = modal.querySelector('.how-to-reach');
+
+            modalTitle.textContent = destination.name;
+            modalImage.src = destination.image;
+            modalImage.alt = destination.name;
+            modalName.textContent = destination.name;
+            modalDescription.textContent = destination.description;
+            modalBestTime.textContent = `Best Time: ${destination.bestTime}`;
+            modalSignificance.textContent = `Significance: ${destination.significance}`;
+            modalAltitude.textContent = `Altitude: ${destination.altitude}`;
+            modalHighlights.textContent = destination.highlights;
+
+            modalFeatures.innerHTML = destination.features.map(feature => 
+                `<span class="card-features"><i class="fas fa-check"></i> ${feature}</span>`
+            ).join('');
+
+            modalThingsToDo.innerHTML = destination.thingsToDo.map(thing => 
+                `<li><i class="fas fa-check-circle"></i> ${thing}</li>`
+            ).join('');
+
+            modalHowToReach.innerHTML = destination.howToReach.map(option => 
+                `<div class="transport-option">
+                    <i class="fas fa-${option.type}"></i>
+                    <span>${option.text}</span>
+                </div>`
+            ).join('');
+
+            const modalInstance = new bootstrap.Modal(modal);
+            modalInstance.show();
+        }
+
+        // Add click event listeners to all Learn More buttons
+        document.querySelectorAll('.destination-card .btn-primary').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const destinationId = this.closest('.destination-card').dataset.destination;
+                openDestinationModal(destinationId);
+            });
+        });
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a.nav-link').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                window.scrollTo({
+                    top: targetElement.offsetTop - 70,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+{% endblock %}

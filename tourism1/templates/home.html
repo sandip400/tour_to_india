@@ -1,0 +1,2193 @@
+{% extends "base.html" %}
+{% block content %}
+
+<head>
+{% load static %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Priceless Memories - Experience the Beauty of India</title>
+  <meta name="description" content="Explore breathtaking destinations, immersive cultural experiences, and plan your perfect journey across India.">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- AOS Animation Library -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <!-- Swiper Slider CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+  <!-- Embedded CSS -->
+  <style>
+    /* Custom CSS for Priceless Memories Website */
+    :root {
+      --primary: #e67e22;
+      --primary-dark: #d35400;
+      --secondary: #f5f5f5;
+      --dark: #333333;
+      --light: #ffffff;
+      --muted: #6c757d;
+      --border: #dee2e6;
+    }
+
+    .bo {
+      
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--dark);
+      overflow-x: hidden;
+    }
+
+    /* Buttons */
+    .btn-primary {
+      background-color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus {
+      background-color: var(--primary-dark);
+      border-color: var(--primary-dark);
+    }
+
+    .btn-outline-primary {
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .btn-outline-primary:hover {
+      background-color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    /* Hero Section */
+    .hero-section {
+      height: 80vh;
+      min-height: 500px;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+
+    .search-box {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 0.5rem;
+    }
+
+    /* Destination Cards */
+    .destination-card {
+      transition: transform 0.3s ease;
+      overflow: hidden;
+    }
+
+    .destination-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .destination-img {
+      height: 200px;
+      overflow: hidden;
+    }
+
+    .destination-img img {
+      transition: transform 0.5s ease;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .destination-card:hover .destination-img img {
+      transform: scale(1.05);
+    }
+
+    /* Page Banner */
+    .page-banner {
+      height: 40vh;
+      min-height: 300px;
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .hero-section {
+        height: 70vh;
+      }
+      
+      .hero-content h1 {
+        font-size: 2.5rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .hero-section {
+        height: 60vh;
+      }
+      
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+      
+      .hero-content p {
+        font-size: 1rem;
+      }
+    }
+
+    
+
+    /* Card styling */
+    .card {
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Testimonial styling */
+    .testimonial-card {
+      background-color: var(--light);
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .testimonial-avatar {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--primary);
+    }
+
+    /* Swiper slider customization */
+    .swiper {
+      width: 100%;
+      padding-bottom: 50px;
+    }
+
+    .swiper-pagination-bullet-active {
+      background-color: var(--primary);
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+      color: var(--primary);
+    }
+
+    /* Timeline styling */
+    .timeline {
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .timeline::after {
+      content: '';
+      position: absolute;
+      width: 6px;
+      background-color: var(--primary);
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      margin-left: -3px;
+    }
+
+    .timeline-container {
+      padding: 10px 40px;
+      position: relative;
+      background-color: inherit;
+      width: 50%;
+    }
+
+    .timeline-container::after {
+      content: '';
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      right: -13px;
+      background-color: var(--light);
+      border: 4px solid var(--primary);
+      top: 15px;
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .left {
+      left: 0;
+    }
+
+    .right {
+      left: 50%;
+    }
+
+    .left::before {
+      content: " ";
+      height: 0;
+      position: absolute;
+      top: 22px;
+      width: 0;
+      z-index: 1;
+      right: 30px;
+      border: medium solid var(--light);
+      border-width: 10px 0 10px 10px;
+      border-color: transparent transparent transparent var(--light);
+    }
+
+    .right::before {
+      content: " ";
+      height: 0;
+      position: absolute;
+      top: 22px;
+      width: 0;
+      z-index: 1;
+      left: 30px;
+      border: medium solid var(--light);
+      border-width: 10px 10px 10px 0;
+      border-color: transparent var(--light) transparent transparent;
+    }
+
+    .right::after {
+      left: -12px;
+    }
+
+    .timeline-content {
+      padding: 20px 30px;
+      background-color: var(--light);
+      position: relative;
+      border-radius: 6px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    @media screen and (max-width: 768px) {
+      .timeline::after {
+        left: 31px;
+      }
+      
+      .timeline-container {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+      }
+      
+      .timeline-container::before {
+        left: 60px;
+        border: medium solid var(--light);
+        border-width: 10px 10px 10px 0;
+        border-color: transparent var(--light) transparent transparent;
+      }
+
+      .left::after, .right::after {
+        left: 18px;
+      }
+      
+      .right {
+        left: 0%;
+      }
+    }
+
+    /* Gallery styling */
+    .gallery-item {
+      overflow: hidden;
+      position: relative;
+      border-radius: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .gallery-item img {
+      transition: transform 0.5s ease;
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .gallery-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+      color: white;
+      padding: 1rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .gallery-item:hover .gallery-caption {
+      opacity: 1;
+    }
+
+    /* FAQ styling */
+    .accordion-button:not(.collapsed) {
+      background-color: rgba(230, 126, 34, 0.1);
+      color: var(--primary);
+    }
+
+    .accordion-button:focus {
+      box-shadow: 0 0 0 0.25rem rgba(230, 126, 34, 0.25);
+    }
+
+    /* Stats counter */
+    .counter-box {
+      text-align: center;
+      padding: 2rem;
+      border-radius: 1rem;
+      background-color: var(--light);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      margin-bottom: 1.5rem;
+    }
+
+    .counter-icon {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .counter-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--dark);
+    }
+
+    .counter-text {
+      font-size: 1rem;
+      color: var(--muted);
+    }
+
+    /* Video section */
+    .video-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 1rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .video-container::before {
+      content: "";
+      display: block;
+      padding-top: 56.25%; /* 16:9 Aspect Ratio */
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* Blog post styling */
+    .blog-card {
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      margin-bottom: 2rem;
+    }
+
+    .blog-img {
+      height: 200px;
+      overflow: hidden;
+    }
+
+    .blog-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .blog-card:hover .blog-img img {
+      transform: scale(1.05);
+    }
+
+    .blog-meta {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.875rem;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .blog-content {
+      padding: 1.5rem;
+    }
+
+    /* CTA section */
+    .cta-section {
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://source.unsplash.com/random/1920x1080/?india,travel') no-repeat center center;
+      background-size: cover;
+      color: var(--light);
+      padding: 5rem 0;
+      text-align: center;
+    }
+
+    /* Map styling */
+    .map-container {
+      height: 400px;
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Weather widget */
+    .weather-widget {
+      background-color: var(--light);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      margin-bottom: 1.5rem;
+    }
+
+    .weather-icon {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .weather-temp {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Currency converter */
+    .currency-converter {
+      background-color: var(--light);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Fix for tab content visibility */
+    .tab-content > .tab-pane {
+      display: block;
+      height: 0;
+      overflow: hidden;
+    }
+
+    .tab-content > .active {
+      height: auto;
+      overflow: visible;
+    }
+
+    /* Chat Assistant styles */
+    .chat-container {
+      border-radius: 1rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      background-color: var(--light);
+      padding: 1.5rem;
+    }
+
+    .chat-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .chat-icon {
+      background-color: var(--primary);
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-right: 1rem;
+    }
+
+    .chat-title {
+      margin-bottom: 0;
+    }
+
+    .chat-response {
+      background-color: #f8f9fa;
+      border-radius: 0.5rem;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      max-height: 300px;
+      overflow-y: auto;
+      transition: all 0.3s ease;
+    }
+
+    .chat-response.has-content {
+      border-left: 4px solid var(--primary);
+    }
+
+    .chat-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .message-input {
+      border: 2px solid var(--border);
+      border-radius: 0.5rem;
+      padding: 0.75rem 1rem;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+
+    .message-input:focus {
+      border-color: var(--primary);
+      outline: none;
+      box-shadow: 0 0 0 0.25rem rgba(230, 126, 34, 0.2);
+    }
+
+    .file-upload-container {
+      position: relative;
+      margin-bottom: 1rem;
+    }
+
+    .file-upload-label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      border: 2px dashed var(--border);
+      transition: all 0.3s ease;
+    }
+
+    .file-upload-label:hover {
+      border-color: var(--primary);
+      background-color: rgba(230, 126, 34, 0.05);
+    }
+
+    .file-upload-input {
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+
+    .file-preview {
+      display: none;
+      margin-top: 0.5rem;
+    }
+
+    .file-preview img {
+      max-width: 100%;
+      max-height: 200px;
+      border-radius: 0.5rem;
+      border: 1px solid var(--border);
+    }
+
+    .typing-indicator {
+      display: none;
+      padding: 0.5rem 1rem;
+      background-color: #f1f1f1;
+      border-radius: 1rem;
+      margin-bottom: 1rem;
+      width: fit-content;
+    }
+
+    .dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--muted);
+      margin-right: 3px;
+      animation: typing 1.5s infinite ease-in-out;
+    }
+
+    .dot:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .dot:nth-child(3) {
+      animation-delay: 0.4s;
+      margin-right: 0;
+    }
+
+    @keyframes typing {
+      0%, 60%, 100% { transform: translateY(0); }
+      30% { transform: translateY(-5px); }
+    }
+    /* Voice recording styles */
+    .voice-recording-container {
+      position: relative;
+    }
+    
+    .recording-indicator {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #dc3545;
+      animation: pulse 1.5s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.3; }
+      100% { opacity: 1; }
+    }
+    
+    #voice-record-btn.recording {
+      background-color: rgba(220, 53, 69, 0.1);
+      color: #dc3545;
+      border-color: #dc3545;
+    }
+    /* Chat toggle button and floating styles */
+    #chat-toggle-btn {
+      width: 60px;
+      height: 60px;
+      transition: all 0.3s ease;
+    }
+
+    #chat-toggle-btn:hover {
+      transform: scale(1.1);
+    }
+
+    #chat-container {
+      position: fixed;
+      bottom: 90px;
+      right: 26%;
+      transform: translateX(50%);
+      width: 600px;
+      max-width: 120%;
+      max-height: 80vh;
+      overflow-y: auto;
+      z-index: 1040;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+      border-radius: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    @media (max-width: 576px) {
+      #chat-container {
+        width: 100%;
+        bottom: 80px;
+        right: 50%;
+        transform: translateX(50%);
+      }
+    }
+
+    /* Chat history styles */
+    .user-message, .assistant-message {
+      padding: 10px 15px;
+      border-radius: 15px;
+      margin-bottom: 10px;
+      max-width: 80%;
+    }
+
+    .user-message {
+      background-color: #e9f5ff;
+      margin-left: auto;
+      border-bottom-right-radius: 0;
+    }
+
+    .assistant-message {
+      background-color: #f0f0f0;
+      margin-right: auto;
+      border-bottom-left-radius: 0;
+    }
+
+    #chat-assistant-section {
+    width: 100%;
+    height: auto;
+  }
+  </style>
+</head>
+<div class="bo">
+  <br><br><br>
+  <!-- Main Content -->
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-section position-relative">
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1718515743530-9371a9389096?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Taj Mahal at sunrise" class="img-fluid w-100 h-100 object-fit-cover">
+        <div class="overlay"></div>
+      </div>
+      <div class="container position-relative">
+        <div class="hero-content text-center text-white">
+          <h1 class="display-3 fw-bold" data-aos="fade-up">Priceless Memories</h1>
+          <p class="lead mt-3" data-aos="fade-up" data-aos-delay="100">Create unforgettable experiences across India's ancient traditions, breathtaking landscapes, and vibrant cultures</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Counter Section -->
+    <section class="py-5 bg-light">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-md-3 col-sm-6" data-aos="fade-up">
+            <div class="counter-box">
+              <div class="counter-icon">
+                <i class="fas fa-map-marked-alt"></i>
+              </div>
+              <div class="counter-number" data-count="500">0</div>
+              <div class="counter-text">Destinations</div>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="counter-box">
+              <div class="counter-icon">
+                <i class="fas fa-users"></i>
+              </div>
+              <div class="counter-number" data-count="15000">0</div>
+              <div class="counter-text">Happy Travelers</div>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="counter-box">
+              <div class="counter-icon">
+                <i class="fas fa-route"></i>
+              </div>
+              <div class="counter-number" data-count="250">0</div>
+              <div class="counter-text">Tour Packages</div>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="counter-box">
+              <div class="counter-icon">
+                <i class="fas fa-award"></i>
+              </div>
+              <div class="counter-number" data-count="10">0</div>
+              <div class="counter-text">Years of Experience</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Enhanced Chat Assistant Section with Toggle Button -->
+    <section class="py-5 bg-light" id="chat-assistant-section">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <!-- Chat toggle button (floating) -->
+            <div id="chat-toggle-container" class="position-fixed bottom-0 end-0 mb-4 me-4" style="z-index: 1050;">
+              <button id="chat-toggle-btn" class="btn btn-primary rounded-circle p-3 shadow-lg">
+                <i class="fas fa-comment-dots fa-lg"></i>
+              </button>
+            </div>
+            
+            <!-- Chat container (initially hidden) -->
+            <div id="chat-container" class="chat-container" style="display: none;height: 200%;">
+              <div class="chat-header d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                  <div class="chat-icon">
+                    <i class="fas fa-robot"></i>
+                  </div>
+                  <h3 class="chat-title">Travel Assistant</h3>
+                </div>
+                <button id="chat-close-btn" class="btn btn-sm btn-link text-muted">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+              
+              <div id="chat-history" class="chat-response mb-3">
+                <p class="text-center text-muted mb-0">
+                  Hi there! I'm your travel assistant. Ask me anything about Indian destinations,
+                  or upload an image to learn more about it. You can also ask me to navigate to specific pages.
+                </p>
+              </div>
+              
+              <div class="typing-indicator" id="typing-indicator">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+              </div>
+              
+              <form id="chat-form" class="chat-form">
+                <div class="file-upload-container">
+                  <label for="image" class="file-upload-label">
+                    <i class="fas fa-camera"></i>
+                    <span>Upload an image</span>
+                  </label>
+                  <input type="file" id="image" name="image" class="file-upload-input" accept="image/*">
+                  <div id="file-preview" class="file-preview"></div>
+                </div>
+                
+                <div class="voice-recording-container mb-2">
+                  <button type="button" id="voice-record-btn" class="btn btn-outline-primary d-flex align-items-center">
+                    <i class="fas fa-microphone me-2"></i>
+                    <span id="record-btn-text">Record Voice</span>
+                  </button>
+                  <div id="recording-status" class="small text-muted mt-1" style="display: none;">
+                    <div class="d-flex align-items-center">
+                      <span class="recording-indicator me-2"></span>
+                      <span>Recording... Click again to stop</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="input-group">
+                  <input type="text" id="message" name="message" class="form-control message-input" 
+                         placeholder="Ask about destinations, attractions, or upload an image..." required>
+                  <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-paper-plane me-1"></i> Ask
+                  </button>
+                </div>
+                
+                <div class="mt-2 small text-muted">
+                  <p class="mb-0">Try asking:</p>
+                  <ul class="mb-0">
+                    <li>"Tell me about Rajasthan"</li>
+                    <li>"What places should I visit in Kerala?"</li>
+                    <li>"Take me to the map page"</li>
+                    <li>"Upload an image of a landmark to identify it"</li>
+                  </ul>
+                </div>
+              </form>
+              
+              <div class="d-flex justify-content-center mt-3">
+                <button id="clear-history-btn" class="btn btn-sm btn-outline-secondary">
+                  <i class="fas fa-trash-alt me-1"></i> Clear Chat History
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Popular Destinations Section -->
+    <section class="py-5" id="destinations">
+      <div class="container">
+        <div class="text-center mb-5">
+          <h2 class="fw-bold" data-aos="fade-up">Explore Dream Travels</h2>
+          <p class="text-muted" data-aos="fade-up" data-aos-delay="100">India's dream travels span Rajasthan's royal palaces, Kerala's serene backwaters, Himachal's snowy peaks, and Goa's vibrant beaches. Uttarakhand's spiritual retreats, Kashmir's heavenly valleys, and Ladakh's rugged landscapes enchant explorers. Northeast's mystical beauty, Maharashtra's historical wonders, and Sikkim's Himalayan charm complete an unforgettable journey across this diverse, incredible land.</p>
+        </div>
+        
+        <div class="row g-4">
+          <!-- Destination Card 1 -->
+          <div class="col-md-6 col-lg-4" data-aos="fade-up">
+            <div class="card h-100 destination-card">
+              <div class="destination-img">
+                <img src="https://images.unsplash.com/photo-1651651166379-06540f274707?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Victoria Memorial">
+              </div>
+              <div class="card-body">
+                <div class="d-flex align-items-center text-muted mb-2">
+                  <i class="fas fa-map-marker-alt me-2"></i>
+                  <small>Victoria Memorial</small>
+                </div>
+                <h3 class="card-title h5 fw-bold">West Bengal</h3>
+                <p class="card-text text-muted">Victoria Memorial is a grand marble monument in Kolkata, India.</p>
+                <a href="{% url 'westbengal' %}" class="text-primary text-decoration-none">Explore <i class="fas fa-arrow-right ms-1"></i></a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Destination Card 2 -->
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="card h-100 destination-card">
+              <div class="destination-img">
+                <img src="{% static 'ram1.jpg'%}" class="card-img-top" alt="Ram Mandir">
+              </div>
+              <div class="card-body">
+                <div class="d-flex align-items-center text-muted mb-2">
+                  <i class="fas fa-map-marker-alt me-2"></i>
+                  <small>Ram Mandir</small>
+                </div>
+                <h3 class="card-title h5 fw-bold">Uttar Pradesh</h3>
+                <p class="card-text text-muted">Ram Mandir is a sacred Hindu temple in Ayodhya, India.</p>
+                <a href="{% url 'uttarpradesh' %}" class="text-primary text-decoration-none">Explore <i class="fas fa-arrow-right ms-1"></i></a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Destination Card 3 -->
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="card h-100 destination-card">
+              <div class="destination-img">
+                <img src="https://images.unsplash.com/photo-1477587458883-47145ed94245?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Jaipur">
+              </div>
+              <div class="card-body">
+                <div class="d-flex align-items-center text-muted mb-2">
+                  <i class="fas fa-map-marker-alt me-2"></i>
+                  <small>Jaipur</small>
+                </div>
+                <h3 class="card-title h5 fw-bold">Rajasthan</h3>
+                <p class="card-text text-muted">The 'Pink City' known for its stunning palaces, forts, and vibrant culture</p>
+                <a href="{% url 'rajasthan' %}" class="text-primary text-decoration-none">Explore <i class="fas fa-arrow-right ms-1"></i></a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Destination Card 4 -->
+          <div class="col-md-6 col-lg-4" data-aos="fade-up">
+            <div class="card h-100 destination-card">
+              <div class="destination-img">
+                <img src="https://plus.unsplash.com/premium_photo-1694475205503-d6c6a71f03bc?q=80&w=2101&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Kerala Backwaters">
+              </div>
+              <div class="card-body">
+                <div class="d-flex align-items-center text-muted mb-2">
+                  <i class="fas fa-map-marker-alt me-2"></i>
+                  <small>Kerala Backwaters</small>
+                </div>
+                <h3 class="card-title h5 fw-bold">Kerala</h3>
+                <p class="card-text text-muted">Serene canals and lagoons, ideal for peaceful boat rides.</p>
+                <a href="{% url 'kerala' %}" class="text-primary text-decoration-none">Explore <i class="fas fa-arrow-right ms-1"></i></a>
+              </div>
+            </div>
+          </div>
+          
+                   <!-- Destination Card 5 -->
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="card h-100 destination-card">
+              <div class="destination-img">
+                <img src="https://images.unsplash.com/photo-1685716271205-83a5ac2ba63b?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Dal Lake">
+              </div>
+              <div class="card-body">
+                <div class="d-flex align-items-center text-muted mb-2">
+                  <i class="fas fa-map-marker-alt me-2"></i>
+                  <small>Dal Lake</small>
+                </div>
+                <h3 class="card-title h5 fw-bold">Kashmir</h3>
+                <p class="card-text text-muted">Stunning, tranquil lake in Srinagar, famous for houseboats.</p>
+                <a href="{% url 'kashmir' %}" class="text-primary text-decoration-none">Explore <i class="fas fa-arrow-right ms-1"></i></a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Destination Card 6 -->
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="card h-100 destination-card">
+              <div class="destination-img">
+                <img src="https://images.unsplash.com/photo-1705723116788-d11fa6e3f415?q=80&w=1976&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Tirupati">
+              </div>
+              <div class="card-body">
+                <div class="d-flex align-items-center text-muted mb-2">
+                  <i class="fas fa-map-marker-alt me-2"></i>
+                  <small>Tirupati</small>
+                </div>
+                <h3 class="card-title h5 fw-bold">Tamil Nadu</h3>
+                <p class="card-text text-muted">Sacred city with the renowned Venkateswara Temple, religious hub.</p>
+                <a href="{% url 'tamilnadu' %}" class="text-primary text-decoration-none">Explore <i class="fas fa-arrow-right ms-1"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="text-center mt-5" data-aos="fade-up">
+          <a href="{% url 'clickablemap' %}" class="btn btn-primary btn-lg">View All Destinations</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experiences Section -->
+    <section class="py-5 bg-light" id="experiences">
+      <div class="container">
+        <div class="text-center mb-5">
+          <h2 class="fw-bold" data-aos="fade-up">Immersive Experiences</h2>
+          <p class="text-muted" data-aos="fade-up" data-aos-delay="100">Dive into authentic Indian cultural activities and adventures that will create lasting memories</p>
+        </div>
+        
+        <div class="row g-4">
+          <!-- Experience Card 1 -->
+          <div class="col-md-4" data-aos="fade-up">
+            <div class="card h-100">
+              <div class="card-body text-center">
+                <div class="display-4 mb-3">🎭</div>
+                <h3 class="card-title h5 fw-bold">Cultural Festivals</h3>
+                <p class="card-text text-muted">Participate in vibrant celebrations like Diwali, Holi, and regional festivals across India</p>
+                <a href="{% url 'culture' %}" class="text-primary text-decoration-none">Discover <i class="fas fa-arrow-right ms-1"></i></a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Experience Card 2 -->
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="card h-100">
+              <div class="card-body text-center">
+                <div class="display-4 mb-3">🍲</div>
+                <h3 class="card-title h5 fw-bold">Culinary Journeys</h3>
+                <p class="card-text text-muted">Savor authentic Indian flavors and learn traditional cooking techniques from master chefs</p>
+                <a href="{% url 'culinary_journey_tourism' %}" class="text-primary text-decoration-none">Discover <i class="fas fa-arrow-right ms-1"></i></a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Experience Card 3 -->
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="card h-100">
+              <div class="card-body text-center">
+                <div class="display-4 mb-3">🏄‍♂️</div>
+                <h3 class="card-title h5 fw-bold">Adventure Sports</h3>
+                <p class="card-text text-muted">Get your adrenaline pumping with trekking in the Himalayas, rafting in Rishikesh, and more</p>
+                <a href="{% url 'adventure_tourism' %}" class="text-primary text-decoration-none">Discover <i class="fas fa-arrow-right ms-1"></i></a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Experience Card 4 -->
+          <div class="col-md-4" data-aos="fade-up">
+            <div class="card h-100">
+              <div class="card-body text-center">
+                <div class="display-4 mb-3">🦁</div>
+                <h3 class="card-title h5 fw-bold">Wildlife Safaris</h3>
+                <p class="card-text text-muted">Encounter tigers, elephants, and exotic birds in India's diverse national parks</p>
+                <a href="{% url 'wildlife_safaris_tourism' %}" class="text-primary text-decoration-none">Discover <i class="fas fa-arrow-right ms-1"></i></a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Experience Card 5 -->
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="card h-100">
+              <div class="card-body text-center">
+                <div class="display-4 mb-3">🧘‍♀️</div>
+                <h3 class="card-title h5 fw-bold">Wellness Retreats</h3>
+                <p class="card-text text-muted">Rejuvenate with yoga, meditation, and Ayurvedic treatments in the land where they originated</p>
+                <a href="{% url 'wellness_retreats_tourism' %}" class="text-primary text-decoration-none">Discover <i class="fas fa-arrow-right ms-1"></i></a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Experience Card 6 -->
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="card h-100">
+              <div class="card-body text-center">
+                <div class="display-4 mb-3">🧵</div>
+                <h3 class="card-title h5 fw-bold">Artisan Workshops</h3>
+                <p class="card-text text-muted">Learn traditional crafts like block printing, pottery, and textile weaving from skilled artisans</p>
+                <a href="{% url 'artisan_workshop_tourism' %}" class="text-primary text-decoration-none">Discover <i class="fas fa-arrow-right ms-1"></i></a>
+              </div>
+            </div>
+          </div>
+          <!-- Experience Card 7 -->
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="card h-100">
+              <div class="card-body text-center">
+                <div class="display-4 mb-3">⛩️</div>
+                <h3 class="card-title h5 fw-bold">Religious Journeys</h3>
+                <p class="card-text text-muted">Pilgrimages across India unite faiths through yatras, dhams, melas, sacred rivers.</p>
+                <a href="{% url 'religious_tourism' %}" class="text-primary text-decoration-none">Discover <i class="fas fa-arrow-right ms-1"></i></a>
+              </div>
+            </div>
+          </div>
+          <!-- Experience Card 8 -->
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="card h-100">
+              <div class="card-body text-center">
+                <div class="display-4 mb-3">🏔️</div>
+                <h3 class="card-title h5 fw-bold">Mountain Trekking</h3>
+                <p class="card-text text-muted">Adventure seekers trek majestic Himalayan trails, discovering beauty, challenge, and peace.</p>
+                <a href="{% url 'mountain_tourism' %}" class="text-primary text-decoration-none">Discover <i class="fas fa-arrow-right ms-1"></i></a>
+              </div>
+            </div>
+          </div>
+          <!-- Experience Card 9 -->
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="card h-100">
+              <div class="card-body text-center">
+                <div class="display-4 mb-3">🏖️</div>
+                <h3 class="card-title h5 fw-bold">Beach Vibes</h3>
+                <p class="card-text text-muted">Golden sands, vibrant sunsets, tropical breezes, and endless coastal adventures await.</p>
+                <a href="{% url 'beach_vibes_tourism' %}" class="text-primary text-decoration-none">Discover <i class="fas fa-arrow-right ms-1"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cultural Heritage Section -->
+    <section class="py-5" id="culture">
+      <div class="container">
+        <div class="text-center mb-5">
+          <h2 class="fw-bold" data-aos="fade-up">Cultural Heritage</h2>
+          <p class="text-muted" data-aos="fade-up" data-aos-delay="100">Discover the rich tapestry of traditions, arts, and history that make India a cultural treasure</p>
+        </div>
+        
+        <div class="row align-items-center mb-5">
+          <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
+            <img src="https://images.unsplash.com/photo-1740456977659-bdd269417fc0?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Classical Indian Dance" class="img-fluid rounded shadow">
+          </div>
+          <div class="col-lg-6" data-aos="fade-left">
+            <h3 class="h4 fw-bold mb-3">Classical Dance Forms</h3>
+            <p class="text-muted">India's classical dance traditions like Bharatanatyam, Kathak, Odissi, and Kathakali are living embodiments of ancient stories and mythology. Each dance form represents the cultural ethos of its region of origin.</p>
+            <ul class="list-unstyled">
+              <li class="mb-2"><i class="fas fa-check-circle text-primary me-2"></i> Bharatanatyam - Tamil Nadu</li>
+              <li class="mb-2"><i class="fas fa-check-circle text-primary me-2"></i> Kathak - North India</li>
+              <li class="mb-2"><i class="fas fa-check-circle text-primary me-2"></i> Odissi - Odisha</li>
+              <li class="mb-2"><i class="fas fa-check-circle text-primary me-2"></i> Kathakali - Kerala</li>
+            </ul>
+            <a href="#" class="btn btn-outline-primary mt-3">Learn More</a>
+          </div>
+        </div>
+        
+        <div class="row align-items-center flex-row-reverse">
+          <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-left">
+            <img src="https://images.unsplash.com/photo-1641309049240-6d158eb7e7ad?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Traditional Indian Music" class="img-fluid rounded shadow">
+          </div>
+          <div class="col-lg-6" data-aos="fade-right">
+            <h3 class="h4 fw-bold mb-3">Musical Traditions</h3>
+            <p class="text-muted">From the classical ragas of Hindustani and Carnatic music to the folk songs of rural India, the country's musical heritage is diverse and profound. Traditional instruments like the sitar, tabla, and veena continue to enchant listeners worldwide.</p>
+            <ul class="list-unstyled">
+              <li class="mb-2"><i class="fas fa-check-circle text-primary me-2"></i> Hindustani Classical - North India</li>
+              <li class="mb-2"><i class="fas fa-check-circle text-primary me-2"></i> Carnatic Classical - South India</li>
+              <li class="mb-2"><i class="fas fa-check-circle text-primary me-2"></i> Folk Music - Regional Variations</li>
+              <li class="mb-2"><i class="fas fa-check-circle text-primary me-2"></i> Devotional Music - Bhajans & Qawwali</li>
+            </ul>
+            <a href="#" class="btn btn-outline-primary mt-3">Learn More</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Indian Cuisine Section -->
+    <section class="py-5 bg-light" id="cuisine">
+      <div class="container">
+        <div class="text-center mb-5">
+          <h2 class="fw-bold" data-aos="fade-up">Culinary Delights</h2>
+          <p class="text-muted" data-aos="fade-up" data-aos-delay="100">Embark on a gastronomic journey through India's diverse and flavorful cuisine</p>
+        </div>
+        
+        <div class="row g-4">
+          <!-- North Indian Cuisine -->
+          <div class="col-md-6 col-lg-3" data-aos="fade-up">
+            <div class="card h-100">
+              <img src="https://media.istockphoto.com/id/2157407620/photo/chole-bhature-is-a-north-indian-food-dish-a-combination-of-chana-masala-and-bhatura-or-puri.webp?a=1&b=1&s=612x612&w=0&k=20&c=XNYqvgE34D8CSEH6eUrCIl7tX0tSad2DkrCT-PZ6-BE=" class="card-img-top" alt="North Indian Cuisine">
+              <div class="card-body">
+                <h3 class="card-title h5 fw-bold">North Indian</h3>
+                <p class="card-text text-muted">Rich, creamy curries, tandoori specialties, and a variety of breads like naan and roti define this popular cuisine.</p>
+                <p class="small text-muted mb-0"><strong>Signature Dishes:</strong> Butter Chicken, Rogan Josh, Chole Bhature</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- South Indian Cuisine -->
+          <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+            <div class="card h-100">
+              <img src="https://media.istockphoto.com/id/1460788317/photo/south-indian-vegetarian-breakfast.jpg?s=2048x2048&w=is&k=20&c=rDvy2VBihTu7ZPR1mM3WkBdQYO2ZPLt0BgBrbJBtkcI=" class="card-img-top" alt="South Indian Cuisine">
+              <div class="card-body">
+                <h3 class="card-title h5 fw-bold">South Indian</h3>
+                <p class="card-text text-muted">Light, healthy, and often vegetarian, featuring rice, lentils, and coconut in various forms.</p>
+                <p class="small text-muted mb-0"><strong>Signature Dishes:</strong> Dosa, Idli, Sambar, Rasam</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- East Indian Cuisine -->
+          <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+            <div class="card h-100">
+              <img src="https://images.unsplash.com/photo-1588644525273-f37b60d78512?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="East Indian Cuisine">
+              <div class="card-body">
+                <h3 class="card-title h5 fw-bold">East Indian</h3>
+                <p class="card-text text-muted">Subtle flavors with an emphasis on fish, rice, and mustard oil, influenced by Bengali traditions.</p>
+                <p class="small text-muted mb-0"><strong>Signature Dishes:</strong> Machher Jhol, Rasgulla, Mishti Doi</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- West Indian Cuisine -->
+          <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+            <div class="card h-100">
+              <img src="https://media.istockphoto.com/id/1156026480/photo/indian-tea-time-snacks-in-group.jpg?s=2048x2048&w=is&k=20&c=NlMGSjzHOCoWgEYo2sWeYRpJAHSFWgq3LOWemQmN0qU=" class="card-img-top" alt="West Indian Cuisine">
+              <div class="card-body">
+                <h3 class="card-title h5 fw-bold">West Indian</h3>
+                <p class="card-text text-muted">Diverse flavors from Gujarat, Maharashtra, and Goa, ranging from vegetarian to seafood specialties.</p>
+                <p class="small text-muted mb-0"><strong>Signature Dishes:</strong> Dhokla, Vada Pav, Goan Fish Curry</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="text-center mt-5" data-aos="fade-up">
+          <a href="{% url 'culinary_journey_tourism' %}" class="btn btn-primary">Discover Culinary Delights</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Photo Gallery Section -->
+    <section class="py-5" id="gallery">
+      <div class="container">
+        <div class="text-center mb-5">
+          <h2 class="fw-bold" data-aos="fade-up">Photo Gallery</h2>
+          <p class="text-muted" data-aos="fade-up" data-aos-delay="100">Glimpses of India's breathtaking landscapes, vibrant culture, and unforgettable moments</p>
+        </div>
+        
+        <div class="row g-4">
+          <div class="col-md-4" data-aos="fade-up">
+            <div class="gallery-item">
+              <img src="https://plus.unsplash.com/premium_photo-1692386759833-3acf660742ad?q=80&w=2076&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Himalayan Mountains" class="img-fluid rounded">
+              <div class="gallery-caption">
+                <h5 class="mb-1">Himalayan Majesty</h5>
+                <p class="small mb-0">The mighty Himalayas in Northern India</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="gallery-item">
+              <img src="https://images.unsplash.com/photo-1603228254119-e6a4d095dc59?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Holi Festival" class="img-fluid rounded">
+              <div class="gallery-caption">
+                <h5 class="mb-1">Festival of Colors</h5>
+                <p class="small mb-0">Celebrating Holi in Mathura</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="gallery-item">
+              <img src="https://images.unsplash.com/photo-1700981757030-56a3dc656329?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Ancient Temple" class="img-fluid rounded">
+              <div class="gallery-caption">
+                <h5 class="mb-1">Ancient Architecture</h5>
+                <p class="small mb-0">Intricate temple carvings in Khajuraho</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4" data-aos="fade-up">
+            <div class="gallery-item">
+              <img src="https://images.unsplash.com/photo-1607547002106-efa2dcacb06a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Colorful Market" class="img-fluid rounded">
+              <div class="gallery-caption">
+                <h5 class="mb-1">Vibrant Markets</h5>
+                <p class="small mb-0">Spice bazaar in Old Delhi</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="gallery-item">
+              <img src="https://images.unsplash.com/photo-1586210476212-d84f0b1c6caf?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Tiger in the Wild" class="img-fluid rounded">
+              <div class="gallery-caption">
+                <h5 class="mb-1">Wildlife Encounters</h5>
+                <p class="small mb-0">Bengal tiger in Ranthambore National Park</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="gallery-item">
+              <img src="https://images.unsplash.com/photo-1603477849227-705c424d1d80?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Tropical Beach" class="img-fluid rounded">
+              <div class="gallery-caption">
+                <h5 class="mb-1">Coastal Paradise</h5>
+                <p class="small mb-0">Pristine beaches of the Andaman Islands</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="text-center mt-5" data-aos="fade-up">
+          <a href="{% url 'Gallery' %}" class="btn btn-primary">View Full Gallery</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-5 bg-light">
+      <div class="container">
+        <div class="text-center mb-5">
+          <h2 class="fw-bold" data-aos="fade-up">Traveler Stories</h2>
+          <p class="text-muted" data-aos="fade-up" data-aos-delay="100">Hear what our guests have to say about their unforgettable Indian journeys</p>
+        </div>
+        
+        <div class="swiper testimonial-swiper" data-aos="fade-up">
+          <div class="swiper-wrapper">
+            <!-- Testimonial 1 -->
+            <div class="swiper-slide">
+              <div class="testimonial-card">
+                <div class="d-flex align-items-center mb-4">
+                  <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Sarah Johnson" class="testimonial-avatar me-3">
+                  <div>
+                    <h4 class="h5 fw-bold mb-0">Sarah Johnson</h4>
+                    <p class="small text-muted mb-0">New York, USA</p>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <i class="fas fa-star text-warning"></i>
+                  <i class="fas fa-star text-warning"></i>
+                  <i class="fas fa-star text-warning"></i>
+                  <i class="fas fa-star text-warning"></i>
+                  <i class="fas fa-star text-warning"></i>
+                </div>
+                <p class="text-muted">"My journey through Rajasthan was nothing short of magical. The palaces, the colors, the food, and most importantly, the warmth of the people made this trip unforgettable. Priceless Memories took care of every detail, allowing me to fully immerse myself in the experience."</p>
+              </div>
+            </div>
+            
+            <!-- Testimonial 2 -->
+            <div class="swiper-slide">
+              <div class="testimonial-card">
+                <div class="d-flex align-items-center mb-4">
+                  <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="David Chen" class="testimonial-avatar me-3">
+                  <div>
+                    <h4 class="h5 fw-bold mb-0">David Chen</h4>
+                    <p class="small text-muted mb-0">Toronto, Canada</p>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <i class="fas fa-star text-warning"></i>
+                  <i class="fas fa-star text-warning"></i>
+                  <i class="fas fa-star text-warning"></i>
+                  <i class="fas fa-star text-warning"></i>
+                  <i class="fas fa-star text-warning"></i>
+                </div>
+                <p class="text-muted">"The Kerala backwaters houseboat experience was the highlight of our trip. Gliding through serene waters, watching village life unfold, and enjoying delicious Kerala cuisine on board was an experience we'll cherish forever. The attention to detail by Priceless Memories was exceptional."</p>
+              </div>
+            </div>
+            
+            <!-- Testimonial 3 -->
+            <div class="swiper-slide">
+              <div class="testimonial-card">
+                <div class="d-flex align-items-center mb-4">
+                  <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Emma Wilson" class="testimonial-avatar me-3">
+                  <div>
+                    <h4 class="h5 fw-bold mb-0">Emma Wilson</h4>
+                    <p class="small text-muted mb-0">London, UK</p>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <i class="fas fa-star text-warning"></i>
+                  <i class="fas fa-star text-warning"></i>
+                  <i class="fas fa-star text-warning"></i>
+                  <i class="fas fa-star text-warning"></i>
+                  <i class="fas fa-star text-warning"></i>
+                </div>
+                <p class="text-muted">"Our family trip to India was a perfect blend of adventure, culture, and relaxation. From tiger spotting in Bandhavgarh to the beaches of Goa, every moment was carefully planned. The kids still talk about the elephant ride and cooking class! Thank you for these priceless memories."</p>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Travel Blog Section -->
+    <section class="py-5" id="blog">
+      <div class="container">
+        <div class="text-center mb-5">
+          <h2 class="fw-bold" data-aos="fade-up">Travel Blog</h2>
+          <p class="text-muted" data-aos="fade-up" data-aos-delay="100">Insights, tips, and stories to inspire your Indian adventure</p>
+        </div>
+        
+        <div class="row g-4">
+          <!-- Blog Post 1 -->
+          <div class="col-md-4" data-aos="fade-up">
+            <div class="blog-card">
+              <div class="blog-img">
+                <img src="https://images.unsplash.com/photo-1554877173-9e70c51d332b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Travel Tips" class="img-fluid">
+              </div>
+              <div class="blog-content">
+                <div class="blog-meta">
+                  <span><i class="far fa-calendar me-1"></i> March 15, 2023</span>
+                  <span><i class="far fa-user me-1"></i> Admin</span>
+                </div>
+                <h3 class="h5 fw-bold mb-3">10 Essential Tips for First-Time Travelers to India</h3>
+                <p class="text-muted">Navigate India like a pro with these insider tips on transportation, accommodation, food safety, and cultural etiquette.</p>
+                <a href="#" class="text-primary text-decoration-none">Read More <i class="fas fa-arrow-right ms-1"></i></a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Blog Post 2 -->
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="blog-card">
+              <div class="blog-img">
+                <img src="https://images.unsplash.com/photo-1667572737639-0aa4f798ff98?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Festival Guide" class="img-fluid">
+              </div>
+              <div class="blog-content">
+                <div class="blog-meta">
+                  <span><i class="far fa-calendar me-1"></i> February 28, 2023</span>
+                  <span><i class="far fa-user me-1"></i> Admin</span>
+                </div>
+                <h3 class="h5 fw-bold mb-3">Ultimate Guide to India's Colorful Festivals</h3>
+                <p class="text-muted">Plan your trip around India's vibrant festivals like Diwali, Holi, Pongal, and Durga Puja for an authentic cultural experience.</p>
+                <a href="#" class="text-primary text-decoration-none">Read More <i class="fas fa-arrow-right ms-1"></i></a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Blog Post 3 -->
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="blog-card">
+              <div class="blog-img">
+                <img src="https://images.unsplash.com/photo-1678781416302-d59ed9ed46d0?q=80&w=1920&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Food Guide" class="img-fluid">
+              </div>
+              <div class="blog-content">
+                <div class="blog-meta">
+                  <span><i class="far fa-calendar me-1"></i> January 10, 2023</span>
+                  <span><i class="far fa-user me-1"></i> Admin</span>
+                </div>
+                <h3 class="h5 fw-bold mb-3">A Foodie's Journey Through India's Regional Cuisines</h3>
+                <p class="text-muted">Embark on a culinary adventure across India, exploring the diverse flavors, spices, and cooking techniques of each region.</p>
+                <a href="#" class="text-primary text-decoration-none">Read More <i class="fas fa-arrow-right ms-1"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="text-center mt-5" data-aos="fade-up">
+          <a href="{% url 'Blog' %}" class="btn btn-primary">View All Posts</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-5 bg-light">
+      <div class="container">
+        <div class="text-center mb-5">
+          <h2 class="fw-bold" data-aos="fade-up">Frequently Asked Questions</h2>
+          <p class="text-muted" data-aos="fade-up" data-aos-delay="100">Find answers to common questions about traveling in India</p>
+        </div>
+        
+        <div class="row justify-content-center">
+          <div class="col-lg-8" data-aos="fade-up">
+            <div class="accordion" id="faqAccordion">
+              <!-- FAQ Item 1 -->
+              <div class="accordion-item mb-3 border rounded overflow-hidden">
+                <h2 class="accordion-header">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                    What is the best time to visit India?
+                  </button>
+                </h2>
+                <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                  <div class="accordion-body">
+                    <p class="mb-0">The best time to visit India is from October to March when the weather is generally pleasant across most regions. However, India's diverse geography means that ideal visiting times vary by region. The Himalayan regions are best visited from March to June, while beach destinations like Goa are perfect from November to February. Monsoon season (June to September) is generally avoided, though Kerala and the Western Ghats can be lush and beautiful during this time.</p>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- FAQ Item 2 -->
+              <div class="accordion-item mb-3 border rounded overflow-hidden">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                    Do I need a visa to visit India?
+                  </button>
+                </h2>
+                <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                  <div class="accordion-body">
+                    <p class="mb-0">Yes, most foreign nationals require a visa to enter India. India offers various types of visas including tourist, business, and e-visas. The e-visa process is convenient for many travelers and can be applied for online. The validity and entry requirements vary based on your nationality, so we recommend checking the official Indian visa website or contacting your nearest Indian embassy or consulate for the most up-to-date information.</p>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- FAQ Item 3 -->
+              <div class="accordion-item mb-3 border rounded overflow-hidden">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                    Is it safe to travel in India?
+                  </button>
+                </h2>
+                <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                  <div class="accordion-body">
+                    <p class="mb-0">India is generally safe for travelers, but like any destination, it's important to exercise common sense and take standard precautions. Keep your valuables secure, be aware of your surroundings, and respect local customs and traditions. Women travelers should take additional precautions, especially when traveling alone. We recommend booking tours and transportation through reputable companies, staying in well-reviewed accommodations, and keeping emergency contacts handy.</p>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- FAQ Item 4 -->
+              <div class="accordion-item mb-3 border rounded overflow-hidden">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                    What vaccinations do I need for India?
+                  </button>
+                </h2>
+                <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                  <div class="accordion-body">
+                    <p class="mb-0">Recommended vaccinations for India typically include Hepatitis A and B, Typhoid, Tetanus, and potentially others depending on your specific itinerary and activities. It's best to consult with a travel medicine specialist or your healthcare provider at least 4-6 weeks before your trip to get personalized advice. Some areas of India may have malaria or dengue risk, so discuss preventive measures with your doctor. Always check the latest health advisories before traveling.</p>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- FAQ Item 5 -->
+              <div class="accordion-item border rounded overflow-hidden">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                    What is the currency in India and can I use credit cards?
+                  </button>
+                </h2>
+                <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                  <div class="accordion-body">
+                    <p class="mb-0">The currency in India is the Indian Rupee (INR). Credit cards are widely accepted in major cities, hotels, and established restaurants, but it's advisable to carry cash for smaller establishments, local markets, and rural areas. ATMs are readily available in cities and tourist destinations. It's a good idea to inform your bank about your travel plans to avoid any issues with your cards. Also, keep some small denominations handy for tips, small purchases, and transportation.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Travel Tips Timeline -->
+    <section class="py-5">
+      <div class="container">
+        <div class="text-center mb-5">
+          <h2 class="fw-bold" data-aos="fade-up">Travel Tips & Insights</h2>
+          <p class="text-muted" data-aos="fade-up" data-aos-delay="100">Essential information to help you plan and enjoy your Indian journey</p>
+        </div>
+        
+        <div class="timeline" data-aos="fade-up">
+          <!-- Timeline Item 1 -->
+          <div class="timeline-container left">
+            <div class="timeline-content">
+              <h3 class="h5 fw-bold">Before You Travel</h3>
+              <p class="text-muted">Research your destinations, check visa requirements, get necessary vaccinations, and make copies of important documents. Consider travel insurance that covers medical emergencies and trip cancellations.</p>
+            </div>
+          </div>
+          
+          <!-- Timeline Item 2 -->
+          <div class="timeline-container right">
+            <div class="timeline-content">
+              <h3 class="h5 fw-bold">Packing Essentials</h3>
+              <p class="text-muted">Pack lightweight, modest clothing suitable for the season and region. Bring comfortable walking shoes, a hat, sunscreen, insect repellent, and any necessary medications. Don't forget a universal adapter for your electronics.</p>
+            </div>
+          </div>
+          
+          <!-- Timeline Item 3 -->
+          <div class="timeline-container left">
+            <div class="timeline-content">
+              <h3 class="h5 fw-bold">Transportation</h3>
+              <p class="text-muted">India offers various transportation options from domestic flights to trains, buses, and taxis. Pre-book long-distance travel and consider hiring a driver for day trips. Ride-sharing apps are available in major cities.</p>
+            </div>
+          </div>
+          
+          <!-- Timeline Item 4 -->
+          <div class="timeline-container right">
+            <div class="timeline-content">
+              <h3 class="h5 fw-bold">Food & Water Safety</h3>
+              <p class="text-muted">Stick to bottled or purified water and avoid ice in drinks. Eat at reputable establishments and be cautious with street food. Carry hand sanitizer and consider probiotics to help your digestive system adjust.</p>
+            </div>
+          </div>
+          
+          <!-- Timeline Item 5 -->
+          <div class="timeline-container left">
+            <div class="timeline-content">
+              <h3 class="h5 fw-bold">Cultural Etiquette</h3>
+              <p class="text-muted">Dress modestly, especially at religious sites. Remove shoes before entering temples and homes. Use your right hand for eating and giving/receiving items. Ask permission before photographing people.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Video Showcase -->
+    <section class="py-5 bg-light">
+      <div class="container">
+        <div class="text-center mb-5">
+          <h2 class="fw-bold" data-aos="fade-up">India in Motion</h2>
+          <p class="text-muted" data-aos="fade-up" data-aos-delay="100">Experience the sights and sounds of incredible India</p>
+        </div>
+        
+        <div class="row justify-content-center">
+          <div class="col-lg-10" data-aos="fade-up">
+            <div class="video-container">
+              <iframe src="https://www.youtube.com/embed/35npVaFGHMY" title="Incredible India Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="text-center mt-4">
+              <p class="text-muted">Discover the diversity and beauty of India through our curated video collection</p>
+              <a href="{% url 'arvr' %}" class="btn btn-outline-primary mt-2">View More Videos</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Travel Tools Section -->
+    <section class="py-5">
+      <div class="container">
+        <div class="text-center mb-5">
+          <h2 class="fw-bold" data-aos="fade-up">Travel Tools</h2>
+          <p class="text-muted" data-aos="fade-up" data-aos-delay="100">Useful resources to help plan and enhance your Indian journey</p>
+        </div>
+        
+        <div class="row g-4">
+          <!-- Weather Widget -->
+          <div class="col-md-4" data-aos="fade-up">
+            <div class="weather-widget text-center">
+              <div class="weather-icon">
+                <i class="fas fa-sun"></i>
+              </div>
+              <h3 class="h5 fw-bold mb-3">Weather Forecast</h3>
+              <div class="weather-temp">28°C</div>
+              <p class="text-muted mb-3">New Delhi, Mostly Sunny</p>
+              <a href="{% url 'weather' %}" class="btn btn-sm btn-outline-primary">Check Other Cities</a>
+            </div>
+          </div>
+          
+          <!-- Currency Converter -->
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="currency-converter">
+              <h3 class="h5 fw-bold mb-3 text-center">Currency Converter</h3>
+              <form class="mb-3">
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Amount</label>
+                  <input type="number" class="form-control" id="amount" value="1">
+                </div>
+                <div class="row mb-3">
+                  <div class="col-6">
+                    <label for="from-currency" class="form-label">From</label>
+                    <select class="form-select" id="from-currency">
+                      <option value="USD" selected>USD</option>
+                      <option value="EUR">EUR</option>
+                      <option value="GBP">GBP</option>
+                      <option value="AUD">AUD</option>
+                    </select>
+                  </div>
+                  <div class="col-6">
+                    <label for="to-currency" class="form-label">To</label>
+                    <select class="form-select" id="to-currency">
+                      <option value="INR" selected>INR</option>
+                    </select>
+                  </div>
+                </div>
+                <button type="button" class="btn btn-primary w-100" id="convert-btn">Convert</button>
+              </form>
+              <div class="text-center" id="conversion-result">
+                <p class="mb-0">1 USD = 82.50 INR</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Travel Checklist -->
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="card h-100">
+              <div class="card-body">
+                <h3 class="h5 fw-bold mb-3 text-center">Travel Checklist</h3>
+                <div class="mb-3">
+                  <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" id="passport">
+                    <label class="form-check-label" for="passport">Valid Passport</label>
+                  </div>
+                  <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" id="visa">
+                    <label class="form-check-label" for="visa">Indian Visa</label>
+                  </div>
+                  <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" id="insurance">
+                    <label class="form-check-label" for="insurance">Travel Insurance</label>
+                  </div>
+                  <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" id="vaccinations">
+                    <label class="form-check-label" for="vaccinations">Vaccinations</label>
+                  </div>
+                  <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" id="flights">
+                    <label class="form-check-label" for="flights">Flight Tickets</label>
+                  </div>
+                  <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" id="accommodation">
+                    <label class="form-check-label" for="accommodation">Accommodation</label>
+                  </div>
+                </div>
+                <a href="#" class="btn btn-outline-primary w-100">Download Full Checklist</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="py-5 bg-light">
+      <div class="container">
+        <div class="text-center mb-5">
+          <h2 class="fw-bold" data-aos="fade-up">Explore India</h2>
+          <p class="text-muted" data-aos="fade-up" data-aos-delay="100">Navigate through India's diverse regions and plan your perfect route</p>
+        </div>
+        
+        <div class="row justify-content-center">
+          <div class="col-lg-10" data-aos="fade-up">
+            <div class="map-container">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15282225.79979123!2d73.7250245393691!3d20.750301298393563!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30635ff06b92b791%3A0xd78c4fa1854213a6!2sIndia!5e0!3m2!1sen!2sin!4v1644813708128!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8 text-center" data-aos="fade-up">
+            <h2 class="display-5 fw-bold mb-4">Ready to Create Your Own Priceless Memories?</h2>
+            <p class="lead mb-4">Let us help you design the perfect Indian journey tailored to your interests, budget, and schedule.</p>
+            <button type="button" class="btn btn-primary btn-lg me-2" data-bs-toggle="modal" data-bs-target="#planTripModal">
+              Start Planning Now
+            </button>
+            <a href="{% url 'contact' %}" class="btn btn-outline-light btn-lg">Contact Our Experts</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Plan Your Journey Section -->
+    <section class="py-5" id="plan-trip">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
+            <h2 class="fw-bold mb-4">Plan Your Indian Journey</h2>
+            <p class="text-muted mb-4">
+              Our travel experts will help you create the perfect itinerary tailored to your interests, budget, and
+              schedule. Whether you're seeking spiritual enlightenment, cultural immersion, or adventure in the
+              diverse landscapes of India, we'll ensure your trip is unforgettable.
+            </p>
+            
+            <div class="row mb-4">
+              <div class="col-sm-6">
+                <div class="d-flex align-items-start mb-3">
+                  <i class="fas fa-calendar text-primary mt-1 me-2"></i>
+                  <div>
+                    <h4 class="h6 fw-bold">Best Time to Visit</h4>
+                    <p class="small text-muted">Find the ideal season for your Indian adventure</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="d-flex align-items-start mb-3">
+                  <i class="fas fa-map-marker-alt text-primary mt-1 me-2"></i>
+                  <div>
+                    <h4 class="h6 fw-bold">Guided Tours</h4>
+                    <p class="small text-muted">Expert-led experiences to iconic Indian locations</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#planTripModal">
+              Start Planning
+            </button>
+          </div>
+          <div class="col-lg-6" data-aos="fade-left">
+            <div class="rounded overflow-hidden">
+              <img src="https://plus.unsplash.com/premium_photo-1661885523029-fc960a2bb4f3?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Planning a trip to India" class="img-fluid w-100">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  
+  <!-- Plan Trip Modal -->
+  <div class="modal fade" id="planTripModal" tabindex="-1" aria-labelledby="planTripModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="planTripModalLabel">Plan Your Trip to India</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="trip-planning-form">
+            <div class="row mb-3">
+              <div class="col-md-6 mb-3 mb-md-0">
+                <label for="name" class="form-label">Full Name</label>
+                <input type="text" class="form-control" id="name" placeholder="Your name" required>
+              </div>
+              <div class="col-md-6">
+                <label for="email" class="form-label">Email Address</label>
+                <input type="email" class="form-control" id="email" placeholder="Your email" required>
+              </div>
+            </div>
+            
+            <div class="row mb-3">
+              <div class="col-md-6 mb-3 mb-md-0">
+                <label for="arrival" class="form-label">Arrival Date</label>
+                <input type="date" class="form-control" id="arrival" required>
+              </div>
+              <div class="col-md-6">
+                <label for="departure" class="form-label">Departure Date</label>
+                <input type="date" class="form-control" id="departure" required>
+              </div>
+            </div>
+            
+            <div class="row mb-3">
+              <div class="col-md-6 mb-3 mb-md-0">
+                <label for="travelers" class="form-label">Number of Travelers</label>
+                <select class="form-select" id="travelers" required>
+                  <option value="" selected disabled>Select</option>
+                  <option value="1">1 Person</option>
+                  <option value="2">2 People</option>
+                  <option value="3-5">3-5 People</option>
+                  <option value="6+">6+ People</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label for="budget" class="form-label">Budget Range</label>
+                <select class="form-select" id="budget" required>
+                  <option value="" selected disabled>Select</option>
+                  <option value="budget">Budget</option>
+                  <option value="standard">Standard</option>
+                  <option value="luxury">Luxury</option>
+                  <option value="ultra-luxury">Ultra Luxury</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="mb-3">
+              <label class="form-label">Interests (Select all that apply)</label>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" id="culture">
+                    <label class="form-check-label" for="culture">Cultural Experiences</label>
+                  </div>
+                  <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" id="adventure">
+                    <label class="form-check-label" for="adventure">Adventure Activities</label>
+                  </div>
+                  <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" id="nature">
+                    <label class="form-check-label" for="nature">Nature & Wildlife</label>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" id="food">
+                    <label class="form-check-label" for="food">Food & Cuisine</label>
+                  </div>
+                  <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" id="history">
+                    <label class="form-check-label" for="history">History & Heritage</label>
+                  </div>
+                  <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" id="wellness">
+                    <label class="form-check-label" for="wellness">Yoga & Wellness</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="mb-3">
+              <label for="message" class="form-label">Additional Requirements</label>
+              <textarea class="form-control" id="message" rows="4" placeholder="Tell us more about your dream trip to India..."></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="submit-trip-form">Submit Request</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+  
+
+  <!-- Bootstrap JS Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- AOS Animation Library -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <!-- Swiper Slider JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+  
+  <!-- Embedded JavaScript -->
+  <script>
+    // Wait for the DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize AOS animation library
+      AOS.init({
+        duration: 800,
+        easing: 'ease-in-out',
+        once: true
+      });
+
+      // Chat Assistant Functionality
+      const chatToggleBtn = document.getElementById('chat-toggle-btn');
+      const chatCloseBtn = document.getElementById('chat-close-btn');
+      const chatContainer = document.getElementById('chat-container');
+      const chatHistory = document.getElementById('chat-history');
+      const chatForm = document.getElementById('chat-form');
+      const messageInput = document.getElementById('message');
+      const imageInput = document.getElementById('image');
+      const filePreview = document.getElementById('file-preview');
+      const typingIndicator = document.getElementById('typing-indicator');
+      const voiceRecordBtn = document.getElementById('voice-record-btn');
+      const recordBtnText = document.getElementById('record-btn-text');
+      const recordingStatus = document.getElementById('recording-status');
+      const clearHistoryBtn = document.getElementById('clear-history-btn');
+
+      // Toggle chat visibility
+      chatToggleBtn.addEventListener('click', function() {
+        chatContainer.style.display = chatContainer.style.display === 'none' ? 'block' : 'none';
+      });
+
+      // Close chat when close button is clicked
+      chatCloseBtn.addEventListener('click', function() {
+        chatContainer.style.display = 'none';
+      });
+
+      // Clear chat history
+      clearHistoryBtn.addEventListener('click', function() {
+        if (confirm('Are you sure you want to clear your chat history?')) {
+          chatHistory.innerHTML = '<p class="text-center text-muted mb-0">Chat history cleared. How can I help you today?</p>';
+          localStorage.removeItem('chatHistory');
+        }
+      });
+
+      // Load chat history from localStorage
+      function loadChatHistory() {
+        const savedHistory = localStorage.getItem('chatHistory');
+        if (savedHistory) {
+          chatHistory.innerHTML = savedHistory;
+          chatHistory.scrollTop = chatHistory.scrollHeight;
+        }
+      }
+
+      // Save chat history to localStorage
+      function saveChatHistory() {
+        localStorage.setItem('chatHistory', chatHistory.innerHTML);
+      }
+
+      // Speech recognition variables
+      let recognition;
+      let isRecording = false;
+
+      // Initialize speech recognition if supported
+      if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+        recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+        recognition.continuous = false;
+        recognition.interimResults = false;
+        recognition.lang = 'en-US';
+        
+        recognition.onresult = function(event) {
+          const transcript = event.results[0][0].transcript;
+          messageInput.value = transcript;
+          recordingStatus.style.display = 'none';
+          voiceRecordBtn.classList.remove('recording');
+          recordBtnText.textContent = 'Record Voice';
+          isRecording = false;
+          
+          // Auto-submit the form when voice is converted to text
+          chatForm.dispatchEvent(new Event('submit'));
+        };
+        
+        recognition.onerror = function(event) {
+          console.error('Speech recognition error:', event.error);
+          recordingStatus.style.display = 'none';
+          voiceRecordBtn.classList.remove('recording');
+          recordBtnText.textContent = 'Record Voice';
+          isRecording = false;
+        };
+        
+        recognition.onend = function() {
+          recordingStatus.style.display = 'none';
+          voiceRecordBtn.classList.remove('recording');
+          recordBtnText.textContent = 'Record Voice';
+          isRecording = false;
+        };
+        
+        // Voice recording button functionality
+        voiceRecordBtn.addEventListener('click', function() {
+          if (!isRecording) {
+            // Start recording
+            recognition.start();
+            recordingStatus.style.display = 'block';
+            voiceRecordBtn.classList.add('recording');
+            recordBtnText.textContent = 'Stop Recording';
+            isRecording = true;
+          } else {
+            // Stop recording
+            recognition.stop();
+            recordingStatus.style.display = 'none';
+            voiceRecordBtn.classList.remove('recording');
+            recordBtnText.textContent = 'Record Voice';
+            isRecording = false;
+          }
+        });
+      } else {
+        // Hide voice recording button if not supported
+        voiceRecordBtn.style.display = 'none';
+      }
+
+      // Function to show typing indicator
+      function showTypingIndicator() {
+        typingIndicator.style.display = 'block';
+      }
+
+      // Function to hide typing indicator
+      function hideTypingIndicator() {
+        typingIndicator.style.display = 'none';
+      }
+
+      // Preview image when selected
+      imageInput.addEventListener('change', function() {
+        if (this.files && this.files[0]) {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            filePreview.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
+            filePreview.style.display = 'block';
+          }
+          reader.readAsDataURL(this.files[0]);
+        } else {
+          filePreview.innerHTML = '';
+          filePreview.style.display = 'none';
+        }
+      });
+
+      // Handle chat form submission
+      chatForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const userMessage = messageInput.value.trim();
+        const image = imageInput.files[0];
+        
+        if (!userMessage && !image) {
+          return;
+        }
+        
+        // Display user's message in chat history
+        const userMessageDiv = document.createElement('div');
+        userMessageDiv.className = 'user-message';
+        
+        let messageContent = `<strong>You:</strong> ${userMessage}`;
+        
+        if (image) {
+          const imgPreviewUrl = URL.createObjectURL(image);
+          messageContent += `<div class="mt-2"><img src="${imgPreviewUrl}" alt="User uploaded image" style="max-width: 100%; max-height: 200px; border-radius: 4px;"></div>`;
+        }
+        
+        userMessageDiv.innerHTML = messageContent;
+        chatHistory.appendChild(userMessageDiv);
+        chatHistory.scrollTop = chatHistory.scrollHeight;
+        
+        // Show typing indicator
+        showTypingIndicator();
+        
+        // Prepare form data
+        const formData = new FormData();
+        formData.append('message', userMessage);
+        if (image) {
+          formData.append('image', image);
+        }
+        
+        // Send request to backend
+        fetch("", {
+          method: "POST",
+          body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+          // Hide typing indicator
+          hideTypingIndicator();
+          
+          // Create and append AI response
+          const aiResponseDiv = document.createElement('div');
+          aiResponseDiv.className = 'assistant-message';
+          
+          // Check if navigation is required
+          if (data.navigation) {
+            aiResponseDiv.innerHTML = `<strong>Assistant:</strong> ${data.response}`;
+            chatHistory.appendChild(aiResponseDiv);
+            
+            // Add a redirect notification
+            const redirectNotice = document.createElement('div');
+            redirectNotice.className = 'alert alert-info mt-3';
+            redirectNotice.innerHTML = `Redirecting you to the requested page...`;
+            chatHistory.appendChild(redirectNotice);
+            
+            // Save chat history before redirecting
+            saveChatHistory();
+            
+            // Redirect after a short delay
+            setTimeout(() => {
+              window.location.href = data.navigation;
+            }, 1500);
+          } else {
+            // Regular response with Markdown support
+            aiResponseDiv.innerHTML = `<strong>Assistant:</strong><div>${data.response}</div>`;
+            chatHistory.appendChild(aiResponseDiv);
+            
+            // Save updated chat history
+            saveChatHistory();
+          }
+          
+          // Scroll to bottom of chat
+          chatHistory.scrollTop = chatHistory.scrollHeight;
+        })
+        .catch(err => {
+          hideTypingIndicator();
+          const errorDiv = document.createElement('div');
+          errorDiv.className = 'alert alert-danger mt-3';
+          errorDiv.innerHTML = `<strong>Error:</strong> ${err.message || 'Something went wrong. Please try again.'}`;
+          chatHistory.appendChild(errorDiv);
+          
+          // Save chat history including error message
+          saveChatHistory();
+        });
+        
+        // Reset form
+        messageInput.value = '';
+        imageInput.value = '';
+        filePreview.innerHTML = '';
+        filePreview.style.display = 'none';
+      });
+
+      // Load chat history when page loads
+      document.addEventListener('DOMContentLoaded', function() {
+        loadChatHistory();
+      });
+
+      // Initialize Swiper slider for testimonials
+      const testimonialSwiper = new Swiper('.testimonial-swiper', {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        loop: true,
+        autoplay: {
+          delay: 5000,
+          disableOnInteraction: false,
+        },
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+        breakpoints: {
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          992: {
+            slidesPerView: 3,
+            spaceBetween: 30,
+          }
+        }
+      });
+
+      // Rest of your existing JavaScript...
+    });
+  </script>
+{% endblock %}

@@ -1,0 +1,2547 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Manipur</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> -->
+  <style>
+    .wb {
+      font-size: 10vw;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+      border-spacing: 0;
+      border: 1px solid #ddd;
+    }
+
+    td,
+    th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+      font-size: 1.5vw;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+
+    .trip {
+      text-align: center;
+      font-weight: 900;
+      background: orangered;
+      padding: 20px;
+      border-radius: 20px;
+      width: 60%;
+    }
+
+    p,
+    li,
+    .text {
+      font-size: 1.5vw;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-weight: 600;
+    }
+
+    h4 {
+      font-weight: 900;
+    }
+
+    img {
+      border-radius: 10px;
+      display: block;
+      margin: auto;
+    }
+
+    @media screen and (max-width: 850px) {
+
+      p,
+      li,
+      .text,
+      td,
+      th {
+        font-size: 2vw;
+        ;
+      }
+
+    }
+
+    @media screen and (max-width: 500px) {
+
+      p,
+      li,
+      .text,
+      td,
+      th {
+        font-size: 4.5vw;
+        ;
+      }
+
+    }
+
+    .box:nth-of-type(odd) {
+      background: #f3b37185;
+      padding: 10px;
+    }
+
+    .weather-container {
+            border-radius: 15px;
+            background: #f0fdf4;
+            padding: 15px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .weather-card {
+            text-align: center;
+            border-radius: 10px;
+            padding: 10px;
+            background: white;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+        .aqi {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            color: white;
+        }
+        .aqi-bad { background: purple; }
+        .aqi-moderate { background: orange; }
+        .aqi-good { background: green; }
+        .best-time {
+            background: #d1fae5;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 15px;
+            color: green;
+        }
+        .wet {
+            max-width: 50px;
+        }
+        
+        .trip {
+          font-size: 18px;
+          padding: 10px 20px;
+          cursor: pointer;
+          background-color:rgb(231, 36, 36);
+          color: white;
+          border: none;
+          border-radius: 5px;
+      }
+      .modal {
+          display: none;
+          position: fixed;
+          z-index: 1;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0,0,0,0.5);
+      }
+      .modal-content {
+          background-color: #fff;
+          margin: 10% auto;
+          padding: 20px;
+          border-radius: 10px;
+          width: 40%;
+          box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+          text-align: center;
+      }
+      .close {
+          color: #aaa;
+          float: right;
+          font-size: 28px;
+          font-weight: bold;
+          cursor: pointer;
+      }
+      .trip-options {
+          display: flex;
+          justify-content: center;
+          gap: 20px;
+          margin-top: 20px;
+      }
+      .trip-options a {
+          display: block;
+          width: 120px;
+          padding: 10px;
+          background-color: #28a745;
+          color: white;
+          text-decoration: none;
+          border-radius: 5px;
+      }
+  </style>
+</head>
+
+<body>
+
+
+  <!-- <h2>Carousel Example</h2> -->
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+      <li data-target="#myCarousel" data-slide-to="4"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+
+      <div class="item active">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Loktak_Lake_Manipur.jpg/1280px-Loktak_Lake_Manipur.jpg" alt="Loktak Lake" style="width:100%; height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Loktak Lake</h3>
+          <p>We love the floating phumdis and scenic beauty!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Kangla_Fort_Imphal.jpg/1280px-Kangla_Fort_Imphal.jpg" alt="Kangla Fort" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Kangla Fort</h3>
+          <p>The amazing architecture and history!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Ima_Keithel_Women%27s_Market_Imphal.jpg/1280px-Ima_Keithel_Women%27s_Market_Imphal.jpg" alt="Ima Market" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Ima Keithel</h3>
+          <p>Asia's largest all-women market!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Dzuko_Valley_Manipur.jpg/1280px-Dzuko_Valley_Manipur.jpg" alt="Dzukou Valley" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Dzukou Valley</h3>
+          <p>We love the pristine valleys!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Shirui_Lily_Manipur.jpg/1280px-Shirui_Lily_Manipur.jpg" alt="Shirui Lily" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Shirui Lily</h3>
+          <p>We love the rare state flower of Manipur!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+  <div class="container">
+    <br><br>
+    <h1 class="wb"> MANIPUR</h1><br>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Manipur_districts_map.png/800px-Manipur_districts_map.png" alt="" style="height:700px; width: -webkit-fill-available;">
+
+        </div>
+        <div class="col-sm-6">
+          <h1> Manipur: The Jewel of India</h1>
+          <p class="text">Manipur is a diverse and vibrant state in northeastern India, known for its rich history,
+            cultural heritage, dance forms, festivals, art, and natural beauty. It is a land of hills and valleys with unique traditions and is often called the "Jewel of India" or the "Switzerland of the East".</p>
+
+          <ul>
+            <li><b>Location --</b> Northeastern India</li>
+            <li><b>Capital --</b> Imphal</li>
+            <li><b>Official Language --</b> Manipuri (Meiteilon)</li>
+            <li><b>Area --</b> 22,327 sq. km</li>
+            <li><b>Population --</b> ~3 million</li>
+            <li><b>Borders --</b> Nagaland, Assam, Mizoram & International border with Myanmar</li>
+            <li><b>Major Rivers --</b> Barak, Imphal, Iril, Nambul, Thoubal</li>
+            <li><b>Major Festivals --</b> Lai Haraoba, Cheiraoba, Kang, Kwak Jatra, Lui-Ngai-Ni, Christmas, Gaan-Ngai</li>
+            <li><b>State Animal --</b> Sangai (Brow-antlered Deer)</li>
+            <li><b>State Flower --</b> Shirui Lily</li>
+            <li><b>State Tree --</b> Uningthou</li>
+            <li><b>State Bird --</b> Mrs. Hume's Pheasant (Nongin)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <br>
+    <hr>
+    <div>
+      <h1>📌 Divisions & Districts of Manipur</h1>
+      <br>
+      <div style="overflow-x:auto;">
+        <table>
+          <tr>
+            <th>Region</th>
+            <th>Districts</th>
+            <th>Key Highlights</th>
+          </tr>
+          <tr>
+            <td>Valley Region</td>
+            <td>1. Imphal East 2. Imphal West 3. Bishnupur 4. Thoubal 5. Kakching 6. Jiribam</td>
+            <td>Imphal (State Capital), Loktak Lake, Kangla Fort, Ima Market, Govindajee Temple</td>
+          </tr>
+          <tr>
+            <td>Hill Region (Eastern)</td>
+            <td>7. Ukhrul 8. Kamjong 9. Chandel 10. Tengnoupal</td>
+            <td>Shirui Peak, Shirui Lily, Indo-Myanmar Border, Tribal Villages</td>
+          </tr>
+          <tr>
+            <td>Hill Region (Western)</td>
+            <td>11. Churachandpur 12. Pherzawl</td>
+            <td>Tribal Cultures, Khuga Dam, Handicrafts</td>
+          </tr>
+          <tr>
+            <td>Hill Region (Northern)</td>
+            <td>13. Senapati 14. Kangpokpi 15. Tamenglong 16. Noney</td>
+            <td>Dzukou Valley, Barak Waterfalls, Tribal Heritage</td>
+          </tr>
+        </table>
+      </div>
+      <br><br>
+      <h1>🔹 Major Highlights of Some Key Districts</h1><br><br>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <ul>
+              <li><b>Imphal East & West --</b> Capital of Manipur, cultural & economic hub.</li>
+              <li><b>Bishnupur --</b> Famous for Loktak Lake, the largest freshwater lake in Northeast India.</li>
+              <li><b>Ukhrul --</b> Home to the rare Shirui Lily and beautiful landscapes.</li>
+              <li><b>Churachandpur --</b> Largest district with diverse tribal cultures.</li>
+              <li><b>Thoubal --</b> Known for agriculture and Khongjom War Memorial.</li>
+              <li><b>Senapati --</b> Gateway to Dzukou Valley, shared with Nagaland.</li>
+              <li><b>Tamenglong --</b> Known for oranges, Barak Waterfalls, and caves.</li>
+              <li><b>Chandel --</b> Border district with Myanmar, known for tribal heritage.</li>
+              <li><b>Kakching --</b> Known as the "Rice Bowl of Manipur" for its agriculture.</li>
+            </ul>
+          </div>
+          <div class="col-sm-6">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Manipur_districts_map.png/800px-Manipur_districts_map.png" alt="" style="height:450px;width: -webkit-fill-available;">
+
+          </div>
+        </div>
+      </div>
+    </div><br><br>
+    <div class="container">
+      <div class="weather-container">
+          <h4 class="text-center"><strong>Weather in Manipur</strong></h4>
+          <div class="row">
+              <!-- January -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Jan</h6>
+                      <p>4/20°C</p>
+                      <span class="aqi aqi-good">AQI 45</span>
+                  </div>
+              </div>
+              <!-- February -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Feb</h6>
+                      <p>6/22°C</p>
+                      <span class="aqi aqi-good">AQI 50</span>
+                  </div>
+              </div>
+              <!-- March -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Mar</h6>
+                      <p>10/25°C</p>
+                      <span class="aqi aqi-good">AQI 55</span>
+                  </div>
+              </div>
+              <!-- April -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Apr</h6>
+                      <p>14/28°C</p>
+                      <span class="aqi aqi-good">AQI 60</span>
+                  </div>
+              </div>
+              <!-- May -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>May</h6>
+                      <p>17/29°C</p>
+                      <span class="aqi aqi-good">AQI 65</span>
+                  </div>
+              </div>
+              <!-- June -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Jun</h6>
+                      <p>20/29°C</p>
+                      <span class="aqi aqi-good">AQI 55</span>
+                  </div>
+              </div>
+              <!-- July -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="rain.png" alt="rain">
+                      <h6>Jul</h6>
+                      <p>21/28°C</p>
+                      <span class="aqi aqi-good">AQI 48</span>
+                  </div>
+              </div>
+              <!-- August -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Aug</h6>
+                      <p>21/29°C</p>
+                      <span class="aqi aqi-good">AQI 50</span>
+                  </div>
+              </div>
+              <!-- September -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Sep</h6>
+                      <p>20/29°C</p>
+                      <span class="aqi aqi-good">AQI 49</span>
+                  </div>
+              </div>
+              <!-- October -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Oct</h6>
+                      <p>16/28°C</p>
+                      <span class="aqi aqi-good">AQI 52</span>
+                  </div>
+              </div>
+              <!-- November -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Nov</h6>
+                      <p>10/25°C</p>
+                      <span class="aqi aqi-good">AQI 48</span>
+                  </div>
+              </div>
+              <!-- December -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Dec</h6>
+                      <p>6/22°C</p>
+                      <span class="aqi aqi-good">AQI 45</span>
+                  </div>
+              </div>
+          </div>
+          <div class="text-center">
+              <div class="best-time">🏆 Best time to visit: October - April</div>
+          </div>
+      </div>
+    </div>
+    
+
+    <br><br>
+    <button class="trip" id="openModal">Let's go on a trip</button>
+    
+    <div id="tripModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Select Your Trip</h2>
+            <button type="button" class="btn btn-warning" style="margin-bottom: 8px;color:black; border-radius: 5px;" onclick="location.href='{% url 'manipur_7days' %}'" >7 days trip</button><br>
+            <button type="button" class="btn btn-warning" style="margin-bottom: 8px;color:black; border-radius: 5px;" onclick="location.href='{% url 'manipur_12days' %}'" >12 days trip</button>
+        </div>
+    </div>
+    
+    <script>
+        var modal = document.getElementById("tripModal");
+        var btn = document.getElementById("openModal");
+        var span = document.getElementsByClassName("close")[0];
+        
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+        
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+        
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script><br><br>
+    <div class="container">
+      <ul class="nav nav-tabs">
+        <li class="nav-item"><a data-toggle="tab" href="#wbculture"> Culture</a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbtradition "> Tradition</a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbfestivals"> Festivals </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbfood"> Foods </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbhistory"> History </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbartacraft"> Art and Craft </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbseason"> Season to Visit </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbtourist"> Tourist Spots </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbwild"> Wildlife & Crops </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbedu"> Institutions </a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="wbculture" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Culture of Manipur</h1>
+          <p class="text">Manipur has a rich and diverse culture, shaped by its history, literature, art, music,
+            festivals, and traditions. Here's an overview of some key aspects of its culture:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Language</h3>
+                  <ul>
+                    <li>Manipuri (Meiteilon) is the official language and a major part of the cultural identity of Manipur. It has its own script called Meitei Mayek, which was revived in the 20th century after being replaced by Bengali script. The state is also home to several tribal languages including Tangkhul, Kuki, Paite, Hmar, and Thadou.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Meitei_script.jpg/800px-Meitei_script.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>2. Literature</h3>
+                  <ul>
+                    <li>Manipur has a rich literary tradition dating back to ancient times. The Puyas (ancient manuscripts) contain historical and religious texts. Modern Manipuri literature has produced notable writers like Hijam Anganghal Singh, M.K. Binodini Devi, and Arambam Somorendra.</li>
+                    <li>The state has a strong tradition of poetry, drama, and storytelling that reflects its cultural heritage.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Manipuri_Puya_manuscript.jpg/800px-Manipuri_Puya_manuscript.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div><br>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Manipuri_Phanek_traditional_dress.jpg/800px-Manipuri_Phanek_traditional_dress.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Art and Craft</h3>
+                  <ul>
+                    <li>Manipur is known for its exquisite handicrafts, including bamboo and cane work, pottery, and traditional textiles. The Manipuri women weave beautiful fabrics like Phanek (traditional sarong), Wangkhei Phee, and Moirang Phee with intricate designs.</li>
+                    <li>The state is also famous for its handloom products, which are known for their vibrant colors and unique patterns.</li>
+                  </ul>
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Manipuri_Pung_Cholom_drummers.jpg/800px-Manipuri_Pung_Cholom_drummers.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>4. Music</h3>
+                  <ul>
+                    <li>Manipuri music is characterized by its devotional and folk elements. Traditional instruments include the pena (a stringed instrument), pung (drum), and sembung (flute).</li>
+                    <li>Pung Cholom, a drum dance, is a significant part of Manipuri music and dance traditions.</li>
+                    <li>Folk songs like Khulang Esei (boat songs) and Eshai Jagoi (narrative songs) are popular in rural areas.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Dance</h3>
+                  <ul>
+                    <li>Manipuri dance is one of the eight classical dance forms of India, known for its graceful, gentle, and lyrical movements.</li>
+                    <li>Raas Leela, depicting the divine love of Radha and Krishna, is the most renowned Manipuri dance form.</li>
+                    <li>Other important dance forms include Lai Haraoba, Pung Cholom, Khamba Thoibi, and various tribal dances.</li>
+                  </ul>
+                  <h3>6. Cuisine</h3>
+                  <ul>
+                    <li>Manipuri cuisine is characterized by its minimal use of spices, focus on fresh ingredients, and fermented foods.</li>
+                    <li>Rice is the staple food, often accompanied by fish, vegetables, and chutney (iromba).</li>
+                    <li>Popular dishes include Eromba (vegetable stew with fermented fish), Chamthong (vegetable soup), Kangshoi (vegetable stew), and Ooti (mustard greens with peas).</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Manipuri_classical_dance.jpg/800px-Manipuri_classical_dance.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Shumang_Leela_Manipuri_theater.jpg/800px-Shumang_Leela_Manipuri_theater.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>7. Theatre and Cinema</h3>
+                  <ul>
+                    <li>Shumang Leela is a traditional form of theater performed in the courtyard, often addressing social issues.</li>
+                    <li>Manipuri cinema, though small, has produced notable films that reflect the state's culture and social issues.</li>
+                  </ul>
+                  <h3>8. Architecture</h3>
+                  <ul>
+                    <li>Traditional Manipuri architecture includes wooden houses with thatched roofs, especially in rural areas.</li>
+                    <li>Historical structures like Kangla Fort, Shree Govindajee Temple, and various ancient temples showcase the architectural heritage of the region.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Govindajee_Temple_Imphal.jpg/800px-Govindajee_Temple_Imphal.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>9. Religious Diversity</h3>
+                  <ul>
+                    <li>Manipur has a diverse religious landscape with Hinduism, Christianity, Sanamahism (indigenous religion), and Islam coexisting. The Meitei community predominantly follows Hinduism with elements of their traditional Sanamahi religion, while many hill tribes practice Christianity. This diversity is reflected in the state's festivals, rituals, and cultural practices.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>10. Folk Traditions</h3>
+                  <ul>
+                    <li>Manipur has rich folk traditions including Thang-Ta (martial art combining spear and sword techniques), Mukna (traditional wrestling), and various tribal customs.</li>
+                    <li>Lai Haraoba, a traditional festival honoring ancestral deities, is a significant cultural event featuring rituals, music, and dance.</li>
+                  </ul>
+                  <h3>11. Philosophy</h3>
+                  <ul>
+                    <li>Manipuri philosophy is deeply influenced by both Vaishnavism and indigenous beliefs. The concept of harmony with nature and respect for ancestral spirits forms an important part of the traditional belief system.</li>
+                  </ul>
+                  <h3>12. Handicrafts</h3>
+                  <ul>
+                    <li>Manipur is known for its handicrafts such as bamboo and cane work, pottery, traditional dolls, and handloom textiles with unique tribal motifs.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Thang_Ta_Manipuri_martial_art.jpg/800px-Thang_Ta_Manipuri_martial_art.jpg" alt="" style="height:300px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br><br>
+
+          <p>Manipur's culture is deeply rooted in its history, and it continues to evolve while maintaining a close
+            connection to its heritage. It's a region where modernity and tradition coexist beautifully!</p><br><br>
+        </div>
+        <div id="wbtradition" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Tradition of Manipur</h1>
+          <p>Manipur has a rich and diverse tradition deeply rooted in its history, culture, and social practices.
+            Here's an overview of some key traditional aspects of the state:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Clothing Tradition</h3>
+                  <h4>Men</h4>
+                  <ul>
+                    <li><b>Pheijom:</b> Traditional dhoti worn by Meitei men, especially during ceremonies and festivals.</li>
+                    <li><b>Kurta:</b> Often worn with the Pheijom for formal occasions.</li>
+                  </ul>
+                  <h4>Women</h4>
+                  <ul>
+                    <li><b>Phanek:</b> Traditional sarong-like lower garment with beautiful designs and patterns.</li>
+                    <li><b>Innaphi:</b> A shawl draped over the upper body, often with intricate embroidery.</li>
+                    <li><b>Tribal Attire:</b> Each tribe has its own distinctive clothing with unique patterns and colors.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Manipuri_Phanek_traditional_dress.jpg/800px-Manipuri_Phanek_traditional_dress.jpg" alt="" style="height:250px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>2. Wedding Traditions</h3>
+                  <ul>
+                    <li><b>Heijingpot:</b> The formal proposal ceremony where the groom's family visits the bride's home.</li>
+                    <li><b>Luhongba:</b> The main wedding ceremony with traditional rituals and customs.</li>
+                    <li><b>Mangani Chakkouba:</b> A feast held five days after the wedding.</li>
+                    <li><b>Tribal Weddings:</b> Each tribe has its own unique wedding customs and rituals.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Manipuri_wedding_ceremony.jpg/800px-Manipuri_wedding_ceremony.jpg" alt="" style="height:250px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Manipuri_Pung_Cholom_drummers.jpg/800px-Manipuri_Pung_Cholom_drummers.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Music & Dance Traditions</h3>
+                  <ul>
+                    <li><b>Manipuri Classical Dance:</b> One of the eight classical dance forms of India, known for its graceful movements.</li>
+                    <li><b>Raas Leela:</b> A devotional dance depicting the divine love of Radha and Krishna.</li>
+                    <li><b>Pung Cholom:</b> A drum dance performed by male dancers.</li>
+                    <li><b>Lai Haraoba:</b> An ancient ritual dance performed to please the deities.</li>
+                    <li><b>Tribal Dances:</b> Each tribe has its own traditional dances like Tangkhul dance, Kabui dance, and Zou dance.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Shumang_Leela_Manipuri_theater.jpg/800px-Shumang_Leela_Manipuri_theater.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+
+                  <h3>4. Social & Religious Traditions</h3>
+                  <ul>
+                    <li><b>Shumang Leela:</b> A traditional form of courtyard theater addressing social issues.</li>
+                    <li><b>Cheiraoba:</b> Manipuri New Year celebrated with family gatherings and hill climbing.</li>
+                    <li><b>Sanamahism:</b> The indigenous religion with worship of ancestral deities and nature spirits.</li>
+                    <li><b>Umang Lai:</b> Worship of forest deities, an important aspect of traditional Meitei religion.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Architectural & Handicraft Traditions</h3>
+                  <ul>
+                    <li><b>Traditional Houses:</b> Wooden houses with thatched roofs, especially in rural areas.</li>
+                    <li><b>Kangla Architecture:</b> The ancient royal palace with its unique architectural style.</li>
+                    <li><b>Bamboo and Cane Craft:</b> Intricate baskets, furniture, and household items.</li>
+                    <li><b>Pottery:</b> Traditional black pottery made without a potter's wheel.</li>
+                    <li><b>Handloom:</b> Exquisite textiles with tribal motifs and patterns.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Kangla_Fort_Imphal.jpg/800px-Kangla_Fort_Imphal.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>6. Sports & Games</h3>
+                  <ul>
+                    <li><b>Thang-Ta:</b> Traditional martial art combining spear and sword techniques.</li>
+                    <li><b>Mukna:</b> Indigenous form of wrestling popular during festivals.</li>
+                    <li><b>Yubi Lakpi:</b> A traditional form of rugby played with a coconut.</li>
+                    <li><b>Hiyang Tanaba:</b> Boat racing festival held during Lai Haraoba.</li>
+                    <li><b>Sagol Kangjei:</b> A form of polo, believed to have originated in Manipur.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Thang_Ta_Manipuri_martial_art.jpg/800px-Thang_Ta_Manipuri_martial_art.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br><br>
+          <p>Manipur's traditions beautifully combine history, art, food, music, and festivals, making it one of the
+            most culturally vibrant states in India.</p><br><br>
+        </div>
+        <div id="wbfestivals" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Festivals of Manipur</h1>
+          <p>Manipur is known for its vibrant and diverse festivals, which reflect its rich cultural heritage,
+            religious harmony, and artistic traditions. Here's a list of some of the major festivals celebrated in the
+            state:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Lai Haraoba (Pleasing of the Gods)</h3>
+                  <ul>
+                    <li>One of the oldest and most significant festivals of Manipur, celebrating the creation of the universe.</li>
+                    <li>Features traditional rituals, music, and dance performances honoring the ancestral deities (Umang Lai).</li>
+                    <li>Maibis (priestesses) and Pena players perform important roles in the ceremonies.</li>
+                    <li>Different regions celebrate different forms: Kanglei, Chakpa, Moirang, and Kakching.</li>
+                  </ul>
+                  <p><b>📍 Time: April - May</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Lai_Haraoba_festival_Manipur.jpg/800px-Lai_Haraoba_festival_Manipur.jpg" alt="" style="height:230px;width: 200px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Manipuri_classical_dance.jpg/800px-Manipuri_classical_dance.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Cheiraoba (Manipuri New Year)</h3>
+                  <ul>
+                    <li>The Manipuri New Year celebration, marking the beginning of a new lunar year.</li>
+                    <li>Families clean and decorate their homes, prepare special meals, and climb hills in the evening.</li>
+                    <li>Hill climbing symbolizes ascending to greater heights in life and spiritual elevation.</li>
+                  </ul>
+                  <p><b>📍 Time: March - April</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Kang (Rath Yatra)</h3>
+                  <ul>
+                    <li>The Manipuri version of Rath Yatra, celebrating Lord Jagannath's journey.</li>
+                    <li>Features chariot processions, devotional songs, and Raas Leela performances.</li>
+                    <li>Celebrated for eight days with great devotion, especially in Imphal.</li>
+                  </ul>
+                  <p><b>📍 Time: June - July</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Govindajee_Temple_Imphal.jpg/800px-Govindajee_Temple_Imphal.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Shirui_Lily_Manipur.jpg/800px-Shirui_Lily_Manipur.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Shirui Lily Festival</h3>
+                  <ul>
+                    <li>Celebrates the rare Shirui Lily flower that grows only in the Shirui Hills of Ukhrul district.</li>
+                    <li>Features cultural performances, indigenous games, folk music, and exhibitions.</li>
+                    <li>Promotes tourism and raises awareness about the endangered state flower.</li>
+                  </ul>
+                  <p><b>📍 Time: May</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Sangai Festival</h3>
+                  <ul>
+                    <li>Manipur's biggest tourism festival, named after the endangered Sangai deer.</li>
+                    <li>Showcases the state's art, culture, cuisine, and natural beauty.</li>
+                    <li>Features cultural performances, indigenous sports, handloom exhibitions, and food stalls.</li>
+                  </ul>
+                  <p><b>📍 Time: November</b></p>
+                  <h3>6. Lui-Ngai-Ni</h3>
+                  <ul>
+                    <li>A seed-sowing festival celebrated by the Naga tribes of Manipur.</li>
+                    <li>Marks the beginning of the spring season and agricultural activities.</li>
+                    <li>Features traditional dances, music, and community feasts.</li>
+                  </ul>
+                  <p><b>📍 Time: February</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Sangai_deer_Manipur.jpg/800px-Sangai_deer_Manipur.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Loktak_Lake_Manipur.jpg/800px-Loktak_Lake_Manipur.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>7. Loktak Day</h3>
+                  <ul>
+                    <li>Celebrates the ecological and cultural significance of Loktak Lake, the largest freshwater lake in Northeast India.</li>
+                    <li>Raises awareness about conservation of the lake and its unique floating islands (phumdis).</li>
+                    <li>Features boat races, cultural programs, and environmental activities.</li>
+                  </ul>
+                  <p><b>📍 Time: October</b></p>
+                  <h3>8. Gaan-Ngai</h3>
+                  <ul>
+                    <li>The biggest post-harvest festival of the Zeliangrong Naga tribes.</li>
+                    <li>Features rituals, dances, feasts, and games celebrating a successful harvest.</li>
+                    <li>Observed for five days with various ceremonies and community activities.</li>
+                  </ul>
+                  <p><b>📍 Time: December - January</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>9. Chavang Kut</h3>
+                  <ul>
+                    <li>A post-harvest festival celebrated by the Kuki-Chin-Mizo tribes.</li>
+                    <li>Features traditional dances, music, and community feasts.</li>
+                    <li>Showcases the rich cultural heritage of the tribal communities.</li>
+                  </ul>
+                  <p><b>📍 Time: November</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Kuki_tribe_traditional_dance.jpg/800px-Kuki_tribe_traditional_dance.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Manipuri_Pung_Cholom_drummers.jpg/800px-Manipuri_Pung_Cholom_drummers.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>10. Kwak Jatra</h3>
+                  <ul>
+                    <li>A festival dedicated to the crow, believed to be a messenger between humans and deities.</li>
+                    <li>People offer food to crows and perform traditional rituals.</li>
+                    <li>Features cultural performances and community gatherings.</li>
+                  </ul>
+                  <p><b>📍 Time: July - August</b></p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>11. Mera Houchongba</h3>
+                  <ul>
+                    <li>A festival promoting brotherhood and unity between hill and valley people.</li>
+                    <li>Features exchange of gifts, cultural performances, and community feasts.</li>
+                    <li>Symbolizes the historical and cultural bonds between different communities.</li>
+                  </ul>
+                  <p><b>📍 Time: October</b></p>
+
+                  <h3>12. Christmas</h3>
+                  <ul>
+                    <li>Widely celebrated in the hill districts where Christianity is predominant.</li>
+                    <li>Features church services, carol singing, and community feasts.</li>
+                    <li>Churches and homes are beautifully decorated with lights and Christmas trees.</li>
+                  </ul>
+                  <p><b>📍 Time: December 25</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Christmas_celebration_Manipur.jpg/800px-Christmas_celebration_Manipur.jpg" alt="" style="height:200px;width: 230px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Dzuko_Valley_Manipur.jpg/800px-Dzuko_Valley_Manipur.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>13. Orange Festival</h3>
+                  <ul>
+                    <li>Celebrates the famous Tamenglong oranges, known for their sweetness and quality.</li>
+                    <li>Features orange competitions, cultural shows, and local food stalls.</li>
+                    <li>Promotes local agriculture and tourism in Tamenglong district.</li>
+                  </ul>
+                  <p><b>📍 Time: December</b></p>
+                  <h3>14. Heikru Hidongba</h3>
+                  <ul>
+                    <li>A traditional boat race festival held at Thangapat (moat) of Kangla.</li>
+                    <li>Features competitive rowing with traditional boats and religious ceremonies.</li>
+                    <li>Has historical significance dating back to the Manipuri kings.</li>
+                  </ul>
+                  <p><b>📍 Time: September</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Manipur's festivals are a blend of religious, cultural, and artistic celebrations, making the state one
+            of the most festive regions in India! 🎉</p><br><br>
+        </div>
+        <div id="wbfood" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Foods of Manipur</h1>
+          <p>Manipur has a rich and diverse culinary tradition that blends flavors from different regions. Manipuri cuisine is known for its use of fresh ingredients, fermented foods, and minimal spices. Here's a look at some of the most iconic foods of Manipur:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Staple Food of Manipur</h3>
+                  <ul>
+                    <li><b>Rice:</b> The main staple food, often served with fish, vegetables, and chutney.</li>
+                    <li><b>Chamthong:</b> A vegetable stew with minimal spices, eaten with rice.</li>
+                  </ul>
+                  <h3>2. Manipuri Breads</h3>
+                  <ul>
+                    <li><b>Tan:</b> A flatbread made from rice flour, often served with curries.</li>
+                    <li><b>Chak-hao Kheer:</b> A sweet dish made from black rice, milk, and sugar.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Manipuri_traditional_meal.jpg/800px-Manipuri_traditional_meal.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Eromba_Manipuri_dish.jpg/800px-Eromba_Manipuri_dish.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Famous Manipuri Dishes</h3>
+                  <h4>Fish & Seafood</h4>
+                  <ul>
+                    <li><b>Ngari:</b> Fermented fish, a key ingredient in many Manipuri dishes.</li>
+                    <li><b>Nga Thongba:</b> Fish curry cooked with minimal spices and vegetables.</li>
+                    <li><b>Nga Ataoba:</b> Smoked fish preparation, often served with rice.</li>
+                  </ul>
+                  <h4>Vegetarian Dishes</h4>
+                  <ul>
+                    <li><b>Eromba:</b> A traditional dish made with boiled vegetables, fermented fish, and chili.</li>
+                    <li><b>Kangshoi:</b> A simple vegetable stew cooked with minimal spices.</li>
+                    <li><b>Ooti:</b> A dish made from peas and other vegetables, often served with rice.</li>
+                    <li><b>Singju:</b> A salad made from various raw vegetables, herbs, and fermented fish.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Manipuri_meat_dish.jpg/800px-Manipuri_meat_dish.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h4>Meat Dishes</h4>
+                  <ul>
+                    <li><b>Yen Thongba:</b> Chicken curry cooked with minimal spices and vegetables.</li>
+                    <li><b>Paaknam:</b> A pancake-like dish made with gram flour, vegetables, and fish.</li>
+                    <li><b>Maroi Napakpi:</b> A dish made with meat and aromatic herbs.</li>
+                  </ul>
+                  <h4>Chutneys & Accompaniments</h4>
+                  <ul>
+                    <li><b>Morok Metpa:</b> A spicy chutney made with green or dried red chilies and fermented fish.</li>
+                    <li><b>Iromba:</b> A chutney made with fermented fish, vegetables, and chili.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>4. Manipuri Sweets & Desserts</h3>
+                  <ul>
+                    <li><b>Chak-hao Kheer:</b> A pudding made from black rice, milk, and sugar.</li>
+                    <li><b>Soibum:</b> Fermented bamboo shoot, used in various dishes.</li>
+                    <li><b>Thairen:</b> A sweet made from jaggery and sesame seeds.</li>
+                  </ul>
+
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Chak_Hao_Kheer_black_rice_pudding.jpg/800px-Chak_Hao_Kheer_black_rice_pudding.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Singju_Manipuri_salad.jpg/800px-Singju_Manipuri_salad.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>5. Street Food of Manipur</h3>
+                  <ul>
+                    <li><b>Singju:</b> A popular street food salad made with various raw vegetables and herbs.</li>
+                    <li><b>Pakora:</b> Deep-fried fritters made with gram flour and vegetables.</li>
+                    <li><b>Bora:</b> Deep-fried snacks made with lentils and spices.</li>
+                    <li><b>Chana:</b> Spiced chickpeas, a popular street snack.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>6. Famous Drinks</h3>
+                  <ul>
+                    <li><b>Apong:</b> A traditional rice beer popular among tribal communities.</li>
+                    <li><b>Cha:</b> Traditional tea, often served with milk and sugar.</li>
+                    <li><b>Lemon Tea:</b> A refreshing drink made with lemon and tea.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Apong_rice_beer_Manipur.jpg/800px-Apong_rice_beer_Manipur.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Special Festival Foods</h3>
+                  <ul>
+                    <li><b>Chak-hao:</b> Black rice, often prepared during festivals and special occasions.</li>
+                    <li><b>Bora:</b> Deep-fried snacks made with lentils, often served during festivals.</li>
+                    <li><b>Paknam:</b> A special dish prepared during festivals and celebrations.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Manipuri_festival_food.jpg/800px-Manipuri_festival_food.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Manipur's cuisine is a mix of unique flavors, fresh ingredients, and traditional cooking methods, making it one of the most distinctive regional cuisines in India! 🍛🐟🍚</p><br><br>
+        </div>
+        <div id="wbhistory" class="tab-pane fade in active" style="background-color: white;">
+          <h1>History of Manipur</h1>
+          <p>Manipur has a rich and diverse history that spans ancient civilizations, medieval kingdoms, British colonial rule, and the modern era. The region has played a significant role in India's political, cultural, and intellectual history.</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Ancient Manipur (Before 6th Century CE)</h3>
+                  <ul>
+                    <li><b>Prehistoric Period:</b> Archaeological findings suggest human settlements in Manipur dating back to the Stone Age.</li>
+                    <li><b>Mythological Origins:</b> According to local legends, Manipur's history begins with Lord Shiva and Goddess Parvati blessing the land.</li>
+                    <li><b>Early Settlements:</b> The Meitei people established early settlements in the fertile Imphal Valley.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Kangla_Fort_Imphal.jpg/800px-Kangla_Fort_Imphal.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Govindajee_Temple_Imphal.jpg/800px-Govindajee_Temple_Imphal.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Medieval Manipur (6th - 18th Century)</h3>
+                  <h4>Ningthouja Dynasty (33 CE - 1949 CE):</h4>
+                  <ul>
+                    <li>The longest-ruling dynasty in Manipur's history, established by King Pakhangba.</li>
+                    <li>Kangba (1405-1359 BCE) unified the seven clans of Meitei.</li>
+                    <li>The kingdom expanded under various rulers, establishing control over the valley and surrounding hills.</li>
+                  </ul>
+                  <h4>King Loiyamba (1074-1122 CE):</h4>
+                  <ul>
+                    <li>Introduced the Loiyamba Shinyen, a code of conduct and administration.</li>
+                    <li>Organized the kingdom into administrative units called "panas."</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Manipuri_classical_dance.jpg/800px-Manipuri_classical_dance.jpg" alt="" style="height:220px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h4>King Kyamba (1467-1508 CE):</h4>
+                  <ul>
+                    <li>Expanded the kingdom and established friendly relations with neighboring states.</li>
+                    <li>Introduced the game of Sagol Kangjei (polo), believed to have originated in Manipur.</li>
+                  </ul>
+                  <h4>King Khagemba (1597-1652 CE):</h4>
+                  <ul>
+                    <li>Repelled invasions from Burma and expanded the kingdom.</li>
+                    <li>Promoted arts, culture, and literature during his reign.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Vaishnavite Influence (18th Century)</h3>
+                  <ul>
+                    <li>King Pamheiba (Garibniwaz) embraced Vaishnavism in 1717 and changed his name to Garibniwaz.</li>
+                    <li>Ordered the burning of ancient Meitei texts and forcibly converted the population to Hinduism.</li>
+                    <li>This period marked a significant cultural and religious transformation in Manipur.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Govindajee_Temple_Imphal.jpg/800px-Govindajee_Temple_Imphal.jpg" alt="" style="height:200px;width: 250px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Khongjom_War_Memorial.jpg/800px-Khongjom_War_Memorial.jpg" alt="" style="height:230px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h2>4. British Colonial Rule (1891 - 1947)</h3>
+                    <h3>Anglo-Manipur War (1891)</h3>
+                    <ul>
+                      <li>The British intervened in a succession dispute, leading to the Anglo-Manipur War.</li>
+                      <li>The Battle of Khongjom (April 23, 1891) saw Manipuri forces led by Paona Brajabashi fighting bravely against the British.</li>
+                      <li>Manipur was defeated, and the British established control over the region.</li>
+                    </ul>
+                    <h3>Colonial Administration</h3>
+                    <ul>
+                      <li>Manipur became a princely state under British paramountcy.</li>
+                      <li>The British appointed a Political Agent to oversee administration.</li>
+                    </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/INA_Memorial_Moirang.jpg/800px-INA_Memorial_Moirang.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>World War II and INA</h3>
+                  <ul>
+                    <li>During World War II, Manipur became a significant battleground between British-Indian forces and the Japanese.</li>
+                    <li>The Battle of Imphal (1944) was one of the fiercest battles of World War II in the eastern front.</li>
+                    <li>Moirang in Manipur became the first Indian territory where the Indian National Army (INA) under Netaji Subhas Chandra Bose hoisted the Indian tricolor on April 14, 1944.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Kangla_Fort_Imphal.jpg/800px-Kangla_Fort_Imphal.jpg" alt="" style="height:230px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>Independence Movement</h3>
+                  <ul>
+                    <li>Manipur had its own independence movement with leaders like Hijam Irabot fighting against both British colonialism and the monarchy.</li>
+                    <li>The Manipur State Constitution Act was drafted in 1947, establishing a democratic government.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Post-Independence Period (1947 - Present)</h3>
+                  <h4>Merger with India (1949)</h4>
+                  <ul>
+                    <li>After India's independence, Manipur briefly existed as an independent kingdom with a constitutional monarchy.</li>
+                    <li>The Maharaja of Manipur, Bodhchandra Singh, signed the Instrument of Accession with India in 1949.</li>
+                    <li>Manipur became a Part C state of India on October 15, 1949.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Manipur_State_Assembly.jpg/800px-Manipur_State_Assembly.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h4>Statehood and Modern Developments</h4>
+                  <ul>
+                    <li>Manipur became a Union Territory in 1956.</li>
+                    <li>It was granted full statehood on January 21, 1972.</li>
+                    <li>The state has faced various insurgency movements since the 1960s, with demands ranging from greater autonomy to independence.</li>
+                    <li>The Armed Forces Special Powers Act (AFSPA) was implemented in Manipur in 1980, leading to controversies and protests.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Ima_Keithel_Women%27s_Market_Imphal.jpg/800px-Ima_Keithel_Women%27s_Market_Imphal.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>6. Present-Day Manipur</h3>
+                  <ul>
+                    <li><b>Cultural Heritage:</b> Manipur continues to preserve its rich cultural heritage, including classical dance, music, and traditional arts.</li>
+                    <li><b>Economic Development:</b> The state is focusing on tourism, agriculture, handloom, and information technology sectors.</li>
+                    <li><b>Strategic Location:</b> As part of India's Act East Policy, Manipur serves as a gateway to Southeast Asia.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Loktak_Lake_Manipur.jpg/800px-Loktak_Lake_Manipur.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Manipur has witnessed ancient kingdoms, colonial rule, independence struggles, and modern political transformations. It remains a center of culture, tradition, and strategic importance in Northeast India. 🚩📜</p>
+          <br><br>
+        </div>
+        <div id="wbartacraft" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Art & Craft of Manipur 🎨🖌️</h1>
+          <p>Manipur has a rich artistic heritage, blending traditional craftsmanship with cultural influences from various communities. Manipuri artisans are known for their intricate craftsmanship, storytelling through art, and diverse materials like bamboo, cane, clay, wood, and textiles.</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Textile & Weaving 🧵</h3>
+                  <h4>🔸 Manipuri Handloom</h4>
+                  <ul>
+                    <li><b>Famous for:</b> Intricate designs, vibrant colors, and unique patterns.</li>
+                    <li><b>Where?</b> Throughout Manipur, especially in Imphal and tribal areas.</li>
+                    <li><b>Products:</b> Phanek (women's sarong), Khudei (shawl), Wangkhei Phee, and Moirang Phee.</li>
+                  </ul>
+                  <h4>🔸 Tribal Textiles</h4>
+                  <ul>
+                    <li><b>Each tribe has distinctive patterns:</b> Tangkhul, Kuki, Paite, and Zou tribes have unique textile traditions.</li>
+                    <li><b>Features:</b> Geometric patterns, animal motifs, and symbolic designs.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Manipuri_Phanek_traditional_dress.jpg/800px-Manipuri_Phanek_traditional_dress.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Manipuri_bamboo_craft.jpg/800px-Manipuri_bamboo_craft.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Bamboo & Cane Craft 🌳</h3>
+                  <ul>
+                    <li><b>Origin:</b> Throughout Manipur, especially in hill areas.</li>
+                    <li><b>Products:</b> Baskets, furniture, mats, fishing equipment, and household items.</li>
+                    <li><b>Techniques:</b> Weaving, coiling, and binding to create intricate designs.</li>
+                  </ul>
+                  <h3>3. Pottery 🏺</h3>
+                  <ul>
+                    <li><b>Longpi Pottery:</b> Black pottery from Ukhrul district, made without a potter's wheel.</li>
+                    <li><b>Material:</b> A mixture of weathered rock and special black clay.</li>
+                    <li><b>Products:</b> Cooking vessels, serving dishes, and decorative items.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>4. Wood Carving 🪵</h3>
+                  <ul>
+                    <li><b>Origin:</b> Throughout Manipur, especially in tribal areas.</li>
+                    <li><b>Products:</b> Masks, figurines, household items, and decorative pieces.</li>
+                    <li><b>Significance:</b> Often used in traditional ceremonies and rituals.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Manipuri_wood_carving.jpg/800px-Manipuri_wood_carving.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Manipuri_classical_dance.jpg/800px-Manipuri_classical_dance.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>5. Performing Arts & Costumes 🎭</h3>
+                  <h4>🔸 Manipuri Dance Costumes</h4>
+                  <ul>
+                    <li><b>Potloi:</b> The cylindrical skirt worn by female dancers in Raas Leela.</li>
+                    <li><b>Kumil:</b> The elaborate headdress worn during performances.</li>
+                    <li><b>Features:</b> Intricate embroidery, mirror work, and vibrant colors.</li>
+                  </ul>
+                  <h4>🔸 Tribal Dance Costumes</h4>
+                  <ul>
+                    <li><b>Each tribe has unique costumes:</b> Featuring beadwork, embroidery, and symbolic elements.</li>
+                    <li><b>Materials:</b> Handwoven textiles, beads, feathers, and natural dyes.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>6. Jewelry Making 💍</h3>
+                  <ul>
+                    <li><b>Traditional Jewelry:</b> Gold, silver, and beaded ornaments worn during festivals and ceremonies.</li>
+                    <li><b>Tribal Jewelry:</b> Each tribe has distinctive jewelry styles using beads, metals, and natural materials.</li>
+                    <li><b>Products:</b> Necklaces, earrings, bracelets, and headgear.</li>
+                  </ul>
+                  <h3>7. Doll Making 🧸</h3>
+                  <ul>
+                    <li><b>Materials:</b> Cloth, clay, and bamboo.</li>
+                    <li><b>Features:</b> Dressed in traditional Manipuri attire, often depicting cultural scenes.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Manipuri_traditional_jewelry.jpg/800px-Manipuri_traditional_jewelry.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Thang_Ta_Manipuri_martial_art.jpg/800px-Thang_Ta_Manipuri_martial_art.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>8. Martial Arts Equipment 🥋</h3>
+                  <ul>
+                    <li><b>Thang-Ta:</b> Traditional martial art combining spear and sword techniques.</li>
+                    <li><b>Equipment:</b> Handcrafted swords, spears, shields, and protective gear.</li>
+                    <li><b>Materials:</b> Wood, metal, and leather.</li>
+                  </ul>
+                  <h3>9. Musical Instruments 🎵</h3>
+                  <ul>
+                    <li><b>Pena:</b> A traditional stringed instrument made from bamboo, wood, and coconut shell.</li>
+                    <li><b>Pung:</b> A barrel-shaped drum used in classical Manipuri music and dance.</li>
+                    <li><b>Tribal Instruments:</b> Various drums, flutes, and string instruments specific to different tribes.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>10. Contemporary Art Forms 🖼️</h3>
+                  <ul>
+                    <li><b>Modern Manipuri Painting:</b> Blending traditional themes with contemporary techniques.</li>
+                    <li><b>Mixed Media Art:</b> Combining traditional crafts with modern materials.</li>
+                    <li><b>Digital Art:</b> Young artists exploring digital platforms while preserving cultural motifs.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Manipuri_Pung_Cholom_drummers.jpg/800px-Manipuri_Pung_Cholom_drummers.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>📌 Summary: Manipur's Art & Craft Forms</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Art Form</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Handloom Textiles</td>
+                <td>Throughout Manipur</td>
+                <td>Phanek, Khudei, Wangkhei Phee, Moirang Phee</td>
+              </tr>
+              <tr>
+                <td>Bamboo & Cane Craft</td>
+                <td>Hill Districts</td>
+                <td>Baskets, Furniture, Mats</td>
+              </tr>
+              <tr>
+                <td>Longpi Pottery</td>
+                <td>Ukhrul District</td>
+                <td>Black Pottery without Potter's Wheel</td>
+              </tr>
+              <tr>
+                <td>Wood Carving</td>
+                <td>Tribal Areas</td>
+                <td>Masks, Figurines, Household Items</td>
+              </tr>
+              <tr>
+                <td>Dance Costumes</td>
+                <td>Imphal Valley</td>
+                <td>Potloi, Kumil for Classical Dance</td>
+              </tr>
+              <tr>
+                <td>Jewelry Making</td>
+                <td>Throughout Manipur</td>
+                <td>Gold, Silver, Beaded Ornaments</td>
+              </tr>
+              <tr>
+                <td>Doll Making</td>
+                <td>Imphal Valley</td>
+                <td>Traditional Cloth Dolls</td>
+              </tr>
+              <tr>
+                <td>Martial Arts Equipment</td>
+                <td>Throughout Manipur</td>
+                <td>Thang-Ta Swords and Spears</td>
+              </tr>
+              <tr>
+                <td>Musical Instruments</td>
+                <td>Throughout Manipur</td>
+                <td>Pena, Pung, Tribal Instruments</td>
+              </tr>
+              <tr>
+                <td>Contemporary Art</td>
+                <td>Urban Centers</td>
+                <td>Modern Paintings, Mixed Media</td>
+              </tr>
+            </table>
+          </div>
+          <br><br>
+          <p>Manipur's art and crafts are a blend of history, culture, and traditional skills, passed down through generations. Whether it's the elegant Phanek, intricate bamboo crafts, or the unique Longpi pottery, Manipur's artisans continue to preserve and innovate their heritage. 🎭✨</p>
+          <br><br>
+        </div>
+        <div id="wbseason" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Seasons to visit Manipur 🌧️☀️ </h1>
+          <p>Manipur has a moderate climate with distinct seasons, making it a year-round destination for different types of experiences. The state's varied topography, from valleys to hills, offers diverse weather conditions throughout the year.</p>
+
+          <br><br>
+
+          <h2> Season-wise Breakdown for Visiting Manipur</h2>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🌸 Spring (March - April)</h3>
+                  <ul>
+                    <li>Perfect time to visit Ukhrul for the Shirui Lily Festival.</li>
+                    <li>Ideal for exploring Imphal Valley and its cultural sites.</li>
+                    <li>Cheiraoba (Manipuri New Year) celebrations offer cultural insights.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Shirui_Lily_Manipur.jpg/800px-Shirui_Lily_Manipur.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Loktak_Lake_Manipur.jpg/800px-Loktak_Lake_Manipur.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>☀️ Summer (May – June)</h3>
+                  <ul>
+                    <li>Hill stations like Ukhrul, Tamenglong, and Senapati offer pleasant weather.</li>
+                    <li>Loktak Lake is beautiful with clear views of the floating phumdis.</li>
+                    <li>Perfect time for trekking in the hills and exploring caves.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🌧️ Monsoon (July - September)</h3>
+                  <ul>
+                    <li>Heavy rainfall makes travel challenging in some areas.</li>
+                    <li>The landscape turns lush green, perfect for photography enthusiasts.</li>
+                    <li>Waterfalls like Barak and Sadu Chiru are at their full glory.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Barak_Waterfall_Manipur.jpg/800px-Barak_Waterfall_Manipur.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Sangai_deer_Manipur.jpg/800px-Sangai_deer_Manipur.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🍁 Autumn (October - November)</h3>
+                  <ul>
+                    <li>Best season for the Sangai Festival, Manipur's biggest tourism event.</li>
+                    <li>Perfect weather for exploring Keibul Lamjao National Park and spotting the Sangai deer.</li>
+                    <li>Ideal for visiting Loktak Lake and its surroundings.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>❄️ Winter (December - February)</h3>
+                  <ul>
+                    <li>Chilly but pleasant weather, perfect for sightseeing in Imphal.</li>
+                    <li>Orange Festival in Tamenglong offers a unique cultural experience.</li>
+                    <li>Christmas celebrations in hill districts are vibrant and festive.</li>
+                    <li>Ideal for trekking in Dzukou Valley and exploring wildlife.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Dzuko_Valley_Manipur.jpg/800px-Dzuko_Valley_Manipur.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>📌 Summary: Best Time to Visit Different Places in Manipur</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Region</th>
+                <th>Best Season</th>
+                <th>Recommended Months</th>
+                <th>Why Visit?</th>
+              </tr>
+              <tr>
+                <td>Imphal Valley</td>
+                <td>Autumn, Winter</td>
+                <td>October - February</td>
+                <td>Pleasant weather, Sangai Festival, cultural sites, Loktak Lake</td>
+              </tr>
+              <tr>
+                <td>Ukhrul & Eastern Hills</td>
+                <td>Spring, Autumn</td>
+                <td>March - April, October - November</td>
+                <td>Shirui Lily, pleasant weather, tribal culture, trekking</td>
+              </tr>
+              <tr>
+                <td>Tamenglong & Western Hills</td>
+                <td>Winter</td>
+                <td>December - February</td>
+                <td>Orange Festival, caves, waterfalls, tribal villages</td>
+              </tr>
+              <tr>
+                <td>Senapati & Northern Hills</td>
+                <td>Spring, Autumn</td>
+                <td>March - April, October - November</td>
+                <td>Dzukou Valley, trekking, tribal culture, scenic landscapes</td>
+              </tr>
+              <tr>
+                <td>Loktak Lake & Bishnupur</td>
+                <td>Autumn, Winter</td>
+                <td>October - February</td>
+                <td>Clear views of phumdis, Keibul Lamjao National Park, Sangai deer</td>
+              </tr>
+              <tr>
+                <td>Churachandpur & Southern Hills</td>
+                <td>Winter, Spring</td>
+                <td>December - April</td>
+                <td>Tribal heritage, handicrafts, pleasant weather</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="container">
+            <div class="row">
+              <h1 style=" text-align: center;">📌 Summary: When to Visit Manipur</h1><br>
+              <ul>
+                <li><b>For festivals & cultural experiences:</b> October - April (Sangai Festival, Lui-Ngai-Ni, Cheiraoba, Christmas)</li>
+                <li><b>For hill stations & trekking:</b> March - April, October - November (Dzukou Valley, Ukhrul, Tamenglong)</li>
+                <li><b>For wildlife & nature:</b> October - February (Keibul Lamjao National Park, Loktak Lake)</li>
+                <li><b>For waterfalls & lush landscapes:</b> July - September (monsoon season)</li>
+                <li><b>For comfortable sightseeing:</b> October - February (pleasant temperatures, clear skies)</li>
+              </ul>
+
+            </div>
+          </div>
+          <br><br>
+        </div>
+        <div id="wbtourist" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Tourist Spots of Manipur 🏞️🏔️</h1>
+          <p>Manipur is a diverse state with hills, valleys, lakes, forests, heritage sites, and cultural hubs. Here's a categorized list of the best tourist places in Manipur:</p>
+
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Lakes & Natural Wonders 🏞️</h3>
+                  <ul>
+                    <li><b>Loktak Lake -</b> Largest freshwater lake in Northeast India with unique floating islands (phumdis)</li>
+                    <li><b>Keibul Lamjao National Park -</b> World's only floating national park, home to the endangered Sangai deer</li>
+                    <li><b>Waithou Lake -</b> Scenic lake surrounded by hills, perfect for boating and picnics</li>
+                    <li><b>Zeilad Lake -</b> Sacred lake in Tamenglong with mythological significance</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Loktak_Lake_Manipur.jpg/800px-Loktak_Lake_Manipur.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Kangla_Fort_Imphal.jpg/800px-Kangla_Fort_Imphal.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Heritage & Cultural Destinations 🏛️</h3>
+                  <ul>
+                    <li><b>Kangla Fort -</b> Ancient palace of Manipuri kings with historical significance.</li>
+                    <li><b>Shree Govindajee Temple -</b> Important Vaishnavite temple with unique architecture.</li>
+                    <li><b>Ima Keithel (Mother's Market) -</b> Asia's largest all-women market.</li>
+                    <li><b>Khongjom War Memorial -</b> Commemorates the Anglo-Manipur War of 1891.</li>
+                    <li><b>INA Memorial, Moirang -</b> Where the Indian National Army first hoisted the Indian flag in 1944.</li>
+                    <li><b>Shaheed Minar -</b> Monument honoring martyrs of Manipur's freedom struggle.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Hill Stations & Mountain Destinations 🏔️</h3>
+                  <ul>
+                    <li><b>Ukhrul -</b> Home to the rare Shirui Lily, tribal culture, and scenic landscapes.</li>
+                    <li><b>Dzukou Valley -</b> Famous for its seasonal flowers and trekking trails.</li>
+                    <li><b>Tengnoupal -</b> Offers panoramic views of Myanmar and surrounding hills.</li>
+                    <li><b>Moreh -</b> Border town with unique blend of cultures and cross-border trade.</li>
+                    <li><b>Mao -</b> Known for its apple orchards and pleasant climate.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Dzuko_Valley_Manipur.jpg/800px-Dzuko_Valley_Manipur.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Barak_Waterfall_Manipur.jpg/800px-Barak_Waterfall_Manipur.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Waterfalls & Natural Attractions 🌊</h3>
+                  <ul>
+                    <li><b>Barak Waterfall -</b> Magnificent waterfall in Tamenglong district.</li>
+                    <li><b>Sadu Chiru Waterfall -</b> Beautiful waterfall near Imphal.</li>
+                    <li><b>Tharon Cave -</b> Ancient cave with archaeological significance in Tamenglong.</li>
+                    <li><b>Bunning Meadows -</b> Scenic grasslands in Senapati district.</li>
+                    <li><b>Leimaram Waterfall -</b> Three-tiered waterfall in Bishnupur district.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Wildlife & Nature Destinations 🐯</h3>
+                  <ul>
+                    <li><b>Keibul Lamjao National Park -</b> Home to the endangered Sangai deer.</li>
+                    <li><b>Yangoupokpi-Lokchao Wildlife Sanctuary -</b> Rich biodiversity in Chandel district.</li>
+                    <li><b>Jiri-Makru Wildlife Sanctuary -</b> Home to various species of flora and fauna.</li>
+                    <li><b>Kaina Hill -</b> Sacred hill with religious significance and natural beauty.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Sangai_deer_Manipur.jpg/800px-Sangai_deer_Manipur.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Ima_Keithel_Women%27s_Market_Imphal.jpg/800px-Ima_Keithel_Women%27s_Market_Imphal.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>6. Shopping & Cultural Hubs 🛍️</h3>
+                  <ul>
+                    <li><b>Ima Keithel (Mother's Market) -</b> Asia's largest all-women market selling handicrafts, textiles, and local products.</li>
+                    <li><b>Paona Bazaar -</b> Popular shopping area in Imphal for traditional items.</li>
+                    <li><b>Moreh Market -</b> Border market with goods from Myanmar and Southeast Asia.</li>
+                    <li><b>Tribal Markets -</b> Weekly markets in hill districts showcasing tribal products.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Religious Destinations ⛩️</h3>
+                  <ul>
+                    <li><b>Shree Govindajee Temple -</b> Important Vaishnavite temple in Imphal.</li>
+                    <li><b>Kaina Temple -</b> Dedicated to Lord Krishna, located on Kaina Hill.</li>
+                    <li><b>Sanamahi Temple -</b> Dedicated to the indigenous deity Sanamahi.</li>
+                    <li><b>Churches in Hill Districts -</b> Beautiful churches in Ukhrul, Churachandpur, and Senapati.</li>
+                    <li><b>Masjid Road Mosque -</b> Historic mosque in Imphal.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Govindajee_Temple_Imphal.jpg/800px-Govindajee_Temple_Imphal.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br><br>
+
+        </div>
+        <div id="wbwild" class="tab-pane fade in active" style="background-color: white;">
+          <h1> Wildlife & Crops of Manipur 🌿</h1>
+          <p>Manipur has diverse wildlife and a rich agricultural landscape due to its varied geography, from hills to valleys and wetlands.</p>
+
+          <br>
+          <h2>Wildlife of Manipur </h2>
+          <p>Manipur has several national parks and wildlife sanctuaries, making it one of Northeast India's most biodiverse states.</p>
+
+          <br>
+          <h2>🔹 Major National Parks & Wildlife Sanctuaries</h2>
+          <div>
+            <table>
+              <tr>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Keibul Lamjao National Park</td>
+                <td>Bishnupur</td>
+                <td>World's only floating national park, Sangai Deer 🦌 (State Animal)</td>
+              </tr>
+              <tr>
+                <td>Yangoupokpi-Lokchao Wildlife Sanctuary</td>
+                <td>Chandel</td>
+                <td>Hoolock Gibbon, Clouded Leopard, Hornbills</td>
+              </tr>
+              <tr>
+                <td>Shirui National Park</td>
+                <td>Ukhrul</td>
+                <td>Shirui Lily (State Flower), Rare Himalayan Flora</td>
+              </tr>
+              <tr>
+                <td>Jiri-Makru Wildlife Sanctuary</td>
+                <td>Tamenglong</td>
+                <td>Diverse Bird Species, Primates</td>
+              </tr>
+              <tr>
+                <td>Bunning Wildlife Sanctuary</td>
+                <td>Tamenglong</td>
+                <td>Serow, Barking Deer, Wild Boar</td>
+              </tr>
+              <tr>
+                <td>Zeilad Wildlife Sanctuary</td>
+                <td>Tamenglong</td>
+                <td>Hornbills, Primates, Sacred Lake</td>
+              </tr>
+            </table>
+          </div>
+          <bt><br></bt>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3> 🔹 Other Notable Wildlife in Manipur</h3>
+                <ul>
+                  <li><b>Mammals:</b> Sangai (Brow-antlered Deer), Hoolock Gibbon, Slow Loris, Clouded Leopard, Himalayan Black Bear.</li>
+                  <li><b>Birds: </b>Mrs. Hume's Pheasant (State Bird), Hornbills, Great Pied Hornbill, Blyth's Tragopan.</li>
+                  <li><b>Reptiles:</b> King Cobra, Python, Monitor Lizard, Turtles.</li>
+                  <li><b>Aquatic Life:</b> Various fish species in Loktak Lake and rivers.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Sangai_deer_Manipur.jpg/800px-Sangai_deer_Manipur.jpg" alt="" style="height:200px;width: 200px;">
+
+              </div>
+
+            </div>
+          </div>
+          <hr><br>
+          <h2>🌾 Agriculture & Major Crops in Manipur </h2>
+          <p>Manipur's agriculture is characterized by both valley and hill farming systems, with a focus on rice cultivation and horticulture.</p>
+
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Key Agricultural Features</h3>
+                <ul>
+                  <li>Agriculture is the main occupation, employing about 70% of the population.</li>
+                  <li><b>Valley Farming:</b> Intensive rice cultivation in the Imphal Valley.</li>
+                  <li><b>Hill Farming:</b> Jhum (shifting cultivation) and terrace farming in hill areas.</li>
+                  <li><b>Climate:</b> Supports both tropical and subtropical crops.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Rice_fields_Manipur.jpg/800px-Rice_fields_Manipur.jpg" alt="" style="height:200px;width: 220px;">
+
+              </div>
+            </div>
+          </div>
+          <h2>🔹 Major Crops of Manipur</h2>
+          <div>
+            <table>
+              <tr>
+                <th>Category</th>
+                <th>Crops</th>
+              </tr>
+              <tr>
+                <td>Cereals</td>
+                <td>Rice 🍚 (main crop), Maize 🌽, Wheat 🌾</td>
+              </tr>
+              <tr>
+                <td>Fruits</td>
+                <td>Pineapple 🍍, Orange 🍊, Lemon 🍋, Banana 🍌, Passion Fruit, Kiwi</td>
+              </tr>
+              <tr>
+                <td>Vegetables</td>
+                <td>Cabbage, Cauliflower, Peas, Beans, Potato 🥔, Chili 🌶️</td>
+              </tr>
+              <tr>
+                <td>Spices</td>
+                <td>Ginger, Turmeric, Chili, Garlic 🧄</td>
+              </tr>
+              <tr>
+                <td>Cash Crops</td>
+                <td>Sugarcane, Cotton, Jute, Oilseeds</td>
+              </tr>
+              <tr>
+                <td>Pulses</td>
+                <td>Lentils, Peas, Beans</td>
+              </tr>
+              <tr>
+                <td>Medicinal Plants</td>
+                <td>Shirui Lily, Aromatic Plants, Herbs</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Special Agricultural Products</h3>
+                <ul>
+                  <li>Tamenglong Orange 🍊 (GI-tagged, known for its sweetness).</li>
+                  <li>Kachai Lemon 🍋 (GI-tagged, high vitamin C content).</li>
+                  <li>Black Rice (Chak-hao) 🍚 (Nutritious, used in traditional dishes).</li>
+                  <li>Sirarakhong Chili 🌶️ (Known for its unique color and flavor).</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Tamenglong_oranges.jpg/800px-Tamenglong_oranges.jpg" alt="" style="height:200px;width: 200px;">
+
+              </div>
+            </div>
+          </div><br>
+          <hr>
+          <div class="box" style=" background: #f3b37185;padding: 10px;">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3> Sustainable Agriculture & Modern Trends 🌾</h3>
+                  <ul>
+                    <li><b>Organic Farming:</b> Growing in hill districts with focus on chemical-free cultivation.</li>
+                    <li><b>Horticulture Mission:</b> Government initiatives to promote fruit and vegetable cultivation.</li>
+                    <li><b>Fisheries:</b> Fish farming in Loktak Lake and other water bodies.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Chak_Hao_Kheer_black_rice_pudding.jpg/800px-Chak_Hao_Kheer_black_rice_pudding.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Manipur is a paradise for both nature lovers and agricultural enthusiasts. It has rich wildlife sanctuaries, unique floating ecosystems, and fertile farmlands that support a diverse ecosystem and economy.</p>
+          <br><br>
+        </div>
+        <div id="wbedu" class="tab-pane fade in active" style="background-color: white;">
+          <h1>🎓 Education & Institutions in Manipur</h1>
+          <p>Manipur has a growing educational system with universities, colleges, and schools that cater to the diverse needs of its population. The state has made significant progress in education, particularly in higher education and technical training.</p>
+
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>📌 Education System in Manipur</h3>
+                  <ul>
+                    <li><b>School Education:</b> Follows BSEM (Board of Secondary Education, Manipur), COHSEM (Council of Higher Secondary Education, Manipur), CBSE, and ICSE boards.</li>
+                    <li><b>Higher Education:</b> Managed by UGC, AICTE, and state universities.</li>
+                    <li><b>Major Fields:</b> Arts, Science, Commerce, Engineering, Medical, Agriculture, and Management.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Manipur_University.jpg/800px-Manipur_University.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>🏛️ Top Universities & Institutions </h2>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Central Universities</h3>
+                <ol>
+                  <li><b>Manipur University -</b> A central university offering various undergraduate, postgraduate, and doctoral programs.</li>
+                  <li><b>Central Agricultural University -</b> Focuses on agricultural education and research.</li>
+                  <li><b>National Sports University -</b> India's first sports university, dedicated to sports education and training.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Manipur_University.jpg/800px-Manipur_University.jpg" alt="" style="height:200px;width: 230px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 State Universities & Institutions</h3>
+                <ol>
+                  <li><b>Dhanamanjuri University -</b> A state university formed by consolidating five colleges in Imphal.</li>
+                  <li><b>Manipur Technical University -</b> Focuses on technical education and research.</li>
+                  <li><b>Manipur University of Culture -</b> Specializes in cultural studies, performing arts, and fine arts.</li>
+                  <li><b>Manipur Institute of Technology -</b> Offers engineering and technical education.</li>
+                  <li><b>Regional Institute of Medical Sciences (RIMS) -</b> Premier medical institution in Northeast India.</li>
+                  <li><b>Jawaharlal Nehru Institute of Medical Sciences (JNIMS) -</b> State medical college and hospital.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/RIMS_Imphal.jpg/800px-RIMS_Imphal.jpg" alt="" style="height:200px;width: 230px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>University/Institution</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Manipur University</td>
+                <td>Imphal</td>
+                <td>Central university offering diverse programs in arts, science, and humanities.</td>
+              </tr>
+              <tr>
+                <td>Central Agricultural University</td>
+                <td>Imphal</td>
+                <td>Agricultural education, research, and extension services.</td>
+              </tr>
+              <tr>
+                <td>National Sports University</td>
+                <td>Imphal</td>
+                <td>India's first sports university, focusing on sports education and training.</td>
+              </tr>
+              <tr>
+                <td>Dhanamanjuri University</td>
+                <td>Imphal</td>
+                <td>State university formed by consolidating five colleges.</td>
+              </tr>
+              <tr>
+                <td>Regional Institute of Medical Sciences (RIMS)</td>
+                <td>Imphal</td>
+                <td>Premier medical institution in Northeast India.</td>
+              </tr>
+              <tr>
+                <td>Manipur Institute of Technology</td>
+                <td>Imphal</td>
+                <td>Engineering and technical education.</td>
+              </tr>
+              <tr>
+                <td>Manipur University of Culture</td>
+                <td>Imphal</td>
+                <td>Cultural studies, performing arts, and fine arts.</td>
+              </tr>
+              <tr>
+                <td>Jawaharlal Nehru Institute of Medical Sciences (JNIMS)</td>
+                <td>Imphal</td>
+                <td>State medical college and hospital.</td>
+              </tr>
+              <tr>
+                <td>College of Agriculture, CAU</td>
+                <td>Imphal</td>
+                <td>Agricultural education and research.</td>
+              </tr>
+            </table>
+          </div>
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Manipuri_classical_dance.jpg/800px-Manipuri_classical_dance.jpg" alt="" style="height:200px;width: 240px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🔹 Specialized Institutions</h3>
+                  <ol>
+                    <li><b>Jawaharlal Nehru Dance Academy -</b> Specializes in Manipuri classical dance and music.</li>
+                    <li><b>State Academy of Training -</b> Provides training for civil servants and government officials.</li>
+                    <li><b>Manipur Film Development Society -</b> Promotes film culture and cinema in the state.</li>
+                    <li><b>Institute of Bioresources and Sustainable Development -</b> Research in biodiversity and sustainable development.</li>
+                    <li><b>Indian Institute of Information Technology (IIIT) Manipur -</b> Focuses on information technology education.</li>
+                  </ol>
+                </div>
+
+                <br><br>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Institute</th>
+                <th>Location</th>
+                <th>Specialization</th>
+              </tr>
+              <tr>
+                <td>Manipur Institute of Technology</td>
+                <td>Imphal</td>
+                <td>Engineering and technical education.</td>
+              </tr>
+              <tr>
+                <td>National Institute of Technology (NIT) Manipur</td>
+                <td>Imphal</td>
+                <td>Technical education and research.</td>
+              </tr>
+              <tr>
+                <td>Indian Institute of Information Technology (IIIT) Manipur</td>
+                <td>Imphal</td>
+                <td>Information technology education.</td>
+              </tr>
+              <tr>
+                <td>Government Polytechnic</td>
+                <td>Imphal</td>
+                <td>Diploma courses in engineering and technology.</td>
+              </tr>
+              <tr>
+                <td>College of Engineering, CAU</td>
+                <td>Imphal</td>
+                <td>Agricultural engineering education.</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🔹 Medical Institutions</h3>
+                  <ol>
+                    <li><b>Regional Institute of Medical Sciences (RIMS) -</b> Premier medical institution in Northeast India.</li>
+                    <li><b>Jawaharlal Nehru Institute of Medical Sciences (JNIMS) -</b> State medical college and hospital.</li>
+                    <li><b>College of Nursing, RIMS -</b> Offers nursing education and training.</li>
+                    <li><b>State Institute of Psychiatry and Behavioral Sciences -</b> Specializes in mental health care.</li>
+                  </ol>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/RIMS_Imphal.jpg/800px-RIMS_Imphal.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Medical Institution</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Regional Institute of Medical Sciences (RIMS)</td>
+                <td>Imphal</td>
+                <td>Premier medical institution in Northeast India.</td>
+              </tr>
+              <tr>
+                <td>Jawaharlal Nehru Institute of Medical Sciences (JNIMS)</td>
+                <td>Imphal</td>
+                <td>State medical college and hospital.</td>
+              </tr>
+              <tr>
+                <td>College of Nursing, RIMS</td>
+                <td>Imphal</td>
+                <td>Nursing education and training.</td>
+              </tr>
+              <tr>
+                <td>State Institute of Psychiatry and Behavioral Sciences</td>
+                <td>Imphal</td>
+                <td>Mental health care and education.</td>
+              </tr>
+              <tr>
+                <td>College of Veterinary Sciences & Animal Husbandry, CAU</td>
+                <td>Imphal</td>
+                <td>Veterinary education and research.</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Central_Agricultural_University.jpg/800px-Central_Agricultural_University.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🔹 Agricultural Institutions</h3>
+                  <ul>
+                    <li><b>Central Agricultural University -</b> Focuses on agricultural education, research, and extension services.</li>
+                    <li><b>College of Agriculture, CAU -</b> Offers undergraduate and postgraduate programs in agriculture.</li>
+                    <li><b>College of Horticulture and Forestry, CAU -</b> Specializes in horticulture and forestry education.</li>
+                    <li><b>College of Fisheries, CAU -</b> Focuses on fisheries science and aquaculture.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Institute</th>
+                <th>Location</th>
+                <th>Specialization</th>
+              </tr>
+              <tr>
+                <td>Central Agricultural University</td>
+                <td>Imphal</td>
+                <td>Agricultural education, research, and extension services.</td>
+              </tr>
+              <tr>
+                <td>College of Agriculture, CAU</td>
+                <td>Imphal</td>
+                <td>Agricultural education and research.</td>
+              </tr>
+              <tr>
+                <td>College of Horticulture and Forestry, CAU</td>
+                <td>Pasighat</td>
+                <td>Horticulture and forestry education.</td>
+              </tr>
+              <tr>
+                <td>College of Fisheries, CAU</td>
+                <td>Lembucherra</td>
+                <td>Fisheries science and aquaculture.</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="box">
+            <h2>🔬 Research & Development Institutions</h2>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <p>Manipur is home to several research institutions focusing on biodiversity, sustainable development, and regional issues:</p>
+                  <ol>
+                    <li><b>Institute of Bioresources and Sustainable Development -</b> Research in biodiversity and sustainable development.</li>
+                    <li><b>North Eastern Regional Institute of Science and Technology (NERIST) Extension Centre -</b> Technical education and research.</li>
+                    <li><b>ICAR Research Complex for NEH Region, Manipur Centre -</b> Agricultural research.</li>
+                  </ol>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Shirui_Lily_Manipur.jpg/800px-Shirui_Lily_Manipur.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <h2>📚 Other Notable Institutions</h2>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <ol>
+                    <li><b>Jawaharlal Nehru Dance Academy -</b> Specializes in Manipuri classical dance and music. 🎭</li>
+                    <li><b>Manipur State Film Development Society -</b> Promotes film culture and cinema in the state. 🎬</li>
+                    <li><b>Manipur Institute of Management Studies -</b> Offers management education and training.</li>
+                    <li><b>State Academy of Training -</b> Provides training for civil servants and government officials.</li>
+                    <li><b>Manipur Public School -</b> One of the oldest and most prestigious schools in the state.</li>
+                    <li><b>Manipur Institute of Law -</b> Offers legal education and training.</li>
+                  </ol>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Manipuri_classical_dance.jpg/800px-Manipuri_classical_dance.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Manipur continues to develop its educational infrastructure, with a focus on quality education, research, and preserving its rich cultural heritage. The state's educational institutions play a crucial role in nurturing talent and addressing regional development needs.</p>
+        </div>
+        <br><br>
+
+      </div>
+
+
+    </div>
+  </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,2718 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>New Delhi</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> -->
+  <style>
+    .wb {
+      font-size: 10vw;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+      border-spacing: 0;
+      border: 1px solid #ddd;
+    }
+
+    td,
+    th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+      font-size: 1.5vw;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+
+    .trip {
+      text-align: center;
+      font-weight: 900;
+      background: orangered;
+      padding: 20px;
+      border-radius: 20px;
+      width: 60%;
+    }
+
+    p,
+    li,
+    .text {
+      font-size: 1.5vw;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-weight: 600;
+    }
+
+    h4 {
+      font-weight: 900;
+    }
+
+    img {
+      border-radius: 10px;
+      display: block;
+      margin: auto;
+    }
+
+    @media screen and (max-width: 850px) {
+
+      p,
+      li,
+      .text,
+      td,
+      th {
+        font-size: 2vw;
+        ;
+      }
+
+    }
+
+    @media screen and (max-width: 500px) {
+
+      p,
+      li,
+      .text,
+      td,
+      th {
+        font-size: 4.5vw;
+        ;
+      }
+
+    }
+
+    .box:nth-of-type(odd) {
+      background: #f3b37185;
+      padding: 10px;
+    }
+
+    .weather-container {
+            border-radius: 15px;
+            background: #f0fdf4;
+            padding: 15px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .weather-card {
+            text-align: center;
+            border-radius: 10px;
+            padding: 10px;
+            background: white;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+        .aqi {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            color: white;
+        }
+        .aqi-bad { background: purple; }
+        .aqi-moderate { background: orange; }
+        .aqi-good { background: green; }
+        .best-time {
+            background: #d1fae5;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 15px;
+            color: green;
+        }
+        .wet {
+            max-width: 50px;
+        }
+        
+        .trip {
+          font-size: 18px;
+          padding: 10px 20px;
+          cursor: pointer;
+          background-color:rgb(231, 36, 36);
+          color: white;
+          border: none;
+          border-radius: 5px;
+      }
+      .modal {
+          display: none;
+          position: fixed;
+          z-index: 1;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0,0,0,0.5);
+      }
+      .modal-content {
+          background-color: #fff;
+          margin: 10% auto;
+          padding: 20px;
+          border-radius: 10px;
+          width: 40%;
+          box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+          text-align: center;
+      }
+      .close {
+          color: #aaa;
+          float: right;
+          font-size: 28px;
+          font-weight: bold;
+          cursor: pointer;
+      }
+      .trip-options {
+          display: flex;
+          justify-content: center;
+          gap: 20px;
+          margin-top: 20px;
+      }
+      .trip-options a {
+          display: block;
+          width: 120px;
+          padding: 10px;
+          background-color: #28a745;
+          color: white;
+          text-decoration: none;
+          border-radius: 5px;
+      }
+  </style>
+</head>
+
+<body>
+
+
+  <!-- <h2>Carousel Example</h2> -->
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+      <li data-target="#myCarousel" data-slide-to="4"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+
+      <div class="item active">
+        <img src="india-gate.jpg" alt="India Gate" style="width:100%; height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">India Gate</h3>
+          <p>The iconic war memorial in the heart of Delhi!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="red-fort.jpg" alt="Red Fort" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Red Fort</h3>
+          <p>The magnificent Mughal architecture and history!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="qutub-minar.jpg" alt="Qutub Minar" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Qutub Minar</h3>
+          <p>The tallest brick minaret in the world!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="lotus-temple.jpg" alt="Lotus Temple" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Lotus Temple</h3>
+          <p>We love the modern architectural marvel!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="humayun-tomb.jpg" alt="Humayun's Tomb" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Humayun's Tomb</h3>
+          <p>The magnificent garden tomb that inspired the Taj Mahal!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+  <div class="container">
+    <br><br>
+    <h1 class="wb"> NEW DELHI</h1><br>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <img src="delhi-map.jpg" alt="" style="height:700px; width: -webkit-fill-available;">
+
+        </div>
+        <div class="col-sm-6">
+          <h1> New Delhi: The Capital & Political Heart of India</h1>
+          <p class="text">New Delhi is the capital city of India, known for its rich history, cultural heritage, 
+            architecture, cuisine, and political significance. It serves as the seat of all three branches of the 
+            Government of India and is a major center for politics, economy, and education.</p>
+
+          <ul>
+            <li><b>Location --</b> Northern India</li>
+            <li><b>Status --</b> National Capital Territory</li>
+            <li><b>Official Languages --</b> Hindi, English, Punjabi, Urdu</li>
+            <li><b>Area --</b> 1,484 sq. km</li>
+            <li><b>Population --</b> ~20 million (Delhi NCR)</li>
+            <li><b>Borders --</b> Haryana, Uttar Pradesh</li>
+            <li><b>Major Rivers --</b> Yamuna</li>
+            <li><b>Major Festivals --</b> Diwali, Holi, Eid, Christmas, Republic Day, Independence Day</li>
+            <li><b>State Animal --</b> Nilgai (Blue Bull)</li>
+            <li><b>State Bird --</b> House Sparrow</li>
+            <li><b>State Tree --</b> Delhi Palm</li>
+            <li><b>State Flower --</b> Alstonia</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <br>
+    <hr>
+    <div>
+      <h1>📌 Districts & Zones of New Delhi</h1>
+      <br>
+      <div style="overflow-x:auto;">
+        <table>
+          <tr>
+            <th>Division</th>
+            <th>Districts</th>
+            <th>Key Highlights</th>
+          </tr>
+          <tr>
+            <td>Central Delhi</td>
+            <td>Connaught Place, Old Delhi, Karol Bagh</td>
+            <td>Government Buildings, Commercial Hub, Historical Sites</td>
+          </tr>
+          <tr>
+            <td>New Delhi</td>
+            <td>Lutyens' Delhi, Diplomatic Enclave</td>
+            <td>Parliament House, Rashtrapati Bhavan, India Gate, Embassies</td>
+          </tr>
+          <tr>
+            <td>South Delhi</td>
+            <td>Defence Colony, Greater Kailash, Hauz Khas</td>
+            <td>Upscale Neighborhoods, Shopping Centers, Historical Monuments</td>
+          </tr>
+          <tr>
+            <td>East Delhi</td>
+            <td>Mayur Vihar, Laxmi Nagar, Shahdara</td>
+            <td>Residential Areas, Akshardham Temple, Commonwealth Games Village</td>
+          </tr>
+          <tr>
+            <td>North Delhi</td>
+            <td>Civil Lines, Delhi University, Model Town</td>
+            <td>Educational Institutions, Colonial Architecture</td>
+          </tr>
+          <tr>
+            <td>West Delhi</td>
+            <td>Rajouri Garden, Janakpuri, Dwarka</td>
+            <td>Residential Suburbs, Shopping Malls, Planned Development</td>
+          </tr>
+          <tr>
+            <td>South West Delhi</td>
+            <td>Vasant Kunj, Delhi Cantonment, Dwarka</td>
+            <td>Airport, Diplomatic Enclaves, Upscale Residential Areas</td>
+          </tr>
+          <tr>
+            <td>North West Delhi</td>
+            <td>Rohini, Pitampura, Ashok Vihar</td>
+            <td>Planned Residential Colonies, Commercial Centers</td>
+          </tr>
+          <tr>
+            <td>North East Delhi</td>
+            <td>Yamuna Vihar, Seelampur, Dilshad Garden</td>
+            <td>Dense Residential Areas, Industrial Zones</td>
+          </tr>
+        </table>
+      </div>
+      <br><br>
+      <h1>🔹 Major Highlights of Some Key Areas</h1><br><br>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <ul>
+              <li><b>Lutyens' Delhi --</b> Planned central administrative area with government buildings.</li>
+              <li><b>Old Delhi --</b> Historical area with Chandni Chowk, Red Fort, and Jama Masjid.</li>
+              <li><b>Connaught Place --</b> Commercial hub with colonial architecture and shopping centers.</li>
+              <li><b>South Delhi --</b> Upscale residential areas, historical monuments, and trendy markets.</li>
+              <li><b>Diplomatic Enclave --</b> Home to foreign embassies and international organizations.</li>
+              <li><b>Delhi University North Campus --</b> Educational hub with prestigious colleges.</li>
+              <li><b>Dwarka --</b> Planned sub-city with modern infrastructure and residential complexes.</li>
+              <li><b>Aerocity --</b> Hospitality district near the airport with luxury hotels.</li>
+              <li><b>Noida & Gurgaon --</b> Satellite cities part of NCR with IT hubs and corporate offices.</li>
+            </ul>
+          </div>
+          <div class="col-sm-6">
+            <img src="delhi-map.jpg" alt="" style="height:450px;width: -webkit-fill-available;">
+
+          </div>
+        </div>
+      </div>
+    </div><br><br>
+    <div class="container">
+      <div class="weather-container">
+          <h4 class="text-center"><strong>Weather in New Delhi</strong></h4>
+          <div class="row">
+              <!-- January -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Jan</h6>
+                      <p>5/20°C</p>
+                      <span class="aqi aqi-bad">AQI 280</span>
+                  </div>
+              </div>
+              <!-- February -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Feb</h6>
+                      <p>10/24°C</p>
+                      <span class="aqi aqi-moderate">AQI 180</span>
+                  </div>
+              </div>
+              <!-- March -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Mar</h6>
+                      <p>15/30°C</p>
+                      <span class="aqi aqi-moderate">AQI 150</span>
+                  </div>
+              </div>
+              <!-- April -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Apr</h6>
+                      <p>21/36°C</p>
+                      <span class="aqi aqi-moderate">AQI 120</span>
+                  </div>
+              </div>
+              <!-- May -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>May</h6>
+                      <p>26/41°C</p>
+                      <span class="aqi aqi-moderate">AQI 110</span>
+                  </div>
+              </div>
+              <!-- June -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Jun</h6>
+                      <p>28/40°C</p>
+                      <span class="aqi aqi-moderate">AQI 95</span>
+                  </div>
+              </div>
+              <!-- July -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="rain.png" alt="rain">
+                      <h6>Jul</h6>
+                      <p>27/35°C</p>
+                      <span class="aqi aqi-good">AQI 80</span>
+                  </div>
+              </div>
+              <!-- August -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Aug</h6>
+                      <p>26/34°C</p>
+                      <span class="aqi aqi-good">AQI 75</span>
+                  </div>
+              </div>
+              <!-- September -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Sep</h6>
+                      <p>24/34°C</p>
+                      <span class="aqi aqi-moderate">AQI 90</span>
+                  </div>
+              </div>
+              <!-- October -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Oct</h6>
+                      <p>19/33°C</p>
+                      <span class="aqi aqi-moderate">AQI 150</span>
+                  </div>
+              </div>
+              <!-- November -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Nov</h6>
+                      <p>12/28°C</p>
+                      <span class="aqi aqi-bad">AQI 250</span>
+                  </div>
+              </div>
+              <!-- December -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Dec</h6>
+                      <p>7/23°C</p>
+                      <span class="aqi aqi-bad">AQI 300</span>
+                  </div>
+              </div>
+          </div>
+          <div class="text-center">
+              <div class="best-time">🏆 Best time to visit: October - March</div>
+          </div>
+      </div>
+    </div>
+    
+
+    <br><br>
+    <button class="trip" id="openModal">Let's go on a trip</button>
+    
+    <div id="tripModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Select Your Trip</h2>
+            <button type="button" class="btn btn-warning" style="margin-bottom: 8px;color:black; border-radius: 5px;">7 days trip</button><br>
+            <button type="button" class="btn btn-warning" style="margin-bottom: 8px;color:black; border-radius: 5px;">12 days trip</button>
+        </div>
+    </div>
+    
+    <script>
+        var modal = document.getElementById("tripModal");
+        var btn = document.getElementById("openModal");
+        var span = document.getElementsByClassName("close")[0];
+        
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+        
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+        
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script><br><br>
+    <div class="container">
+      <ul class="nav nav-tabs">
+        <li class="nav-item"><a data-toggle="tab" href="#wbculture"> Culture</a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbtradition "> Tradition</a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbfestivals"> Festivals </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbfood"> Foods </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbhistory"> History </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbartacraft"> Art and Craft </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbseason"> Season to Visit </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbtourist"> Tourist Spots </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbwild"> Wildlife & Crops </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbedu"> Institutions </a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="wbculture" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Culture of New Delhi</h1>
+          <p class="text">New Delhi has a rich and diverse culture, shaped by its history, literature, art, music,
+            festivals, and traditions. Here's an overview of some key aspects of its culture:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Language</h3>
+                  <ul>
+                    <li>Hindi is the official language of Delhi, but the city is a linguistic melting pot with significant 
+                      populations speaking Punjabi, Urdu, English, and various regional languages. This multilingual character 
+                      reflects Delhi's status as a national capital that attracts people from all over India.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="hindi.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>2. Literature</h3>
+                  <ul>
+                    <li>Delhi has been a center of literary traditions for centuries, from the courts of Mughal emperors to 
+                      modern literary movements. The city has been home to renowned Urdu poets like Mirza Ghalib and 
+                      contemporary writers who have chronicled Delhi's evolving character.</li>
+                    <li>The city hosts the annual World Book Fair, one of the largest in Asia, and has numerous literary 
+                      festivals throughout the year.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="delhi-lit.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div><br>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="delhi-art.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Art and Craft</h3>
+                  <ul>
+                    <li>Delhi is home to numerous art galleries, museums, and cultural institutions like the National Gallery 
+                      of Modern Art and the Crafts Museum that showcase both traditional and contemporary Indian art.</li>
+                    <li>The city has a thriving art scene with regular exhibitions, installations, and art festivals that 
+                      attract artists from across India and the world.</li>
+                  </ul>
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="delhi-music.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>4. Music</h3>
+                  <ul>
+                    <li>Delhi has a rich musical heritage spanning classical Hindustani music, Sufi traditions, and contemporary 
+                      genres.</li>
+                    <li>The city hosts numerous music festivals including the Delhi Classical Music Festival and various 
+                      international music events.</li>
+                    <li>Qawwali performances at Nizamuddin Dargah and other venues continue the centuries-old Sufi musical 
+                      traditions.</li>
+                    <li>Delhi's vibrant youth culture has given rise to a thriving independent music scene across genres.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Dance</h3>
+                  <ul>
+                    <li>Delhi is a center for classical Indian dance forms like Kathak, Bharatanatyam, and Odissi, with 
+                      numerous dance academies and regular performances.</li>
+                    <li>The Kathak Kendra (National Institute of Kathak Dance) is located in Delhi and is a premier institution 
+                      for this North Indian classical dance form.</li>
+                    <li>Contemporary dance and fusion performances are regularly held at venues like Kamani Auditorium and 
+                      India Habitat Centre.</li>
+                  </ul>
+                  <h3>6. Cuisine</h3>
+                  <ul>
+                    <li>Delhi's cuisine reflects its multicultural character with influences from Mughal, Punjabi, and various 
+                      regional Indian culinary traditions.</li>
+                    <li>Old Delhi is famous for its street food, particularly in areas like Chandni Chowk, Jama Masjid, and 
+                      Paranthe Wali Gali.</li>
+                    <li>Signature dishes include butter chicken, kebabs, chaat, chole bhature, and various types of biryanis 
+                      and curries.</li>
+                    <li>The city also has a cosmopolitan food scene with international cuisines available in upscale areas.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="delhi-dance.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="delhi-cinema.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>7. Theatre and Cinema</h3>
+                  <ul>
+                    <li>Delhi has a vibrant theatre scene with venues like Shri Ram Centre, Kamani Auditorium, and the National 
+                      School of Drama hosting regular performances.</li>
+                    <li>The city has been the setting for numerous Bollywood and international films, and hosts film festivals 
+                      including the Delhi International Film Festival.</li>
+                  </ul>
+                  <h3>8. Architecture</h3>
+                  <ul>
+                    <li>Delhi's architecture spans centuries and includes Mughal monuments, colonial buildings, and modern 
+                      structures. Notable examples include the Red Fort, Qutub Minar, India Gate, Rashtrapati Bhavan, and 
+                      the Lotus Temple.</li>
+                    <li>Lutyens' Delhi, designed by British architects Edwin Lutyens and Herbert Baker, features wide avenues, 
+                      government buildings, and the iconic circular Connaught Place.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="delhi-religion.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>9. Religious Diversity</h3>
+                  <ul>
+                    <li>Delhi is home to significant religious landmarks including the Jama Masjid, Akshardham Temple, Lotus 
+                      Temple, Gurudwara Bangla Sahib, and the Sacred Heart Cathedral, reflecting its religious diversity.</li>
+                    <li>The city celebrates festivals of all major religions, from Diwali and Holi to Eid, Christmas, and 
+                      Guru Nanak Jayanti, creating a vibrant calendar of cultural events throughout the year.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>10. Folk Traditions</h3>
+                  <ul>
+                    <li>Despite being a modern metropolis, Delhi preserves various folk traditions through cultural events, 
+                      festivals, and performances.</li>
+                    <li>The Crafts Museum and Dilli Haat showcase folk arts, crafts, and performances from across India.</li>
+                  </ul>
+                  <h3>11. Political Culture</h3>
+                  <ul>
+                    <li>As India's capital, Delhi has a unique political culture with government institutions, diplomatic 
+                      missions, and political demonstrations being part of everyday life.</li>
+                    <li>Areas like Jantar Mantar have become symbolic spaces for political protests and social movements.</li>
+                  </ul>
+                  <h3>12. Handicrafts</h3>
+                  <ul>
+                    <li>Delhi is a major center for handicrafts with markets like Dilli Haat, Janpath, and Sarojini Nagar 
+                      offering traditional crafts from across India.</li>
+                    <li>The city is known for textiles, jewelry, pottery, and decorative items that blend traditional techniques 
+                      with contemporary designs.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="delhi-folk.jpg" alt="" style="height:300px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br><br>
+
+          <p>New Delhi's culture is a fascinating blend of ancient traditions and modern influences, reflecting its status as 
+            both an ancient city and a contemporary capital. The city continues to evolve while maintaining connections to its 
+            rich historical heritage.</p><br><br>
+        </div>
+        <div id="wbtradition" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Tradition of New Delhi</h1>
+          <p>New Delhi has a rich and diverse tradition deeply rooted in its history, culture, and social practices. Here's an overview of some key traditional aspects of the city:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Clothing Tradition</h3>
+                  <h4>Men</h4>
+                  <ul>
+                    <li><b>Kurta Pajama:</b> Traditional attire worn during festivals, religious ceremonies, and formal occasions.</li>
+                    <li><b>Sherwani:</b> Formal attire worn for weddings and special celebrations.</li>
+                  </ul>
+                  <h4>Women</h4>
+                  <ul>
+                    <li><b>Saree:</b> Traditional garment worn in various styles, especially during formal occasions and festivals.</li>
+                    <li><b>Salwar Kameez:</b> Popular everyday attire combining comfort with traditional aesthetics.</li>
+                    <li><b>Lehenga Choli:</b> Festive attire worn during weddings and major celebrations.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="delhi-clothing.jpg" alt="" style="height:250px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>2. Wedding Traditions</h3>
+                  <ul>
+                    <li><b>Mehendi:</b> Intricate henna designs applied to the bride's hands and feet before the wedding.</li>
+                    <li><b>Sangeet:</b> Pre-wedding celebration with music, dance, and performances by family members.</li>
+                    <li><b>Baraat:</b> Groom's procession to the wedding venue, often with dancing and music.</li>
+                    <li><b>Pheras:</b> The couple circles the sacred fire seven times, making vows to each other.</li>
+                    <li><b>Vidaai:</b> Emotional ceremony when the bride leaves her parental home to join her husband's family.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="delhi-wedding.jpg" alt="" style="height:250px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="delhi-music-tradition.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Music & Dance Traditions</h3>
+                  <ul>
+                    <li><b>Qawwali:</b> Sufi devotional music performed at shrines like Nizamuddin Dargah.</li>
+                    <li><b>Kathak:</b> Classical dance form with strong presence in Delhi's cultural institutions.</li>
+                    <li><b>Ghazals:</b> Poetic expression through music, with regular performances across the city.</li>
+                    <li><b>Folk Music:</b> Various regional traditions that have found a home in the cosmopolitan capital.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="delhi-social.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+
+                  <h3>4. Social & Religious Traditions</h3>
+                  <ul>
+                    <li><b>Adda Culture:</b> Social gatherings for discussions on politics, culture, and everyday life.</li>
+                    <li><b>Ramlilas:</b> Traditional theatrical performances of the Ramayana during Dussehra.</li>
+                    <li><b>Kite Flying:</b> Popular during Independence Day and various festivals.</li>
+                    <li><b>Religious Processions:</b> Regular processions for various religious occasions across faiths.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Architectural & Handicraft Traditions</h3>
+                  <ul>
+                    <li><b>Mughal Architecture:</b> Reflected in monuments like Red Fort, Humayun's Tomb, and Jama Masjid.</li>
+                    <li><b>Colonial Architecture:</b> Seen in Lutyens' Delhi, including Rashtrapati Bhavan and India Gate.</li>
+                    <li><b>Zardozi Embroidery:</b> Intricate metallic threadwork on fabrics, especially for formal wear.</li>
+                    <li><b>Blue Pottery:</b> Distinctive ceramic work available in markets like Dilli Haat.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="delhi-architecture.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>6. Sports & Games</h3>
+                  <ul>
+                    <li><b>Cricket:</b> The most popular sport with matches at Feroz Shah Kotla Ground (Arun Jaitley Stadium).</li>
+                    <li><b>Kabaddi & Kho-Kho:</b> Traditional Indian games still played in schools and communities.</li>
+                    <li><b>Chess:</b> Traditional board game with regular tournaments and clubs across the city.</li>
+                    <li><b>Kite Flying Competitions:</b> Especially popular during festivals and national holidays.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="delhi-cricket.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br><br>
+          <p>New Delhi's traditions beautifully combine Mughal, colonial, and modern Indian influences, creating a unique cultural tapestry that reflects its status as India's capital and a meeting point of diverse communities.</p><br><br>
+        </div>
+        <div id="wbfestivals" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Festivals of New Delhi</h1>
+          <p>New Delhi is known for its vibrant and diverse festivals, which reflect its rich cultural heritage, religious harmony, and cosmopolitan character. Here's a list of some of the major festivals celebrated in the city:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Diwali (Festival of Lights)</h3>
+                  <ul>
+                    <li>The most celebrated festival in Delhi with homes and buildings illuminated with diyas and lights.</li>
+                    <li>Markets like Chandni Chowk, Lajpat Nagar, and Sarojini Nagar are beautifully decorated.</li>
+                    <li>Families exchange gifts, prepare sweets, and perform Lakshmi Puja.</li>
+                    <li>The city skyline lights up with fireworks (though restrictions have been implemented in recent years).</li>
+                  </ul>
+                  <p><b>📍 Time: October - November</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="delhi-diwali.jpg" alt="" style="height:230px;width: 200px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="delhi-holi.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Holi (Festival of Colors)</h3>
+                  <ul>
+                    <li>Celebrated with great enthusiasm as people apply colors to each other and enjoy festive foods.</li>
+                    <li>Special Holi celebrations at places like Banke Bihari Temple attract many visitors.</li>
+                    <li>Cultural events and music performances are organized across the city.</li>
+                    <li>Traditional delicacies like gujiya, thandai, and bhang are prepared.</li>
+                  </ul>
+                  <p><b>📍 Time: February - March</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Republic Day</h3>
+                  <ul>
+                    <li>Grand parade along Rajpath (now Kartavya Path) showcasing India's military might and cultural diversity.</li>
+                    <li>Tableaux from different states display regional culture and achievements.</li>
+                    <li>Spectacular air show by the Indian Air Force.</li>
+                    <li>Beating Retreat ceremony at Vijay Chowk marks the conclusion of celebrations.</li>
+                  </ul>
+                  <p><b>📍 Time: January 26</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="delhi-republic.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="delhi-durga.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Durga Puja</h3>
+                  <ul>
+                    <li>Celebrated by the Bengali community with elaborate pandals across the city.</li>
+                    <li>CR Park becomes a mini-Kolkata with cultural performances and traditional food.</li>
+                    <li>Idol immersion processions are taken out on Vijaya Dashami.</li>
+                    <li>Cultural events, music, and dance performances are organized.</li>
+                  </ul>
+                  <p><b>📍 Time: September - October</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Eid-ul-Fitr & Eid-ul-Adha</h3>
+                  <ul>
+                    <li>Major celebrations at Jama Masjid and other mosques across Delhi.</li>
+                    <li>Special prayers, feasting, and exchange of gifts mark the occasions.</li>
+                    <li>Old Delhi areas like Chandni Chowk come alive with festive markets and food stalls.</li>
+                  </ul>
+                  <p><b>📍 Time: Based on Islamic Calendar</b></p>
+                  <h3>6. Christmas</h3>
+                  <ul>
+                    <li>Sacred Heart Cathedral and other churches hold midnight mass.</li>
+                    <li>Connaught Place and major markets are decorated with lights and Christmas trees.</li>
+                    <li>Special markets and events are organized at places like Select Citywalk and Dilli Haat.</li>
+                  </ul>
+                  <p><b>📍 Time: December 25</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="delhi-christmas.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="delhi-lohri.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>7. Lohri</h3>
+                  <ul>
+                    <li>Celebrated primarily by the Punjabi community with bonfires and traditional folk dances.</li>
+                    <li>People gather around the fire, throw puffed rice and popcorn into it, and sing folk songs.</li>
+                    <li>Special foods like til (sesame) sweets, gajak, and peanuts are distributed.</li>
+                  </ul>
+                  <p><b>📍 Time: January 13</b></p>
+                  <h3>8. Baisakhi</h3>
+                  <ul>
+                    <li>Punjabi harvest festival celebrated with great enthusiasm at Gurudwaras.</li>
+                    <li>Processions, langar (community meals), and cultural performances are organized.</li>
+                    <li>Gurudwara Bangla Sahib and other Sikh temples host special prayers.</li>
+                  </ul>
+                  <p><b>📍 Time: April 13-14</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>9. Janmashtami</h3>
+                  <ul>
+                    <li>Celebrates Lord Krishna's birth with special decorations at temples.</li>
+                    <li>ISKCON Temple and Laxmi Narayan Temple host elaborate celebrations.</li>
+                    <li>Dahi Handi competitions are organized in various neighborhoods.</li>
+                    <li>Devotees observe fasts and participate in night-long prayers and bhajans.</li>
+                  </ul>
+                  <p><b>📍 Time: August - September</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="delhi-janmashtami.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="delhi-dussehra.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>10. Dussehra</h3>
+                  <ul>
+                    <li>Celebrated with Ramlila performances across the city, some dating back centuries.</li>
+                    <li>Massive effigies of Ravana, Kumbhakarna, and Meghnad are burned at places like Red Fort grounds.</li>
+                    <li>The President often attends the Ramlila at Red Fort, a tradition dating back to colonial times.</li>
+                  </ul>
+                  <p><b>📍 Time: September - October</b></p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>11. Independence Day</h3>
+                  <ul>
+                    <li>Prime Minister hoists the national flag at Red Fort and addresses the nation.</li>
+                    <li>Cultural programs, patriotic events, and kite flying competitions are organized.</li>
+                    <li>Government buildings are illuminated with tricolor lights.</li>
+                  </ul>
+                  <p><b>📍 Time: August 15</b></p>
+
+                  <h3>12. Qutub Festival</h3>
+                  <ul>
+                    <li>Cultural festival held against the backdrop of the historic Qutub Minar.</li>
+                    <li>Features performances by renowned classical musicians and dancers.</li>
+                    <li>Organized by Delhi Tourism to showcase India's rich cultural heritage.</li>
+                  </ul>
+                  <p><b>📍 Time: November - December</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="delhi-independence.jpg" alt="" style="height:200px;width: 230px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="delhi-food-festival.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>13. Delhi International Arts Festival</h3>
+                  <ul>
+                    <li>Multi-venue cultural festival featuring performances from India and abroad.</li>
+                    <li>Includes music, dance, theater, visual arts, literature, and cinema.</li>
+                    <li>Held at iconic venues across the city including heritage sites.</li>
+                  </ul>
+                  <p><b>📍 Time: November</b></p>
+                  <h3>14. International Trade Fair</h3>
+                  <ul>
+                    <li>Annual trade exhibition at Pragati Maidan showcasing products from across India and the world.</li>
+                    <li>Different states set up pavilions displaying their cultural heritage and products.</li>
+                    <li>Attracts millions of visitors and is a major shopping event.</li>
+                  </ul>
+                  <p><b>📍 Time: November</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>New Delhi's festivals are a vibrant reflection of India's cultural diversity, bringing together traditions from across the country in the national capital. The city's cosmopolitan character ensures that festivals of all communities are celebrated with equal enthusiasm! 🎉</p><br><br>
+        </div>
+        <div id="wbfood" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Foods of New Delhi</h1>
+          <p>New Delhi has a rich and diverse culinary tradition that blends flavors from different regions of India and beyond. The city's food scene reflects its history as a capital city that has welcomed people from across the country and the world. Here's a look at some of the most iconic foods of New Delhi:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Street Food of Old Delhi</h3>
+                  <ul>
+                    <li><b>Paranthe Wali Gali:</b> Famous lane in Chandni Chowk known for stuffed parathas with various fillings.</li>
+                    <li><b>Chaat:</b> Varieties include golgappe (pani puri), aloo tikki, papri chaat, and dahi bhalla.</li>
+                    <li><b>Jalebi & Rabri:</b> Sweet treats, especially famous from the Old Famous Jalebi Wala shop.</li>
+                  </ul>
+                  <h3>2. Mughlai Cuisine</h3>
+                  <ul>
+                    <li><b>Butter Chicken:</b> Created in Delhi at Moti Mahal restaurant, now world-famous.</li>
+                    <li><b>Nihari:</b> Slow-cooked meat stew, traditionally eaten for breakfast.</li>
+                    <li><b>Kebabs:</b> Various types including seekh kebab, shammi kebab, and kakori kebab.</li>
+                    <li><b>Biryani:</b> Fragrant rice dish with meat, spices, and aromatics.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="delhi-street-food.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="delhi-punjabi.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Punjabi Influence</h3>
+                  <ul>
+                    <li><b>Chole Bhature:</b> Spicy chickpea curry served with fried bread, a Delhi breakfast favorite.</li>
+                    <li><b>Butter Chicken:</b> Creamy tomato-based curry with tandoori chicken pieces.</li>
+                    <li><b>Dal Makhani:</b> Creamy black lentils slow-cooked with butter and cream.</li>
+                    <li><b>Tandoori Dishes:</b> Chicken, fish, and paneer cooked in a clay oven.</li>
+                  </ul>
+                  <h3>4. Vegetarian Delights</h3>
+                  <ul>
+                    <li><b>Rajma Chawal:</b> Kidney bean curry served with steamed rice.</li>
+                    <li><b>Kadhi Pakora:</b> Gram flour dumplings in yogurt-based gravy.</li>
+                    <li><b>Paneer Dishes:</b> Various preparations of Indian cottage cheese.</li>
+                    <li><b>Aloo Paratha:</b> Potato-stuffed flatbread served with butter, yogurt, and pickle.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="delhi-kebab.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>5. Non-Vegetarian Specialties</h3>
+                  <ul>
+                    <li><b>Kebabs from Karim's:</b> Historic restaurant near Jama Masjid famous for authentic Mughlai cuisine.</li>
+                    <li><b>Butter Chicken from Moti Mahal:</b> The original creators of this world-famous dish.</li>
+                    <li><b>Rogan Josh:</b> Aromatic lamb curry popular in Delhi restaurants.</li>
+                    <li><b>Korma:</b> Meat cooked in a rich, creamy sauce with yogurt and spices.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>6. Delhi's Sweet Treats</h3>
+                  <ul>
+                    <li><b>Jalebi:</b> Crispy, syrup-soaked sweet, especially famous from Old Delhi shops.</li>
+                    <li><b>Rabri Faluda:</b> Sweet dessert with vermicelli, basil seeds, and condensed milk.</li>
+                    <li><b>Kulfi:</b> Traditional Indian ice cream, with famous kulfi shops in Chandni Chowk.</li>
+                    <li><b>Daulat ki Chaat:</b> Seasonal winter delicacy, a light milk foam dessert.</li>
+                    <li><b>Gulab Jamun:</b> Deep-fried milk solids soaked in sugar syrup.</li>
+                  </ul>
+
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="delhi-sweets.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="delhi-chaat.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>7. Famous Street Food Areas</h3>
+                  <ul>
+                    <li><b>Chandni Chowk:</b> Historic food paradise with centuries-old establishments.</li>
+                    <li><b>Khan Market:</b> Upscale area with both traditional and international cuisine.</li>
+                    <li><b>Connaught Place:</b> Mix of street food and established restaurants.</li>
+                    <li><b>Karol Bagh:</b> Known for its variety of North Indian food.</li>
+                    <li><b>Nizamuddin:</b> Famous for kebabs and Mughlai cuisine.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>8. Beverages</h3>
+                  <ul>
+                    <li><b>Masala Chai:</b> Spiced tea available at every street corner and restaurant.</li>
+                    <li><b>Lassi:</b> Sweet or salted yogurt drink, especially popular in summer.</li>
+                    <li><b>Fruit Juices:</b> Fresh seasonal juices from street vendors.</li>
+                    <li><b>Kanji:</b> Fermented carrot drink, especially popular in winter.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="delhi-chai.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>9. International Cuisine</h3>
+                  <ul>
+                    <li><b>Tibetan/Nepali:</b> Momos, thukpa, and other Himalayan dishes in areas like Majnu Ka Tilla.</li>
+                    <li><b>Continental:</b> European cuisine in upscale areas like Khan Market and Connaught Place.</li>
+                    <li><b>Pan-Asian:</b> Chinese, Japanese, Thai, and Korean restaurants across the city.</li>
+                    <li><b>Middle Eastern:</b> Hummus, shawarma, and falafel available in many areas.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="delhi-international.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>New Delhi's cuisine is a delightful mix of street food, royal Mughlai dishes, regional Indian specialties, and international flavors, making it one of the most exciting food destinations in India! 🍛🍢🍦</p><br><br>
+        </div>
+        <div id="wbhistory" class="tab-pane fade in active" style="background-color: white;">
+          <h1>History of New Delhi</h1>
+          <p>New Delhi has a rich and complex history spanning thousands of years, with multiple cities built and destroyed on the same site. The region has been the capital of various empires and has witnessed the rise and fall of numerous dynasties.</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Ancient Delhi (Before 12th Century)</h3>
+                  <ul>
+                    <li><b>Indraprastha (1500 BCE):</b> According to the Mahabharata, Delhi was the site of the legendary city of Indraprastha, established by the Pandavas.</li>
+                    <li><b>Lal Kot (1060 CE):</b> The first fortified city of Delhi was built by the Tomar Rajputs.</li>
+                    <li><b>Qila Rai Pithora (1180 CE):</b> Prithviraj Chauhan expanded Lal Kot, creating the first of Delhi's seven historic cities.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="delhi-ancient.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="delhi-medieval.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Delhi Sultanate (1206 - 1526 CE)</h3>
+                  <h4>The Five Dynasties:</h4>
+                  <ul>
+                    <li><b>Mamluk/Slave Dynasty (1206-1290):</b> Qutb-ud-din Aibak established the Delhi Sultanate after defeating Prithviraj Chauhan. Built Qutub Minar.</li>
+                    <li><b>Khilji Dynasty (1290-1320):</b> Alauddin Khilji built Siri Fort, the second city of Delhi.</li>
+                    <li><b>Tughlaq Dynasty (1320-1414):</b> Muhammad bin Tughlaq built Tughlaqabad, the third city. Firoz Shah Tughlaq built Firozabad, the fifth city.</li>
+                    <li><b>Sayyid Dynasty (1414-1451):</b> Brief period with little architectural contribution.</li>
+                    <li><b>Lodi Dynasty (1451-1526):</b> Built Lodi Gardens and established the sixth city, Lodi Gardens.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="delhi-mughal.jpg" alt="" style="height:220px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>3. Mughal Era (1526 - 1857 CE)</h3>
+                  <ul>
+                    <li><b>Babur (1526-1530):</b> Defeated Ibrahim Lodi at the First Battle of Panipat, establishing Mughal rule in Delhi.</li>
+                    <li><b>Humayun (1530-1540, 1555-1556):</b> Built Dinpanah, the sixth city of Delhi.</li>
+                    <li><b>Akbar, Jahangir, Shah Jahan:</b> Ruled mostly from Agra and Lahore, though Shah Jahan built the Red Fort and Jama Masjid in Shahjahanabad (Old Delhi), the seventh historic city.</li>
+                    <li><b>Aurangzeb (1658-1707):</b> Last powerful Mughal emperor, after whom the empire began to decline.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>4. British Colonial Period (1803 - 1947)</h3>
+                  <ul>
+                    <li><b>British East India Company (1803-1857):</b> Took control of Delhi after defeating Marathas.</li>
+                    <li><b>Revolt of 1857:</b> Delhi became a major center of the uprising against British rule.</li>
+                    <li><b>British Raj (1858-1947):</b> Direct rule by the British Crown after the revolt was suppressed.</li>
+                    <li><b>Delhi Durbar (1911):</b> King George V announced the shifting of the capital from Calcutta to Delhi.</li>
+                    <li><b>New Delhi Construction (1912-1931):</b> Edwin Lutyens and Herbert Baker designed the new imperial capital.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="delhi-british.jpg" alt="" style="height:200px;width: 250px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="delhi-independence.jpg" alt="" style="height:230px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h2>5. Post-Independence Era (1947 - Present)</h3>
+                    <h3>Partition and Independence</h3>
+                    <ul>
+                      <li><b>August 15, 1947:</b> India gained independence, with New Delhi as its capital.</li>
+                      <li><b>Refugee Crisis:</b> Delhi received a massive influx of refugees from Pakistan.</li>
+                      <li><b>Expansion:</b> The city grew rapidly to accommodate the new population.</li>
+                    </ul>
+                    <h3>Modern Development</h3>
+                    <ul>
+                      <li><b>1950s-1960s:</b> Planned development under Prime Minister Nehru.</li>
+                      <li><b>1970s-1980s:</b> Expansion of government institutions and housing colonies.</li>
+                      <li><b>1982:</b> Hosted the Asian Games, leading to significant infrastructure development.</li>
+                    </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="delhi-modern.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>Recent History</h3>
+                  <ul>
+                    <li><b>1991:</b> Economic liberalization transformed Delhi's economy and landscape.</li>
+                    <li><b>2000s:</b> Delhi Metro construction began, revolutionizing public transport.</li>
+                    <li><b>2010:</b> Commonwealth Games hosted in Delhi, leading to further infrastructure development.</li>
+                    <li><b>2020s:</b> Central Vista Redevelopment Project to redesign the central administrative area.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="delhi-governance.jpg" alt="" style="height:230px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>Political Evolution</h3>
+                  <ul>
+                    <li><b>1911-1947:</b> Imperial Capital of British India.</li>
+                    <li><b>1947-1956:</b> Chief Commissioner's Province.</li>
+                    <li><b>1956-1991:</b> Union Territory administered by the President through a Lieutenant Governor.</li>
+                    <li><b>1991-Present:</b> National Capital Territory with its own elected government, though with limited powers.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>6. The Seven Historic Cities of Delhi</h3>
+                  <ol>
+                    <li><b>Qila Rai Pithora (1180 CE):</b> Built by Prithviraj Chauhan, near present-day Mehrauli.</li>
+                    <li><b>Siri (1303 CE):</b> Built by Alauddin Khilji, near present-day Hauz Khas.</li>
+                    <li><b>Tughlaqabad (1321 CE):</b> Built by Ghiyasuddin Tughlaq, in southeast Delhi.</li>
+                    <li><b>Jahanpanah (1325 CE):</b> Built by Muhammad bin Tughlaq, connecting Siri and Qila Rai Pithora.</li>
+                    <li><b>Firozabad (1354 CE):</b> Built by Firoz Shah Tughlaq, near present-day Firoz Shah Kotla.</li>
+                    <li><b>Dinpanah/Shergarh (1540 CE):</b> Built by Humayun and later modified by Sher Shah Suri, near Purana Qila.</li>
+                    <li><b>Shahjahanabad (1639 CE):</b> Built by Shah Jahan, now known as Old Delhi.</li>
+                    <li><b>New Delhi (1931 CE):</b> Built by the British, the eighth and current Delhi.</li>
+                  </ol>
+                </div>
+                <div class="col-sm-4">
+                  <img src="delhi-seven-cities.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Present-Day New Delhi</h3>
+                  <ul>
+                    <li><b>Political Center:</b> Houses all three branches of the Government of India.</li>
+                    <li><b>Diplomatic Hub:</b> Home to embassies and international organizations.</li>
+                    <li><b>Cultural Melting Pot:</b> Blend of various cultures from across India.</li>
+                    <li><b>Economic Center:</b> Major commercial and financial hub of North India.</li>
+                    <li><b>Educational Hub:</b> Home to prestigious universities and research institutions.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="delhi-present.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>New Delhi's history is a fascinating tapestry of different cultures, dynasties, and architectural styles. From ancient Hindu kingdoms to Islamic sultanates, from Mughal emperors to British colonizers, and finally as the capital of independent India, the city has continuously evolved while preserving its rich heritage. 🏛️📜</p>
+          <br><br>
+        </div>
+        <div id="wbartacraft" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Art & Craft of New Delhi 🎨🖌️</h1>
+          <p>New Delhi has a rich artistic heritage, blending traditional craftsmanship with cultural influences from Mughal, colonial, and contemporary periods. The city serves as both a creator and curator of arts and crafts from across India, with numerous markets, museums, and cultural institutions dedicated to preserving and promoting these traditions.</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Traditional Crafts 🏺</h3>
+                  <h4>🔸 Pottery & Ceramics</h4>
+                  <ul>
+                    <li><b>Blue Pottery:</b> Distinctive turquoise-blue pottery with Persian influences.</li>
+                    <li><b>Delhi Pottery:</b> Traditional earthenware with intricate designs.</li>
+                    <li><b>Where to find:</b> Dilli Haat, Hauz Khas Village, Crafts Museum.</li>
+                  </ul>
+                  <h4>🔸 Metalwork</h4>
+                  <ul>
+                    <li><b>Meenakari:</b> Intricate enamel work on metal, especially jewelry.</li>
+                    <li><b>Brass and Copper Ware:</b> Decorative items, utensils, and religious artifacts.</li>
+                    <li><b>Where to find:</b> Janpath Market, Chandni Chowk.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="delhi-pottery.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="delhi-textile.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Textile & Weaving 🧵</h3>
+                  <h4>🔸 Zardozi Embroidery</h4>
+                  <ul>
+                    <li><b>Origin:</b> Mughal-era craft that flourished in Delhi.</li>
+                    <li><b>Features:</b> Gold and silver thread embroidery on fabrics, often used for formal wear and home decor.</li>
+                  </ul>
+                  <h4>🔸 Phulkari</h4>
+                  <ul>
+                    <li><b>Origin:</b> Punjabi embroidery technique popular in Delhi.</li>
+                    <li><b>Features:</b> Colorful floral embroidery on shawls, dupattas, and other garments.</li>
+                  </ul>
+                  <h4>🔸 Chikankari</h4>
+                  <ul>
+                    <li><b>Origin:</b> Lucknow craft that has found a significant market in Delhi.</li>
+                    <li><b>Features:</b> Delicate white-on-white embroidery on cotton fabrics.</li>
+                  </ul>
+                  <h4>🔸 Block Printing</h4>
+                  <ul>
+                    <li><b>Features:</b> Traditional hand-block printed textiles from Rajasthan and Gujarat.</li>
+                    <li><b>Where to find:</b> Sarojini Nagar Market, Dilli Haat, Cottage Industries Emporium.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Miniature Paintings 🖼️</h3>
+                  <ul>
+                    <li><b>Origin:</b> Mughal, Rajasthani, and Pahari styles are all represented in Delhi.</li>
+                    <li><b>Features:</b> Intricate, detailed paintings on small surfaces, often depicting court scenes, mythology, and nature.</li>
+                    <li><b>Where to find:</b> National Museum, Crafts Museum, State Emporiums at Baba Kharak Singh Marg.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="delhi-miniature.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="delhi-wood.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Wooden & Bamboo Craft 🌳</h3>
+                  <h4>🔸 Wood Carving</h4>
+                  <ul>
+                    <li><b>Features:</b> Intricate carving on furniture, doors, and decorative items.</li>
+                    <li><b>Styles:</b> Influences from Kashmiri, Rajasthani, and South Indian traditions.</li>
+                  </ul>
+                  <h4>🔸 Bamboo Crafts</h4>
+                  <ul>
+                    <li><b>Features:</b> Baskets, furniture, and decorative items made from bamboo.</li>
+                    <li><b>Origin:</b> Primarily from Northeast India but sold widely in Delhi markets.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Paper Crafts 📜</h3>
+                  <ul>
+                    <li><b>Handmade Paper:</b> Traditional paper-making techniques used for stationery and art.</li>
+                    <li><b>Paper Mache:</b> Decorative items, jewelry boxes, and figurines made from paper pulp.</li>
+                    <li><b>Where to find:</b> Khan Market, Dilli Haat, and specialized paper shops in Connaught Place.</li>
+                  </ul>
+                  <h3>6. Stone Carving 🗿</h3>
+                  <ul>
+                    <li><b>Marble Work:</b> Intricate carvings and inlay work similar to those found in Taj Mahal.</li>
+                    <li><b>Sandstone Sculptures:</b> Traditional carvings reflecting various regional styles.</li>
+                    <li><b>Where to find:</b> Crafts Museum, State Emporiums, and specialized shops in South Delhi.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="delhi-paper.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="delhi-contemporary.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>7. Contemporary Art Scene 🖌️</h3>
+                  <ul>
+                    <li><b>Art Galleries:</b> National Gallery of Modern Art, Art Heritage, Gallery Espace, and numerous private galleries.</li>
+                    <li><b>Art Districts:</b> Lado Sarai, Hauz Khas Village, and Shahpur Jat have emerged as hubs for contemporary art.</li>
+                    <li><b>Street Art:</b> Growing movement with murals and installations in areas like Lodhi Colony.</li>
+                  </ul>
+                  <h3>8. Jewelry Making 💍</h3>
+                  <ul>
+                    <li><b>Kundan:</b> Traditional technique involving setting glass or gems in gold foil.</li>
+                    <li><b>Silver Filigree:</b> Delicate wirework creating intricate patterns.</li>
+                    <li><b>Where to find:</b> Chandni Chowk, Janpath, and upscale boutiques in South Delhi.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>9. Performing Arts 🎭</h3>
+                  <h4>🔸 Classical Dance</h4>
+                  <ul>
+                    <li><b>Institutions:</b> Kathak Kendra, Triveni Kala Sangam, and numerous private academies.</li>
+                    <li><b>Styles:</b> Kathak, Bharatanatyam, Odissi, and other classical forms.</li>
+                  </ul>
+                  <h4>🔸 Music</h4>
+                  <ul>
+                    <li><b>Hindustani Classical:</b> Regular concerts at venues like India Habitat Centre and Kamani Auditorium.</li>
+                    <li><b>Qawwali:</b> Sufi devotional music, especially at Nizamuddin Dargah.</li>
+                  </ul>
+                  <h4>🔸 Theatre</h4>
+                  <ul>
+                    <li><b>Institutions:</b> National School of Drama, Shri Ram Centre for Performing Arts.</li>
+                    <li><b>Traditions:</b> Both traditional and contemporary theatrical performances.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="delhi-performing.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>📌 Major Art & Craft Markets in Delhi</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Market</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Dilli Haat</td>
+                <td>INA, Janakpuri, Pitampura</td>
+                <td>Rotating exhibitions of crafts from all Indian states</td>
+              </tr>
+              <tr>
+                <td>Janpath Market</td>
+                <td>Central Delhi</td>
+                <td>Textiles, jewelry, handicrafts, souvenirs</td>
+              </tr>
+              <tr>
+                <td>Chandni Chowk</td>
+                <td>Old Delhi</td>
+                <td>Traditional jewelry, textiles, and Mughal-inspired crafts</td>
+              </tr>
+              <tr>
+                <td>State Emporiums</td>
+                <td>Baba Kharak Singh Marg</td>
+                <td>Authentic crafts from different Indian states</td>
+              </tr>
+              <tr>
+                <td>Hauz Khas Village</td>
+                <td>South Delhi</td>
+                <td>Contemporary art, designer boutiques, fusion crafts</td>
+              </tr>
+              <tr>
+                <td>Khan Market</td>
+                <td>Central Delhi</td>
+                <td>Upscale handicrafts, designer goods, books</td>
+              </tr>
+              <tr>
+                <td>Sarojini Nagar Market</td>
+                <td>South Delhi</td>
+                <td>Textiles, clothing, affordable handicrafts</td>
+              </tr>
+            </table>
+          </div>
+          <br><br>
+          <p>New Delhi's art and craft scene is a vibrant blend of traditional techniques and contemporary expressions. The city not only preserves India's rich artistic heritage but also serves as a platform for innovation and cross-cultural exchange. Whether you're interested in ancient crafts or cutting-edge contemporary art, Delhi offers a wealth of experiences for art enthusiasts. 🎭✨</p>
+          <br><br>
+        </div>
+        <div id="wbseason" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Seasons to visit New Delhi 🌧️☀️ </h1>
+          <p>New Delhi experiences a distinct seasonal pattern with extreme temperature variations throughout the year. Understanding these seasons is crucial for planning a comfortable and enjoyable visit to the capital city.</p>
+
+          <br><br>
+
+          <h2> Season-wise Breakdown for Visiting New Delhi</h2>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🌸 Spring (February - March)</h3>
+                  <ul>
+                    <li>Pleasant temperatures ranging from 15°C to 30°C (59°F to 86°F).</li>
+                    <li>Perfect time to explore outdoor attractions like Lodi Gardens and Qutub Minar.</li>
+                    <li>Holi festival (Festival of Colors) typically falls during this season.</li>
+                    <li>Gardens and parks are in full bloom, especially at Mughal Garden (now Amrit Udyan).</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="delhi-spring.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="delhi-summer.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>☀️ Summer (April – June)</h3>
+                  <ul>
+                    <li>Extremely hot with temperatures ranging from 25°C to 45°C (77°F to 113°F).</li>
+                    <li>May and June can see heatwaves with temperatures exceeding 45°C (113°F).</li>
+                    <li>Indoor attractions like museums and shopping malls are better options.</li>
+                    <li>Early mornings and evenings are relatively more comfortable for outdoor activities.</li>
+                    <li>Summer discounts at hotels and less crowded attractions.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🌧️ Monsoon (July - September)</h3>
+                  <ul>
+                    <li>Moderate to heavy rainfall with high humidity.</li>
+                    <li>Temperatures range from 25°C to 35°C (77°F to 95°F).</li>
+                    <li>The city turns green and monuments like Humayun's Tomb look spectacular against cloudy skies.</li>
+                    <li>Occasional waterlogging can disrupt transportation.</li>
+                    <li>Lower tourist crowds and good hotel deals available.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="delhi-monsoon.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="delhi-autumn.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🍁 Autumn (October - November)</h3>
+                  <ul>
+                    <li>One of the best seasons to visit with pleasant temperatures between 15°C to 30°C (59°F to 86°F).</li>
+                    <li>Clear skies and comfortable weather for sightseeing.</li>
+                    <li>Major festivals like Dussehra, Diwali, and Durga Puja fall during this period.</li>
+                    <li>Perfect time for outdoor activities and exploring historical monuments.</li>
+                    <li>Note: Air quality can deteriorate in late October and November.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>❄️ Winter (December - January)</h3>
+                  <ul>
+                    <li>Cold temperatures ranging from 5°C to 20°C (41°F to 68°F).</li>
+                    <li>Foggy mornings with occasional dense fog affecting visibility and transportation.</li>
+                    <li>Christmas and New Year celebrations across the city.</li>
+                    <li>Republic Day parade preparations and celebrations in January.</li>
+                    <li>Perfect for exploring the city during daytime hours.</li>
+                    <li>Note: Air quality is often poor during this season.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="delhi-winter.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>📌 Summary: Best Time to Visit Different Places in New Delhi</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Attraction Type</th>
+                <th>Best Season</th>
+                <th>Recommended Months</th>
+                <th>Why Visit?</th>
+              </tr>
+              <tr>
+                <td>Historical Monuments (Red Fort, Qutub Minar, Humayun's Tomb)</td>
+                <td>Autumn, Winter, Spring</td>
+                <td>October - March</td>
+                <td>Pleasant weather for outdoor exploration, good photography conditions</td>
+              </tr>
+              <tr>
+                <td>Gardens and Parks (Lodhi Gardens, Mughal Garden, Buddha Jayanti Park)</td>
+                <td>Spring, Autumn</td>
+                <td>February - March, October - November</td>
+                <td>Flowers in bloom, comfortable temperatures for walking</td>
+              </tr>
+              <tr>
+                <td>Religious Sites (Akshardham Temple, Jama Masjid, Lotus Temple)</td>
+                <td>Autumn, Winter</td>
+                <td>October - February</td>
+                <td>Comfortable weather for visiting often crowded sites</td>
+              </tr>
+              <tr>
+                <td>Shopping Areas (Chandni Chowk, Connaught Place, Sarojini Nagar)</td>
+                <td>Autumn, Winter</td>
+                <td>October - February</td>
+                <td>Comfortable weather for market exploration, festival shopping seasons</td>
+              </tr>
+              <tr>
+                <td>Museums and Indoor Attractions (National Museum, Crafts Museum)</td>
+                <td>Summer, Monsoon</td>
+                <td>April - September</td>
+                <td>Escape from extreme weather, less crowded</td>
+              </tr>
+              <tr>
+                <td>Food Tours and Culinary Experiences</td>
+                <td>Autumn, Winter</td>
+                <td>October - February</td>
+                <td>Comfortable weather for street food exploration, seasonal specialties</td>
+              </tr>
+              <tr>
+                <td>Cultural Events and Festivals</td>
+                <td>Autumn, Winter</td>
+                <td>October - January</td>
+                <td>Major festivals (Diwali, Durga Puja), cultural performances</td>
+              </tr>
+              <tr>
+                <td>Day Trips (Agra, Jaipur)</td>
+                <td>Autumn, Winter, Spring</td>
+                <td>October - March</td>
+                <td>Comfortable weather for long journeys, clear visibility</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="container">
+            <div class="row">
+              <h1 style=" text-align: center;">📌 Summary: When to Visit New Delhi</h1><br>
+              <ul>
+                <li><b>Best overall time to visit:</b> October to March (autumn, winter, and spring)</li>
+                <li><b>For budget travelers:</b> July to September (monsoon season) for lower hotel rates</li>
+                <li><b>For festival experiences:</b> October-November (Dussehra, Diwali) and February-March (Holi)</li>
+                <li><b>For avoiding crowds:</b> July-September (monsoon) and April-June (summer)</li>
+                <li><b>For photography:</b> Early October (post-monsoon greenery, clear skies) and February (blooming gardens)</li>
+                <li><b>Times to avoid if possible:</b> Late May to early July (extreme heat) and late December to early January (dense fog)</li>
+              </ul>
+
+            </div>
+          </div>
+          <br><br>
+        </div>
+        <div id="wbtourist" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Tourist Spots of New Delhi 🏛️🕌</h1>
+          <p>New Delhi is a treasure trove of historical monuments, cultural landmarks, religious sites, and modern attractions. The city offers a fascinating blend of ancient, medieval, colonial, and contemporary India. Here's a categorized list of the best tourist places in New Delhi:</p>
+
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Historical Monuments & Heritage Sites 🏛️</h3>
+                  <ul>
+                    <li><b>Red Fort (Lal Qila) -</b> UNESCO World Heritage Site, Mughal-era fort complex built by Shah Jahan</li>
+                    <li><b>Qutub Minar -</b> UNESCO site, world's tallest brick minaret from the 12th century</li>
+                    <li><b>Humayun's Tomb -</b> UNESCO site, magnificent Mughal tomb that inspired the Taj Mahal</li>
+                    <li><b>India Gate -</b> War memorial designed by Edwin Lutyens, commemorating Indian soldiers</li>
+                    <li><b>Rashtrapati Bhavan -</b> Official residence of the President of India, magnificent colonial architecture</li>
+                    <li><b>Purana Qila -</b> Ancient fort believed to be built on the site of Indraprastha</li>
+                    <li><b>Jantar Mantar -</b> 18th-century astronomical observatory built by Maharaja Jai Singh II</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="delhi-red-fort.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="delhi-akshardham.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Religious Sites 🕌</h3>
+                  <ul>
+                    <li><b>Akshardham Temple -</b> Massive Hindu temple complex with stunning architecture and exhibitions</li>
+                    <li><b>Lotus Temple -</b> Bahá'í House of Worship known for its distinctive lotus-shaped design</li>
+                    <li><b>Jama Masjid -</b> India's largest mosque, built by Shah Jahan in the 17th century</li>
+                    <li><b>Gurudwara Bangla Sahib -</b> Important Sikh place of worship with a sacred pool</li>
+                    <li><b>ISKCON Temple -</b> Modern Hindu temple dedicated to Lord Krishna</li>
+                    <li><b>Laxminarayan Temple (Birla Mandir) -</b> Hindu temple dedicated to Vishnu and Lakshmi</li>
+                    <li><b>Cathedral Church of the Redemption -</b> Anglican church near Rashtrapati Bhavan</li>
+                    <li><b>Nizamuddin Dargah -</b> Sufi shrine of Saint Nizamuddin Auliya</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Museums & Cultural Institutions 🏛️</h3>
+                  <ul>
+                    <li><b>National Museum -</b> Houses over 200,000 artifacts spanning 5,000 years of Indian history</li>
+                    <li><b>National Gallery of Modern Art -</b> Collection of modern and contemporary Indian art</li>
+                    <li><b>Crafts Museum -</b> Showcases traditional Indian crafts and folk art</li>
+                    <li><b>Gandhi Smriti -</b> Museum where Mahatma Gandhi spent his last days</li>
+                    <li><b>Indira Gandhi Memorial Museum -</b> Former residence of Prime Minister Indira Gandhi</li>
+                    <li><b>Rail Museum -</b> Displays the railway heritage of India</li>
+                    <li><b>Nehru Planetarium -</b> Astronomy center with sky shows and exhibitions</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="delhi-national-museum.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="delhi-lodhi-garden.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Parks & Gardens 🌳</h3>
+                  <ul>
+                    <li><b>Lodhi Gardens -</b> Historic park containing tombs of the Lodhi dynasty</li>
+                    <li><b>Mughal Garden (Amrit Udyan) -</b> Beautiful gardens at Rashtrapati Bhavan, open to public seasonally</li>
+                    <li><b>Garden of Five Senses -</b> Recreational park designed to stimulate all five senses</li>
+                    <li><b>Nehru Park -</b> Popular recreational area in the diplomatic enclave</li>
+                    <li><b>Deer Park -</b> Urban park in Hauz Khas with a lake and deer enclosure</li>
+                    <li><b>Buddha Jayanti Park -</b> Commemorates 2500th birth anniversary of Gautama Buddha</li>
+                    <li><b>National Zoological Park -</b> Houses around 1350 animals representing 130 species</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Markets & Shopping Districts 🛍️</h3>
+                  <ul>
+                    <li><b>Chandni Chowk -</b> Historic market dating back to the 17th century, famous for food, textiles, and jewelry</li>
+                    <li><b>Connaught Place -</b> Colonial-era commercial hub with shops, restaurants, and offices</li>
+                    <li><b>Dilli Haat -</b> Crafts bazaar showcasing handicrafts from different states of India</li>
+                    <li><b>Khan Market -</b> Upscale shopping area with boutiques, bookstores, and restaurants</li>
+                    <li><b>Sarojini Nagar Market -</b> Popular for budget shopping and export surplus clothing</li>
+                    <li><b>Janpath -</b> Market known for handicrafts, textiles, and souvenirs</li>
+                    <li><b>Hauz Khas Village -</b> Trendy area with boutiques, art galleries, and restaurants</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="delhi-chandni-chowk.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="delhi-food-tour.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>6. Food & Culinary Experiences 🍽️</h3>
+                  <ul>
+                    <li><b>Paranthe Wali Gali -</b> Famous lane in Old Delhi known for stuffed parathas</li>
+                    <li><b>Karim's -</b> Historic restaurant near Jama Masjid serving Mughlai cuisine</li>
+                    <li><b>Dilli Haat -</b> Food stalls serving cuisines from different Indian states</li>
+                    <li><b>Pandara Road -</b> Row of restaurants famous for North Indian cuisine</li>
+                    <li><b>Chaat in Old Delhi -</b> Street food vendors serving various chaat varieties</li>
+                    <li><b>Khan Market -</b> Upscale restaurants and cafes serving international cuisine</li>
+                    <li><b>Food Tours -</b> Guided culinary walks through Old Delhi and other areas</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Modern Attractions 🏙️</h3>
+                  <ul>
+                    <li><b>Pragati Maidan -</b> Exhibition and convention center hosting trade fairs</li>
+                    <li><b>India Habitat Centre -</b> Cultural complex with art galleries, theaters, and restaurants</li>
+                    <li><b>Kingdom of Dreams -</b> Entertainment complex showcasing Indian culture and performing arts</li>
+                    <li><b>Select Citywalk -</b> Upscale shopping mall in Saket</li>
+                    <li><b>DLF Cyber Hub -</b> Dining and entertainment destination in Gurugram (part of NCR)</li>
+                    <li><b>Waste to Wonder Park -</b> Park featuring replicas of world monuments made from industrial waste</li>
+                    <li><b>National Science Centre -</b> Interactive science museum with educational exhibits</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="delhi-modern.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br><br>
+          <h2>📌 Day Trips from Delhi</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Destination</th>
+                <th>Distance</th>
+                <th>Highlights</th>
+              </tr>
+              <tr>
+                <td>Agra</td>
+                <td>230 km (3-4 hours)</td>
+                <td>Taj Mahal, Agra Fort, Fatehpur Sikri</td>
+              </tr>
+              <tr>
+                <td>Jaipur</td>
+                <td>280 km (5-6 hours)</td>
+                <td>Amber Fort, City Palace, Hawa Mahal</td>
+              </tr>
+              <tr>
+                <td>Mathura & Vrindavan</td>
+                <td>160 km (3 hours)</td>
+                <td>Krishna temples, religious sites</td>
+              </tr>
+              <tr>
+                <td>Neemrana</td>
+                <td>120 km (2-3 hours)</td>
+                <td>Neemrana Fort Palace, zip-lining</td>
+              </tr>
+              <tr>
+                <td>Sultanpur Bird Sanctuary</td>
+                <td>50 km (1 hour)</td>
+                <td>Birdwatching, nature walks</td>
+              </tr>
+            </table>
+          </div>
+
+          <br><br>
+          <p>New Delhi offers a fascinating blend of historical monuments, cultural experiences, and modern attractions. Whether you're interested in history, architecture, food, shopping, or spirituality, the city has something to offer for every type of traveler. The best way to experience Delhi is to combine visits to major landmarks with explorations of local markets and culinary adventures. 🏛️🕌🍽️</p>
+
+        </div>
+        <div id="wbwild" class="tab-pane fade in active" style="background-color: white;">
+          <h1> Wildlife & Green Spaces of New Delhi 🌿</h1>
+          <p>While New Delhi is primarily known as an urban metropolis, it has several significant green spaces, wildlife sanctuaries, and biodiversity zones that provide natural habitats within and around the city.</p>
+
+          <br>
+          <h2>Wildlife in and around Delhi</h2>
+          <p>Despite being a bustling capital city, Delhi has managed to preserve some natural habitats that support diverse wildlife.</p>
+
+          <br>
+          <h2>🔹 Major Wildlife Areas & Sanctuaries</h2>
+          <div>
+            <table>
+              <tr>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Asola Bhatti Wildlife Sanctuary</td>
+                <td>South Delhi</td>
+                <td>Nilgai 🦌, Jackals, Porcupines, 200+ Bird Species</td>
+              </tr>
+              <tr>
+                <td>National Zoological Park</td>
+                <td>Near Old Fort</td>
+                <td>White Tigers 🐅, Asiatic Lions, Giraffes, Hippos</td>
+              </tr>
+              <tr>
+                <td>Okhla Bird Sanctuary</td>
+                <td>Noida (NCR)</td>
+                <td>Migratory Birds, Wetland Ecosystem</td>
+              </tr>
+              <tr>
+                <td>Sultanpur National Park</td>
+                <td>Gurugram (NCR)</td>
+                <td>300+ Bird Species, Winter Migratory Birds</td>
+              </tr>
+              <tr>
+                <td>Yamuna Biodiversity Park</td>
+                <td>North Delhi</td>
+                <td>Wetland Ecosystem, Native Plant Species, Butterflies</td>
+              </tr>
+              <tr>
+                <td>Aravalli Biodiversity Park</td>
+                <td>South Delhi</td>
+                <td>Native Aravalli Flora, Butterflies, Reptiles</td>
+              </tr>
+            </table>
+          </div>
+          <bt><br></bt>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3> 🔹 Wildlife Found in Delhi</h3>
+                <ul>
+                  <li><b>Mammals:</b> Nilgai (Blue Bull - Delhi's state animal), Jackals, Indian Palm Squirrels, Rhesus Macaques, Mongoose.</li>
+                  <li><b>Birds:</b> House Sparrow (State Bird), Peacocks, Parakeets, Kingfishers, Kites, Migratory Birds.</li>
+                  <li><b>Reptiles:</b> Monitor Lizards, Various Snake Species, Garden Lizards.</li>
+                  <li><b>Aquatic Life:</b> Various Fish Species in the Yamuna River (though pollution has affected biodiversity).</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="delhi-wildlife.jpg" alt="" style="height:200px;width: 200px;">
+
+              </div>
+
+            </div>
+          </div>
+          <hr><br>
+          <h2>🌳 Parks & Green Spaces in New Delhi</h2>
+          <p>Delhi is known as one of the greenest capitals in the world, with numerous parks, gardens, and protected forest areas.</p>
+
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Major Parks & Gardens</h3>
+                <ul>
+                  <li><b>Lodhi Gardens:</b> Historic park with Lodhi-era tombs and monuments spread across 90 acres.</li>
+                  <li><b>Mughal Garden (Amrit Udyan):</b> Presidential gardens open to the public seasonally.</li>
+                  <li><b>Buddha Jayanti Park:</b> Located in the Delhi Ridge area, commemorating Buddha's birth anniversary.</li>
+                  <li><b>Nehru Park:</b> Popular recreational area in the diplomatic enclave of Chanakyapuri.</li>
+                  <li><b>Garden of Five Senses:</b> Themed garden designed to stimulate all five senses.</li>
+                  <li><b>Deer Park:</b> Urban park in Hauz Khas with a lake and deer enclosure.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="delhi-parks.jpg" alt="" style="height:200px;width: 220px;">
+
+              </div>
+            </div>
+          </div>
+          <h2>🔹 Forest Areas in Delhi</h2>
+          <div>
+            <table>
+              <tr>
+                <th>Forest Area</th>
+                <th>Location</th>
+                <th>Features</th>
+              </tr>
+              <tr>
+                <td>Delhi Ridge (Northern Ridge)</td>
+                <td>North Delhi</td>
+                <td>Extension of Aravalli Range, Important Green Lung of the City</td>
+              </tr>
+              <tr>
+                <td>Central Ridge</td>
+                <td>Central Delhi</td>
+                <td>Protected Forest Area, Buddha Jayanti Park</td>
+              </tr>
+              <tr>
+                <td>South Central Ridge</td>
+                <td>South Delhi</td>
+                <td>Sanjay Van, JNU Campus Forest Area</td>
+              </tr>
+              <tr>
+                <td>Southern Ridge</td>
+                <td>South Delhi</td>
+                <td>Asola Bhatti Wildlife Sanctuary, Tughlaqabad Forest</td>
+              </tr>
+              <tr>
+                <td>Yamuna Floodplains</td>
+                <td>East Delhi</td>
+                <td>Wetland Ecosystem, Important Bird Area</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Biodiversity Parks</h3>
+                <ul>
+                  <li><b>Yamuna Biodiversity Park:</b> Restored wetland ecosystem along the Yamuna River.</li>
+                  <li><b>Aravalli Biodiversity Park:</b> Restored native Aravalli ecosystem in an abandoned mining area.</li>
+                  <li><b>Neela Hauz Biodiversity Park:</b> Rejuvenated water body and surrounding ecosystem.</li>
+                  <li><b>Northern Ridge Biodiversity Park:</b> Protected forest area with native flora and fauna.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="delhi-biodiversity.jpg" alt="" style="height:200px;width: 200px;">
+
+              </div>
+            </div>
+          </div><br>
+          <hr>
+          <div class="box" style=" background: #f3b37185;padding: 10px;">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3> Urban Agriculture & Green Initiatives 🌱</h3>
+                  <ul>
+                    <li><b>Urban Farming:</b> Growing movement of terrace gardens and community farming.</li>
+                    <li><b>Vertical Gardens:</b> On flyovers and public buildings to combat air pollution.</li>
+                    <li><b>Delhi Greens:</b> NGO working on environmental education and conservation.</li>
+                    <li><b>Tree Plantation Drives:</b> Regular initiatives by government and civil society.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="delhi-urban-farming.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Despite being a major urban center, New Delhi has made significant efforts to preserve its green spaces and wildlife habitats. The Delhi Ridge, often called the "lungs of Delhi," plays a crucial role in maintaining the city's ecological balance. Various conservation initiatives and the creation of biodiversity parks are helping to protect and enhance the natural heritage of the capital region.</p>
+          <br><br>
+        </div>
+        <div id="wbedu" class="tab-pane fade in active" style="background-color: white;">
+          <h1>🎓 Education & Institutions in New Delhi</h1>
+          <p>New Delhi is a major educational hub in India, hosting some of the country's most prestigious universities, research institutions, and schools. The city attracts students from across India and around the world, offering diverse educational opportunities across disciplines.</p>
+
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>📌 Education System in New Delhi</h3>
+                  <ul>
+                    <li><b>School Education:</b> Follows CBSE, ICSE, State Board, and International curricula.</li>
+                    <li><b>Higher Education:</b> Managed by UGC, AICTE, and central/state universities.</li>
+                    <li><b>Major Fields:</b> Engineering, Medical, Law, Humanities, Commerce, Management, Fine Arts, and Sciences.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="delhi-education.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>🏛️ Top Universities & Institutions </h2>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Central Universities</h3>
+                <ol>
+                  <li><b>University of Delhi (DU) -</b> One of India's premier universities with numerous colleges across the city.</li>
+                  <li><b>Jawaharlal Nehru University (JNU) -</b> Renowned for social sciences, international relations, and languages.</li>
+                  <li><b>Jamia Millia Islamia -</b> Central university known for media studies, engineering, and humanities.</li>
+                  <li><b>Indira Gandhi National Open University (IGNOU) -</b> World's largest open university.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="delhi-du.jpg" alt="" style="height:200px;width: 230px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Specialized Institutions</h3>
+                <ol>
+                  <li><b>All India Institute of Medical Sciences (AIIMS) -</b> India's top medical institution.</li>
+                  <li><b>Indian Institute of Technology Delhi (IIT-D) -</b> Premier engineering and technology institute.</li>
+                  <li><b>National Law University Delhi -</b> Leading law school in the country.</li>
+                  <li><b>Indian Institute of Foreign Trade (IIFT) -</b> Specialized in international business education.</li>
+                  <li><b>National Institute of Design (NID) -</b> Premier design education institute.</li>
+                  <li><b>National School of Drama -</b> India's foremost theater training institution.</li>
+                  <li><b>Lady Shri Ram College, St. Stephen's College, Hindu College -</b> Prestigious colleges under Delhi University.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="delhi-aiims.jpg" alt="" style="height:200px;width: 230px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>University/Institution</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>University of Delhi</td>
+                <td>North & South Campus</td>
+                <td>Comprehensive education across disciplines, prestigious colleges</td>
+              </tr>
+              <tr>
+                <td>Jawaharlal Nehru University</td>
+                <td>South Delhi</td>
+                <td>Social Sciences, International Relations, Languages</td>
+              </tr>
+              <tr>
+                <td>IIT Delhi</td>
+                <td>Hauz Khas</td>
+                <td>Engineering, Technology, Research & Innovation</td>
+              </tr>
+              <tr>
+                <td>AIIMS Delhi</td>
+                <td>Ansari Nagar</td>
+                <td>Medical Education, Healthcare, Research</td>
+              </tr>
+              <tr>
+                <td>Jamia Millia Islamia</td>
+                <td>Jamia Nagar</td>
+                <td>Media Studies, Engineering, Humanities</td>
+              </tr>
+              <tr>
+                <td>National Law University</td>
+                <td>Dwarka</td>
+                <td>Legal Education, Research, Advocacy</td>
+              </tr>
+              <tr>
+                <td>IGNOU</td>
+                <td>Maidan Garhi</td>
+                <td>Distance Education, Inclusive Learning</td>
+              </tr>
+              <tr>
+                <td>Delhi Technological University</td>
+                <td>Rohini</td>
+                <td>Engineering, Technical Education</td>
+              </tr>
+              <tr>
+                <td>Indian Agricultural Research Institute</td>
+                <td>Pusa</td>
+                <td>Agricultural Sciences, Research</td>
+              </tr>
+            </table>
+          </div>
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="delhi-iit.jpg" alt="" style="height:200px;width: 240px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🔹 Management & Business Schools</h3>
+                  <ol>
+                    <li><b>Faculty of Management Studies (FMS), Delhi University -</b> One of India's oldest and most prestigious business schools.</li>
+                    <li><b>Indian Institute of Foreign Trade (IIFT) -</b> Specialized in international business education.</li>
+                    <li><b>Management Development Institute (MDI), Gurgaon -</b> Top-ranked business school in NCR.</li>
+                    <li><b>International Management Institute (IMI) -</b> Among India's premier management institutions.</li>
+                    <li><b>FORE School of Management -</b> Established business school with industry connections.</li>
+                  </ol>
+                </div>
+
+                <br><br>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Engineering & Technical Institutions</th>
+                <th>Location</th>
+                <th>Specialization</th>
+              </tr>
+              <tr>
+                <td>IIT Delhi</td>
+                <td>Hauz Khas</td>
+                <td>Premier technical institution with comprehensive engineering programs</td>
+              </tr>
+              <tr>
+                <td>Delhi Technological University (DTU)</td>
+                <td>Rohini</td>
+                <td>Formerly Delhi College of Engineering, known for technical education</td>
+              </tr>
+              <tr>
+                <td>Netaji Subhas University of Technology (NSUT)</td>
+                <td>Dwarka</td>
+                <td>Formerly NSIT, known for computer science and engineering</td>
+              </tr>
+              <tr>
+                <td>Indraprastha Institute of Information Technology (IIIT-Delhi)</td>
+                <td>Okhla</td>
+                <td>IT, Computer Science, and related fields</td>
+              </tr>
+              <tr>
+                <td>Jamia Millia Islamia (Faculty of Engineering)</td>
+                <td>Jamia Nagar</td>
+                <td>Engineering and technical education</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🔹 Medical Institutions</h3>
+                  <ol>
+                    <li><b>All India Institute of Medical Sciences (AIIMS) -</b> India's premier medical institution.</li>
+                    <li><b>Maulana Azad Medical College -</b> One of the oldest and most prestigious medical colleges.</li>
+                    <li><b>Lady Hardinge Medical College -</b> Historic women's medical institution.</li>
+                    <li><b>University College of Medical Sciences -</b> Affiliated with Delhi University.</li>
+                    <li><b>Vardhman Mahavir Medical College -</b> Associated with Safdarjung Hospital.</li>
+                  </ol>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="delhi-medical.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Medical Institution</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>All India Institute of Medical Sciences (AIIMS)</td>
+                <td>Ansari Nagar</td>
+                <td>India's premier medical institution, research, specialized care</td>
+              </tr>
+              <tr>
+                <td>Maulana Azad Medical College</td>
+                <td>Central Delhi</td>
+                <td>Associated with Lok Nayak Hospital, comprehensive medical education</td>
+              </tr>
+              <tr>
+                <td>Lady Hardinge Medical College</td>
+                <td>Connaught Place</td>
+                <td>Women's medical education, historic institution</td>
+              </tr>
+              <tr>
+                <td>University College of Medical Sciences</td>
+                <td>Dilshad Garden</td>
+                <td>Affiliated with GTB Hospital, medical education and research</td>
+              </tr>
+              <tr>
+                <td>Vardhman Mahavir Medical College</td>
+                <td>Safdarjung</td>
+                <td>Associated with Safdarjung Hospital, medical training</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="delhi-law.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🔹 Law, Arts & Other Institutions</h3>
+                  <ul>
+                    <li><b>National Law University Delhi -</b> Premier legal education institution.</li>
+                    <li><b>Faculty of Law, Delhi University -</b> Historic law school with three centers.</li>
+                    <li><b>College of Art -</b> Leading fine arts institution.</li>
+                    <li><b>National School of Drama -</b> Premier theater training institution.</li>
+                    <li><b>Indian Institute of Mass Communication -</b> Specialized in journalism and media studies.</li>
+                    <li><b>Delhi School of Economics -</b> Renowned for economics and social sciences.</li>
+                    <li><b>Indian Agricultural Research Institute -</b> Leading institution for agricultural sciences.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Institute</th>
+                <th>Location</th>
+                <th>Specialization</th>
+              </tr>
+              <tr>
+                <td>National Law University Delhi</td>
+                <td>Dwarka</td>
+                <td>Legal education, research, and advocacy</td>
+              </tr>
+              <tr>
+                <td>Faculty of Law, Delhi University</td>
+                <td>North Campus</td>
+                <td>Comprehensive legal education</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <h2>🏫 School Education in New Delhi </h2>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Major School Boards</h3>
+                <ol>
+                  <li><b>Central Board of Secondary Education (CBSE) -</b> Most schools in Delhi follow this national curriculum.</li>
+                  <li><b>Indian Certificate of Secondary Education (ICSE) -</b> Several private schools follow this board.</li>
+                  <li><b>International Baccalaureate (IB) & Cambridge (IGCSE) -</b> Select schools offering international curricula.</li>
+                  <li><b>Delhi Government Schools -</b> State-run schools following CBSE curriculum with recent reforms.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="delhi-school.jpg" alt="" style="height:200px;width: 200px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-4">
+                <img src="delhi-dps.jpg" alt="" style="height:200px;width: 230px;">
+
+              </div>
+              <div class="col-sm-8">
+
+                <h3>🔹 Famous Schools in New Delhi</h3>
+                <ol>
+                  <li><b>Delhi Public School (DPS) Network -</b> Multiple branches across the city.</li>
+                  <li><b>Modern School, Barakhamba Road -</b> Historic institution established in 1920.</li>
+                  <li><b>The Shri Ram School -</b> Progressive education with multiple campuses.</li>
+                  <li><b>Sanskriti School -</b> Established for children of civil servants.</li>
+                  <li><b>Mother's International School -</b> Run by the Sri Aurobindo Education Society.</li>
+                  <li><b>St. Columba's School & Loreto Convent -</b> Prestigious Christian missionary schools.</li>
+                </ol>
+
+              </div>
+
+            </div>
+          </div>
+          <div class="box">
+            <h2>🔬 Research & Technological Advancements</h2>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <p>New Delhi hosts numerous research institutions at the forefront of scientific and technological innovation:</p>
+                  <ol>
+                    <li><b>Council of Scientific and Industrial Research (CSIR) -</b> Headquarters and multiple labs.</li>
+                    <li><b>Indian Council of Medical Research (ICMR) -</b> Apex body for biomedical research.</li>
+                    <li><b>Defence Research and Development Organisation (DRDO) -</b> Military research facilities.</li>
+                    <li><b>Indian Agricultural Research Institute (IARI) -</b> Premier agricultural research institution.</li>
+                    <li><b>National Physical Laboratory -</b> Research in physical sciences and measurement standards.</li>
+                  </ol>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="delhi-research.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <h2>📚 Other Notable Institutions</h2>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <ol>
+                    <li><b>Indian Institute of Public Administration -</b> Training for civil servants.</li>
+                    <li><b>National Institute of Design (NID) -</b> Design education and research.</li>
+                    <li><b>National Institute of Fashion Technology (NIFT) -</b> Fashion education and industry linkages.</li>
+                    <li><b>Indian Institute of Mass Communication -</b> Journalism and media studies.</li>
+                    <li><b>School of Planning and Architecture -</b> Architecture, planning, and design education.</li>
+                    <li><b>National Institute of Educational Planning and Administration -</b> Educational policy research.</li>
+                  </ol>
+                </div>
+                <div class="col-sm-4">
+                  <img src="delhi-nift.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>New Delhi's educational landscape reflects its status as India's capital, offering world-class institutions across disciplines. The city continues to attract students from across India and internationally, contributing to its vibrant, diverse academic environment. Recent years have seen significant reforms in public education and increased focus on research and innovation.</p>
+        </div>
+        <br><br>
+
+      </div>
+
+
+    </div>
+  </div>
+  </div>
+</body>
+
+</html>

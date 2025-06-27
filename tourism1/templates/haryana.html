@@ -1,0 +1,2668 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Haryana</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> -->
+  <style>
+    .wb {
+      font-size: 10vw;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+      border-spacing: 0;
+      border: 1px solid #ddd;
+    }
+
+    td,
+    th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+      font-size: 1.5vw;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+
+    .trip {
+      text-align: center;
+      font-weight: 900;
+      background: orangered;
+      padding: 20px;
+      border-radius: 20px;
+      width: 60%;
+    }
+
+    p,
+    li,
+    .text {
+      font-size: 1.5vw;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-weight: 600;
+    }
+
+    h4 {
+      font-weight: 900;
+    }
+
+    img {
+      border-radius: 10px;
+      display: block;
+      margin: auto;
+    }
+
+    @media screen and (max-width: 850px) {
+
+      p,
+      li,
+      .text,
+      td,
+      th {
+        font-size: 2vw;
+        ;
+      }
+
+    }
+
+    @media screen and (max-width: 500px) {
+
+      p,
+      li,
+      .text,
+      td,
+      th {
+        font-size: 4.5vw;
+        ;
+      }
+
+    }
+
+    .box:nth-of-type(odd) {
+      background: #f3b37185;
+      padding: 10px;
+    }
+
+    .weather-container {
+            border-radius: 15px;
+            background: #f0fdf4;
+            padding: 15px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .weather-card {
+            text-align: center;
+            border-radius: 10px;
+            padding: 10px;
+            background: white;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+        .aqi {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            color: white;
+        }
+        .aqi-bad { background: purple; }
+        .aqi-moderate { background: orange; }
+        .aqi-good { background: green; }
+        .best-time {
+            background: #d1fae5;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 15px;
+            color: green;
+        }
+        .wet {
+            max-width: 50px;
+        }
+        
+        .trip {
+          font-size: 18px;
+          padding: 10px 20px;
+          cursor: pointer;
+          background-color:rgb(231, 36, 36);
+          color: white;
+          border: none;
+          border-radius: 5px;
+      }
+      .modal {
+          display: none;
+          position: fixed;
+          z-index: 1;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0,0,0,0.5);
+      }
+      .modal-content {
+          background-color: #fff;
+          margin: 10% auto;
+          padding: 20px;
+          border-radius: 10px;
+          width: 40%;
+          box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+          text-align: center;
+      }
+      .close {
+          color: #aaa;
+          float: right;
+          font-size: 28px;
+          font-weight: bold;
+          cursor: pointer;
+      }
+      .trip-options {
+          display: flex;
+          justify-content: center;
+          gap: 20px;
+          margin-top: 20px;
+      }
+      .trip-options a {
+          display: block;
+          width: 120px;
+          padding: 10px;
+          background-color: #28a745;
+          color: white;
+          text-decoration: none;
+          border-radius: 5px;
+      }
+  </style>
+</head>
+
+<body>
+
+
+  <!-- <h2>Carousel Example</h2> -->
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+      <li data-target="#myCarousel" data-slide-to="4"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+
+      <div class="item active">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Kingdom_of_Dreams_Gurgaon.jpg" alt="Kingdom of Dreams" style="width:100%; height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Kingdom of Dreams</h3>
+          <p>India's first live entertainment and leisure destination in Gurugram!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Kurukshetra_Brahma_Sarovar.jpg" alt="Brahma Sarovar" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Brahma Sarovar</h3>
+          <p>The sacred water tank in Kurukshetra associated with the Mahabharata!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Sultanpur_National_Park.jpg" alt="Sultanpur Bird Sanctuary" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Sultanpur Bird Sanctuary</h3>
+          <p>A paradise for bird watchers with migratory birds from around the world!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Pinjore_Gardens.jpg" alt="Pinjore Gardens" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Pinjore Gardens</h3>
+          <p>A beautiful Mughal garden with terraced lawns and fountains!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Morni_Hills_Haryana.jpg" alt="Morni Hills" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Morni Hills</h3>
+          <p>Haryana's only hill station with twin lakes and lush greenery!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+  <div class="container">
+    <br><br>
+    <h1 class="wb"> HARYANA</h1><br>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/8/88/Haryana_district_map.png" alt="" style="height:700px; width: -webkit-fill-available;">
+
+        </div>
+        <div class="col-sm-6">
+          <h1> Haryana: The Land of Plough and Valor</h1>
+          <p class="text">Haryana is a state in northern India that surrounds New Delhi on three sides. Known for its agricultural productivity, rich cultural heritage, and significant contribution to India's sports, Haryana blends tradition with modernity. From the ancient battleground of Kurukshetra to the modern cyber hub of Gurugram, the state offers diverse experiences to visitors.</p>
+
+          <ul>
+            <li><b>Location --</b> Northern India</li>
+            <li><b>Capital --</b> Chandigarh (shared with Punjab)</li>
+            <li><b>Largest City --</b> Faridabad</li>
+            <li><b>Official Language --</b> Hindi</li>
+            <li><b>Area --</b> 44,212 sq. km</li>
+            <li><b>Population --</b> ~28 million</li>
+            <li><b>Borders --</b> Punjab and Himachal Pradesh (North), Uttarakhand and Uttar Pradesh (East), Rajasthan (West and South), Delhi (South)</li>
+            <li><b>Major Rivers --</b> Yamuna, Ghaggar, Markanda, Saraswati</li>
+            <li><b>Major Festivals --</b> Teej, Lohri, Baisakhi, Gugga Naumi, Holi</li>
+            <li><b>State Animal --</b> Blackbuck</li>
+            <li><b>State Flower --</b> Lotus</li>
+            <li><b>State Tree --</b> Peepal</li>
+            <li><b>State Bird --</b> Black Francolin (Kala Titar)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <br>
+    <hr>
+    <div>
+      <h1>📌 Divisions & Districts of Haryana</h1>
+      <br>
+      <div style="overflow-x:auto;">
+        <table>
+          <tr>
+            <th>Division</th>
+            <th>Districts</th>
+            <th>Key Highlights</th>
+          </tr>
+          <tr>
+            <td>Ambala</td>
+            <td>Ambala, Kurukshetra, Kaithal, Yamunanagar, Panchkula</td>
+            <td>Kurukshetra (Mahabharata battlefield), Pinjore Gardens, Science City, Sthaneshwar Mahadev Temple</td>
+          </tr>
+          <tr>
+            <td>Gurgaon</td>
+            <td>Gurugram, Faridabad, Nuh, Palwal, Rewari</td>
+            <td>Cyber Hub, Kingdom of Dreams, Sultanpur Bird Sanctuary, Damdama Lake</td>
+          </tr>
+          <tr>
+            <td>Hisar</td>
+            <td>Hisar, Fatehabad, Sirsa, Jind, Hansi</td>
+            <td>Agroha Dham, Deer Park, Blue Bird Lake, Ancient Harappan sites</td>
+          </tr>
+          <tr>
+            <td>Rohtak</td>
+            <td>Rohtak, Jhajjar, Sonipat, Panipat, Karnal, Bhiwani, Charkhi Dadri, Mahendragarh</td>
+            <td>Tilyar Lake, Panipat Museum, Karnal Lake, Sohna Hot Springs</td>
+          </tr>
+        </table>
+      </div>
+      <br><br>
+      <h1>🔹 Major Highlights of Some Key Districts</h1><br><br>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <ul>
+              <li><b>Gurugram --</b> IT and corporate hub, modern infrastructure, shopping malls.</li>
+              <li><b>Faridabad --</b> Industrial center, Raja Nahar Singh Palace, Surajkund Crafts Mela.</li>
+              <li><b>Kurukshetra --</b> Historical and religious significance, Mahabharata battlefield.</li>
+              <li><b>Panipat --</b> Known for three historic battles, textile industry, handloom products.</li>
+              <li><b>Panchkula --</b> Planned city, Morni Hills, Cactus Garden, proximity to Chandigarh.</li>
+              <li><b>Karnal --</b> Agricultural research centers, Karna Lake, dairy farming.</li>
+              <li><b>Hisar --</b> Ancient city with archaeological sites, agricultural university.</li>
+              <li><b>Ambala --</b> Military cantonment, wholesale cloth market, educational institutions.</li>
+              <li><b>Rohtak --</b> Educational hub, sports facilities, ancient archaeological sites.</li>
+            </ul>
+          </div>
+          <div class="col-sm-6">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/88/Haryana_district_map.png" alt="" style="height:450px;width: -webkit-fill-available;">
+
+          </div>
+        </div>
+      </div>
+    </div><br><br>
+    <div class="container">
+      <div class="weather-container">
+          <h4 class="text-center"><strong>Weather in Haryana</strong></h4>
+          <div class="row">
+              <!-- January -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Jan</h6>
+                      <p>5/20°C</p>
+                      <span class="aqi aqi-bad">AQI 180</span>
+                  </div>
+              </div>
+              <!-- February -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Feb</h6>
+                      <p>8/24°C</p>
+                      <span class="aqi aqi-moderate">AQI 150</span>
+                  </div>
+              </div>
+              <!-- March -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Mar</h6>
+                      <p>13/30°C</p>
+                      <span class="aqi aqi-moderate">AQI 130</span>
+                  </div>
+              </div>
+              <!-- April -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Apr</h6>
+                      <p>19/37°C</p>
+                      <span class="aqi aqi-moderate">AQI 120</span>
+                  </div>
+              </div>
+              <!-- May -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>May</h6>
+                      <p>24/41°C</p>
+                      <span class="aqi aqi-moderate">AQI 110</span>
+                  </div>
+              </div>
+              <!-- June -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Jun</h6>
+                      <p>27/40°C</p>
+                      <span class="aqi aqi-moderate">AQI 100</span>
+                  </div>
+              </div>
+              <!-- July -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="rain.png" alt="rain">
+                      <h6>Jul</h6>
+                      <p>27/36°C</p>
+                      <span class="aqi aqi-good">AQI 80</span>
+                  </div>
+              </div>
+              <!-- August -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Aug</h6>
+                      <p>26/34°C</p>
+                      <span class="aqi aqi-good">AQI 85</span>
+                  </div>
+              </div>
+              <!-- September -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Sep</h6>
+                      <p>24/34°C</p>
+                      <span class="aqi aqi-moderate">AQI 95</span>
+                  </div>
+              </div>
+              <!-- October -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Oct</h6>
+                      <p>18/33°C</p>
+                      <span class="aqi aqi-moderate">AQI 120</span>
+                  </div>
+              </div>
+              <!-- November -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Nov</h6>
+                      <p>11/28°C</p>
+                      <span class="aqi aqi-bad">AQI 160</span>
+                  </div>
+              </div>
+              <!-- December -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Dec</h6>
+                      <p>7/22°C</p>
+                      <span class="aqi aqi-bad">AQI 170</span>
+                  </div>
+              </div>
+          </div>
+          <div class="text-center">
+              <div class="best-time">🏆 Best time to visit: October - March</div>
+          </div>
+      </div>
+    </div>
+    
+
+    <br><br>
+    <button class="trip" id="openModal">Let's go on a trip</button>
+    
+    <div id="tripModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Select Your Trip</h2>
+            <button type="button" class="btn btn-warning" style="margin-bottom: 8px;color:black; border-radius: 5px;" onclick="location.href='{% url 'haryana_7days' %}'" >7 days trip</button><br>
+            <button type="button" class="btn btn-warning" style="margin-bottom: 8px;color:black; border-radius: 5px;" onclick="location.href='{% url 'haryana_12days' %}'" >12 days trip</button>
+        </div>
+    </div>
+    
+    <script>
+        var modal = document.getElementById("tripModal");
+        var btn = document.getElementById("openModal");
+        var span = document.getElementsByClassName("close")[0];
+        
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+        
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+        
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script><br><br>
+    <div class="container">
+      <ul class="nav nav-tabs">
+        <li class="nav-item"><a data-toggle="tab" href="#wbculture"> Culture</a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbtradition "> Tradition</a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbfestivals"> Festivals </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbfood"> Foods </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbhistory"> History </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbartacraft"> Art and Craft </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbseason"> Season to Visit </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbtourist"> Tourist Spots </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbwild"> Wildlife & Crops </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbedu"> Institutions </a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="wbculture" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Culture of Haryana</h1>
+          <p class="text">Haryana has a rich and vibrant culture deeply rooted in its agricultural heritage, martial traditions, and folk customs. The state's culture is characterized by its rustic simplicity, warmth, and a strong sense of community. Here's an overview of some key aspects of Haryana's culture:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Language</h3>
+                  <ul>
+                    <li>Haryanvi, a dialect of Hindi, is the primary language spoken in Haryana. It has its own distinct vocabulary, pronunciation, and expressions that reflect the rural ethos of the region. Hindi is the official language, while Punjabi is also spoken in some parts, especially near the Punjab border.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Haryanvi_folk_singers.jpg/800px-Haryanvi_folk_singers.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>2. Literature and Oral Traditions</h3>
+                  <ul>
+                    <li>Haryana has a rich tradition of folk tales, ballads, and proverbs that have been passed down through generations. The state has produced notable writers like Surendra Sharma and Vishnu Prabhakar.</li>
+                    <li>Ragini, a form of folk song that narrates stories of valor, love, and social issues, is an important part of Haryanvi literature.</li>
+                    <li>Swang, a traditional form of folk theater, combines dialogue, music, dance, and comedy to convey social messages.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Haryanvi_Ragini_performance.jpg/800px-Haryanvi_Ragini_performance.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div><br>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Phulkari_embroidery.jpg/800px-Phulkari_embroidery.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Art and Craft</h3>
+                  <ul>
+                    <li>Phulkari embroidery, featuring colorful floral designs, is a traditional craft practiced by women in Haryana.</li>
+                    <li>Pottery, especially the black pottery of Jhajjar, is known for its unique designs and techniques.</li>
+                    <li>Durrie (cotton rugs) weaving is another traditional craft, with geometric patterns and bright colors.</li>
+                    <li>Wooden furniture with intricate carvings, especially from Karnal and Faridabad, is famous throughout North India.</li>
+                  </ul>
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Haryanvi_folk_dance.jpg/800px-Haryanvi_folk_dance.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>4. Music and Dance</h3>
+                  <ul>
+                    <li>Haryanvi folk music is characterized by its simplicity and rustic charm, often accompanied by traditional instruments like dhol, nagara, and sarangi.</li>
+                    <li>Ragini, a form of ballad singing, is popular during social gatherings and festivals.</li>
+                    <li>Folk dances include:
+                      <ul>
+                        <li>Ghoomar: Performed by women during festive occasions, involving graceful circular movements.</li>
+                        <li>Jhumar: A male folk dance depicting the joy of harvest season.</li>
+                        <li>Dhamal: An energetic dance performed by men during Holi and other celebrations.</li>
+                        <li>Khoria: A dance performed by elderly women during weddings.</li>
+                        <li>Loor: A romantic dance performed by young girls during the monsoon season.</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Cuisine</h3>
+                  <ul>
+                    <li>Haryanvi cuisine is simple, nutritious, and hearty, reflecting the agricultural lifestyle of the region.</li>
+                    <li>Staple foods include bajra and wheat rotis, often served with ghee, lassi, and buttermilk.</li>
+                    <li>Popular dishes include:
+                      <ul>
+                        <li>Kadhi Pakora: Gram flour dumplings in a yogurt-based curry.</li>
+                        <li>Bajra Khichdi: A nutritious mix of millet and lentils.</li>
+                        <li>Bathua Raita: A yogurt dish made with bathua leaves.</li>
+                        <li>Methi Gajar: A vegetable dish made with fenugreek leaves and carrots.</li>
+                        <li>Kachri Ki Sabzi: A traditional dish made from wild melons.</li>
+                        <li>Malpua and Kheer: Popular sweet dishes.</li>
+                      </ul>
+                    </li>
+                  </ul>
+                  <h3>6. Attire</h3>
+                  <ul>
+                    <li>Traditional Haryanvi men wear dhoti-kurta with a turban (pagri) and a waistcoat (sadri).</li>
+                    <li>Women traditionally wear ghagra-choli (long skirt and blouse) with a head covering (odhni).</li>
+                    <li>Heavy silver jewelry, including anklets, bangles, and necklaces, is an important part of women's attire.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Haryanvi_cuisine.jpg/800px-Haryanvi_cuisine.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Haryanvi_wrestling.jpg/800px-Haryanvi_wrestling.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>7. Sports and Martial Traditions</h3>
+                  <ul>
+                    <li>Haryana has a strong sporting culture, particularly in wrestling (kushti), boxing, and kabaddi.</li>
+                    <li>The state has produced numerous Olympic medalists and international champions, especially in wrestling and boxing.</li>
+                    <li>Traditional akharas (wrestling pits) are common in villages, where young men train in wrestling.</li>
+                    <li>Gatka, a traditional martial art, is practiced in some parts of the state.</li>
+                  </ul>
+                  <h3>8. Religious Practices</h3>
+                  <ul>
+                    <li>Hinduism is the predominant religion, with significant worship of deities like Lord Shiva, Krishna, and local folk deities.</li>
+                    <li>Kurukshetra, the battlefield of the Mahabharata, holds immense religious significance.</li>
+                    <li>Folk deities like Gugga Pir and Baba Khatu Shyam are widely revered.</li>
+                    <li>Sikhism has a significant presence, especially in districts bordering Punjab.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Kurukshetra_Brahma_Sarovar.jpg/800px-Kurukshetra_Brahma_Sarovar.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>9. Festivals</h3>
+                  <ul>
+                    <li>Teej: Celebrated by women during  Festivals</h3>
+                  <ul>
+                    <li>Teej: Celebrated by women during the monsoon season with swings, songs, and prayers for marital bliss.</li>
+                    <li>Lohri: A winter harvest festival celebrated with bonfires, folk songs, and traditional dances.</li>
+                    <li>Baisakhi: Marks the beginning of the harvest season, celebrated with folk dances and community gatherings.</li>
+                    <li>Gugga Naumi: A festival dedicated to Gugga Pir, believed to protect against snakebites and other dangers.</li>
+                    <li>Holi: Celebrated with great enthusiasm, featuring the unique Haryanvi tradition of "Dulandi" (celebrated a day after Holi).</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>10. Social Structure and Values</h3>
+                  <ul>
+                    <li>Haryana has a traditional patriarchal society with strong family bonds and respect for elders.</li>
+                    <li>The khap panchayat (clan council) still plays a significant role in rural social governance, though their influence is gradually changing.</li>
+                    <li>Hospitality is a core value, with guests treated with great respect and warmth.</li>
+                    <li>The concept of "Dhaakad" (bravery) is highly valued, especially for men.</li>
+                  </ul>
+                  <h3>11. Rural Traditions</h3>
+                  <ul>
+                    <li>Chaupal: A community space in villages where people gather to discuss issues, settle disputes, and socialize.</li>
+                    <li>Hookah: The traditional water pipe is often shared among men during social gatherings.</li>
+                    <li>Gotras: Clan-based social organization remains important, especially in marriage alliances.</li>
+                    <li>Agricultural festivals and rituals mark different stages of the farming cycle.</li>
+                  </ul>
+                  <h3>12. Modern Cultural Developments</h3>
+                  <ul>
+                    <li>Haryanvi music and films have gained popularity beyond the state, with artists like Daler Mehndi and Sapna Chaudhary achieving national fame.</li>
+                    <li>The state has seen a rise in sports academies and training centers, further strengthening its sporting culture.</li>
+                    <li>Urban centers like Gurugram have developed a cosmopolitan culture while still maintaining connections to traditional Haryanvi roots.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Village_chaupal_in_Haryana.jpg/800px-Village_chaupal_in_Haryana.jpg" alt="" style="height:300px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br><br>
+
+          <p>Haryana's culture is a vibrant blend of agricultural traditions, martial valor, folk arts, and community spirit. Despite rapid modernization in parts of the state, traditional values and customs continue to thrive, especially in rural areas, creating a unique cultural identity that honors its heritage while embracing change.</p><br><br>
+        </div>
+        <div id="wbtradition" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Tradition of Haryana</h1>
+          <p>Haryana has a rich tapestry of traditions deeply rooted in its agricultural heritage, rural lifestyle, and historical influences. These traditions reflect the state's values of community, hospitality, and resilience. Here's an overview of some key traditional aspects of the state:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Clothing Tradition</h3>
+                  <h4>Men</h4>
+                  <ul>
+                    <li><b>Dhoti-Kurta:</b> Traditional attire consisting of a long shirt and loose-fitting lower garment.</li>
+                    <li><b>Pagri (Turban):</b> An essential part of traditional dress, symbolizing honor and dignity.</li>
+                    <li><b>Sadri:</b> A sleeveless jacket worn over the kurta, especially during cooler months.</li>
+                    <li><b>Lungi:</b> A shorter version of dhoti, often worn during agricultural work.</li>
+                  </ul>
+                  <h4>Women</h4>
+                  <ul>
+                    <li><b>Ghagra-Choli:</b> A long skirt worn with a blouse, often in bright colors with embroidery.</li>
+                    <li><b>Odhni/Dupatta:</b> A head covering that is an essential part of traditional attire.</li>
+                    <li><b>Kurti-Salwar:</b> A more contemporary adaptation, popular in both rural and urban areas.</li>
+                    <li><b>Jewelry:</b> Silver anklets (payal), toe rings (bichhiya), bangles (chuda), and necklaces (hansli) are traditional ornaments.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Traditional_Haryanvi_attire.jpg/800px-Traditional_Haryanvi_attire.jpg" alt="" style="height:250px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>2. Wedding Traditions</h3>
+                  <ul>
+                    <li><b>Sagai (Engagement):</b> Involves the exchange of rings and gifts between families.</li>
+                    <li><b>Baan:</b> A pre-wedding ritual where the groom's family sends gifts to the bride's family.</li>
+                    <li><b>Mehndi:</b> Intricate henna designs are applied to the bride's hands and feet.</li>
+                    <li><b>Ghurchari:</b> The groom's ceremonial procession on horseback to the bride's home.</li>
+                    <li><b>Doli:</b> The emotional departure of the bride from her parental home in a decorated palanquin.</li>
+                    <li><b>Gotras:</b> Marriage within the same gotra (clan) is traditionally prohibited.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Haryanvi_wedding.jpg/800px-Haryanvi_wedding.jpg" alt="" style="height:250px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Haryanvi_folk_dance.jpg/800px-Haryanvi_folk_dance.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Music & Dance Traditions</h3>
+                  <ul>
+                    <li><b>Ragini:</b> A form of folk song that narrates stories of valor, love, and social issues.</li>
+                    <li><b>Saang/Swang:</b> Traditional folk theater combining dialogue, music, dance, and comedy.</li>
+                    <li><b>Ghoomar:</b> A graceful dance performed by women in circular formations.</li>
+                    <li><b>Jhumar:</b> A male folk dance celebrating the harvest season.</li>
+                    <li><b>Dhamal:</b> An energetic dance performed during festivals, especially Holi.</li>
+                    <li><b>Phag:</b> Songs and dances associated with the spring season and Holi festival.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Village_chaupal_in_Haryana.jpg/800px-Village_chaupal_in_Haryana.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+
+                  <h3>4. Social & Community Traditions</h3>
+                  <ul>
+                    <li><b>Chaupal:</b> A community space in villages where people gather to discuss issues, settle disputes, and socialize.</li>
+                    <li><b>Khap Panchayat:</b> Traditional clan councils that govern social norms and resolve disputes.</li>
+                    <li><b>Hookah:</b> The traditional water pipe shared among men during social gatherings, symbolizing community bonding.</li>
+                    <li><b>Teej Celebration:</b> Women gather to sing, dance, and pray for marital bliss during the monsoon season.</li>
+                    <li><b>Gotras:</b> Clan-based social organization that determines marriage alliances and community relations.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Agricultural Traditions</h3>
+                  <ul>
+                    <li><b>Baisakhi:</b> Harvest festival marking the beginning of the agricultural year.</li>
+                    <li><b>Lohri:</b> Winter harvest festival celebrated with bonfires, folk songs, and traditional foods.</li>
+                    <li><b>Seasonal Rituals:</b> Various ceremonies mark different stages of the agricultural cycle, from sowing to harvesting.</li>
+                    <li><b>Cattle Fairs:</b> Traditional gatherings for trading livestock, especially bullocks and cows.</li>
+                    <li><b>Guga Naumi:</b> Festival dedicated to Guga Pir, believed to protect crops and cattle from snakes and natural calamities.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Haryana_agriculture.jpg/800px-Haryana_agriculture.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>6. Culinary Traditions</h3>
+                  <ul>
+                    <li><b>Kachri Ki Sabzi:</b> A traditional dish made from wild melons.</li>
+                    <li><b>Bajra Khichdi:</b> A nutritious mix of millet and lentils, a staple during winter.</li>
+                    <li><b>Kadhi Pakora:</b> Gram flour dumplings in a yogurt-based curry.</li>
+                    <li><b>Bathua Raita:</b> A yogurt dish made with bathua leaves, seasonal and nutritious.</li>
+                    <li><b>Churma:</b> A sweet dish made from crushed wheat rotis, ghee, and sugar.</li>
+                    <li><b>Lassi and Chaach:</b> Traditional yogurt-based drinks that are an essential part of meals.</li>
+                    <li><b>Seasonal Cooking:</b> Culinary traditions change with seasons, using locally available ingredients.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Haryanvi_cuisine.jpg/800px-Haryanvi_cuisine.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br><br>
+          <p>Haryana's traditions are a vibrant reflection of its agricultural heritage, community values, and historical influences. Despite modernization, many of these traditions continue to thrive, especially in rural areas, preserving the state's cultural identity and providing a sense of continuity and belonging to its people.</p><br><br>
+        </div>
+        <div id="wbfestivals" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Festivals of Haryana</h1>
+          <p>Haryana celebrates a variety of festivals that reflect its agricultural heritage, religious beliefs, and cultural traditions. These festivals bring communities together and showcase the vibrant spirit of Haryanvi culture. Here's a list of some of the major festivals celebrated in the state:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Teej</h3>
+                  <ul>
+                    <li>A monsoon festival celebrated primarily by women to welcome the rainy season.</li>
+                    <li>Women dress in colorful clothes, apply mehndi (henna), and gather to sing and dance.</li>
+                    <li>Swings are hung from trees, and women enjoy swinging while singing traditional songs.</li>
+                    <li>Married women pray for their husbands' well-being, while unmarried girls pray for good husbands.</li>
+                    <li>Special foods like ghevar (a sweet dish) and traditional savories are prepared.</li>
+                  </ul>
+                  <p><b>📍 Time: July-August (Sawan month)</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Teej_celebration_in_Haryana.jpg/800px-Teej_celebration_in_Haryana.jpg" alt="" style="height:230px;width: 200px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Lohri_celebration.jpg/800px-Lohri_celebration.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Lohri</h3>
+                  <ul>
+                    <li>A winter harvest festival celebrated with great enthusiasm across Haryana.</li>
+                    <li>People gather around a bonfire, throw sesame seeds, jaggery, and popcorn into it, and sing folk songs.</li>
+                    <li>The festival marks the end of winter and the onset of longer days.</li>
+                    <li>Special significance is given to the first Lohri of a newlywed couple or a newborn child.</li>
+                    <li>Traditional foods include revri, gajak, peanuts, and popcorn.</li>
+                  </ul>
+                  <p><b>📍 Time: January 13</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Baisakhi</h3>
+                  <ul>
+                    <li>A harvest festival marking the beginning of the agricultural year and the Sikh New Year.</li>
+                    <li>Farmers express gratitude for a good harvest and pray for future prosperity.</li>
+                    <li>Celebrated with folk dances like Bhangra and Gidda, especially in areas bordering Punjab.</li>
+                    <li>People visit gurudwaras (Sikh temples) and take part in community feasts (langar).</li>
+                    <li>Fairs and cultural programs are organized across the state.</li>
+                  </ul>
+                  <p><b>📍 Time: April 13 or 14</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Baisakhi_celebration.jpg/800px-Baisakhi_celebration.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Gugga_Naumi_celebration.jpg/800px-Gugga_Naumi_celebration.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Gugga Naumi</h3>
+                  <ul>
+                    <li>A festival dedicated to Gugga Pir, a folk deity believed to protect against snakebites and other dangers.</li>
+                    <li>Devotees carry colorful flags called "Gugga Jhandis" and visit Gugga Maris (shrines).</li>
+                    <li>Processions with drums and traditional music are taken out in villages.</li>
+                    <li>People offer churma (a sweet dish) and perform rituals to seek protection for their families and livestock.</li>
+                  </ul>
+                  <p><b>📍 Time: August-September</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Holi</h3>
+                  <ul>
+                    <li>The festival of colors is celebrated with great enthusiasm across Haryana.</li>
+                    <li>In Haryana, Holi is followed by "Dulandi" (celebrated a day after Holi), which is unique to the region.</li>
+                    <li>People play with colors, water guns, and natural colors made from flowers.</li>
+                    <li>Traditional Phag songs and Dhamal dance are performed during the celebrations.</li>
+                    <li>Special foods like gujiya, mathri, and thandai are prepared.</li>
+                  </ul>
+                  <p><b>📍 Time: March (Phalgun month)</b></p>
+                  <h3>6. Makar Sankranti</h3>
+                  <ul>
+                    <li>A harvest festival marking the transition of the sun into Capricorn.</li>
+                    <li>People take holy dips in sacred rivers, especially at Kurukshetra.</li>
+                    <li>Kite flying is a popular activity during this festival.</li>
+                    <li>Traditional foods include khichdi, til (sesame) ladoos, and chikki.</li>
+                  </ul>
+                  <p><b>📍 Time: January 14</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Holi_celebration_in_Haryana.jpg/800px-Holi_celebration_in_Haryana.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Kurukshetra_Brahma_Sarovar.jpg/800px-Kurukshetra_Brahma_Sarovar.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>7. Gita Jayanti</h3>
+                  <ul>
+                    <li>Celebrates the birth of the Bhagavad Gita, the sacred Hindu text believed to have been revealed at Kurukshetra.</li>
+                    <li>A major festival in Kurukshetra, attracting devotees from across the country.</li>
+                    <li>Features recitations of the Gita, religious discourses, cultural programs, and a grand procession.</li>
+                    <li>The Brahma Sarovar is illuminated, and a deep daan (lamp offering) ceremony is performed.</li>
+                  </ul>
+                  <p><b>📍 Time: November-December (Margashirsha month)</b></p>
+                  <h3>8. Kartik Cultural Festival</h3>
+                  <ul>
+                    <li>A cultural festival organized at Kurukshetra during the month of Kartik.</li>
+                    <li>Features folk performances, crafts exhibitions, and religious activities.</li>
+                    <li>Pilgrims take holy dips in the sacred tanks of Kurukshetra.</li>
+                    <li>Cultural programs showcase Haryana's rich heritage.</li>
+                  </ul>
+                  <p><b>📍 Time: October-November (Kartik month)</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>9. Maha Shivaratri</h3>
+                  <ul>
+                    <li>Dedicated to Lord Shiva, celebrated with great devotion at Shiva temples across Haryana.</li>
+                    <li>Devotees observe fasting and perform night-long vigils.</li>
+                    <li>Special prayers are offered at ancient Shiva temples like Sthaneshwar Mahadev in Kurukshetra.</li>
+                    <li>Processions with traditional music and dance are taken out in many towns.</li>
+                  </ul>
+                  <p><b>📍 Time: February-March</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Sthaneshwar_Mahadev_Temple.jpg/800px-Sthaneshwar_Mahadev_Temple.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Surajkund_Crafts_Mela.jpg/800px-Surajkund_Crafts_Mela.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>10. Surajkund International Crafts Mela</h3>
+                  <ul>
+                    <li>One of India's largest crafts fairs, held annually in Faridabad district.</li>
+                    <li>Showcases traditional handicrafts, handlooms, and cultural performances from India and around the world.</li>
+                    <li>Features a rural setting with replicas of traditional huts and village environments.</li>
+                    <li>Attracts artisans, performers, and visitors from across the globe.</li>
+                  </ul>
+                  <p><b>📍 Time: February (first two weeks)</b></p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>11. Sohna Car Rally</h3>
+                  <ul>
+                    <li>A modern festival celebrating Haryana's growing automotive culture.</li>
+                    <li>Features vintage and modern car rallies, exhibitions, and competitions.</li>
+                    <li>Held in the picturesque Sohna region, known for its hot springs and hills.</li>
+                    <li>Attracts car enthusiasts and tourists from neighboring states.</li>
+                  </ul>
+                  <p><b>📍 Time: October-November</b></p>
+
+                  <h3>12. Haryana Day</h3>
+                  <ul>
+                    <li>Celebrates the formation of Haryana as a separate state on November 1, 1966.</li>
+                    <li>Government functions, cultural programs, and sports events are organized across the state.</li>
+                    <li>Awards are given to individuals who have made significant contributions to the state.</li>
+                    <li>Schools and colleges organize special activities to mark the occasion.</li>
+                  </ul>
+                  <p><b>📍 Time: November 1</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Haryana_Day_celebration.jpg/800px-Haryana_Day_celebration.jpg" alt="" style="height:200px;width: 230px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Diwali_celebration_in_Haryana.jpg/800px-Diwali_celebration_in_Haryana.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>13. Diwali</h3>
+                  <ul>
+                    <li>The festival of lights is celebrated with great enthusiasm across Haryana.</li>
+                    <li>Homes and public places are decorated with diyas (oil lamps) and colorful rangoli.</li>
+                    <li>People worship Goddess Lakshmi and Lord Ganesha for prosperity and good fortune.</li>
+                    <li>Fireworks displays and community celebrations are common.</li>
+                    <li>Traditional sweets and savories are prepared and exchanged as gifts.</li>
+                  </ul>
+                  <p><b>📍 Time: October-November</b></p>
+                  <h3>14. Gangaur</h3>
+                  <ul>
+                    <li>A festival celebrated by women, especially in southern Haryana bordering Rajasthan.</li>
+                    <li>Women pray to Goddess Gauri for marital bliss and the well-being of their husbands.</li>
+                    <li>Colorful processions with the image of Gauri are taken out.</li>
+                    <li>Women dress in traditional attire and sing folk songs dedicated to the goddess.</li>
+                  </ul>
+                  <p><b>📍 Time: March-April</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Haryana's festivals are a vibrant reflection of its agricultural heritage, religious diversity, and cultural traditions. These celebrations not only preserve the state's rich cultural legacy but also strengthen community bonds and provide a platform for artistic expression. Whether it's the agricultural festivities of Lohri and Baisakhi or the religious observances of Gita Jayanti and Maha Shivaratri, Haryana's festival calendar offers a colorful tapestry of celebrations throughout the year! 🎉</p><br><br>
+        </div>
+        <div id="wbfood" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Foods of Haryana</h1>
+          <p>Haryanvi cuisine is characterized by its simplicity, nutritional value, and rustic flavors that reflect the state's agricultural heritage. The food is hearty and wholesome, designed to provide energy for the physically demanding rural lifestyle. Here's a look at some of the most iconic foods of Haryana:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Staple Food of Haryana</h3>
+                  <ul>
+                    <li><b>Bajra Roti:</b> Flatbread made from pearl millet flour, a staple especially during winter months.</li>
+                    <li><b>Besan Masala Roti:</b> Flatbread made from gram flour mixed with spices.</li>
+                    <li><b>Wheat Roti:</b> Simple unleavened bread made from wheat flour, a daily staple.</li>
+                    <li><b>Jowar Roti:</b> Flatbread made from sorghum flour, common in rural areas.</li>
+                  </ul>
+                  <h3>2. Traditional Haryanvi Meals</h3>
+                  <ul>
+                    <li><b>Components:</b> A typical Haryanvi meal includes roti, sabzi (vegetable dish), dahi (yogurt), lassi (buttermilk drink), and sometimes a sweet dish.</li>
+                    <li><b>Serving Style:</b> Traditionally served on pattal (leaf plates) in rural areas, with an emphasis on fresh, home-cooked food.</li>
+                    <li><b>Ghee:</b> Liberal use of ghee (clarified butter) is a hallmark of Haryanvi cuisine, adding richness and flavor.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Bajra_roti_with_ghee.jpg/800px-Bajra_roti_with_ghee.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Kadhi_Pakora.jpg/800px-Kadhi_Pakora.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Famous Haryanvi Dishes</h3>
+                  <h4>Vegetarian Specialties</h4>
+                  <ul>
+                    <li><b>Kadhi Pakora:</b> Gram flour dumplings in a yogurt-based curry, a popular dish especially during festivals.</li>
+                    <li><b>Kachri Ki Sabzi:</b> A traditional dish made from wild melons, unique to the region.</li>
+                    <li><b>Methi Gajar:</b> A nutritious vegetable dish made with fenugreek leaves and carrots.</li>
+                    <li><b>Hara Dhania Cholia:</b> Fresh green chickpeas cooked with coriander and spices.</li>
+                    <li><b>Bajra Khichdi:</b> A nutritious one-pot meal made with pearl millet and lentils.</li>
+                    <li><b>Bathua Raita:</b> A yogurt dish made with bathua (pigweed) leaves, rich in iron and other nutrients.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Haryanvi_non_veg_thali.jpg/800px-Haryanvi_non_veg_thali.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h4>Non-Vegetarian Specialties</h4>
+                  <ul>
+                    <li><b>Kukad Khad:</b> A rustic chicken curry cooked on slow fire, often prepared during special occasions.</li>
+                    <li><b>Masala Meat:</b> Spicy mutton curry cooked with whole spices and served with roti.</li>
+                    <li><b>Khad Murgh:</b> Chicken marinated with spices and cooked in an earthen pot buried in the ground.</li>
+                    <li><b>Seekh Kebab:</b> Minced meat mixed with spices and grilled on skewers.</li>
+                    <li><b>Junglee Maas:</b> A spicy game meat preparation, traditionally made with wild boar or deer.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>4. Haryanvi Sweets & Desserts</h3>
+                  <ul>
+                    <li><b>Churma:</b> A sweet dish made by crushing wheat rotis and mixing them with ghee and sugar.</li>
+                    <li><b>Meethe Chawal:</b> Sweet rice prepared with saffron, milk, and dry fruits.</li>
+                    <li><b>Kheer:</b> Rice pudding cooked with milk, sugar, and flavored with cardamom and saffron.</li>
+                    <li><b>Malpua:</b> Sweet pancakes dipped in sugar syrup, often served during festivals.</li>
+                    <li><b>Ghevar:</b> A disc-shaped sweet cake made with flour and soaked in sugar syrup, popular during Teej festival.</li>
+                    <li><b>Alsi Ki Pinni:</b> Nutritious sweet balls made with flaxseeds, jaggery, and ghee.</li>
+                  </ul>
+
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Churma.jpg/800px-Churma.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Lassi_in_Haryana.jpg/800px-Lassi_in_Haryana.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>5. Beverages of Haryana</h3>
+                  <ul>
+                    <li><b>Lassi:</b> A yogurt-based drink, often flavored with sugar or salt, extremely popular especially during summer.</li>
+                    <li><b>Chaach/Mattha:</b> Buttermilk, a refreshing drink served with meals, sometimes flavored with cumin and mint.</li>
+                    <li><b>Kanji:</b> A fermented drink made from black carrots, mustard seeds, and water, known for its digestive properties.</li>
+                    <li><b>Sattu Sharbat:</b> A cooling drink made from roasted gram flour, popular among farmers during fieldwork.</li>
+                    <li><b>Thandai:</b> A cooling milk-based drink flavored with nuts, seeds, and spices, popular during festivals like Holi.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>6. Seasonal Specialties</h3>
+                  <ul>
+                    <li><b>Winter Specialties:</b>
+                      <ul>
+                        <li>Sarson Ka Saag: Mustard greens cooked with spices, traditionally served with makki di roti (cornmeal flatbread).</li>
+                        <li>Gajar Ka Halwa: Sweet dish made from carrots, milk, and sugar, garnished with nuts.</li>
+                        <li>Bajra Khichdi: Pearl millet cooked with lentils, especially popular during cold months.</li>
+                      </ul>
+                    </li>
+                    <li><b>Summer Specialties:</b>
+                      <ul>
+                        <li>Raabri: A cooling porridge made from bajra flour and buttermilk.</li>
+                        <li>Sattu Paratha: Flatbread stuffed with roasted gram flour mixture, providing energy in hot weather.</li>
+                        <li>Kair Sangri: A dish made from desert beans and berries, preserved for use during summer.</li>
+                      </ul>
+                    </li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Sarson_Ka_Saag.jpg/800px-Sarson_Ka_Saag.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Festival Foods</h3>
+                  <ul>
+                    <li><b>Lohri:</b> Revri (sesame brittle), gajak (sesame and jaggery sweet), peanuts, and popcorn are traditional foods.</li>
+                    <li><b>Teej:</b> Ghevar (disc-shaped sweet cake) and other sweet dishes are prepared.</li>
+                    <li><b>Holi:</b> Gujiya (sweet dumplings), mathri (savory crackers), and thandai (spiced milk drink) are popular.</li>
+                    <li><b>Baisakhi:</b> Kadhi chawal, meethe chawal, and various sweet dishes mark the harvest festival.</li>
+                    <li><b>Gugga Naumi:</b> Churma (crushed wheat sweet) is offered to Gugga Pir and distributed as prasad.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Gujiya.jpg/800px-Gujiya.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Haryanvi cuisine is a testament to the state's agricultural abundance and rural lifestyle. The food is simple yet nutritious, designed to sustain the hardworking farming community. Despite its simplicity, Haryanvi cuisine offers a rich variety of flavors and textures, from the spicy kadhi pakora to the sweet churma, reflecting the state's cultural heritage and agricultural bounty. The emphasis on seasonal ingredients and traditional cooking methods ensures that the food is not only delicious but also wholesome and connected to the rhythms of rural life. 🍛🥘🍚</p><br><br>
+        </div>
+        <div id="wbhistory" class="tab-pane fade in active" style="background-color: white;">
+          <h1>History of Haryana</h1>
+          <p>Haryana has a rich and diverse history that spans ancient civilizations, medieval kingdoms, colonial rule, and the modern era. The region has played a significant role in India's political, cultural, and economic history.</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Ancient Haryana (Before 6th Century CE)</h3>
+                  <ul>
+                    <li><b>Indus Valley Civilization (3300-1300 BCE):</b> Archaeological evidence from sites like Rakhigarhi, Banawali, and Mitathal indicates that Haryana was part of the Indus Valley Civilization, one of the world's oldest urban cultures.</li>
+                    <li><b>Vedic Period (1500-500 BCE):</b> The region was part of the Kuru Kingdom mentioned in the Vedas and Mahabharata. Kurukshetra, where the epic battle of Mahabharata is believed to have taken place, is located in present-day Haryana.</li>
+                    <li><b>Maurya and Gupta Empires:</b> The region was part of these major ancient Indian empires, with evidence of Buddhist and Hindu influences.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Rakhigarhi_archaeological_site.jpg/800px-Rakhigarhi_archaeological_site.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Kurukshetra_Brahma_Sarovar.jpg/800px-Kurukshetra_Brahma_Sarovar.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Medieval Haryana (6th - 18th Century)</h3>
+                  <h4>Early Medieval Period (6th-12th Century):</h4>
+                  <ul>
+                    <li>The region was ruled by various dynasties including the Pushyabhutis of Thanesar, with King Harsha being a notable ruler who united much of North India in the 7th century.</li>
+                    <li>Tomara Rajputs established their kingdom with Dhillika (Delhi) as their capital, controlling parts of present-day Haryana.</li>
+                  </ul>
+                  <h4>Delhi Sultanate Period (1206-1526):</h4>
+                  <ul>
+                    <li>Haryana became part of the Delhi Sultanate, with significant influence from Turkic, Afghan, and Persian cultures.</li>
+                    <li>The region witnessed several important battles, including the three Battles of Panipat that shaped Indian history.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Panipat_battle_memorial.jpg/800px-Panipat_battle_memorial.jpg" alt="" style="height:220px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h4>Mughal Period (1526-1707):</h4>
+                  <ul>
+                    <li>The First Battle of Panipat in 1526 established Mughal rule in India when Babur defeated Ibrahim Lodi.</li>
+                    <li>The region prospered under Mughal rule, with development of infrastructure, agriculture, and culture.</li>
+                    <li>Several important monuments and gardens were built during this period, including the Pinjore Gardens.</li>
+                  </ul>
+                  <h4>Post-Mughal Period (1707-1803):</h4>
+                  <ul>
+                    <li>After the decline of the Mughal Empire, the region was contested between various powers including the Marathas, Sikhs, and local chieftains.</li>
+                    <li>The Third Battle of Panipat in 1761 between the Marathas and Ahmad Shah Abdali's forces was a pivotal moment in Indian history.</li>
+                    <li>Jat rulers established significant control in parts of Haryana, with Raja Suraj Mal being a prominent leader.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Colonial Period (1803-1947)</h3>
+                  <ul>
+                    <li><b>British East India Company (1803-1857):</b> The region came under British control after the Second Anglo-Maratha War, initially as part of the North-Western Provinces.</li>
+                    <li><b>Revolt of 1857:</b> Several areas in Haryana, including Rohtak, Rewari, and Jhajjar, were active centers of the rebellion against British rule.</li>
+                    <li><b>British Raj (1858-1947):</b> After the revolt, the region was reorganized as part of the Punjab Province. The British developed canal systems that transformed agriculture in the region.</li>
+                    <li><b>Freedom Movement:</b> Haryana actively participated in India's freedom struggle, with leaders like Sir Chhotu Ram advocating for farmers' rights and social reforms.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/British_era_building_in_Haryana.jpg/800px-British_era_building_in_Haryana.jpg" alt="" style="height:200px;width: 250px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Haryana_Day_celebration.jpg/800px-Haryana_Day_celebration.jpg" alt="" style="height:230px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h2>4. Post-Independence Period (1947-Present)</h3>
+                    <h3>Partition and Its Aftermath</h3>
+                    <ul>
+                      <li>The Partition of India in 1947 significantly affected the region, with large-scale population exchanges and refugee settlements.</li>
+                      <li>The area remained part of Punjab state after independence.</li>
+                    </ul>
+                    <h3>Formation of Haryana State</h3>
+                    <ul>
+                      <li>On November 1, 1966, Haryana was carved out of Punjab on linguistic grounds, becoming India's 17th state.</li>
+                      <li>Chandigarh became a union territory and the shared capital of both Punjab and Haryana.</li>
+                      <li>Bhagwat Dayal Sharma became the first Chief Minister of the newly formed state.</li>
+                    </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Kingdom_of_Dreams_Gurgaon.jpg/800px-Kingdom_of_Dreams_Gurgaon.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>Modern Developments</h3>
+                  <ul>
+                    <li><b>Green Revolution:</b> Haryana was at the forefront of India's Green Revolution in the 1960s and 1970s, transforming from a food-deficit state to a major agricultural producer.</li>
+                    <li><b>Industrialization:</b> Since the 1980s, the state has seen significant industrial growth, particularly in the automotive, IT, and manufacturing sectors.</li>
+                    <li><b>Economic Hub:</b> Gurugram (formerly Gurgaon) has emerged as a major corporate and IT hub, housing offices of numerous multinational companies.</li>
+                    <li><b>Sports Excellence:</b> Haryana has produced numerous Olympic medalists and international champions, particularly in wrestling, boxing, and shooting.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Cultural and Social History</h3>
+                  <h4>Agricultural Heritage</h4>
+                  <ul>
+                    <li>Haryana has a rich agricultural tradition dating back thousands of years, with farming being central to its economy and culture.</li>
+                    <li>The development of canal systems, first under the Mughals and later expanded by the British, transformed agriculture in the region.</li>
+                    <li>The Green Revolution further modernized farming practices, making Haryana one of India's agricultural powerhouses.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Haryana_agriculture.jpg/800px-Haryana_agriculture.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h4>Martial Tradition</h4>
+                  <ul>
+                    <li>The region has a strong martial tradition, with significant contributions to Indian armed forces throughout history.</li>
+                    <li>Haryanvi soldiers played important roles in both World Wars as part of the British Indian Army.</li>
+                    <li>Post-independence, Haryana continues to contribute significantly to India's armed forces.</li>
+                  </ul>
+                  <h4>Social Reforms</h4>
+                  <ul>
+                    <li>Leaders like Sir Chhotu Ram advocated for farmers' rights and social reforms during the colonial period.</li>
+                    <li>The state has witnessed significant social movements addressing issues like caste discrimination, gender equality, and educational reforms.</li>
+                    <li>Recent decades have seen efforts to address gender imbalance and promote women's education and empowerment.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Haryanvi_wrestling.jpg/800px-Haryanvi_wrestling.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>6. Archaeological and Historical Sites</h3>
+                  <ul>
+                    <li><b>Rakhigarhi:</b> One of the largest Indus Valley Civilization sites, providing insights into ancient urban planning and culture.</li>
+                    <li><b>Kurukshetra:</b> Associated with the Mahabharata, this ancient city houses numerous temples and tanks of historical and religious significance.</li>
+                    <li><b>Panipat:</b> Site of three pivotal battles that shaped Indian history (1526, 1556, and 1761).</li>
+                    <li><b>Pinjore Gardens:</b> A 17th-century Mughal garden showcasing the architectural and horticultural traditions of the era.</li>
+                    <li><b>Feroz Shah's Palace (Hisar):</b> A 14th-century monument built during the Tughlaq dynasty.</li>
+                    <li><b>Raja Nahar Singh Palace (Ballabgarh):</b> A 18th-century palace reflecting the architectural style of the period.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Pinjore_Gardens.jpg/800px-Pinjore_Gardens.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Haryana's history is a fascinating tapestry of ancient civilizations, medieval kingdoms, colonial influences, and modern developments. From being the cradle of the Indus Valley Civilization to the battlefield of the Mahabharata, from witnessing the rise and fall of empires to emerging as a modern industrial and agricultural powerhouse, Haryana's historical journey reflects the broader narrative of Indian history while maintaining its distinct regional identity. 🚩📜</p>
+          <br><br>
+        </div>
+        <div id="wbartacraft" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Art & Craft of Haryana 🎨🖌️</h1>
+          <p>Haryana has a rich tradition of arts and crafts that reflect the state's cultural heritage, rural lifestyle, and artistic sensibilities. These crafts have been passed down through generations, preserving traditional techniques while adapting to contemporary tastes. Here's an overview of the diverse arts and crafts of Haryana:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Textile Arts 🧵</h3>
+                  <h4>🔸 Phulkari Embroidery</h4>
+                  <ul>
+                    <li><b>Origin:</b> Traditional embroidery practiced by women, especially in areas bordering Punjab.</li>
+                    <li><b>Technique:</b> Colorful floral patterns created using darn stitch on handspun cotton fabric (khaddar).</li>
+                    <li><b>Products:</b> Dupattas, shawls, bed covers, and wall hangings.</li>
+                    <li><b>Significance:</b> Traditionally created by mothers for their daughters' wedding trousseaus.</li>
+                  </ul>
+                  <h4>🔸 Shisha (Mirror Work) Embroidery</h4>
+                  <ul>
+                    <li><b>Technique:</b> Small mirrors are incorporated into embroidery using colorful threads.</li>
+                    <li><b>Products:</b> Clothing, cushion covers, wall hangings, and decorative items.</li>
+                    <li><b>Regions:</b> Particularly popular in southern Haryana.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Phulkari_embroidery.jpg/800px-Phulkari_embroidery.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Durrie_weaving_in_Haryana.jpg/800px-Durrie_weaving_in_Haryana.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Weaving Traditions 🧶</h3>
+                  <h4>🔸 Durrie (Cotton Rugs)</h4>
+                  <ul>
+                    <li><b>Technique:</b> Flat-woven cotton rugs with geometric patterns and bright colors.</li>
+                    <li><b>Centers:</b> Panipat is famous as the "City of Weavers" and a major center for durrie production.</li>
+                    <li><b>Features:</b> Durable, washable, and versatile, used as floor coverings, wall hangings, and bedding.</li>
+                  </ul>
+                  <h4>🔸 Khes</h4>
+                  <ul>
+                    <li><b>Description:</b> Traditional cotton bedspread with checkered patterns.</li>
+                    <li><b>Technique:</b> Woven on pit looms using cotton yarn.</li>
+                    <li><b>Significance:</b> Often included in a bride's trousseau.</li>
+                  </ul>
+                  <h4>🔸 Panja Durrie</h4>
+                  <ul>
+                    <li><b>Technique:</b> Hand-woven using a special tool called "panja" to create tight weaves.</li>
+                    <li><b>Features:</b> Known for durability and intricate designs.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Pottery and Ceramics 🏺</h3>
+                  <ul>
+                    <li><b>Black Pottery of Jhajjar:</b> Distinctive black pottery made using a special firing technique.</li>
+                    <li><b>Terracotta Crafts:</b> Clay figurines, toys, and decorative items made by rural artisans.</li>
+                    <li><b>Technique:</b> Traditional potter's wheel (chak) is used, with designs often painted or etched by hand.</li>
+                    <li><b>Products:</b> Water pots (matkas), storage jars, decorative items, and religious artifacts.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Black_pottery_of_Jhajjar.jpg/800px-Black_pottery_of_Jhajjar.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Wooden_furniture_from_Haryana.jpg/800px-Wooden_furniture_from_Haryana.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Woodwork and Furniture 🪵</h3>
+                  <ul>
+                    <li><b>Carved Furniture:</b> Intricate wood carving on furniture, especially from Karnal and Faridabad.</li>
+                    <li><b>Pida (Low Stool):</b> Traditional wooden stools with woven seats, often used in rural households.</li>
+                    <li><b>Charpai (Traditional Cot):</b> Wooden frame with woven rope or jute webbing.</li>
+                    <li><b>Decorative Items:</b> Carved wooden boxes, photo frames, and wall panels.</li>
+                    <li><b>Woods Used:</b> Primarily sheesham (Indian rosewood), mango, and neem.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Metal Crafts 🔨</h3>
+                  <ul>
+                    <li><b>Brass Work:</b> Utensils, decorative items, and religious artifacts made from brass.</li>
+                    <li><b>Iron Craft:</b> Agricultural tools, decorative items, and household utensils.</li>
+                    <li><b>Bell Metal:</b> Traditional utensils and decorative items made from an alloy of copper and tin.</li>
+                    <li><b>Centers:</b> Rewari is known for its brass and copper work.</li>
+                  </ul>
+                  <h3>6. Leather Craft 🧳</h3>
+                  <ul>
+                    <li><b>Products:</b> Traditional footwear (juti), bags, belts, and horse accessories.</li>
+                    <li><b>Technique:</b> Hand-stitched and often embellished with embroidery or beadwork.</li>
+                    <li><b>Centers:</b> Gurgaon and Faridabad are known for leather crafts.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Brass_work_from_Rewari.jpg/800px-Brass_work_from_Rewari.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Handmade_paper_craft_Haryana.jpg/800px-Handmade_paper_craft_Haryana.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>7. Paper Crafts 📜</h3>
+                  <ul>
+                    <li><b>Handmade Paper:</b> Traditional paper making using natural fibers and eco-friendly techniques.</li>
+                    <li><b>Products:</b> Stationery, greeting cards, photo albums, and decorative items.</li>
+                    <li><b>Centers:</b> Kurukshetra and Rohtak have workshops specializing in handmade paper crafts.</li>
+                    <li><b>Features:</b> Often incorporates dried flowers, leaves, and natural dyes.</li>
+                  </ul>
+                  <h3>8. Bamboo and Cane Craft 🎋</h3>
+                  <ul>
+                    <li><b>Products:</b> Baskets, furniture, storage containers, and decorative items.</li>
+                    <li><b>Technique:</b> Weaving and binding bamboo and cane strips into functional and decorative items.</li>
+                    <li><b>Utility:</b> Used for agricultural storage, household items, and increasingly for contemporary home decor.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>9. Folk Paintings 🖼️</h3>
+                  <ul>
+                    <li><b>Wall Paintings:</b> Traditional murals depicting religious themes, folklore, and daily life scenes.</li>
+                    <li><b>Mandana:</b> Floor and wall paintings made during festivals and special occasions.</li>
+                    <li><b>Materials:</b> Natural pigments, clay, and cow dung are traditionally used.</li>
+                    <li><b>Themes:</b> Often depict rural life, mythology, and auspicious symbols.</li>
+                  </ul>
+                  <h3>10. Musical Instruments 🎵</h3>
+                  <ul>
+                    <li><b>Handcrafted Instruments:</b> Traditional musical instruments like dhol, nagara, sarangi, and chimta.</li>
+                    <li><b>Materials:</b> Wood, leather, metal, and natural fibers are used.</li>
+                    <li><b>Craftsmanship:</b> Requires specialized skills passed down through generations.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Haryanvi_folk_singers.jpg/800px-Haryanvi_folk_singers.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>📌 Summary: Haryana's Art & Craft Forms</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Art Form</th>
+                <th>Region</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Phulkari Embroidery</td>
+                <td>Northern Haryana</td>
+                <td>Colorful floral patterns, darn stitch technique</td>
+              </tr>
+              <tr>
+                <td>Durrie Weaving</td>
+                <td>Panipat, Rohtak</td>
+                <td>Cotton rugs with geometric patterns</td>
+              </tr>
+              <tr>
+                <td>Black Pottery</td>
+                <td>Jhajjar</td>
+                <td>Distinctive black finish, unique firing technique</td>
+              </tr>
+              <tr>
+                <td>Wooden Furniture</td>
+                <td>Karnal, Faridabad</td>
+                <td>Intricate carving, traditional designs</td>
+              </tr>
+              <tr>
+                <td>Brass Work</td>
+                <td>Rewari</td>
+                <td>Utensils, decorative items, religious artifacts</td>
+              </tr>
+              <tr>
+                <td>Leather Craft</td>
+                <td>Gurgaon, Faridabad</td>
+                <td>Traditional footwear (juti), embellished accessories</td>
+              </tr>
+              <tr>
+                <td>Handmade Paper</td>
+                <td>Kurukshetra, Rohtak</td>
+                <td>Eco-friendly techniques, natural materials</td>
+              </tr>
+              <tr>
+                <td>Bamboo and Cane Craft</td>
+                <td>Throughout Haryana</td>
+                <td>Baskets, furniture, storage containers</td>
+              </tr>
+              <tr>
+                <td>Folk Paintings</td>
+                <td>Rural Haryana</td>
+                <td>Wall murals, floor designs, natural pigments</td>
+              </tr>
+              <tr>
+                <td>Musical Instruments</td>
+                <td>Throughout Haryana</td>
+                <td>Dhol, nagara, sarangi, traditional craftsmanship</td>
+              </tr>
+            </table>
+          </div>
+          <br><br>
+          <p>Haryana's arts and crafts represent a rich cultural heritage that has evolved over centuries, reflecting the state's history, lifestyle, and artistic sensibilities. These traditional crafts not only serve as a source of livelihood for many artisans but also play a crucial role in preserving the cultural identity of the region. Despite modernization, efforts are being made to revive and promote these traditional crafts through government initiatives, craft fairs like the Surajkund Mela, and increasing interest in sustainable and handmade products. 🎭✨</p>
+          <br><br>
+        </div>
+        <div id="wbseason" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Seasons to visit Haryana 🌧️☀️ </h1>
+          <p>Haryana experiences a continental climate with hot summers, cold winters, and a moderate monsoon season. The best time to visit depends on your interests, the regions you plan to explore, and your tolerance for different weather conditions.</p>
+
+          <br><br>
+
+          <h2> Season-wise Breakdown for Visiting Haryana</h2>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>❄️ Winter (October - March)</h3>
+                  <ul>
+                    <li>The most pleasant season to visit Haryana with cool, dry weather.</li>
+                    <li>October and November offer mild temperatures (15-30°C/59-86°F) with clear skies.</li>
+                    <li>December to February can be quite cold (5-20°C/41-68°F), with occasional fog and mist, especially in the morning.</li>
+                    <li>Perfect time for sightseeing, outdoor activities, and exploring historical sites.</li>
+                    <li>Major festivals like Lohri (January) and the Surajkund Crafts Mela (February) take place during this season.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Surajkund_Crafts_Mela.jpg/800px-Surajkund_Crafts_Mela.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Holi_celebration_in_Haryana.jpg/800px-Holi_celebration_in_Haryana.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🌸 Spring (March - April)</h3>
+                  <ul>
+                    <li>A transitional season with gradually rising temperatures (15-35°C/59-95°F).</li>
+                    <li>Pleasant mornings and evenings, though afternoons can get warm.</li>
+                    <li>The countryside is often colorful with flowering trees and crops.</li>
+                    <li>Holi (March) is celebrated with great enthusiasm across the state.</li>
+                    <li>Good time for visiting wildlife sanctuaries and rural tourism.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>☀️ Summer (May - June)</h3>
+                  <ul>
+                    <li>Extremely hot and dry with temperatures often exceeding 40°C (104°F).</li>
+                    <li>Heat waves are common, with temperatures sometimes reaching 45-48°C (113-118°F).</li>
+                    <li>Not recommended for general tourism, especially outdoor activities.</li>
+                    <li>If visiting during this time, early morning or evening activities are advisable.</li>
+                    <li>Indoor attractions like museums, shopping malls, and water parks can be considered.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Morni_Hills_Haryana.jpg/800px-Morni_Hills_Haryana.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Teej_celebration_in_Haryana.jpg/800px-Teej_celebration_in_Haryana.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🌧️ Monsoon (July - September)</h3>
+                  <ul>
+                    <li>Moderate rainfall brings relief from the summer heat, with temperatures ranging from 25-35°C (77-95°F).</li>
+                    <li>The landscape turns lush green, especially in rural areas and Morni Hills.</li>
+                    <li>Humidity levels can be high, making it feel warmer than the actual temperature.</li>
+                    <li>Occasional heavy downpours might cause waterlogging in urban areas.</li>
+                    <li>Teej festival (July-August) is celebrated during this season.</li>
+                    <li>Good time for photography and experiencing rural Haryana.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <h2>📌 Summary: Best Time to Visit Different Places in Haryana</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Region</th>
+                <th>Best Season</th>
+                <th>Recommended Months</th>
+                <th>Why Visit?</th>
+              </tr>
+              <tr>
+                <td>Kurukshetra</td>
+                <td>Winter, Post-Monsoon</td>
+                <td>October - March</td>
+                <td>Religious sites, Gita Jayanti festival (Nov-Dec), pleasant weather for sightseeing</td>
+              </tr>
+              <tr>
+                <td>Gurugram & Faridabad</td>
+                <td>Winter, Spring</td>
+                <td>October - April</td>
+                <td>Urban attractions, shopping, entertainment, corporate tourism</td>
+              </tr>
+              <tr>
+                <td>Morni Hills</td>
+                <td>Monsoon, Post-Monsoon</td>
+                <td>July - November</td>
+                <td>Lush greenery, waterfalls, trekking, bird watching</td>
+              </tr>
+              <tr>
+                <td>Pinjore Gardens</td>
+                <td>Winter</td>
+                <td>October - March</td>
+                <td>Heritage site, pleasant weather, garden festival (December)</td>
+              </tr>
+              <tr>
+                <td>Sultanpur Bird Sanctuary</td>
+                <td>Winter</td>
+                <td>November - March</td>
+                <td>Migratory birds, comfortable weather for bird watching</td>
+              </tr>
+              <tr>
+                <td>Surajkund</td>
+                <td>Winter</td>
+                <td>February</td>
+                <td>International Crafts Mela (first two weeks of February)</td>
+              </tr>
+              <tr>
+                <td>Panipat & Karnal</td>
+                <td>Winter, Spring</td>
+                <td>October - March</td>
+                <td>Historical sites, museums, pleasant weather</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="container">
+            <div class="row">
+              <h1 style=" text-align: center;">📌 Summary: When to Visit Haryana</h1><br>
+              <ul>
+                <li><b>For general tourism:</b> October - March (winter season with pleasant weather)</li>
+                <li><b>For festivals:</b> January (Lohri), February (Surajkund Mela), March (Holi), July-August (Teej)</li>
+                <li><b>For wildlife & nature:</b> October - March (bird watching), July - September (lush landscapes)</li>
+                <li><b>For budget travel:</b> July - September (off-season with fewer tourists)</li>
+                <li><b>For cultural experiences:</b> Align your visit with major festivals for authentic cultural immersion</li>
+              </ul>
+
+            </div>
+          </div>
+          <br><br>
+        </div>
+        <div id="wbtourist" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Tourist Spots of Haryana 🏛️🏞️</h1>
+          <p>Haryana offers a diverse range of tourist attractions, from ancient religious sites and historical monuments to modern entertainment venues and natural landscapes. Here's a categorized list of the best tourist places in Haryana:</p>
+
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Religious & Spiritual Sites 🕍</h3>
+                  <ul>
+                    <li><b>Kurukshetra -</b> The legendary battlefield of the Mahabharata, featuring:
+                      <ul>
+                        <li>Brahma Sarovar: A sacred water tank where pilgrims take holy dips.</li>
+                        <li>Jyotisar: The place where Lord Krishna delivered the Bhagavad Gita.</li>
+                        <li>Sannihit Sarovar: Another sacred tank believed to house all the tirthas (holy places).</li>
+                        <li>Krishna Museum: Showcasing artifacts related to Lord Krishna and the Mahabharata.</li>
+                      </ul>
+                    </li>
+                    <li><b>Sthaneshwar Mahadev Temple (Kurukshetra) -</b> Ancient Shiva temple dating back to the Mahabharata era.</li>
+                    <li><b>Gurudwara Nada Sahib (Panchkula) -</b> Important Sikh shrine associated with Guru Gobind Singh.</li>
+                    <li><b>Mansa Devi Temple (Panchkula) -</b> Popular Shakti Peeth atop the Shivalik Hills.</li>
+                    <li><b>Pehowa -</b> Ancient town with temples where Hindus perform ancestor worship rituals.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Kurukshetra_Brahma_Sarovar.jpg/800px-Kurukshetra_Brahma_Sarovar.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Pinjore_Gardens.jpg/800px-Pinjore_Gardens.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Historical & Heritage Sites 🏛️</h3>
+                  <ul>
+                    <li><b>Pinjore Gardens (Yadavindra Gardens) -</b> 17th-century Mughal garden with terraced lawns, fountains, and a mini zoo.</li>
+                    <li><b>Panipat -</b> Historic city known for three decisive battles:
+                      <ul>
+                        <li>Panipat Museum: Displays artifacts from the three battles.</li>
+                        <li>Ibrahim Lodhi's Tomb: Memorial of the ruler defeated by Babur.</li>
+                        <li>Kabuli Bagh Mosque: Built by Babur to commemorate his victory.</li>
+                      </ul>
+                    </li>
+                    <li><b>Raja Nahar Singh Palace (Ballabgarh) -</b> 18th-century palace showcasing traditional architecture.</li>
+                    <li><b>Feroz Shah Palace (Hisar) -</b> 14th-century monument built during the Tughlaq dynasty.</li>
+                    <li><b>Sheikh Chilli's Tomb (Thanesar) -</b> Beautiful example of Mughal architecture.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Archaeological Sites 🏺</h3>
+                  <ul>
+                    <li><b>Rakhigarhi -</b> One of the largest Indus Valley Civilization sites, featuring:
+                      <ul>
+                        <li>Archaeological excavations revealing ancient urban planning.</li>
+                        <li>Museum displaying artifacts from the Harappan era.</li>
+                      </ul>
+                    </li>
+                    <li><b>Bhima Devi Temple Complex (Pinjore) -</b> Ancient Hindu temple ruins dating back to the 8th-11th centuries.</li>
+                    <li><b>Banawali -</b> Pre-Harappan and Harappan site with evidence of ancient settlement.</li>
+                    <li><b>Agroha Mound -</b> Ancient site associated with the Agrawal community, featuring ruins and a museum.</li>
+                    <li><b>Kunal -</b> Pre-Harappan archaeological site in Fatehabad district.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Rakhigarhi_archaeological_site.jpg/800px-Rakhigarhi_archaeological_site.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Sultanpur_National_Park.jpg/800px-Sultanpur_National_Park.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Wildlife & Nature Destinations 🌳🦅</h3>
+                  <ul>
+                    <li><b>Sultanpur National Park -</b> Bird sanctuary near Gurugram, home to:
+                      <ul>
+                        <li>Over 250 species of birds, including migratory birds from Europe and Siberia.</li>
+                        <li>Nature trails, watch towers, and interpretation center.</li>
+                      </ul>
+                    </li>
+                    <li><b>Morni Hills -</b> Haryana's only hill station, featuring:
+                      <ul>
+                        <li>Twin lakes, lush forests, and panoramic views.</li>
+                        <li>Trekking trails and adventure activities.</li>
+                      </ul>
+                    </li>
+                    <li><b>Kalesar National Park -</b> Dense forest with diverse flora and fauna, including leopards and elephants.</li>
+                    <li><b>Peacock and Deer Breeding Center (Pipli) -</b> Conservation center for peacocks and deer.</li>
+                    <li><b>Karna Lake (Karnal) -</b> Picturesque lake associated with the Mahabharata character Karna.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Modern Attractions & Entertainment 🎭</h3>
+                  <ul>
+                    <li><b>Kingdom of Dreams (Gurugram) -</b> India's first live entertainment and leisure destination, featuring:
+                      <ul>
+                        <li>Nautanki Mahal: Theater hosting Bollywood-style musicals.</li>
+                        <li>Culture Gully: Indoor street showcasing India's culture, crafts, and cuisine.</li>
+                      </ul>
+                    </li>
+                    <li><b>Cyber Hub (Gurugram) -</b> Modern dining and entertainment destination with restaurants, pubs, and shops.</li>
+                    <li><b>Damdama Lake (Gurugram) -</b> Adventure sports destination offering boating, camping, and other activities.</li>
+                    <li><b>Fun 'n' Food Village (Gurugram) -</b> Water park and amusement park with various rides and attractions.</li>
+                    <li><b>iSKATE (Gurugram) -</b> India's first all-year ice skating rink.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Kingdom_of_Dreams_Gurgaon.jpg/800px-Kingdom_of_Dreams_Gurgaon.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Surajkund_Crafts_Mela.jpg/800px-Surajkund_Crafts_Mela.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>6. Cultural & Craft Centers 🧶</h3>
+                  <ul>
+                    <li><b>Surajkund -</b> Famous for:
+                      <ul>
+                        <li>Surajkund International Crafts Mela: Annual crafts fair held in February.</li>
+                        <li>Ancient reservoir believed to be built by King Suraj Pal of the Tomar dynasty.</li>
+                      </ul>
+                    </li>
+                    <li><b>Shri Krishna Museum (Kurukshetra) -</b> Showcases artifacts related to Lord Krishna and the Mahabharata.</li>
+                    <li><b>Dharohar Haryana Heritage Museum (Kurukshetra) -</b> Displays the cultural heritage of Haryana.</li>
+                    <li><b>Panipat Handloom Export House -</b> Showcases the famous handloom products of Panipat.</li>
+                    <li><b>Jahaj Kothi Museum (Hisar) -</b> Houses artifacts from the Harappan civilization and medieval period.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Sports & Fitness Destinations 🏊‍♂️</h3>
+                  <ul>
+                    <li><b>Motilal Nehru Sports School (Rai) -</b> Premier sports institution that has produced numerous Olympians and international athletes.</li>
+                    <li><b>Tau Devi Lal Stadium (Gurugram) -</b> Multi-purpose stadium hosting various sporting events.</li>
+                    <li><b>National Institute of Sports (Patiala) -</b> Though in Punjab, it's close to Haryana and is India's premier sports training institute.</li>
+                    <li><b>Traditional Akharas -</b> Wrestling training centers found in many villages, showcasing Haryana's wrestling culture.</li>
+                    <li><b>Golf Courses -</b> Several world-class golf courses, especially in the Gurugram region.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Haryanvi_wrestling.jpg/800px-Haryanvi_wrestling.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br><br>
+
+        </div>
+        <div id="wbwild" class="tab-pane fade in active" style="background-color: white;">
+          <h1> Wildlife & Crops of Haryana 🌿</h1>
+          <p>Haryana, despite being one of India's most agriculturally productive states, also hosts diverse wildlife in its protected areas. The state's geography ranges from the Shivalik Hills in the north to the semi-arid regions in the south, supporting various ecosystems.</p>
+
+          <br>
+          <h2>Wildlife of Haryana </h2>
+          <p>Haryana has established several wildlife sanctuaries and national parks to conserve its biodiversity, though much of the state's natural habitat has been converted to agricultural land.</p>
+
+          <br>
+          <h2>🔹 Major Wildlife Sanctuaries & Protected Areas</h2>
+          <div>
+            <table>
+              <tr>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Sultanpur National Park</td>
+                <td>Gurugram District</td>
+                <td>Migratory Birds 🦢, Wetland Ecosystem, Bird Watching</td>
+              </tr>
+              <tr>
+                <td>Kalesar National Park</td>
+                <td>Yamunanagar District</td>
+                <td>Sal Forests, Leopards 🐆, Elephants, Diverse Flora</td>
+              </tr>
+              <tr>
+                <td>Bhindawas Wildlife Sanctuary</td>
+                <td>Jhajjar District</td>
+                <td>Largest Wetland in Haryana, Migratory Birds, Marsh Ecosystem</td>
+              </tr>
+              <tr>
+                <td>Nahar Wildlife Sanctuary</td>
+                <td>Rewari District</td>
+                <td>Blackbuck (State Animal) 🦌, Desert Fox, Blue Bull</td>
+              </tr>
+              <tr>
+                <td>Abubshahar Wildlife Sanctuary</td>
+                <td>Sirsa District</td>
+                <td>Blackbuck, Nilgai, Desert Wildlife</td>
+              </tr>
+              <tr>
+                <td>Khaprawas Wildlife Sanctuary</td>
+                <td>Jhajjar District</td>
+                <td>Wetland Birds, Aquatic Ecosystem</td>
+              </tr>
+              <tr>
+                <td>Bir Shikargah Wildlife Sanctuary</td>
+                <td>Panchkula District</td>
+                <td>Sambar Deer, Wild Boar, Leopards, Himalayan Foothills Ecosystem</td>
+              </tr>
+            </table>
+          </div>
+          <bt><br></bt>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3> 🔹 Notable Wildlife in Haryana</h3>
+                <ul>
+                  <li><b>Mammals:</b> Blackbuck (State Animal), Nilgai, Leopard, Jungle Cat, Jackal, Indian Fox, Wild Boar, Sambar Deer, Mongoose.</li>
+                  <li><b>Birds:</b> Black Francolin (State Bird), Peacock, Grey Partridge, Flamingos, Siberian Crane (winter visitor), Painted Stork, Sarus Crane.</li>
+                  <li><b>Reptiles:</b> Indian Python, Monitor Lizard, Various Snake Species, Indian Softshell Turtle.</li>
+                  <li><b>Aquatic Life:</b> Various Fish Species in the Yamuna River and other water bodies.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Sultanpur_National_Park.jpg/800px-Sultanpur_National_Park.jpg" alt="" style="height:200px;width: 200px;">
+
+              </div>
+
+            </div>
+          </div>
+          <hr><br>
+          <h2>🌾 Agriculture & Major Crops in Haryana </h2>
+          <p>Haryana is one of India's agricultural powerhouses, often referred to as the "Green Land of India." The state has played a crucial role in India's Green Revolution and continues to be a major contributor to the country's food security.</p>
+
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Key Agricultural Features</h3>
+                <ul>
+                  <li>One of India's leading agricultural states, contributing significantly to the national food grain pool.</li>
+                  <li><b>Irrigation Network:</b> Extensive canal system and tubewells, with the Western Yamuna Canal being a major source.</li>
+                  <li><b>Agricultural Innovation:</b> Pioneer in modern farming techniques, mechanization, and high-yielding varieties.</li>
+                  <li><b>Research Institutions:</b> Home to several agricultural research centers and universities.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Haryana_agriculture.jpg/800px-Haryana_agriculture.jpg" alt="" style="height:200px;width: 220px;">
+
+              </div>
+            </div>
+          </div>
+          <h2>🔹 Major Crops of Haryana</h2>
+          <div>
+            <table>
+              <tr>
+                <th>Category</th>
+                <th>Crops</th>
+              </tr>
+              <tr>
+                <td>Food Grains</td>
+                <td>Wheat 🌾, Rice 🍚, Bajra (Pearl Millet), Maize 🌽, Barley</td>
+              </tr>
+              <tr>
+                <td>Pulses</td>
+                <td>Gram, Moong (Green Gram), Masoor (Red Lentil)</td>
+              </tr>
+              <tr>
+                <td>Oilseeds</td>
+                <td>Mustard 🌱, Rapeseed, Sunflower, Groundnut</td>
+              </tr>
+              <tr>
+                <td>Cash Crops</td>
+                <td>Sugarcane, Cotton 🧶, Potato 🥔, Guar</td>
+              </tr>
+              <tr>
+                <td>Fruits</td>
+                <td>Mango 🥭, Guava, Citrus Fruits, Ber (Indian Jujube)</td>
+              </tr>
+              <tr>
+                <td>Vegetables</td>
+                <td>Tomato 🍅, Onion, Cauliflower, Carrot 🥕, Green Chili</td>
+              </tr>
+              <tr>
+                <td>Spices</td>
+                <td>Fenugreek (Methi), Coriander, Cumin</td>
+              </tr>
+              <tr>
+                <td>Fodder Crops</td>
+                <td>Berseem, Jowar, Oats</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Crop Seasons in Haryana</h3>
+                <ul>
+                  <li><b>Rabi (Winter) Crops:</b> Sown in October-November and harvested in April-May.
+                    <ul>
+                      <li>Major crops: Wheat, Barley, Gram, Mustard</li>
+                    </ul>
+                  </li>
+                  <li><b>Kharif (Monsoon) Crops:</b> Sown in June-July and harvested in September-October.
+                    <ul>
+                      <li>Major crops: Rice, Bajra, Maize, Cotton, Sugarcane</li>
+                    </ul>
+                  </li>
+                  <li><b>Zaid (Summer) Crops:</b> Grown between Rabi and Kharif seasons.
+                    <ul>
+                      <li>Major crops: Vegetables, Fodder crops, Moong</li>
+                    </ul>
+                  </li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Wheat_fields_in_Haryana.jpg/800px-Wheat_fields_in_Haryana.jpg" alt="" style="height:200px;width: 200px;">
+
+              </div>
+            </div>
+          </div><br>
+          <hr>
+          <div class="box" style=" background: #f3b37185;padding: 10px;">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3> Sustainable Agriculture & Modern Trends 🌾</h3>
+                  <ul>
+                    <li><b>Water Conservation:</b> Micro-irrigation techniques and water harvesting structures to address declining water tables.</li>
+                    <li><b>Crop Diversification:</b> Shifting from traditional wheat-rice rotation to include more pulses, vegetables, and fruits.</li>
+                    <li><b>Organic Farming:</b> Growing trend, especially for vegetables and fruits.</li>
+                    <li><b>Precision Agriculture:</b> Use of technology like GPS, sensors, and drones for efficient farming.</li>
+                    <li><b>Climate-Resilient Agriculture:</b> Developing farming practices adapted to changing climate patterns.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Modern_farming_in_Haryana.jpg/800px-Modern_farming_in_Haryana.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Haryana represents an interesting balance between agricultural development and wildlife conservation. While the state has transformed much of its natural landscape into productive farmland, contributing significantly to India's food security, efforts are also being made to preserve its remaining wildlife through protected areas and conservation initiatives. The challenge for the future lies in maintaining this balance, promoting sustainable agricultural practices while protecting and enhancing the state's biodiversity.</p>
+          <br><br>
+        </div>
+        <div id="wbedu" class="tab-pane fade in active" style="background-color: white;">
+          <h1>🎓 Education & Institutions in Haryana</h1>
+          <p>Haryana has made significant strides in education over the past few decades, transforming from a primarily agricultural state to one with a growing focus on education, research, and skill development. The state government has implemented various initiatives to improve educational infrastructure and quality at all levels.</p>
+
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>📌 Education System in Haryana</h3>
+                  <ul>
+                    <li><b>School Education:</b> Follows the 10+2 pattern under the Board of School Education Haryana (BSEH), along with CBSE and other national boards.</li>
+                    <li><b>Higher Education:</b> Managed by state universities, central institutions, and private universities.</li>
+                    <li><b>Technical Education:</b> Strong focus on engineering, management, and vocational training.</li>
+                    <li><b>Literacy Rate:</b> Around 76%, with ongoing efforts to improve educational access in rural areas.</li>
+                    <li><b>Gender Gap:</b> Initiatives to promote girls' education have helped reduce the gender gap in literacy.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Haryana_school.jpg/800px-Haryana_school.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>🏛️ Top Universities & Institutions </h2>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 General Universities</h3>
+                <ol>
+                  <li><b>Kurukshetra University (Kurukshetra) -</b> One of the oldest universities in the state, offering diverse programs in arts, science, commerce, and more.</li>
+                  <li><b>Maharshi Dayanand University (Rohtak) -</b> A major state university with numerous affiliated colleges across Haryana.</li>
+                  <li><b>Guru Jambheshwar University of Science and Technology (Hisar) -</b> Focused on technical education and research.</li>
+                  <li><b>Chaudhary Devi Lal University (Sirsa) -</b> Named after the former Deputy Prime Minister, serving the educational needs of the region.</li>
+                  <li><b>Central University of Haryana (Mahendragarh) -</b> A central university established to promote accessible quality education.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Kurukshetra_University.jpg/800px-Kurukshetra_University.jpg" alt="" style="height:200px;width: 230px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Technical & Research Institutions</h3>
+                <ol>
+                  <li><b>National Institute of Technology (NIT Kurukshetra) -</b> One of India's premier engineering institutions, formerly known as Regional Engineering College.</li>
+                  <li><b>Indian Institute of Management (IIM Rohtak) -</b> Prestigious management institute offering MBA and doctoral programs.</li>
+                  <li><b>National Brain Research Centre (Manesar) -</b> Dedicated to neuroscience research and education.</li>
+                  <li><b>National Institute of Food Technology, Entrepreneurship and Management (NIFTEM, Sonipat) -</b> Focused on food technology education and research.</li>
+                  <li><b>Indian Institute of Technology (IIT Delhi, Sonipat Extension) -</b> Extension campus of IIT Delhi focusing on research and innovation.</li>
+                  <li><b>Haryana Space Applications Centre (HARSAC, Hisar) -</b> Research in remote sensing and GIS applications.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/NIT_Kurukshetra.jpg/800px-NIT_Kurukshetra.jpg" alt="" style="height:200px;width: 230px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Institution</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>NIT Kurukshetra</td>
+                <td>Kurukshetra</td>
+                <td>Engineering education, research, technical festivals</td>
+              </tr>
+              <tr>
+                <td>IIM Rohtak</td>
+                <td>Rohtak</td>
+                <td>Management education, case studies, industry connections</td>
+              </tr>
+              <tr>
+                <td>National Brain Research Centre</td>
+                <td>Manesar</td>
+                <td>Neuroscience research, interdisciplinary studies</td>
+              </tr>
+              <tr>
+                <td>NIFTEM</td>
+                <td>Sonipat</td>
+                <td>Food technology, entrepreneurship development</td>
+              </tr>
+              <tr>
+                <td>Kurukshetra University</td>
+                <td>Kurukshetra</td>
+                <td>Comprehensive education, cultural activities</td>
+              </tr>
+              <tr>
+                <td>Maharshi Dayanand University</td>
+                <td>Rohtak</td>
+                <td>Sports excellence, academic diversity</td>
+              </tr>
+              <tr>
+                <td>O.P. Jindal Global University</td>
+                <td>Sonipat</td>
+                <td>International collaborations, liberal arts education</td>
+              </tr>
+              <tr>
+                <td>Ashoka University</td>
+                <td>Sonipat</td>
+                <td>Liberal arts, research-focused education</td>
+              </tr>
+              <tr>
+                <td>Lala Lajpat Rai University of Veterinary and Animal Sciences</td>
+                <td>Hisar</td>
+                <td>Veterinary education, animal husbandry research</td>
+              </tr>
+            </table>
+          </div>
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/PGIMS_Rohtak.jpg/800px-PGIMS_Rohtak.jpg" alt="" style="height:200px;width: 240px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🔹 Medical & Healthcare Institutions</h3>
+                  <ol>
+                    <li><b>Post Graduate Institute of Medical Sciences (PGIMS, Rohtak) -</b> Premier medical institution offering undergraduate, postgraduate, and super-specialty programs.</li>
+                    <li><b>All India Institute of Medical Sciences (AIIMS, Jhajjar) -</b> Extension of AIIMS Delhi, focusing on cancer research and treatment.</li>
+                    <li><b>Shaheed Hasan Khan Mewati Government Medical College (Nalhar) -</b> Serving the healthcare and medical education needs of the Mewat region.</li>
+                    <li><b>Bhagat Phool Singh Government Medical College for Women (Sonipat) -</b> Dedicated to women's medical education.</li>
+                    <li><b>National Institute of Ayurveda (Panchkula) -</b> Promoting education and research in traditional Ayurvedic medicine.</li>
+                  </ol>
+                </div>
+
+                <br><br>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Medical Institution</th>
+                <th>Location</th>
+                <th>Specialization</th>
+              </tr>
+              <tr>
+                <td>PGIMS</td>
+                <td>Rohtak</td>
+                <td>Comprehensive medical education and tertiary care</td>
+              </tr>
+              <tr>
+                <td>AIIMS</td>
+                <td>Jhajjar</td>
+                <td>Cancer research and treatment, specialized care</td>
+              </tr>
+              <tr>
+                <td>Kalpana Chawla Government Medical College</td>
+                <td>Karnal</td>
+                <td>Named after astronaut Kalpana Chawla, general medical education</td>
+              </tr>
+              <tr>
+                <td>SGT Medical College</td>
+                <td>Gurugram</td>
+                <td>Private medical education, modern facilities</td>
+              </tr>
+              <tr>
+                <td>Maharaja Agrasen Medical College</td>
+                <td>Agroha</td>
+                <td>Rural healthcare focus, community medicine</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🔹 Law & Management Institutions</h3>
+                  <ol>
+                    <li><b>National Law University (Sonipat) -</b> Premier legal education institution offering undergraduate and postgraduate law programs.</li>
+                    <li><b>O.P. Jindal Global University (Sonipat) -</b> Private university known for its law, business, and international affairs programs.</li>
+                    <li><b>Management Development Institute (MDI, Gurugram) -</b> One of India's top business schools with strong industry connections.</li>
+                    <li><b>Institute of Management Studies and Research (Maharshi Dayanand University, Rohtak) -</b> Offering various management programs.</li>
+                    <li><b>YMCA University of Science and Technology (Faridabad) -</b> Known for technical and management education.</li>
+                  </ol>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/MDI_Gurgaon.jpg/800px-MDI_Gurgaon.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Institution</th>
+                <th>Location</th>
+                <th>Specialization</th>
+              </tr>
+              <tr>
+                <td>National Law University</td>
+                <td>Sonipat</td>
+                <td>Legal education, moot courts, research</td>
+              </tr>
+              <tr>
+                <td>O.P. Jindal Global University</td>
+                <td>Sonipat</td>
+                <td>Interdisciplinary education, international faculty</td>
+              </tr>
+              <tr>
+                <td>Management Development Institute</td>
+                <td>Gurugram</td>
+                <td>Management education, executive programs</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <h2>🏫 School Education in Haryana </h2>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Major School Boards</h3>
+                <ol>
+                  <li><b>HBSE (Haryana Board of School Education) -</b> State board headquartered in Bhiwani, conducts Class 10 & 12 exams.</li>
+                  <li><b>Central Board of Secondary Education (CBSE) -</b> National board covering many schools, follows NCERT syllabus.</li>
+                  <li><b>ICSE/ISC (CISCE Board) -</b> Private board with a strong focus on English, Math, and Science.</li>
+                  <li><b>HOS (Haryana Open School) -</b>Open learning system for students unable to attend regular schools.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Gujarat_school.jpg/800px-Gujarat_school.jpg" alt="" style="height:200px;width: 200px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Riverside_School_Ahmedabad.jpg/800px-Riverside_School_Ahmedabad.jpg" alt="" style="height:200px;width: 230px;">
+
+              </div>
+              <div class="col-sm-8">
+
+                <h3>🔹 Notable Schools in Haryana</h3>
+                <ol>
+                  <li><b>Delhi Public School, Gurgaon -</b> Renowned for its robust academics and wide range of extracurricular activities.</li>
+                  <li><b>Kendriya Vidyalaya, Faridabad -</b> A premier government-run school noted for quality education and a central curriculum.</li>
+                  <li><b>DAV Public School, Faridabad -</b> Esteemed for its holistic development approach and strong academic record.</li>
+                  <li><b>Apeejay School, Gurgaon -</b> Recognized for modern facilities and a balanced, innovative curriculum.</li>
+                  <li><b>Mount Litera Zee School, Gurgaon -</b> Known for its progressive teaching methods and diverse co-curricular offerings.</li>
+                  <li><b>St. Kabir Public School, Gurgaon -</b> Celebrated for its disciplined environment, academic excellence, and emphasis on sports.</li>
+                </ol>
+
+              </div>
+
+            </div>
+          </div>
+          <div class="box">
+            <h2>🔬 Research & Innovation Institutions</h2>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <p>Gujarat hosts several specialized research institutions:</p>
+                  <ol>
+                    <li><b>National Brain Research Centre (NBRC), Manesar -</b> India's premier institute for neuroscience research.</li>
+                    <li><b>Central Institute for Research on Buffaloes (CIRB), Hisar -</b> Specializes in buffalo breeding and dairy research.</li>
+                    <li><b>The Energy and Resources Institute (TERI), Gurugram -</b> Focuses on sustainable development and energy research.</li>
+                    <li><b>National Dairy Research Institute (NDRI), Karnal -</b> Leading institute for dairy science, technology, and animal genetics.</li>
+                    <li><b>Defence Research and Development Organisation (DRDO) Lab, Gurugram -</b> Engaged in defense technology and innovation.</li>
+                  </ol>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Physical_Research_Laboratory.jpg/800px-Physical_Research_Laboratory.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <h2>📚 Educational Initiatives & Developments</h2>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <ol>
+                    <li><b>National Dairy Research Institute (NDRI), Karnal -</b> Specializes in dairy science, cattle genetics, and biotechnology research.</li>
+                    <li><b>Central Institute for Research on Buffaloes (CIRB), Hisar -</b> Conducts advanced research on buffalo breeding, reproduction, and genetics.</li>
+                    <li><b>Lala Lajpat Rai University of Veterinary & Animal Sciences (LUVAS), Hisar -</b> Focuses on animal genetics, breeding, and veterinary sciences.</li>
+                    <li><b>National Bureau of Animal Genetic Resources (NBAGR), Karnal -</b> Works on the conservation and genetic improvement of livestock breeds.</li>
+                    <li><b>Chaudhary Charan Singh Haryana Agricultural University (CCSHAU), Hisar -</b> Engaged in crop genetics, hybrid seed development, and biotechnology research.</li>
+                  </ol>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/GIFT_City_Gujarat.jpg/800px-GIFT_City_Gujarat.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Haryana has some of India's best educational institutions, covering engineering, medical, law, management, and agriculture. With government initiatives and private investments, Haryana is becoming an education hub in North India.</p>
+        </div>
+        <br><br>
+
+      </div>
+
+
+    </div>
+  </div>
+  </div>
+</body>
+
+</html>

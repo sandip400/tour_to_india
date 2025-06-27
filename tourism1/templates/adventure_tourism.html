@@ -1,0 +1,1023 @@
+{% extends "base.html" %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdventureQuest - Thrilling Adventures in India</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Custom CSS -->
+    <style>
+        .bo {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+        }
+        .hero-section {
+            background: url('https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?q=80&w=2070') no-repeat center center;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(26, 115, 232, 0.5), rgba(52, 199, 89, 0.5));
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        .hero-section h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease-in-out;
+        }
+        .hero-section p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease-in-out 0.3s;
+            animation-fill-mode: both;
+        }
+        .hero-section .btn {
+            font-size: 1.2rem;
+            padding: 12px 30px;
+            background-color: #1a73e8;
+            border: none;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            animation: fadeInUp 1s ease-in-out 0.6s;
+            animation-fill-mode: both;
+        }
+        .hero-section .btn:hover {
+            background-color: #34c759;
+            transform: translateY(-5px) scale(1.05);
+        }
+        .adventures-section {
+            background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2070') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            padding: 80px 0;
+        }
+        .adventures-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(240, 244, 248, 0.9);
+            z-index: 1;
+        }
+        .adventures-section .container {
+            position: relative;
+            z-index: 2;
+        }
+        .adventure-card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: #fff;
+            animation: fadeInUp 0.5s ease-out;
+            animation-fill-mode: both;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .adventure-card:nth-child(1) { animation-delay: 0.1s; }
+        .adventure-card:nth-child(2) { animation-delay: 0.2s; }
+        .adventure-card:nth-child(3) { animation-delay: 0.3s; }
+        .adventure-card:nth-child(4) { animation-delay: 0.4s; }
+        .adventure-card:nth-child(5) { animation-delay: 0.5s; }
+        .adventure-card:nth-child(6) { animation-delay: 0.6s; }
+        .adventure-card:nth-child(7) { animation-delay: 0.7s; }
+        .adventure-card:nth-child(8) { animation-delay: 0.8s; }
+        .adventure-card:nth-child(9) { animation-delay: 0.9s; }
+        .adventure-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        .adventure-card img {
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .adventure-card:hover img {
+            transform: scale(1.05);
+        }
+        .adventure-card .card-body {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .adventure-card .card-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            color: #1a73e8;
+            transition: color 0.3s ease;
+        }
+        .adventure-card:hover .card-title {
+            color: #34c759;
+        }
+        .adventure-card .card-text {
+            color: #555;
+            flex-grow: 1;
+        }
+        .adventure-card .btn {
+            background-color: #34c759;
+            border: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .adventure-card .btn:hover {
+            background-color: #1a73e8;
+            transform: translateY(-3px);
+        }
+        .activities-section {
+            background: url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            padding: 80px 0;
+        }
+        .activities-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            z-index: 1;
+        }
+        .activities-section .container {
+            position: relative;
+            z-index: 2;
+        }
+        .activities-section h2, .adventures-section h2, .contact-section h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: #1a73e8;
+            font-size: 2.8rem;
+            margin-bottom: 40px;
+            animation: fadeInDown 0.5s ease-out;
+        }
+        .activities-section h4 {
+            color: #34c759;
+            font-family: 'Montserrat', sans-serif;
+            transition: color 0.3s ease;
+        }
+        .activities-section h4:hover {
+            color: #1a73e8;
+        }
+        .contact-section {
+            background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2070') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            padding: 80px 0;
+        }
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(240, 244, 248, 0.9);
+            z-index: 1;
+        }
+        .contact-section .container {
+            position: relative;
+            z-index: 2;
+        }
+        .contact-section .form-control {
+            border-radius: 10px;
+            border: 1px solid #34c759;
+            padding: 12px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .contact-section .form-control:focus {
+            border-color: #1a73e8;
+            box-shadow: 0 0 8px rgba(26, 115, 232, 0.3);
+        }
+        .contact-section .btn {
+            background-color: #1a73e8;
+            border: none;
+            padding: 12px;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .contact-section .btn:hover {
+            background-color: #34c759;
+            transform: translateY(-3px);
+        }
+        footer {
+            background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2070') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            color: #fff;
+            padding: 30px 0;
+            font-size: 1rem;
+        }
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(26, 115, 232, 0.8), rgba(52, 199, 89, 0.8));
+            z-index: 1;
+        }
+        footer .container {
+            position: relative;
+            z-index: 2;
+        }
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideInDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .section-title {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-bottom: 1rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, #1a73e8, #34c759);
+            animation: pulse 2s infinite;
+        }
+        .card {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+        .btn {
+            border-radius: 25px;
+            padding: 10px 25px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .modal-content {
+            border-radius: 15px;
+            border: none;
+            animation: fadeInUp 0.3s ease-out;
+        }
+        .modal-header {
+            background: linear-gradient(90deg, #1a73e8, #34c759);
+            color: white;
+            border-radius: 15px 15px 0 0;
+        }
+        .adventure-card {
+            animation: slideInLeft 0.5s ease-out;
+        }
+        @keyframes slideInLeft {
+            from { transform: translateX(-50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+    </style>
+</head>
+
+<div class="bo">
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-content">
+            <h1>Thrilling Adventures Await in India</h1>
+            <p>Embark on adrenaline-pumping experiences across diverse landscapes.</p>
+            <a href="#adventures" class="btn btn-primary btn-lg">Start Your Adventure</a>
+        </div>
+    </section>
+
+    <!-- Adventures Section -->
+    <section id="adventures" class="adventures-section">
+        <div class="container">
+            <h2 class="text-center mb-5 section-title">Top Adventure Destinations in India</h2>
+            <div class="row">
+                <!-- Card 1: Rishikesh -->
+                <div class="col-md-4 mb-4">
+                    <div class="card adventure-card" data-adventure="rishikesh">
+                        <img src="https://images.unsplash.com/photo-1720819029162-8500607ae232?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="-dot-circle" alt="Rishikesh">
+                        <div class="card-body">
+                            <h5 class="card-title">Rishikesh, Uttarakhand</h5>
+                            <p class="card-text">The adventure capital of India, known for white-water rafting on the Ganges and bungee jumping.</p>
+                            <div class="adventure-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Best Time: 3-4 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Specialty: River rafting</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-mountain"></i>
+                                    <span>Altitude: 372m</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-water"></i> Rafting</span>
+                                <span><i class="fas fa-parachute-box"></i> Bungee Jumping</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Ladakh -->
+                <div class="col-md-4 mb-4">
+                    <div class="card adventure-card" data-adventure="ladakh">
+                        <img src="https://images.unsplash.com/photo-1581793745862-99fde7fa73d2?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Ladakh">
+                        <div class="card-body">
+                            <h5 class="card-title">Ladakh, Jammu & Kashmir</h5>
+                            <p class="card-text">A high-altitude desert offering thrilling biking routes and trekking in rugged terrain.</p>
+                            <div class="adventure-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Best Time: 7-10 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Specialty: Biking</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-mountain"></i>
+                                    <span>Altitude: 3500m</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-bicycle"></i> Biking</span>
+                                <span><i class="fas fa-hiking"></i> Trekking</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Manali -->
+                <div class="col-md-4 mb-4">
+                    <div class="card adventure-card" data-adventure="manali">
+                        <img src="https://images.unsplash.com/photo-1712388430474-ace0c16051e2?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Manali">
+                        <div class="card-body">
+                            <h5 class="card-title">Manali, Himachal Pradesh</h5>
+                            <p class="card-text">A hub for paragliding, skiing, and trekking in the Himalayas, surrounded by snow-capped peaks.</p>
+                            <div class="adventure-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Best Time: 4-5 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Specialty: Paragliding</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-mountain"></i>
+                                    <span>Altitude: 2050m</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-parachute-box"></i> Paragliding</span>
+                                <span><i class="fas fa-skiing"></i> Skiing</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4: Coorg -->
+                <div class="col-md-4 mb-4">
+                    <div class="card adventure-card" data-adventure="coorg">
+                        <img src="https://images.unsplash.com/photo-1655128633542-b6b7e86e93b4?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Coorg">
+                        <div class="card-body">
+                            <h5 class="card-title">Coorg, Karnataka</h5>
+                            <p class="card-text">Known for its lush greenery, offering trekking, river rafting, and camping amidst coffee plantations.</p>
+                            <div class="adventure-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Best Time: 3-4 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Specialty: Trekking</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-mountain"></i>
+                                    <span>Altitude: 900m</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-hiking"></i> Trekking</span>
+                                <span><i class="fas fa-tent"></i> Camping</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5: Auli -->
+                <div class="col-md-4 mb-4">
+                    <div class="card adventure-card" data-adventure="auli">
+                        <img src="https://images.unsplash.com/photo-1618661057370-7cf87dfad271?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Auli">
+                        <div class="card-body">
+                            <h5 class="card-title">Auli, Uttarakhand</h5>
+                            <p class="card-text">A premier skiing destination with breathtaking Himalayan views and opportunities for trekking.</p>
+                            <div class="adventure-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Best Time: 3-4 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Specialty: Skiing</span>
+                                </div>
+                                <div class="detail-item">
+                                    start of document
+                                    <i class="fas fa-mountain"></i>
+                                    <span>Altitude: 2800m</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-skiing"></i> Skiing</span>
+                                <span><i class="fas fa-hiking"></i> Trekking</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6: Andaman -->
+                <div class="col-md-4 mb-4">
+                    <div class="card adventure-card" data-adventure="andaman">
+                        <img src="https://images.unsplash.com/photo-1642498232612-a837df233825?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Andaman">
+                        <div class="card-body">
+                            <h5 class="card-title">Andaman & Nicobar Islands</h5>
+                            <p class="card-text">A tropical paradise offering scuba diving, snorkeling, and sea kayaking in crystal-clear waters.</p>
+                            <div class="adventure-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Best Time: 5-7 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Specialty: Scuba diving</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-water"></i>
+                                    <span>Sea Level</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-swimmer"></i> Scuba Diving</span>
+                                <span><i class="fas fa-water"></i> Snorkeling</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 7: Spiti Valley -->
+                <div class="col-md-4 mb-4">
+                    <div class="card adventure-card" data-adventure="spiti">
+                        <img src="https://images.unsplash.com/photo-1617159156637-dfb8655c9f95?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Spiti Valley">
+                        <div class="card-body">
+                            <h5 class="card-title">Spiti Valley, Himachal Pradesh</h5>
+                            <p class="card-text">A remote Himalayan valley offering rugged trekking and biking adventures amidst monasteries and stark landscapes.</p>
+                            <div class="adventure-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Best Time: 5-7 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Specialty: Trekking</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-mountain"></i>
+                                    <span>Altitude: 3800m</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-hiking"></i> Trekking</span>
+                                <span><i class="fas fa-bicycle"></i> Biking</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 8: Meghalaya -->
+                <div class="col-md-4 mb-4">
+                    <div class="card adventure-card" data-adventure="meghalaya">
+                        <img src="https://images.unsplash.com/photo-1694712282542-1c9929653496?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Meghalaya">
+                        <div class="card-body">
+                            <h5 class="card-title">Meghalaya</h5>
+                            <p class="card-text">Known for its living root bridges and caves, offering caving and trekking in lush, rainy landscapes.</p>
+                            <div class="adventure-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Best Time: 4-5 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Specialty: Caving</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-mountain"></i>
+                                    <span>Altitude: 1500m</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-hiking"></i> Trekking</span>
+                                <span><i class="fas fa-dungeon"></i> Caving</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 9: Goa -->
+                <div class="col-md-4 mb-4">
+                    <div class="card adventure-card" data-adventure="goa">
+                        <img src="https://plus.unsplash.com/premium_photo-1697729701846-e34563b06d47?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Goa">
+                        <div class="card-body">
+                            <h5 class="card-title">Goa</h5>
+                            <p class="card-text">A coastal haven offering water sports like jet skiing, parasailing, and windsurfing on its pristine beaches.</p>
+                            <div class="adventure-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Best Time: 3-4 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Specialty: Water sports</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-water"></i>
+                                    <span>Sea Level</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-water"></i> Jet Skiing</span>
+                                <span><i class="fas fa-parachute-box"></i> Parasailing</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activities Section -->
+    <section id="activities" class="activities-section">
+        <div class="container">
+            <h2 class="text-center mb-5 section-title">Adventure Activities</h2>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <h4>Trekking</h4>
+                    <p>Explore trails in the Himalayas, Western Ghats, and other scenic regions.</p>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <h4>River Rafting</h4>
+                    <p>Navigate the rapids of the Ganges, Zanskar, and Beas rivers.</p>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <h4>Paragliding</h4>
+                    <p>Soar above valleys in Bir-Billing and Manali for an adrenaline rush.</p>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <h4>Scuba Diving</h4>
+                    <p>Dive into the vibrant marine life of Andaman and Lakshadweep.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="text-center mb-5 section-title">Share Your Adventure</h2>
+            <div class="row">
+                <div class="col-md-6 mx-auto">
+                    <div class="adventure-form">
+                        <form id="adventureForm">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Your Name</label>
+                                <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="destination" class="form-label">Adventure Destination</label>
+                                <select class="form-control" id="destination" required>
+                                    <option value="">Select a destination</option>
+                                    <option value="rishikesh">Rishikesh, Uttarakhand</option>
+                                    <option value="ladakh">Ladakh, Jammu & Kashmir</option>
+                                    <option value="manali">Manali, Himachal Pradesh</option>
+                                    <option value="coorg">Coorg, Karnataka</option>
+                                    <option value="auli">Auli, Uttarakhand</option>
+                                    <option value="andaman">Andaman & Nicobar Islands</option>
+                                    <option value="spiti">Spiti Valley, Himachal Pradesh</option>
+                                    <option value="meghalaya">Meghalaya</option>
+                                    <option value="goa">Goa</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="experience" class="form-label">Your Experience</label>
+                                <textarea class="form-control" id="experience" rows="4" placeholder="Share your adventure..." required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="photos" class="form-label">Upload Photos</label>
+                                <input type="file" class="form-control" id="photos" multiple accept="image/*">
+                                <div id="photoPreview" class="mt-2"></div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Share Adventure</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Adventure Modal -->
+    <div class="modal fade" id="adventureModal" tabindex="-1" aria-labelledby="adventureModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="adventureModalLabel">Adventure Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="adventure-detail-content">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <img src="" alt="" class="img-fluid adventure-image">
+                            </div>
+                            <div class="col-md-6">
+                                <h3 class="adventure-name"></h3>
+                                <p class="adventure-description"></p>
+                                <div class="adventure-info">
+                                    <div class="info-item">
+                                        <i class="fas fa-clock"></i>
+                                        <span class="best-time"></span>
+                                    </div>
+                                    <div class="info-item">
+                                        <i class="fas fa-star"></i>
+                                        <span class="specialty"></span>
+                                    </div>
+                                    <div class="info-item">
+                                        <i class="fas fa-mountain"></i>
+                                        <span class="altitude"></span>
+                                    </div>
+                                </div>
+                                <div class="adventure-features"></div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <h4>Adventure Highlights</h4>
+                                <p class="adventure-highlights"></p>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <h4>Things to Do</h4>
+                                <ul class="things-to-do"></ul>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <h4>How to Reach</h4>
+                                <div class="how-to-reach"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="#" class="btn btn-primary book-now-btn">Book Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div> 
+
+    
+
+    <!-- Bootstrap JS and Custom JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Adventure data
+        const adventures = {
+            'rishikesh': {
+                name: 'Rishikesh, Uttarakhand',
+                image: 'https://images.unsplash.com/photo-1610970881699-44a5587cbbcd?q=80&w=2070',
+                description: 'The adventure capital of India, Rishikesh offers thrilling white-water rafting on the Ganges and Asia’s highest bungee jumping.',
+                bestTime: '3-4 days',
+                specialty: 'River rafting',
+                altitude: '372m',
+                highlights: 'Known as the yoga capital, Rishikesh combines spirituality with adrenaline-pumping activities like rafting and bungee jumping.',
+                features: ['Rafting', 'Bungee Jumping'],
+                thingsToDo: [
+                    'White-water rafting on the Ganges',
+                    'Bungee jumping at Jumpin Heights',
+                    'Camping by the river',
+                    'Trekking to Neer Garh Waterfall',
+                    'Explore Laxman Jhula'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Jolly Grant Airport, Dehradun (20 km)' },
+                    { type: 'train', text: 'Rishikesh Railway Station' },
+                    { type: 'car', text: 'Well-connected by road' }
+                ]
+            },
+            'ladakh': {
+                name: 'Ladakh, Jammu & Kashmir',
+                image: 'https://images.unsplash.com/photo-1595168855117-82e61e6f27fb?q=80&w=2070',
+                description: 'A high-altitude desert with rugged terrain, perfect for biking on the Leh-Manali highway and trekking in the Himalayas.',
+                bestTime: '7-10 days',
+                specialty: 'Biking',
+                altitude: '3500m',
+                highlights: 'Ladakh’s stark landscapes and high-altitude passes like Khardung La make it a biker’s and trekker’s paradise.',
+                features: ['Biking', 'Trekking'],
+                thingsToDo: [
+                    'Bike on the Leh-Manali highway',
+                    'Trek to Markha Valley',
+                    'Visit Pangong Lake',
+                    'Explore monasteries',
+                    'Camp under the stars'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Kushok Bakula Rimpochee Airport, Leh' },
+                    { type: 'car', text: 'Connected by road from Manali or Srinagar' }
+                ]
+            },
+            'manali': {
+                name: 'Manali, Himachal Pradesh',
+                image: 'https://images.unsplash.com/photo-1597078737119-7f76ee897dc1?q=80&w=2070',
+                description: 'A Himalayan gem offering paragliding, skiing, and trekking amidst snow-capped peaks and lush valleys.',
+                bestTime: '4-5 days',
+                specialty: 'Paragliding',
+                altitude: '2050m',
+                highlights: 'Manali’s scenic beauty and adventure activities make it a year-round destination for thrill-seekers.',
+                features: ['Paragliding', 'Skiing'],
+                thingsToDo: [
+                    'Paragliding in Solang Valley',
+                    'Skiing in winter',
+                    'Trekking to Hampta Pass',
+                    'Visit Rohtang Pass',
+                    'River rafting on Beas'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Bhuntar Airport (50 km)' },
+                    { type: 'train', text: 'Joginder Nagar Railway Station (145 km)' },
+                    { type: 'car', text: 'Well-connected by road' }
+                ]
+            },
+            'coorg': {
+                name: 'Coorg, Karnataka',
+                image: 'https://images.unsplash.com/photo-1593697821152-8c15313125df?q=80&w=2070',
+                description: 'A lush hill station offering trekking, river rafting, and camping amidst coffee plantations and waterfalls.',
+                bestTime: '3-4 days',
+                specialty: 'Trekking',
+                altitude: '900m',
+                highlights: 'Coorg’s verdant landscapes and serene environment are perfect for nature lovers and adventure enthusiasts.',
+                features: ['Trekking', 'Camping'],
+                thingsToDo: [
+                    'Trek to Tadiandamol Peak',
+                    'River rafting in Barapole',
+                    'Camping in the hills',
+                    'Visit Abbey Falls',
+                    'Explore coffee plantations'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Mangalore Airport (140 km)' },
+                    { type: 'train', text: 'Mysore Railway Station (120 km)' },
+                    { type: 'car', text: 'Well-connected by road' }
+                ]
+            },
+            'auli': {
+                name: 'Auli, Uttarakhand',
+                image: 'https://images.unsplash.com/photo-1603785572857-4c795ed83fa0?q=80&w=2070',
+                description: 'A premier skiing destination with stunning Himalayan views and opportunities for trekking.',
+                bestTime: '3-4 days',
+                specialty: 'Skiing',
+                altitude: '2800m',
+                highlights: 'Auli’s snow-covered slopes and panoramic views make it one of India’s top skiing destinations.',
+                features: ['Skiing', 'Trekking'],
+                thingsToDo: [
+                    'Skiing in winter',
+                    'Trekking to Gorson Bugyal',
+                    'Cable car ride',
+                    'Visit Auli Artificial Lake',
+                    'Camping in summer'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Jolly Grant Airport, Dehradun (280 km)' },
+                    { type: 'train', text: 'Rishikesh Railway Station (250 km)' },
+                    { type: 'car', text: 'Connected by road' }
+                ]
+            },
+            'andaman': {
+                name: 'Andaman & Nicobar Islands',
+                image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070',
+                description: 'A tropical paradise with coral reefs, perfect for scuba diving, snorkeling, and sea kayaking.',
+                bestTime: '5-7 days',
+                specialty: 'Scuba diving',
+                altitude: 'Sea Level',
+                highlights: 'The Andamans offer vibrant marine life and pristine beaches, ideal for water-based adventures.',
+                features: ['Scuba Diving', 'Snorkeling'],
+                thingsToDo: [
+                    'Scuba diving at Havelock Island',
+                    'Snorkeling at Neil Island',
+                    'Sea kayaking in mangroves',
+                    'Visit Radhanagar Beach',
+                    'Explore Cellular Jail'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Veer Savarkar International Airport, Port Blair' },
+                    { type: 'ship', text: 'Ferry from Chennai/Kolkata' }
+                ]
+            },
+            'spiti': {
+                name: 'Spiti Valley, Himachal Pradesh',
+                image: 'https://images.unsplash.com/photo-1621330396168-6121ced03db8?q=80&w=2070',
+                description: 'A remote Himalayan valley offering rugged trekking and biking adventures amidst monasteries and stark landscapes.',
+                bestTime: '5-7 days',
+                specialty: 'Trekking',
+                altitude: '3800m',
+                highlights: 'Spiti’s otherworldly landscapes and ancient monasteries make it a haven for adventure seekers.',
+                features: ['Trekking', 'Biking'],
+                thingsToDo: [
+                    'Trek to Pin Valley',
+                    'Bike to Chandratal Lake',
+                    'Visit Key Monastery',
+                    'Explore Dhankar Village',
+                    'Camp under the stars'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Bhuntar Airport (200 km)' },
+                    { type: 'car', text: 'Connected by road from Manali or Shimla' }
+                ]
+            },
+            'meghalaya': {
+                name: 'Meghalaya',
+                image: 'https://images.unsplash.com/photo-1628084266576-6b6cb94c7b44?q=80&w=2070',
+                description: 'Known for its living root bridges and caves, offering caving and trekking in lush, rainy landscapes.',
+                bestTime: '4-5 days',
+                specialty: 'Caving',
+                altitude: '1500m',
+                highlights: 'Meghalaya’s unique root bridges and extensive cave systems make it a paradise for explorers.',
+                features: ['Trekking', 'Caving'],
+                thingsToDo: [
+                    'Explore Mawsmai Cave',
+                    'Trek to Living Root Bridges',
+                    'Visit Nohkalikai Falls',
+                    'Caving in Krem Liat Prah',
+                    'Discover Dawki’s crystal-clear river'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Shillong Airport (30 km)' },
+                    { type: 'train', text: 'Guwahati Railway Station (100 km)' },
+                    { type: 'car', text: 'Well-connected by road' }
+                ]
+            },
+            'goa': {
+                name: 'Goa',
+                image: 'https://images.unsplash.com/photo-1516306584366-1b98397e1f33?q=80&w=2070',
+                description: 'A coastal haven offering water sports like jet skiing, parasailing, and windsurfing on its pristine beaches.',
+                bestTime: '3-4 days',
+                specialty: 'Water sports',
+                altitude: 'Sea Level',
+                highlights: 'Goa’s vibrant beaches and water sports make it a top destination for adventure and relaxation.',
+                features: ['Jet Skiing', 'Parasailing'],
+                thingsToDo: [
+                    'Jet skiing at Calangute Beach',
+                    'Parasailing at Baga Beach',
+                    'Windsurfing at Dona Paula',
+                    'Explore Dudhsagar Falls',
+                    'Scuba diving at Grande Island'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Dabolim Airport, Goa' },
+                    { type: 'train', text: 'Madgaon Railway Station' },
+                    { type: 'car', text: 'Well-connected by road' }
+                ]
+            }
+        };
+
+        // Function to open adventure modal
+        function openAdventureModal(adventureId) {
+            const adventure = adventures[adventureId];
+            if (!adventure) return;
+
+            const modal = document.getElementById('adventureModal');
+            const modalTitle = modal.querySelector('.modal-title');
+            const modalImage = modal.querySelector('.adventure-image');
+            const modalName = modal.querySelector('.adventure-name');
+            const modalDescription = modal.querySelector('.adventure-description');
+            const modalBestTime = modal.querySelector('.best-time');
+            const modalSpecialty = modal.querySelector('.specialty');
+            const modalAltitude = modal.querySelector('.altitude');
+            const modalHighlights = modal.querySelector('.adventure-highlights');
+            const modalFeatures = modal.querySelector('.adventure-features');
+            const modalThingsToDo = modal.querySelector('.things-to-do');
+            const modalHowToReach = modal.querySelector('.how-to-reach');
+
+            modalTitle.textContent = adventure.name;
+            modalImage.src = adventure.image;
+            modalImage.alt = adventure.name;
+            modalName.textContent = adventure.name;
+            modalDescription.textContent = adventure.description;
+            modalBestTime.textContent = `Best Time: ${adventure.bestTime}`;
+            modalSpecialty.textContent = `Specialty: ${adventure.specialty}`;
+            modalAltitude.textContent = `Altitude: ${adventure.altitude}`;
+            modalHighlights.textContent = adventure.highlights;
+
+            modalFeatures.innerHTML = adventure.features.map(feature => 
+                `<span class="card-features"><i class="fas fa-check"></i> ${feature}</span>`
+            ).join('');
+
+            modalThingsToDo.innerHTML = adventure.thingsToDo.map(thing => 
+                `<li><i class="fas fa-check-circle"></i> ${thing}</li>`
+            ).join('');
+
+            modalHowToReach.innerHTML = adventure.howToReach.map(option => 
+                `<div class="transport-option">
+                    <i class="fas fa-${option.type}"></i>
+                    <span>${option.text}</span>
+                </div>`
+            ).join('');
+
+            const modalInstance = new bootstrap.Modal(modal);
+            modalInstance.show();
+        }
+
+        // Add click event listeners to all Learn More buttons
+        document.querySelectorAll('.adventure-card .btn-primary').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const adventureId = this.closest('.adventure-card').dataset.adventure;
+                openAdventureModal(adventureId);
+            });
+        });
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a.nav-link').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                window.scrollTo({
+                    top: targetElement.offsetTop - 70,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
+{% endblock %}

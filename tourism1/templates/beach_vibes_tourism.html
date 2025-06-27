@@ -1,0 +1,1023 @@
+{% extends "base.html" %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoastalCraze - Beach Vibes Tourism in India</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Custom CSS -->
+    <style>
+        .bo {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+        }
+        
+        .hero-section {
+            background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2070') no-repeat center center;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(2, 136, 209, 0.5), rgba(79, 195, 247, 0.5));
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        .hero-section h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease-in-out;
+        }
+        .hero-section p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease-in-out 0.3s;
+            animation-fill-mode: both;
+        }
+        .hero-section .btn {
+            font-size: 1.2rem;
+            padding: 12px 30px;
+            background-color: #0288d1;
+            border: none;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            animation: fadeInUp 1s ease-in-out 0.6s;
+            animation-fill-mode: both;
+        }
+        .hero-section .btn:hover {
+            background-color: #4fc3f7;
+            transform: translateY(-5px) scale(1.05);
+        }
+        .beaches-section {
+            background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2070') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            padding: 80px 0;
+        }
+        .beaches-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(240, 244, 248, 0.9);
+            z-index: 1;
+        }
+        .beaches-section .container {
+            position: relative;
+            z-index: 2;
+        }
+        .beach-card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: #fff;
+            animation: fadeInUp 0.5s ease-out;
+            animation-fill-mode: both;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .beach-card:nth-child(1) { animation-delay: 0.1s; }
+        .beach-card:nth-child(2) { animation-delay: 0.2s; }
+        .beach-card:nth-child(3) { animation-delay: 0.3s; }
+        .beach-card:nth-child(4) { animation-delay: 0.4s; }
+        .beach-card:nth-child(5) { animation-delay: 0.5s; }
+        .beach-card:nth-child(6) { animation-delay: 0.6s; }
+        .beach-card:nth-child(7) { animation-delay: 0.7s; }
+        .beach-card:nth-child(8) { animation-delay: 0.8s; }
+        .beach-card:nth-child(9) { animation-delay: 0.9s; }
+        .beach-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        .beach-card img {
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .beach-card:hover img {
+            transform: scale(1.05);
+        }
+        .beach-card .card-body {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .beach-card .card-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            color: #0288d1;
+            transition: color 0.3s ease;
+        }
+        .beach-card:hover .card-title {
+            color: #4fc3f7;
+        }
+        .beach-card .card-text {
+            color: #555;
+            flex-grow: 1;
+        }
+        .beach-card .btn {
+            background-color: #4fc3f7;
+            border: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .beach-card .btn:hover {
+            background-color: #0288d1;
+            transform: translateY(-3px);
+        }
+        .activities-section {
+            background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2070') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            padding: 80px 0;
+        }
+        .activities-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            z-index: 1;
+        }
+        .activities-section .container {
+            position: relative;
+            z-index: 2;
+        }
+        .activities-section h2, .beaches-section h2, .contact-section h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: #0288d1;
+            font-size: 2.8rem;
+            margin-bottom: 40px;
+            animation: fadeInDown 0.5s ease-out;
+        }
+        .activities-section h4 {
+            color: #4fc3f7;
+            font-family: 'Montserrat', sans-serif;
+            transition: color 0.3s ease;
+        }
+        .activities-section h4:hover {
+            color: #0288d1;
+        }
+        .contact-section {
+            background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2070') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            padding: 80px 0;
+        }
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(240, 244, 248, 0.9);
+            z-index: 1;
+        }
+        .contact-section .container {
+            position: relative;
+            z-index: 2;
+        }
+        .contact-section .form-control {
+            border-radius: 10px;
+            border: 1px solid #4fc3f7;
+            padding: 12px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .contact-section .form-control:focus {
+            border-color: #0288d1;
+            box-shadow: 0 0 8px rgba(2, 136, 209, 0.3);
+        }
+        .contact-section .btn {
+            background-color: #0288d1;
+            border: none;
+            padding: 12px;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .contact-section .btn:hover {
+            background-color: #4fc3f7;
+            transform: translateY(-3px);
+        }
+        footer {
+            background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2070') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            color: #fff;
+            padding: 30px 0;
+            font-size: 1rem;
+        }
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(2, 136, 209, 0.8), rgba(79, 195, 247, 0.8));
+            z-index: 1;
+        }
+        footer .container {
+            position: relative;
+            z-index: 2;
+        }
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideInDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .section-title {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-bottom: 1rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, #0288d1, #4fc3f7);
+            animation: pulse 2s infinite;
+        }
+        .card {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+        .btn {
+            border-radius: 25px;
+            padding: 10px 25px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .modal-content {
+            border-radius: 15px;
+            border: none;
+            animation: fadeInUp 0.3s ease-out;
+        }
+        .modal-header {
+            background: linear-gradient(90deg, #0288d1, #4fc3f7);
+            color: white;
+            border-radius: 15px 15px 0 0;
+        }
+        .beach-card {
+            animation: slideInLeft 0.5s ease-out;
+        }
+        @keyframes slideInLeft {
+            from { transform: translateX(-50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+    </style>
+</head>
+
+<div class="bo">
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-content">
+            <h1>Soak in the Beach Vibes of India</h1>
+            <p>Discover pristine shores, vibrant coastal culture, and unforgettable seaside adventures.</p>
+            <a href="#beaches" class="btn btn-primary btn-lg">Explore Beaches</a>
+        </div>
+    </section>
+
+    <!-- Beaches Section -->
+    <section id="beaches" class="beaches-section">
+        <div class="container">
+            <h2 class="text-center mb-5 section-title">Top Beach Destinations in India</h2>
+            <div class="row">
+                <!-- Card 1: Goa -->
+                <div class="col-md-4 mb-4">
+                    <div class="card beach-card" data-beach="goa">
+                        <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?q=80&w=2070" class="card-img-top" alt="Goa Beaches">
+                        <div class="card-body">
+                            <h5 class="card-title">Goa</h5>
+                            <p class="card-text">Famous for its vibrant beaches like Baga, Anjuna, and Palolem, offering nightlife and water sports.</p>
+                            <div class="beach-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Best Time: 3-5 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Vibe: Party & Relaxation</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-water"></i>
+                                    <span>Beach Type: Sandy</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-cocktail"></i> Nightlife</span>
+                                <span><i class="fas fa-swimmer"></i> Water Sports</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Andaman and Nicobar Islands -->
+                <div class="col-md-4 mb-4">
+                    <div class="card beach-card" data-beach="andaman">
+                        <img src="https://images.unsplash.com/photo-1586053226626-febc8817962f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Andaman Beaches">
+                        <div class="card-body">
+                            <h5 class="card-title">Andaman and Nicobar Islands</h5>
+                            <p class="card-text">Pristine beaches like Radhanagar and Neil Island, ideal for snorkeling and scuba diving.</p>
+                            <div class="beach-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Best Time: 5-7 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Vibe: Serene & Adventure</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-water"></i>
+                                    <span>Beach Type: Coral</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-fish"></i> Snorkeling</span>
+                                <span><i class="fas fa-diving-mask"></i> Scuba Diving</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Kovalam -->
+                <div class="col-md-4 mb-4">
+                    <div class="card beach-card" data-beach="kovalam">
+                        <img src="https://images.unsplash.com/photo-1621338318169-c6f87f8913c1?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Kovalam Beach">
+                        <div class="card-body">
+                            <h5 class="card-title">Kovalam, Kerala</h5>
+                            <p class="card-text">Known for its crescent-shaped beaches and Ayurvedic resorts, perfect for relaxation.</p>
+                            <div class="beach-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Best Time: 2-3 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Vibe: Tranquil & Wellness</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-water"></i>
+                                    <span>Beach Type: Sandy</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-spa"></i> Ayurveda</span>
+                                <span><i class="fas fa-umbrella-beach"></i> Relaxation</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4: Gokarna -->
+                <div class="col-md-4 mb-4">
+                    <div class="card beach-card" data-beach="gokarna">
+                        <img src="https://images.unsplash.com/photo-1567098628209-d182949882b0?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Gokarna Beaches">
+                        <div class="card-body">
+                            <h5 class="card-title">Gokarna, Karnataka</h5>
+                            <p class="card-text">A serene alternative to Goa, with beaches like Om and Kudle, ideal for yoga and spirituality.</p>
+                            <div class="beach-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Best Time: 2-3 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Vibe: Spiritual & Relaxed</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-water"></i>
+                                    <span>Beach Type: Sandy</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-yoga"></i> Yoga</span>
+                                <span><i class="fas fa-temple"></i> Temples</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5: Puri -->
+                <div class="col-md-4 mb-4">
+                    <div class="card beach-card" data-beach="puri">
+                        <img src="https://images.unsplash.com/photo-1706790574525-d218c4c52b5c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Puri Beach">
+                        <div class="card-body">
+                            <h5 class="card-title">Puri, Odisha</h5>
+                            <p class="card-text">A sacred beach destination with Golden Beach and the Jagannath Temple nearby.</p>
+                            <div class="beach-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Best Time: 2-3 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Vibe: Spiritual & Cultural</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-water"></i>
+                                    <span>Beach Type: Sandy</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-temple"></i> Jagannath Temple</span>
+                                <span><i class="fas fa-festival"></i> Beach Festival</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6: Varkala -->
+                <div class="col-md-4 mb-4">
+                    <div class="card beach-card" data-beach="varkala">
+                        <img src="https://images.unsplash.com/photo-1610817201767-793a9130ce07?q=80&w=1962&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Varkala Beach">
+                        <div class="card-body">
+                            <h5 class="card-title">Varkala, Kerala</h5>
+                            <p class="card-text">Famous for its cliff-lined beaches and spiritual vibe, ideal for surfing and yoga.</p>
+                            <div class="beach-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Best Time: 2-3 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Vibe: Bohemian & Adventure</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-water"></i>
+                                    <span>Beach Type: Sandy</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-surfing"></i> Surfing</span>
+                                <span><i class="fas fa-yoga"></i> Yoga</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 7: Alappuzha -->
+                <div class="col-md-4 mb-4">
+                    <div class="card beach-card" data-beach="alappuzha">
+                        <img src="https://images.unsplash.com/photo-1593693411515-c20261bcad6e?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Alappuzha Beach">
+                        <div class="card-body">
+                            <h5 class="card-title">Alappuzha, Kerala</h5>
+                            <p class="card-text">Known for its backwaters and serene beach, offering houseboat stays and seafood.</p>
+                            <div class="beach-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Best Time: 2-3 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Vibe: Serene & Cultural</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-water"></i>
+                                    <span>Beach Type: Sandy</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-ship"></i> Houseboats</span>
+                                <span><i class="fas fa-utensils"></i> Seafood</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 8: Diu -->
+                <div class="col-md-4 mb-4">
+                    <div class="card beach-card" data-beach="diu">
+                        <img src="https://images.unsplash.com/photo-1569776186059-f26b84be14b0?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Diu Beaches">
+                        <div class="card-body">
+                            <h5 class="card-title">Diu</h5>
+                            <p class="card-text">A quaint island with Nagoa and Ghoghla beaches, offering a relaxed vibe and water sports.</p>
+                            <div class="beach-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Best Time: 2-3 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Vibe: Relaxed & Adventure</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-water"></i>
+                                    <span>Beach Type: Sandy</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-swimmer"></i> Water Sports</span>
+                                <span><i class="fas fa-fort-awesome"></i> Diu Fort</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 9: Pondicherry -->
+                <div class="col-md-4 mb-4">
+                    <div class="card beach-card" data-beach="pondicherry">
+                        <img src="https://images.unsplash.com/photo-1597073642928-48c0971f7ded?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Pondicherry Beaches">
+                        <div class="card-body">
+                            <h5 class="card-title">Pondicherry</h5>
+                            <p class="card-text">A blend of French charm and beaches like Paradise and Auroville, ideal for relaxation.</p>
+                            <div class="beach-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Best Time: 2-3 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Vibe: Cultural & Relaxed</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-water"></i>
+                                    <span>Beach Type: Sandy</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-coffee"></i> French Cafes</span>
+                                <span><i class="fas fa-pray"></i> Auroville</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activities Section -->
+    <section id="activities" class="activities-section">
+        <div class="container">
+            <h2 class="text-center mb-5 section-title">Beach Activities</h2>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <h4>Water Sports</h4>
+                    <p>Enjoy jet skiing, parasailing, and banana boat rides at beaches like Goa and Diu.</p>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <h4>Snorkeling & Scuba Diving</h4>
+                    <p>Explore vibrant coral reefs and marine life in the Andaman Islands and Lakshadweep.</p>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <h4>Beach Yoga & Wellness</h4>
+                    <p>Practice yoga and indulge in Ayurvedic treatments at Kovalam and Varkala.</p>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <h4>Cultural Experiences</h4>
+                    <p>Attend beach festivals in Puri or explore French heritage in Pondicherry.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="text-center mb-5 section-title">Share Your Beach Adventure</h2>
+            <div class="row">
+                <div class="col-md-6 mx-auto">
+                    <div class="beach-form">
+                        <form id="beachForm">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Your Name</label>
+                                <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="beach" class="form-label">Beach Destination</label>
+                                <select class="form-control" id="beach" required>
+                                    <option value="">Select a beach</option>
+                                    <option value="goa">Goa</option>
+                                    <option value="andaman">Andaman and Nicobar Islands</option>
+                                    <option value="kovalam">Kovalam, Kerala</option>
+                                    <option value="gokarna">Gokarna, Karnataka</option>
+                                    <option value="puri">Puri, Odisha</option>
+                                    <option value="varkala">Varkala, Kerala</option>
+                                    <option value="alappuzha">Alappuzha, Kerala</option>
+                                    <option value="diu">Diu</option>
+                                    <option value="pondicherry">Pondicherry</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="experience" class="form-label">Your Experience</label>
+                                <textarea class="form-control" id="experience" rows="4" placeholder="Share your beach adventure..." required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="photos" class="form-label">Upload Photos</label>
+                                <input type="file" class="form-control" id="photos" multiple accept="image/*">
+                                <div id="photoPreview" class="mt-2"></div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Share Adventure</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Beach Modal -->
+    <div class="modal fade" id="beachModal" tabindex="-1" aria-labelledby="beachModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="beachModalLabel">Beach Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="beach-detail-content">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <img src="" alt="" class="img-fluid beach-image">
+                            </div>
+                            <div class="col-md-6">
+                                <h3 class="beach-name"></h3>
+                                <p class="beach-description"></p>
+                                <div class="beach-info">
+                                    <div class="info-item">
+                                        <i class="fas fa-clock"></i>
+                                        <span class="best-time"></span>
+                                    </div>
+                                    <div class="info-item">
+                                        <i class="fas fa-star"></i>
+                                        <span class="vibe"></span>
+                                    </div>
+                                    <div class="info-item">
+                                        <i class="fas fa-water"></i>
+                                        <span class="beach-type"></span>
+                                    </div>
+                                </div>
+                                <div class="beach-features"></div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <h4>Beach Highlights</h4>
+                                <p class="beach-highlights"></p>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <h4>Things to Do</h4>
+                                <ul class="things-to-do"></ul>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <h4>How to Reach</h4>
+                                <div class="how-to-reach"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="#" class="btn btn-primary book-now-btn">Plan Your Visit</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    
+
+    <!-- Bootstrap JS and Custom JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Beach data
+        const beaches = {
+            'goa': {
+                name: 'Goa',
+                image: 'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?q=80&w=2070',
+                description: 'Famous for its vibrant beaches like Baga, Anjuna, and Palolem, Goa is a hub for nightlife, water sports, and coastal cuisine.',
+                bestTime: '3-5 days',
+                vibe: 'Party & Relaxation',
+                beachType: 'Sandy',
+                highlights: 'Goa offers a perfect blend of sun-soaked beaches, lively shacks, and a vibrant party scene, making it a top beach destination.',
+                features: ['Nightlife', 'Water Sports'],
+                thingsToDo: [
+                    'Party at Baga Beach',
+                    'Try jet skiing at Calangute',
+                    'Relax at Palolem Beach',
+                    'Explore Anjuna Flea Market',
+                    'Enjoy seafood at beach shacks'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Dabolim Airport (25 km)' },
+                    { type: 'train', text: 'Madgaon Railway Station' },
+                    { type: 'car', text: 'Well-connected by road' }
+                ]
+            },
+            'andaman': {
+                name: 'Andaman and Nicobar Islands',
+                image: 'https://images.unsplash.com/photo-1593697821152-8c15313125df?q=80&w=2070',
+                description: 'Pristine beaches like Radhanagar and Neil Island offer crystal waters and coral reefs, perfect for snorkeling and scuba diving.',
+                bestTime: '5-7 days',
+                vibe: 'Serene & Adventure',
+                beachType: 'Coral',
+                highlights: 'The Andamans are a tropical paradise with untouched beaches and vibrant marine life, ideal for adventure and tranquility.',
+                features: ['Snorkeling', 'Scuba Diving'],
+                thingsToDo: [
+                    'Snorkel at Havelock Island',
+                    'Scuba dive at Neil Island',
+                    'Relax at Radhanagar Beach',
+                    'Visit Cellular Jail',
+                    'Explore Ross Island'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Veer Savarkar International Airport, Port Blair' },
+                    { type: 'ship', text: 'Ferry from Chennai or Kolkata' }
+                ]
+            },
+            'kovalam': {
+                name: 'Kovalam, Kerala',
+                image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070',
+                description: 'Known for its crescent-shaped beaches and Ayurvedic resorts, Kovalam is perfect for relaxation and wellness.',
+                bestTime: '2-3 days',
+                vibe: 'Tranquil & Wellness',
+                beachType: 'Sandy',
+                highlights: 'Kovalam’s serene beaches and Ayurvedic treatments offer a rejuvenating escape with stunning Arabian Sea views.',
+                features: ['Ayurveda', 'Relaxation'],
+                thingsToDo: [
+                    'Relax at Lighthouse Beach',
+                    'Indulge in Ayurvedic massages',
+                    'Visit Hawa Beach',
+                    'Explore Vizhinjam Lighthouse',
+                    'Enjoy local seafood'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Trivandrum International Airport (15 km)' },
+                    { type: 'train', text: 'Trivandrum Central Railway Station (15 km)' },
+                    { type: 'car', text: 'Well-connected by road' }
+                ]
+            },
+            'gokarna': {
+                name: 'Gokarna, Karnataka',
+                image: 'https://images.unsplash.com/photo-1515473787929-0be4e7cd3616?q=80&w=2070',
+                description: 'A serene alternative to Goa, with beaches like Om and Kudle, Gokarna is ideal for yoga and spirituality.',
+                bestTime: '2-3 days',
+                vibe: 'Spiritual & Relaxed',
+                beachType: 'Sandy',
+                highlights: 'Gokarna blends serene beaches with spiritual vibes, offering a peaceful retreat with stunning sunsets.',
+                features: ['Yoga', 'Temples'],
+                thingsToDo: [
+                    'Relax at Om Beach',
+                    'Practice yoga at Kudle Beach',
+                    'Visit Mahabaleshwar Temple',
+                    'Trek to Half Moon Beach',
+                    'Enjoy beachside cafes'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Dabolim Airport, Goa (140 km)' },
+                    { type: 'train', text: 'Gokarna Road Railway Station (10 km)' },
+                    { type: 'car', text: 'Well-connected by road' }
+                ]
+            },
+            'puri': {
+                name: 'Puri, Odisha',
+                image: 'https://images.unsplash.com/photo-1604503243048-c3b258bb79bc?q=80&w=2070',
+                description: 'A sacred beach destination with Golden Beach and the Jagannath Temple, known for its cultural and spiritual significance.',
+                bestTime: '2-3 days',
+                vibe: 'Spiritual & Cultural',
+                beachType: 'Sandy',
+                highlights: 'Puri combines the spiritual allure of Jagannath Temple with the vibrant energy of its Golden Beach.',
+                features: ['Jagannath Temple', 'Beach Festival'],
+                thingsToDo: [
+                    'Visit Jagannath Temple',
+                    'Relax at Golden Beach',
+                    'Attend Puri Beach Festival',
+                    'Explore Konark Sun Temple',
+                    'Enjoy local Odia cuisine'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Biju Patnaik International Airport, Bhubaneswar (60 km)' },
+                    { type: 'train', text: 'Puri Railway Station' },
+                    { type: 'car', text: 'Well-connected by road' }
+                ]
+            },
+            'varkala': {
+                name: 'Varkala, Kerala',
+                image: 'https://images.unsplash.com/photo-1597078737119-7f76ee897dc1?q=80&w=2070',
+                description: 'Famous for its cliff-lined beaches and bohemian vibe, Varkala is ideal for surfing, yoga, and relaxation.',
+                bestTime: '2-3 days',
+                vibe: 'Bohemian & Adventure',
+                beachType: 'Sandy',
+                highlights: 'Varkala’s dramatic cliffs and vibrant beach culture make it a haven for surfers and free spirits.',
+                features: ['Surfing', 'Yoga'],
+                thingsToDo: [
+                    'Surf at Varkala Beach',
+                    'Practice yoga on the cliffs',
+                    'Visit Janardhana Swami Temple',
+                    'Explore North Cliff cafes',
+                    'Relax at Black Beach'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Trivandrum International Airport (50 km)' },
+                    { type: 'train', text: 'Varkala Sivagiri Railway Station (3 km)' },
+                    { type: 'car', text: 'Well-connected by road' }
+                ]
+            },
+            'alappuzha': {
+                name: 'Alappuzha, Kerala',
+                image: 'https://images.unsplash.com/photo-1605351354358-53d4b24f68e5?q=80&w=2070',
+                description: 'Known for its backwaters and serene beach, Alappuzha offers houseboat stays and delicious seafood.',
+                bestTime: '2-3 days',
+                vibe: 'Serene & Cultural',
+                beachType: 'Sandy',
+                highlights: 'Alappuzha’s tranquil beach and backwater cruises provide a unique coastal experience steeped in Kerala’s culture.',
+                features: ['Houseboats', 'Seafood'],
+                thingsToDo: [
+                    'Relax at Alappuzha Beach',
+                    'Cruise on a houseboat',
+                    'Visit Alappuzha Lighthouse',
+                    'Explore backwaters',
+                    'Enjoy Kerala cuisine'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Cochin International Airport (80 km)' },
+                    { type: 'train', text: 'Alappuzha Railway Station' },
+                    { type: 'car', text: 'Well-connected by road' }
+                ]
+            },
+            'diu': {
+                name: 'Diu',
+                image: 'https://images.unsplash.com/photo-1621330396168-6121ced03db8?q=80&w=2070',
+                description: 'A quaint island with Nagoa and Ghoghla beaches, offering a relaxed vibe and water sports.',
+                bestTime: '2-3 days',
+                vibe: 'Relaxed & Adventure',
+                beachType: 'Sandy',
+                highlights: 'Diu’s peaceful beaches and Portuguese heritage make it a charming getaway for relaxation and exploration.',
+                features: ['Water Sports', 'Diu Fort'],
+                thingsToDo: [
+                    'Relax at Nagoa Beach',
+                    'Try water sports at Ghoghla Beach',
+                    'Visit Diu Fort',
+                    'Explore St. Paul’s Church',
+                    'Enjoy sunset at INS Khukri Memorial'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Diu Airport (5 km)' },
+                    { type: 'train', text: 'Veraval Railway Station (90 km)' },
+                    { type: 'car', text: 'Well-connected by road' }
+                ]
+            },
+            'pondicherry': {
+                name: 'Pondicherry',
+                image: 'https://images.unsplash.com/photo-1516306584366-1b98397e1f33?q=80&w=2070',
+                description: 'A blend of French charm and beaches like Paradise and Auroville, ideal for relaxation and cultural exploration.',
+                bestTime: '2-3 days',
+                vibe: 'Cultural & Relaxed',
+                beachType: 'Sandy',
+                highlights: 'Pondicherry’s French quarters and serene beaches offer a unique blend of culture and coastal beauty.',
+                features: ['French Cafes', 'Auroville'],
+                thingsToDo: [
+                    'Relax at Paradise Beach',
+                    'Visit Auroville',
+                    'Explore White Town',
+                    'Dine at French cafes',
+                    'Walk along Promenade Beach'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Puducherry Airport (6 km)' },
+                    { type: 'train', text: 'Puducherry Railway Station' },
+                    { type: 'car', text: 'Well-connected by road' }
+                ]
+            }
+        };
+
+        // Function to open beach modal
+        function openBeachModal(beachId) {
+            const beach = beaches[beachId];
+            if (!beach) return;
+
+            const modal = document.getElementById('beachModal');
+            const modalTitle = modal.querySelector('.modal-title');
+            const modalImage = modal.querySelector('.beach-image');
+            const modalName = modal.querySelector('.beach-name');
+            const modalDescription = modal.querySelector('.beach-description');
+            const modalBestTime = modal.querySelector('.best-time');
+            const modalVibe = modal.querySelector('.vibe');
+            const modalBeachType = modal.querySelector('.beach-type');
+            const modalHighlights = modal.querySelector('.beach-highlights');
+            const modalFeatures = modal.querySelector('.beach-features');
+            const modalThingsToDo = modal.querySelector('.things-to-do');
+            const modalHowToReach = modal.querySelector('.how-to-reach');
+
+            modalTitle.textContent = beach.name;
+            modalImage.src = beach.image;
+            modalImage.alt = beach.name;
+            modalName.textContent = beach.name;
+            modalDescription.textContent = beach.description;
+            modalBestTime.textContent = `Best Time: ${beach.bestTime}`;
+            modalVibe.textContent = `Vibe: ${beach.vibe}`;
+            modalBeachType.textContent = `Beach Type: ${beach.beachType}`;
+            modalHighlights.textContent = beach.highlights;
+
+            modalFeatures.innerHTML = beach.features.map(feature => 
+                `<span class="card-features"><i class="fas fa-check"></i> ${feature}</span>`
+            ).join('');
+
+            modalThingsToDo.innerHTML = beach.thingsToDo.map(thing => 
+                `<li><i class="fas fa-check-circle"></i> ${thing}</li>`
+            ).join('');
+
+            modalHowToReach.innerHTML = beach.howToReach.map(option => 
+                `<div class="transport-option">
+                    <i class="fas fa-${option.type}"></i>
+                    <span>${option.text}</span>
+                </div>`
+            ).join('');
+
+            const modalInstance = new bootstrap.Modal(modal);
+            modalInstance.show();
+        }
+
+        // Add click event listeners to all Learn More buttons
+        document.querySelectorAll('.beach-card .btn-primary').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const beachId = this.closest('.beach-card').dataset.beach;
+                openBeachModal(beachId);
+            });
+        });
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a.nav-link').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                window.scrollTo({
+                    top: targetElement.offsetTop - 70,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
+{% endblock %}

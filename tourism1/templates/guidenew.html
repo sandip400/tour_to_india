@@ -1,0 +1,558 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Guide Connect - Find trusted local guides for your next trip</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .guide-card {
+            transition: all 0.3s ease;
+        }
+        .guide-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        .guide-image {
+            transition: transform 0.3s ease;
+        }
+        .guide-card:hover .guide-image {
+            transform: scale(1.1);
+        }
+        .guide-overlay {
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+        .guide-card:hover .guide-overlay {
+            opacity: 1;
+        }
+        .guide-button {
+            transition: all 0.3s ease;
+        }
+        .guide-button:hover {
+            transform: scale(1.05);
+        }
+        .section {
+            display: none;
+        }
+        .section.active {
+            display: block;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Booking form styles */
+        .booking-form {
+            max-width: 520px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin: 0 auto;
+        }
+
+        .booking-form h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2c3e50;
+            font-size: 28px;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .booking-form h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 8px;
+            color: #34495e;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e1e8ed;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+            color: #2c3e50;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .form-group input:hover, .form-group select:hover, .form-group textarea:hover {
+            border-color: #bdc3c7;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+            font-family: inherit;
+        }
+
+        .form-group select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 12px center;
+            background-repeat: no-repeat;
+            background-size: 16px;
+            padding-right: 40px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 18px 30px;
+            border-radius: 12px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 18px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+
+        .submit-btn:active {
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
+    
+    <!-- Guidebook Section -->
+    <div id="guidebook-section" class="section active">
+        <!-- Header -->
+        <header class="bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 text-white shadow-lg">
+            <div class="container mx-auto px-6 py-12 text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4 tracking-tight">Local Guide Connect</h1>
+                <p class="text-xl md:text-2xl text-blue-100 font-light">Find trusted local guides for your next trip</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="container mx-auto px-6 py-12">
+            <section>
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Available Guides</h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-indigo-500 mx-auto rounded-full"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Guide Card 1 - Priya Sharma -->
+                    <div class="guide-card group bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
+                        <div class="relative overflow-hidden">
+                            <img
+                                src="https://images.unsplash.com/photo-1634671452706-9b746f493b90?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                                alt="Priya Sharma - Local Guide"
+                                class="guide-image w-full h-48 object-cover"
+                            />
+                            <div class="guide-overlay absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                        </div>
+
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-800 mb-3">Priya Sharma</h3>
+
+                            <div class="space-y-2 mb-6">
+                                <div class="flex items-center text-gray-600">
+                                    <svg class="w-4 h-4 mr-2 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            fill-rule="evenodd"
+                                            d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                            clip-rule="evenodd"
+                                        />
+                                    </svg>
+                                    <span class="font-medium">Jaipur</span>
+                                </div>
+
+                                <div class="flex items-center text-gray-600">
+                                    <svg class="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            fill-rule="evenodd"
+                                            d="M7 4a3 3 0 016 0v4a3 3 0 11-6 0V4zm4 10.93A7.001 7.001 0 0017 8a1 1 0 10-2 0A5 5 0 015 8a1 1 0 00-2 0 7.001 7.001 0 006 6.93V17H6a1 1 0 100 2h8a1 1 0 100-2h-3v-2.07z"
+                                            clip-rule="evenodd"
+                                        />
+                                    </svg>
+                                    <span>English, Hindi, French</span>
+                                </div>
+
+                                <div class="flex items-start text-gray-600">
+                                    <svg class="w-4 h-4 mr-2 mt-0.5 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    <span>Food Tours, Culture</span>
+                                </div>
+                            </div>
+
+                            <button onclick="showProfile()" class="guide-button w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-blue-700 hover:to-indigo-700 focus:outline-none focus:ring-4 focus:ring-blue-300">
+                                View Profile
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Guide Card 2 -->
+                    <div class="guide-card group bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
+                        <div class="relative overflow-hidden">
+                            <img
+                                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&h=200&q=80"
+                                alt="Rajiv Menon - Local Guide"
+                                class="guide-image w-full h-48 object-cover"
+                            />
+                            <div class="guide-overlay absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                        </div>
+
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-800 mb-3">Rajiv Menon</h3>
+
+                            <div class="space-y-2 mb-6">
+                                <div class="flex items-center text-gray-600">
+                                    <svg class="w-4 h-4 mr-2 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            fill-rule="evenodd"
+                                            d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                            clip-rule="evenodd"
+                                        />
+                                    </svg>
+                                    <span class="font-medium">Kochi</span>
+                                </div>
+
+                                <div class="flex items-center text-gray-600">
+                                    <svg class="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            fill-rule="evenodd"
+                                            d="M7 4a3 3 0 016 0v4a3 3 0 11-6 0V4zm4 10.93A7.001 7.001 0 0017 8a1 1 0 10-2 0A5 5 0 715 8a1 1 0 00-2 0 7.001 7.001 0 006 6.93V17H6a1 1 0 100 2h8a1 1 0 100-2h-3v-2.07z"
+                                            clip-rule="evenodd"
+                                        />
+                                    </svg>
+                                    <span>English, Hindi, Malayalam</span>
+                                </div>
+
+                                <div class="flex items-start text-gray-600">
+                                    <svg class="w-4 h-4 mr-2 mt-0.5 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    <span>Backwater Tours, Nature</span>
+                                </div>
+                            </div>
+
+                            <button class="guide-button w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-blue-700 hover:to-indigo-700 focus:outline-none focus:ring-4 focus:ring-blue-300">
+                                View Profile
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Guide Card 3 -->
+                    <div class="guide-card group bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
+                        <div class="relative overflow-hidden">
+                            <img
+                                src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&h=200&q=80"
+                                alt="Maya Patel - Local Guide"
+                                class="guide-image w-full h-48 object-cover"
+                            />
+                            <div class="guide-overlay absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                        </div>
+
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-800 mb-3">Maya Patel</h3>
+
+                            <div class="space-y-2 mb-6">
+                                <div class="flex items-center text-gray-600">
+                                    <svg class="w-4 h-4 mr-2 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            fill-rule="evenodd"
+                                            d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                            clip-rule="evenodd"
+                                        />
+                                    </svg>
+                                    <span class="font-medium">Mumbai</span>
+                                </div>
+
+                                <div class="flex items-center text-gray-600">
+                                    <svg class="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            fill-rule="evenodd"
+                                            d="M7 4a3 3 0 016 0v4a3 3 0 11-6 0V4zm4 10.93A7.001 7.001 0 0017 8a1 1 0 10-2 0A5 5 0 715 8a1 1 0 00-2 0 7.001 7.001 0 006 6.93V17H6a1 1 0 100 2h8a1 1 0 100-2h-3v-2.07z"
+                                            clip-rule="evenodd"
+                                        />
+                                    </svg>
+                                    <span>English, Hindi, Marathi</span>
+                                </div>
+
+                                <div class="flex items-start text-gray-600">
+                                    <svg class="w-4 h-4 mr-2 mt-0.5 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    <span>City Tours, History</span>
+                                </div>
+                            </div>
+
+                            <button class="guide-button w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-blue-700 hover:to-indigo-700 focus:outline-none focus:ring-4 focus:ring-blue-300">
+                                View Profile
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-white py-8 mt-16">
+            <div class="container mx-auto px-6 text-center">
+                <p class="text-gray-300">&copy; 2025 Local Guide Connect | Travel with Insight</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Profile Section -->
+    <div id="profile-section" class="section">
+        <!-- Header -->
+        <header class="bg-blue-700 text-white py-6">
+            <div class="container mx-auto px-4 text-center">
+                <h1 class="text-3xl font-bold">Guide Profile</h1>
+                <p class="text-blue-200">Get to know your guide better before your trip</p>
+            </div>
+        </header>
+
+        <!-- Profile Section -->
+        <main class="container mx-auto px-4 py-10">
+            <div class="grid md:grid-cols-3 gap-8 items-start">
+                
+                <!-- Guide Photo -->
+                <div class="md:col-span-1">
+                    <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?q=80" 
+                         alt="Guide Profile"
+                         class="w-full rounded-2xl shadow-lg object-cover h-80" />
+                </div>
+
+                <!-- Guide Details -->
+                <div class="md:col-span-2 space-y-4">
+                    <h2 class="text-2xl font-bold text-gray-800">Priya Sharma</h2>
+                    <p class="text-gray-600"><strong>Location:</strong> Jaipur</p>
+                    <p class="text-gray-600"><strong>Languages:</strong> English, French</p>
+                    <p class="text-gray-600"><strong>Specialties:</strong> Food Tours, Culture</p>
+                    <p class="text-gray-600"><strong>Experience:</strong> 5+ years</p>
+                    <p class="text-gray-700 leading-relaxed">
+                        Priya is a passionate food lover and cultural enthusiast who has been showing tourists around Jaipur for over five years. Her tours are informative, friendly, and full of local flavors.
+                    </p>
+
+                    <!-- Ratings -->
+                    <div class="flex items-center space-x-2 mt-4">
+                        <span class="text-yellow-400">★★★★★</span>
+                        <span class="text-sm text-gray-500">(128 reviews)</span>
+                    </div>
+
+                    <!-- Pricing -->
+                    <div class="mt-6 space-y-1">
+                        <p><strong>Hourly Rate:</strong> ₹500</p>
+                        <p><strong>Half-Day:</strong> ₹1,500</p>
+                        <p><strong>Full-Day:</strong> ₹2,500</p>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="mt-6 space-x-4">
+                        <button onclick="showBooking()" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg">Book Now</button>
+                        <button onclick="goBack()" class="inline-block bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold px-6 py-3 rounded-lg">Back to Guides</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-white py-6 mt-16">
+            <div class="text-center text-gray-300">
+                &copy; 2025 Local Guide Connect
+            </div>
+        </footer>
+    </div>
+
+    <!-- Booking Section -->
+    <div id="booking-section" class="section">
+        <div class="min-h-screen bg-gradient-to-br from-blue-100 via-white to-indigo-100 py-20 px-4">
+            <div class="booking-form fade-in">
+                <h2>Book Your Guide</h2>
+
+                <form onsubmit="handleBookingSubmit(event)">
+                    <div class="form-group">
+                        <label for="traveler-name">Your Name</label>
+                        <input type="text" id="traveler-name" name="traveler_name" placeholder="Enter your full name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date">Select Date</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="time">Preferred Start Time</label>
+                        <input type="time" id="time" name="start_time" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="duration">Duration</label>
+                        <select id="duration" name="duration" required>
+                            <option value="">Choose your preferred duration</option>
+                            <option value="1">1 Hour - Quick Tour</option>
+                            <option value="2">2 Hours - Essential Highlights</option>
+                            <option value="4">Half Day (4 Hours) - In-Depth Experience</option>
+                            <option value="8">Full Day (8 Hours) - Complete Adventure</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Special Requests</label>
+                        <textarea id="message" name="message" rows="4" placeholder="Tell us about your interests, accessibility needs, or any special requests..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="submit-btn">Confirm Booking</button>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="button" onclick="goBack()" class="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-3 px-6 rounded-lg">Back to Profile</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // Navigation history to track previous pages
+    let navigationHistory = ['guidebook-section'];
+
+    function showSection(sectionId, addToHistory = true) {
+        // Hide all sections
+        const sections = document.querySelectorAll('.section');
+        sections.forEach(section => {
+            section.classList.remove('active');
+        });
+        
+        // Show the requested section
+        const targetSection = document.getElementById(sectionId);
+        if (targetSection) {
+            targetSection.classList.add('active');
+            
+            // Add to history if specified
+            if (addToHistory) {
+                navigationHistory.push(sectionId);
+            }
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+    }
+
+    function goBack() {
+        // Remove current page from history
+        if (navigationHistory.length > 1) {
+            navigationHistory.pop();
+            // Get previous page
+            const previousPage = navigationHistory[navigationHistory.length - 1];
+            showSection(previousPage, false); // Don't add to history when going back
+        }
+    }
+
+    function showGuidebook() {
+        showSection('guidebook-section');
+    }
+
+    function showProfile() {
+        showSection('profile-section');
+    }
+
+    function showBooking() {
+        showSection('booking-section');
+    }
+
+    function handleBookingSubmit(event) {
+        event.preventDefault();
+        
+        // Get form data
+        const formData = new FormData(event.target);
+        const bookingData = Object.fromEntries(formData);
+        
+        // Show confirmation
+        alert(`Booking confirmed for ${bookingData.traveler_name}!\n\nGuide: Priya Sharma\nDate: ${bookingData.date}\nTime: ${bookingData.start_time}\nDuration: ${bookingData.duration} hour(s)\n\nYou will receive a confirmation email shortly.`);
+        
+        // Reset form
+        event.target.reset();
+        
+        // Reset navigation history and go back to guidebook
+        navigationHistory = ['guidebook-section'];
+        showSection('guidebook-section', false);
+    }
+
+    // Set minimum date to today
+    document.addEventListener('DOMContentLoaded', function() {
+        const dateInput = document.getElementById('date');
+        if (dateInput) {
+            const today = new Date().toISOString().split('T')[0];
+            dateInput.setAttribute('min', today);
+        }
+    });
+</script>
+</body>
+</html>

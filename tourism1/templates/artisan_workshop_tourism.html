@@ -1,0 +1,1024 @@
+{% extends "base.html" %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CraftVibe - Artisan Workshops in India</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Custom CSS -->
+    <style>
+        .bo{
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+        }
+        
+        .hero-section {
+            background: url('https://images.unsplash.com/photo-1513519245088-0e12902e5a38?q=80&w=2070') no-repeat center center;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(2, 136, 209, 0.5), rgba(79, 195, 247, 0.5));
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        .hero-section h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease-in-out;
+        }
+        .hero-section p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease-in-out 0.3s;
+            animation-fill-mode: both;
+        }
+        .hero-section .btn {
+            font-size: 1.2rem;
+            padding: 12px 30px;
+            background-color: #0288d1;
+            border: none;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            animation: fadeInUp 1s ease-in-out 0.6s;
+            animation-fill-mode: both;
+        }
+        .hero-section .btn:hover {
+            background-color: #4fc3f7;
+            transform: translateY(-5px) scale(1.05);
+        }
+        .workshops-section {
+            background: url('https://images.unsplash.com/photo-1513519245088-0e12902e5a38?q=80&w=2070') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            padding: 80px 0;
+        }
+        .workshops-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(240, 244, 248, 0.9);
+            z-index: 1;
+        }
+        .workshops-section .container {
+            position: relative;
+            z-index: 2;
+        }
+        .workshop-card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: #fff;
+            animation: fadeInUp 0.5s ease-out;
+            animation-fill-mode: both;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .workshop-card:nth-child(1) { animation-delay: 0.1s; }
+        .workshop-card:nth-child(2) { animation-delay: 0.2s; }
+        .workshop-card:nth-child(3) { animation-delay: 0.3s; }
+        .workshop-card:nth-child(4) { animation-delay: 0.4s; }
+        .workshop-card:nth-child(5) { animation-delay: 0.5s; }
+        .workshop-card:nth-child(6) { animation-delay: 0.6s; }
+        .workshop-card:nth-child(7) { animation-delay: 0.7s; }
+        .workshop-card:nth-child(8) { animation-delay: 0.8s; }
+        .workshop-card:nth-child(9) { animation-delay: 0.9s; }
+        .workshop-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        .workshop-card img {
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .workshop-card:hover img {
+            transform: scale(1.05);
+        }
+        .workshop-card .card-body {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .workshop-card .card-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            color: #0288d1;
+            transition: color 0.3s ease;
+        }
+        .workshop-card:hover .card-title {
+            color: #4fc3f7;
+        }
+        .workshop-card .card-text {
+            color: #555;
+            flex-grow: 1;
+        }
+        .workshop-card .btn {
+            background-color: #4fc3f7;
+            border: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .workshop-card .btn:hover {
+            background-color: #0288d1;
+            transform: translateY(-3px);
+        }
+        .activities-section {
+            background: url('https://images.unsplash.com/photo-1513519245088-0e12902e5a38?q=80&w=2070') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            padding: 80px 0;
+        }
+        .activities-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            z-index: 1;
+        }
+        .activities-section .container {
+            position: relative;
+            z-index: 2;
+        }
+        .activities-section h2, .workshops-section h2, .contact-section h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: #0288d1;
+            font-size: 2.8rem;
+            margin-bottom: 40px;
+            animation: fadeInDown 0.5s ease-out;
+        }
+        .activities-section h4 {
+            color: #4fc3f7;
+            font-family: 'Montserrat', sans-serif;
+            transition: color 0.3s ease;
+        }
+        .activities-section h4:hover {
+            color: #0288d1;
+        }
+        .contact-section {
+            background: url('https://images.unsplash.com/photo-1513519245088-0e12902e5a38?q=80&w=2070') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            padding: 80px 0;
+        }
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(240, 244, 248, 0.9);
+            z-index: 1;
+        }
+        .contact-section .container {
+            position: relative;
+            z-index: 2;
+        }
+        .contact-section .form-control {
+            border-radius: 10px;
+            border: 1px solid #4fc3f7;
+            padding: 12px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .contact-section .form-control:focus {
+            border-color: #0288d1;
+            box-shadow: 0 0 8px rgba(2, 136, 209, 0.3);
+        }
+        .contact-section .btn {
+            background-color: #0288d1;
+            border: none;
+            padding: 12px;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .contact-section .btn:hover {
+            background-color: #4fc3f7;
+            transform: translateY(-3px);
+        }
+        footer {
+            background: url('https://images.unsplash.com/photo-1513519245088-0e12902e5a38?q=80&w=2070') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            color: #fff;
+            padding: 30px 0;
+            font-size: 1rem;
+        }
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(2, 136, 209, 0.8), rgba(79, 195, 247, 0.8));
+            z-index: 1;
+        }
+        footer .container {
+            position: relative;
+            z-index: 2;
+        }
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideInDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .section-title {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-bottom: 1rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, #0288d1, #4fc3f7);
+            animation: pulse 2s infinite;
+        }
+        .card {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+        .btn {
+            border-radius: 25px;
+            padding: 10px 25px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .modal-content {
+            border-radius: 15px;
+            border: none;
+            animation: fadeInUp 0.3s ease-out;
+        }
+        .modal-header {
+            background: linear-gradient(90deg, #0288d1, #4fc3f7);
+            color: white;
+            border-radius: 15px 15px 0 0;
+        }
+        .workshop-card {
+            animation: slideInLeft 0.5s ease-out;
+        }
+        @keyframes slideInLeft {
+            from { transform: translateX(-50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+    </style>
+</head>
+
+<div class="bo">
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-content">
+            <h1>Create with India's Artisans</h1>
+            <p>Immerse yourself in hands-on workshops to master traditional Indian crafts.</p>
+            <a href="#workshops" class="btn btn-primary btn-lg">Explore Workshops</a>
+        </div>
+    </section>
+
+    <!-- Workshops Section -->
+    <section id="workshops" class="workshops-section">
+        <div class="container">
+            <h2 class="text-center mb-5 section-title">Top Artisan Workshops in India</h2>
+            <div class="row">
+                <!-- Card 1: Jaipur Block Printing -->
+                <div class="col-md-4 mb-4">
+                    <div class="card workshop-card" data-workshop="jaipur_block_printing">
+                        <img src="https://media.istockphoto.com/id/2161986087/photo/young-man-working-in-a-block-printing-factory-in-jaipur-india.jpg?s=2048x2048&w=is&k=20&c=7LqRndSxLM_nlYe7yzXj51m6Gnh-THhoGmTqWi3WACY=" class="card-img-top" alt="Jaipur Block Printing Workshop">
+                        <div class="card-body">
+                            <h5 class="card-title">Block Printing, Jaipur</h5>
+                            <p class="card-text">Learn the art of hand-block printing with traditional Rajasthani motifs.</p>
+                            <div class="workshop-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Duration: 1-2 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Craft: Textile Printing</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-map"></i>
+                                    <span>Region: Rajasthan</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-paint-brush"></i> Hand Printing</span>
+                                <span><i class="fas fa-tshirt"></i> Fabric Design</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Varanasi Silk Weaving -->
+                <div class="col-md-4 mb-4">
+                    <div class="card workshop-card" data-workshop="varanasi_silk_weaving">
+                        <img src="https://images.unsplash.com/photo-1611584436801-6dd82d70ade6?q=80&w=1976&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Varanasi Silk Weaving Workshop">
+                        <div class="card-body">
+                            <h5 class="card-title">Silk Weaving, Varanasi</h5>
+                            <p class="card-text">Master the craft of weaving Banarasi silk sarees with skilled artisans.</p>
+                            <div class="workshop-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Duration: 2-3 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Craft: Silk Weaving</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-map"></i>
+                                    <span>Region: Uttar Pradesh</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-tools"></i> Loom Weaving</span>
+                                <span><i class="fas fa-tshirt"></i> Saree Design</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Udaipur Miniature Painting -->
+                <div class="col-md-4 mb-4">
+                    <div class="card workshop-card" data-workshop="udaipur_miniature_painting">
+                        <img src="https://images.unsplash.com/photo-1694370806118-c34c72badd81?q=80&w=2060&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Udaipur Miniature Painting Workshop">
+                        <div class="card-body">
+                            <h5 class="card-title">Miniature Painting, Udaipur</h5>
+                            <p class="card-text">Create intricate Rajasthani miniature paintings with traditional techniques.</p>
+                            <div class="workshop-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Duration: 1-2 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Craft: Painting</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-map"></i>
+                                    <span>Region: Rajasthan</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-paint-brush"></i> Fine Art</span>
+                                <span><i class="fas fa-palette"></i> Color Blending</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4: Kutch Embroidery -->
+                <div class="col-md-4 mb-4">
+                    <div class="card workshop-card" data-workshop="kutch_embroidery">
+                        <img src="https://images.unsplash.com/photo-1592169138776-7c9211066fc8?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Kutch Embroidery Workshop">
+                        <div class="card-body">
+                            <h5 class="card-title">Embroidery, Kutch</h5>
+                            <p class="card-text">Learn vibrant Kutchi embroidery with mirror work and colorful patterns.</p>
+                            <div class="workshop-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Duration: 2-3 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Craft: Embroidery</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-map"></i>
+                                    <span>Region: Gujarat</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-sewing-machine"></i> Needlework</span>
+                                <span><i class="fas fa-tshirt"></i> Textile Art</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5: Madhubani Painting -->
+                <div class="col-md-4 mb-4">
+                    <div class="card workshop-card" data-workshop="madhubani_painting">
+                        <img src="https://plus.unsplash.com/premium_photo-1678257846725-e88b5280900b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Madhubani Painting Workshop">
+                        <div class="card-body">
+                            <h5 class="card-title">Madhubani Painting, Bihar</h5>
+                            <p class="card-text">Create intricate Madhubani art with vibrant colors and folk motifs.</p>
+                            <div class="workshop-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Duration: 1-2 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Craft: Folk Painting</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-map"></i>
+                                    <span>Region: Bihar</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-paint-brush"></i> Folk Art</span>
+                                <span><i class="fas fa-palette"></i> Vibrant Colors</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6: Channapatna Toy Making -->
+                <div class="col-md-4 mb-4">
+                    <div class="card workshop-card" data-workshop="channapatna_toy_making">
+                        <img src="https://images.unsplash.com/photo-1629019317873-3f603b269723?q=80&w=2038&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Channapatna Toy Making Workshop">
+                        <div class="card-body">
+                            <h5 class="card-title">Toy Making, Channapatna</h5>
+                            <p class="card-text">Craft colorful wooden toys using traditional lacquer techniques.</p>
+                            <div class="workshop-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Duration: 1-2 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Craft: Woodwork</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-map"></i>
+                                    <span>Region: Karnataka</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-tools"></i> Wood Carving</span>
+                                <span><i class="fas fa-paint-roller"></i> Lacquer Finishing</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 7: Puri Pattachitra -->
+                <div class="col-md-4 mb-4">
+                    <div class="card workshop-card" data-workshop="puri_pattachitra">
+                        <img src="https://plus.unsplash.com/premium_photo-1667239054884-d3ef8dbc6380?q=80&w=1992&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Puri Pattachitra Workshop">
+                        <div class="card-body">
+                            <h5 class="card-title">Pattachitra, Puri</h5>
+                            <p class="card-text">Learn the ancient art of Pattachitra painting with mythological themes.</p>
+                            <div class="workshop-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Duration: 1-2 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Craft: Traditional Painting</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-map"></i>
+                                    <span>Region: Odisha</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-paint-brush"></i> Mythological Art</span>
+                                <span><i class="fas fa-palette"></i> Natural Colors</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 8: Agra Marble Inlay -->
+                <div class="col-md-4 mb-4">
+                    <div class="card workshop-card" data-workshop="agra_marble_inlay">
+                        <img src="https://images.unsplash.com/photo-1668493266499-6318403c3181?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Agra Marble Inlay Workshop">
+                        <div class="card-body">
+                            <h5 class="card-title">Marble Inlay, Agra</h5>
+                            <p class="card-text">Master the Mughal art of marble inlay with semi-precious stones.</p>
+                            <div class="workshop-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Duration: 2-3 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Craft: Stone Inlay</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-map"></i>
+                                    <span>Region: Uttar Pradesh</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-gem"></i> Stone Work</span>
+                                <span><i class="fas fa-tools"></i> Precision Craft</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 9: Kerala Mural Painting -->
+                <div class="col-md-4 mb-4">
+                    <div class="card workshop-card" data-workshop="kerala_mural_painting">
+                        <img src="https://images.unsplash.com/photo-1731251452984-be79cf0735c6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Kerala Mural Painting Workshop">
+                        <div class="card-body">
+                            <h5 class="card-title">Mural Painting, Kerala</h5>
+                            <p class="card-text">Create vibrant Kerala murals with natural pigments and temple-inspired designs.</p>
+                            <div class="workshop-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Duration: 1-2 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Craft: Mural Art</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-map"></i>
+                                    <span>Region: Kerala</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-paint-brush"></i> Natural Pigments</span>
+                                <span><i class="fas fa-palette"></i> Temple Art</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activities Section -->
+    <section id="activities" class="activities-section">
+        <div class="container">
+            <h2 class="text-center mb-5 section-title">Artisan Workshop Activities</h2>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <h4>Hands-On Craft Workshops</h4>
+                    <p>Create your own textiles, paintings, or wooden crafts under expert guidance in Jaipur, Varanasi, and more.</p>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <h4>Artisan Village Visits</h4>
+                    <p>Explore craft villages like Kutch and Channapatna to meet artisans and see their work in action.</p>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <h4>Craft Market Tours</h4>
+                    <p>Shop for handmade goods and learn about crafts at markets in Agra, Puri, and Kerala.</p>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <h4>Cultural Performances</h4>
+                    <p>Enjoy folk performances and storytelling sessions tied to the crafts in Udaipur and Bihar.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="text-center mb-5 section-title">Share Your Artisan Experience</h2>
+            <div class="row">
+                <div class="col-md-6 mx-auto">
+                    <div class="workshop-form">
+                        <form id="workshopForm">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Your Name</label>
+                                <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="workshop" class="form-label">Workshop Destination</label>
+                                <select class="form-control" id="workshop" required>
+                                    <option value="">Select a workshop</option>
+                                    <option value="jaipur_block_printing">Block Printing, Jaipur</option>
+                                    <option value="varanasi_silk_weaving">Silk Weaving, Varanasi</option>
+                                    <option value="udaipur_miniature_painting">Miniature Painting, Udaipur</option>
+                                    <option value="kutch_embroidery">Embroidery, Kutch</option>
+                                    <option value="madhubani_painting">Madhubani Painting, Bihar</option>
+                                    <option value="channapatna_toy_making">Toy Making, Channapatna</option>
+                                    <option value="puri_pattachitra">Pattachitra, Puri</option>
+                                    <option value="agra_marble_inlay">Marble Inlay, Agra</option>
+                                    <option value="kerala_mural_painting">Mural Painting, Kerala</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="experience" class="form-label">Your Experience</label>
+                                <textarea class="form-control" id="experience" rows="4" placeholder="Share your artisan workshop experience..." required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="photos" class="form-label">Upload Photos</label>
+                                <input type="file" class="form-control" id="photos" multiple accept="image/*">
+                                <div id="photoPreview" class="mt-2"></div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Share Experience</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Workshop Modal -->
+    <div class="modal fade" id="workshopModal" tabindex="-1" aria-labelledby="workshopModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="workshopModalLabel">Workshop Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="workshop-detail-content">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <img src="" alt="" class="img-fluid workshop-image">
+                            </div>
+                            <div class="col-md-6">
+                                <h3 class="workshop-name"></h3>
+                                <p class="workshop-description"></p>
+                                <div class="workshop-info">
+                                    <div class="info-item">
+                                        <i class="fas fa-clock"></i>
+                                        <span class="duration"></span>
+                                    </div>
+                                    <div class="info-item">
+                                        <i class="fas fa-star"></i>
+                                        <span class="craft"></span>
+                                    </div>
+                                    <div class="info-item">
+                                        <i class="fas fa-map"></i>
+                                        <span class="region"></span>
+                                    </div>
+                                </div>
+                                <div class="workshop-features"></div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <h4>Workshop Highlights</h4>
+                                <p class="workshop-highlights"></p>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <h4>Things to Do</h4>
+                                <ul class="things-to-do"></ul>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <h4>How to Reach</h4>
+                                <div class="how-to-reach"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="#" class="btn btn-primary book-now-btn">Book Workshop</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div> 
+
+    
+
+    <!-- Bootstrap JS and Custom JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Workshop data
+        const workshops = {
+            'jaipur_block_printing': {
+                name: 'Block Printing, Jaipur',
+                image: 'https://images.unsplash.com/photo-1610280283455-e408b9753f7e?q=80&w=2070',
+                description: 'Learn the traditional Rajasthani art of hand-block printing, creating vibrant patterns on fabric with carved wooden blocks.',
+                duration: '1-2 days',
+                craft: 'Textile Printing',
+                region: 'Rajasthan',
+                highlights: 'Jaipur’s block printing workshops offer a hands-on experience in creating intricate textile designs with vibrant colors.',
+                features: ['Hand Printing', 'Fabric Design'],
+                thingsToDo: [
+                    'Learn block printing techniques',
+                    'Create your own printed fabric',
+                    'Visit local textile markets',
+                    'Explore artisan villages like Bagru',
+                    'Tour Jaipur’s craft bazaars'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Jaipur International Airport (12 km)' },
+                    { type: 'train', text: 'Jaipur Railway Station (5 km)' },
+                    { type: 'car', text: 'Drive from Delhi (280 km)' }
+                ]
+            },
+            'varanasi_silk_weaving': {
+                name: 'Silk Weaving, Varanasi',
+                image: 'https://images.unsplash.com/photo-1607082349566-187b1f2f1145?q=80&w=2070',
+                description: 'Master the intricate art of weaving Banarasi silk sarees, known for their luxurious patterns and craftsmanship.',
+                duration: '2-3 days',
+                craft: 'Silk Weaving',
+                region: 'Uttar Pradesh',
+                highlights: 'Varanasi’s silk weaving workshops let you work on traditional looms to create exquisite Banarasi sarees.',
+                features: ['Loom Weaving', 'Saree Design'],
+                thingsToDo: [
+                    'Learn silk weaving on handlooms',
+                    'Design your own silk fabric',
+                    'Visit silk markets in Varanasi',
+                    'Explore artisan communities',
+                    'Tour the ghats of Varanasi'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Lal Bahadur Shastri Airport (25 km)' },
+                    { type: 'train', text: 'Varanasi Junction (5 km)' },
+                    { type: 'car', text: 'Drive from Lucknow (300 km)' }
+                ]
+            },
+            'udaipur_miniature_painting': {
+                name: 'Miniature Painting, Udaipur',
+                image: 'https://images.unsplash.com/photo-1605721911519-3d91e4e4e7c6?q=80&w=2070',
+                description: 'Create detailed Rajasthani miniature paintings with fine brushes and vibrant colors, inspired by royal heritage.',
+                duration: '1-2 days',
+                craft: 'Painting',
+                region: 'Rajasthan',
+                highlights: 'Udaipur’s miniature painting workshops teach the delicate art of creating intricate royal-themed artworks.',
+                features: ['Fine Art', 'Color Blending'],
+                thingsToDo: [
+                    'Learn miniature painting techniques',
+                    'Create your own artwork',
+                    'Visit City Palace for inspiration',
+                    'Explore local art galleries',
+                    'Shop for handmade crafts'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Maharana Pratap Airport (25 km)' },
+                    { type: 'train', text: 'Udaipur Railway Station (5 km)' },
+                    { type: 'car', text: 'Drive from Jaipur (400 km)' }
+                ]
+            },
+            'kutch_embroidery': {
+                name: 'Embroidery, Kutch',
+                image: 'https://images.unsplash.com/photo-1610280283455-e408b9753f7e?q=80&w=2070',
+                description: 'Learn the vibrant art of Kutchi embroidery, featuring mirror work and colorful thread patterns.',
+                duration: '2-3 days',
+                craft: 'Embroidery',
+                region: 'Gujarat',
+                highlights: 'Kutch’s embroidery workshops immerse you in the region’s rich textile traditions with hands-on stitching.',
+                features: ['Needlework', 'Textile Art'],
+                thingsToDo: [
+                    'Learn Kutchi embroidery techniques',
+                    'Create embroidered fabric pieces',
+                    'Visit Dhamadka artisan village',
+                    'Explore Bhuj craft markets',
+                    'Tour the Great Rann of Kutch'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Bhuj Airport (70 km)' },
+                    { type: 'train', text: 'Bhuj Railway Station (50 km)' },
+                    { type: 'car', text: 'Drive from Ahmedabad (350 km)' }
+                ]
+            },
+            'madhubani_painting': {
+                name: 'Madhubani Painting, Bihar',
+                image: 'https://images.unsplash.com/photo-1605721911519-3d91e4e4e7c6?q=80&w=2070',
+                description: 'Create vibrant Madhubani paintings with folk motifs, using natural dyes and traditional techniques.',
+                duration: '1-2 days',
+                craft: 'Folk Painting',
+                region: 'Bihar',
+                highlights: 'Madhubani painting workshops teach the intricate folk art of Bihar, known for its storytelling designs.',
+                features: ['Folk Art', 'Vibrant Colors'],
+                thingsToDo: [
+                    'Learn Madhubani painting techniques',
+                    'Create your own folk artwork',
+                    'Visit Mithila art galleries',
+                    'Explore local craft markets',
+                    'Tour historical sites in Madhubani'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Patna Airport (150 km)' },
+                    { type: 'train', text: 'Darbhanga Railway Station (40 km)' },
+                    { type: 'car', text: 'Drive from Patna (180 km)' }
+                ]
+            },
+            'channapatna_toy_making': {
+                name: 'Toy Making, Channapatna',
+                image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070',
+                description: 'Craft colorful wooden toys using traditional lacquer techniques in the toy town of Channapatna.',
+                duration: '1-2 days',
+                craft: 'Woodwork',
+                region: 'Karnataka',
+                highlights: 'Channapatna’s toy-making workshops let you carve and paint eco-friendly wooden toys with artisans.',
+                features: ['Wood Carving', 'Lacquer Finishing'],
+                thingsToDo: [
+                    'Learn wood carving techniques',
+                    'Create your own wooden toy',
+                    'Visit artisan workshops',
+                    'Explore local craft markets',
+                    'Tour nearby Mysore'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Kempegowda International Airport (80 km)' },
+                    { type: 'train', text: 'Mysore Railway Station (50 km)' },
+                    { type: 'car', text: 'Drive from Bangalore (60 km)' }
+                ]
+            },
+            'puri_pattachitra': {
+                name: 'Pattachitra, Puri',
+                image: 'https://images.unsplash.com/photo-1605721911519-3d91e4e4e7c6?q=80&w=2070',
+                description: 'Learn the ancient art of Pattachitra, creating mythological paintings with natural colors on cloth.',
+                duration: '1-2 days',
+                craft: 'Traditional Painting',
+                region: 'Odisha',
+                highlights: 'Puri’s Pattachitra workshops teach the sacred art of painting mythological stories with vibrant hues.',
+                features: ['Mythological Art', 'Natural Colors'],
+                thingsToDo: [
+                    'Learn Pattachitra painting techniques',
+                    'Create your own cloth painting',
+                    'Visit Raghurajpur artisan village',
+                    'Explore Puri’s craft markets',
+                    'Tour Jagannath Temple'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Biju Patnaik International Airport (60 km)' },
+                    { type: 'train', text: 'Puri Railway Station (5 km)' },
+                    { type: 'car', text: 'Drive from Bhubaneswar (60 km)' }
+                ]
+            },
+            'agra_marble_inlay': {
+                name: 'Marble Inlay, Agra',
+                image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070',
+                description: 'Master the Mughal art of marble inlay, embedding semi-precious stones into marble surfaces.',
+                duration: '2-3 days',
+                craft: 'Stone Inlay',
+                region: 'Uttar Pradesh',
+                highlights: 'Agra’s marble inlay workshops offer a chance to learn the intricate craft seen in the Taj Mahal.',
+                features: ['Stone Work', 'Precision Craft'],
+                thingsToDo: [
+                    'Learn marble inlay techniques',
+                    'Create your own inlaid piece',
+                    'Visit Taj Mahal for inspiration',
+                    'Explore local craft markets',
+                    'Tour Agra Fort'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Agra Airport (10 km)' },
+                    { type: 'train', text: 'Agra Cantt Railway Station (5 km)' },
+                    { type: 'car', text: 'Drive from Delhi (230 km)' }
+                ]
+            },
+            'kerala_mural_painting': {
+                name: 'Mural Painting, Kerala',
+                image: 'https://images.unsplash.com/photo-1605721911519-3d91e4e4e7c6?q=80&w=2070',
+                description: 'Create vibrant Kerala murals with natural pigments, inspired by temple and mythological themes.',
+                duration: '1-2 days',
+                craft: 'Mural Art',
+                region: 'Kerala',
+                highlights: 'Kerala’s mural painting workshops teach the sacred art of creating vibrant wall art with natural colors.',
+                features: ['Natural Pigments', 'Temple Art'],
+                thingsToDo: [
+                    'Learn mural painting techniques',
+                    'Create your own mural artwork',
+                    'Visit Guruvayur Temple for inspiration',
+                    'Explore local art galleries',
+                    'Tour Kerala’s craft markets'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Cochin International Airport (80 km)' },
+                    { type: 'train', text: 'Thrissur Railway Station (30 km)' },
+                    { type: 'car', text: 'Drive from Kochi (80 km)' }
+                ]
+            }
+        };
+
+        // Function to open workshop modal
+        function openWorkshopModal(workshopId) {
+            const workshop = workshops[workshopId];
+            if (!workshop) return;
+
+            const modal = document.getElementById('workshopModal');
+            const modalTitle = modal.querySelector('.modal-title');
+            const modalImage = modal.querySelector('.workshop-image');
+            const modalName = modal.querySelector('.workshop-name');
+            const modalDescription = modal.querySelector('.workshop-description');
+            const modalDuration = modal.querySelector('.duration');
+            const modalCraft = modal.querySelector('.craft');
+            const modalRegion = modal.querySelector('.region');
+            const modalHighlights = modal.querySelector('.workshop-highlights');
+            const modalFeatures = modal.querySelector('.workshop-features');
+            const modalThingsToDo = modal.querySelector('.things-to-do');
+            const modalHowToReach = modal.querySelector('.how-to-reach');
+
+            modalTitle.textContent = workshop.name;
+            modalImage.src = workshop.image;
+            modalImage.alt = workshop.name;
+            modalName.textContent = workshop.name;
+            modalDescription.textContent = workshop.description;
+            modalDuration.textContent = `Duration: ${workshop.duration}`;
+            modalCraft.textContent = `Craft: ${workshop.craft}`;
+            modalRegion.textContent = `Region: ${workshop.region}`;
+            modalHighlights.textContent = workshop.highlights;
+
+            modalFeatures.innerHTML = workshop.features.map(feature => 
+                `<span class="card-features"><i class="fas fa-check"></i> ${feature}</span>`
+            ).join('');
+
+            modalThingsToDo.innerHTML = workshop.thingsToDo.map(thing => 
+                `<li><i class="fas fa-check-circle"></i> ${thing}</li>`
+            ).join('');
+
+            modalHowToReach.innerHTML = workshop.howToReach.map(option => 
+                `<div class="transport-option">
+                    <i class="fas fa-${option.type}"></i>
+                    <span>${option.text}</span>
+                </div>`
+            ).join('');
+
+            const modalInstance = new bootstrap.Modal(modal);
+            modalInstance.show();
+        }
+
+        // Add click event listeners to all Learn More buttons
+        document.querySelectorAll('.workshop-card .btn-primary').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const workshopId = this.closest('.workshop-card').dataset.workshop;
+                openWorkshopModal(workshopId);
+            });
+        });
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a.nav-link').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                window.scrollTo({
+                    top: targetElement.offsetTop - 70,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
+{% endblock %}

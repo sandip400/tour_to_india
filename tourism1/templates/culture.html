@@ -1,0 +1,1067 @@
+{% extends "base.html" %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CultureQuest - Discover Indian Cultural Wonders</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Custom CSS -->
+    <style>
+        .bo {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fff5e6;
+            color: #333;
+        }
+        
+        .hero-section {
+            background: url('https://images.unsplash.com/photo-1621787084849-ed98731b3071?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 111, 97, 0.5), rgba(255, 179, 71, 0.5));
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        .hero-section h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease-in-out;
+        }
+        .hero-section p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease-in-out 0.3s;
+            animation-fill-mode: both;
+        }
+        .hero-section .btn {
+            font-size: 1.2rem;
+            padding: 12px 30px;
+            background-color: #ff6f61;
+            border: none;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            animation: fadeInUp 1s ease-in-out 0.6s;
+            animation-fill-mode: both;
+        }
+        .hero-section .btn:hover {
+            background-color: #ffb347;
+            transform: translateY(-5px) scale(1.05);
+        }
+        .destinations-section {
+            background: url('https://images.unsplash.com/photo-1571055107559-3e67626c9f61?q=80&w=2070') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            padding: 80px 0;
+        }
+        .destinations-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 245, 230, 0.9);
+            z-index: 1;
+        }
+        .destinations-section .container {
+            position: relative;
+            z-index: 2;
+        }
+        .destination-card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: #fff;
+            animation: fadeInUp 0.5s ease-out;
+            animation-fill-mode: both;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .destination-card:nth-child(1) { animation-delay: 0.1s; }
+        .destination-card:nth-child(2) { animation-delay: 0.2s; }
+        .destination-card:nth-child(3) { animation-delay: 0.3s; }
+        .destination-card:nth-child(4) { animation-delay: 0.4s; }
+        .destination-card:nth-child(5) { animation-delay: 0.5s; }
+        .destination-card:nth-child(6) { animation-delay: 0.6s; }
+        .destination-card:nth-child(7) { animation-delay: 0.7s; }
+        .destination-card:nth-child(8) { animation-delay: 0.8s; }
+        .destination-card:nth-child(9) { animation-delay: 0.9s; }
+        .destination-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        .destination-card img {
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .destination-card:hover img {
+            transform: scale(1.05);
+        }
+        .destination-card .card-body {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .destination-card .card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: #ff6f61;
+            transition: color 0.3s ease;
+        }
+        .destination-card:hover .card-title {
+            color: #ffb347;
+        }
+        .destination-card .card-text {
+            color: #555;
+            flex-grow: 1;
+        }
+        .destination-card .btn {
+            background-color: #ffb347;
+            border: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .destination-card .btn:hover {
+            background-color: #ff6f61;
+            transform: translateY(-3px);
+        }
+        .culture-section {
+            background: url('https://images.unsplash.com/photo-1615735461249-2e7ae2414ba6?q=80&w=2070') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            padding: 80px 0;
+        }
+        .culture-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            z-index: 1;
+        }
+        .culture-section .container {
+            position: relative;
+            z-index: 2;
+        }
+        .culture-section h2, .destinations-section h2, .contact-section h2 {
+            font-family: 'Playfair Display', serif;
+            color: #ff6f61;
+            font-size: 2.8rem;
+            margin-bottom: 40px;
+            animation: fadeInDown 0.5s ease-out;
+        }
+        .culture-section h4 {
+            color: #ffb347;
+            font-family: 'Playfair Display', serif;
+            transition: color 0.3s ease;
+        }
+        .culture-section h4:hover {
+            color: #ff6f61;
+        }
+        .contact-section {
+            background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            padding: 80px 0;
+        }
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(254, 242, 232, 0.9);
+            z-index: 1;
+        }
+        .contact-section .container {
+            position: relative;
+            z-index: 2;
+        }
+        .contact-section .form-control {
+            border-radius: 10px;
+            border: 1px solid #ffb347;
+            padding: 12px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .contact-section .form-control:focus {
+            border-color: #ff6f61;
+            box-shadow: 0 0 8px rgba(255, 111, 97, 0.3);
+        }
+        .contact-section .btn {
+            background-color: #ff6f61;
+            border: none;
+            padding: 12px;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .contact-section .btn:hover {
+            background-color: #ffb347;
+            transform: translateY(-3px);
+        }
+        footer {
+            background: url('https://images.unsplash.com/photo-1584982751601-97dcc096659c?q=80&w=2070') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            color: #fff;
+            padding: 30px 0;
+            font-size: 1rem;
+        }
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(255, 111, 97, 0.8), rgba(255, 179, 71, 0.8));
+            z-index: 1;
+        }
+        footer .container {
+            position: relative;
+            z-index: 2;
+        }
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideInDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        /* Additional styles for better visual appeal */
+        .section-title {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-bottom: 1rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, #ff6f61, #ffb347);
+            animation: pulse 2s infinite;
+        }
+        .card {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+        .btn {
+            border-radius: 25px;
+            padding: 10px 25px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        /* Modal animations */
+        .modal-content {
+            border-radius: 15px;
+            border: none;
+            animation: fadeInUp 0.3s ease-out;
+        }
+        .modal-header {
+            background: linear-gradient(90deg, #ff6f61, #ffb347);
+            color: white;
+            border-radius: 15px 15px 0 0;
+        }
+        /* Experience card animations */
+        .experience-card {
+            animation: slideInLeft 0.5s ease-out;
+        }
+        @keyframes slideInLeft {
+            from { transform: translateX(-50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+    </style>
+</head>
+<div class="bo">
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-content">
+            <h1>Discover India's Vibrant Heritage</h1>
+            <p>Embark on a journey through timeless traditions and iconic landmarks.</p>
+            <a href="#destinations" class="btn btn-primary btn-lg">Explore Now</a>
+        </div>
+    </section>
+
+    <!-- Destinations Section -->
+    <section id="destinations" class="destinations-section">
+        <div class="container">
+            <h2 class="text-center mb-5">Top Indian Cultural Destinations</h2>
+            <div class="row">
+                <!-- Card 1: Taj Mahal -->
+                <div class="col-md-4 mb-4">
+                    <div class="card destination-card" data-destination="taj-mahal">
+                        <img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?q=80&w=2070" class="card-img-top" alt="Taj Mahal">
+                        <div class="card-body">
+                            <h5 class="card-title">Taj Mahal, Agra</h5>
+                            <p class="card-text">A UNESCO World Heritage Site and one of the Seven Wonders of the World, built by Mughal Emperor Shah Jahan in memory of his wife Mumtaz Mahal.</p>
+                            <div class="destination-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Best Time: 2-3 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Specialty: White marble architecture</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-history"></i>
+                                    <span>Built: 1632-1653</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-camera"></i> Photography</span>
+                                <span><i class="fas fa-moon"></i> Moonlight View</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Varanasi -->
+                <div class="col-md-4 mb-4">
+                    <div class="card destination-card" data-destination="varanasi">
+                        <img src="https://images.unsplash.com/photo-1561359313-0639aad49ca6?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Varanasi">
+                        <div class="card-body">
+                            <h5 class="card-title">Varanasi, Uttar Pradesh</h5>
+                            <p class="card-text">One of the world's oldest living cities, known for its spiritual significance and the sacred Ganga Aarti ceremony.</p>
+                            <div class="destination-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Best Time: 3-4 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Specialty: Spiritual rituals</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-history"></i>
+                                    <span>Age: 3000+ years</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-water"></i> Ganga Aarti</span>
+                                <span><i class="fas fa-om"></i> Temples</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Jaipur -->
+                <div class="col-md-4 mb-4">
+                    <div class="card destination-card" data-destination="jaipur">
+                        <img src="https://images.unsplash.com/photo-1603262110263-fb0112e7cc33?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Jaipur">
+                        <div class="card-body">
+                            <h5 class="card-title">Jaipur, Rajasthan</h5>
+                            <p class="card-text">The Pink City, known for its magnificent palaces, forts, and vibrant culture. A perfect blend of Rajput and Mughal architecture.</p>
+                            <div class="destination-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Best Time: 4-5 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Specialty: Royal heritage</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-history"></i>
+                                    <span>Founded: 1727</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-crown"></i> Palaces</span>
+                                <span><i class="fas fa-shopping-bag"></i> Shopping</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4: Khajuraho -->
+                <div class="col-md-4 mb-4">
+                    <div class="card destination-card" data-destination="khajuraho">
+                        <img src="https://plus.unsplash.com/premium_photo-1697730370661-51bf72769ff6?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Khajuraho">
+                        <div class="card-body">
+                            <h5 class="card-title">Khajuraho, Madhya Pradesh</h5>
+                            <p class="card-text">Famous for its group of Hindu and Jain temples with intricate sculptures, showcasing the artistic excellence of the Chandela dynasty.</p>
+                            <div class="destination-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Best Time: 2-3 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Specialty: Temple architecture</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-history"></i>
+                                    <span>Built: 950-1050 CE</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-landmark"></i> UNESCO Site</span>
+                                <span><i class="fas fa-dance"></i> Dance Festival</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5: Hampi -->
+                <div class="col-md-4 mb-4">
+                    <div class="card destination-card" data-destination="hampi">
+                        <img src="https://plus.unsplash.com/premium_photo-1697730337612-8bd916249e30?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Hampi">
+                        <div class="card-body">
+                            <h5 class="card-title">Hampi, Karnataka</h5>
+                            <p class="card-text">A UNESCO World Heritage Site, showcasing the ruins of the Vijayanagar Empire, with stunning architecture and ancient temples.</p>
+                            <div class="destination-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Best Time: 3-4 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Specialty: Ancient ruins</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-history"></i>
+                                    <span>Peak: 14th-16th century</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-bicycle"></i> Cycling</span>
+                                <span><i class="fas fa-camera"></i> Photography</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6: Amritsar -->
+                <div class="col-md-4 mb-4">
+                    <div class="card destination-card" data-destination="amritsar">
+                        <img src="https://plus.unsplash.com/premium_photo-1697730396642-7a338ffc2852?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Amritsar">
+                        <div class="card-body">
+                            <h5 class="card-title">Amritsar, Punjab</h5>
+                            <p class="card-text">Home to the Golden Temple, the holiest shrine of Sikhism, and the famous Wagah Border Ceremony.</p>
+                            <div class="destination-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Best Time: 2-3 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Specialty: Sikh culture</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-history"></i>
+                                    <span>Founded: 1577</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-utensils"></i> Langar</span>
+                                <span><i class="fas fa-flag"></i> Border Ceremony</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 7: Madurai -->
+                <div class="col-md-4 mb-4">
+                    <div class="card destination-card" data-destination="madurai">
+                        <img src="https://plus.unsplash.com/premium_photo-1697729444936-8c6a6f643312?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Madurai">
+                        <div class="card-body">
+                            <h5 class="card-title">Madurai, Tamil Nadu</h5>
+                            <p class="card-text">Known for the magnificent Meenakshi Amman Temple, a masterpiece of Dravidian architecture with towering gopurams.</p>
+                            <div class="destination-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Best Time: 2-3 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Specialty: Temple architecture</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-history"></i>
+                                    <span>Age: 2500+ years</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-temple"></i> Temples</span>
+                                <span><i class="fas fa-utensils"></i> Food</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 8: Kolkata -->
+                <div class="col-md-4 mb-4">
+                    <div class="card destination-card" data-destination="kolkata">
+                        <img src="https://images.unsplash.com/photo-1597220397294-0d95abb2031c?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Kolkata">
+                        <div class="card-body">
+                            <h5 class="card-title">Kolkata, West Bengal</h5>
+                            <p class="card-text">The cultural capital of India, known for its colonial architecture, literary heritage, and vibrant arts scene.</p>
+                            <div class="destination-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Best Time: 4-5 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Specialty: Cultural heritage</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-history"></i>
+                                    <span>Founded: 1690</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-book"></i> Literature</span>
+                                <span><i class="fas fa-utensils"></i> Food</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 9: Mysore -->
+                <div class="col-md-4 mb-4">
+                    <div class="card destination-card" data-destination="mysore">
+                        <img src="https://images.unsplash.com/photo-1590766940554-634a7ed41450?q=80&w=1998&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Mysore">
+                        <div class="card-body">
+                            <h5 class="card-title">Mysore, Karnataka</h5>
+                            <p class="card-text">Famous for its opulent palace, silk sarees, and the grand Dasara festival. A perfect blend of royal heritage and cultural traditions.</p>
+                            <div class="destination-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Best Time: 3-4 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Specialty: Royal palace</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-history"></i>
+                                    <span>Founded: 1399</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-crown"></i> Palace</span>
+                                <span><i class="fas fa-shopping-bag"></i> Silk</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Culture Section -->
+    <section id="culture" class="culture-section">
+        <div class="container">
+            <h2 class="text-center mb-5">Immerse in Indian Culture</h2>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <h4>Festivals & Events</h4>
+                    <p>Celebrate Diwali, Holi, Durga Puja, and regional festivals like Pongal and Baisakhi.</p>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <h4>Culinary Arts</h4>
+                    <p>Savor diverse flavors from spicy North Indian curries to South Indian dosas.</p>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <h4>Traditional Crafts</h4>
+                    <p>Discover Banarasi silk, Rajasthani block prints, and Madhubani paintings.</p>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <h4>Performing Arts</h4>
+                    <p>Experience classical dances like Bharatanatyam, Kathak, and Odissi.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="text-center mb-5">Share Your Experience</h2>
+            <!-- Experience Sharing Form -->
+            <div class="row">
+                <div class="col-md-6 mx-auto">
+                    <div class="experience-form">
+                        <form id="experienceForm">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Your Name</label>
+                                <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="destination" class="form-label">Destination Visited</label>
+                                <select class="form-control" id="destination" required>
+                                    <option value="">Select a destination</option>
+                                    <option value="taj-mahal">Taj Mahal, Agra</option>
+                                    <option value="varanasi">Varanasi, Uttar Pradesh</option>
+                                    <option value="jaipur">Jaipur, Rajasthan</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="experience" class="form-label">Your Experience</label>
+                                <textarea class="form-control" id="experience" rows="4" placeholder="Share your experience..." required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="photos" class="form-label">Upload Photos</label>
+                                <input type="file" class="form-control" id="photos" multiple accept="image/*">
+                                <div id="photoPreview" class="mt-2"></div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Share Experience</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Destination Modal -->
+    <div class="modal fade" id="destinationModal" tabindex="-1" aria-labelledby="destinationModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="destinationModalLabel">Destination Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="destination-detail-content">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <img src="" alt="" class="img-fluid destination-image">
+                            </div>
+                            <div class="col-md-6">
+                                <h3 class="destination-name"></h3>
+                                <p class="destination-description"></p>
+                                <div class="destination-info">
+                                    <div class="info-item">
+                                        <i class="fas fa-clock"></i>
+                                        <span class="best-time"></span>
+                                    </div>
+                                    <div class="info-item">
+                                        <i class="fas fa-star"></i>
+                                        <span class="specialty"></span>
+                                    </div>
+                                    <div class="info-item">
+                                        <i class="fas fa-history"></i>
+                                        <span class="history"></span>
+                                    </div>
+                                </div>
+                                <div class="destination-features"></div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <h4>Historical Significance</h4>
+                                <p class="historical-significance"></p>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <h4>Freedom Fighters</h4>
+                                <div class="freedom-fighters"></div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <h4>Things to Do</h4>
+                                <ul class="things-to-do"></ul>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <h4>How to Reach</h4>
+                                <div class="how-to-reach"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="#" class="btn btn-primary book-now-btn">Book Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+    
+    
+
+    <!-- Bootstrap JS and Custom JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Destination data
+        const destinations = {
+            'taj-mahal': {
+                name: 'Taj Mahal, Agra',
+                image: 'https://images.unsplash.com/photo-1564507592333-c60657eea523?q=80&w=2070',
+                description: 'A UNESCO World Heritage Site and one of the Seven Wonders of the World, the Taj Mahal is a stunning white marble mausoleum built by Mughal Emperor Shah Jahan in memory of his wife Mumtaz Mahal.',
+                bestTime: '2-3 days',
+                specialty: 'White marble architecture',
+                history: 'Built: 1632-1653',
+                historicalSignificance: 'Commissioned in 1632 by Emperor Shah Jahan, the Taj Mahal was constructed over 21 years by thousands of artisans. It symbolizes Mughal architectural prowess and eternal love.',
+                freedomFighters: [
+                    { name: 'Begum Hazrat Mahal', contribution: 'During the 1857 Revolt, she led the rebellion in Awadh, near Agra, uniting Hindus and Muslims against British rule, ensuring the cultural heritage of the region was defended.' },
+                    { name: 'Mangal Pandey', contribution: 'A key figure in the 1857 Revolt, he sparked the uprising in nearby Barrackpore, indirectly protecting Agra’s cultural landmarks by challenging British authority.' }
+                ],
+                features: ['Photography', 'Moonlight View'],
+                thingsToDo: [
+                    'Visit at sunrise for the best photography',
+                    'Explore the main mausoleum',
+                    'Visit the mosque and guest house',
+                    'Enjoy the moonlight view (full moon nights)',
+                    'Visit the Taj Museum'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Agra Airport (7 km)' },
+                    { type: 'train', text: 'Agra Cantt Railway Station' },
+                    { type: 'car', text: 'Well-connected by road' }
+                ]
+            },
+            'varanasi': {
+                name: 'Varanasi, Uttar Pradesh',
+                image: 'https://images.unsplash.com/photo-1592292058790-6cc9b9f7e8f3?q=80&w=2070',
+                description: 'One of the world\'s oldest living cities, Varanasi is known for its spiritual significance and the sacred Ganga Aarti ceremony.',
+                bestTime: '3-4 days',
+                specialty: 'Spiritual rituals',
+                history: 'Age: 3000+ years',
+                historicalSignificance: 'Varanasi, also known as Kashi, has been a spiritual center for millennia, mentioned in ancient texts like the Rigveda. It has been a hub for Hindu and Buddhist pilgrimage.',
+                freedomFighters: [
+                    { name: 'Chandra Shekhar Azad', contribution: 'Operated revolutionary activities in Varanasi, using the city as a base to organize against British rule, preserving its spiritual and cultural significance.' },
+                    { name: 'Rash Behari Bose', contribution: 'Organized revolutionary networks in Varanasi, inspiring resistance to protect the city’s sacred heritage from colonial exploitation.' }
+                ],
+                features: ['Ganga Aarti', 'Temples'],
+                thingsToDo: [
+                    'Attend the Ganga Aarti ceremony',
+                    'Take a boat ride on the Ganges',
+                    'Visit the Kashi Vishwanath Temple',
+                    'Explore the ghats',
+                    'Experience the morning rituals'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Lal Bahadur Shastri Airport' },
+                    { type: 'train', text: 'Varanasi Junction' },
+                    { type: 'car', text: 'Well-connected by road' }
+                ]
+            },
+            'jaipur': {
+                name: 'Jaipur, Rajasthan',
+                image: 'https://images.unsplash.com/photo-1583325097630-6ec6f6d8e8d3?q=80&w=2070',
+                description: 'The Pink City, known for its magnificent palaces, forts, and vibrant culture. A perfect blend of Rajput and Mughal architecture.',
+                bestTime: '4-5 days',
+                specialty: 'Royal heritage',
+                history: 'Founded: 1727',
+                historicalSignificance: 'Founded by Maharaja Sawai Jai Singh II in 1727, Jaipur was planned as a modern city with a grid layout, blending Rajput and Mughal architectural styles.',
+                freedomFighters: [
+                    { name: 'Rao Tula Ram', contribution: 'Led the 1857 Revolt in Rajasthan, defending Jaipur’s cultural heritage by resisting British control over the region.' },
+                    { name: 'Sardar Ajit Singh', contribution: 'Fought against British policies in Rajasthan, mobilizing locals to protect Jaipur’s royal and cultural identity.' }
+                ],
+                features: ['Palaces', 'Shopping'],
+                thingsToDo: [
+                    'Visit Amber Fort',
+                    'Explore City Palace',
+                    'Shop at Johari Bazaar',
+                    'Visit Hawa Mahal',
+                    'Experience local cuisine'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Jaipur International Airport' },
+                    { type: 'train', text: 'Jaipur Railway Station' },
+                    { type: 'car', text: 'Well-connected by road' }
+                ]
+            },
+            'khajuraho': {
+                name: 'Khajuraho, Madhya Pradesh',
+                image: 'https://images.unsplash.com/photo-1622973480367-6e1918f76b60?q=80&w=2070',
+                description: 'Famous for its group of Hindu and Jain temples with intricate sculptures, showcasing the artistic excellence of the Chandela dynasty.',
+                bestTime: '2-3 days',
+                specialty: 'Temple architecture',
+                history: 'Built: 950-1050 CE',
+                historicalSignificance: 'Built by the Chandela dynasty between 950-1050 CE, the Khajuraho temples are renowned for their intricate carvings depicting life, love, and spirituality.',
+                freedomFighters: [
+                    { name: 'Rani Durgavati', contribution: 'Resisted Mughal invasions in Madhya Pradesh, protecting the region’s cultural landmarks, including areas near Khajuraho.' },
+                    { name: 'Tantia Tope', contribution: 'Led guerrilla campaigns in central India during the 1857 Revolt, safeguarding the cultural heritage of Khajuraho from British dominance.' }
+                ],
+                features: ['UNESCO Site', 'Dance Festival'],
+                thingsToDo: [
+                    'Explore the Western Group of Temples',
+                    'Attend the Khajuraho Dance Festival',
+                    'Visit the Archaeological Museum',
+                    'See the Eastern Group of Temples',
+                    'Enjoy light and sound show'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Khajuraho Airport' },
+                    { type: 'train', text: 'Khajuraho Railway Station' },
+                    { type: 'car', text: 'Connected by road' }
+                ]
+            },
+            'hampi': {
+                name: 'Hampi, Karnataka',
+                image: 'https://images.unsplash.com/photo-1593691399852-7f2db15ae48e?q=80&w=2070',
+                description: 'A UNESCO World Heritage Site, showcasing the ruins of the Vijayanagar Empire, with stunning architecture and ancient temples.',
+                bestTime: '3-4 days',
+                specialty: 'Ancient ruins',
+                history: 'Peak: 14th-16th century',
+                historicalSignificance: 'Hampi was the capital of the Vijayanagar Empire, flourishing in the 14th-16th centuries as a major trade and cultural center until its destruction in 1565.',
+                freedomFighters: [
+                    { name: 'Sangolli Rayanna', contribution: 'Led a rebellion against British rule in Karnataka, protecting Hampi’s cultural heritage by resisting colonial exploitation.' },
+                    { name: 'Kittur Chennamma', contribution: 'Fought the British in nearby Kittur, defending the region’s cultural and historical significance, including Hampi.' }
+                ],
+                features: ['Cycling', 'Photography'],
+                thingsToDo: [
+                    'Visit Virupaksha Temple',
+                    'Explore Hampi Bazaar',
+                    'Climb Matanga Hill',
+                    'Cycle through the ruins',
+                    'See the Stone Chariot'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Bellary Airport (60 km)' },
+                    { type: 'train', text: 'Hospet Railway Station' },
+                    { type: 'car', text: 'Connected by road' }
+                ]
+            },
+            'amritsar': {
+                name: 'Amritsar, Punjab',
+                image: 'https://images.unsplash.com/photo-1587407736932-f189fe97c630?q=80&w=2070',
+                description: 'Home to the Golden Temple, the holiest shrine of Sikhism, and the famous Wagah Border Ceremony.',
+                bestTime: '2-3 days',
+                specialty: 'Sikh culture',
+                history: 'Founded: 1577',
+                historicalSignificance: 'Founded by Guru Ram Das in 1577, Amritsar became a spiritual and cultural center for Sikhs, with the Golden Temple as its focal point.',
+                freedomFighters: [
+                    { name: 'Bhagat Singh', contribution: 'Inspired revolutionary movements in Punjab, including Amritsar, to protect the Golden Temple and Sikh heritage from British control.' },
+                    { name: 'Udham Singh', contribution: 'Avenged the Jallianwala Bagh massacre in Amritsar by assassinating Michael O’Dwyer, defending the city’s cultural sanctity.' }
+                ],
+                features: ['Langar', 'Border Ceremony'],
+                thingsToDo: [
+                    'Visit the Golden Temple',
+                    'Experience the Wagah Border Ceremony',
+                    'Explore Jallianwala Bagh',
+                    'Taste Amritsari kulcha',
+                    'Visit Durgiana Temple'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Sri Guru Ram Dass Jee Airport' },
+                    { type: 'train', text: 'Amritsar Railway Station' },
+                    { type: 'car', text: 'Well-connected by road' }
+                ]
+            },
+            'madurai': {
+                name: 'Madurai, Tamil Nadu',
+                image: 'https://images.unsplash.com/photo-1571142843669-7e6e6d302f55?q=80&w=2070',
+                description: 'Known for the magnificent Meenakshi Amman Temple, a masterpiece of Dravidian architecture with towering gopurams.',
+                bestTime: '2-3 days',
+                specialty: 'Temple architecture',
+                history: 'Age: 2500+ years',
+                historicalSignificance: 'Madurai, one of the oldest cities in India, was a major center of Tamil culture and learning, ruled by the Pandyas and later the Nayaks.',
+                freedomFighters: [
+                    { name: 'V.O. Chidambaram Pillai', contribution: 'Led anti-British movements in Tamil Nadu, protecting Madurai’s cultural heritage through economic resistance and Swadeshi campaigns.' },
+                    { name: 'Bharathiyar', contribution: 'Inspired Tamil Nadu’s freedom struggle through poetry, rallying people in Madurai to preserve their cultural identity.' }
+                ],
+                features: ['Temples', 'Food'],
+                thingsToDo: [
+                    'Visit Meenakshi Amman Temple',
+                    'Explore Thirumalai Nayak Palace',
+                    'Attend temple festivals',
+                    'Try local street food',
+                    'Visit Gandhi Memorial Museum'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Madurai Airport' },
+                    { type: 'train', text: 'Madurai Junction' },
+                    { type: 'car', text: 'Well-connected by road' }
+                ]
+            },
+            'kolkata': {
+                name: 'Kolkata, West Bengal',
+                image: 'https://images.unsplash.com/photo-1603111692286-c84a14d83e22?q=80&w=2070',
+                description: 'The cultural capital of India, known for its colonial architecture, literary heritage, and vibrant arts scene.',
+                bestTime: '4-5 days',
+                specialty: 'Cultural heritage',
+                history: 'Founded: 1690',
+                historicalSignificance: 'Established by the British East India Company in 1690, Kolkata was the capital of British India until 1911, shaping its colonial and cultural identity.',
+                freedomFighters: [
+                    { name: 'Subhas Chandra Bose', contribution: 'Led the Indian National Army from Kolkata, mobilizing resistance to protect Bengal’s cultural heritage.' },
+                    { name: 'Rabindranath Tagore', contribution: 'Promoted cultural nationalism through literature, inspiring Kolkata’s resistance against British cultural suppression.' }
+                ],
+                features: ['Literature', 'Food'],
+                thingsToDo: [
+                    'Visit Victoria Memorial',
+                    'Explore Howrah Bridge',
+                    'Experience Durga Puja',
+                    'Visit Indian Museum',
+                    'Try Bengali cuisine'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Netaji Subhas Chandra Bose Airport' },
+                    { type: 'train', text: 'Howrah Railway Station' },
+                    { type: 'car', text: 'Well-connected by road' }
+                ]
+            },
+            'mysore': {
+                name: 'Mysore, Karnataka',
+                image: 'https://images.unsplash.com/photo-1585238342025-8b33b0e8b312?q=80&w=2070',
+                description: 'Famous for its opulent palace, silk sarees, and the grand Dasara festival. A perfect blend of royal heritage and cultural traditions.',
+                bestTime: '3-4 days',
+                specialty: 'Royal palace',
+                history: 'Founded: 1399',
+                historicalSignificance: 'Mysore, ruled by the Wodeyar dynasty since 1399, became a cultural and administrative hub, with the Mysore Palace as a symbol of its royal legacy.',
+                freedomFighters: [
+                    { name: 'Hyder Ali', contribution: 'Fought against British expansion in Mysore, defending the region’s cultural landmarks like the Mysore Palace.' },
+                    { name: 'Tipu Sultan', contribution: 'Led wars against the British, protecting Mysore’s cultural heritage through military resistance and modernization.' }
+                ],
+                features: ['Palace', 'Silk'],
+                thingsToDo: [
+                    'Visit Mysore Palace',
+                    'Attend Dasara festival',
+                    'Explore Chamundi Hills',
+                    'Shop for silk sarees',
+                    'Visit Brindavan Gardens'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Mysore Airport' },
+                    { type: 'train', text: 'Mysore Railway Station' },
+                    { type: 'car', text: 'Well-connected by road' }
+                ]
+            }
+        };
+
+        // Function to open destination modal
+        function openDestinationModal(destinationId) {
+            const destination = destinations[destinationId];
+            if (!destination) return;
+
+            const modal = document.getElementById('destinationModal');
+            const modalTitle = modal.querySelector('.modal-title');
+            const modalImage = modal.querySelector('.destination-image');
+            const modalName = modal.querySelector('.destination-name');
+            const modalDescription = modal.querySelector('.destination-description');
+            const modalBestTime = modal.querySelector('.best-time');
+            const modalSpecialty = modal.querySelector('.specialty');
+            const modalHistory = modal.querySelector('.history');
+            const modalHistoricalSignificance = modal.querySelector('.historical-significance');
+            const modalFreedomFighters = modal.querySelector('.freedom-fighters');
+            const modalFeatures = modal.querySelector('.destination-features');
+            const modalThingsToDo = modal.querySelector('.things-to-do');
+            const modalHowToReach = modal.querySelector('.how-to-reach');
+
+            modalTitle.textContent = destination.name;
+            modalImage.src = destination.image;
+            modalImage.alt = destination.name;
+            modalName.textContent = destination.name;
+            modalDescription.textContent = destination.description;
+            modalBestTime.textContent = `Best Time: ${destination.bestTime}`;
+            modalSpecialty.textContent = `Specialty: ${destination.specialty}`;
+            modalHistory.textContent = destination.history;
+            modalHistoricalSignificance.textContent = destination.historicalSignificance;
+
+            modalFreedomFighters.innerHTML = destination.freedomFighters.map(fighter => 
+                `<p><strong>${fighter.name}:</strong> ${fighter.contribution}</p>`
+            ).join('');
+
+            modalFeatures.innerHTML = destination.features.map(feature => 
+                `<span class="card-features"><i class="fas fa-check"></i> ${feature}</span>`
+            ).join('');
+
+            modalThingsToDo.innerHTML = destination.thingsToDo.map(thing => 
+                `<li><i class="fas fa-check-circle"></i> ${thing}</li>`
+            ).join('');
+
+            modalHowToReach.innerHTML = destination.howToReach.map(option => 
+                `<div class="transport-option">
+                    <i class="fas fa-${option.type}"></i>
+                    <span>${option.text}</span>
+                </div>`
+            ).join('');
+
+            const modalInstance = new bootstrap.Modal(modal);
+            modalInstance.show();
+        }
+
+        // Add click event listeners to all Learn More buttons
+        document.querySelectorAll('.destination-card .btn-primary').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const destinationId = this.closest('.destination-card').dataset.destination;
+                openDestinationModal(destinationId);
+            });
+        });
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a.nav-link').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                window.scrollTo({
+                    top: targetElement.offsetTop - 70,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+{% endblock %}

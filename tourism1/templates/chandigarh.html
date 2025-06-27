@@ -1,0 +1,2710 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Chandigarh</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> -->
+  <style>
+    .wb {
+      font-size: 10vw;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+      border-spacing: 0;
+      border: 1px solid #ddd;
+    }
+
+    td,
+    th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+      font-size: 1.5vw;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+
+    .trip {
+      text-align: center;
+      font-weight: 900;
+      background: orangered;
+      padding: 20px;
+      border-radius: 20px;
+      width: 60%;
+    }
+
+    p,
+    li,
+    .text {
+      font-size: 1.5vw;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-weight: 600;
+    }
+
+    h4 {
+      font-weight: 900;
+    }
+
+    img {
+      border-radius: 10px;
+      display: block;
+      margin: auto;
+    }
+
+    @media screen and (max-width: 850px) {
+
+      p,
+      li,
+      .text,
+      td,
+      th {
+        font-size: 2vw;
+        ;
+      }
+
+    }
+
+    @media screen and (max-width: 500px) {
+
+      p,
+      li,
+      .text,
+      td,
+      th {
+        font-size: 4.5vw;
+        ;
+      }
+
+    }
+
+    .box:nth-of-type(odd) {
+      background: #f3b37185;
+      padding: 10px;
+    }
+
+    .weather-container {
+            border-radius: 15px;
+            background: #f0fdf4;
+            padding: 15px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .weather-card {
+            text-align: center;
+            border-radius: 10px;
+            padding: 10px;
+            background: white;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+        .aqi {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            color: white;
+        }
+        .aqi-bad { background: purple; }
+        .aqi-moderate { background: orange; }
+        .aqi-good { background: green; }
+        .best-time {
+            background: #d1fae5;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 15px;
+            color: green;
+        }
+        .wet {
+            max-width: 50px;
+        }
+        
+        .trip {
+          font-size: 18px;
+          padding: 10px 20px;
+          cursor: pointer;
+          background-color:rgb(231, 36, 36);
+          color: white;
+          border: none;
+          border-radius: 5px;
+      }
+      .modal {
+          display: none;
+          position: fixed;
+          z-index: 1;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0,0,0,0.5);
+      }
+      .modal-content {
+          background-color: #fff;
+          margin: 10% auto;
+          padding: 20px;
+          border-radius: 10px;
+          width: 40%;
+          box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+          text-align: center;
+      }
+      .close {
+          color: #aaa;
+          float: right;
+          font-size: 28px;
+          font-weight: bold;
+          cursor: pointer;
+      }
+      .trip-options {
+          display: flex;
+          justify-content: center;
+          gap: 20px;
+          margin-top: 20px;
+      }
+      .trip-options a {
+          display: block;
+          width: 120px;
+          padding: 10px;
+          background-color: #28a745;
+          color: white;
+          text-decoration: none;
+          border-radius: 5px;
+      }
+  </style>
+</head>
+
+<body>
+
+
+  <!-- <h2>Carousel Example</h2> -->
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+      <li data-target="#myCarousel" data-slide-to="4"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+
+      <div class="item active">
+        <img src="darjeeling wlp.jpg" alt="Rock Garden" style="width:100%; height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Rock Garden</h3>
+          <p>We love the artistic sculptures and beautiful landscapes!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="victoria wlp.jpg" alt="Sukhna Lake" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Sukhna Lake</h3>
+          <p>The serene waters and peaceful surroundings!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="howrah bridge wlp.jpg" alt="Capitol Complex" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Capitol Complex</h3>
+          <p>Le Corbusier's architectural masterpiece!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="Digha wlp2.png" alt="Rose Garden" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Rose Garden</h3>
+          <p>We love the colorful blooms!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="teegarden wlp.jpg" alt="Sector 17" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Sector 17</h3>
+          <p>The vibrant heart of the city!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+  <div class="container">
+    <br><br>
+    <h1 class="wb"> CHANDIGARH</h1><br>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <img src="westbengal-map.jpg" alt="" style="height:700px; width: -webkit-fill-available;">
+
+        </div>
+        <div class="col-sm-6">
+          <h1> Chandigarh: The City Beautiful</h1>
+          <p class="text">Chandigarh is a well-planned, modern city in northern India, known for its architecture, urban design, greenery, and quality of life. It serves as the capital of two states - Punjab and Haryana, while being a Union Territory itself. Designed by the famous Swiss-French architect Le Corbusier, it is renowned for its urban planning, wide roads, and beautiful gardens.</p>
+
+          <ul>
+            <li><b>Location --</b> Northern India</li>
+            <li><b>Capital --</b> Union Territory and capital of Punjab and Haryana</li>
+            <li><b>Official Languages --</b> English, Hindi, Punjabi</li>
+            <li><b>Area --</b> 114 sq. km</li>
+            <li><b>Population --</b> ~1.2 million</li>
+            <li><b>Borders --</b> Punjab and Haryana</li>
+            <li><b>Major Water Bodies --</b> Sukhna Lake</li>
+            <li><b>Major Festivals --</b> Baisakhi, Diwali, Lohri, Holi, Christmas, Rose Festival</li>
+            <li><b>Famous For --</b> Planned city, Architecture, Gardens, Clean environment</li>
+            <li><b>Nickname --</b> The City Beautiful</li>
+            <li><b>UNESCO World Heritage --</b> Capitol Complex</li>
+            <li><b>Climate --</b> Composite - Hot summers, mild winters, pleasant spring and autumn</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <br>
+    <hr>
+    <div>
+      <h1>📌 Sectors & Areas of Chandigarh</h1>
+      <br>
+      <div style="overflow-x:auto;">
+        <table>
+          <tr>
+            <th>Zone</th>
+            <th>Sectors</th>
+            <th>Key Highlights</th>
+          </tr>
+          <tr>
+            <td>Capitol Complex</td>
+            <td>Sector 1</td>
+            <td>High Court, Secretariat, Legislative Assembly, Open Hand Monument (UNESCO World Heritage Site)</td>
+          </tr>
+          <tr>
+            <td>City Center</td>
+            <td>Sector 17</td>
+            <td>Shopping Plaza, Offices, Neelam Cinema, Fountain, Commercial Hub</td>
+          </tr>
+          <tr>
+            <td>Institutional Area</td>
+            <td>Sectors 10-12, 14-16, 26</td>
+            <td>Panjab University, PGI Hospital, Government Museum & Art Gallery, Educational Institutions</td>
+          </tr>
+          <tr>
+            <td>Industrial Area</td>
+            <td>Phases I & II</td>
+            <td>Manufacturing Units, IT Park, Business Centers</td>
+          </tr>
+          <tr>
+            <td>Residential Sectors</td>
+            <td>Sectors 2-9, 18-25, 27-47</td>
+            <td>Housing, Neighborhood Markets, Parks, Community Centers</td>
+          </tr>
+        </table>
+      </div>
+      <br><br>
+      <h1>🔹 Major Highlights of Some Key Areas</h1><br><br>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <ul>
+              <li><b>Sector 1 --</b> Capitol Complex, Sukhna Lake, Rock Garden.</li>
+              <li><b>Sector 17 --</b> City Center, Shopping Plaza, Offices, Entertainment.</li>
+              <li><b>Sector 10 --</b> Rose Garden, Leisure Valley, Educational Institutions.</li>
+              <li><b>Sector 16 --</b> Cricket Stadium, Government Museum & Art Gallery.</li>
+              <li><b>Sector 22 --</b> Oldest market, Kiran Cinema, Shastri Market.</li>
+              <li><b>Sector 35 --</b> Popular for restaurants, cafes, and nightlife.</li>
+              <li><b>Manimajra --</b> Old town area, Pinjore Garden nearby.</li>
+              <li><b>IT Park --</b> Technology companies, modern office spaces.</li>
+              <li><b>Mohali & Panchkula --</b> Satellite cities forming the Chandigarh Tricity.</li>
+            </ul>
+          </div>
+          <div class="col-sm-6">
+            <img src="westbengal-map.jpg" alt="" style="height:450px;width: -webkit-fill-available;">
+
+          </div>
+        </div>
+      </div>
+    </div><br><br>
+    <div class="container">
+      <div class="weather-container">
+          <h4 class="text-center"><strong>Weather in Chandigarh</strong></h4>
+          <div class="row">
+              <!-- January -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Jan</h6>
+                      <p>5/20°C</p>
+                      <span class="aqi aqi-bad">AQI 180</span>
+                  </div>
+              </div>
+              <!-- February -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Feb</h6>
+                      <p>8/23°C</p>
+                      <span class="aqi aqi-moderate">AQI 140</span>
+                  </div>
+              </div>
+              <!-- March -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Mar</h6>
+                      <p>13/28°C</p>
+                      <span class="aqi aqi-moderate">AQI 120</span>
+                  </div>
+              </div>
+              <!-- April -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Apr</h6>
+                      <p>18/36°C</p>
+                      <span class="aqi aqi-moderate">AQI 110</span>
+                  </div>
+              </div>
+              <!-- May -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>May</h6>
+                      <p>23/40°C</p>
+                      <span class="aqi aqi-moderate">AQI 105</span>
+                  </div>
+              </div>
+              <!-- June -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Jun</h6>
+                      <p>26/39°C</p>
+                      <span class="aqi aqi-good">AQI 85</span>
+                  </div>
+              </div>
+              <!-- July -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="rain.png" alt="rain">
+                      <h6>Jul</h6>
+                      <p>26/35°C</p>
+                      <span class="aqi aqi-good">AQI 60</span>
+                  </div>
+              </div>
+              <!-- August -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Aug</h6>
+                      <p>25/33°C</p>
+                      <span class="aqi aqi-good">AQI 70</span>
+                  </div>
+              </div>
+              <!-- September -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Sep</h6>
+                      <p>23/33°C</p>
+                      <span class="aqi aqi-good">AQI 75</span>
+                  </div>
+              </div>
+              <!-- October -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Oct</h6>
+                      <p>17/32°C</p>
+                      <span class="aqi aqi-moderate">AQI 95</span>
+                  </div>
+              </div>
+              <!-- November -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Nov</h6>
+                      <p>11/27°C</p>
+                      <span class="aqi aqi-moderate">AQI 130</span>
+                  </div>
+              </div>
+              <!-- December -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Dec</h6>
+                      <p>7/22°C</p>
+                      <span class="aqi aqi-moderate">AQI 150</span>
+                  </div>
+              </div>
+          </div>
+          <div class="text-center">
+              <div class="best-time">🏆 Best time to visit: February - April and September - November</div>
+          </div>
+      </div>
+    </div>
+    
+
+    <br><br>
+    <button class="trip" id="openModal">Let's go on a trip</button>
+    
+    <div id="tripModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Select Your Trip</h2>
+            <button type="button" class="btn btn-warning" style="margin-bottom: 8px;color:black; border-radius: 5px;" onclick="location.href='{% url 'chandigarh_4days' %}'" >4 days trip</button><br>
+        </div>
+    </div>
+    
+    <script>
+        var modal = document.getElementById("tripModal");
+        var btn = document.getElementById("openModal");
+        var span = document.getElementsByClassName("close")[0];
+        
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+        
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+        
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script><br><br>
+    <div class="container">
+      <ul class="nav nav-tabs">
+        <li class="nav-item"><a data-toggle="tab" href="#wbculture"> Culture</a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbtradition "> Tradition</a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbfestivals"> Festivals </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbfood"> Foods </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbhistory"> History </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbartacraft"> Art and Craft </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbseason"> Season to Visit </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbtourist"> Tourist Spots </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbwild"> Wildlife & Parks </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbedu"> Institutions </a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="wbculture" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Culture of Chandigarh</h1>
+          <p class="text">Chandigarh has a unique and diverse culture, shaped by its planned urban design, cosmopolitan population, and influences from Punjab and Haryana. Here's an overview of some key aspects of its culture:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Language</h3>
+                  <ul>
+                    <li>Punjabi, Hindi, and English are the main languages spoken in Chandigarh. As a cosmopolitan city with residents from various parts of India, it has a multilingual environment where people comfortably switch between languages.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="bang.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>2. Literature</h3>
+                  <ul>
+                    <li>Chandigarh has a vibrant literary scene with many prominent writers, poets, and intellectuals. The city hosts literary festivals, book fairs, and poetry recitals throughout the year.</li>
+                    <li>The Chandigarh Sahitya Akademi promotes literary activities in various languages including Punjabi, Hindi, and English.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="lit.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div><br>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="art.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Art and Architecture</h3>
+                  <ul>
+                    <li>Chandigarh is renowned for its modernist architecture designed by Le Corbusier. The Capitol Complex, comprising the High Court, Secretariat, and Legislative Assembly, is a UNESCO World Heritage Site.</li>
+                    <li>The Government Museum and Art Gallery houses one of the best collections of Gandhara sculptures and Pahari miniature paintings in India.</li>
+                    <li>The city has a thriving art scene with numerous galleries, exhibitions, and art festivals.</li>
+                  </ul>
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="music.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>4. Music</h3>
+                  <ul>
+                    <li>Punjabi music, especially Bhangra and Giddha, is very popular in Chandigarh.</li>
+                    <li>The city hosts numerous music concerts, from classical to contemporary.</li>
+                    <li>Chandigarh has produced many notable musicians and singers who have contributed to Bollywood and Punjabi music industry.</li>
+                    <li>The Pracheen Kala Kendra is a prominent institution that promotes classical music and dance.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Dance</h3>
+                  <ul>
+                    <li>Traditional Punjabi folk dances like Bhangra and Giddha are integral to Chandigarh's cultural identity.</li>
+                    <li>The city also appreciates classical dance forms, with regular performances of Kathak, Bharatanatyam, and other styles.</li>
+                    <li>Modern dance forms and fusion styles are popular among the youth.</li>
+                  </ul>
+                  <h3>6. Cuisine</h3>
+                  <ul>
+                    <li>Chandigarh's cuisine is predominantly influenced by Punjabi food, known for its rich flavors and hearty portions.</li>
+                    <li>Popular dishes include Butter Chicken, Sarson da Saag with Makki di Roti, Chole Bhature, and various tandoori items.</li>
+                    <li>The city has a vibrant street food culture, especially in Sector 17 and Sector 22 markets.</li>
+                    <li>As a cosmopolitan city, Chandigarh also offers a wide range of international cuisines.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="chau.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="theater.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>7. Theatre and Cinema</h3>
+                  <ul>
+                    <li>Chandigarh has a strong theatre tradition with several active theatre groups and regular performances.</li>
+                    <li>The Tagore Theatre is a major venue for cultural performances and theatrical productions.</li>
+                    <li>The city has modern multiplexes as well as older single-screen theaters like Neelam and Kiran Cinema.</li>
+                  </ul>
+                  <h3>8. Urban Design</h3>
+                  <ul>
+                    <li>Chandigarh's urban planning is a cultural statement in itself, with its grid-like layout, wide roads, green spaces, and distinct sectors.</li>
+                    <li>The city is divided into sectors, each with its own market, parks, and community facilities.</li>
+                    <li>The architectural style emphasizes functionality, simplicity, and harmony with nature.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="religion.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>9. Religious Diversity</h3>
+                  <ul>
+                    <li>Chandigarh is home to various religions, with Hinduism, Sikhism, Islam, Christianity, and Jainism having significant presence. This diversity is reflected in the city's festivals, rituals, and cultural practices.</li>
+                    <li>The city has beautiful temples, gurudwaras, mosques, and churches, including the ISKCON Temple, Gurudwara Nada Sahib, and the Sector 19 Cathedral.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>10. Lifestyle and Recreation</h3>
+                  <ul>
+                    <li>Chandigarh residents enjoy a high quality of life with numerous parks, gardens, and recreational facilities.</li>
+                    <li>The Sukhna Lake is a popular spot for morning walks, boating, and social gatherings.</li>
+                    <li>The city has a vibrant café culture, especially in Sectors 17, 35, and 26.</li>
+                  </ul>
+                  <h3>11. Education and Intellectual Culture</h3>
+                  <ul>
+                    <li>Chandigarh is known for its strong emphasis on education and intellectual pursuits.</li>
+                    <li>Panjab University and other educational institutions contribute to a vibrant academic environment.</li>
+                    <li>The city regularly hosts seminars, conferences, and intellectual discussions on various topics.</li>
+                  </ul>
+                  <h3>12. Sports</h3>
+                  <ul>
+                    <li>Sports are an integral part of Chandigarh's culture, with cricket, football, hockey, and tennis being particularly popular.</li>
+                    <li>The city has produced many national and international level athletes.</li>
+                    <li>The Sector 16 Stadium and the Chandigarh Golf Club are prominent sporting venues.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="phi.jpg" alt="" style="height:300px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br><br>
+
+          <p>Chandigarh's culture is a unique blend of modernity and tradition, urban planning and natural beauty, Punjabi heritage and cosmopolitan influences. It's a city where planned architecture meets vibrant lifestyle, creating a distinctive cultural identity.</p><br><br>
+        </div>
+        <div id="wbtradition" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Tradition of Chandigarh</h1>
+          <p>Chandigarh, being a relatively young city established after India's independence, has traditions that blend Punjabi and Haryanvi cultures with modern urban lifestyle. Here's an overview of some key traditional aspects of the city:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Clothing Tradition</h3>
+                  <h4>Men</h4>
+                  <ul>
+                    <li><b>Kurta Pajama:</b> Traditional Punjabi attire worn during festivals and special occasions.</li>
+                    <li><b>Turban (Pagri):</b> Sikh men wear turbans as part of their religious identity.</li>
+                    <li><b>Western Wear:</b> Being a modern city, western clothing is common for daily wear.</li>
+                  </ul>
+                  <h4>Women</h4>
+                  <ul>
+                    <li><b>Salwar Kameez:</b> The most popular traditional attire, often with a phulkari dupatta.</li>
+                    <li><b>Phulkari:</b> Traditional Punjabi embroidery style used on dupattas and shawls, especially for weddings and festivals.</li>
+                    <li><b>Parandi:</b> Colorful silk threads woven into braids, traditionally worn by Punjabi women.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="cloth.jpg" alt="" style="height:250px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>2. Wedding Traditions</h3>
+                  <ul>
+                    <li><b>Roka Ceremony:</b> The first official meeting of the families to confirm the relationship.</li>
+                    <li><b>Mehndi:</b> Intricate henna designs applied on the bride's hands and feet.</li>
+                    <li><b>Sangeet:</b> A musical evening where families gather to sing and dance before the wedding.</li>
+                    <li><b>Anand Karaj:</b> Traditional Sikh wedding ceremony performed at a Gurudwara.</li>
+                    <li><b>Hindu Ceremonies:</b> Many follow traditional Hindu wedding rituals with pheras around the sacred fire.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="wedding.jpg" alt="" style="height:250px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="dance.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Music & Dance Traditions</h3>
+                  <ul>
+                    <li><b>Bhangra:</b> Energetic folk dance of Punjab, performed during celebrations and festivals.</li>
+                    <li><b>Giddha:</b> Traditional folk dance performed by women in Punjab.</li>
+                    <li><b>Folk Songs:</b> Traditional Punjabi folk songs like Boliyan, Tappe, and Jugni are popular.</li>
+                    <li><b>Modern Fusion:</b> Chandigarh has developed a unique blend of traditional and contemporary music and dance forms.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="book.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+
+                  <h3>4. Social & Religious Traditions</h3>
+                  <ul>
+                    <li><b>Langar:</b> The tradition of community meals at Gurudwaras, open to people of all religions.</li>
+                    <li><b>Teej:</b> A festival celebrated by women with swings, singing, and special foods.</li>
+                    <li><b>Lohri:</b> Winter harvest festival celebrated with bonfires, singing, and dancing.</li>
+                    <li><b>Community Living:</b> Chandigarh's sector-based planning encourages community interaction and neighborhood traditions.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Architectural & Design Traditions</h3>
+                  <ul>
+                    <li><b>Le Corbusier's Legacy:</b> The city follows modernist architectural principles with concrete structures, geometric designs, and functional spaces.</li>
+                    <li><b>Sector System:</b> The traditional layout of Chandigarh with numbered sectors, each containing markets, residential areas, and green spaces.</li>
+                    <li><b>Rock Garden:</b> Nek Chand's unique creation using industrial and home waste, representing a distinctive artistic tradition.</li>
+                    <li><b>Green Spaces:</b> The tradition of maintaining gardens, parks, and tree-lined avenues is integral to Chandigarh's identity.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="arch.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>6. Sports & Recreation</h3>
+                  <ul>
+                    <li><b>Cricket:</b> Extremely popular, with the Sector 16 Stadium being a major venue.</li>
+                    <li><b>Golf:</b> The Chandigarh Golf Club has a strong tradition and prestigious membership.</li>
+                    <li><b>Morning Walks:</b> The tradition of early morning walks around Sukhna Lake is deeply ingrained in the city's lifestyle.</li>
+                    <li><b>Cycling:</b> With its wide roads and cycle tracks, Chandigarh has maintained a cycling tradition even as other cities moved away from it.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="foot1.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br><br>
+          <p>Chandigarh's traditions represent a unique blend of Punjabi cultural heritage, modern urban planning, and cosmopolitan influences. Despite being a relatively young city, it has developed its own distinctive traditions that reflect both its planned nature and the cultural backgrounds of its residents.</p><br><br>
+        </div>
+        <div id="wbfestivals" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Festivals of Chandigarh</h1>
+          <p>Chandigarh celebrates a variety of festivals that reflect its diverse cultural heritage, with influences from Punjab, Haryana, and its cosmopolitan population. Here's a list of some of the major festivals celebrated in the city:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Chandigarh Rose Festival</h3>
+                  <ul>
+                    <li>One of the city's signature events, held annually in February at the Zakir Hussain Rose Garden.</li>
+                    <li>Features flower shows, cultural performances, photography competitions, and food stalls.</li>
+                    <li>The Rose Garden displays over 1,600 varieties of roses, making it one of Asia's largest.</li>
+                    <li>Competitions include Rose Prince and Princess, photography contests, and flower arrangements.</li>
+                  </ul>
+                  <p><b>📍 Time: February (Last weekend)</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="durga1.jpg" alt="" style="height:230px;width: 200px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="kali.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Baisakhi</h3>
+                  <ul>
+                    <li>The Punjabi harvest festival and Sikh New Year, celebrated with great enthusiasm.</li>
+                    <li>Gurudwaras are decorated, and special prayers and langar (community meals) are organized.</li>
+                    <li>Cultural programs featuring Bhangra and Giddha performances are held across the city.</li>
+                    <li>Fairs and processions add to the festive atmosphere.</li>
+                  </ul>
+                  <p><b>📍 Time: April 13-14</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Lohri</h3>
+                  <ul>
+                    <li>A popular winter harvest festival celebrated with bonfires, singing, and dancing.</li>
+                    <li>People gather around bonfires, throw sesame seeds, jaggery, and popcorn into the fire as offerings.</li>
+                    <li>Traditional Punjabi folk songs and dances like Bhangra and Giddha are performed.</li>
+                    <li>Special foods include sarson da saag, makki di roti, revri, gajak, and peanuts.</li>
+                  </ul>
+                  <p><b>📍 Time: January 13</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="poila.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="saras.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Teej</h3>
+                  <ul>
+                    <li>A traditional festival celebrated by women during the monsoon season.</li>
+                    <li>Women dress in green clothes, apply mehndi (henna), and sing folk songs.</li>
+                    <li>Swings are hung from trees, and women enjoy swinging while singing traditional songs.</li>
+                    <li>Special foods like ghevar and other sweets are prepared.</li>
+                  </ul>
+                  <p><b>📍 Time: July-August (varies according to the lunar calendar)</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Diwali</h3>
+                  <ul>
+                    <li>The festival of lights is celebrated with great enthusiasm in Chandigarh.</li>
+                    <li>Homes and buildings are decorated with diyas (oil lamps), candles, and colorful lights.</li>
+                    <li>The Sector 17 Plaza and other markets are beautifully illuminated.</li>
+                    <li>Fireworks displays, family gatherings, and exchange of gifts and sweets are common.</li>
+                  </ul>
+                  <p><b>📍 Time: October-November (varies according to the lunar calendar)</b></p>
+                  <h3>6. Holi</h3>
+                  <ul>
+                    <li>The festival of colors is celebrated with great enthusiasm, especially in residential sectors.</li>
+                    <li>People play with colors, water guns, and water balloons.</li>
+                    <li>Special foods like gujiya, mathri, and thandai are prepared.</li>
+                    <li>Community celebrations with music and dance are organized in various parts of the city.</li>
+                  </ul>
+                  <p><b>📍 Time: March (varies according to the lunar calendar)</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="roth.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="bhai.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>7. Gurpurbs</h3>
+                  <ul>
+                    <li>Birth and martyrdom anniversaries of Sikh Gurus are celebrated with devotion.</li>
+                    <li>Gurudwaras are decorated, and Akhand Path (continuous reading of the Guru Granth Sahib) is organized.</li>
+                    <li>Processions (Nagar Kirtans) with the Guru Granth Sahib are taken out through the city.</li>
+                    <li>Langar (community meals) are served to all visitors regardless of religion.</li>
+                  </ul>
+                  <p><b>📍 Time: Various dates throughout the year</b></p>
+                  <h3>8. Chandigarh Carnival</h3>
+                  <ul>
+                    <li>An annual event celebrating the city's vibrant culture and lifestyle.</li>
+                    <li>Features parades, music performances, dance shows, and art exhibitions.</li>
+                    <li>Food stalls offering various cuisines add to the festive atmosphere.</li>
+                    <li>Held at the Leisure Valley or Sector 17 Plaza.</li>
+                  </ul>
+                  <p><b>📍 Time: November</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>9. Mango Festival</h3>
+                  <ul>
+                    <li>Celebrates the king of fruits with displays of various mango varieties.</li>
+                    <li>Competitions for the best mango variety, mango eating, and mango recipes.</li>
+                    <li>Cultural programs and food stalls featuring mango-based dishes and drinks.</li>
+                    <li>Organized by the Tourism Department at Yadavindra Gardens, Pinjore.</li>
+                  </ul>
+                  <p><b>📍 Time: June-July</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="nabanna.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="alla.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>10. Eid-ul-Fitr & Eid-ul-Adha</h3>
+                  <ul>
+                    <li>Celebrated by the Muslim community with prayers at mosques, especially the Jama Masjid in Sector 20.</li>
+                    <li>Families gather for festive meals, exchange gifts, and visit friends and relatives.</li>
+                    <li>Special foods include seviyaan (sweet vermicelli), biryani, and various meat dishes.</li>
+                  </ul>
+                  <p><b>📍 Time: Based on Islamic Calendar</b></p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>11. Craft Mela</h3>
+                  <ul>
+                    <li>Annual craft fair showcasing traditional handicrafts from various parts of India.</li>
+                    <li>Artisans display and sell their creations, including pottery, textiles, jewelry, and woodwork.</li>
+                    <li>Cultural performances and food stalls add to the festive atmosphere.</li>
+                    <li>Usually held at Kalagram or Sector 17 Plaza.</li>
+                  </ul>
+                  <p><b>📍 Time: October-November</b></p>
+
+                  <h3>12. Christmas </h3>
+                  <ul>
+                    <li>Celebrated with special services at churches, including Christ Church in Sector 18 and Cathedral of the Redemption in Sector 19.</li>
+                    <li>Markets, especially in Sector 17, are decorated with Christmas trees and lights.</li>
+                    <li>Christmas parties, carol singing, and exchange of gifts are common.</li>
+                  </ul>
+                  <p><b>📍 Time: December 25</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="chris.jpg" alt="" style="height:200px;width: 230px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="biswa.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>13. International Crafts Mela</h3>
+                  <ul>
+                    <li>Held at Kalagram, featuring crafts and cultural performances from India and abroad.</li>
+                    <li>Artisans showcase traditional crafts, textiles, pottery, and other handmade items.</li>
+                    <li>Cultural programs, folk dances, and music performances add to the festive atmosphere.</li>
+                  </ul>
+                  <p><b>📍 Time: December</b></p>
+                  <h3>14. Chandigarh Literary Festival</h3>
+                  <ul>
+                    <li>Annual event bringing together authors, poets, and literary enthusiasts.</li>
+                    <li>Features book launches, panel discussions, poetry readings, and workshops.</li>
+                    <li>Organized at various venues including Tagore Theatre and Panjab University.</li>
+                  </ul>
+                  <p><b>📍 Time: November</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Chandigarh's festivals reflect its unique blend of traditional Punjabi culture, modern urban lifestyle, and cosmopolitan influences. The city celebrates both religious and cultural festivals with equal enthusiasm, making it a vibrant place throughout the year. 🎉</p><br><br>
+        </div>
+        <div id="wbfood" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Foods of Chandigarh</h1>
+          <p>Chandigarh offers a rich and diverse culinary experience, predominantly influenced by Punjabi cuisine but also incorporating flavors from various parts of India due to its cosmopolitan population. Here's a look at some of the most iconic foods of Chandigarh:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Punjabi Staples</h3>
+                  <ul>
+                    <li><b>Makki di Roti & Sarson da Saag:</b> A classic winter dish of cornmeal flatbread served with mustard greens cooked with spices and topped with butter or ghee.</li>
+                    <li><b>Chole Bhature:</b> Spicy chickpea curry served with deep-fried, fluffy bread. A popular breakfast and lunch option.</li>
+                    <li><b>Butter Chicken:</b> Tender chicken pieces in a rich, creamy tomato-based gravy, a signature dish in many Chandigarh restaurants.</li>
+                  </ul>
+                  <h3>2. Breads & Parathas</h3>
+                  <ul>
+                    <li><b>Amritsari Kulcha:</b> Stuffed bread typically filled with potatoes, paneer, or mixed vegetables, served with chole and chutneys.</li>
+                    <li><b>Laccha Paratha:</b> Multi-layered flatbread made with whole wheat flour, ghee, and salt.</li>
+                    <li><b>Naan:</b> Leavened bread baked in a tandoor, often topped with butter or garlic.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="staple.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="veg.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Famous Chandigarh Dishes</h3>
+                  <h4>Vegetarian Specialties</h4>
+                  <ul>
+                    <li><b>Paneer Tikka:</b> Marinated cottage cheese cubes grilled in a tandoor, a popular appetizer.</li>
+                    <li><b>Dal Makhani:</b> Black lentils cooked with butter, cream, and spices, simmered slowly for rich flavor.</li>
+                    <li><b>Rajma Chawal:</b> Kidney beans curry served with steamed rice, a comfort food favorite.</li>
+                    <li><b>Kadhi Pakora:</b> Gram flour dumplings in a yogurt-based gravy, often served with rice.</li>
+                  </ul>
+                  <h4>Non-Vegetarian Delights</h4>
+                  <ul>
+                    <li><b>Tandoori Chicken:</b> Chicken marinated in yogurt and spices, then cooked in a clay oven.</li>
+                    <li><b>Amritsari Fish:</b> Fish fillets coated with a spiced gram flour batter and deep-fried.</li>
+                    <li><b>Chicken Tikka:</b> Boneless chicken pieces marinated and grilled, a popular starter.</li>
+                    <li><b>Mutton Rogan Josh:</b> Slow-cooked mutton in a rich, aromatic gravy.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="meat.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h4>Rice Dishes</h4>
+                  <ul>
+                    <li><b>Biryani:</b> Fragrant rice cooked with meat or vegetables and aromatic spices.</li>
+                    <li><b>Pulao:</b> Mildly spiced rice dish with vegetables or meat.</li>
+                    <li><b>Jeera Rice:</b> Basmati rice tempered with cumin seeds, a simple yet flavorful accompaniment.</li>
+                  </ul>
+                  <h4>Accompaniments</h4>
+                  <ul>
+                    <li><b>Raita:</b> Yogurt mixed with cucumber, mint, or other vegetables, a cooling side dish.</li>
+                    <li><b>Chutneys:</b> Various types including mint, tamarind, and mango, adding flavor to meals.</li>
+                    <li><b>Pickles (Achaar):</b> Spicy preserved vegetables or fruits, a traditional accompaniment.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>4. Desserts & Sweets</h3>
+                  <ul>
+                    <li><b>Jalebi:</b> Deep-fried sweet batter soaked in sugar syrup, often enjoyed with rabri.</li>
+                    <li><b>Gulab Jamun:</b> Soft, spongy milk solids balls soaked in rose-flavored sugar syrup.</li>
+                    <li><b>Phirni:</b> Ground rice pudding flavored with cardamom and saffron, traditionally served in earthen pots.</li>
+                    <li><b>Kulfi:</b> Traditional Indian ice cream in flavors like pistachio, mango, and saffron.</li>
+                    <li><b>Pinni:</b> A winter sweet made with wheat flour, ghee, jaggery, and nuts.</li>
+                    <li><b>Gajrela (Carrot Halwa):</b> Grated carrots cooked with milk, sugar, and ghee, garnished with nuts.</li>
+                  </ul>
+
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="rosso.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="phuchka.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>5. Street Food of Chandigarh</h3>
+                  <ul>
+                    <li><b>Gol Gappe (Pani Puri):</b> Hollow crisp puris filled with spicy tamarind water, potatoes, and chickpeas.</li>
+                    <li><b>Tikki Chaat:</b> Potato patties topped with yogurt, chutneys, and spices.</li>
+                    <li><b>Samosa:</b> Triangular pastry filled with spiced potatoes and peas, served with chutneys.</li>
+                    <li><b>Kathi Roll:</b> Flatbread wrapped around fillings like paneer, chicken, or vegetables.</li>
+                    <li><b>Bhel Puri:</b> Puffed rice mixed with vegetables, chutneys, and spices, a light snack.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>6. Beverages</h3>
+                  <ul>
+                    <li><b>Lassi:</b> Sweet or salted yogurt drink, often flavored with fruits or spices. Chandigarh's lassi is particularly famous.</li>
+                    <li><b>Chai:</b> Spiced tea, a popular beverage enjoyed throughout the day.</li>
+                    <li><b>Kanji:</b> A traditional fermented drink made from black carrots, mustard seeds, and water.</li>
+                    <li><b>Shikanji:</b> Refreshing lemonade spiced with cumin, mint, and black salt.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="tea.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Special Festival Foods</h3>
+                  <ul>
+                    <li><b>Kada Prasad:</b> A semolina-based sweet offered at Gurudwaras, especially during Gurpurbs.</li>
+                    <li><b>Langar Food:</b> Community meals served at Gurudwaras, typically including dal, roti, sabzi, and kheer.</li>
+                    <li><b>Gajak & Revri:</b> Sesame and jaggery sweets popular during Lohri.</li>
+                    <li><b>Ghevar:</b> A disc-shaped sweet made from flour and soaked in sugar syrup, popular during Teej.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="pithe.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Chandigarh's food scene is a delightful mix of traditional Punjabi flavors, street food favorites, and modern culinary innovations. Whether you're enjoying a hearty Punjabi meal, savoring street food in Sector 17, or dining at one of the city's upscale restaurants, Chandigarh offers a rich gastronomic experience that reflects its vibrant culture. 🍛🍲🍦</p><br><br>
+        </div>
+        <div id="wbhistory" class="tab-pane fade in active" style="background-color: white;">
+          <h1>History of Chandigarh</h1>
+          <p>Chandigarh has a unique history as one of the earliest planned cities in post-independence India. Unlike many ancient Indian cities, Chandigarh's history is relatively recent but fascinating in its conception, design, and development.</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Pre-Independence Era</h3>
+                  <ul>
+                    <li><b>Ancient History:</b> The area where Chandigarh now stands was once part of the Harappan Civilization. Archaeological findings suggest human settlement in the region dates back to 8000 BCE.</li>
+                    <li><b>Medieval Period:</b> The region was ruled by various dynasties including the Mauryas, Guptas, Mughals, and Marathas over the centuries.</li>
+                    <li><b>British Era:</b> During British rule, the area was primarily agricultural land with small villages, falling under the Punjab province.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="maurya.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="pala.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Partition and the Need for a New Capital (1947)</h3>
+                  <ul>
+                    <li><b>Partition Impact:</b> When India gained independence in 1947, the partition divided Punjab into two parts, with Lahore (the capital of undivided Punjab) becoming part of Pakistan.</li>
+                    <li><b>Capital Crisis:</b> The Indian state of Punjab was left without a capital, creating an urgent need for a new administrative center.</li>
+                    <li><b>Decision for a New City:</b> Prime Minister Jawaharlal Nehru decided to build a completely new, modern city to serve as the capital of Punjab.</li>
+                    <li><b>Site Selection:</b> In 1948, the government acquired land at the foothills of the Shivalik range for the new capital city.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="delhi.png" alt="" style="height:220px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>3. Planning and Design (1950-1953)</h3>
+                  <ul>
+                    <li><b>Le Corbusier's Appointment:</b> After initial plans by American architect Albert Mayer and his partner Matthew Nowicki were abandoned following Nowicki's death, the renowned Swiss-French architect Le Corbusier was appointed to design the city.</li>
+                    <li><b>Master Plan:</b> Le Corbusier, along with his cousin Pierre Jeanneret and British architects Maxwell Fry and Jane Drew, developed the master plan for Chandigarh.</li>
+                    <li><b>City Concept:</b> The city was designed as a grid with 47 self-contained sectors, each measuring 800 x 1200 meters, inspired by the human body with the Capitol Complex as the head, the city center as the heart, and the industrial area as the hands.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>4. Construction and Development (1952-1960)</h3>
+                  <ul>
+                    <li><b>Foundation Stone:</b> Prime Minister Jawaharlal Nehru laid the foundation stone of Chandigarh on April 2, 1952.</li>
+                    <li><b>First Phase:</b> The construction began with the Capitol Complex, housing the High Court, Secretariat, and Legislative Assembly.</li>
+                    <li><b>Residential Sectors:</b> The first residential sectors were developed, with a focus on providing modern amenities and green spaces.</li>
+                    <li><b>Inauguration:</b> The city was officially inaugurated in 1953, with government functions gradually shifting from temporary facilities in Shimla.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="mughal.jpg" alt="" style="height:200px;width: 250px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="plassey.jpg" alt="" style="height:230px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h2>5. Chandigarh as Punjab's Capital (1953-1966)</h3>
+                    <ul>
+                      <li><b>Administrative Center:</b> Chandigarh functioned as the capital of Punjab, with all major government offices operating from the city.</li>
+                      <li><b>Growth and Development:</b> The city saw rapid development with the establishment of educational institutions, healthcare facilities, and commercial areas.</li>
+                      <li><b>Cultural Hub:</b> Chandigarh began to emerge as a cultural and educational center with the establishment of Panjab University and other institutions.</li>
+                    </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="rammohan.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>6. Reorganization and Union Territory Status (1966)</h3>
+                  <ul>
+                    <li><b>Punjab Reorganization:</b> In 1966, the state of Punjab was reorganized on linguistic lines, creating a Punjabi-speaking Punjab and a Hindi-speaking Haryana.</li>
+                    <li><b>Disputed Capital:</b> Both states claimed Chandigarh as their capital, leading to a political dispute.</li>
+                    <li><b>Union Territory:</b> As a compromise, Chandigarh was made a Union Territory, directly administered by the Central Government, while serving as the capital of both Punjab and Haryana.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="netaji.jpg" alt="" style="height:230px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>7. Modern Developments (1970s-Present)</h3>
+                  <ul>
+                    <li><b>Expansion:</b> The city expanded beyond its original 47 sectors, with the development of satellite towns like Mohali (Punjab) and Panchkula (Haryana), forming the Chandigarh Tricity.</li>
+                    <li><b>IT Hub:</b> Chandigarh emerged as an IT hub with the establishment of the IT Park in the early 2000s.</li>
+                    <li><b>Cultural Landmarks:</b> Development of cultural landmarks like the Rock Garden (created by Nek Chand from waste materials) added to the city's unique character.</li>
+                    <li><b>UNESCO Recognition:</b> In 2016, the Capitol Complex was declared a UNESCO World Heritage Site, recognizing Le Corbusier's architectural contribution.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>8. Political Status and Ongoing Issues</h3>
+                  <ul>
+                    <li><b>Capital Dispute:</b> The issue of Chandigarh's status remains politically sensitive, with Punjab continuing to claim exclusive rights to the city.</li>
+                    <li><b>Shared Facilities:</b> Many institutions and buildings in Chandigarh are shared between Punjab and Haryana, including the Civil Secretariat and the High Court.</li>
+                    <li><b>Governance Structure:</b> As a Union Territory, Chandigarh is administered by an Administrator (the Governor of Punjab) appointed by the Central Government.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="part.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>9. Architectural Legacy</h3>
+                  <ul>
+                    <li><b>Le Corbusier's Vision:</b> The city stands as a testament to Le Corbusier's modernist vision, with its grid layout, functional zoning, and distinctive concrete buildings.</li>
+                    <li><b>Urban Planning Model:</b> Chandigarh has served as a model for urban planning in India and other developing countries.</li>
+                    <li><b>Preservation Challenges:</b> The city faces challenges in preserving its architectural heritage while accommodating modern development needs.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="part1.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>10. Present-Day Chandigarh</h3>
+                  <ul>
+                    <li><b>Quality of Life:</b> Consistently ranked among the cleanest and most livable cities in India.</li>
+                    <li><b>Economic Hub:</b> A major economic center in North India with thriving IT, education, and service sectors.</li>
+                    <li><b>Cultural Center:</b> Home to numerous cultural institutions, museums, and educational facilities.</li>
+                    <li><b>Green City:</b> Known for its parks, gardens, and tree-lined avenues, maintaining Le Corbusier's vision of a green city.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="present.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Chandigarh's history is a unique story of modern urban planning, architectural innovation, and political compromise. From its conception as a symbol of newly independent India's aspirations to its current status as a thriving administrative and cultural center, Chandigarh represents a distinctive chapter in India's post-independence development. 🏙️📜</p>
+          <br><br>
+        </div>
+        <div id="wbartacraft" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Art & Craft of Chandigarh 🎨🖌️</h1>
+          <p>Chandigarh has a unique artistic heritage that blends modernist influences from its planned architecture with traditional North Indian crafts. The city's art scene is shaped by its distinctive urban design, cultural institutions, and the creative spirit of its residents.</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Architectural Art 🏛️</h3>
+                  <h4>🔸 Le Corbusier's Modernist Vision</h4>
+                  <ul>
+                    <li><b>Famous for:</b> Brutalist concrete structures with geometric patterns and bold forms.</li>
+                    <li><b>Where?</b> Capitol Complex (High Court, Secretariat, Legislative Assembly).</li>
+                    <li><b>Features:</b> Brise-soleil (sun breakers), modular proportions based on the "Modulor" system, and integration of art with architecture.</li>
+                  </ul>
+                  <h4>🔸 Architectural Sculptures</h4>
+                  <ul>
+                    <li><b>Open Hand Monument:</b> Le Corbusier's iconic symbol of peace and reconciliation, now the official emblem of Chandigarh.</li>
+                    <li><b>Geometric Hill:</b> A sculptural mound in the Capitol Complex representing the Himalayan landscape.</li>
+                    <li><b>Tower of Shadows:</b> An architectural experiment demonstrating natural cooling techniques.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="tera.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="textile.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Rock Garden - Nek Chand's Masterpiece 🗿</h3>
+                  <ul>
+                    <li><b>Creator:</b> Nek Chand Saini, a government road inspector who began the garden secretly in 1957.</li>
+                    <li><b>Materials:</b> Created entirely from industrial and home waste materials - broken pottery, glass, bangles, tiles, and discarded electrical parts.</li>
+                    <li><b>Scale:</b> Spans over 40 acres with thousands of sculptures, waterfalls, courtyards, and theaters.</li>
+                    <li><b>Recognition:</b> One of the largest folk art environments in the world, attracting millions of visitors annually.</li>
+                    <li><b>Artistic Style:</b> Whimsical figures of humans, animals, and mythical creatures arranged in fantasy landscapes.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Traditional Punjabi Crafts 🧵</h3>
+                  <ul>
+                    <li><b>Phulkari Embroidery:</b> Colorful floral embroidery on shawls and dupattas, traditionally done by Punjabi women.</li>
+                    <li><b>Juttis:</b> Handcrafted leather footwear with intricate embroidery and mirror work.</li>
+                    <li><b>Paranda:</b> Colorful tassels used to decorate braids, made with silk threads and adorned with beads and trinkets.</li>
+                    <li><b>Durries:</b> Flat-woven rugs with geometric patterns, made on traditional looms.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="dokra.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="gomira.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Contemporary Art Scene 🖼️</h3>
+                  <h4>🔸 Government Museum and Art Gallery</h4>
+                  <ul>
+                    <li><b>Collection:</b> Houses one of the best collections of Gandhara sculptures and Pahari miniature paintings in India.</li>
+                    <li><b>Building:</b> Designed by Le Corbusier, the building itself is a work of art.</li>
+                    <li><b>Exhibitions:</b> Regularly hosts contemporary art exhibitions and cultural events.</li>
+                  </ul>
+                  <h4>🔸 Chandigarh Lalit Kala Akademi</h4>
+                  <ul>
+                    <li><b>Role:</b> Promotes visual arts through exhibitions, workshops, and artist residencies.</li>
+                    <li><b>Annual Art Mart:</b> Platform for artists to showcase and sell their work directly to the public.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Furniture Design 🪑</h3>
+                  <ul>
+                    <li><b>Chandigarh Chair:</b> Iconic furniture designed by Pierre Jeanneret (Le Corbusier's cousin) for the city's public buildings.</li>
+                    <li><b>Materials:</b> Made from local teak and cane, featuring V-shaped legs and geometric forms.</li>
+                    <li><b>Global Recognition:</b> Now highly sought after by collectors worldwide and featured in design museums.</li>
+                    <li><b>Legacy:</b> Represents the modernist design philosophy that influenced the entire city.</li>
+                  </ul>
+                  <h3>6. Calligraphy and Typography 📝</h3>
+                  <ul>
+                    <li><b>Gurmukhi Script:</b> Traditional Punjabi calligraphy seen in religious texts and public signage.</li>
+                    <li><b>Modernist Typography:</b> Le Corbusier designed a special typeface for Chandigarh's signage, reflecting the city's modernist aesthetic.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="potochitra.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="kalighat.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>7. Performing Arts 🎭</h3>
+                  <ul>
+                    <li><b>Tagore Theatre:</b> The cultural hub of Chandigarh, hosting plays, dance performances, and music concerts.</li>
+                    <li><b>Bhangra and Giddha:</b> Traditional Punjabi folk dances that are integral to the city's cultural identity.</li>
+                    <li><b>Music:</b> Strong tradition of classical and folk music performances, with regular concerts and festivals.</li>
+                  </ul>
+                  <h3>8. Literary Arts 📚</h3>
+                  <ul>
+                    <li><b>Chandigarh Sahitya Akademi:</b> Promotes literature in various languages including Punjabi, Hindi, and English.</li>
+                    <li><b>Literary Festivals:</b> The city hosts regular book fairs, poetry recitals, and literary discussions.</li>
+                    <li><b>Publishing:</b> Home to several publishing houses focusing on regional literature.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>9. Photography and Film 📷</h3>
+                  <ul>
+                    <li><b>Architectural Photography:</b> Chandigarh's unique buildings and urban landscapes have inspired generations of photographers.</li>
+                    <li><b>Documentary Filmmaking:</b> Several documentaries have been made about the city's planning and development.</li>
+                    <li><b>Film Festivals:</b> The city hosts regular film screenings and festivals celebrating both mainstream and independent cinema.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="jute.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>📌 Summary: Chandigarh's Art & Craft Forms</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Art Form</th>
+                <th>Location/Institution</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Modernist Architecture</td>
+                <td>Capitol Complex</td>
+                <td>Le Corbusier's brutalist concrete buildings, UNESCO World Heritage Site</td>
+              </tr>
+              <tr>
+                <td>Rock Garden</td>
+                <td>Sector 1</td>
+                <td>Nek Chand's sculptures made from recycled materials</td>
+              </tr>
+              <tr>
+                <td>Phulkari Embroidery</td>
+                <td>Traditional craft centers</td>
+                <td>Colorful floral patterns on textiles</td>
+              </tr>
+              <tr>
+                <td>Chandigarh Furniture</td>
+                <td>Government buildings, museums</td>
+                <td>Pierre Jeanneret's iconic chairs and tables</td>
+              </tr>
+              <tr>
+                <td>Contemporary Art</td>
+                <td>Government Museum & Art Gallery</td>
+                <td>Exhibitions of modern Indian art</td>
+              </tr>
+              <tr>
+                <td>Performing Arts</td>
+                <td>Tagore Theatre</td>
+                <td>Theatre, dance, and music performances</td>
+              </tr>
+              <tr>
+                <td>Literary Arts</td>
+                <td>Chandigarh Sahitya Akademi</td>
+                <td>Promotion of regional literature</td>
+              </tr>
+              <tr>
+                <td>Punjabi Folk Crafts</td>
+                <td>Craft bazaars, Kalagram</td>
+                <td>Juttis, Paranda, traditional textiles</td>
+              </tr>
+              <tr>
+                <td>Photography</td>
+                <td>Various galleries</td>
+                <td>Architectural and urban landscape photography</td>
+              </tr>
+            </table>
+          </div>
+          <br><br>
+          <p>Chandigarh's art and craft scene represents a unique blend of modernist vision and traditional Punjabi culture. From Le Corbusier's architectural masterpieces to Nek Chand's whimsical Rock Garden, from traditional Phulkari embroidery to contemporary art exhibitions, the city offers a rich and diverse artistic landscape that continues to inspire and evolve. 🎭✨</p>
+          <br><br>
+        </div>
+        <div id="wbseason" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Seasons to visit Chandigarh 🌧️☀️ </h1>
+          <p>Chandigarh experiences a composite climate with distinct seasons, each offering a different experience for visitors. The city's well-planned layout, gardens, and architectural landmarks can be enjoyed year-round, but certain seasons provide more comfortable conditions for exploration.</p>
+
+          <br><br>
+
+          <h2> Season-wise Breakdown for Visiting Chandigarh</h2>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🌸 Spring (February - March)</h3>
+                  <ul>
+                    <li>One of the best times to visit Chandigarh with pleasant temperatures ranging from 15°C to 30°C.</li>
+                    <li>The Rose Festival in February is a major attraction, showcasing over 1,600 varieties of roses.</li>
+                    <li>Gardens and parks are in full bloom, making it ideal for outdoor activities.</li>
+                    <li>Perfect weather for exploring the Capitol Complex, Rock Garden, and Sukhna Lake.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="spring.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="summer.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>☀️ Summer (April – June)</h3>
+                  <ul>
+                    <li>Temperatures can soar to 40-45°C, making outdoor activities challenging during midday.</li>
+                    <li>Early mornings and evenings are more comfortable for sightseeing.</li>
+                    <li>The Mango Festival in June showcases various mango varieties and products.</li>
+                    <li>Indoor attractions like museums and shopping malls offer respite from the heat.</li>
+                    <li>Sukhna Lake remains popular for evening boat rides and walks.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🌧️ Monsoon (July - September)</h3>
+                  <ul>
+                    <li>The city receives moderate rainfall, turning the landscape lush and green.</li>
+                    <li>Temperatures drop to a more comfortable range of 25-35°C.</li>
+                    <li>Sukhna Lake and the city's gardens look particularly beautiful during this season.</li>
+                    <li>Occasional heavy downpours may disrupt outdoor plans, so flexibility is recommended.</li>
+                    <li>The Teej Festival in August celebrates the monsoon with traditional music and dance.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="rain.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="autmn.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🍁 Autumn (October - November)</h3>
+                  <ul>
+                    <li>Another excellent time to visit with temperatures ranging from 15°C to 30°C.</li>
+                    <li>Clear skies and reduced humidity make it perfect for outdoor exploration.</li>
+                    <li>The Chandigarh Carnival in November features parades, music, and cultural performances.</li>
+                    <li>Festival season with Diwali celebrations lighting up the city.</li>
+                    <li>Ideal for architectural tours and photography with good natural light.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>❄️ Winter (December - January)</h3>
+                  <ul>
+                    <li>Temperatures range from 5°C to 20°C, with occasional fog in the mornings.</li>
+                    <li>The International Crafts Mela in December showcases handicrafts from across India.</li>
+                    <li>New Year celebrations and Christmas events add to the festive atmosphere.</li>
+                    <li>Lohri in January is celebrated with bonfires and traditional folk performances.</li>
+                    <li>Warm clothing is recommended, especially for early mornings and evenings.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="winter.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>📌 Summary: Best Time to Visit Different Places in Chandigarh</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Attraction</th>
+                <th>Best Season</th>
+                <th>Recommended Months</th>
+                <th>Why Visit?</th>
+              </tr>
+              <tr>
+                <td>Rose Garden</td>
+                <td>Spring</td>
+                <td>February - March</td>
+                <td>Rose Festival, thousands of roses in full bloom</td>
+              </tr>
+              <tr>
+                <td>Sukhna Lake</td>
+                <td>Autumn, Winter</td>
+                <td>October - February</td>
+                <td>Pleasant weather for boating, walking, and bird watching</td>
+              </tr>
+              <tr>
+                <td>Rock Garden</td>
+                <td>Spring, Autumn</td>
+                <td>February - March, October - November</td>
+                <td>Comfortable temperatures for exploring the extensive outdoor exhibits</td>
+              </tr>
+              <tr>
+                <td>Capitol Complex</td>
+                <td>Spring, Autumn</td>
+                <td>February - March, October - November</td>
+                <td>Clear skies for architectural photography, comfortable for walking tours</td>
+              </tr>
+              <tr>
+                <td>Leisure Valley</td>
+                <td>Spring, Monsoon</td>
+                <td>February - March, July - September</td>
+                <td>Lush greenery and flowering plants</td>
+              </tr>
+              <tr>
+                <td>Sector 17 Plaza</td>
+                <td>Winter</td>
+                <td>November - January</td>
+                <td>Festival decorations, comfortable shopping weather</td>
+              </tr>
+              <tr>
+                <td>Pinjore Gardens</td>
+                <td>Spring, Monsoon</td>
+                <td>February - March, July - September</td>
+                <td>Mughal gardens at their best, Mango Festival in summer</td>
+              </tr>
+              <tr>
+                <td>Museums & Indoor Attractions</td>
+                <td>Summer</td>
+                <td>April - June</td>
+                <td>Escape the heat while exploring the city's cultural offerings</td>
+              </tr>
+              <tr>
+                <td>Chandigarh Carnival</td>
+                <td>Autumn</td>
+                <td>November</td>
+                <td>Cultural performances, parades, and festivities</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="container">
+            <div class="row">
+              <h1 style=" text-align: center;">📌 Summary: When to Visit Chandigarh</h1><br>
+              <ul>
+                <li><b>Best overall time:</b> February-March and October-November (Spring and Autumn)</li>
+                <li><b>For festivals & cultural experiences:</b> February (Rose Festival), November (Chandigarh Carnival), October-November (Diwali), January (Lohri)</li>
+                <li><b>For outdoor activities:</b> February-March, October-November</li>
+                <li><b>For budget travelers:</b> July-September (Monsoon season has fewer tourists)</li>
+                <li><b>For photography:</b> Early mornings in winter for misty landscapes, spring for colorful gardens</li>
+              </ul>
+
+            </div>
+          </div>
+          <br><br>
+        </div>
+        <div id="wbtourist" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Tourist Spots of Chandigarh 🏛️🌳</h1>
+          <p>Chandigarh, known as "The City Beautiful," offers a unique blend of architectural marvels, well-planned urban spaces, lush gardens, and cultural attractions. Here's a categorized list of the best tourist places in Chandigarh:</p>
+
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Architectural Landmarks 🏛️</h3>
+                  <ul>
+                    <li><b>Capitol Complex -</b> UNESCO World Heritage Site designed by Le Corbusier, featuring the High Court, Secretariat, and Legislative Assembly.</li>
+                    <li><b>Open Hand Monument -</b> Le Corbusier's iconic symbol of peace and reconciliation, the official emblem of Chandigarh.</li>
+                    <li><b>Tower of Shadows -</b> An architectural experiment demonstrating natural cooling techniques.</li>
+                    <li><b>Geometric Hill -</b> A sculptural mound in the Capitol Complex representing the Himalayan landscape.</li>
+                    <li><b>Government Museum and Art Gallery -</b> Designed by Le Corbusier, housing an impressive collection of Gandhara sculptures and Pahari miniature paintings.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="darj.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="biswagate.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Gardens & Green Spaces 🌳</h3>
+                  <ul>
+                    <li><b>Rock Garden -</b> Nek Chand's masterpiece created from industrial waste and recycled materials, featuring sculptures, waterfalls, and amphitheaters.</li>
+                    <li><b>Zakir Hussain Rose Garden -</b> Asia's largest rose garden with over 1,600 species of roses.</li>
+                    <li><b>Leisure Valley -</b> A series of themed gardens running through the city, including the Garden of Fragrance, Garden of Silence, and Bougainvillea Garden.</li>
+                    <li><b>Terraced Garden -</b> A multi-level garden with fountains, flowers, and walking paths.</li>
+                    <li><b>Pinjore Gardens (Yadavindra Gardens) -</b> Historic Mughal gardens located 20 km from Chandigarh.</li>
+                    <li><b>Shanti Kunj -</b> A peaceful garden with medicinal plants and herbs.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Lakes & Water Bodies 💦</h3>
+                  <ul>
+                    <li><b>Sukhna Lake -</b> A man-made lake at the foothills of the Shivalik range, popular for boating, walking, and bird watching.</li>
+                    <li><b>Dhanas Lake -</b> A serene water body surrounded by greenery, ideal for nature lovers.</li>
+                    <li><b>Chhatbir Zoo Lake -</b> Located within the zoo premises, offering boat rides and views of wildlife.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="sundar.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="digha.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Museums & Cultural Centers 🏛️</h3>
+                  <ul>
+                    <li><b>Government Museum and Art Gallery -</b> Houses Gandhara sculptures, miniature paintings, and contemporary art.</li>
+                    <li><b>Natural History Museum -</b> Exhibits on local flora, fauna, and geological history.</li>
+                    <li><b>International Dolls Museum -</b> Collection of dolls from around the world.</li>
+                    <li><b>Le Corbusier Centre -</b> Located in the architect's former office, showcasing his life and work.</li>
+                    <li><b>Chandigarh Architecture Museum -</b> Documents the planning and construction of the city.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Religious Places ⛩️</h3>
+                  <ul>
+                    <li><b>ISKCON Temple -</b> Modern temple dedicated to Lord Krishna with beautiful architecture.</li>
+                    <li><b>Gurudwara Nada Sahib -</b> Historic Sikh shrine located in nearby Panchkula.</li>
+                    <li><b>Mansa Devi Temple -</b> Ancient temple on a hilltop offering panoramic views of the city.</li>
+                    <li><b>Chandi Mandir -</b> Temple dedicated to Goddess Chandi, from which Chandigarh derives its name.</li>
+                    <li><b>Christ Church -</b> Beautiful church in Sector 18 with stained glass windows.</li>
+                    <li><b>Jama Masjid -</b> Main mosque located in Sector 20.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="dak.png" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="ajhills.png" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>6. Entertainment & Recreation 🎢</h3>
+                  <ul>
+                    <li><b>Elante Mall -</b> One of North India's largest shopping malls with stores, restaurants, and entertainment options.</li>
+                    <li><b>Fun City -</b> Amusement park with rides and attractions for all ages.</li>
+                    <li><b>Thunderzone -</b> Indoor entertainment center with gaming zones and activities.</li>
+                    <li><b>Chandigarh Golf Club -</b> 18-hole golf course in a beautiful setting.</li>
+                    <li><b>Tagore Theatre -</b> Cultural venue hosting plays, concerts, and performances.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Markets & Shopping Areas 🛍️</h3>
+                  <ul>
+                    <li><b>Sector 17 Plaza -</b> The heart of Chandigarh's shopping district with stores, boutiques, and eateries.</li>
+                    <li><b>Sector 22 Market -</b> One of the oldest markets in the city, known for clothing and accessories.</li>
+                    <li><b>Shastri Market -</b> Popular for electronics and gadgets.</li>
+                    <li><b>Sector 15 Market -</b> Student hub with affordable shopping and dining options.</li>
+                    <li><b>Palika Bazaar -</b> Underground market with various shops and stalls.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="kumar.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>8. Educational Institutions 🎓</h3>
+                  <ul>
+                    <li><b>Panjab University -</b> Historic institution with beautiful campus and architecture.</li>
+                    <li><b>Post Graduate Institute of Medical Education and Research (PGIMER) -</b> Renowned medical institution with impressive buildings.</li>
+                    <li><b>Chandigarh College of Architecture -</b> First architecture college in the region, designed by Le Corbusier's team.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="kumar.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>9. Nearby Attractions 🏔️</h3>
+                  <ul>
+                    <li><b>Timber Trail -</b> Hill resort with cable car rides offering stunning views (60 km).</li>
+                    <li><b>Morni Hills -</b> Picturesque hill station with lakes and trekking opportunities (45 km).</li>
+                    <li><b>Kasauli -</b> Colonial hill station with Victorian architecture (65 km).</li>
+                    <li><b>Parwanoo -</b> Known for fruit orchards and cable car rides (35 km).</li>
+                    <li><b>Nalagarh -</b> Historic town with a palace and fort (60 km).</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="kumar.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>10. Sports Venues 🏏</h3>
+                  <ul>
+                    <li><b>Sector 16 Stadium -</b> Cricket stadium that has hosted international matches.</li>
+                    <li><b>Chandigarh Golf Club -</b> One of India's oldest golf courses with beautiful greens.</li>
+                    <li><b>Sports Complex, Sector 42 -</b> Multi-sport facility with swimming pool, tennis courts, and athletic tracks.</li>
+                    <li><b>Lake Sports Complex -</b> Water sports facilities at Sukhna Lake.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="kumar.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br><br>
+          <p>Chandigarh offers a perfect blend of architectural marvels, natural beauty, cultural attractions, and recreational facilities. Whether you're interested in Le Corbusier's modernist vision, Nek Chand's artistic genius, or simply enjoying the city's well-planned green spaces, Chandigarh has something for every visitor. 🏙️🌳</p>
+          <br><br>
+
+        </div>
+        <div id="wbwild" class="tab-pane fade in active" style="background-color: white;">
+          <h1> Wildlife & Parks of Chandigarh 🌿</h1>
+          <p>While Chandigarh is primarily known for its urban planning and architecture, the city and its surrounding areas offer several opportunities to experience wildlife and natural parks. The city's planners incorporated green spaces into the urban design, creating a balance between development and nature.</p>
+
+          <br>
+          <h2>Wildlife Areas Near Chandigarh</h2>
+          <p>Chandigarh is surrounded by several wildlife sanctuaries and natural areas that preserve the region's biodiversity.</p>
+
+          <br>
+          <h2>🔹 Major Wildlife Sanctuaries & Parks</h2>
+          <div>
+            <table>
+              <tr>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Chhatbir Zoo (Mahendra Chaudhary Zoological Park)</td>
+                <td>17 km from Chandigarh</td>
+                <td>Royal Bengal Tigers 🐅, Lions 🦁, Elephants 🐘, Reptile House, Safari</td>
+              </tr>
+              <tr>
+                <td>Sukhna Wildlife Sanctuary</td>
+                <td>Adjacent to Sukhna Lake</td>
+                <td>Migratory Birds, Sambar Deer, Wild Boar, Jackals</td>
+              </tr>
+              <tr>
+                <td>Kansal Forest</td>
+                <td>North of Chandigarh</td>
+                <td>Dense Forest, Hiking Trails, Bird Watching</td>
+              </tr>
+              <tr>
+                <td>Nepli Forest</td>
+                <td>Northeast of Chandigarh</td>
+                <td>Nature Trails, Wildlife Spotting, Bird Watching</td>
+              </tr>
+              <tr>
+                <td>Morni Hills Wildlife Sanctuary</td>
+                <td>45 km from Chandigarh</td>
+                <td>Leopards 🐆, Sambars, Barking Deer, Peacocks 🦚</td>
+              </tr>
+              <tr>
+                <td>Bir Shikargah Wildlife Sanctuary</td>
+                <td>Near Panchkula</td>
+                <td>Nilgai, Wild Boar, Jackals, Variety of Birds</td>
+              </tr>
+              <tr>
+                <td>Khol Hi-Raitan Wildlife Sanctuary</td>
+                <td>60 km from Chandigarh</td>
+                <td>Leopards, Sambars, Pangolins, Medicinal Plants</td>
+              </tr>
+            </table>
+          </div>
+          <bt><br></bt>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3> 🔹 Notable Wildlife in and around Chandigarh</h3>
+                <ul>
+                  <li><b>Mammals:</b> Sambar Deer, Nilgai, Wild Boar, Jackals, Leopards (in surrounding hills).</li>
+                  <li><b>Birds: </b>Over 400 species including Peacocks, Kingfishers, Parakeets, Woodpeckers, and migratory birds at Sukhna Lake.</li>
+                  <li><b>Reptiles:</b> Various snake species, Monitor Lizards, Turtles.</li>
+                  <li><b>Butterflies:</b> The region is home to numerous butterfly species, especially in the garden areas.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="ele.jpg" alt="" style="height:200px;width: 200px;">
+
+              </div>
+
+            </div>
+          </div>
+          <hr><br>
+          <h2>🌳 Parks and Gardens in Chandigarh </h2>
+          <p>Chandigarh is known as the "City Beautiful" partly due to its abundant green spaces, parks, and gardens that are integrated into the urban landscape.</p>
+
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Key Parks and Gardens</h3>
+                <ul>
+                  <li><b>Zakir Hussain Rose Garden:</b> Asia's largest rose garden with over 1,600 varieties of roses spread across 30 acres.</li>
+                  <li><b>Rock Garden:</b> A unique 40-acre sculpture garden created by Nek Chand from industrial and home waste.</li>
+                  <li><b>Leisure Valley:</b> A 8 km long green belt running through the city with themed gardens.</li>
+                  <li><b>Botanical Garden:</b> Houses rare plant species, medicinal herbs, and a greenhouse.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="jutep.jpg" alt="" style="height:200px;width: 220px;">
+
+              </div>
+            </div>
+          </div>
+          <h2>🔹 Major Parks of Chandigarh</h2>
+          <div>
+            <table>
+              <tr>
+                <th>Park/Garden</th>
+                <th>Location</th>
+                <th>Highlights</th>
+              </tr>
+              <tr>
+                <td>Zakir Hussain Rose Garden</td>
+                <td>Sector 16</td>
+                <td>1,600+ rose varieties, Annual Rose Festival in February 🌹</td>
+              </tr>
+              <tr>
+                <td>Rock Garden</td>
+                <td>Sector 1</td>
+                <td>Sculptures made from recycled materials, Waterfalls, Amphitheaters</td>
+              </tr>
+              <tr>
+                <td>Terraced Garden</td>
+                <td>Sector 33</td>
+                <td>Multi-level garden with fountains, flowers, and walking paths</td>
+              </tr>
+              <tr>
+                <td>Garden of Fragrance</td>
+                <td>Sector 36</td>
+                <td>Aromatic plants and flowers, Medicinal herbs</td>
+              </tr>
+              <tr>
+                <td>Garden of Silence</td>
+                <td>Sector 42</td>
+                <td>Meditation spaces, Quiet environment, Buddha statue</td>
+              </tr>
+              <tr>
+                <td>Bougainvillea Garden</td>
+                <td>Sector 3</td>
+                <td>65+ varieties of bougainvillea, Seasonal flower shows</td>
+              </tr>
+              <tr>
+                <td>Shanti Kunj</td>
+                <td>Sector 16</td>
+                <td>Medicinal plants, Herbal garden, Walking trails</td>
+              </tr>
+              <tr>
+                <td>Topiary Garden</td>
+                <td>Sector 35</td>
+                <td>Plants trimmed into animal shapes, Ornamental designs</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Sector Parks</h3>
+                <ul>
+                  <li>Each of Chandigarh's 56 sectors has its own neighborhood parks.</li>
+                  <li>These parks typically include children's play areas, walking paths, and exercise stations.</li>
+                  <li>Many sector parks have been developed with specific themes or features.</li>
+                  <li>These green spaces contribute significantly to Chandigarh's high quality of life.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="mango.jpg" alt="" style="height:200px;width: 200px;">
+
+              </div>
+            </div>
+          </div><br>
+          <hr>
+          <div class="box" style=" background: #f3b37185;padding: 10px;">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3> Conservation Efforts & Eco-Tourism 🌱</h3>
+                  <ul>
+                    <li><b>Sukhna Lake Conservation:</b> Efforts to maintain water quality and protect the catchment area.</li>
+                    <li><b>Bird Watching:</b> Organized tours at Sukhna Wildlife Sanctuary and Sukhna Lake, especially during winter migration season.</li>
+                    <li><b>Nature Trails:</b> Developed in Nepli and Kansal forests for eco-tourism and environmental education.</li>
+                    <li><b>Tree Plantation Drives:</b> Regular initiatives to maintain and enhance Chandigarh's green cover.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="teag.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Chandigarh offers a unique blend of urban planning and natural spaces. While not primarily known as a wildlife destination, the city's commitment to preserving green spaces within its urban design and the proximity to natural areas in the Shivalik foothills provide residents and visitors with opportunities to connect with nature and wildlife.</p>
+          <br><br>
+        </div>
+        <div id="wbedu" class="tab-pane fade in active" style="background-color: white;">
+          <h1>🎓 Education & Institutions in Chandigarh</h1>
+          <p>Chandigarh is a major educational hub in North India, known for its quality institutions, high literacy rate, and focus on education. The city hosts prestigious universities, research centers, and schools that attract students from across India and abroad.</p>
+
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>📌 Education System in Chandigarh</h3>
+                  <ul>
+                    <li><b>School Education:</b> Follows CBSE, ICSE, and Chandigarh Board curricula with a mix of government, private, and model schools.</li>
+                    <li><b>Higher Education:</b> Home to universities, medical institutions, engineering colleges, and research centers.</li>
+                    <li><b>Literacy Rate:</b> Over 86%, one of the highest in India.</li>
+                    <li><b>Administration:</b> Education is managed by the Chandigarh Administration's Education Department and central regulatory bodies.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="wbbse.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>🏛️ Top Universities & Institutions </h2>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Universities</h3>
+                <ol>
+                  <li><b>Panjab University -</b> One of India's oldest universities (established 1882), known for law, sciences, engineering, and humanities.</li>
+                  <li><b>Punjab Engineering College (PEC University of Technology) -</b> Premier engineering institution established in 1921, known for technical education and research.</li>
+                  <li><b>Chandigarh University -</b> Private university in nearby Mohali offering diverse programs in engineering, management, law, and more.</li>
+                  <li><b>Chitkara University -</b> Private university with strengths in engineering, business, and healthcare education.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="visva.jpg" alt="" style="height:200px;width: 230px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Medical Institutions</h3>
+                <ol>
+                  <li><b>Post Graduate Institute of Medical Education and Research (PGIMER) -</b> One of India's top medical institutions for education, research, and patient care.</li>
+                  <li><b>Government Medical College and Hospital (GMCH) -</b> Established medical college offering undergraduate and postgraduate medical education.</li>
+                  <li><b>Dr. Harvansh Singh Judge Institute of Dental Sciences -</b> Dental college affiliated with Panjab University.</li>
+                  <li><b>National Institute of Nursing Education -</b> Part of PGIMER, offering nursing education programs.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="jadav.png" alt="" style="height:200px;width: 230px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Institution</th>
+                <th>Type</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Panjab University</td>
+                <td>University</td>
+                <td>Comprehensive programs, research, historic campus designed by Pierre Jeanneret</td>
+              </tr>
+              <tr>
+                <td>PGIMER</td>
+                <td>Medical Institute</td>
+                <td>Advanced medical research, specialized healthcare, medical education</td>
+              </tr>
+              <tr>
+                <td>Punjab Engineering College</td>
+                <td>Engineering University</td>
+                <td>Technical education, research, industry connections</td>
+              </tr>
+              <tr>
+                <td>Chandigarh College of Architecture</td>
+                <td>Architecture College</td>
+                <td>Only specialized architecture college in the region, Le Corbusier's influence</td>
+              </tr>
+              <tr>
+                <td>University Institute of Engineering & Technology</td>
+                <td>Engineering College</td>
+                <td>Part of Panjab University, technical education</td>
+              </tr>
+              <tr>
+                <td>University Business School</td>
+                <td>Management Institute</td>
+                <td>MBA programs, corporate connections</td>
+              </tr>
+              <tr>
+                <td>Government Medical College</td>
+                <td>Medical College</td>
+                <td>Medical education, attached hospital</td>
+              </tr>
+              <tr>
+                <td>National Institute of Pharmaceutical Education and Research (NIPER)</td>
+                <td>Pharmaceutical Institute</td>
+                <td>Located in nearby Mohali, pharmaceutical research and education</td>
+              </tr>
+              <tr>
+                <td>Indian School of Business (ISB)</td>
+                <td>Business School</td>
+                <td>Located in nearby Mohali, world-class management education</td>
+              </tr>
+            </table>
+          </div>
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="iitkgp.jpg" alt="" style="height:200px;width: 240px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🔹 Specialized Institutions</h3>
+                  <ol>
+                    <li><b>Chandigarh College of Architecture -</b> Established in 1961, the first architecture college in the region, influenced by Le Corbusier's principles.</li>
+                    <li><b>Institute of Microbial Technology (IMTECH) -</b> CSIR research institute focused on microbiology and biotechnology.</li>
+                    <li><b>Central Scientific Instruments Organisation (CSIO) -</b> Research and development in scientific and industrial instruments.</li>
+                    <li><b>National Institute of Technical Teachers Training and Research (NITTTR) -</b> Focuses on training technical education teachers.</li>
+                    <li><b>Regional Institute of English -</b> Specializes in English language teaching and research.</li>
+                  </ol>
+                </div>
+
+                <br><br>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Research Institution</th>
+                <th>Focus Area</th>
+                <th>Significance</th>
+              </tr>
+              <tr>
+                <td>Institute of Microbial Technology (IMTECH)</td>
+                <td>Microbiology, Biotechnology</td>
+                <td>CSIR laboratory with advanced research facilities</td>
+              </tr>
+              <tr>
+                <td>Central Scientific Instruments Organisation (CSIO)</td>
+                <td>Scientific Instruments</td>
+                <td>R&D in medical instruments, optics, and agricultural equipment</td>
+              </tr>
+              <tr>
+                <td>Institute of Nano Science and Technology</td>
+                <td>Nanotechnology</td>
+                <td>Advanced research in nanomaterials and applications</td>
+              </tr>
+              <tr>
+                <td>Centre for Research in Rural and Industrial Development</td>
+                <td>Social Sciences</td>
+                <td>Research on socio-economic development</td>
+              </tr>
+              <tr>
+                <td>Snow and Avalanche Study Establishment</td>
+                <td>Snow Science</td>
+                <td>Research on Himalayan snow and avalanches</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🔹 Management & Law Institutions</h3>
+                  <ol>
+                    <li><b>University Business School (UBS) -</b> Part of Panjab University, offering MBA and other management programs.</li>
+                    <li><b>University Institute of Legal Studies -</b> Law school affiliated with Panjab University.</li>
+                    <li><b>Army Institute of Law -</b> Established by the Indian Army, offering legal education.</li>
+                    <li><b>Chandigarh Judicial Academy -</b> Training institution for judicial officers.</li>
+                  </ol>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="calmed.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Management/Law Institution</th>
+                <th>Affiliation</th>
+                <th>Programs</th>
+              </tr>
+              <tr>
+                <td>University Business School</td>
+                <td>Panjab University</td>
+                <td>MBA, MBA (International Business), PhD</td>
+              </tr>
+              <tr>
+                <td>University Institute of Legal Studies</td>
+                <td>Panjab University</td>
+                <td>BA LLB, LLM, PhD</td>
+              </tr>
+              <tr>
+                <td>Army Institute of Law</td>
+                <td>Punjabi University</td>
+                <td>BA LLB (Hons)</td>
+              </tr>
+              <tr>
+                <td>Chandigarh Judicial Academy</td>
+                <td>Punjab & Haryana High Court</td>
+                <td>Training for judicial officers</td>
+              </tr>
+              <tr>
+                <td>Indian Institute of Management (IIM)</td>
+                <td>Autonomous</td>
+                <td>Located in nearby Amritsar, offering management education</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="bckv.svg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🔹 Arts, Science & Commerce Colleges</h3>
+                  <ul>
+                    <li><b>DAV College -</b> One of the oldest colleges in the region offering arts, science, and commerce programs.</li>
+                    <li><b>MCM DAV College for Women -</b> Premier women's college with diverse academic programs.</li>
+                    <li><b>Government College for Men -</b> Offers undergraduate and postgraduate courses in various disciplines.</li>
+                    <li><b>Government College for Women -</b> Focuses on women's education across multiple streams.</li>
+                    <li><b>Post Graduate Government College -</b> Offers specialized postgraduate programs.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>College</th>
+                <th>Type</th>
+                <th>Specialization</th>
+              </tr>
+              <tr>
+                <td>DAV College</td>
+                <td>Co-educational</td>
+                <td>Arts, Science, Commerce, comprehensive programs</td>
+              </tr>
+              <tr>
+                <td>MCM DAV College for Women</td>
+                <td>Women's College</td>
+                <td>Liberal arts, sciences, professional courses</td>
+              </tr>
+              <tr>
+                <td>Government College for Men</td>
+                <td>Men's College</td>
+                <td>Arts, Science, Commerce programs</td>
+              </tr>
+              <tr>
+                <td>Government College for Women</td>
+                <td>Women's College</td>
+                <td>Diverse academic programs for women</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <h2>🏫 School Education in Chandigarh </h2>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Major School Boards</h3>
+                <ol>
+                  <li><b>Central Board of Secondary Education (CBSE) -</b> Most schools in Chandigarh follow the CBSE curriculum.</li>
+                  <li><b>Indian Certificate of Secondary Education (ICSE) -</b> Several private schools offer ICSE curriculum.</li>
+                  <li><b>Chandigarh Board -</b> Some government schools follow the local board curriculum.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="cbse.jpg" alt="" style="height:200px;width: 200px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-4">
+                <img src="apsbkp.jpg" alt="" style="height:200px;width: 230px;">
+
+              </div>
+              <div class="col-sm-8">
+
+                <h3>🔹 Prominent Schools in Chandigarh</h3>
+                <ol>
+                  <li><b>Carmel Convent School -</b> One of the oldest and most prestigious girls' schools.</li>
+                  <li><b>St. John's High School -</b> Historic boys' school known for academic excellence.</li>
+                  <li><b>Sacred Heart School -</b> Renowned for holistic education and infrastructure.</li>
+                  <li><b>Vivek High School -</b> Known for progressive education and international outlook.</li>
+                  <li><b>Bhavan Vidyalaya -</b> Consistently ranks among top CBSE schools.</li>
+                  <li><b>Delhi Public School -</b> Part of the nationwide DPS network with modern facilities.</li>
+                  <li><b>Government Model Schools -</b> Several well-established government schools across sectors.</li>
+                </ol>
+
+              </div>
+
+            </div>
+          </div>
+          <div class="box">
+            <h2>🔬 Research & Innovation</h2>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <p>Chandigarh hosts several research institutions contributing to scientific advancement:</p>
+                  <ol>
+                    <li><b>Institute of Microbial Technology (IMTECH) -</b> Conducts research in microbiology, protein science, and molecular biology.</li>
+                    <li><b>Central Scientific Instruments Organisation (CSIO) -</b> Develops scientific and industrial instruments for various applications.</li>
+                    <li><b>Institute of Nano Science and Technology -</b> Focuses on nanomaterials research and applications.</li>
+                    <li><b>PGIMER Research Wing -</b> Conducts medical research across various specialties.</li>
+                  </ol>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="csir.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <h2>📚 Libraries and Knowledge Centers</h2>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <ol>
+                    <li><b>A.C. Joshi Library -</b> Panjab University's central library with over 7 lakh volumes.</li>
+                    <li><b>State Library -</b> Located in Sector 34, offering a wide collection of books and periodicals.</li>
+                    <li><b>T.S. Central State Library -</b> In Sector 17, with extensive reading materials and digital resources.</li>
+                    <li><b>Divisional Library -</b> Located in various sectors, serving neighborhood communities.</li>
+                    <li><b>British Library -</b> Offers access to British publications and cultural programs.</li>
+                  </ol>
+                </div>
+                <div class="col-sm-4">
+                  <img src="Marine.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Chandigarh's educational landscape reflects its planned development and focus on quality. From prestigious universities and research institutions to excellent schools, the city offers comprehensive educational opportunities. Its central location in North India, combined with high-quality institutions, makes it an educational hub attracting students from across the region and beyond.</p>
+        </div>
+        <br><br>
+
+      </div>
+
+
+    </div>
+  </div>
+  </div>
+</body>
+
+</html>

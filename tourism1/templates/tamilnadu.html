@@ -1,0 +1,2663 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Tamil Nadu</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> -->
+  <style>
+    .wb {
+      font-size: 10vw;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+      border-spacing: 0;
+      border: 1px solid #ddd;
+    }
+
+    td,
+    th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+      font-size: 1.5vw;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+
+    .trip {
+      text-align: center;
+      font-weight: 900;
+      background: orangered;
+      padding: 20px;
+      border-radius: 20px;
+      width: 60%;
+    }
+
+    p,
+    li,
+    .text {
+      font-size: 1.5vw;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-weight: 600;
+    }
+
+    h4 {
+      font-weight: 900;
+    }
+
+    img {
+      border-radius: 10px;
+      display: block;
+      margin: auto;
+    }
+
+    @media screen and (max-width: 850px) {
+
+      p,
+      li,
+      .text,
+      td,
+      th {
+        font-size: 2vw;
+        ;
+      }
+
+    }
+
+    @media screen and (max-width: 500px) {
+
+      p,
+      li,
+      .text,
+      td,
+      th {
+        font-size: 4.5vw;
+        ;
+      }
+
+    }
+
+    .box:nth-of-type(odd) {
+      background: #f3b37185;
+      padding: 10px;
+    }
+
+    .weather-container {
+            border-radius: 15px;
+            background: #f0fdf4;
+            padding: 15px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .weather-card {
+            text-align: center;
+            border-radius: 10px;
+            padding: 10px;
+            background: white;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+        .aqi {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            color: white;
+        }
+        .aqi-bad { background: purple; }
+        .aqi-moderate { background: orange; }
+        .aqi-good { background: green; }
+        .best-time {
+            background: #d1fae5;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 15px;
+            color: green;
+        }
+        .wet {
+            max-width: 50px;
+        }
+        
+        .trip {
+          font-size: 18px;
+          padding: 10px 20px;
+          cursor: pointer;
+          background-color:rgb(231, 36, 36);
+          color: white;
+          border: none;
+          border-radius: 5px;
+      }
+      .modal {
+          display: none;
+          position: fixed;
+          z-index: 1;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0,0,0,0.5);
+      }
+      .modal-content {
+          background-color: #fff;
+          margin: 10% auto;
+          padding: 20px;
+          border-radius: 10px;
+          width: 40%;
+          box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+          text-align: center;
+      }
+      .close {
+          color: #aaa;
+          float: right;
+          font-size: 28px;
+          font-weight: bold;
+          cursor: pointer;
+      }
+      .trip-options {
+          display: flex;
+          justify-content: center;
+          gap: 20px;
+          margin-top: 20px;
+      }
+      .trip-options a {
+          display: block;
+          width: 120px;
+          padding: 10px;
+          background-color: #28a745;
+          color: white;
+          text-decoration: none;
+          border-radius: 5px;
+      }
+  </style>
+</head>
+
+<body>
+
+
+  <!-- <h2>Carousel Example</h2> -->
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+      <li data-target="#myCarousel" data-slide-to="4"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+
+      <div class="item active">
+        <img src="darjeeling wlp.jpg" alt="Ooty" style="width:100%; height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Ooty</h3>
+          <p>We love the mountains and scenic beauty!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="victoria wlp.jpg" alt="Meenakshi Temple" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Meenakshi Temple</h3>
+          <p>The amazing architecture and history!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="howrah bridge wlp.jpg" alt="Pamban Bridge" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Pamban Bridge</h3>
+          <p>A magnificent sea bridge!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="Digha wlp2.png" alt="Marina Beach" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Marina Beach</h3>
+          <p>We love the beach!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="teegarden wlp.jpg" alt="Tea Plantations" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Tea Plantations</h3>
+          <p>We love the smell of the tea gardens!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+  <div class="container">
+    <br><br>
+    <h1 class="wb"> TAMIL NADU</h1><br>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <img src="westbengal-map.jpg" alt="" style="height:700px; width: -webkit-fill-available;">
+
+        </div>
+        <div class="col-sm-6">
+          <h1> Tamil Nadu: The Cultural & Historical Heart of South India</h1>
+          <p class="text">Tamil Nadu is a diverse and vibrant state in southern India, known for its rich history,
+            cultural heritage, literature, festivals, art, and natural beauty. It is a key center for politics, economy, education, and classical arts.</p>
+
+          <ul>
+            <li><b>Location --</b> Southern India</li>
+            <li><b>Capital --</b> Chennai</li>
+            <li><b>Official Language --</b> Tamil</li>
+            <li><b>Area --</b> 130,058 sq. km</li>
+            <li><b>Population --</b> ~72 million (6th most populous state in India)</li>
+            <li><b>Borders --</b> Andhra Pradesh, Karnataka, Kerala & International border with Sri Lanka</li>
+            <li><b>Major Rivers --</b> Cauvery, Palar, Vaigai, Thamirabarani</li>
+            <li><b>Major Festivals --</b> Pongal, Thai Poosam, Aadi Perukku, Navaratri, Deepavali, Christmas</li>
+            <li><b>State Animal --</b> Nilgiri Tahr</li>
+            <li><b>State Flower --</b> Gloriosa Lily</li>
+            <li><b>State Tree --</b> Palm Tree</li>
+            <li><b>State Bird --</b> Emerald Dove</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <br>
+    <hr>
+    <div>
+      <h1>📌 Divisions & Districts of Tamil Nadu</h1>
+      <br>
+      <div style="overflow-x:auto;">
+        <table>
+          <tr>
+            <th>Division</th>
+            <th>Districts</th>
+            <th>Key Highlights</th>
+          </tr>
+          <tr>
+            <td>Chennai Division</td>
+            <td>1. Chennai 2. Tiruvallur 3. Kancheepuram 4. Chengalpattu</td>
+            <td>Chennai (State Capital), IT Hubs, Beaches, Historical Temples</td>
+          </tr>
+          <tr>
+            <td>Coimbatore Division</td>
+            <td>5. Coimbatore 6. Tiruppur 7. Erode 8. Nilgiris</td>
+            <td>Textile Industry, Hill Stations, Tea Plantations</td>
+          </tr>
+          <tr>
+            <td>Madurai Division</td>
+            <td>9. Madurai 10. Theni 11. Dindigul 12. Ramanathapuram 13. Sivaganga 14. Virudhunagar</td>
+            <td>Meenakshi Temple, Cultural Heritage, Spice Trade</td>
+          </tr>
+          <tr>
+            <td>Trichy Division</td>
+            <td>15. Tiruchirappalli 16. Karur 17. Perambalur 18. Ariyalur 19. Pudukkottai</td>
+            <td>Rock Fort Temple, Educational Institutions, Agriculture</td>
+          </tr>
+          <tr>
+            <td>Tirunelveli Division</td>
+            <td>20. Tirunelveli 21. Tenkasi 22. Thoothukudi 23. Kanniyakumari</td>
+            <td>Beaches, Temples, Kanyakumari (Land's End), Western Ghats</td>
+          </tr>
+          <tr>
+            <td>Salem Division</td>
+            <td>24. Salem 25. Namakkal 26. Dharmapuri 27. Krishnagiri</td>
+            <td>Steel Industry, Mango Cultivation, Textile Manufacturing</td>
+          </tr>
+          <tr>
+            <td>Vellore Division</td>
+            <td>28. Vellore 29. Tiruvannamalai 30. Ranipet 31. Tirupattur</td>
+            <td>Vellore Fort, Leather Industry, Spiritual Centers</td>
+          </tr>
+          <tr>
+            <td>Thanjavur Division</td>
+            <td>32. Thanjavur 33. Nagapattinam 34. Tiruvarur 35. Mayiladuthurai 36. Cuddalore 37. Villupuram 38. Kallakurichi</td>
+            <td>Brihadeeswarar Temple, Rice Bowl of Tamil Nadu, Classical Arts</td>
+          </tr>
+        </table>
+      </div>
+      <br><br>
+      <h1>🔹 Major Highlights of Some Key Districts</h1><br><br>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <ul>
+              <li><b>Chennai --</b> Capital of Tamil Nadu, cultural & economic hub.</li>
+              <li><b>Madurai --</b> Famous for Meenakshi Amman Temple and ancient Pandyan heritage.</li>
+              <li><b>Coimbatore --</b> Industrial city known as the "Manchester of South India".</li>
+              <li><b>Ooty (Nilgiris) --</b> Popular hill station with tea plantations and scenic beauty.</li>
+              <li><b>Kanyakumari --</b> Southernmost tip of mainland India where three seas meet.</li>
+              <li><b>Thanjavur --</b> Known for Brihadeeswarar Temple and classical arts.</li>
+              <li><b>Rameshwaram --</b> Important pilgrimage site with the famous Ramanathaswamy Temple.</li>
+              <li><b>Tirunelveli --</b> Famous for its unique cuisine and ancient temples.</li>
+              <li><b>Vellore --</b> Known for its fort, medical institutions, and leather industry.</li>
+            </ul>
+          </div>
+          <div class="col-sm-6">
+            <img src="westbengal-map.jpg" alt="" style="height:450px;width: -webkit-fill-available;">
+
+          </div>
+        </div>
+      </div>
+    </div><br><br>
+    <div class="container">
+      <div class="weather-container">
+          <h4 class="text-center"><strong>Weather in Tamil Nadu</strong></h4>
+          <div class="row">
+              <!-- January -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Jan</h6>
+                      <p>20/30°C</p>
+                      <span class="aqi aqi-moderate">AQI 95</span>
+                  </div>
+              </div>
+              <!-- February -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Feb</h6>
+                      <p>21/32°C</p>
+                      <span class="aqi aqi-moderate">AQI 89</span>
+                  </div>
+              </div>
+              <!-- March -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Mar</h6>
+                      <p>23/34°C</p>
+                      <span class="aqi aqi-moderate">AQI 87</span>
+                  </div>
+              </div>
+              <!-- April -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Apr</h6>
+                      <p>26/36°C</p>
+                      <span class="aqi aqi-moderate">AQI 83</span>
+                  </div>
+              </div>
+              <!-- May -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>May</h6>
+                      <p>27/38°C</p>
+                      <span class="aqi aqi-moderate">AQI 75</span>
+                  </div>
+              </div>
+              <!-- June -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Jun</h6>
+                      <p>27/37°C</p>
+                      <span class="aqi aqi-good">AQI 66</span>
+                  </div>
+              </div>
+              <!-- July -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Jul</h6>
+                      <p>26/35°C</p>
+                      <span class="aqi aqi-good">AQI 58</span>
+                  </div>
+              </div>
+              <!-- August -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Aug</h6>
+                      <p>26/34°C</p>
+                      <span class="aqi aqi-good">AQI 59</span>
+                  </div>
+              </div>
+              <!-- September -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Sep</h6>
+                      <p>25/34°C</p>
+                      <span class="aqi aqi-good">AQI 59</span>
+                  </div>
+              </div>
+              <!-- October -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Oct</h6>
+                      <p>24/32°C</p>
+                      <span class="aqi aqi-good">AQI 62</span>
+                  </div>
+              </div>
+              <!-- November -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="rain.png" alt="rain">
+                      <h6>Nov</h6>
+                      <p>23/30°C</p>
+                      <span class="aqi aqi-moderate">AQI 78</span>
+                  </div>
+              </div>
+              <!-- December -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Dec</h6>
+                      <p>21/29°C</p>
+                      <span class="aqi aqi-moderate">AQI 80</span>
+                  </div>
+              </div>
+          </div>
+          <div class="text-center">
+              <div class="best-time">🏆 Best time to visit: November - February</div>
+          </div>
+      </div>
+    </div>
+    
+
+    <br><br>
+    <button class="trip" id="openModal">Let's go on a trip</button>
+    
+    <div id="tripModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Select Your Trip</h2>
+            <button type="button" class="btn btn-warning" style="margin-bottom: 8px;color:black; border-radius: 5px;" onclick="location.href='{% url 'tamilnadu_7days' %}'" >7 days trip</button><br>
+            <button type="button" class="btn btn-warning" style="margin-bottom: 8px;color:black; border-radius: 5px;" onclick="location.href='{% url 'tamilnadu_12days' %}'" >12 days trip</button>
+        </div>
+    </div>
+    
+    <script>
+        var modal = document.getElementById("tripModal");
+        var btn = document.getElementById("openModal");
+        var span = document.getElementsByClassName("close")[0];
+        
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+        
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+        
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script><br><br>
+    <div class="container">
+      <ul class="nav nav-tabs">
+        <li class="nav-item"><a data-toggle="tab" href="#wbculture"> Culture</a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbtradition "> Tradition</a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbfestivals"> Festivals </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbfood"> Foods </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbhistory"> History </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbartacraft"> Art and Craft </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbseason"> Season to Visit </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbtourist"> Tourist Spots </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbwild"> Wildlife & Crops </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbedu"> Institutions </a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="wbculture" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Culture of Tamil Nadu</h1>
+          <p class="text">Tamil Nadu has a rich and diverse culture, shaped by its history, literature, art, music,
+            festivals, and traditions. Here's an overview of some key aspects of its culture:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Language</h3>
+                  <ul>
+                    <li>Tamil is the official language and a major part of the cultural identity of Tamil Nadu. It's one of the oldest classical languages in the world with a literary tradition spanning over 2,000 years. Famous Tamil poets and writers include Thiruvalluvar, Subramania Bharati, and Kalki Krishnamurthy.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="bang.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>2. Literature</h3>
+                  <ul>
+                    <li>Tamil Nadu has one of the world's oldest literary traditions. The Sangam literature, dating back to 300 BCE - 300 CE, is a collection of poems composed by numerous poets.</li>
+                    <li>Thirukkural, written by Thiruvalluvar, is a classic Tamil text consisting of 1,330 couplets on ethics, politics, and love.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="lit.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div><br>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="art.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Art and Craft</h3>
+                  <ul>
+                    <li>The state is known for its diverse range of art forms, from Tanjore paintings to bronze sculptures. The Chola bronze statues are world-renowned for their craftsmanship.</li>
+                    <li>Kanchipuram and Arani silks are traditional wear, known for their intricate designs and durability.</li>
+                  </ul>
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="music.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>4. Music</h3>
+                  <ul>
+                    <li>Carnatic music, one of the two main subgenres of Indian classical music, originated in Tamil Nadu.</li>
+                    <li>Famous Carnatic musicians include MS Subbulakshmi, Ariyakudi Ramanuja Iyengar, and Madurai Mani Iyer.</li>
+                    <li>Folk music forms like Villuppattu and Karagattam are also popular.</li>
+                    <li>Tamil film music has a huge influence on the state's cultural identity.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Dance</h3>
+                  <ul>
+                    <li>Bharatanatyam, one of India's oldest classical dance forms, originated in Tamil Nadu.</li>
+                    <li>Other traditional dance forms include Karagattam, Kummi, and Kolattam.</li>
+                    <li>Folk dances like Oyilattam and Mayilattam are performed during festivals.</li>
+                  </ul>
+                  <h3>6. Cuisine</h3>
+                  <ul>
+                    <li>Tamil cuisine is famous for its use of rice, lentils, and spices. Popular dishes include Idli, Dosa, Sambar, and Rasam.</li>
+                    <li>The traditional meal is served on a banana leaf and includes a variety of vegetarian dishes.</li>
+                    <li>Chettinad cuisine, known for its spicy non-vegetarian dishes, is a specialty of the region.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="chau.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="theater.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>7. Theatre and Cinema</h3>
+                  <ul>
+                    <li>Tamil theatre has a rich tradition, with forms like Therukoothu (street theatre) and Bommalattam (puppet shows).</li>
+                    <li>Tamil cinema, often referred to as Kollywood, is one of the largest film industries in India, producing hundreds of films each year.</li>
+                  </ul>
+                  <h3>8. Architecture</h3>
+                  <ul>
+                    <li>Tamil Nadu's architectural style is predominantly Dravidian, characterized by pyramid-shaped towers, intricate carvings, and large temple complexes. Notable structures include the Brihadeeswarar Temple in Thanjavur, Meenakshi Amman Temple in Madurai, and Shore Temple in Mahabalipuram.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="religion.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>9. Religious Diversity</h3>
+                  <ul>
+                    <li>The state is home to a variety of religions, with Hinduism, Christianity, Islam, and Jainism having a significant presence. This diversity is reflected in the state's festivals, rituals, and cultural practices.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>10. Folk Traditions</h3>
+                  <ul>
+                    <li>Tamil Nadu is famous for its rich folk traditions, including Villupattu (bow song), Karagattam (pot dance), and Thappattam (drum dance).</li>
+                    <li>Jallikattu, a traditional bull-taming sport, is an integral part of Pongal celebrations.</li>
+
+                  </ul>
+                  <h3>11. Philosophy</h3>
+                  <ul>
+                    <li>Tamil Nadu has a rich philosophical tradition, with Shaivism and Vaishnavism being the dominant schools of thought. The Bhakti movement had a significant influence on Tamil culture and literature.</li>
+
+                  </ul>
+                  <h3>12. Handicrafts</h3>
+                  <ul>
+                    <li>Tamil Nadu is known for its handicrafts such as Tanjore paintings, bronze sculptures, stone carvings, and palm leaf manuscripts.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="phi.jpg" alt="" style="height:300px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br><br>
+
+          <p>Tamil Nadu's culture is deeply rooted in its history, and it continues to evolve while maintaining a close
+            connection to its heritage. It's a region where modernity and tradition coexist beautifully!</p><br><br>
+        </div>
+        <div id="wbtradition" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Tradition of Tamil Nadu</h1>
+          <p>Tamil Nadu has a rich and diverse tradition deeply rooted in its history, culture, and social practices.
+            Here's an overview of some key traditional aspects of the state:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Clothing Tradition</h3>
+                  <h4>Men</h4>
+                  <ul>
+                    <li><b>Veshti and Shirt:</b> Traditional Tamil men wear white or colored veshti (dhoti) with a shirt, especially during religious ceremonies, weddings, and festivals.</li>
+                    <li><b>Angavastram:</b> A cloth draped over the shoulder, worn for special occasions.</li>
+                  </ul>
+                  <h4>Women</h4>
+                  <ul>
+                    <li><b>Saree:</b> Tamil women traditionally wear silk sarees like Kanchipuram, Arani, and Coimbatore silks. During festivals, bright colored sarees with gold borders are commonly worn.</li>
+                    <li><b>Thali:</b> Married Tamil women wear Thali (mangalsutra) as a symbol of their marital status.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="cloth.jpg" alt="" style="height:250px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>2. Wedding Traditions</h3>
+                  <ul>
+                    <li><b>Nichayathartham:</b> The formal engagement ceremony where rings are exchanged.</li>
+                    <li><b>Kashi Yatra:</b> A symbolic ritual where the groom pretends to leave for Kashi before being convinced to return and marry.</li>
+                    <li><b>Thali Kattuthal:</b> The groom ties the sacred Thali (mangalsutra) around the bride's neck, symbolizing marriage.</li>
+                    <li><b>Nalangu:</b> A post-wedding ritual involving games played by the newlyweds.</li>
+                    <li><b>Grihapravesam:</b> The bride's formal entry into her new home.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="wedding.jpg" alt="" style="height:250px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="dance.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Music & Dance Traditions</h3>
+                  <ul>
+                    <li><b>Carnatic Music:</b> Classical music tradition with ragas, talas, and compositions.</li>
+                    <li><b>Bharatanatyam:</b> One of the oldest classical dance forms originating from Tamil Nadu.</li>
+                    <li><b>Folk Music:</b> Traditional forms like Villupattu, Karagattam, and Thappattam.</li>
+                    <li><b>Nadaswaram & Thavil:</b> Traditional musical instruments played during auspicious occasions.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="book.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+
+                  <h3>4. Social & Religious Traditions</h3>
+                  <ul>
+                    <li> <b>Kolam:</b> Intricate patterns drawn with rice flour at the entrance of homes, especially in the morning.</li>
+                    <li><b>Literature & Arts:</b> Tamil Nadu has a deep literary tradition, with the Chennai Book Fair being a major cultural event.</li>
+                    <li><b>Pongal:</b> The harvest festival celebrated to thank the Sun God, accompanied by folk songs and dance.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Architectural & Handicraft Traditions</h3>
+                  <ul>
+                    <li><b>Dravidian Temples:</b> Characterized by towering gopurams (gateways) and intricate stone carvings.</li>
+                    <li><b>Tanjore Paintings:</b> Traditional paintings with gold foil overlays depicting deities.</li>
+                    <li><b>Bronze Sculptures:</b> Intricate metal castings, especially from the Chola period.</li>
+                    <li><b>Palm Leaf Manuscripts:</b> Ancient texts written on dried palm leaves.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="arch.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>6. Sports & Games</h3>
+                  <ul>
+                    <li><b>Jallikattu:</b> Traditional bull-taming sport practiced during Pongal festival.</li>
+                    <li><b>Silambam:</b> Ancient martial art form using a bamboo staff.</li>
+                    <li><b>Kabaddi & Kho-Kho:</b> Traditional rural games played widely.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="foot1.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br><br>
+          <p>Tamil Nadu's traditions beautifully combine history, art, food, music, and festivals, making it one of the
+            most culturally vibrant states in India.</p><br><br>
+        </div>
+        <div id="wbfestivals" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Festivals of Tamil Nadu</h1>
+          <p>Tamil Nadu is known for its vibrant and diverse festivals, which reflect its rich cultural heritage,
+            religious harmony, and artistic traditions. Here's a list of some of the major festivals celebrated in the
+            state:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Pongal (Biggest Festival of Tamil Nadu)</h3>
+                  <ul>
+                    <li>The most significant festival, celebrated over four days to thank the Sun God for a bountiful harvest.</li>
+                    <li>Bhogi Pongal, Thai Pongal, Mattu Pongal, and Kaanum Pongal are the four days of celebration.</li>
+                    <li>Sweet Pongal (rice pudding) is prepared in new clay pots and offered to the Sun God.</li>
+                    <li>Homes are decorated with kolam (rangoli), and cattle are decorated and worshipped.</li>
+                  </ul>
+                  <p><b>📍 Time: January (Mid-January)</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="durga1.jpg" alt="" style="height:230px;width: 200px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="kali.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Thai Poosam</h3>
+                  <ul>
+                    <li>Dedicated to Lord Murugan, celebrated with grand processions at Palani and other Murugan temples.</li>
+                    <li>Devotees carry kavadis (decorated wooden arches) and perform various acts of devotion.</li>
+                    <li>Famous places: Palani Murugan Temple, Tiruchendur Temple.</li>
+                  </ul>
+                  <p><b>📍 Time: January - February</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Tamil New Year (Puthandu)</h3>
+                  <ul>
+                    <li>Marks the Tamil New Year on the first day of the Tamil month of Chithirai.</li>
+                    <li>People wear new clothes, visit temples, and prepare special meals.</li>
+                    <li>Homes are decorated with kolam and mango leaves.</li>
+                  </ul>
+                  <p><b>📍 Time: April 14</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="poila.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="saras.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Aadi Perukku</h3>
+                  <ul>
+                    <li>Celebrated on the 18th day of the Tamil month of Aadi to honor water bodies, especially the Cauvery River.</li>
+                    <li>Women perform rituals at riverbanks, offering prayers for prosperity and fertility.</li>
+                    <li>Special foods like Aadi Koozh (porridge) are prepared.</li>
+                  </ul>
+                  <p><b>📍 Time: July - August</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Navaratri</h3>
+                  <ul>
+                    <li>Nine-night festival dedicated to the goddess Durga, Lakshmi, and Saraswati.</li>
+                    <li>Homes display Golu (arrangement of dolls on stepped platforms).</li>
+                    <li>Traditional music and dance performances are held.</li>
+                  </ul>
+                  <p><b>📍 Time: September - October</b></p>
+                  <h3>6. Deepavali (Diwali)</h3>
+                  <ul>
+                    <li>Festival of lights celebrated with new clothes, sweets, and fireworks.</li>
+                    <li>Early morning oil bath is a unique Tamil tradition for Deepavali.</li>
+                  </ul>
+                  <p><b>📍 Time: October - November</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="roth.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="bhai.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>7. Karthigai Deepam</h3>
+                  <ul>
+                    <li>Festival of lights dedicated to Lord Shiva, celebrated by lighting lamps in homes and temples.</li>
+                    <li>The Annamalai hill in Tiruvannamalai is lit with a huge lamp visible for miles.</li>
+                  </ul>
+                  <p><b>📍 Time: November - December</b></p>
+                  <h3>8. Arudra Darshan</h3>
+                  <ul>
+                    <li>Dedicated to Lord Shiva in his cosmic dance form (Nataraja).</li>
+                    <li>Special abhishekams and processions are held at Chidambaram and other Shiva temples.</li>
+                  </ul>
+                  <p><b>📍 Time: December - January</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>9. Panguni Uthiram</h3>
+                  <ul>
+                    <li>Celebrates the celestial wedding of various deities, including Lord Murugan and Deivayanai.</li>
+                    <li>Grand processions and car festivals are held at major temples.</li>
+                    <li>Devotees fulfill vows by carrying kavadis and performing fire-walking.</li>
+                  </ul>
+                  <p><b>📍 Time: March - April</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="nabanna.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="alla.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>10. Eid-ul-Fitr & Eid-ul-Adha</h3>
+                  <ul>
+                    <li>Celebrated by the Muslim community, especially in Chennai, Trichy, and Madurai.</li>
+                    <li>Special feasts include Biryani, Sheer Khurma, and various sweets.</li>
+                    <li>Huge congregational prayers are held at major mosques.</li>
+                  </ul>
+                  <p><b>📍 Time: Based on Islamic Calendar</b></p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>11. Jallikattu</h3>
+                  <ul>
+                    <li>Traditional bull-taming sport held during Pongal festival.</li>
+                    <li>Major events are held in Alanganallur, Palamedu, and Avaniyapuram near Madurai.</li>
+                  </ul>
+                  <p><b>📍 Time: January</b></p>
+
+                  <h3>12. Christmas</h3>
+                  <ul>
+                    <li>Celebrated with great enthusiasm in Chennai, Vellore, and Kanyakumari.</li>
+                    <li>Churches are beautifully decorated, and midnight Mass is held.</li>
+                  </ul>
+                  <p><b>📍 Time: December 25</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="chris.jpg" alt="" style="height:200px;width: 230px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="biswa.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>13. Mahamaham</h3>
+                  <ul>
+                    <li>Celebrated once every 12 years at the Mahamaham tank in Kumbakonam.</li>
+                    <li>Devotees take a holy dip in the tank, believed to wash away sins.</li>
+                  </ul>
+                  <p><b>📍 Time: February - March (once every 12 years)</b></p>
+                  <h3>14. Chennai Music & Dance Festival</h3>
+                  <ul>
+                    <li>Month-long celebration of classical music and dance.</li>
+                    <li>Performances by renowned artists at various venues across Chennai.</li>
+                  </ul>
+                  <p><b>📍 Time: December - January</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Tamil Nadu's festivals are a blend of religious, cultural, and artistic celebrations, making the state one
+            of the most festive regions in India! 🎉</p><br><br>
+        </div>
+        <div id="wbfood" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Foods of Tamil Nadu</h1>
+          <p>Tamil Nadu has a rich and diverse culinary tradition that blends flavors from different regions. Tamil cuisine is known for its use of rice, lentils, and a variety of spices. Here's a look at some of the most iconic foods of Tamil Nadu:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Staple Food of Tamil Nadu</h3>
+                  <ul>
+                    <li><b>Rice & Sambar:</b> The most popular combination, usually served with a variety of side dishes.</li>
+                    <li><b>Idli-Sambar:</b> Steamed rice cakes served with lentil soup, a breakfast staple.</li>
+                  </ul>
+                  <h3>2. Tamil Breads</h3>
+                  <ul>
+                    <li><b>Dosa:</b> Thin, crispy fermented rice and lentil crepes.</li>
+                    <li><b>Appam:</b> Bowl-shaped rice pancakes with soft centers and crispy edges.</li>
+                    <li><b>Parotta:</b> Layered flatbread made from maida flour, popular in street food.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="staple.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="veg.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Famous Tamil Dishes</h3>
+                  <h4>Rice Dishes</h4>
+                  <ul>
+                    <li><b>Pongal:</b> A savory rice and lentil dish cooked with pepper, cumin, and ghee.</li>
+                    <li><b>Biryani:</b> Especially Dindigul, Ambur, and Chettinad styles, known for their unique flavors.</li>
+                    <li><b>Tamarind Rice (Puliyodarai):</b> Tangy rice flavored with tamarind and spices.</li>
+                    <li><b>Coconut Rice:</b> Rice mixed with grated coconut and tempered with spices.</li>
+                  </ul>
+                  <h4>Vegetarian Dishes</h4>
+                  <ul>
+                    <li><b>Sambar:</b> Lentil-based vegetable stew flavored with tamarind.</li>
+                    <li><b>Rasam:</b> Spicy tamarind soup, often served as a starter or with rice.</li>
+                    <li><b>Avial:</b> Mixed vegetables cooked with coconut and yogurt.</li>
+                    <li><b>Kootu:</b> Vegetables cooked with lentils and coconut.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="meat.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h4>Non-Vegetarian Dishes</h4>
+                  <ul>
+                    <li><b>Chettinad Chicken:</b> Spicy chicken curry with a unique blend of spices.</li>
+                    <li><b>Fish Curry:</b> Prepared with tamarind, coconut, and local spices.</li>
+                    <li><b>Mutton Sukka:</b> Dry mutton dish with roasted spices.</li>
+                  </ul>
+                  <h4>Accompaniments</h4>
+                  <ul>
+                    <li><b>Thayir Sadam (Curd Rice):</b> Rice mixed with yogurt, tempered with mustard seeds and curry leaves.</li>
+                    <li><b>Pachadi:</b> Yogurt-based side dish with vegetables or fruits.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>4. Tamil Sweets (Mithai)</h3>
+                  <ul>
+                    <li><b>Mysore Pak:</b> Rich sweet made from gram flour, ghee, and sugar.</li>
+                    <li><b>Jangiri:</b> Similar to jalebi but made with urad dal batter.</li>
+                    <li><b>Adhirasam:</b> Deep-fried sweet made from rice flour and jaggery.</li>
+                    <li><b>Palkova:</b> Milk-based sweet, a specialty of Srivilliputhur.</li>
+                    <li><b>Halwa:</b> Various types including wheat halwa from Tirunelveli.</li>
+                    <li><b>Payasam:</b> Sweet pudding made with milk, rice or vermicelli, and sugar.</li>
+                  </ul>
+
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="rosso.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="phuchka.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>5. Street Food of Tamil Nadu</h3>
+                  <ul>
+                    <li><b>Kothu Parotta:</b> Shredded parotta mixed with spices, vegetables, and meat.</li>
+                    <li><b>Sundal:</b> Seasoned and spiced chickpeas or other legumes.</li>
+                    <li><b>Murukku:</b> Crunchy savory snack made from rice and urad dal flour.</li>
+                    <li><b>Vada:</b> Savory fried snack made from lentils, often served with sambar and chutney.</li>
+                    <li><b>Bajji:</b> Vegetable fritters dipped in gram flour batter and deep-fried.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>6. Famous Drinks</h3>
+                  <ul>
+                    <li><b>Filter Coffee:</b> Strong coffee brewed with a metal filter, mixed with milk and sugar.</li>
+                    <li><b>Nannari Sherbet:</b> Cooling drink made from the roots of the Nannari plant.</li>
+                    <li><b>Panagam:</b> Sweet drink made with jaggery, ginger, and lemon, served during Ram Navami.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="tea.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Special Festival Foods</h3>
+                  <ul>
+                    <li><b>Sakkarai Pongal:</b> Sweet rice pudding made during Pongal festival.</li>
+                    <li><b>Ellu Urundai:</b> Sesame and jaggery balls made during Pongal.</li>
+                    <li><b>Kozhukattai:</b> Rice flour dumplings with sweet or savory fillings, made during Vinayaka Chaturthi.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="pithe.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Tamil Nadu's cuisine is a mix of rich flavors, delicate sweets, and iconic street foods, making it one of
+            the most delicious regional cuisines in India! 🍛🐟🍬</p><br><br>
+        </div>
+        <div id="wbhistory" class="tab-pane fade in active" style="background-color: white;">
+          <h1>History of Tamil Nadu</h1>
+          <p>Tamil Nadu has a rich and diverse history that spans ancient civilizations, medieval kingdoms, British
+            colonial rule, and the modern era. The region has played a significant role in India's political, cultural,
+            and intellectual history.</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Ancient Tamil Nadu (Before 6th Century CE)</h3>
+                  <ul>
+                    <li><b>Sangam Period (300 BCE - 300 CE):</b> The earliest documented period of Tamil history, known for its rich literature and cultural achievements.</li>
+                    <li><b>Chera, Chola, and Pandya Kingdoms:</b> The three ancient Tamil dynasties that ruled different parts of Tamil Nadu.</li>
+                    <li><b>Trade Connections:</b> Ancient Tamils had trade connections with Rome, Greece, Egypt, China, and Southeast Asia.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="maurya.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="pala.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Medieval Tamil Nadu (6th - 16th Century)</h3>
+                  <h4>Pallava Dynasty (6th - 9th Century CE):</h4>
+                  <ul>
+                    <li>Ruled from Kanchipuram, known for their rock-cut temples at Mahabalipuram.</li>
+                    <li>Promoted art, architecture, and literature.</li>
+                    <li>Notable rulers include Mahendravarman I and Narasimhavarman I.</li>
+                  </ul>
+                  <h4>Chola Empire (9th - 13th Century):</h4>
+                  <ul>
+                    <li>One of the longest-ruling dynasties in South Indian history.</li>
+                    <li>Built magnificent temples like the Brihadeeswarar Temple in Thanjavur.</li>
+                    <li>Under Raja Raja Chola I and Rajendra Chola I, expanded to Southeast Asia.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="delhi.png" alt="" style="height:220px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h4>Pandya Revival (13th - 14th Century):</h4>
+                  <ul>
+                    <li>Regained power after the decline of the Cholas.</li>
+                    <li>Promoted Tamil literature and built temples in Madurai.</li>
+                  </ul>
+                  <h4>Vijayanagara Empire (14th - 17th Century):</h4>
+                  <ul>
+                    <li>Protected South India from northern invasions.</li>
+                    <li>Promoted Hindu culture, art, and architecture.</li>
+                    <li>Appointed Nayaks as governors who later became independent rulers.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Nayak and Maratha Rule (16th - 18th Century)</h3>
+                  <ul>
+                    <li>Nayaks of Madurai, Thanjavur, and Gingee ruled different parts of Tamil Nadu.</li>
+                    <li>Built palaces, temples, and developed irrigation systems.</li>
+                    <li>Marathas ruled Thanjavur after defeating the Nayaks.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="mughal.jpg" alt="" style="height:200px;width: 250px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="plassey.jpg" alt="" style="height:230px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h2>4. Colonial Period (18th - 20th Century)</h3>
+                    <h3>European Arrival and Carnatic Wars</h3>
+                    <ul>
+                      <li>Portuguese, Dutch, French, and British established trading posts along the Tamil coast.</li>
+                      <li>The Carnatic Wars between the British and French resulted in British dominance.</li>
+                      <li>The British East India Company gained control over most of Tamil Nadu by the late 18th century.</li>
+                    </ul>
+                    <h3>British Rule</h3>
+                    <ul>
+                      <li>Tamil Nadu was part of the Madras Presidency under British rule.</li>
+                      <li>Introduction of Western education, railways, and modern administration.</li>
+                      <li>Development of cities like Madras (Chennai) as major administrative and commercial centers.</li>
+                    </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="rammohan.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>Cultural Renaissance & Revolt</h3>
+                  <ul>
+                    <li><b>Tamil Renaissance (19th Century):</b></li>
+                    <ul>
+                      <li>Revival of Tamil literature and culture led by scholars like U.V. Swaminatha Iyer.</li>
+                      <li>Social reformers like Periyar E.V. Ramasamy fought against caste discrimination.</li>
+                      <li>C. Rajagopalachari, V.O. Chidambaram Pillai, and Subramania Bharati were prominent freedom fighters.</li>
+                    </ul>
+
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="netaji.jpg" alt="" style="height:230px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <ul>
+                    <li><b>Freedom Movement:</b></li>
+                    <ul>
+                      <li>Tamil Nadu played a significant role in India's freedom struggle.</li>
+                      <li>Leaders like C. Rajagopalachari, S. Satyamurti, and K. Kamaraj led the movement in the region.</li>
+                      <li>The Salt Satyagraha was held at Vedaranyam, parallel to Gandhi's Dandi March.</li>
+                    </ul>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Post-Independence (1947 - Present)</h3>
+                  <h4>Formation of Tamil Nadu</h4>
+                  <ul>
+                    <li>After independence, the Madras State was formed.</li>
+                    <li>In 1956, the state was reorganized along linguistic lines.</li>
+                    <li>In 1969, Madras State was renamed Tamil Nadu.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="part.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h4>Post-Independence Developments</h4>
+                  <ul>
+                    <li>Dravidian movement led by Periyar E.V. Ramasamy shaped Tamil Nadu's politics and society.</li>
+                    <li><b>1967 - Present:</b> Dravidian parties (DMK and AIADMK) have dominated Tamil Nadu politics.</li>
+                    <li><b>Economic Growth:</b> Tamil Nadu has emerged as one of India's most industrialized and urbanized states.</li>
+                    <li><b>Cultural Identity:</b> Strong emphasis on Tamil language, culture, and identity.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="part1.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>6. Present-Day Tamil Nadu</h3>
+                  <ul>
+                    <li><b>Cultural Capital of South India:</b> Chennai is the hub of literature, arts, and cinema.</li>
+                    <li><b>Economic Growth:</b> IT sector, automobile industry, textiles, and tourism are key sectors.</li>
+                    <li><b>Tourist Attractions:</b> Ancient temples, beaches, hill stations, and wildlife sanctuaries.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="present.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Tamil Nadu has witnessed ancient kingdoms, colonial rule, freedom struggle, and modern political transformations. It remains a center of culture, education, and politics in India. 🚩📜</p>
+          <br><br>
+        </div>
+        <div id="wbartacraft" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Art & Craft of Tamil Nadu 🎨🖌️</h1>
+          <p>Tamil Nadu has a rich artistic heritage, blending traditional craftsmanship with cultural influences from ancient Dravidian, medieval, and colonial periods. Tamil artisans are known for their intricate craftsmanship, storytelling through art, and diverse materials like bronze, stone, wood, and textiles.</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Bronze Sculptures 🏺</h3>
+                  <h4>🔸 Chola Bronze Sculptures</h4>
+                  <ul>
+                    <li><b>Famous for:</b> Nataraja (Dancing Shiva), Parvati, and other deity figures.</li>
+                    <li><b>Where?</b> Swamimalai, Thanjavur district.</li>
+                    <li><b>Technique:</b> Lost-wax casting method (Madhu Chitta Vishesham).</li>
+                  </ul>
+                  <h4>🔸 Stone Sculptures</h4>
+                  <ul>
+                    <li><b>Mahabalipuram Stone Carvings:</b> UNESCO World Heritage site with rock-cut temples and monolithic rathas.</li>
+                    <li><b>Temple Sculptures:</b> Intricate carvings on temple walls depicting mythology and daily life.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="tera.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="textile.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Textile & Weaving 🧵</h3>
+                  <h4>🔸 Kanchipuram Silk Sarees</h4>
+                  <ul>
+                    <li><b>Origin:</b> Kanchipuram, Tamil Nadu.</li>
+                    <li><b>Features:</b> Heavy silk sarees with gold zari work and contrasting borders.</li>
+                  </ul>
+                  <h4>🔸 Chettinad Cotton Sarees</h4>
+                  <ul>
+                    <li><b>Origin:</b> Chettinad region.</li>
+                    <li><b>Features:</b> Cotton sarees with checks and temple borders.</li>
+                  </ul>
+                  <h4>🔸 Madurai Sungudi</h4>
+                  <ul>
+                    <li><b>Origin:</b> Madurai.</li>
+                    <li><b>Features:</b> Traditional tie and dye technique creating dotted patterns.</li>
+                  </ul>
+                  <h4>🔸 Salem Cotton</h4>
+                  <ul>
+                    <li><b>Famous for:</b> Fine cotton fabric known for its softness and durability.</li>
+                    <li><b>Uses:</b> Sarees, dhotis, and other garments.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Tanjore Art 🏺</h3>
+                  <ul>
+                    <li><b>Origin:</b> Thanjavur (Tanjore), Tamil Nadu.</li>
+                    <li><b>Material:</b> Wooden board, gold foil, glass beads, and semi-precious stones.</li>
+                    <li><b>Designs:</b> Predominantly religious themes, especially Hindu deities.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="dokra.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="gomira.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Wooden & Cane Craft 🌳</h3>
+                  <h4>🔸 Wooden Toys</h4>
+                  <ul>
+                    <li><b>Origin:</b> Channapatna and other parts of Tamil Nadu.</li>
+                    <li><b>Features:</b> Brightly colored wooden toys made with natural dyes.</li>
+                  </ul>
+                  <h4>🔸 Chettinad Woodwork</h4>
+                  <ul>
+                    <li><b>Popular in:</b> Chettinad region.</li>
+                    <li><b>Items:</b> Intricately carved doors, pillars, and furniture.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Palm Leaf Art 🎨</h3>
+                  <ul>
+                    <li><b>Origin:</b> Various parts of Tamil Nadu.</li>
+                    <li><b>Style:</b> Manuscripts and art created on dried palm leaves.</li>
+                    <li><b>Uses:</b> Ancient texts, religious scriptures, and decorative items.</li>
+                  </ul>
+                  <h3>6. Terracotta & Pottery 🧸</h3>
+                  <ul>
+                    <li><b>Famous in:</b> Villianur and other parts of Tamil Nadu.</li>
+                    <li><b>Products:</b> Clay pots, figurines, and decorative items.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="potochitra.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="kalighat.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>7. Kolam Art 🖌️</h3>
+                  <ul>
+                    <li></b>Origin:</b> Traditional Tamil art form.</li>
+                    <li></b>Features:</b> Geometric patterns drawn with rice flour at the entrance of homes.</li>
+                  </ul>
+                  <h3>8. Stone Carving & Temple Architecture 🐚</h3>
+                  <ul>
+                    <li><b>Location:</b> Throughout Tamil Nadu.</li>
+                    <li><b>Features:</b> Dravidian style architecture with towering gopurams (gateways) and intricate stone carvings.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>9. Metal Craft 🌾</h3>
+                  <h4>🔸 Bell Metal Craft</h4>
+                  <ul>
+                    <li>Artisans create:</li>
+                    <ul>
+                      <li>Lamps, utensils, and decorative items.</li>
+                    </ul>
+                  </ul>
+                  <h4>🔸 Brass Work</h4>
+                  <ul>
+                    <li><b>Products:</b> Traditional lamps, utensils, and religious artifacts.</li>
+                    <li><b>Centers:</b> Nachiarkoil and Kumbakonam.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="jute.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>📌 Summary: Tamil Nadu's Art & Craft Forms</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Art Form</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Bronze Sculptures</td>
+                <td>Swamimalai, Thanjavur</td>
+                <td>Nataraja, Lost-wax Casting</td>
+              </tr>
+              <tr>
+                <td>Stone Carvings</td>
+                <td>Mahabalipuram, Madurai</td>
+                <td>Rock-cut Temples, Rathas</td>
+              </tr>
+              <tr>
+                <td>Kanchipuram Silk</td>
+                <td>Kanchipuram</td>
+                <td>Gold Zari Work, Temple Borders</td>
+              </tr>
+              <tr>
+                <td>Chettinad Cotton</td>
+                <td>Chettinad Region</td>
+                <td>Checked Patterns, Durability</td>
+              </tr>
+              <tr>
+                <td>Tanjore Paintings</td>
+                <td>Thanjavur</td>
+                <td>Gold Foil, Religious Themes</td>
+              </tr>
+              <tr>
+                <td>Wooden Toys</td>
+                <td>Channapatna</td>
+                <td>Colorful Toys, Natural Dyes</td>
+              </tr>
+              <tr>
+                <td>Palm Leaf Art</td>
+                <td>Various Regions</td>
+                <td>Manuscripts, Etching</td>
+              </tr>
+              <tr>
+                <td>Kolam Art</td>
+                <td>Throughout Tamil Nadu</td>
+                <td>Rice Flour Patterns</td>
+              </tr>
+              <tr>
+                <td>Terracotta</td>
+                <td>Villianur</td>
+                <td>Clay Figurines, Pottery</td>
+              </tr>
+              <tr>
+                <td>Bell Metal Craft</td>
+                <td>Nachiarkoil</td>
+                <td>Lamps, Utensils</td>
+              </tr>
+              <tr>
+                <td>Chettinad Woodwork</td>
+                <td>Chettinad</td>
+                <td>Carved Doors, Pillars</td>
+              </tr>
+              <tr>
+                <td>Temple Architecture</td>
+                <td>Throughout Tamil Nadu</td>
+                <td>Gopurams, Stone Carvings</td>
+              </tr>
+            </table>
+          </div>
+          <br><br>
+          <p>Tamil Nadu's art and crafts are a blend of history, culture, and traditional skills, passed down through
+            generations. Whether it's the elegant Kanchipuram sarees, Tanjore paintings, or the magnificent bronze sculptures, Tamil Nadu's artisans continue to preserve and innovate their heritage. 🎭✨</p>
+          <br><br>
+        </div>
+        <div id="wbseason" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Seasons to visit Tamil Nadu 🌧️☀️ </h1>
+          <p>Tamil Nadu has a tropical climate with distinct seasons that influence the best times to visit different parts of the state. The region offers diverse experiences from beaches to hill stations, ancient temples to wildlife sanctuaries.</p>
+
+          <br><br>
+
+          <h2> Season-wise Breakdown for Visiting Tamil Nadu</h2>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🌸 Winter (November - February)</h3>
+                  <ul>
+                    <li>Best overall season to visit Tamil Nadu with pleasant temperatures.</li>
+                    <li>Perfect for exploring Chennai, Madurai, Thanjavur, and other cities.</li>
+                    <li>Ideal for temple tours and heritage sites.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="spring.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="summer.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>☀️ Summer (March – June)</h3>
+                  <ul>
+                    <li>Hill stations like Ooty, Kodaikanal, and Yelagiri are best for escaping the heat.</li>
+                    <li>Coastal areas can be hot but less crowded.</li>
+                    <li>Many summer festivals are celebrated during this time.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🌧️ Monsoon (June - September)</h3>
+                  <ul>
+                    <li>Tamil Nadu receives less rainfall during the southwest monsoon compared to other parts of India.</li>
+                    <li>Western Ghats regions like Valparai look beautiful with rain-fed waterfalls.</li>
+                    <li>Good time for budget travelers as accommodation rates are lower.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="rain.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="autmn.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🍁 Northeast Monsoon (October - December)</h3>
+                  <ul>
+                    <li>Tamil Nadu receives most of its rainfall during this period, especially coastal areas.</li>
+                    <li>Chennai and coastal regions may experience heavy rains.</li>
+                    <li>Western parts of the state are relatively drier.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>❄️ Festival Season (Various Times)</h3>
+                  <ul>
+                    <li>Pongal (January): Best time to experience rural Tamil culture.</li>
+                    <li>Navarathri (September-October): Witness colorful golu displays and cultural performances.</li>
+                    <li>Chennai Music Season (December-January): World's largest music festival for classical arts.</li>
+                    <li>Thai Poosam (January-February): Spectacular processions at Murugan temples.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="winter.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>📌 Summary: Best Time to Visit Different Places in Tamil Nadu</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Region</th>
+                <th>Best Season</th>
+                <th>Recommended Months</th>
+                <th>Why Visit?</th>
+              </tr>
+              <tr>
+                <td>Chennai</td>
+                <td>Winter</td>
+                <td>November - February</td>
+                <td>Pleasant weather, cultural events, beaches, historical sites</td>
+              </tr>
+              <tr>
+                <td>Hill Stations (Ooty, Kodaikanal, Yelagiri)</td>
+                <td>Summer, Winter</td>
+                <td>March - June, October - December</td>
+                <td>Pleasant weather, scenic beauty, trekking, tea plantations</td>
+              </tr>
+              <tr>
+                <td>Temple Circuit (Madurai, Thanjavur, Rameshwaram)</td>
+                <td>Winter</td>
+                <td>November - February</td>
+                <td>Comfortable weather for temple visits, cultural experiences</td>
+              </tr>
+              <tr>
+                <td>Coastal Areas (Marina, Mahabalipuram, Kanyakumari)</td>
+                <td>Winter</td>
+                <td>November - February</td>
+                <td>Pleasant beach weather, water activities, historical sites</td>
+              </tr>
+              <tr>
+                <td>Western Ghats (Valparai, Meghamalai)</td>
+                <td>Winter, Post-Monsoon</td>
+                <td>September - February</td>
+                <td>Lush greenery, waterfalls, wildlife sightings</td>
+              </tr>
+              <tr>
+                <td>Chettinad Region</td>
+                <td>Winter</td>
+                <td>November - February</td>
+                <td>Heritage mansions, traditional cuisine, cultural experiences</td>
+              </tr>
+              <tr>
+                <td>Wildlife Sanctuaries (Mudumalai, Anamalai)</td>
+                <td>Winter, Summer</td>
+                <td>October - May</td>
+                <td>Better wildlife sightings, comfortable safari weather</td>
+              </tr>
+              <tr>
+                <td>Coimbatore & Western Tamil Nadu</td>
+                <td>Winter</td>
+                <td>November - February</td>
+                <td>Pleasant climate, temples, industrial tours</td>
+              </tr>
+              <tr>
+                <td>Kanyakumari (Land's End)</td>
+                <td>Winter</td>
+                <td>November - February</td>
+                <td>Clear views of sunrise/sunset, pleasant weather</td>
+              </tr>
+
+            </table>
+          </div><br><br>
+          <div class="container">
+            <div class="row">
+              <h1 style=" text-align: center;">📌 Summary: When to Visit Tamil Nadu</h1><br>
+              <ul>
+                <li><b>For festivals & cultural experiences:</b> January (Pongal), September-October (Navarathri), December-January (Music Season)</li>
+                <li><b>For hill stations & trekking:</b> March - June, October - December (Ooty, Kodaikanal)</li>
+                <li><b>For wildlife & forests:</b> October - May (Mudumalai, Anamalai)</li>
+                <li><b>For beaches & coastal areas:</b> November - February (Marina, Mahabalipuram)</li>
+                <li><b>For heritage & temple tours:</b> November - February (Madurai, Thanjavur, Mahabalipuram)</li>
+              </ul>
+
+            </div>
+          </div>
+          <br><br>
+        </div>
+        <div id="wbtourist" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Tourist Spots of Tamil Nadu 🏖️🏔️</h1>
+          <p>Tamil Nadu is a diverse state with hill stations, beaches, temples, heritage sites, and cultural hubs. Here's
+            a categorized list of the best tourist places in Tamil Nadu:</p>
+
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Hill Stations & Mountain Destinations 🏔️</h3>
+                  <ul>
+                    <li><b>Ooty -</b> Botanical Gardens, Nilgiri Mountain Railway, Doddabetta Peak, Tea Gardens</li>
+                    <li><b>Kodaikanal -</b> Kodai Lake, Bryant Park, Coaker's Walk, Pine Forests</li>
+                    <li><b>Yelagiri -</b> Jalagamparai Waterfalls, Nature Park, Swamimalai Hills</li>
+                    <li><b>Valparai -</b> Tea Plantations, Monkey Falls, Aliyar Dam</li>
+                    <li><b>Coonoor -</b> Sim's Park, Dolphin's Nose, Lamb's Rock</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="darj.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="biswagate.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Heritage & Cultural Destinations 🏛️</h3>
+                  <ul>
+                    <li><b>Madurai -</b> Meenakshi Amman Temple, Thirumalai Nayakkar Palace, Gandhi Museum.</li>
+                    <li><b>Thanjavur -</b> Brihadeeswarar Temple (UNESCO site), Royal Palace, Saraswathi Mahal Library.</li>
+                    <li><b>Mahabalipuram -</b> Shore Temple, Five Rathas, Arjuna's Penance (UNESCO sites).</li>
+                    <li><b>Kanchipuram -</b> Kailasanathar Temple, Ekambareswarar Temple, Silk Weaving Centers.</li>
+                    <li><b>Chettinad -</b> Mansion Houses, Athangudi Tile Factories, Traditional Cuisine.</li>
+                    <li><b>Tiruvannamalai -</b> Arunachaleswarar Temple, Ramana Maharshi Ashram.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Wildlife & Nature Destinations 🌳🐯</h3>
+                  <ul>
+                    <li><b>Mudumalai National Park -</b> Tigers, elephants, and diverse wildlife.</li>
+                    <li><b>Anamalai Tiger Reserve -</b> Elephants, tigers, and lion-tailed macaques.</li>
+                    <li><b>Point Calimere Wildlife Sanctuary -</b> Migratory birds and blackbucks.</li>
+                    <li><b>Gulf of Mannar Marine National Park -</b> Coral reefs and marine biodiversity.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="sundar.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="digha.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Beach Destinations 🏖️</h3>
+                  <ul>
+                    <li><b>Marina Beach (Chennai) -</b> Second longest urban beach in the world.</li>
+                    <li><b>Mahabalipuram Beach -</b> Shore Temple and water sports.</li>
+                    <li><b>Kanyakumari -</b> Southernmost tip of mainland India where three seas meet.</li>
+                    <li><b>Rameshwaram -</b> Pristine beaches and pilgrimage site.</li>
+                    <li><b>Covelong Beach -</b> Surfing and water sports destination.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Religious Destinations ⛩️</h3>
+                  <ul>
+                    <li><b>Rameshwaram -</b> Ramanathaswamy Temple with the longest corridor in India.</li>
+                    <li><b>Madurai -</b> Meenakshi Amman Temple, one of the most important temples in South India.</li>
+                    <li><b>Palani -</b> Murugan Temple, one of the six abodes of Lord Murugan.</li>
+                    <li><b>Tiruvannamalai -</b> Arunachaleswarar Temple and Girivalam (circumambulation of the hill).</li>
+                    <li><b>Chidambaram -</b> Nataraja Temple dedicated to Lord Shiva as the cosmic dancer.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="dak.png" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="ajhills.png" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>6. Adventure & Offbeat Destinations 🎢🚵</h3>
+                  <ul>
+                    <li><b>Kolli Hills -</b> 70 hairpin bends, trekking trails, and waterfalls.</li>
+                    <li><b>Meghamalai -</b> Less explored hill station with tea plantations.</li>
+                    <li><b>Hogenakkal Falls -</b> "Niagara of India" with coracle rides.</li>
+                    <li><b>Pichavaram Mangrove Forest -</b> Second largest mangrove forest in the world.</li>
+                    <li><b>Javadi Hills -</b> Trekking and tribal villages.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Food & Shopping Hotspots 🍛🛍️</h3>
+                  <ul>
+                    <li><b>T. Nagar, Chennai -</b> Shopping hub for silk sarees and jewelry.</li>
+                    <li><b>Pondy Bazaar, Chennai -</b> Street shopping and local cuisine.</li>
+                    <li><b>Chettinad Region -</b> Authentic Chettinad cuisine.</li>
+                    <li><b>Kanchipuram -</b> Silk saree shopping.</li>
+                    <li><b>Madurai -</b> Famous for its unique street food and Jigarthanda (cold drink).</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="kumar.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br><br>
+
+        </div>
+        <div id="wbwild" class="tab-pane fade in active" style="background-color: white;">
+          <h1> Wildlife & Crops of Tamil Nadu 🌿</h1>
+          <p>Tamil Nadu has diverse wildlife and a rich agricultural landscape due to its varied geography, from the Western Ghats to the coastal plains.</p>
+
+          <br>
+          <h2>Wildlife of Tamil Nadu </h2>
+          <p>Tamil Nadu has 5 national parks and 15 wildlife sanctuaries, making it one of India's most biodiverse states.</p>
+
+          <br>
+          <h2>🔹 Major National Parks & Wildlife Sanctuaries</h2>
+          <div>
+            <table>
+              <tr>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Mudumalai National Park</td>
+                <td>Nilgiris</td>
+                <td>Tigers 🐅, Elephants 🐘, Gaur, Varied Birdlife</td>
+              </tr>
+              <tr>
+                <td>Anamalai Tiger Reserve</td>
+                <td>Coimbatore</td>
+                <td>Tigers, Lion-tailed Macaques, Nilgiri Tahr 🦌</td>
+              </tr>
+              <tr>
+                <td>Gulf of Mannar Marine National Park</td>
+                <td>Ramanathapuram</td>
+                <td>Coral Reefs, Dugongs, Sea Turtles 🐢</td>
+              </tr>
+              <tr>
+                <td>Indira Gandhi Wildlife Sanctuary</td>
+                <td>Coimbatore</td>
+                <td>Elephants, Leopards 🐆, Great Indian Hornbill</td>
+              </tr>
+              <tr>
+                <td>Mukurthi National Park</td>
+                <td>Nilgiris</td>
+                <td>Nilgiri Tahr, Sambar Deer, Unique Shola Forests</td>
+              </tr>
+              <tr>
+                <td>Point Calimere Wildlife Sanctuary</td>
+                <td>Nagapattinam</td>
+                <td>Blackbuck, Flamingos, Migratory Birds</td>
+              </tr>
+              <tr>
+                <td>Vallanadu Blackbuck Sanctuary</td>
+                <td>Tuticorin</td>
+                <td>Blackbuck, Indian Fox, Monitor Lizards</td>
+              </tr>
+            </table>
+          </div>
+          <bt><br></bt>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3> 🔹 Other Notable Wildlife in Tamil Nadu</h3>
+                <ul>
+                  <li><b>Mammals:</b> Nilgiri Tahr (State Animal), Asian Elephants, Sloth Bears, Leopards, Wild Boars.</li>
+                  <li><b>Birds:</b> Emerald Dove (State Bird), Great Indian Hornbill, Malabar Trogon, Painted Stork.</li>
+                  <li><b>Reptiles:</b> Mugger Crocodiles, King Cobra, Russell's Viper, Monitor Lizards.</li>
+                  <li><b>Marine Life:</b> Olive Ridley Turtles, Dolphins, Dugongs, Whale Sharks.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="ele.jpg" alt="" style="height:200px;width: 200px;">
+
+              </div>
+
+            </div>
+          </div>
+          <hr><br>
+          <h2>🌾 Agriculture & Major Crops in Tamil Nadu </h2>
+          <p>Tamil Nadu is one of India's major agricultural states, producing a variety of cereals, pulses, vegetables, fruits, and spices.</p>
+
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Key Agricultural Features</h3>
+                <ul>
+                  <li>Major producer of Rice, Sugarcane, Bananas, and Coconuts in India.</li>
+                  <li></b>Fertile Land:</b> Thanks to the Cauvery Delta & Western Ghats.</li>
+                  <li></b>Climate:</b> Supports both Kharif & Rabi crops.</li>
+                  <li></b>Irrigation:</b> Cauvery, Palar, Vaigai, and Thamirabarani rivers support farming.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="jutep.jpg" alt="" style="height:200px;width: 220px;">
+
+              </div>
+            </div>
+          </div>
+          <h2>🔹 Major Crops of Tamil Nadu</h2>
+          <div>
+            <table>
+              <tr>
+                <th>Category</th>
+                <th>Crops</th>
+              </tr>
+              <tr>
+                <td>Cereals</td>
+                <td>Rice 🍚, Sorghum, Maize 🌽, Millets</td>
+              </tr>
+              <tr>
+                <td>Cash Crops</td>
+                <td>Sugarcane, Cotton, Tobacco, Tea 🍵, Coffee ☕</td>
+              </tr>
+              <tr>
+                <td>Pulses</td>
+                <td>Black Gram, Green Gram, Red Gram, Horse Gram</td>
+              </tr>
+              <tr>
+                <td>Vegetables</td>
+                <td>Tomato 🍅, Brinjal, Onion, Tapioca, Drumstick</td>
+              </tr>
+              <tr>
+                <td>Fruits</td>
+                <td>Banana 🍌, Mango 🥭, Jackfruit, Guava, Papaya 🍈</td>
+              </tr>
+              <tr>
+                <td>Oilseeds</td>
+                <td>Groundnut, Sesame, Coconut 🥥, Castor</td>
+              </tr>
+              <tr>
+                <td>Spices</td>
+                <td>Turmeric, Chili, Coriander, Cardamom, Pepper</td>
+              </tr>
+              <tr>
+                <td>Flowers</td>
+                <td>Jasmine, Rose 🌹, Marigold, Chrysanthemum</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Special Agricultural Products</h3>
+                <ul>
+                  <li>Nilgiri Tea 🍵 (High-quality tea from the Nilgiri Hills).</li>
+                  <li>Thanjavur Rice (Known as the "Rice Bowl of Tamil Nadu").</li>
+                  <li>Salem Mangoes 🥭 (Highly exported).</li>
+                  <li>Chettinad Spices (Known for their unique flavor and aroma).</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="mango.jpg" alt="" style="height:200px;width: 200px;">
+
+              </div>
+            </div>
+          </div><br>
+          <hr>
+          <div class="box" style=" background: #f3b37185;padding: 10px;">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3> Sustainable Agriculture & Modern Trends 🌾</h3>
+                  <ul>
+                    <li><b>Organic Farming:</b> Growing in Nilgiris and Western Ghats regions.</li>
+                    <li><b>Precision Farming:</b> Use of modern technology for better crop yield.</li>
+                    <li><b>Aquaculture & Fisheries:</b> Tamil Nadu is a major producer of fish 🐟, especially in coastal districts.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="teag.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Tamil Nadu is a paradise for both nature lovers and agricultural enthusiasts. It has rich wildlife sanctuaries, lush tea plantations, and fertile farmlands that support a diverse ecosystem and economy.</p>
+          <br><br>
+        </div>
+        <div id="wbedu" class="tab-pane fade in active" style="background-color: white;">
+          <h1>🎓 Education & Institutions in Tamil Nadu</h1>
+          <p>Tamil Nadu has a rich educational heritage with some of India's oldest and most prestigious universities, research institutions, and schools. It has one of the highest literacy rates in India and remains a major hub for higher education, science, technology, and literature.</p>
+
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>📌 Education System in Tamil Nadu</h3>
+                  <ul>
+                    <li><b>School Education:</b> Follows Tamil Nadu State Board, CBSE, ICSE, and Anglo-Indian Boards.</li>
+                    <li><b>Higher Education:</b> Managed by UGC, AICTE, and state universities.</li>
+                    <li><b>Major Fields:</b> Engineering, Medical, Science, Arts, Commerce, Law, Agriculture, and Management.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="wbbse.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>🏛️ Top Universities & Institutions </h2>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Central Universities</h3>
+                <ol>
+                  <li><b>Indian Institute of Technology Madras (IIT Madras) -</b> Consistently ranked as the top engineering institute in India.</li>
+                  <li><b>Central University of Tamil Nadu -</b> Located in Thiruvarur, offering diverse programs.</li>
+                  <li><b>Indian Maritime University -</b> Headquartered in Chennai, focusing on maritime education.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="visva.jpg" alt="" style="height:200px;width: 230px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 State Universities</h3>
+                <ol>
+                  <li><b>University of Madras -</b> Established in 1857, one of India's oldest and most prestigious universities.</li>
+                  <li><b>Anna University -</b> Premier technical university, known for engineering education.</li>
+                  <li><b>Madurai Kamaraj University -</b> Major university in southern Tamil Nadu.</li>
+                  <li><b>Bharathiar University -</b> Located in Coimbatore, known for research and innovation.</li>
+                  <li><b>Tamil Nadu Agricultural University -</b> Leading agricultural research and education.</li>
+                  <li><b>Bharathidasan University -</b> Located in Tiruchirappalli, known for science and humanities.</li>
+                  <li><b>Tamil Nadu Dr. Ambedkar Law University -</b> Specialized in legal education.</li>
+                  <li><b>Tamil Nadu Dr. MGR Medical University -</b> Governing medical education in the state.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="jadav.png" alt="" style="height:200px;width: 230px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>University</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>University of Madras</td>
+                <td>Chennai</td>
+                <td>One of the oldest universities in India (1857), top-ranked for humanities.</td>
+              </tr>
+              <tr>
+                <td>Anna University</td>
+                <td>Chennai</td>
+                <td>Engineering, Technology, and Research.</td>
+              </tr>
+              <tr>
+                <td>Madras Christian College</td>
+                <td>Chennai</td>
+                <td>Liberal Arts, Sciences, and Research.</td>
+              </tr>
+              <tr>
+                <td>Madurai Kamaraj University</td>
+                <td>Madurai</td>
+                <td>Arts, Sciences, and Distance Education.</td>
+              </tr>
+              <tr>
+                <td>Indian Institute of Technology Madras</td>
+                <td>Chennai</td>
+                <td>Top-ranked engineering institute in India.</td>
+              </tr>
+              <tr>
+                <td>National Institute of Technology Trichy</td>
+                <td>Tiruchirappalli</td>
+                <td>Premier engineering education and research.</td>
+              </tr>
+              <tr>
+                <td>Indian Institute of Management Trichy</td>
+                <td>Tiruchirappalli</td>
+                <td>Management education and research.</td>
+              </tr>
+              <tr>
+                <td>Tamil Nadu Music and Fine Arts University</td>
+                <td>Chennai</td>
+                <td>Classical music, dance, and fine arts.</td>
+              </tr>
+              <tr>
+                <td>Tamil Nadu Open University</td>
+                <td>Chennai</td>
+                <td>Distance education and lifelong learning.</td>
+              </tr>
+            </table>
+          </div>
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="iitkgp.jpg" alt="" style="height:200px;width: 240px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🔹 IITs, IIMs & Other Premier Institutes</h3>
+                  <ol>
+                    <li><b>IIT Madras -</b> Consistently ranked as India's top engineering institute.</li>
+                    <li><b>NIT Trichy -</b> One of the top NITs in India.</li>
+                    <li><b>IIM Trichy -</b> Premier management institute.</li>
+                    <li><b>Chennai Mathematical Institute -</b> Specialized in mathematical sciences.</li>
+                    <li><b>National Institute of Fashion Technology (NIFT) Chennai -</b> Leading fashion design institute.</li>
+                  </ol>
+                </div>
+
+                <br><br>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Institute</th>
+                <th>Location</th>
+                <th>Specialization</th>
+              </tr>
+              <tr>
+                <td>IIT Madras</td>
+                <td>Chennai</td>
+                <td>Top-ranked engineering institute in India.</td>
+              </tr>
+              <tr>
+                <td>Anna University</td>
+                <td>Chennai</td>
+                <td>Premier state technical university.</td>
+              </tr>
+              <tr>
+                <td>College of Engineering, Guindy</td>
+                <td>Chennai</td>
+                <td>One of the oldest engineering colleges in India (est. 1794).</td>
+              </tr>
+              <tr>
+                <td>PSG College of Technology</td>
+                <td>Coimbatore</td>
+                <td>Leading private engineering institute.</td>
+              </tr>
+              <tr>
+                <td>SSN College of Engineering</td>
+                <td>Chennai</td>
+                <td>Top-ranked private engineering college.</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🔹 Medical Colleges</h3>
+                  <ol>
+                    <li><b>Madras Medical College -</b> One of India's oldest medical colleges (est. 1835).</li>
+                    <li><b>Christian Medical College, Vellore -</b> Consistently ranked among the top medical colleges in India.</li>
+                    <li><b>Stanley Medical College -</b> Premier medical institution in Chennai.</li>
+                    <li><b>Kilpauk Medical College -</b> Renowned for medical education and research.</li>
+                  </ol>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="calmed.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Medical College</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Madras Medical College</td>
+                <td>Chennai</td>
+                <td>One of the oldest medical colleges in India (1835).</td>
+              </tr>
+              <tr>
+                <td>Christian Medical College</td>
+                <td>Vellore</td>
+                <td>World-class medical education and healthcare.</td>
+              </tr>
+              <tr>
+                <td>Stanley Medical College</td>
+                <td>Chennai</td>
+                <td>Excellent clinical training and research.</td>
+              </tr>
+              <tr>
+                <td>Kilpauk Medical College</td>
+                <td>Chennai</td>
+                <td>Specialized departments and research.</td>
+              </tr>
+              <tr>
+                <td>Madurai Medical College</td>
+                <td>Madurai</td>
+                <td>Leading medical institution in southern Tamil Nadu.</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="bckv.svg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🔹 Law, Agriculture, & Other Institutes</h3>
+                  <ul>
+                    <li><b>Tamil Nadu Dr. Ambedkar Law University -</b> Premier law university in the state.</li>
+                    <li><b>Tamil Nadu Agricultural University -</b> Leading agricultural education and research.</li>
+                    <li><b>Tamil Nadu Veterinary and Animal Sciences University -</b> Specialized in veterinary sciences.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Institute</th>
+                <th>Location</th>
+                <th>Specialization</th>
+              </tr>
+              <tr>
+                <td>Tamil Nadu Dr. Ambedkar Law University</td>
+                <td>Chennai</td>
+                <td>Legal education and research.</td>
+              </tr>
+              <tr>
+                <td>School of Excellence in Law</td>
+                <td>Chennai</td>
+                <td>Premier law school in Tamil Nadu.</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <h2>🏫 School Education in Tamil Nadu </h2>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Major School Boards</h3>
+                <ol>
+                  <li><b>Tamil Nadu State Board -</b> Conducts SSLC (10th) and HSC (12th) exams.</li>
+                  <li><b>CBSE & ICSE -</b> National boards with schools across the state.</li>
+                  <li><b>Anglo-Indian Board -</b> Schools following the Anglo-Indian curriculum.</li>
+                  <li><b>Matriculation Board -</b> English-medium schools with a focus on practical education.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="cbse.jpg" alt="" style="height:200px;width: 200px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-4">
+                <img src="apsbkp.jpg" alt="" style="height:200px;width: 230px;">
+
+              </div>
+              <div class="col-sm-8">
+
+                <h3>🔹 Famous Schools in Tamil Nadu</h3>
+                <ol>
+                  <li></b>The Grove School (Chennai) -</b> Progressive education with a focus on holistic development.</li>
+                  <li></b>Padma Seshadri Bala Bhavan (Chennai) -</b> Known for academic excellence.</li>
+                  <li></b>Vidya Mandir (Chennai) -</b> Traditional values with modern education.</li>
+                  <li></b>Don Bosco Schools (Chennai, Trichy) -</b> Top-rated for discipline & academics.</li>
+                  <li></b>Good Shepherd School (Ooty) -</b> Premier residential school.</li>
+                  <li></b>Kendriya Vidyalayas -</b> Central government schools with quality education.</li>
+                </ol>
+
+              </div>
+
+            </div>
+          </div>
+          <div class="box">
+            <h2>🔬 Research & Technological Advancements</h2>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <p>Tamil Nadu is home to pioneering research institutions in science, technology, and medical fields:</p>
+                  <ol>
+                    <li><b>Institute of Mathematical Sciences (IMSc) -</b> Advanced research in mathematics and theoretical physics.</li>
+                    <li><b>National Institute of Ocean Technology (NIOT) -</b> Marine technology and ocean engineering.</li>
+                    <li><b>Central Leather Research Institute (CLRI) -</b> World's largest leather research institute.</li>
+                  </ol>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="csir.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <h2>📚 Other Notable Institutions</h2>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <ol>
+                    <li><b>Kalakshetra Foundation -</b> Premier institution for Bharatanatyam and music. 🎭</li>
+                    <li><b>Tamil Nadu Music and Fine Arts University -</b> Specialized in classical arts.</li>
+                    <li><b>National Institute of Fashion Technology (NIFT), Chennai -</b> Fashion design and technology.</li>
+                    <li><b>Indian Institute of Science Education and Research (IISER), Tirupati -</b> Excellence in science & research.</li>
+                    <li><b>Central Institute of Classical Tamil -</b> Research in Tamil language and literature.</li>
+                    <li><b>M.S. Swaminathan Research Foundation -</b> Agricultural research and sustainable development.</li>
+                  </ol>
+                </div>
+                <div class="col-sm-4">
+                  <img src="Marine.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Tamil Nadu continues to be one of India's top educational hubs, producing leaders, scholars, scientists, and entrepreneurs. Whether in engineering, medicine, law, arts, or business, the state offers world-class institutions.</p>
+        </div>
+        <br><br>
+
+      </div>
+
+
+    </div>
+  </div>
+  </div>
+</body>
+
+</html>

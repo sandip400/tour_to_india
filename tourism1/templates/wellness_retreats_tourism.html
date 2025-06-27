@@ -1,0 +1,1002 @@
+{% extends "base.html" %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Priceless Memories</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Custom CSS -->
+    <style>
+        .bo {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+        }
+        
+        .hero-section {
+            background: url('https://images.unsplash.com/photo-1506126279646-a697353d3166?q=80&w=2070') no-repeat center center;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(123, 31, 162, 0.5), rgba(171, 71, 188, 0.5));
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        .hero-section h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease-in-out;
+        }
+        .hero-section p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease-in-out 0.3s;
+            animation-fill-mode: both;
+        }
+        .hero-section .btn {
+            font-size: 1.2rem;
+            padding: 12px 30px;
+            background-color: #7b1fa2;
+            border: none;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            animation: fadeInUp 1s ease-in-out 0.6s;
+            animation-fill-mode: both;
+        }
+        .hero-section .btn:hover {
+            background-color: #ab47bc;
+            transform: translateY(-5px) scale(1.05);
+        }
+        .retreats-section {
+            background: url('https://images.unsplash.com/photo-1506126279646-a697353d3166?q=80&w=2070') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            padding: 80px 0;
+        }
+        .retreats-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(240, 244, 248, 0.9);
+            z-index: 1;
+        }
+        .retreats-section .container {
+            position: relative;
+            z-index: 2;
+        }
+        .retreat-card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: #fff;
+            animation: fadeInUp 0.5s ease-out;
+            animation-fill-mode: both;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .retreat-card:nth-child(1) { animation-delay: 0.1s; }
+        .retreat-card:nth-child(2) { animation-delay: 0.2s; }
+        .retreat-card:nth-child(3) { animation-delay: 0.3s; }
+        .retreat-card:nth-child(4) { animation-delay: 0.4s; }
+        .retreat-card:nth-child(5) { animation-delay: 0.5s; }
+        .retreat-card:nth-child(6) { animation-delay: 0.6s; }
+        .retreat-card:nth-child(7) { animation-delay: 0.7s; }
+        .retreat-card:nth-child(8) { animation-delay: 0.8s; }
+        .retreat-card:nth-child(9) { animation-delay: 0.9s; }
+        .retreat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        .retreat-card img {
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .retreat-card:hover img {
+            transform: scale(1.05);
+        }
+        .retreat-card .card-body {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .retreat-card .card-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            color: #7b1fa2;
+            transition: color 0.3s ease;
+        }
+        .retreat-card:hover .card-title {
+            color: #ab47bc;
+        }
+        .retreat-card .card-text {
+            color: #555;
+            flex-grow: 1;
+        }
+        .retreat-card .btn {
+            background-color: #ab47bc;
+            border: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .retreat-card .btn:hover {
+            background-color: #7b1fa2;
+            transform: translateY(-3px);
+        }
+        .activities-section {
+            background: url('https://images.unsplash.com/photo-1506126279646-a697353d3166?q=80&w=2070') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            padding: 80px 0;
+        }
+        .activities-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            z-index: 1;
+        }
+        .activities-section .container {
+            position: relative;
+            z-index: 2;
+        }
+        .activities-section h2, .retreats-section h2, .contact-section h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: #7b1fa2;
+            font-size: 2.8rem;
+            margin-bottom: 40px;
+            animation: fadeInDown 0.5s ease-out;
+        }
+        .activities-section h4 {
+            color: #ab47bc;
+            font-family: 'Montserrat', sans-serif;
+            transition: color 0.3s ease;
+        }
+        .activities-section h4:hover {
+            color: #7b1fa2;
+        }
+        .contact-section {
+            background: url('https://images.unsplash.com/photo-1506126279646-a697353d3166?q=80&w=2070') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            padding: 80px 0;
+        }
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(240, 244, 248, 0.9);
+            z-index: 1;
+        }
+        .contact-section .container {
+            position: relative;
+            z-index: 2;
+        }
+        .contact-section .form-control {
+            border-radius: 10px;
+            border: 1px solid #ab47bc;
+            padding: 12px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .contact-section .form-control:focus {
+            border-color: #7b1fa2;
+            box-shadow: 0 0 8px rgba(123, 31, 162, 0.3);
+        }
+        .contact-section .btn {
+            background-color: #7b1fa2;
+            border: none;
+            padding: 12px;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .contact-section .btn:hover {
+            background-color: #ab47bc;
+            transform: translateY(-3px);
+        }
+        
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideInDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .section-title {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-bottom: 1rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, #7b1fa2, #ab47bc);
+            animation: pulse 2s infinite;
+        }
+        .card {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+        .btn {
+            border-radius: 25px;
+            padding: 10px 25px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .modal-content {
+            border-radius: 15px;
+            border: none;
+            animation: fadeInUp 0.3s ease-out;
+        }
+        .modal-header {
+            background: linear-gradient(90deg, #7b1fa2, #ab47bc);
+            color: white;
+            border-radius: 15px 15px 0 0;
+        }
+        .retreat-card {
+            animation: slideInLeft 0.5s ease-out;
+        }
+        @keyframes slideInLeft {
+            from { transform: translateX(-50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+    </style>
+</head>
+
+<div class="bo">
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-content">
+            <h1>Rejuvenate Your Soul in India</h1>
+            <p>Discover serene wellness retreats for yoga, Ayurveda, and holistic healing.</p>
+            <a href="#retreats" class="btn btn-primary btn-lg">Explore Retreats</a>
+        </div>
+    </section>
+
+    <!-- Retreats Section -->
+    <section id="retreats" class="retreats-section">
+        <div class="container">
+            <h2 class="text-center mb-5 section-title">Top Wellness Retreats in India</h2>
+            <div class="row">
+                <!-- Card 1: Ananda in the Himalayas -->
+                <div class="col-md-4 mb-4">
+                    <div class="card retreat-card" data-retreat="ananda">
+                        <img src="https://images.unsplash.com/photo-1682344473914-4ffbb6aa7e4b?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Ananda in the Himalayas">
+                        <div class="card-body">
+                            <h5 class="card-title">Ananda in the Himalayas, Uttarakhand</h5>
+                            <p class="card-text">A luxury retreat offering Ayurveda, yoga, and meditation in the Himalayan foothills.</p>
+                            <div class="retreat-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Duration: 5-14 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Focus: Ayurveda & Yoga</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-spa"></i>
+                                    <span>Setting: Himalayas</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-spa"></i> Spa Therapies</span>
+                                <span><i class="fas fa-yoga"></i> Yoga Sessions</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Shreyas Yoga Retreat -->
+                <div class="col-md-4 mb-4">
+                    <div class="card retreat-card" data-retreat="shreyas">
+                        <img src="https://images.unsplash.com/photo-1647796853261-a4112c2ba315?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Shreyas Yoga Retreat">
+                        <div class="card-body">
+                            <h5 class="card-title">Shreyas Yoga Retreat, Karnataka</h5>
+                            <p class="card-text">A serene retreat focused on yoga, meditation, and organic farm-to-table cuisine.</p>
+                            <div class="retreat-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Duration: 3-7 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Focus: Yoga & Meditation</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-spa"></i>
+                                    <span>Setting: Countryside</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-yoga"></i> Yoga Classes</span>
+                                <span><i class="fas fa-leaf"></i> Organic Food</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Art of Living International Ashram -->
+                <div class="col-md-4 mb-4">
+                    <div class="card retreat-card" data-retreat="artofliving">
+                        <img src="https://plus.unsplash.com/premium_photo-1691030925293-6bfd4963bbc7?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Art of Living International Ashram">
+                        <div class="card-body">
+                            <h5 class="card-title">Art of Living International Ashram, Karnataka</h5>
+                            <p class="card-text">A spiritual haven offering yoga, meditation, and Sudarshan Kriya breathing techniques.</p>
+                            <div class="retreat-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Duration: 3-7 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Focus: Meditation & Breathing</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-spa"></i>
+                                    <span>Setting: Urban</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-pray"></i> Meditation</span>
+                                <span><i class="fas fa-lungs"></i> Breathing Techniques</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4: Vana Retreat -->
+                <div class="col-md-4 mb-4">
+                    <div class="card retreat-card" data-retreat="vana">
+                        <img src="https://plus.unsplash.com/premium_photo-1685133856025-c5b8383c92e3?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Vana Retreat">
+                        <div class="card-body">
+                            <h5 class="card-title">Vana Retreat, Uttarakhand</h5>
+                            <p class="card-text">A holistic retreat blending Ayurveda, Tibetan healing, and yoga in a serene setting.</p>
+                            <div class="retreat-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Duration: 5-14 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Focus: Holistic Healing</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-spa"></i>
+                                    <span>Setting: Forest</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-spa"></i> Ayurvedic Treatments</span>
+                                <span><i class="fas fa-yoga"></i> Yoga</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5: Kairali Ayurvedic Healing Village -->
+                <div class="col-md-4 mb-4">
+                    <div class="card retreat-card" data-retreat="kairali">
+                        <img src="https://images.unsplash.com/photo-1662281208885-15822c6fd794?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Kairali Ayurvedic Healing Village">
+                        <div class="card-body">
+                            <h5 class="card-title">Kairali Ayurvedic Healing Village, Kerala</h5>
+                            <p class="card-text">An authentic Ayurvedic retreat offering detox, yoga, and personalized treatments.</p>
+                            <div class="retreat-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Duration: 7-21 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Focus: Ayurveda & Detox</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-spa"></i>
+                                    <span>Setting: Countryside</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-spa"></i> Ayurvedic Therapies</span>
+                                <span><i class="fas fa-yoga"></i> Yoga</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6: SwaSwara -->
+                <div class="col-md-4 mb-4">
+                    <div class="card retreat-card" data-retreat="swaswara">
+                        <img src="https://plus.unsplash.com/premium_photo-1678593494435-9a9075496d10?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="SwaSwara">
+                        <div class="card-body">
+                            <h5 class="card-title">SwaSwara, Karnataka</h5>
+                            <p class="card-text">A coastal retreat offering yoga, Ayurveda, and art therapy by Om Beach.</p>
+                            <div class="retreat-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Duration: 5-10 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Focus: Yoga & Art Therapy</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-spa"></i>
+                                    <span>Setting: Coastal</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-yoga"></i> Yoga</span>
+                                <span><i class="fas fa-paint-brush"></i> Art Therapy</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 7: Isha Yoga Center -->
+                <div class="col-md-4 mb-4">
+                    <div class="card retreat-card" data-retreat="isha">
+                        <img src="https://plus.unsplash.com/premium_photo-1661685143504-32699441b551?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Isha Yoga Center">
+                        <div class="card-body">
+                            <h5 class="card-title">Isha Yoga Center, Tamil Nadu</h5>
+                            <p class="card-text">A spiritual retreat offering yoga, meditation, and inner transformation programs.</p>
+                            <div class="retreat-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Duration: 3-7 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Focus: Yoga & Meditation</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-spa"></i>
+                                    <span>Setting: Foothills</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-yoga"></i> Yoga Programs</span>
+                                <span><i class="fas fa-pray"></i> Meditation</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 8: Somatheeram Ayurveda Resort -->
+                <div class="col-md-4 mb-4">
+                    <div class="card retreat-card" data-retreat="somatheeram">
+                        <img src="https://images.unsplash.com/photo-1600500428907-18021d70a9a4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Somatheeram Ayurveda Resort">
+                        <div class="card-body">
+                            <h5 class="card-title">Somatheeram Ayurveda Resort, Kerala</h5>
+                            <p class="card-text">A beachside retreat specializing in Ayurveda, yoga, and holistic wellness.</p>
+                            <div class="retreat-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Duration: 7-14 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Focus: Ayurveda & Wellness</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-spa"></i>
+                                    <span>Setting: Coastal</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-spa"></i> Ayurvedic Treatments</span>
+                                <span><i class="fas fa-yoga"></i> Yoga</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 9: Osho Meditation Resort -->
+                <div class="col-md-4 mb-4">
+                    <div class="card retreat-card" data-retreat="osho">
+                        <img src="https://images.unsplash.com/photo-1708517206149-aad1c5608879?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Osho Meditation Resort">
+                        <div class="card-body">
+                            <h5 class="card-title">Osho Meditation Resort, Maharashtra</h5>
+                            <p class="card-text">A modern retreat offering meditation, mindfulness, and personal growth workshops.</p>
+                            <div class="retreat-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Duration: 3-7 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Focus: Meditation & Mindfulness</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-spa"></i>
+                                    <span>Setting: Urban</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-pray"></i> Meditation</span>
+                                <span><i class="fas fa-users"></i> Workshops</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activities Section -->
+    <section id="activities" class="activities-section">
+        <div class="container">
+            <h2 class="text-center mb-5 section-title">Wellness Retreat Activities</h2>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <h4>Yoga & Meditation</h4>
+                    <p>Practice various yoga styles and meditation techniques at retreats like Shreyas and Isha Yoga Center.</p>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <h4>Ayurvedic Treatments</h4>
+                    <p>Experience detox, massages, and personalized therapies at Kairali and Somatheeram.</p>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <h4>Holistic Healing</h4>
+                    <p>Engage in Tibetan healing, naturopathy, and wellness programs at Vana and Ananda.</p>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <h4>Art & Mindfulness</h4>
+                    <p>Explore art therapy and mindfulness workshops at SwaSwara and Osho Meditation Resort.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="text-center mb-5 section-title">Share Your Wellness Journey</h2>
+            <div class="row">
+                <div class="col-md-6 mx-auto">
+                    <div class="retreat-form">
+                        <form id="retreatForm">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Your Name</label>
+                                <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="retreat" class="form-label">Retreat Destination</label>
+                                <select class="form-control" id="retreat" required>
+                                    <option value="">Select a retreat</option>
+                                    <option value="ananda">Ananda in the Himalayas, Uttarakhand</option>
+                                    <option value="shreyas">Shreyas Yoga Retreat, Karnataka</option>
+                                    <option value="artofliving">Art of Living International Ashram, Karnataka</option>
+                                    <option value="vana">Vana Retreat, Uttarakhand</option>
+                                    <option value="kairali">Kairali Ayurvedic Healing Village, Kerala</option>
+                                    <option value="swaswara">SwaSwara, Karnataka</option>
+                                    <option value="isha">Isha Yoga Center, Tamil Nadu</option>
+                                    <option value="somatheeram">Somatheeram Ayurveda Resort, Kerala</option>
+                                    <option value="osho">Osho Meditation Resort, Maharashtra</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="experience" class="form-label">Your Experience</label>
+                                <textarea class="form-control" id="experience" rows="4" placeholder="Share your wellness journey..." required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="photos" class="form-label">Upload Photos</label>
+                                <input type="file" class="form-control" id="photos" multiple accept="image/*">
+                                <div id="photoPreview" class="mt-2"></div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Share Journey</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Retreat Modal -->
+    <div class="modal fade" id="retreatModal" tabindex="-1" aria-labelledby="retreatModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="retreatModalLabel">Retreat Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="retreat-detail-content">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <img src="" alt="" class="img-fluid retreat-image">
+                            </div>
+                            <div class="col-md-6">
+                                <h3 class="retreat-name"></h3>
+                                <p class="retreat-description"></p>
+                                <div class="retreat-info">
+                                    <div class="info-item">
+                                        <i class="fas fa-clock"></i>
+                                        <span class="duration"></span>
+                                    </div>
+                                    <div class="info-item">
+                                        <i class="fas fa-star"></i>
+                                        <span class="focus"></span>
+                                    </div>
+                                    <div class="info-item">
+                                        <i class="fas fa-spa"></i>
+                                        <span class="setting"></span>
+                                    </div>
+                                </div>
+                                <div class="retreat-features"></div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <h4>Retreat Highlights</h4>
+                                <p class="retreat-highlights"></p>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <h4>Things to Do</h4>
+                                <ul class="things-to-do"></ul>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <h4>How to Reach</h4>
+                                <div class="how-to-reach"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="#" class="btn btn-primary book-now-btn">Book Retreat</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>   
+
+    
+
+    <!-- Bootstrap JS and Custom JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Retreat data
+        const retreats = {
+            'ananda': {
+                name: 'Ananda in the Himalayas, Uttarakhand',
+                image: 'https://images.unsplash.com/photo-1506126279646-a697353d3166?q=80&w=2070',
+                description: 'A luxury wellness retreat offering personalized Ayurveda, yoga, and meditation programs amidst the serene Himalayan foothills.',
+                duration: '5-14 days',
+                focus: 'Ayurveda & Yoga',
+                setting: 'Himalayas',
+                highlights: 'Ananda combines luxury with ancient wellness practices, offering tailored programs in a breathtaking Himalayan setting.',
+                features: ['Spa Therapies', 'Yoga Sessions'],
+                thingsToDo: [
+                    'Personalized Ayurvedic treatments',
+                    'Daily yoga and meditation sessions',
+                    'Spa therapies at Ananda Spa',
+                    'Trekking in the Himalayas',
+                    'Visit Rishikesh for spiritual tours'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Jolly Grant Airport, Dehradun (40 km)' },
+                    { type: 'train', text: 'Haridwar Railway Station (30 km)' },
+                    { type: 'car', text: 'Drive from Delhi (250 km)' }
+                ]
+            },
+            'shreyas': {
+                name: 'Shreyas Yoga Retreat, Karnataka',
+                image: 'https://images.unsplash.com/photo-1545205597-3d9c9c1b8b37?q=80&w=2070',
+                description: 'A serene retreat focused on yoga, meditation, and organic cuisine, set in the peaceful countryside near Bangalore.',
+                duration: '3-7 days',
+                focus: 'Yoga & Meditation',
+                setting: 'Countryside',
+                highlights: 'Shreyas offers an intimate yoga experience with organic farm-to-table meals and serene surroundings.',
+                features: ['Yoga Classes', 'Organic Food'],
+                thingsToDo: [
+                    'Daily yoga and pranayama sessions',
+                    'Meditation and chanting',
+                    'Organic farm tours',
+                    'Ayurvedic massages',
+                    'Community service activities'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Kempegowda International Airport, Bangalore (35 km)' },
+                    { type: 'train', text: 'Bangalore City Railway Station (30 km)' },
+                    { type: 'car', text: 'Drive from Bangalore (30 km)' }
+                ]
+            },
+            'artofliving': {
+                name: 'Art of Living International Ashram, Karnataka',
+                image: 'https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=2070',
+                description: 'A spiritual haven offering yoga, meditation, and Sudarshan Kriya breathing techniques for inner peace.',
+                duration: '3-7 days',
+                focus: 'Meditation & Breathing',
+                setting: 'Urban',
+                highlights: 'The Art of Living Ashram provides transformative programs like Sudarshan Kriya in a vibrant, spiritual environment.',
+                features: ['Meditation', 'Breathing Techniques'],
+                thingsToDo: [
+                    'Sudarshan Kriya sessions',
+                    'Daily yoga and meditation',
+                    'Satsang and spiritual discourses',
+                    'Visit Vishalakshi Mantap',
+                    'Explore ashram gardens'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Kempegowda International Airport, Bangalore (40 km)' },
+                    { type: 'train', text: 'Bangalore City Railway Station (20 km)' },
+                    { type: 'car', text: 'Drive from Bangalore (20 km)' }
+                ]
+            },
+            'vana': {
+                name: 'Vana Retreat, Uttarakhand',
+                image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070',
+                description: 'A holistic retreat blending Ayurveda, Tibetan healing, and yoga in a serene forest setting near Dehradun.',
+                duration: '5-14 days',
+                focus: 'Holistic Healing',
+                setting: 'Forest',
+                highlights: 'Vana offers a unique blend of traditional and modern wellness practices in a tranquil forest environment.',
+                features: ['Ayurvedic Treatments', 'Yoga'],
+                thingsToDo: [
+                    'Ayurvedic and Tibetan treatments',
+                    'Daily yoga and meditation',
+                    'Spa and hydrotherapy sessions',
+                    'Nature walks in the forest',
+                    'Culinary wellness workshops'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Jolly Grant Airport, Dehradun (30 km)' },
+                    { type: 'train', text: 'Dehradun Railway Station (10 km)' },
+                    { type: 'car', text: 'Drive from Delhi (240 km)' }
+                ]
+            },
+            'kairali': {
+                name: 'Kairali Ayurvedic Healing Village, Kerala',
+                image: 'https://images.unsplash.com/photo-1515473787929-0be4e7cd3616?q=80&w=2070',
+                description: 'An authentic Ayurvedic retreat offering detox, yoga, and personalized treatments in a lush countryside setting.',
+                duration: '7-21 days',
+                focus: 'Ayurveda & Detox',
+                setting: 'Countryside',
+                highlights: 'Kairali provides authentic Ayurvedic healing with personalized detox programs in a serene Kerala village.',
+                features: ['Ayurvedic Therapies', 'Yoga'],
+                thingsToDo: [
+                    'Personalized Ayurvedic treatments',
+                    'Daily yoga and meditation',
+                    'Detox and cleansing programs',
+                    'Visit local villages',
+                    'Explore herbal gardens'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Cochin International Airport (80 km)' },
+                    { type: 'train', text: 'Palakkad Railway Station (30 km)' },
+                    { type: 'car', text: 'Drive from Cochin (80 km)' }
+                ]
+            },
+            'swaswara': {
+                name: 'SwaSwara, Karnataka',
+                image: 'https://images.unsplash.com/photo-1597078737119-7f76ee897dc1?q=80&w=2070',
+                description: 'A coastal retreat by Om Beach, offering yoga, Ayurveda, and art therapy for holistic rejuvenation.',
+                duration: '5-10 days',
+                focus: 'Yoga & Art Therapy',
+                setting: 'Coastal',
+                highlights: 'SwaSwara combines coastal serenity with yoga, Ayurveda, and creative therapies for a unique wellness experience.',
+                features: ['Yoga', 'Art Therapy'],
+                thingsToDo: [
+                    'Daily yoga and pranayama',
+                    'Ayurvedic treatments',
+                    'Art and pottery workshops',
+                    'Meditation by the beach',
+                    'Explore Gokarna beaches'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Dabolim Airport, Goa (150 km)' },
+                    { type: 'train', text: 'Gokarna Road Railway Station (20 km)' },
+                    { type: 'car', text: 'Drive from Goa (150 km)' }
+                ]
+            },
+            'isha': {
+                name: 'Isha Yoga Center, Tamil Nadu',
+                image: 'https://images.unsplash.com/photo-1605351354358-53d4b24f68e5?q=80&w=2070',
+                description: 'A spiritual retreat offering yoga, meditation, and inner transformation programs at the Velliangiri foothills.',
+                duration: '3-7 days',
+                focus: 'Yoga & Meditation',
+                setting: 'Foothills',
+                highlights: 'Isha Yoga Center provides transformative yoga and meditation programs in a spiritually charged environment.',
+                features: ['Yoga Programs', 'Meditation'],
+                thingsToDo: [
+                    'Inner Engineering program',
+                    'Daily yoga and meditation',
+                    'Visit Dhyanalinga Temple',
+                    'Trekking in Velliangiri hills',
+                    'Participate in spiritual events'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Coimbatore International Airport (40 km)' },
+                    { type: 'train', text: 'Coimbatore Railway Station (30 km)' },
+                    { type: 'car', text: 'Drive from Coimbatore (30 km)' }
+                ]
+            },
+            'somatheeram': {
+                name: 'Somatheeram Ayurveda Resort, Kerala',
+                image: 'https://images.unsplash.com/photo-1621330396168-6121ced03db8?q=80&w=2070',
+                description: 'A beachside retreat specializing in Ayurveda, yoga, and holistic wellness with stunning Arabian Sea views.',
+                duration: '7-14 days',
+                focus: 'Ayurveda & Wellness',
+                setting: 'Coastal',
+                highlights: 'Somatheeram offers authentic Ayurvedic treatments and yoga by the beach, blending wellness with coastal beauty.',
+                features: ['Ayurvedic Treatments', 'Yoga'],
+                thingsToDo: [
+                    'Ayurvedic massages and therapies',
+                    'Daily yoga by the beach',
+                    'Meditation sessions',
+                    'Explore Kovalam beaches',
+                    'Culinary wellness classes'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Trivandrum International Airport (20 km)' },
+                    { type: 'train', text: 'Trivandrum Railway Station (15 km)' },
+                    { type: 'car', text: 'Drive from Trivandrum (15 km)' }
+                ]
+            },
+            'osho': {
+                name: 'Osho Meditation Resort, Maharashtra',
+                image: 'https://images.unsplash.com/photo-1516306584366-1b98397e1f33?q=80&w=2070',
+                description: 'A modern retreat offering meditation, mindfulness, and personal growth workshops in a vibrant urban setting.',
+                duration: '3-7 days',
+                focus: 'Meditation & Mindfulness',
+                setting: 'Urban',
+                highlights: 'Osho Meditation Resort provides dynamic meditation techniques and workshops for personal transformation.',
+                features: ['Meditation', 'Workshops'],
+                thingsToDo: [
+                    'Dynamic meditation sessions',
+                    'Mindfulness workshops',
+                    'Evening meditation gatherings',
+                    'Explore resort gardens',
+                    'Participate in group therapies'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Pune International Airport (10 km)' },
+                    { type: 'train', text: 'Pune Railway Station (5 km)' },
+                    { type: 'car', text: 'Drive from Pune (5 km)' }
+                ]
+            }
+        };
+
+        // Function to open retreat modal
+        function openRetreatModal(retreatId) {
+            const retreat = retreats[retreatId];
+            if (!retreat) return;
+
+            const modal = document.getElementById('retreatModal');
+            const modalTitle = modal.querySelector('.modal-title');
+            const modalImage = modal.querySelector('.retreat-image');
+            const modalName = modal.querySelector('.retreat-name');
+            const modalDescription = modal.querySelector('.retreat-description');
+            const modalDuration = modal.querySelector('.duration');
+            const modalFocus = modal.querySelector('.focus');
+            const modalSetting = modal.querySelector('.setting');
+            const modalHighlights = modal.querySelector('.retreat-highlights');
+            const modalFeatures = modal.querySelector('.retreat-features');
+            const modalThingsToDo = modal.querySelector('.things-to-do');
+            const modalHowToReach = modal.querySelector('.how-to-reach');
+
+            modalTitle.textContent = retreat.name;
+            modalImage.src = retreat.image;
+            modalImage.alt = retreat.name;
+            modalName.textContent = retreat.name;
+            modalDescription.textContent = retreat.description;
+            modalDuration.textContent = `Duration: ${retreat.duration}`;
+            modalFocus.textContent = `Focus: ${retreat.focus}`;
+            modalSetting.textContent = `Setting: ${retreat.setting}`;
+            modalHighlights.textContent = retreat.highlights;
+
+            modalFeatures.innerHTML = retreat.features.map(feature => 
+                `<span class="card-features"><i class="fas fa-check"></i> ${feature}</span>`
+            ).join('');
+
+            modalThingsToDo.innerHTML = retreat.thingsToDo.map(thing => 
+                `<li><i class="fas fa-check-circle"></i> ${thing}</li>`
+            ).join('');
+
+            modalHowToReach.innerHTML = retreat.howToReach.map(option => 
+                `<div class="transport-option">
+                    <i class="fas fa-${option.type}"></i>
+                    <span>${option.text}</span>
+                </div>`
+            ).join('');
+
+            const modalInstance = new bootstrap.Modal(modal);
+            modalInstance.show();
+        }
+
+        // Add click event listeners to all Learn More buttons
+        document.querySelectorAll('.retreat-card .btn-primary').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const retreatId = this.closest('.retreat-card').dataset.retreat;
+                openRetreatModal(retreatId);
+            });
+        });
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a.nav-link').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                window.scrollTo({
+                    top: targetElement.offsetTop - 70,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+{% endblock %}

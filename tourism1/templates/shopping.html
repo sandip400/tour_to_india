@@ -1,0 +1,1689 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravelTreasure - Unique Souvenirs & Travel Kits</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        :root {
+            --primary-color: #ff6f61;
+            --secondary-color: #1e3a8a;
+            --accent-color: #facc15;
+            --bg-light: #f8fafc;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            margin: 0;
+            padding-bottom: 120px;
+        }
+
+        .navbar {
+            background: var(--secondary-color);
+            padding: 12px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .navbar-brand {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: white !important;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-brand img {
+            height: 32px;
+            margin-right: 8px;
+        }
+
+        .nav-link {
+            color: white !important;
+            font-size: 1rem;
+            font-weight: 500;
+            padding: 8px 12px;
+            transition: background 0.2s;
+        }
+
+        .nav-link:hover {
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+        }
+
+        .search-bar {
+            max-width: 600px;
+            width: 100%;
+            margin: 0 16px;
+        }
+
+        .search-bar .input-group {
+            border-radius: 50px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .search-bar input {
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+        }
+
+        .search-bar button {
+            background: var(--accent-color);
+            border: none;
+            padding: 0 20px;
+            transition: background 0.2s;
+        }
+
+        .search-bar button:hover {
+            background: #eab308;
+        }
+
+        .hero-section {
+            background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') no-repeat center center;
+            background-size: cover;
+            height: 450px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+            margin-bottom: 40px;
+            border-radius: 0 0 16px 16px;
+        }
+
+        .hero-section h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .hero-section p {
+            font-size: 1.25rem;
+            font-weight: 400;
+        }
+
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin: 32px 0 16px;
+            padding-left: 12px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .product-card {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+
+        .product-card img {
+            height: 180px;
+            object-fit: cover;
+            width: 100%;
+        }
+
+        .product-card .card-body {
+            padding: 16px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card .card-title {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+            display: -webkit-box;
+            display: box;
+            line-clamp: 2;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            box-orient: vertical;
+            overflow: hidden;
+            max-height: 2.8rem;
+            text-overflow: ellipsis;
+        }
+
+        .product-card .card-text {
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .rating {
+            color: var(--accent-color);
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .wishlist-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+
+        .wishlist-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .cart-count, .notification-count {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .dropdown-menu {
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            border: none;
+            min-width: 300px;
+        }
+
+        .dropdown-menu h6 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 4px 0;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .dropdown-menu a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 40px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            border-top: 4px solid var(--primary-color);
+        }
+
+        .footer h5 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .footer a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .footer a:hover {
+            color: white;
+        }
+
+        .auth-container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            width: 420px;
+            max-width: 90%;
+            margin: 60px auto;
+            overflow: hidden;
+        }
+
+        .auth-header {
+            background: var(--secondary-color);
+            color: white;
+            padding: 24px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .auth-body {
+            padding: 32px;
+        }
+
+        .btn-auth {
+            background: var(--primary-color);
+            border: none;
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        .btn-auth:hover {
+            background: #f05244;
+        }
+
+        .error-message, .success-message {
+            display: none;
+            margin-top: 12px;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .error-message {
+            color: #9f1239;
+            background: #fce7f3;
+        }
+
+        .success-message {
+            color: #15803d;
+            background: #dcfce7;
+        }
+
+        .toggle-link {
+            color: var(--primary-color);
+            font-weight: 500;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .toggle-link:hover {
+            color: #f05244;
+            text-decoration: underline;
+        }
+
+        .auth-page {
+            background: var(--bg-light);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            border: none;
+            border-radius: 8px;
+            padding: 10px 16px;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: #f05244;
+        }
+
+        .btn-outline-primary {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .btn-outline-primary:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .quantity-control button {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background: white;
+            color: var(--text-dark);
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .quantity-control button:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .quantity-control button:disabled {
+            background: #e5e7eb;
+            color: #9ca3af;
+            border-color: #e5e7eb;
+            cursor: not-allowed;
+        }
+
+        .quantity-control span {
+            font-size: 1rem;
+            font-weight: 500;
+            min-width: 24px;
+            text-align: center;
+        }
+
+        @media (max-width: 992px) {
+            .search-bar {
+                max-width: 100%;
+                margin: 12px 0;
+            }
+
+            .hero-section {
+                height: 300px;
+            }
+
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+
+            .hero-section p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .navbar-brand {
+                font-size: 1.5rem;
+            }
+
+            .product-card img {
+                height: 140px;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .auth-container {
+                width: 90%;
+                margin: 40px auto;
+            }
+
+            .auth-header {
+                font-size: 1.25rem;
+                padding: 20px;
+            }
+
+            .auth-body {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body class="auth-page">
+    <!-- Authentication Section -->
+    <div id="authSection">
+        <div class="auth-container">
+            <div id="signinSection">
+                <div class="auth-header">
+                    <h3>Login to TravelTreasure</h3>
+                </div>
+                <div class="auth-body">
+                    <form id="signinForm">
+                        <div class="mb-3">
+                            <label for="signinUsername" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="signinUsername" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="signinPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="signinPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-auth">Login</button>
+                        <p class="text-center mt-3">
+                            <span class="toggle-link" data-section="forgot">Forgot Password?</span> | 
+                            <span class="toggle-link" data-section="signup">Sign Up</span>
+                        </p>
+                        <div id="signinError" class="error-message"></div>
+                    </form>
+                </div>
+            </div>
+            <div id="signupSection" class="d-none">
+                <div class="auth-header">
+                    <h3>Create an Account</h3>
+                </div>
+                <div class="auth-body">
+                    <form id="signupForm">
+                        <div class="mb-3">
+                            <label for="signupUsername" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="signupUsername" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="signupEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="signupEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="signupPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="signupPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-auth">Sign Up</button>
+                        <p class="text-center mt-3">
+                            <span class="toggle-link" data-section="signin">Back to Login</span>
+                        </p>
+                        <div id="signupError" class="error-message"></div>
+                        <div id="signupSuccess" class="success-message">Account created! Redirecting to login...</div>
+                    </form>
+                </div>
+            </div>
+            <div id="forgotSection" class="d-none">
+                <div class="auth-header">
+                    <h3>Reset Password</h3>
+                </div>
+                <div class="auth-body">
+                    <form id="forgotForm">
+                        <div class="mb-3">
+                            <label for="forgotUsername" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="forgotUsername" required>
+                        </div>
+                        <button type="submit" class="btn btn-auth">Reset Password</button>
+                        <p class="text-center mt-3">
+                            <span class="toggle-link" data-section="signin">Back to Login</span>
+                        </p>
+                        <div id="forgotError" class="error-message"></div>
+                        <div id="forgotSuccess" class="success-message">Password reset link sent! Check your email.</div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav id="mainNavbar" class="navbar navbar-expand-lg fixed-top d-none">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="javascript:void(0)" onclick="showSection('home')">
+                <img src="{% static 'image.png'%}" alt="India Map" class="me-2" style="width: 60px; height: 60px;"> TravelTreasure
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Souvenirs</a>
+                        <div class="dropdown-menu">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6>Regional Crafts</h6>
+                                    <a href="javascript:void(0)" onclick="filterBySubcategory('handicrafts')">Handicrafts</a>
+                                    <a href="javascript:void(0)" onclick="filterBySubcategory('pottery')">Pottery</a>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6>Textiles</h6>
+                                    <a href="javascript:void(0)" onclick="filterBySubcategory('scarves')">Scarves</a>
+                                    <a href="javascript:void(0)" onclick="filterBySubcategory('bags')">Bags</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Travel Accessories</a>
+                        <div class="dropdown-menu">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6>Bags</h6>
+                                    <a href="javascript:void(0)" onclick="filterBySubcategory('backpacks')">Backpacks</a>
+                                    <a href="javascript:void(0)" onclick="filterBySubcategory('travel_pouches')">Travel Pouches</a>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6>Electronics</h6>
+                                    <a href="javascript:void(0)" onclick="filterBySubcategory('power_banks')">Power Banks</a>
+                                    <a href="javascript:void(0)" onclick="filterBySubcategory('adapters')">Travel Adapters</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Travel Kits</a>
+                        <div class="dropdown-menu">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h6>Kits</h6>
+                                    <a href="javascript:void(0)" onclick="filterBySubcategory('adventure_kits')">Adventure Kits</a>
+                                    <a href="javascript:void(0)" onclick="filterBySubcategory('trekking_kits')">Trekking Kits</a>
+                                    <a href="javascript:void(0)" onclick="filterBySubcategory('safari_kits')">Safari Kits</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="search-bar mx-auto">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="searchInput" placeholder="Search products...">
+                        <button class="btn" type="button"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link position-relative" href="javascript:void(0)" onclick="showSection('cart')">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span id="cartCount" class="cart-count">0</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link position-relative" href="javascript:void(0)" onclick="showSection('notifications')">
+                            <i class="fas fa-bell"></i>
+                            <span id="notificationCount" class="notification-count">0</span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">Hi, Guest</a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="javascript:void(0)" onclick="showSection('profile')">Profile</a></li>
+                            <li><a class="dropdown-item" href="javascript:void(0)" onclick="showSection('wishlist')">Wishlist</a></li>
+                            <li><a class="dropdown-item" href="javascript:void(0)" onclick="showSection('orders')">Orders</a></li>
+                            <li><a class="dropdown-item" href="javascript:void(0)" id="logoutBtn">Logout</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div id="mainContainer" class="container d-none">
+        <!-- Home Section -->
+        <div id="homeSection">
+            <div class="hero-section">
+                <div>
+                    <h1>Discover Unique Travel Treasures</h1>
+                    <p>Explore handcrafted souvenirs and travel essentials from around the world.</p>
+                </div>
+            </div>
+            <h2 class="section-title">Featured Souvenirs</h2>
+            <div id="featuredSouvenirsList" class="row"></div>
+            <h2 class="section-title">Travel Accessories</h2>
+            <div id="travelAccessoriesList" class="row"></div>
+            <h2 class="section-title">Travel Kits</h2>
+            <div id="travelKitsList" class="row"></div>
+            <h2 class="section-title">Recently Viewed</h2>
+            <div id="recentlyViewedList" class="row"></div>
+        </div>
+
+        <!-- Product Detail Section -->
+        <div id="productDetailSection" class="d-none">
+            <div class="card mb-4 border-0 shadow-sm">
+                <div class="row g-0">
+                    <div class="col-md-6">
+                        <img id="detailImage" src="" class="img-fluid rounded-start" alt="Product">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card-body">
+                            <h3 id="detailName" class="card-title"></h3>
+                            <p id="detailPrice" class="card-text text-primary"></p>
+                            <p id="detailCategory"></p>
+                            <p id="detailRating"></p>
+                            <div id="detailSpecs" class="mb-3"></div>
+                            <button class="btn btn-primary add-to-cart-detail mb-2">Add to Cart</button>
+                            <button class="btn btn-outline-primary wishlist-btn-detail"><i class="far fa-heart"></i> Add to Wishlist</button>
+                            <h5 class="mt-4">Reviews</h5>
+                            <div id="detailReviews"></div>
+                            <form id="reviewForm" class="mt-3">
+                                <div class="mb-3">
+                                    <textarea class="form-control" rows="3" placeholder="Write a review..."></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit Review</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Wishlist Section -->
+        <div id="wishlistSection" class="d-none">
+            <h2 class="section-title">Your Wishlist</h2>
+            <div id="wishlistList" class="row"></div>
+        </div>
+
+        <!-- Cart Section -->
+        <div id="cartSection" class="d-none">
+            <h2 class="section-title">Your Cart</h2>
+            <div id="cartList"></div>
+            <button class="btn btn-primary mt-3" onclick="showSection('checkout')">Proceed to Checkout</button>
+        </div>
+
+        <!-- Checkout Section -->
+        <div id="checkoutSection" class="d-none">
+            <h2 class="section-title">Checkout</h2>
+            <div id="checkoutList"></div>
+            <form id="checkoutForm">
+                <div class="mb-3">
+                    <label for="address" class="form-label">Shipping Address</label>
+                    <textarea class="form-control" id="address" rows="3" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="paymentMethod" class="form-label">Payment Method</label>
+                    <select class="form-select" id="paymentMethod" required>
+                        <option value="credit_card">Credit Card</option>
+                        <option value="paypal">PayPal</option>
+                        <option value="cod">Cash on Delivery</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Place Order</button>
+            </form>
+        </div>
+
+        <!-- Orders Section -->
+        <div id="ordersSection" class="d-none">
+            <h2 class="section-title">Your Orders</h2>
+            <div id="ordersList"></div>
+        </div>
+
+        <!-- Notifications Section -->
+        <div id="notificationsSection" class="d-none">
+            <h2 class="section-title">Notifications</h2>
+            <div id="notificationList"></div>
+        </div>
+
+        <!-- Profile Section -->
+        <div id="profileSection" class="d-none">
+            <h2 class="section-title">Your Profile</h2>
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <p id="profileName"></p>
+                    <p id="profileEmail"></p>
+                    <p id="profilePhone"></p>
+                    <h5 class="mt-4">Update Profile</h5>
+                    <form id="profileForm">
+                        <div class="mb-3">
+                            <label for="profileEmailInput" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="profileEmailInput">
+                        </div>
+                        <div class="mb-3">
+                            <label for="profilePhoneInput" class="form-label">Phone</label>
+                            <input type="tel" class="form-control" id="profilePhoneInput">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="mainFooter" class="footer d-none">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>About TravelTreasure</h5>
+                    <p>TravelTreasure brings you unique, handcrafted souvenirs and travel essentials from artisans around the world. Celebrate culture and adventure with every purchase.</p>
+                </div>
+                <div class="col-md-2">
+                    <h5>Quick Links</h5>
+                    <a href="javascript:void(0)" onclick="showSection('home')">Home</a>
+                    <a href="javascript:void(0)" onclick="showSection('wishlist')">Wishlist</a>
+                    <a href="javascript:void(0)" onclick="showSection('cart')">Cart</a>
+                    <a href="javascript:void(0)" onclick="showSection('orders')">Orders</a>
+                </div>
+                <div class="col-md-3">
+                    <h5>Contact Us</h5>
+                    <p>Email: support@traveltreasure.com</p>
+                    <p>Phone: +91 123 456 7890</p>
+                    <p>Address: 123 Travel Lane, Mumbai, India</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Follow Us</h5>
+                    <a href="#">Facebook</a>
+                    <a href="#">Instagram</a>
+                    <a href="#">Twitter</a>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p>© 2025 TravelTreasure. All rights reserved.</p>
+            </div>
+            <div class="mt-3">
+                <h5 class="text-center">Our Commitment to Sustainability</h5>
+                <p>At TravelTreasure, we are dedicated to promoting sustainable practices by sourcing eco-friendly materials and supporting local artisans. Our packaging is 100% recyclable, and we partner with suppliers who prioritize energy efficiency improvements to minimize environmental impact.</p>
+                <p>By choosing our products, you're not just preparing for your next adventure—you're supporting a movement towards a more sustainable and culturally rich world. Thank you for being a part of our journey!</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+        // Prevent duplicate event listeners
+        let isEventListenersSet = false;
+
+        // User database (simulated, stored in localStorage)
+        let users = (() => {
+            try {
+                return JSON.parse(localStorage.getItem('users')) || {
+                    'user1': { password: 'password123', email: 'user1@example.com' },
+                    'admin': { password: 'admin456', email: 'admin@example.com' }
+                };
+            } catch (e) {
+                console.error('Failed to parse users from localStorage:', e);
+                return {
+                    'user1': { password: 'password123', email: 'user1@example.com' },
+                    'admin': { password: 'admin456', email: 'admin@example.com' }
+                };
+            }
+        })();
+
+        // Product generation logic
+        const regions = [
+            'Rajasthani', 'Kashmiri', 'Bengali', 'Himachali', 'Goan', 'Telugu', 'Karnataka', 'Bihari'
+        ];
+        const materials = ['Brass', 'Wood', 'Marble', 'Leather', 'Silver'];
+        const colors = ['Red', 'White', 'Multicolor'];
+        const kitTypes = ['Adventure', 'Trekking', 'Safari'];
+
+        function generateProducts() {
+            const products = [];
+            let id = 1;
+
+            // Souvenirs: Handicrafts
+            regions.forEach((region, i) => {
+                materials.slice(0, 4).forEach(material => {
+                    products.push({
+                        id: id++,
+                        name: `${region} ${material} Statue`,
+                        price: Math.floor(Math.random() * 2000) + 999,
+                        category: 'souvenirs',
+                        subcategory: 'handicrafts',
+                        image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c',
+                        featured: i % 3 === 0,
+                        specs: { Material: material, Height: `${Math.floor(Math.random() * 10) + 10}cm` },
+                        rating: (Math.random() * 1 + 4).toFixed(1),
+                        reviews: ['Exquisite craftsmanship', 'Great souvenir']
+                    });
+                });
+            });
+
+            // Souvenirs: Pottery
+            regions.forEach(region => {
+                products.push({
+                    id: id++,
+                    name: `${region} Clay Vase`,
+                    price: Math.floor(Math.random() * 1500) + 799,
+                    category: 'souvenirs',
+                    subcategory: 'pottery',
+                    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c',
+                    featured: Math.random() > 0.7,
+                    specs: { Material: 'Clay', Height: `${Math.floor(Math.random() * 15) + 15}cm` },
+                    rating: (Math.random() * 1 + 4).toFixed(1),
+                    reviews: ['Unique design', 'Perfect decor']
+                });
+                products.push({
+                    id: id++,
+                    name: `${region} Ceramic Pot`,
+                    price: Math.floor(Math.random() * 1200) + 699,
+                    category: 'souvenirs',
+                    subcategory: 'pottery',
+                    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c',
+                    featured: Math.random() > 0.7,
+                    specs: { Material: 'Ceramic', Diameter: `${Math.floor(Math.random() * 10) + 10}cm` },
+                    rating: (Math.random() * 1 + 4).toFixed(1),
+                    reviews: ['Sturdy and stylish', 'Great value']
+                });
+            });
+
+            // Souvenirs: Scarves
+            regions.forEach(region => {
+                colors.forEach(color => {
+                    products.push({
+                        id: id++,
+                        name: `${region} ${color} Silk Scarf`,
+                        price: Math.floor(Math.random() * 2000) + 1499,
+                        category: 'souvenirs',
+                        subcategory: 'scarves',
+                        image: 'https://images.unsplash.com/photo-1606768666853-403c90a981ad',
+                        featured: Math.random() > 0.7,
+                        specs: { Material: 'Silk', Length: `${Math.floor(Math.random() * 0.5 + 1.8)}m` },
+                        rating: (Math.random() * 1 + 4).toFixed(1),
+                        reviews: ['Soft and elegant', 'Vibrant color']
+                    });
+                });
+            });
+
+            // Souvenirs: Bags
+            regions.forEach(region => {
+                products.push({
+                    id: id++,
+                    name: `${region} Embroidered Tote Bag`,
+                    price: Math.floor(Math.random() * 1500) + 999,
+                    category: 'souvenirs',
+                    subcategory: 'bags',
+                    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c',
+                    featured: Math.random() > 0.7,
+                    specs: { Material: 'Cotton', Size: `${Math.floor(Math.random() * 10) + 30}x${Math.floor(Math.random() * 5) + 20}cm` },
+                    rating: (Math.random() * 1 + 4).toFixed(1),
+                    reviews: ['Spacious and durable', 'Beautiful embroidery']
+                });
+            });
+
+            // Travel Accessories: Backpacks
+            colors.forEach(color => {
+                products.push({
+                    id: id++,
+                    name: `${color} Travel Backpack`,
+                    price: Math.floor(Math.random() * 3000) + 1999,
+                    category: 'travel_accessories',
+                    subcategory: 'backpacks',
+                    image: 'https://images.unsplash.com/photo-1519985176271-adb1088fa94c',
+                    featured: Math.random() > 0.7,
+                    specs: { Capacity: `${Math.floor(Math.random() * 20) + 20}L`, Material: 'Polyester' },
+                    rating: (Math.random() * 1 + 4).toFixed(1),
+                    reviews: ['Comfortable straps', 'Lots of pockets']
+                });
+            });
+
+            // Travel Accessories: Travel Pouches
+            colors.forEach(color => {
+                products.push({
+                    id: id++,
+                    name: `${color} Travel Pouch`,
+                    price: Math.floor(Math.random() * 800) + 499,
+                    category: 'travel_accessories',
+                    subcategory: 'travel_pouches',
+                    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c',
+                    featured: Math.random() > 0.7,
+                    specs: { Material: 'Nylon', Size: `${Math.floor(Math.random() * 10) + 15}x${Math.floor(Math.random() * 5) + 10}cm` },
+                    rating: (Math.random() * 1 + 4).toFixed(1),
+                    reviews: ['Perfect for essentials', 'Water-resistant']
+                });
+            });
+
+            // Travel Accessories: Power Banks
+            products.push({
+                id: id++,
+                name: `High-Capacity Power Bank`,
+                price: Math.floor(Math.random() * 2000) + 1499,
+                category: 'travel_accessories',
+                subcategory: 'power_banks',
+                image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c',
+                featured: true,
+                specs: { Capacity: '10000mAh', Ports: '2 USB' },
+                rating: 4.6,
+                reviews: ['Fast charging', 'Compact']
+            });
+            products.push({
+                id: id++,
+                name: `Ultra-Slim Power Bank`,
+                price: Math.floor(Math.random() * 2500) + 1799,
+                category: 'travel_accessories',
+                subcategory: 'power_banks',
+                image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c',
+                featured: Math.random() > 0.7,
+                specs: { Capacity: '15000mAh', Ports: '3 USB' },
+                rating: (Math.random() * 1 + 4).toFixed(1),
+                reviews: ['Sleek design', 'Reliable']
+            });
+
+            // Travel Accessories: Adapters
+            products.push({
+                id: id++,
+                name: `Universal Travel Adapter`,
+                price: Math.floor(Math.random() * 1000) + 799,
+                category: 'travel_accessories',
+                subcategory: 'adapters',
+                image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c',
+                featured: Math.random() > 0.7,
+                specs: { Ports: '4 USB, 1 Type-C', Compatibility: '150+ Countries' },
+                rating: (Math.random() * 1 + 4).toFixed(1),
+                reviews: ['Very versatile', 'Compact']
+            });
+
+            // Travel Kits
+            kitTypes.forEach(kit => {
+                regions.slice(0, 5).forEach(region => {
+                    products.push({
+                        id: id++,
+                        name: `${region} ${kit} Travel Kit`,
+                        price: Math.floor(Math.random() * 4000) + 2999,
+                        category: 'travel_kits',
+                        subcategory: `${kit.toLowerCase()}_kits`,
+                        image: 'https://images.unsplash.com/photo-1519985176271-adb1088fa94c',
+                        featured: Math.random() > 0.7,
+                        specs: { Includes: 'Backpack, Water Bottle, Multi-tool' },
+                        rating: (Math.random() * 1 + 4).toFixed(1),
+                        reviews: ['Perfect for travel', 'High quality']
+                    });
+                });
+            });
+
+            return products;
+        }
+
+        const products = generateProducts();
+
+        let cart = JSON.parse(localStorage.getItem('cart')) || {};
+        let wishlist = JSON.parse(localStorage.getItem('wishlist')) || {};
+        let recentlyViewed = JSON.parse(localStorage.getItem('recentlyViewed')) || [];
+        let orders = JSON.parse(localStorage.getItem('orders')) || [];
+        let notifications = JSON.parse(localStorage.getItem('notifications')) || [];
+        let profile = JSON.parse(localStorage.getItem('profile')) || { email: '', phone: '' };
+        updateCartCount();
+        updateNotificationCount();
+
+        // Show/hide auth sections
+        function showAuthSection(section) {
+            const sections = document.querySelectorAll('.auth-container > div');
+            sections.forEach(div => div.classList.add('d-none'));
+            document.getElementById(`${section}Section`).classList.remove('d-none');
+            document.querySelectorAll('.error-message, .success-message').forEach(msg => msg.style.display = 'none');
+        }
+
+        // Validate email uniqueness
+        function isEmailUnique(email) {
+            return !Object.values(users).some(user => user.email === email);
+        }
+
+        // Show main interface
+        function showMainInterface() {
+            document.getElementById('authSection').classList.add('d-none');
+            document.getElementById('mainNavbar').classList.remove('d-none');
+            document.getElementById('mainContainer').classList.remove('d-none');
+            document.getElementById('mainFooter').classList.remove('d-none');
+            document.body.classList.remove('auth-page');
+            document.body.style.background = '#f8fafc';
+            // Update userDropdown after navbar is visible
+            const username = localStorage.getItem('username') || 'Guest';
+            const userDropdown = document.getElementById('userDropdown');
+            if (userDropdown) {
+                userDropdown.textContent = `Hi, ${username}`;
+            } else {
+                console.warn('userDropdown element not found');
+            }
+        }
+
+        // Hide main interface
+        function hideMainInterface() {
+            document.getElementById('authSection').classList.remove('d-none');
+            document.getElementById('mainNavbar').classList.add('d-none');
+            document.getElementById('mainContainer').classList.add('d-none');
+            document.getElementById('mainFooter').classList.add('d-none');
+            document.body.classList.add('auth-page');
+            document.body.style.background = '#f8fafc';
+        }
+
+        // Sign In
+        document.getElementById('signinForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('signinUsername').value.trim();
+            const password = document.getElementById('signinPassword').value;
+            const errorMessage = document.getElementById('signinError');
+
+            if (!username || !password) {
+                errorMessage.textContent = 'Please fill in all fields';
+                errorMessage.style.display = 'block';
+                setTimeout(() => errorMessage.style.display = 'none', 3000);
+                return;
+            }
+
+            if (users[username] && users[username].password === password) {
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('username', username);
+                showMainInterface();
+                showSection('home');
+            } else {
+                errorMessage.textContent = users[username] ? 'Incorrect password' : 'Username not found';
+                errorMessage.style.display = 'block';
+                setTimeout(() => errorMessage.style.display = 'none', 3000);
+            }
+        });
+
+        // Sign Up
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('signupUsername').value.trim();
+            const email = document.getElementById('signupEmail').value.trim();
+            const password = document.getElementById('signupPassword').value;
+            const errorMessage = document.getElementById('signupError');
+            const successMessage = document.getElementById('signupSuccess');
+
+            if (!username || !email || !password) {
+                errorMessage.textContent = 'Please fill in all fields';
+                errorMessage.style.display = 'block';
+                setTimeout(() => errorMessage.style.display = 'none', 3000);
+                return;
+            }
+
+            if (users[username]) {
+                errorMessage.textContent = 'Username already exists';
+                errorMessage.style.display = 'block';
+                setTimeout(() => errorMessage.style.display = 'none', 3000);
+            } else if (!isEmailUnique(email)) {
+                errorMessage.textContent = 'Email already registered';
+                errorMessage.style.display = 'block';
+                setTimeout(() => errorMessage.style.display = 'none', 3000);
+            } else {
+                users[username] = { password, email };
+                localStorage.setItem('users', JSON.stringify(users));
+                successMessage.style.display = 'block';
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                    showAuthSection('signin');
+                }, 2000);
+            }
+        });
+
+        // Forgot Password (Simulated)
+        document.getElementById('forgotForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('forgotUsername').value.trim();
+            const successMessage = document.getElementById('forgotSuccess');
+            const errorMessage = document.getElementById('forgotError');
+
+            if (!username) {
+                errorMessage.textContent = 'Please enter a username';
+                errorMessage.style.display = 'block';
+                setTimeout(() => errorMessage.style.display = 'none', 3000);
+                return;
+            }
+
+            if (users[username]) {
+                successMessage.style.display = 'block';
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                    showAuthSection('signin');
+                }, 2000);
+            } else {
+                errorMessage.textContent = 'Username not found';
+                errorMessage.style.display = 'block';
+                setTimeout(() => errorMessage.style.display = 'none', 3000);
+            }
+        });
+
+        // Show Product Detail
+        function showProductDetail(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            recentlyViewed = recentlyViewed.filter(id => id !== productId);
+            recentlyViewed.unshift(productId);
+            if (recentlyViewed.length > 8) recentlyViewed.pop();
+            localStorage.setItem('recentlyViewed', JSON.stringify(recentlyViewed));
+
+            document.getElementById('detailImage').src = product.image;
+            document.getElementById('detailImage').alt = product.name;
+            document.getElementById('detailName').textContent = product.name;
+            document.getElementById('detailPrice').textContent = `₹${product.price}`;
+            document.getElementById('detailCategory').textContent = `Category: ${product.category.replace('_', ' ').toUpperCase()}`;
+            document.getElementById('detailRating').textContent = `Rating: ★ ${product.rating}`;
+            const specsList = Object.entries(product.specs).map(([key, value]) => `<li><strong>${key}:</strong> ${value}</li>`).join('');
+            document.getElementById('detailSpecs').innerHTML = `<ul>${specsList}</ul>`;
+            const inCart = cart[productId] || 0;
+            const inWishlist = wishlist[productId] || false;
+            document.querySelector('.add-to-cart-detail').dataset.id = productId;
+            document.querySelector('.add-to-cart-detail').textContent = inCart > 0 ? `In Cart (${inCart})` : 'Add to Cart';
+            document.querySelector('.add-to-cart-detail').disabled = inCart >= 4;
+            document.querySelector('.wishlist-btn-detail').dataset.id = productId;
+            document.querySelector('.wishlist-btn-detail').innerHTML = inWishlist ? '<i class="fas fa-heart"></i> In Wishlist' : '<i class="far fa-heart"></i> Add to Wishlist';
+            const reviews = product.reviews.map(review => `<p class="mb-2">${review}</p>`).join('');
+            document.getElementById('detailReviews').innerHTML = reviews || '<p>No reviews yet.</p>';
+
+            showSection('productDetail');
+        }
+
+        // Section Management
+        function showSection(sectionId) {
+            document.querySelectorAll('.container > div, #authSection').forEach(div => div.classList.add('d-none'));
+            document.getElementById(`${sectionId}Section`).classList.remove('d-none');
+            if (sectionId === 'home') displayHome();
+            if (sectionId === 'wishlist') displayWishlist();
+            if (sectionId === 'cart') displayCart();
+            if (sectionId === 'checkout') displayCheckout();
+            if (sectionId === 'orders') displayOrders();
+            if (sectionId === 'notifications') displayNotifications();
+            if (sectionId === 'profile') displayProfile();
+        }
+
+        // Authentication Check
+        function checkAuthentication() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            if (!isLoggedIn) {
+                hideMainInterface();
+                showSection('auth');
+                showAuthSection('signin');
+                return false;
+            }
+            showMainInterface();
+            return true;
+        }
+
+        // Display Home
+        function displayHome(filter = '', search = '') {
+            console.log('DisplayHome - Filter:', filter, 'Search:', search);
+            const featuredSouvenirsList = document.getElementById('featuredSouvenirsList');
+            const travelAccessoriesList = document.getElementById('travelAccessoriesList');
+            const travelKitsList = document.getElementById('travelKitsList');
+            const recentlyViewedList = document.getElementById('recentlyViewedList');
+            
+            // Clear all lists
+            featuredSouvenirsList.innerHTML = '';
+            travelAccessoriesList.innerHTML = '';
+            travelKitsList.innerHTML = '';
+            recentlyViewedList.innerHTML = '';
+
+            // Filter products based on category, subcategory, or search
+            let filteredProducts = products.filter(product => 
+                (!filter || product.subcategory === filter || product.category === filter) &&
+                product.name.toLowerCase().includes(search.toLowerCase())
+            );
+
+            // If a filter is applied, show all filtered products in a single section
+            if (filter) {
+                const targetList = filter === 'souvenirs' ? featuredSouvenirsList :
+                                  filter === 'travel_accessories' ? travelAccessoriesList :
+                                  filter === 'travel_kits' ? travelKitsList : featuredSouvenirsList;
+
+                filteredProducts.forEach(product => {
+                    const inCart = cart[product.id] || 0;
+                    const inWishlist = wishlist[product.id] || false;
+                    const buttonText = inCart > 0 ? `In Cart (${inCart})` : 'Add to Cart';
+                    const isDisabled = inCart >= 4;
+                    const productCard = `
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-4">
+                            <div class="card product-card">
+                                <img src="${product.image}" class="card-img-top" alt="${product.name}" onclick="showProductDetail(${product.id})">
+                                <button class="wishlist-btn" data-id="${product.id}">${inWishlist ? '<i class="fas fa-heart"></i>' : '<i class="far fa-heart"></i>'}</button>
+                                <div class="card-body">
+                                    <h5 class="card-title">${product.name}</h5>
+                                    <p class="card-text">₹${product.price}</p>
+                                    <p class="rating">★ ${product.rating}</p>
+                                    <button class="btn btn-primary w-100 add-to-cart" data-id="${product.id}" ${isDisabled ? 'disabled' : ''}>
+                                        ${buttonText}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    targetList.innerHTML += productCard;
+                });
+            } else {
+                // No filter: Populate all sections
+                filteredProducts.forEach(product => {
+                    const inCart = cart[product.id] || 0;
+                    const inWishlist = wishlist[product.id] || false;
+                    const buttonText = inCart > 0 ? `In Cart (${inCart})` : 'Add to Cart';
+                    const isDisabled = inCart >= 4;
+                    const productCard = `
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-4">
+                            <div class="card product-card">
+                                <img src="${product.image}" class="card-img-top" alt="${product.name}" onclick="showProductDetail(${product.id})">
+                                <button class="wishlist-btn" data-id="${product.id}">${inWishlist ? '<i class="fas fa-heart"></i>' : '<i class="far fa-heart"></i>'}</button>
+                                <div class="card-body">
+                                    <h5 class="card-title">${product.name}</h5>
+                                    <p class="card-text">₹${product.price}</p>
+                                    <p class="rating">★ ${product.rating}</p>
+                                    <button class="btn btn-primary w-100 add-to-cart" data-id="${product.id}" ${isDisabled ? 'disabled' : ''}>
+                                        ${buttonText}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    if (product.category === 'souvenirs') featuredSouvenirsList.innerHTML += productCard;
+                    if (product.category === 'travel_accessories') travelAccessoriesList.innerHTML += productCard;
+                    if (product.category === 'travel_kits') travelKitsList.innerHTML += productCard;
+                });
+            }
+
+            // Populate recently viewed
+            recentlyViewed.forEach(productId => {
+                const product = products.find(p => p.id === productId);
+                if (product) {
+                    const inCart = cart[product.id] || 0;
+                    const inWishlist = wishlist[product.id] || false;
+                    const buttonText = inCart > 0 ? `In Cart (${inCart})` : 'Add to Cart';
+                    const isDisabled = inCart >= 4;
+                    recentlyViewedList.innerHTML += `
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-4">
+                            <div class="card product-card">
+                                <img src="${product.image}" class="card-img-top" alt="${product.name}" onclick="showProductDetail(${product.id})">
+                                <button class="wishlist-btn" data-id="${product.id}">${inWishlist ? '<i class="fas fa-heart"></i>' : '<i class="far fa-heart"></i>'}</button>
+                                <div class="card-body">
+                                    <h5 class="card-title">${product.name}</h5>
+                                    <p class="card-text">₹${product.price}</p>
+                                    <button class="btn btn-primary w-100 add-to-cart" data-id="${product.id}" ${isDisabled ? 'disabled' : ''}>
+                                        ${buttonText}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+        }
+
+        // Wishlist
+        function displayWishlist() {
+            const wishlistList = document.getElementById('wishlistList');
+            wishlistList.innerHTML = '';
+            Object.keys(wishlist).forEach(productId => {
+                const product = products.find(p => p.id === parseInt(productId));
+                if (product) {
+                    const inCart = cart[product.id] || 0;
+                    const buttonText = inCart > 0 ? `In Cart (${inCart})` : 'Add to Cart';
+                    const isDisabled = inCart >= 4;
+                    wishlistList.innerHTML += `
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-4">
+                            <div class="card product-card">
+                                <img src="${product.image}" class="card-img-top" alt="${product.name}" onclick="showProductDetail(${product.id})">
+                                <div class="card-body">
+                                    <h5 class="card-title">${product.name}</h5>
+                                    <p class="card-text">₹${product.price}</p>
+                                    <button class="btn btn-primary w-100 add-to-cart" data-id="${product.id}" ${isDisabled ? 'disabled' : ''}>
+                                        ${buttonText}
+                                    </button>
+                                    <button class="btn btn-outline-danger w-100 mt-2 remove-wishlist" data-id="${product.id}">Remove</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+        }
+
+        // Cart
+        function displayCart() {
+            const cartList = document.getElementById('cartList');
+            cartList.innerHTML = '';
+            let total = 0;
+            Object.keys(cart).forEach(productId => {
+                const product = products.find(p => p.id === parseInt(productId));
+                if (product) {
+                    const quantity = cart[productId];
+                    total += product.price * quantity;
+                    cartList.innerHTML += `
+                        <div class="card mb-3 border-0 shadow-sm">
+                            <div class="row g-0">
+                                <div class="col-md-2 col-4">
+                                    <img src="${product.image}" class="img-fluid rounded" alt="${product.name}">
+                                </div>
+                                <div class="col-md-10 col-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${product.name}</h5>
+                                        <p class="card-text">₹${product.price} x ${quantity}</p>
+                                        <div class="quantity-control">
+                                            <button class="decrease-quantity" data-id="${product.id}" ${quantity <= 1 ? 'disabled' : ''}>−</button>
+                                            <span>${quantity}</span>
+                                            <button class="increase-quantity" data-id="${product.id}" ${quantity >= 4 ? 'disabled' : ''}>+</button>
+                                        </div>
+                                        <button class="btn btn-danger remove-cart" data-id="${product.id}">Remove</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+            cartList.innerHTML += `<h4 class="text-end mt-3">Total: ₹${total}</h4>`;
+        }
+
+        // Checkout
+        function displayCheckout() {
+            const checkoutList = document.getElementById('checkoutList');
+            checkoutList.innerHTML = '';
+            let total = 0;
+            Object.keys(cart).forEach(productId => {
+                const product = products.find(p => p.id === parseInt(productId));
+                if (product) {
+                    const quantity = cart[productId];
+                    total += product.price * quantity;
+                    checkoutList.innerHTML += `
+                        <div class="card mb-3 border-0 shadow-sm">
+                            <div class="card-body">
+                                <h5>${product.name}</h5>
+                                <p>₹${product.price} x ${quantity}</p>
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+            checkoutList.innerHTML += `<h4 class="text-end">Total: ₹${total}</h4>`;
+        }
+
+        // Orders
+        function displayOrders() {
+            const ordersList = document.getElementById('ordersList');
+            ordersList.innerHTML = '';
+            orders.forEach((order, index) => {
+                let total = 0;
+                let itemsHtml = '';
+                Object.keys(order.items).forEach(productId => {
+                    const product = products.find(p => p.id === parseInt(productId));
+                    if (product) {
+                        const quantity = order.items[productId];
+                        total += product.price * quantity;
+                        itemsHtml += `<p>${product.name} - ₹${product.price} x ${quantity}</p>`;
+                    }
+                });
+                ordersList.innerHTML += `
+                    <div class="card mb-3 border-0 shadow-sm">
+                        <div class="card-body">
+                            <h5>Order #${index + 1} - ${new Date(order.date).toLocaleDateString()}</h5>
+                            ${itemsHtml}
+                            <p><strong>Total: ₹${total}</strong></p>
+                            <p>Status: ${order.status}</p>
+                            <button class="btn btn-outline-primary track-order" data-id="${index}">Track Order</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // Notifications
+        function displayNotifications() {
+            const notificationList = document.getElementById('notificationList');
+            notificationList.innerHTML = '';
+            notifications.forEach((notification, index) => {
+                notificationList.innerHTML += `
+                    <div class="card mb-2 border-0 shadow-sm">
+                        <div class="card-body d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="mb-1">${notification.message}</p>
+                                <small class="text-muted">${new Date(notification.date).toLocaleString()}</small>
+                            </div>
+                            <button class="btn btn-sm btn-danger clear-notification" data-id="${index}">Clear</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // Profile
+        function displayProfile() {
+            document.getElementById('profileName').textContent = `Name: ${localStorage.getItem('username') || 'Guest'}`;
+            document.getElementById('profileEmail').textContent = profile.email || 'Not set';
+            document.getElementById('profilePhone').textContent = profile.phone || 'Not set';
+            document.getElementById('profileEmailInput').value = profile.email || '';
+            document.getElementById('profilePhoneInput').value = profile.phone || '';
+        }
+
+        // Update Counts
+        function updateCartCount() {
+            const count = Object.values(cart).reduce((sum, qty) => sum + qty, 0);
+            document.getElementById('cartCount').textContent = count;
+        }
+
+        function updateNotificationCount() {
+            document.getElementById('notificationCount').textContent = notifications.length;
+        }
+
+        // Add to Cart
+        function addToCart(productId) {
+            const currentQuantity = cart[productId] || 0;
+            if (currentQuantity >= 4) {
+                addNotification(`Cannot add more than 4 units of ${products.find(p => p.id === productId).name}`);
+                return;
+            }
+            cart[productId] = currentQuantity + 1;
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            addNotification(`Added ${products.find(p => p.id === productId).name} to cart (Qty: ${cart[productId]})`);
+            displayHome('', document.getElementById('searchInput').value);
+            if (!document.getElementById('productDetailSection').classList.contains('d-none')) {
+                showProductDetail(productId);
+            }
+            if (!document.getElementById('wishlistSection').classList.contains('d-none')) {
+                displayWishlist();
+            }
+        }
+
+        // Adjust Cart Quantity
+        function adjustCartQuantity(productId, change) {
+            const currentQuantity = cart[productId] || 0;
+            const newQuantity = currentQuantity + change;
+            if (newQuantity < 1) {
+                delete cart[productId];
+            } else if (newQuantity > 4) {
+                addNotification(`Cannot add more than 4 units of ${products.find(p => p.id === productId).name}`);
+                return;
+            } else {
+                cart[productId] = newQuantity;
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            addNotification(`${change > 0 ? 'Added' : 'Removed'} 1 unit of ${products.find(p => p.id === productId).name} (Qty: ${cart[productId] || 0})`);
+            displayCart();
+            displayHome('', document.getElementById('searchInput').value);
+            if (!document.getElementById('wishlistSection').classList.contains('d-none')) {
+                displayWishlist();
+            }
+            if (!document.getElementById('productDetailSection').classList.contains('d-none')) {
+                showProductDetail(productId);
+            }
+        }
+
+        // Add/Remove Wishlist
+        function toggleWishlist(productId) {
+            const productName = products.find(p => p.id === productId).name;
+            if (wishlist[productId]) {
+                delete wishlist[productId];
+                addNotification(`Removed ${productName} from wishlist`);
+            } else {
+                wishlist[productId] = true;
+                addNotification(`Added ${productName} to wishlist`);
+            }
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            displayHome('', document.getElementById('searchInput').value);
+            if (!document.getElementById('wishlistSection').classList.contains('d-none')) displayWishlist();
+            if (!document.getElementById('productDetailSection').classList.contains('d-none')) showProductDetail(productId);
+        }
+
+        // Add Notification
+        function addNotification(message) {
+            notifications.unshift({ message, date: new Date().toISOString() });
+            localStorage.setItem('notifications', JSON.stringify(notifications));
+            updateNotificationCount();
+        }
+
+        // Filter by Category
+        function filterByCategory(category) {
+            console.log('Filtering by category:', category);
+            showSection('home');
+            displayHome(category, document.getElementById('searchInput').value);
+        }
+
+        // Filter by Subcategory
+        function filterBySubcategory(subcategory) {
+            console.log('Filtering by subcategory:', subcategory);
+            showSection('home');
+            displayHome(subcategory, document.getElementById('searchInput').value);
+        }
+
+        // Event Listeners
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.dropdown-toggle') || e.target.closest('.dropdown-menu')) return;
+            if (e.target.closest('.add-to-cart') || e.target.closest('.add-to-cart-detail')) {
+                const btn = e.target.closest('.add-to-cart') || e.target.closest('.add-to-cart-detail');
+                addToCart(parseInt(btn.dataset.id));
+            }
+            if (e.target.closest('.wishlist-btn') || e.target.closest('.wishlist-btn-detail')) {
+                const btn = e.target.closest('.wishlist-btn') || e.target.closest('.wishlist-btn-detail');
+                toggleWishlist(parseInt(btn.dataset.id));
+            }
+            if (e.target.closest('.remove-wishlist')) {
+                toggleWishlist(parseInt(e.target.dataset.id));
+            }
+            if (e.target.closest('.remove-cart')) {
+                const productId = parseInt(e.target.dataset.id);
+                delete cart[productId];
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartCount();
+                addNotification(`Removed ${products.find(p => p.id === productId).name} from cart`);
+                displayCart();
+                displayHome('', document.getElementById('searchInput').value);
+                if (!document.getElementById('wishlistSection').classList.contains('d-none')) {
+                    displayWishlist();
+                }
+            }
+            if (e.target.closest('.increase-quantity')) {
+                adjustCartQuantity(parseInt(e.target.dataset.id), 1);
+            }
+            if (e.target.closest('.decrease-quantity')) {
+                adjustCartQuantity(parseInt(e.target.dataset.id), -1);
+            }
+            if (e.target.closest('.track-order')) {
+                alert(`Tracking Order #${parseInt(e.target.dataset.id) + 1}: In transit`);
+            }
+            if (e.target.closest('.clear-notification')) {
+                notifications.splice(e.target.dataset.id, 1);
+                localStorage.setItem('notifications', JSON.stringify(notifications));
+                displayNotifications();
+                updateNotificationCount();
+            }
+            if (e.target.id === 'logoutBtn') {
+                localStorage.clear();
+                hideMainInterface();
+                showSection('auth');
+                showAuthSection('signin');
+            }
+        });
+
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            displayHome('', e.target.value);
+        });
+
+        document.getElementById('checkoutForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const order = {
+                items: { ...cart },
+                date: new Date().toISOString(),
+                status: 'Order Placed'
+            };
+            orders.push(order);
+            localStorage.setItem('orders', JSON.stringify(orders));
+            cart = {};
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            addNotification('Order placed successfully!');
+            showSection('orders');
+        });
+
+        document.getElementById('reviewForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const review = e.target.querySelector('textarea').value;
+            const productId = parseInt(document.querySelector('.add-to-cart-detail').dataset.id);
+            products.find(p => p.id === productId).reviews.push(review);
+            e.target.querySelector('textarea').value = '';
+            showProductDetail(productId);
+            addNotification('Review submitted!');
+        });
+
+        document.getElementById('profileForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            profile.email = document.getElementById('profileEmailInput').value;
+            profile.phone = document.getElementById('profilePhoneInput').value;
+            localStorage.setItem('profile', JSON.stringify(profile));
+            displayProfile();
+            addNotification('Profile updated!');
+        });
+
+        // Initialize toggle link event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            if (isEventListenersSet) return;
+            isEventListenersSet = true;
+
+            const toggleLinks = document.querySelectorAll('.toggle-link');
+            toggleLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const section = this.getAttribute('data-section');
+                    showAuthSection(section);
+                });
+            });
+
+            if (checkAuthentication()) {
+                showSection('home');
+            }
+        });
+    </script>
+</body>
+</html>

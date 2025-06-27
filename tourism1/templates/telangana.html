@@ -1,0 +1,2686 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Telangana</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> -->
+  <style>
+    .wb {
+      font-size: 10vw;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+      border-spacing: 0;
+      border: 1px solid #ddd;
+    }
+
+    td,
+    th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+      font-size: 1.5vw;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+
+    .trip {
+      text-align: center;
+      font-weight: 900;
+      background: orangered;
+      padding: 20px;
+      border-radius: 20px;
+      width: 60%;
+    }
+
+    p,
+    li,
+    .text {
+      font-size: 1.5vw;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-weight: 600;
+    }
+
+    h4 {
+      font-weight: 900;
+    }
+
+    img {
+      border-radius: 10px;
+      display: block;
+      margin: auto;
+    }
+
+    @media screen and (max-width: 850px) {
+
+      p,
+      li,
+      .text,
+      td,
+      th {
+        font-size: 2vw;
+        ;
+      }
+
+    }
+
+    @media screen and (max-width: 500px) {
+
+      p,
+      li,
+      .text,
+      td,
+      th {
+        font-size: 4.5vw;
+        ;
+      }
+
+    }
+
+    .box:nth-of-type(odd) {
+      background: #f3b37185;
+      padding: 10px;
+    }
+
+    .weather-container {
+            border-radius: 15px;
+            background: #f0fdf4;
+            padding: 15px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .weather-card {
+            text-align: center;
+            border-radius: 10px;
+            padding: 10px;
+            background: white;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+        .aqi {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            color: white;
+        }
+        .aqi-bad { background: purple; }
+        .aqi-moderate { background: orange; }
+        .aqi-good { background: green; }
+        .best-time {
+            background: #d1fae5;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 15px;
+            color: green;
+        }
+        .wet {
+            max-width: 50px;
+        }
+        
+        .trip {
+          font-size: 18px;
+          padding: 10px 20px;
+          cursor: pointer;
+          background-color:rgb(231, 36, 36);
+          color: white;
+          border: none;
+          border-radius: 5px;
+      }
+      .modal {
+          display: none;
+          position: fixed;
+          z-index: 1;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0,0,0,0.5);
+      }
+      .modal-content {
+          background-color: #fff;
+          margin: 10% auto;
+          padding: 20px;
+          border-radius: 10px;
+          width: 40%;
+          box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+          text-align: center;
+      }
+      .close {
+          color: #aaa;
+          float: right;
+          font-size: 28px;
+          font-weight: bold;
+          cursor: pointer;
+      }
+      .trip-options {
+          display: flex;
+          justify-content: center;
+          gap: 20px;
+          margin-top: 20px;
+      }
+      .trip-options a {
+          display: block;
+          width: 120px;
+          padding: 10px;
+          background-color: #28a745;
+          color: white;
+          text-decoration: none;
+          border-radius: 5px;
+      }
+  </style>
+</head>
+
+<body>
+
+
+  <!-- <h2>Carousel Example</h2> -->
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+      <li data-target="#myCarousel" data-slide-to="4"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+
+      <div class="item active">
+        <img src="darjeeling wlp.jpg" alt="Charminar" style="width:100%; height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Charminar</h3>
+          <p>The iconic symbol of Hyderabad!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="victoria wlp.jpg" alt="Golconda Fort" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Golconda Fort</h3>
+          <p>The magnificent historical fortress!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="howrah bridge wlp.jpg" alt="Hussain Sagar" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Hussain Sagar</h3>
+          <p>The heart-shaped lake with Buddha statue!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="Digha wlp2.png" alt="Ramoji Film City" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Ramoji Film City</h3>
+          <p>World's largest film studio complex!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="teegarden wlp.jpg" alt="Warangal Fort" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Warangal Fort</h3>
+          <p>The magnificent Kakatiya architecture!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+  <div class="container">
+    <br><br>
+    <h1 class="wb"> TELANGANA</h1><br>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <img src="westbengal-map.jpg" alt="" style="height:700px; width: -webkit-fill-available;">
+
+        </div>
+        <div class="col-sm-6">
+          <h1> Telangana: The Cultural & Historical Heart of South India</h1>
+          <p class="text">Telangana is a diverse and vibrant state in southern India, known for its rich history,
+            cultural heritage, literature, festivals, art, and natural beauty. It is a key center for technology, 
+            politics, economy, and education.</p>
+
+          <ul>
+            <li><b>Location --</b> South-Central India</li>
+            <li><b>Capital --</b> Hyderabad</li>
+            <li><b>Official Language --</b> Telugu</li>
+            <li><b>Area --</b> 112,077 sq. km</li>
+            <li><b>Population --</b> ~39 million (12th most populous state in India)</li>
+            <li><b>Borders --</b> Maharashtra, Karnataka, Chhattisgarh, Andhra Pradesh</li>
+            <li><b>Major Rivers --</b> Godavari, Krishna, Manjira, Musi</li>
+            <li><b>Major Festivals --</b> Bathukamma, Bonalu, Dussehra, Sankranti, Ramzan, Christmas</li>
+            <li><b>State Animal --</b> Spotted Deer</li>
+            <li><b>State Flower --</b> Tangedu (Tanner's Cassia)</li>
+            <li><b>State Tree --</b> Jammi Chettu (Prosopis Cineraria)</li>
+            <li><b>State Bird --</b> Palapitta (Indian Roller)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <br>
+    <hr>
+    <div>
+      <h1>📌 Divisions & Districts of Telangana</h1>
+      <br>
+      <div style="overflow-x:auto;">
+        <table>
+          <tr>
+            <th>Division</th>
+            <th>Districts</th>
+            <th>Key Highlights</th>
+          </tr>
+          <tr>
+            <td>Hyderabad Division</td>
+            <td>1. Hyderabad 2. Rangareddy 3. Medchal-Malkajgiri 4. Sangareddy 5. Vikarabad 6. Medak</td>
+            <td>Hyderabad (State Capital), IT Hub, Historical Monuments, Hussain Sagar</td>
+          </tr>
+          <tr>
+            <td>Warangal Division</td>
+            <td>7. Warangal 8. Hanamkonda 9. Jangaon 10. Mahabubabad 11. Bhupalapally</td>
+            <td>Warangal Fort, Thousand Pillar Temple, Pakhal Lake</td>
+          </tr>
+          <tr>
+            <td>Karimnagar Division</td>
+            <td>12. Karimnagar 13. Jagtial 14. Peddapalli 15. Rajanna Sircilla</td>
+            <td>Lower Manair Dam, Textile Industry, Handicrafts</td>
+          </tr>
+          <tr>
+            <td>Khammam Division</td>
+            <td>16. Khammam 17. Bhadradri Kothagudem</td>
+            <td>Bhadrachalam Temple, Coal Mines, Kinnerasani Wildlife Sanctuary</td>
+          </tr>
+          <tr>
+            <td>Nalgonda Division</td>
+            <td>18. Nalgonda 19. Suryapet 20. Yadadri Bhuvanagiri</td>
+            <td>Nagarjuna Sagar Dam, Yadadri Temple, Kolanupaka Jain Temple</td>
+          </tr>
+          <tr>
+            <td>Nizamabad Division</td>
+            <td>21. Nizamabad 22. Kamareddy</td>
+            <td>Nizamabad Fort, Agricultural Hub, Spice Production</td>
+          </tr>
+          <tr>
+            <td>Adilabad Division</td>
+            <td>23. Adilabad 24. Nirmal 25. Mancherial 26. Kumuram Bheem Asifabad</td>
+            <td>Tribal Culture, Kawal Tiger Reserve, Kuntala Waterfalls</td>
+          </tr>
+          <tr>
+            <td>Mahabubnagar Division</td>
+            <td>27. Mahabubnagar 28. Nagarkurnool 29. Wanaparthy 30. Jogulamba Gadwal 31. Narayanpet</td>
+            <td>Koilsagar Dam, Pillalamarri Banyan Tree, Agricultural Region</td>
+          </tr>
+        </table>
+      </div>
+      <br><br>
+      <h1>🔹 Major Highlights of Some Key Districts</h1><br><br>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <ul>
+              <li><b>Hyderabad --</b> Capital of Telangana, IT hub, cultural & economic center.</li>
+              <li><b>Warangal --</b> Famous for its historical forts, temples, and Kakatiya heritage.</li>
+              <li><b>Nizamabad --</b> Known for agriculture, spices, and historical monuments.</li>
+              <li><b>Karimnagar --</b> Famous for granite, textiles, and silver filigree work.</li>
+              <li><b>Khammam --</b> Rich in minerals, forests, and tribal culture.</li>
+              <li><b>Adilabad --</b> Known for tribal culture, forests, and waterfalls.</li>
+              <li><b>Nalgonda --</b> Famous for Nagarjuna Sagar Dam and Buddhist sites.</li>
+              <li><b>Mahabubnagar --</b> Agricultural region with historical significance.</li>
+              <li><b>Medak --</b> Home to the magnificent Medak Cathedral and agricultural lands.</li>
+            </ul>
+          </div>
+          <div class="col-sm-6">
+            <img src="westbengal-map.jpg" alt="" style="height:450px;width: -webkit-fill-available;">
+
+          </div>
+        </div>
+      </div>
+    </div><br><br>
+    <div class="container">
+      <div class="weather-container">
+          <h4 class="text-center"><strong>Weather in Telangana</strong></h4>
+          <div class="row">
+              <!-- January -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Jan</h6>
+                      <p>15/28°C</p>
+                      <span class="aqi aqi-moderate">AQI 120</span>
+                  </div>
+              </div>
+              <!-- February -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Feb</h6>
+                      <p>18/32°C</p>
+                      <span class="aqi aqi-moderate">AQI 110</span>
+                  </div>
+              </div>
+              <!-- March -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Mar</h6>
+                      <p>21/36°C</p>
+                      <span class="aqi aqi-moderate">AQI 105</span>
+                  </div>
+              </div>
+              <!-- April -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Apr</h6>
+                      <p>24/39°C</p>
+                      <span class="aqi aqi-moderate">AQI 100</span>
+                  </div>
+              </div>
+              <!-- May -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>May</h6>
+                      <p>26/40°C</p>
+                      <span class="aqi aqi-moderate">AQI 95</span>
+                  </div>
+              </div>
+              <!-- June -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Jun</h6>
+                      <p>25/36°C</p>
+                      <span class="aqi aqi-good">AQI 80</span>
+                  </div>
+              </div>
+              <!-- July -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="rain.png" alt="rain">
+                      <h6>Jul</h6>
+                      <p>23/32°C</p>
+                      <span class="aqi aqi-good">AQI 65</span>
+                  </div>
+              </div>
+              <!-- August -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Aug</h6>
+                      <p>23/30°C</p>
+                      <span class="aqi aqi-good">AQI 70</span>
+                  </div>
+              </div>
+              <!-- September -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Sep</h6>
+                      <p>22/31°C</p>
+                      <span class="aqi aqi-good">AQI 75</span>
+                  </div>
+              </div>
+              <!-- October -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Oct</h6>
+                      <p>20/31°C</p>
+                      <span class="aqi aqi-good">AQI 80</span>
+                  </div>
+              </div>
+              <!-- November -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Nov</h6>
+                      <p>17/29°C</p>
+                      <span class="aqi aqi-moderate">AQI 90</span>
+                  </div>
+              </div>
+              <!-- December -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Dec</h6>
+                      <p>15/28°C</p>
+                      <span class="aqi aqi-moderate">AQI 100</span>
+                  </div>
+              </div>
+          </div>
+          <div class="text-center">
+              <div class="best-time">🏆 Best time to visit: October - February</div>
+          </div>
+      </div>
+    </div>
+    
+
+    <br><br>
+    
+    <button class="trip" id="openModal">Let's go on a trip</button>
+    
+    <div id="tripModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Select Your Trip</h2>
+            <button type="button" class="btn btn-warning" style="margin-bottom: 8px;color:black; border-radius: 5px;" onclick="location.href='{% url 'telangana_7days' %}'" >7 days trip</button><br>
+            <button type="button" class="btn btn-warning" style="margin-bottom: 8px;color:black; border-radius: 5px;" onclick="location.href='{% url 'telangana_12days' %}'" >12 days trip</button>
+        </div>
+    </div>
+    
+    <script>
+        var modal = document.getElementById("tripModal");
+        var btn = document.getElementById("openModal");
+        var span = document.getElementsByClassName("close")[0];
+        
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+        
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+        
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script><br><br>
+    <div class="container">
+      <ul class="nav nav-tabs">
+        <li class="nav-item"><a data-toggle="tab" href="#wbculture"> Culture</a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbtradition "> Tradition</a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbfestivals"> Festivals </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbfood"> Foods </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbhistory"> History </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbartacraft"> Art and Craft </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbseason"> Season to Visit </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbtourist"> Tourist Spots </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbwild"> Wildlife & Crops </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbedu"> Institutions </a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="wbculture" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Culture of Telangana</h1>
+          <p class="text">Telangana has a rich and diverse culture, shaped by its history, literature, art, music,
+            festivals, and traditions. Here's an overview of some key aspects of its culture:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Language</h3>
+                  <ul>
+                    <li>Telugu is the official language and a major part of the cultural identity of Telangana. It's one of the classical languages of India with a rich literary heritage. The Telangana dialect of Telugu has its own unique vocabulary and expressions influenced by Urdu and Marathi.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="bang.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>2. Literature</h3>
+                  <ul>
+                    <li>Telangana has a rich literary tradition with poets like Kaloji Narayana Rao, Dasarathi Krishnamacharyulu, and Gaddar who wrote extensively about social issues and the Telangana movement.</li>
+                    <li>Folk literature including ballads, songs, and stories form an important part of Telangana's cultural heritage.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="lit.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div><br>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="art.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Art and Craft</h3>
+                  <ul>
+                    <li>The state is known for its diverse range of art forms, including Nirmal paintings, Pembarthi metal craft, and Cheriyal scroll paintings.</li>
+                    <li>Bidri work, a metal handicraft inlaid with silver, is a specialty of Hyderabad region.</li>
+                    <li>Pochampally Ikat, a unique style of tie and dye weaving, is internationally renowned.</li>
+                  </ul>
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="music.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>4. Music</h3>
+                  <ul>
+                    <li>Carnatic music has a strong presence in Telangana, especially in Hyderabad.</li>
+                    <li>Folk music forms like Oggukatha, Chindu Bhagavatham, and Perini Shivatandavam are unique to the region.</li>
+                    <li>Qawwali, influenced by Sufi traditions, is popular in Hyderabad.</li>
+                    <li>Burrakatha, a storytelling form with music, is widely practiced in rural areas.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Dance</h3>
+                  <ul>
+                    <li>Perini Shivatandavam, an ancient dance form performed by male dancers, was revived in Telangana.</li>
+                    <li>Gusadi Dance, performed by Gond tribes, is a vibrant folk dance form.</li>
+                    <li>Bathukamma dance, performed during the Bathukamma festival, is unique to Telangana.</li>
+                  </ul>
+                  <h3>6. Cuisine</h3>
+                  <ul>
+                    <li>Telangana cuisine is known for its spicy and tangy flavors, with dishes like Hyderabadi Biryani, Haleem, and Qubani ka Meetha.</li>
+                    <li>Traditional Telangana dishes include Sakinalu, Sarva Pindi, and Jonna Rotte (jowar roti).</li>
+                    <li>Street food in Hyderabad, such as Irani chai with Osmania biscuits, is famous throughout India.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="chau.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="theater.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>7. Theatre and Cinema</h3>
+                  <ul>
+                    <li>Telangana has a rich tradition of folk theater forms like Oggu Katha and Gollasuddulu.</li>
+                    <li>Hyderabad is home to Tollywood, the Telugu film industry, which produces numerous films annually.</li>
+                    <li>Ramoji Film City in Hyderabad, the world's largest film studio complex, attracts filmmakers from across India.</li>
+                  </ul>
+                  <h3>8. Architecture</h3>
+                  <ul>
+                    <li>Telangana's architectural style blends Hindu, Islamic, and contemporary influences. Notable structures include the Charminar, Golconda Fort, Qutb Shahi Tombs, and Thousand Pillar Temple in Warangal.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="religion.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>9. Religious Diversity</h3>
+                  <ul>
+                    <li>The state is home to a variety of religions, with Hinduism, Islam, Christianity, and Buddhism having a significant presence. This diversity is reflected in the state's festivals, rituals, and cultural practices. The Ganga-Jamuni tehzeeb (Hindu-Muslim cultural synthesis) is particularly evident in Hyderabad.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>10. Folk Traditions</h3>
+                  <ul>
+                    <li>Telangana is famous for its rich folk traditions, including Bonalu, Bathukamma, and tribal celebrations.</li>
+                    <li>Storytelling traditions like Oggu Katha and Burrakatha preserve ancient myths and legends.</li>
+                  </ul>
+                  <h3>11. Philosophy</h3>
+                  <ul>
+                    <li>The region has been influenced by various philosophical traditions including Vedanta, Sufism, and the Bhakti movement. The teachings of saints like Yogi Vemana have had a profound impact on Telangana's cultural ethos.</li>
+                  </ul>
+                  <h3>12. Handicrafts</h3>
+                  <ul>
+                    <li>Telangana is known for its handicrafts such as Bidriware, Dokra metal casting, Nirmal paintings, and Pochampally Ikat textiles.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="phi.jpg" alt="" style="height:300px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br><br>
+
+          <p>Telangana's culture is deeply rooted in its history, and it continues to evolve while maintaining a close
+            connection to its heritage. It's a region where modernity and tradition coexist beautifully!</p><br><br>
+        </div>
+        <div id="wbtradition" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Tradition of Telangana</h1>
+          <p>Telangana has a rich and diverse tradition deeply rooted in its history, culture, and social practices.
+            Here's an overview of some key traditional aspects of the state:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Clothing Tradition</h3>
+                  <h4>Men</h4>
+                  <ul>
+                    <li><b>Dhoti and Kurta:</b> Traditional Telangana men wear white or cream-colored dhoti with a kurta,
+                      especially during religious ceremonies, weddings, and festivals.</li>
+                    <li><b>Turban (Pagdi):</b> Worn for special occasions and ceremonies.</li>
+                  </ul>
+                  <h4>Women</h4>
+                  <ul>
+                    <li><b>Saree:</b> Telangana women traditionally wear sarees like Pochampally Ikat, Gadwal, and Narayanpet.
+                      During Bathukamma, colorful sarees are commonly worn.</li>
+                    <li><b>Jewelry:</b> Traditional gold jewelry including Kasulu (bangles), Jhumkas (earrings), and Vaddanam
+                      (waistband) are worn during festivals and ceremonies.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="cloth.jpg" alt="" style="height:250px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>2. Wedding Traditions</h3>
+                  <ul>
+                    <li><b>Pelli Koduku:</b> Pre-wedding ceremony for the groom.</li>
+                    <li><b>Jeelakarra Bellam:</b> The bride and groom taste a mixture of cumin seeds and jaggery symbolizing
+                      the sweet and sour experiences of married life.</li>
+                    <li><b>Talambralu:</b> The couple showers each other with rice mixed with turmeric and saffron.</li>
+                    <li><b>Arundhati Nakshatra:</b> The couple looks at the Arundhati star, symbolizing marital fidelity.</li>
+                    <li><b>Mangalsutra:</b> The groom ties the sacred thread around the bride's neck, symbolizing
+                      marriage.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="wedding.jpg" alt="" style="height:250px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="dance.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Music & Dance Traditions</h3>
+                  <ul>
+                    <li><b>Perini Shivatandavam:</b> An ancient dance form performed to worship Lord Shiva before warriors
+                      went to battle.</li>
+                    <li><b>Oggu Katha:</b> A traditional storytelling form with music and dance elements.</li>
+                    <li><b>Burrakatha:</b> A folk storytelling tradition with musical accompaniment.</li>
+                    <li><b>Gusadi Dance:</b> A tribal dance form performed by the Gond tribe with elaborate costumes and
+                      headgear.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="book.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+
+                  <h3>4. Social & Religious Traditions</h3>
+                  <ul>
+                    <li><b>Numaish:</b> Annual industrial exhibition in Hyderabad that has become a cultural tradition.</li>
+                    <li><b>Ganga-Jamuni Tehzeeb:</b> The syncretic Hindu-Muslim culture especially prevalent in Hyderabad.</li>
+                    <li><b>Muharram:</b> Observed with processions and rituals, particularly in Hyderabad.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Architectural & Handicraft Traditions</h3>
+                  <ul>
+                    <li><b>Kakatiya Temples:</b> Warangal is famous for its stunning stone temples with intricate
+                      carvings.</li>
+                    <li><b>Cheriyal Scroll Painting:</b> Traditional narrative scroll paintings depicting mythological
+                      themes.</li>
+                    <li><b>Bidriware:</b> Metal handicraft with silver inlay work, originated in Bidar but flourished in
+                      Hyderabad.</li>
+                    <li><b>Pembarthi Metal Craft:</b> Intricate sheet metal work used for decorative items and temple
+                      decorations.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="arch.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>6. Sports & Games</h3>
+                  <ul>
+                    <li><b>Kabaddi:</b> Traditional rural game played widely across Telangana villages.</li>
+                    <li><b>Kho-Kho:</b> Popular traditional game in rural areas.</li>
+                    <li><b>Marbles & Gilli-Danda:</b> Traditional children's games still played in villages.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="foot1.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br><br>
+          <p>Telangana's traditions beautifully combine history, art, food, music, and festivals, making it one of the
+            most culturally vibrant states in India.</p><br><br>
+        </div>
+        <div id="wbfestivals" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Festivals of Telangana</h1>
+          <p>Telangana is known for its vibrant and diverse festivals, which reflect its rich cultural heritage,
+            religious harmony, and artistic traditions. Here's a list of some of the major festivals celebrated in the
+            state:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Bathukamma (Biggest Festival of Telangana)</h3>
+                  <ul>
+                    <li>The most significant festival unique to Telangana, celebrated with floral arrangements, songs, and dances.</li>
+                    <li>Women arrange seasonal flowers in a conical shape to worship Goddess Gauri.</li>
+                    <li>The festival lasts 9 days, culminating in the immersion of the floral arrangements in water bodies.</li>
+                    <li>Celebrated with colorful processions and traditional songs.</li>
+                  </ul>
+                  <p><b>📍 Time: September - October (Dussehra season)</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="durga1.jpg" alt="" style="height:230px;width: 200px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="kali.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Bonalu</h3>
+                  <ul>
+                    <li>A traditional Hindu festival dedicated to Goddess Mahakali.</li>
+                    <li>Women carry pots (Bonalu) filled with offerings on their heads to temples.</li>
+                    <li>Features the Potharaju dance and processions with decorated elephants and bulls.</li>
+                    <li>Famous places: Golconda Fort, Ujjaini Mahakali Temple, Secunderabad.</li>
+                  </ul>
+                  <p><b>📍 Time: July - August</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Sankranti</h3>
+                  <ul>
+                    <li>Marks the harvest festival and is widely celebrated across Telangana.</li>
+                    <li>People fly kites, prepare special foods like Pongali and Ariselu.</li>
+                    <li>Homes are decorated with colorful Rangoli and Muggu (floor designs).</li>
+                    <li>Cockfights and bull races are traditional in rural areas.</li>
+                  </ul>
+                  <p><b>📍 Time: January 14 - 15</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="poila.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="saras.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Dussehra</h3>
+                  <ul>
+                    <li>Celebrated with great enthusiasm, especially in Hyderabad.</li>
+                    <li>The Golconda Fort and Ujjaini Mahakali Temple host special celebrations.</li>
+                    <li>The famous Alai Balai event brings together people from all communities.</li>
+                  </ul>
+                  <p><b>📍 Time: September - October</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Nagula Chavithi</h3>
+                  <ul>
+                    <li>A festival dedicated to the worship of snakes, considered sacred in Hindu tradition.</li>
+                    <li>Women offer milk, turmeric, and flowers at snake pits and anthills.</li>
+                  </ul>
+                  <p><b>📍 Time: October - November</b></p>
+                  <h3>6. Medaram Jatara</h3>
+                  <ul>
+                    <li>One of Asia's largest tribal festivals, held biennially in Warangal district.</li>
+                    <li>Dedicated to tribal goddesses Sammakka and Saralamma.</li>
+                    <li>Attracts millions of devotees from across India.</li>
+                  </ul>
+                  <p><b>📍 Time: February (once every two years)</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="roth.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="bhai.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>7. Ugadi</h3>
+                  <ul>
+                    <li>Telugu New Year celebrated with special dishes like Ugadi Pachadi.</li>
+                    <li>People clean and decorate their homes and listen to the Panchanga (almanac) reading.</li>
+                  </ul>
+                  <p><b>📍 Time: March - April</b></p>
+                  <h3>8. Ramzan/Eid-ul-Fitr</h3>
+                  <ul>
+                    <li>Celebrated with great fervor in Hyderabad and other parts of Telangana.</li>
+                    <li>The Old City of Hyderabad comes alive with night bazaars during Ramzan.</li>
+                    <li>Special dishes include Haleem, Biryani, and various sweets.</li>
+                  </ul>
+                  <p><b>📍 Time: Based on Islamic Calendar</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>9. Deccan Festival</h3>
+                  <ul>
+                    <li>A cultural festival showcasing the art, craft, and cuisine of the Deccan region.</li>
+                    <li>Features Qawwali performances, handicraft exhibitions, and food festivals.</li>
+                    <li>Organized by the Telangana Tourism Department.</li>
+                  </ul>
+                  <p><b>📍 Time: February - March</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="nabanna.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="alla.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>10. Muharram</h3>
+                  <ul>
+                    <li>Observed with processions and rituals, particularly in Hyderabad.</li>
+                    <li>The historic Bibi-ka-Alam procession is a significant event.</li>
+                    <li>Ashurkhanas (mourning houses) are decorated and visited by people of all faiths.</li>
+                  </ul>
+                  <p><b>📍 Time: Based on Islamic Calendar</b></p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>11. Vinayaka Chavithi</h3>
+                  <ul>
+                    <li>Celebrated with the installation of Ganesh idols in homes and public places.</li>
+                    <li>The immersion processions in Hyderabad are among the largest in India.</li>
+                  </ul>
+                  <p><b>📍 Time: August - September</b></p>
+
+                  <h3>12. Christmas</h3>
+                  <ul>
+                    <li>Celebrated with enthusiasm in Hyderabad and other urban centers.</li>
+                    <li>The Medak Cathedral hosts special midnight mass services.</li>
+                  </ul>
+                  <p><b>📍 Time: December 25</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="chris.jpg" alt="" style="height:200px;width: 230px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="biswa.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>13. Lashkar Bonalu</h3>
+                  <ul>
+                    <li>A variation of Bonalu celebrated in the Secunderabad area.</li>
+                    <li>Features unique traditions associated with the military cantonment history.</li>
+                  </ul>
+                  <p><b>📍 Time: July - August</b></p>
+                  <h3>14. Sammakka Saralamma Jatara</h3>
+                  <ul>
+                    <li>One of the largest tribal festivals in Asia held in Medaram, Warangal district.</li>
+                    <li>Celebrates the valor of tribal goddesses who fought against oppression.</li>
+                  </ul>
+                  <p><b>📍 Time: February (biennial)</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Telangana's festivals are a blend of religious, cultural, and artistic celebrations, making the state one
+            of the most festive regions in India! 🎉</p><br><br>
+        </div>
+        <div id="wbfood" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Foods of Telangana</h1>
+          <p>Telangana has a rich and diverse culinary tradition that blends flavors from different regions. Telangana
+            cuisine is known for its use of spices, tamarind, and a balance of tangy and spicy flavors. Here's a look at some of the most iconic foods of Telangana:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Staple Food of Telangana</h3>
+                  <ul>
+                    <li><b>Rice:</b> The most common staple, served with curries, lentils, and vegetables.</li>
+                    <li><b>Jowar Roti (Jonna Rotte):</b> Flatbread made from sorghum flour, a staple in rural Telangana.</li>
+                  </ul>
+                  <h3>2. Telangana Breads</h3>
+                  <ul>
+                    <li><b>Sarva Pindi:</b> A savory pancake made with rice flour, peanuts, and spices.</li>
+                    <li><b>Sakinalu:</b> Ring-shaped rice crackers, especially prepared during Sankranti.</li>
+                    <li><b>Jonna Rotte:</b> Jowar flatbread, commonly eaten with curries or chutneys.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="staple.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="veg.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Famous Telangana Dishes</h3>
+                  <h4>Hyderabadi Specialties</h4>
+                  <ul>
+                    <li><b>Hyderabadi Biryani:</b> The crown jewel of Telangana cuisine, made with basmati rice, meat, and aromatic spices.</li>
+                    <li><b>Haleem:</b> A slow-cooked stew of meat, lentils, and pounded wheat, especially popular during Ramzan.</li>
+                    <li><b>Pathar ka Gosht:</b> Meat cooked on a stone slab.</li>
+                    <li><b>Double ka Meetha:</b> Bread pudding dessert with saffron and nuts.</li>
+                  </ul>
+                  <h4>Vegetarian Dishes</h4>
+                  <ul>
+                    <li><b>Sarvapindi:</b> A spicy rice flour pancake with peanuts and sesame seeds.</li>
+                    <li><b>Boti Curry:</b> A spicy curry made with vegetables or meat.</li>
+                    <li><b>Bachali Kura:</b> Malabar spinach curry with tamarind.</li>
+                    <li><b>Gutti Vankaya:</b> Stuffed eggplant curry, a Telangana specialty.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="meat.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h4>Meat Dishes</h4>
+                  <ul>
+                    <li><b>Talakaya Kura:</b> A spicy goat head curry.</li>
+                    <li><b>Pachi Pulusu:</b> A tangy tamarind soup with meat.</li>
+                    <li><b>Saoji Mutton:</b> Spicy mutton curry with distinctive flavors.</li>
+                  </ul>
+                  <h4>Dal & Accompaniments</h4>
+                  <ul>
+                    <li><b>Pappu Charu:</b> A tangy lentil soup with tamarind.</li>
+                    <li><b>Gongura Pachadi:</b> Tangy chutney made from sorrel leaves, a Telangana specialty.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>4. Telangana Sweets & Desserts</h3>
+                  <ul>
+                    <li><b>Qubani ka Meetha:</b> Apricot dessert served with cream, a Hyderabadi specialty.</li>
+                    <li><b>Double ka Meetha:</b> Bread pudding with saffron and nuts.</li>
+                    <li><b>Gil-e-Firdaus:</b> A rich dessert made with milk, khoya, and fruits.</li>
+                    <li><b>Jouzi Halwa:</b> Nutmeg-flavored halwa, a royal Hyderabadi dessert.</li>
+                    <li><b>Garijalu:</b> Sweet dumplings filled with coconut and jaggery.</li>
+                  </ul>
+
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="rosso.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="phuchka.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>5. Street Food of Telangana</h3>
+                  <ul>
+                    <li><b>Irani Chai & Osmania Biscuits:</b> A popular tea-time combination in Hyderabad.</li>
+                    <li><b>Lukhmi:</b> A savory pastry filled with minced meat.</li>
+                    <li><b>Dil Pasand:</b> Sweet puff pastry with nuts and khoya.</li>
+                    <li><b>Mirchi Bajji:</b> Stuffed chili fritters, a popular street snack.</li>
+                    <li><b>Punugulu:</b> Deep-fried rice and lentil batter balls, served with chutney.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>6. Famous Drinks</h3>
+                  <ul>
+                    <li><b>Irani Chai:</b> Strong tea with milk, served in Irani cafes across Hyderabad.</li>
+                    <li><b>Sheer Khurma:</b> A festive milk drink with vermicelli and dates.</li>
+                    <li><b>Lassi:</b> Yogurt-based drink, both sweet and salted versions are popular.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="tea.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Special Festival Foods</h3>
+                  <ul>
+                    <li><b>Sakinalu:</b> Rice crackers made during Sankranti festival.</li>
+                    <li><b>Garelu:</b> Lentil fritters prepared during Bathukamma.</li>
+                    <li><b>Paramannam:</b> Sweet rice pudding made during festivals and celebrations.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="pithe.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Telangana's cuisine is a mix of rich flavors, spicy curries, and iconic street foods, making it one of
+            the most delicious regional cuisines in India! 🍛🍖🍬</p><br><br>
+        </div>
+        <div id="wbhistory" class="tab-pane fade in active" style="background-color: white;">
+          <h1>History of Telangana</h1>
+          <p>Telangana has a rich and diverse history that spans ancient civilizations, medieval kingdoms, Nizam rule, 
+            and the modern era. The region has played a significant role in India's political, cultural,
+            and intellectual history.</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Ancient Telangana (Before 6th Century CE)</h3>
+                  <ul>
+                    <li><b>Prehistoric Period:</b> Archaeological evidence at sites like Nagarjunakonda shows human habitation dating back to 10,000 BCE.</li>
+                    <li><b>Satavahana Empire (230 BCE - 220 CE):</b> Ruled from their capital at Amaravati, they were patrons of Buddhism and trade.</li>
+                    <li><b>Ikshvaku Dynasty (225 CE - 325 CE):</b> Successors to the Satavahanas, known for Buddhist monuments.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="maurya.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="pala.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Medieval Telangana (6th - 16th Century)</h3>
+                  <h4>Chalukya Dynasty (6th - 12th Century):</h4>
+                  <ul>
+                    <li>The Eastern Chalukyas ruled parts of Telangana and were patrons of art and architecture.</li>
+                    <li>Built temples and promoted Telugu literature.</li>
+                  </ul>
+                  <h4>Kakatiya Dynasty (1083 - 1323):</h4>
+                  <ul>
+                    <li>Golden age of Telangana with Warangal as their capital.</li>
+                    <li>Built magnificent temples, tanks, and forts like the Thousand Pillar Temple and Warangal Fort.</li>
+                    <li>Queen Rudrama Devi, one of India's few female rulers, led the kingdom during this period.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="delhi.png" alt="" style="height:220px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h4>Delhi Sultanate Rule (1323 - 1347):</h4>
+                  <ul>
+                    <li>Alauddin Khilji's general Malik Kafur invaded and defeated the Kakatiyas.</li>
+                    <li>The region came under the Delhi Sultanate's control.</li>
+                  </ul>
+                  <h4>Bahmani Sultanate (1347 - 1518):</h4>
+                  <ul>
+                    <li>Broke away from the Delhi Sultanate and established an independent kingdom.</li>
+                    <li>Promoted Persian culture and architecture in the Deccan.</li>
+                  </ul>
+                  <h4>Qutb Shahi Dynasty (1518 - 1687):</h4>
+                  <ul>
+                    <li>Founded Hyderabad in 1591 around the Charminar.</li>
+                    <li>Promoted a syncretic culture blending Persian, Telugu, and local traditions.</li>
+                    <li>Built monuments like Golconda Fort, Charminar, and Qutb Shahi Tombs.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Mughal & Asaf Jahi Rule (1687 - 1948)</h3>
+                  <ul>
+                    <li>Aurangzeb conquered the Qutb Shahi kingdom in 1687, bringing it under Mughal control.</li>
+                    <li>Asaf Jah I, a Mughal governor, established the Asaf Jahi dynasty (Nizams) in 1724.</li>
+                    <li>The Nizams ruled Hyderabad State, which included Telangana, as a princely state.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="mughal.jpg" alt="" style="height:200px;width: 250px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="plassey.jpg" alt="" style="height:230px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h2>4. British Colonial Influence & Nizam Rule (1798 - 1948)</h3>
+                    <h3>Subsidiary Alliance</h3>
+                    <ul>
+                      <li>The Nizam signed a subsidiary alliance with the British East India Company in 1798.</li>
+                      <li>While maintaining nominal independence, the Nizams were under British influence.</li>
+                    </ul>
+                    <h3>Nizam's Dominions</h3>
+                    <ul>
+                      <li>Hyderabad State became the largest princely state in British India.</li>
+                      <li>The Nizams were among the wealthiest people in the world.</li>
+                    </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="rammohan.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>Peasant Revolts & Freedom Movement</h3>
+                  <ul>
+                    <li><b>Telangana Peasant Armed Struggle (1946-1951):</b></li>
+                    <ul>
+                      <li>One of the largest peasant movements against feudal landlords and the Nizam's rule.</li>
+                      <li>Led by Communist Party of India against the oppressive Jagirdari system.</li>
+                    </ul>
+                    <li><b>Anti-Nizam Movements:</b></li>
+                    <ul>
+                      <li>Andhra Mahasabha and other organizations fought for civil liberties and democratic rights.</li>
+                      <li>The Hyderabad State Congress led movements against the Nizam's autocratic rule.</li>
+                    </ul>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="netaji.jpg" alt="" style="height:230px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>Operation Polo & Integration with India</h3>
+                  <ul>
+                    <li>After India's independence in 1947, the Nizam refused to join either India or Pakistan.</li>
+                    <li>The Indian Army conducted "Operation Polo" in September 1948 to integrate Hyderabad State into India.</li>
+                    <li>Hyderabad State was officially merged with the Indian Union on September 17, 1948.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Post-Independence & Formation of Telangana (1948 - Present)</h3>
+                  <h4>States Reorganization</h4>
+                  <ul>
+                    <li>In 1956, the States Reorganization Act merged Telangana with Andhra State to form Andhra Pradesh.</li>
+                    <li>The merger included safeguards for Telangana known as the "Gentlemen's Agreement."</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="part.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h4>Telangana Movement</h4>
+                  <ul>
+                    <li><b>1969 Movement:</b> First major agitation for a separate Telangana state.</li>
+                    <li><b>2000s Revival:</b> K. Chandrashekar Rao formed the Telangana Rashtra Samithi (TRS) in 2001 to fight for statehood.</li>
+                    <li><b>2009-2014:</b> Intensified movement with protests, strikes, and political pressure.</li>
+                  </ul>
+                  <h4>Formation of Telangana State</h4>
+                  <ul>
+                    <li>On June 2, 2014, Telangana was officially formed as the 29th state of India.</li>
+                    <li>K. Chandrashekar Rao became the first Chief Minister of the new state.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="part1.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>6. Present-Day Telangana</h3>
+                  <ul>
+                    <li><b>IT Hub of India:</b> Hyderabad is a major center for information technology and pharmaceuticals.</li>
+                    <li><b>Economic Growth:</b> Focus on irrigation projects, agriculture, and industrial development.</li>
+                    <li><b>Tourist Attractions:</b> Charminar, Golconda Fort, Ramoji Film City, Warangal Fort, and numerous temples and lakes.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="present.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Telangana has witnessed ancient empires, Islamic rule, Nizam governance, integration with India, and finally the formation of a separate state. It remains a center of culture, education, technology, and politics in India. 🚩📜</p>
+          <br><br>
+        </div>
+        <div id="wbartacraft" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Art & Craft of Telangana 🎨🖌️</h1>
+          <p>Telangana has a rich artistic heritage, blending traditional craftsmanship with cultural influences from Hindu, Islamic, and local tribal traditions. Telangana artisans are known for their intricate craftsmanship, storytelling through art, and diverse materials like metal, wood, cloth, and clay.</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Bidriware 🏺</h3>
+                  <h4>🔸 Bidri Craft</h4>
+                  <ul>
+                    <li><b>Famous for:</b> Metal handicraft with silver inlay work on a blackened alloy of zinc and copper.</li>
+                    <li><b>Where?</b> Hyderabad region.</li>
+                    <li><b>Used in:</b> Decorative items, jewelry boxes, vases, and hookah bases.</li>
+                  </ul>
+                  <h4>🔸 Metal & Brass Work</h4>
+                  <ul>
+                    <li><b>Pembarthi Metal Craft:</b> Sheet metal work with intricate designs used for temple decorations and household items.</li>
+                    <li><b>Dokra Metal Casting:</b> Ancient lost-wax technique used by tribal artisans to create figurines and jewelry.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="tera.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="textile.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Textile & Weaving 🧵</h3>
+                  <h4>🔸 Pochampally Ikat</h4>
+                  <ul>
+                    <li><b>Origin:</b> Pochampally village, Yadadri Bhuvanagiri district.</li>
+                    <li><b>Features:</b> Geometric patterns created by resist-dyeing the threads before weaving.</li>
+                  </ul>
+                  <h4>🔸 Gadwal Sarees</h4>
+                  <ul>
+                    <li><b>Origin:</b> Gadwal, Jogulamba Gadwal district.</li>
+                    <li><b>Features:</b> Cotton body with silk borders and pallu, intricate temple designs.</li>
+                  </ul>
+                  <h4>🔸 Narayanpet Sarees</h4>
+                  <ul>
+                    <li><b>Origin:</b> Narayanpet, Mahbubnagar district.</li>
+                    <li><b>Features:</b> Distinctive borders with temple designs and traditional motifs.</li>
+                  </ul>
+                  <h4>🔸 Gollabhama Sarees</h4>
+                  <ul>
+                    <li><b>Origin:</b> Siddipet district.</li>
+                    <li><b>Features:</b> Depictions of local women (Gollabhama) in traditional attire.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Nirmal Paintings & Crafts 🎨</h3>
+                  <ul>
+                    <li><b>Origin:</b> Nirmal town, Adilabad district.</li>
+                    <li><b>Style:</b> Paintings on wood with vegetable dyes and gold highlighting.</li>
+                    <li><b>Designs:</b> Mythological scenes, nature, and Mughal-inspired themes.</li>
+                    <li><b>Products:</b> Paintings, furniture, toys, and decorative items.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="dokra.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="gomira.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Wooden Crafts & Toys 🌳</h3>
+                  <h4>🔸 Nirmal Toys</h4>
+                  <ul>
+                    <li><b>Origin:</b> Nirmal, Adilabad district.</li>
+                    <li><b>Features:</b> Soft wood toys with vibrant colors and lacquer coating.</li>
+                  </ul>
+                  <h4>🔸 Etikoppaka Toys</h4>
+                  <ul>
+                    <li><b>Origin:</b> Influenced by neighboring Andhra Pradesh.</li>
+                    <li><b>Features:</b> Turned wood toys with natural dyes.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Cheriyal Scroll Painting 🎨</h3>
+                  <ul>
+                    <li><b>Origin:</b> Cheriyal village, Warangal district.</li>
+                    <li><b>Style:</b> Narrative scroll paintings depicting mythological stories, folk tales, and epics.</li>
+                    <li><b>Features:</b> Bright colors, stylized figures, and sequential storytelling format.</li>
+                    <li><b>Traditional Use:</b> Used by storytellers (Kaki Padagollu) who would sing and narrate stories using these scrolls.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="potochitra.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="kalighat.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>6. Tribal Art & Craft 🖌️</h3>
+                  <ul>
+                    <li><b>Gond Art:</b> Vibrant paintings with natural colors by Gond tribes of Adilabad.</li>
+                    <li><b>Telia Rumal:</b> Traditional tie-dye textile with oil treatment, used by the Andhra-Karnataka border tribes.</li>
+                  </ul>
+                  <h3>7. Stone Carving & Sculpture 🗿</h3>
+                  <ul>
+                    <li><b>Location:</b> Warangal and surrounding areas.</li>
+                    <li><b>Heritage:</b> Continues the tradition of Kakatiya stone sculptures and temple carvings.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>8. Banjara Embroidery & Textiles 🧵</h3>
+                  <ul>
+                    <li><b>Origin:</b> Banjara tribal communities across Telangana.</li>
+                    <li><b>Features:</b> Vibrant mirror work, appliqué, and embroidery on fabrics.</li>
+                    <li><b>Products:</b> Traditional clothing, bags, home decor, and accessories.</li>
+                  </ul>
+                  <h3>9. Lacquer Bangles 💍</h3>
+                  <ul>
+                    <li><b>Origin:</b> Hyderabad, especially Laad Bazaar near Charminar.</li>
+                    <li><b>Features:</b> Colorful lac bangles adorned with stones, mirrors, and intricate designs.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="jute.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>📌 Summary: Telangana's Art & Craft Forms</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Art Form</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Bidriware</td>
+                <td>Hyderabad</td>
+                <td>Silver inlay work on blackened metal</td>
+              </tr>
+              <tr>
+                <td>Pochampally Ikat</td>
+                <td>Pochampally, Yadadri Bhuvanagiri</td>
+                <td>Geometric patterns on handwoven textiles</td>
+              </tr>
+              <tr>
+                <td>Nirmal Paintings</td>
+                <td>Nirmal, Adilabad</td>
+                <td>Paintings on wood with gold highlighting</td>
+              </tr>
+              <tr>
+                <td>Cheriyal Scroll Painting</td>
+                <td>Cheriyal, Warangal</td>
+                <td>Narrative scroll paintings for storytelling</td>
+              </tr>
+              <tr>
+                <td>Pembarthi Metal Craft</td>
+                <td>Pembarthi, Warangal</td>
+                <td>Sheet metal work with intricate designs</td>
+              </tr>
+              <tr>
+                <td>Gadwal Sarees</td>
+                <td>Gadwal, Jogulamba</td>
+                <td>Cotton body with silk borders</td>
+              </tr>
+              <tr>
+                <td>Dokra Metal Casting</td>
+                <td>Tribal areas of Adilabad</td>
+                <td>Lost-wax casting technique</td>
+              </tr>
+              <tr>
+                <td>Banjara Embroidery</td>
+                <td>Tribal areas across Telangana</td>
+                <td>Mirror work and vibrant embroidery</td>
+              </tr>
+              <tr>
+                <td>Lacquer Bangles</td>
+                <td>Hyderabad (Laad Bazaar)</td>
+                <td>Colorful lac bangles with stone work</td>
+              </tr>
+              <tr>
+                <td>Narayanpet Sarees</td>
+                <td>Narayanpet, Mahbubnagar</td>
+                <td>Temple border designs</td>
+              </tr>
+              <tr>
+                <td>Gond Art</td>
+                <td>Adilabad</td>
+                <td>Tribal paintings with natural colors</td>
+              </tr>
+              <tr>
+                <td>Stone Carving</td>
+                <td>Warangal</td>
+                <td>Sculptures in Kakatiya tradition</td>
+              </tr>
+            </table>
+          </div>
+          <br><br>
+          <p>Telangana's art and crafts are a blend of history, culture, and traditional skills, passed down through
+            generations. Whether it's the elegant Pochampally Ikat sarees, intricate Bidriware, or the narrative Cheriyal scrolls, Telangana's artisans continue to preserve and innovate their heritage. 🎭✨</p>
+          <br><br>
+        </div>
+        <div id="wbseason" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Seasons to visit Telangana 🌧️☀️ </h1>
+          <p>Telangana has a tropical climate with distinct seasons that influence the best times to visit different parts of the state. The region experiences hot summers, moderate monsoons, and pleasant winters.</p>
+
+          <br><br>
+
+          <h2> Season-wise Breakdown for Visiting Telangana</h2>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🌸 Spring (February - March)</h3>
+                  <ul>
+                    <li>Pleasant weather with temperatures ranging from 18°C to 35°C.</li>
+                    <li>Ideal for exploring Hyderabad's monuments and museums.</li>
+                    <li>Bathukamma and other spring festivals add cultural charm.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="spring.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="summer.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>☀️ Summer (April – June)</h3>
+                  <ul>
+                    <li>Very hot with temperatures often exceeding 40°C, especially in May.</li>
+                    <li>Best to visit hill stations like Ananthagiri Hills and water bodies like Nagarjuna Sagar.</li>
+                    <li>Indoor attractions like museums and shopping malls are good options.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🌧️ Monsoon (July - September)</h3>
+                  <ul>
+                    <li>Moderate rainfall makes the landscape lush and green.</li>
+                    <li>Waterfalls like Kuntala and Pochera are at their best.</li>
+                    <li>Bonalu festival is celebrated during this season.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="rain.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="autmn.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🍁 Autumn (October - November)</h3>
+                  <ul>
+                    <li>One of the best seasons to visit with pleasant temperatures.</li>
+                    <li>Ideal for exploring Hyderabad, Warangal, and other historical sites.</li>
+                    <li>Bathukamma and Diwali festivals add cultural vibrancy.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>❄️ Winter (December - January)</h3>
+                  <ul>
+                    <li>Pleasant and cool with temperatures ranging from 10°C to 28°C.</li>
+                    <li>Perfect for sightseeing across the state.</li>
+                    <li>Ideal for outdoor activities and exploring wildlife sanctuaries.</li>
+                    <li>Christmas celebrations in Hyderabad and the Deccan Festival are highlights.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="winter.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>📌 Summary: Best Time to Visit Different Places in Telangana</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Region</th>
+                <th>Best Season</th>
+                <th>Recommended Months</th>
+                <th>Why Visit?</th>
+              </tr>
+              <tr>
+                <td>Hyderabad</td>
+                <td>Winter, Autumn</td>
+                <td>October - February</td>
+                <td>Pleasant weather, festivals, historical monuments, shopping</td>
+              </tr>
+              <tr>
+                <td>Warangal</td>
+                <td>Winter, Autumn</td>
+                <td>October - February</td>
+                <td>Kakatiya monuments, Thousand Pillar Temple, Warangal Fort</td>
+              </tr>
+              <tr>
+                <td>Adilabad & Tribal Areas</td>
+                <td>Winter</td>
+                <td>November - February</td>
+                <td>Tribal culture, Kuntala Waterfalls, Kawal Tiger Reserve</td>
+              </tr>
+              <tr>
+                <td>Nagarjuna Sagar</td>
+                <td>Monsoon, Winter</td>
+                <td>August - February</td>
+                <td>Dam at full capacity, Buddhist sites, boat rides</td>
+              </tr>
+              <tr>
+                <td>Nizamabad</td>
+                <td>Winter</td>
+                <td>November - February</td>
+                <td>Nizamabad Fort, Pocharam Wildlife Sanctuary</td>
+              </tr>
+              <tr>
+                <td>Karimnagar</td>
+                <td>Winter</td>
+                <td>November - February</td>
+                <td>Lower Manair Dam, temples, handicrafts</td>
+              </tr>
+              <tr>
+                <td>Khammam</td>
+                <td>Winter</td>
+                <td>November - February</td>
+                <td>Bhadrachalam Temple, Kinnerasani Wildlife Sanctuary</td>
+              </tr>
+              <tr>
+                <td>Ananthagiri Hills</td>
+                <td>Monsoon, Winter</td>
+                <td>July - February</td>
+                <td>Lush greenery, trekking, Anantha Padmanabha Temple</td>
+              </tr>
+              <tr>
+                <td>Medak</td>
+                <td>Winter</td>
+                <td>November - February</td>
+                <td>Medak Cathedral, Pocharam Wildlife Sanctuary</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="container">
+            <div class="row">
+              <h1 style=" text-align: center;">📌 Summary: When to Visit Telangana</h1><br>
+              <ul>
+                <li><b>For festivals & cultural experiences:</b> September - November (Bathukamma, Bonalu, Diwali)</li>
+                <li><b>For historical sites & monuments:</b> October - February (Hyderabad, Warangal, Nizamabad)</li>
+                <li><b>For wildlife & nature:</b> November - February (Kawal, Kinnerasani, Pocharam)</li>
+                <li><b>For waterfalls & scenic beauty:</b> July - September (Kuntala, Pochera, Ananthagiri)</li>
+                <li><b>For tribal culture & crafts:</b> November - February (Adilabad, Nirmal)</li>
+              </ul>
+
+            </div>
+          </div>
+          <br><br>
+        </div>
+        <div id="wbtourist" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Tourist Spots of Telangana 🏛️🏞️</h1>
+          <p>Telangana is a diverse state with historical monuments, lakes, temples, forts, and cultural hubs. Here's
+            a categorized list of the best tourist places in Telangana:</p>
+
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Historical Monuments & Heritage Sites 🏛️</h3>
+                  <ul>
+                    <li><b>Charminar -</b> The iconic symbol of Hyderabad, built in 1591</li>
+                    <li><b>Golconda Fort -</b> Magnificent fort known for its acoustic effects and diamond mining history</li>
+                    <li><b>Qutb Shahi Tombs -</b> Elegant tombs of the Qutb Shahi dynasty rulers</li>
+                    <li><b>Warangal Fort -</b> Kakatiya-era fort with impressive stone gateways</li>
+                    <li><b>Thousand Pillar Temple -</b> 12th-century temple with exquisite carvings in Hanamkonda</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="darj.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="biswagate.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Religious & Spiritual Destinations ⛩️</h3>
+                  <ul>
+                    <li><b>Bhadrachalam Temple -</b> Sacred Rama temple on the banks of the Godavari River</li>
+                    <li><b>Yadadri Temple -</b> Ancient hilltop temple dedicated to Lord Narasimha</li>
+                    <li><b>Medak Cathedral -</b> Second largest diocese in Asia with beautiful stained glass windows</li>
+                    <li><b>Mecca Masjid -</b> One of India's largest mosques, located near Charminar</li>
+                    <li><b>Kolanupaka Jain Temple -</b> Ancient Jain temple with marble idols</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Lakes & Waterscapes 🏞️</h3>
+                  <ul>
+                    <li><b>Hussain Sagar -</b> Heart-shaped lake with a giant Buddha statue in the center, located in Hyderabad</li>
+                    <li><b>Osman Sagar -</b> Scenic lake and reservoir with boating facilities</li>
+                    <li><b>Nagarjuna Sagar -</b> One of the world's largest masonry dams with boat rides to Buddhist sites</li>
+                    <li><b>Pakhal Lake -</b> Serene lake surrounded by forests in Warangal district</li>
+                    <li><b>Laknavaram Lake -</b> Beautiful lake with hanging bridge and island in Warangal</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="sundar.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="digha.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Waterfalls & Hill Stations 🏔️</h3>
+                  <ul>
+                    <li><b>Kuntala Waterfall -</b> Highest waterfall in Telangana, located in Adilabad district</li>
+                    <li><b>Pochera Waterfall -</b> Picturesque waterfall on the Godavari River</li>
+                    <li><b>Ananthagiri Hills -</b> Scenic hills with ancient temples and trekking trails</li>
+                    <li><b>Bogatha Waterfall -</b> Known as "Telangana's Niagara" in Khammam district</li>
+                    <li><b>Mallaram Forest -</b> Dense forest area with natural springs and wildlife</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Wildlife & Nature Destinations 🌳</h3>
+                  <ul>
+                    <li><b>Kawal Tiger Reserve -</b> Tiger sanctuary with diverse flora and fauna</li>
+                    <li><b>Kinnerasani Wildlife Sanctuary -</b> Rich biodiversity with a beautiful reservoir</li>
+                    <li><b>Pocharam Wildlife Sanctuary -</b> Home to deer, wild boar, and various bird species</li>
+                    <li><b>Eturnagaram Wildlife Sanctuary -</b> Tribal area with rich wildlife and cultural heritage</li>
+                    <li><b>Manjira Wildlife Sanctuary -</b> Bird sanctuary with crocodiles and marsh ecosystem</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="dak.png" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="ajhills.png" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>6. Modern Attractions & Entertainment 🎢</h3>
+                  <ul>
+                    <li><b>Ramoji Film City -</b> World's largest film studio complex with tours and attractions</li>
+                    <li><b>Salar Jung Museum -</b> One of India's largest museums with artifacts from around the world</li>
+                    <li><b>Birla Mandir -</b> Marble temple with panoramic views of Hyderabad</li>
+                    <li><b>Lumbini Park -</b> Recreational park with laser shows and boating</li>
+                    <li><b>Snow World -</b> Indoor snow theme park in Hyderabad</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Shopping & Cultural Hotspots 🛍️</h3>
+                  <ul>
+                    <li><b>Laad Bazaar -</b> Famous market near Charminar known for bangles and pearls</li>
+                    <li><b>Shilparamam -</b> Arts and crafts village showcasing traditional handicrafts</li>
+                    <li><b>Pochampally Village -</b> Famous for handloom textiles and Ikat sarees</li>
+                    <li><b>Nirmal -</b> Known for its traditional paintings and wooden toys</li>
+                    <li><b>Gadwal -</b> Famous for its unique handloom sarees</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="kumar.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br><br>
+
+        </div>
+        <div id="wbwild" class="tab-pane fade in active" style="background-color: white;">
+          <h1> Wildlife & Crops of Telangana 🌿</h1>
+          <p>Telangana has diverse wildlife and a rich agricultural landscape due to its varied geography, from the Deccan plateau to the river valleys of the Godavari and Krishna.</p>
+
+          <br>
+          <h2>Wildlife of Telangana </h2>
+          <p>Telangana has 9 wildlife sanctuaries and 3 national parks, making it an important state for biodiversity conservation in central India.</p>
+
+          <br>
+          <h2>🔹 Major National Parks & Wildlife Sanctuaries</h2>
+          <div>
+            <table>
+              <tr>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Kawal Tiger Reserve</td>
+                <td>Adilabad</td>
+                <td>Tigers 🐅, Nilgai, Sloth Bears 🐻, Diverse Bird Species</td>
+              </tr>
+              <tr>
+                <td>Amrabad Tiger Reserve</td>
+                <td>Nagarkurnool</td>
+                <td>Tigers, Leopards 🐆, Diverse Flora</td>
+              </tr>
+              <tr>
+                <td>Kinnerasani Wildlife Sanctuary</td>
+                <td>Bhadradri Kothagudem</td>
+                <td>Marsh Crocodiles 🐊, Deer, Peacocks 🦚</td>
+              </tr>
+              <tr>
+                <td>Pocharam Wildlife Sanctuary</td>
+                <td>Medak</td>
+                <td>Deer 🦌, Wild Boar, Migratory Birds</td>
+              </tr>
+              <tr>
+                <td>Manjira Wildlife Sanctuary</td>
+                <td>Sangareddy</td>
+                <td>Marsh Crocodiles, Aquatic Birds</td>
+              </tr>
+              <tr>
+                <td>Eturnagaram Wildlife Sanctuary</td>
+                <td>Mulugu</td>
+                <td>Sambar Deer, Chital, Tribal Culture</td>
+              </tr>
+              <tr>
+                <td>Pakhal Wildlife Sanctuary</td>
+                <td>Warangal</td>
+                <td>Leopards, Sloth Bears, Pakhal Lake</td>
+              </tr>
+            </table>
+          </div>
+          <bt><br></bt>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3> 🔹 Other Notable Wildlife in Telangana</h3>
+                <ul>
+                  <li><b>Mammals:</b> Spotted Deer (State Animal), Blackbuck, Nilgai, Wild Boar, Sloth Bear.</li>
+                  <li><b>Birds:</b> Indian Roller (State Bird), Peacocks, Egrets, Herons, Kingfishers.</li>
+                  <li><b>Reptiles:</b> Marsh Crocodiles, Monitor Lizards, Various Snake Species.</li>
+                  <li><b>Aquatic Life:</b> Various Fish Species in the Godavari and Krishna Rivers.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="ele.jpg" alt="" style="height:200px;width: 200px;">
+
+              </div>
+
+            </div>
+          </div>
+          <hr><br>
+          <h2>🌾 Agriculture & Major Crops in Telangana </h2>
+          <p>Telangana is an important agricultural state, producing a variety of cereals, pulses, vegetables, fruits, and spices. Agriculture employs about 55% of the state's workforce.</p>
+
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Key Agricultural Features</h3>
+                <ul>
+                  <li>Major producer of Cotton, Rice, Maize, and Pulses in India.</li>
+                  <li><b>Irrigation Projects:</b> Kaleshwaram Lift Irrigation Project, Mission Kakatiya for tank restoration.</li>
+                  <li><b>Climate:</b> Supports both Kharif & Rabi crops.</li>
+                  <li><b>Irrigation:</b> Godavari, Krishna, and Manjira rivers support farming.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="jutep.jpg" alt="" style="height:200px;width: 220px;">
+
+              </div>
+            </div>
+          </div>
+          <h2>🔹 Major Crops of Telangana</h2>
+          <div>
+            <table>
+              <tr>
+                <th>Category</th>
+                <th>Crops</th>
+              </tr>
+              <tr>
+                <td>Cereals</td>
+                <td>Rice 🍚, Jowar (Sorghum), Maize 🌽, Wheat 🌾</td>
+              </tr>
+              <tr>
+                <td>Cash Crops</td>
+                <td>Cotton, Sugarcane, Tobacco</td>
+              </tr>
+              <tr>
+                <td>Pulses</td>
+                <td>Red Gram, Green Gram, Black Gram, Bengal Gram</td>
+              </tr>
+              <tr>
+                <td>Vegetables</td>
+                <td>Tomatoes 🍅, Brinjal, Okra, Chillies 🌶️, Onions 🧅</td>
+              </tr>
+              <tr>
+                <td>Fruits</td>
+                <td>Mangoes 🥭, Oranges 🍊, Guavas, Bananas 🍌, Grapes 🍇</td>
+              </tr>
+              <tr>
+                <td>Oilseeds</td>
+                <td>Groundnut, Sunflower 🌻, Sesame, Castor</td>
+              </tr>
+              <tr>
+                <td>Spices</td>
+                <td>Turmeric, Chillies 🌶️, Coriander</td>
+              </tr>
+              <tr>
+                <td>Flowers</td>
+                <td>Marigold, Chrysanthemum, Rose 🌹 (Used in Bathukamma festival)</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Special Agricultural Products</h3>
+                <ul>
+                  <li>Nizamabad Turmeric (GI-tagged).</li>
+                  <li>Adilabad Cotton (Known for its quality).</li>
+                  <li>Karimnagar's Sona Masuri Rice (Premium rice variety).</li>
+                  <li>Telangana Sona Rice (Developed specifically for the state).</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="mango.jpg" alt="" style="height:200px;width: 200px;">
+
+              </div>
+            </div>
+          </div><br>
+          <hr>
+          <div class="box" style=" background: #f3b37185;padding: 10px;">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3> Sustainable Agriculture & Modern Trends 🌾</h3>
+                  <ul>
+                    <li><b>Organic Farming:</b> Growing in Adilabad, Nizamabad, and other districts.</li>
+                    <li><b>Precision Farming:</b> Use of technology for better crop yield and water management.</li>
+                    <li><b>Aquaculture & Fisheries:</b> Developing sector in reservoirs and tanks across the state.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="teag.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Telangana is a paradise for both nature lovers and agricultural enthusiasts. It has rich wildlife
+            sanctuaries, diverse ecosystems, and fertile farmlands that support a diverse ecosystem and economy.</p>
+          <br><br>
+        </div>
+        <div id="wbedu" class="tab-pane fade in active" style="background-color: white;">
+          <h1>🎓 Education & Institutions in Telangana</h1>
+          <p>Telangana has a rich educational heritage with some of India's prestigious universities,
+            research institutions, and schools. It is a major hub for higher education, science, technology, and IT training.</p>
+
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>📌 Education System in Telangana</h3>
+                  <ul>
+                    <li><b>School Education:</b> Follows Telangana State Board of Secondary Education, CBSE, ICSE, and
+                      International Boards.</li>
+                    <li><b>Higher Education:</b> Managed by UGC, AICTE, and state universities.</li>
+                    <li><b>Major Fields:</b> Engineering, Medical, Science, Arts, Commerce, Law, Agriculture, and
+                      Management.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="wbbse.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>🏛️ Top Universities & Institutions </h2>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Central Universities</h3>
+                <ol>
+                  <li><b>University of Hyderabad -</b> A premier institution ranked among the top universities in India.</li>
+                  <li><b>English and Foreign Languages University (EFLU) -</b> Specializes in language education and research.</li>
+                  <li><b>Maulana Azad National Urdu University -</b> Promotes Urdu language and education.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="visva.jpg" alt="" style="height:200px;width: 230px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 State Universities</h3>
+                <ol>
+                  <li><b>Osmania University -</b> Established in 1918, one of India's oldest and most prestigious
+                    universities.</li>
+                  <li><b>Kakatiya University -</b> Major university in Warangal for arts, science, and commerce.</li>
+                  <li><b>Jawaharlal Nehru Technological University Hyderabad (JNTUH) -</b> Premier technical university
+                    governing engineering education.</li>
+                  <li><b>Telangana University -</b> Located in Nizamabad, focuses on rural development and regional needs.</li>
+                  <li><b>Palamuru University -</b> Serves the educational needs of Mahabubnagar region.</li>
+                  <li><b>Satavahana University -</b> Located in Karimnagar, focuses on regional development.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="jadav.png" alt="" style="height:200px;width: 230px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>University</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>University of Hyderabad</td>
+                <td>Hyderabad</td>
+                <td>Research excellence, Sciences, Humanities, and Social Sciences.</td>
+              </tr>
+              <tr>
+                <td>Osmania University</td>
+                <td>Hyderabad</td>
+                <td>One of India's oldest universities, comprehensive education.</td>
+              </tr>
+              <tr>
+                <td>JNTUH</td>
+                <td>Hyderabad</td>
+                <td>Technical education, Engineering, and Technology.</td>
+              </tr>
+              <tr>
+                <td>EFLU</td>
+                <td>Hyderabad</td>
+                <td>Language studies, Linguistics, and Translation studies.</td>
+              </tr>
+              <tr>
+                <td>IIIT Hyderabad</td>
+                <td>Hyderabad</td>
+                <td>Computer Science, IT research, and Artificial Intelligence.</td>
+              </tr>
+              <tr>
+                <td>ISB Hyderabad</td>
+                <td>Hyderabad</td>
+                <td>World-class business education and leadership development.</td>
+              </tr>
+              <tr>
+                <td>NALSAR</td>
+                <td>Hyderabad</td>
+                <td>Legal education and research, consistently top-ranked.</td>
+              </tr>
+              <tr>
+                <td>Kakatiya University</td>
+                <td>Warangal</td>
+                <td>Arts, Science, and Commerce education in northern Telangana.</td>
+              </tr>
+              <tr>
+                <td>PJTSAU</td>
+                <td>Hyderabad</td>
+                <td>Agricultural education and research.</td>
+              </tr>
+            </table>
+          </div>
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="iitkgp.jpg" alt="" style="height:200px;width: 240px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🔹 IITs, IIMs & Other Premier Institutes</h3>
+                  <ol>
+                    <li><b>Indian Institute of Technology (IIT) Hyderabad -</b> One of India's premier engineering institutes.</li>
+                    <li><b>Indian School of Business (ISB) -</b> World-renowned business school with global rankings.</li>
+                    <li><b>International Institute of Information Technology (IIIT) Hyderabad -</b> Leading in computer science and IT research.</li>
+                    <li><b>National Institute of Fashion Technology (NIFT) -</b> Premier fashion design institute.</li>
+                    <li><b>National Academy of Legal Studies and Research (NALSAR) -</b> Top-ranked law university.</li>
+                  </ol>
+                </div>
+
+                <br><br>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Institute</th>
+                <th>Location</th>
+                <th>Specialization</th>
+              </tr>
+              <tr>
+                <td>IIT Hyderabad</td>
+                <td>Sangareddy</td>
+                <td>Engineering, Technology, and Research.</td>
+              </tr>
+              <tr>
+                <td>BITS Pilani Hyderabad Campus</td>
+                <td>Hyderabad</td>
+                <td>Engineering and Technology education.</td>
+              </tr>
+              <tr>
+                <td>IIIT Hyderabad</td>
+                <td>Hyderabad</td>
+                <td>Computer Science, IT, and AI research.</td>
+              </tr>
+              <tr>
+                <td>Chaitanya Bharathi Institute of Technology</td>
+                <td>Hyderabad</td>
+                <td>Engineering education and research.</td>
+              </tr>
+              <tr>
+                <td>Vasavi College of Engineering</td>
+                <td>Hyderabad</td>
+                <td>Quality engineering education.</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🔹 Medical Colleges</h3>
+                  <ol>
+                    <li><b>Osmania Medical College -</b> One of the oldest medical colleges in India.</li>
+                    <li><b>Gandhi Medical College -</b> Premier medical institution with extensive clinical facilities.</li>
+                    <li><b>Kakatiya Medical College -</b> Major medical college in Warangal.</li>
+                    <li><b>Nizam's Institute of Medical Sciences (NIMS) -</b> Super-specialty hospital and research center.</li>
+                  </ol>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="calmed.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Medical College</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Osmania Medical College</td>
+                <td>Hyderabad</td>
+                <td>One of the oldest medical colleges in India.</td>
+              </tr>
+              <tr>
+                <td>Gandhi Medical College</td>
+                <td>Hyderabad</td>
+                <td>Comprehensive medical education and research.</td>
+              </tr>
+              <tr>
+                <td>Kakatiya Medical College</td>
+                <td>Warangal</td>
+                <td>Medical education in northern Telangana.</td>
+              </tr>
+              <tr>
+                <td>NIMS</td>
+                <td>Hyderabad</td>
+                <td>Super-specialty care and advanced medical research.</td>
+              </tr>
+              <tr>
+                <td>ESIC Medical College</td>
+                <td>Hyderabad</td>
+                <td>Medical education with focus on industrial health.</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="bckv.svg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🔹 Law, Agriculture, & Other Institutes</h3>
+                  <ul>
+                    <li><b>NALSAR University of Law -</b> One of India's top law schools.</li>
+                    <li><b>Professor Jayashankar Telangana State Agricultural University (PJTSAU) -</b> Premier agricultural university.</li>
+                    <li><b>Dr. B.R. Ambedkar Open University -</b> Major distance education provider.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Institute</th>
+                <th>Location</th>
+                <th>Specialization</th>
+              </tr>
+              <tr>
+                <td>NALSAR University of Law</td>
+                <td>Hyderabad</td>
+                <td>Legal education and research, consistently top-ranked.</td>
+              </tr>
+              <tr>
+                <td>Faculty of Law, Osmania University</td>
+                <td>Hyderabad</td>
+                <td>Comprehensive legal education.</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <h2>🏫 School Education in Telangana </h2>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Major School Boards</h3>
+                <ol>
+                  <li><b>Telangana State Board of Secondary Education -</b> Conducts SSC (10th) exams.</li>
+                  <li><b>Telangana State Board of Intermediate Education -</b> Conducts Intermediate (11th & 12th) exams.</li>
+                  <li><b>CBSE, ICSE & International Boards -</b> Many private schools follow these curricula.</li>
+                  <li><b>Telangana Residential Educational Institutions Society -</b> Runs residential schools for underprivileged students.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="cbse.jpg" alt="" style="height:200px;width: 200px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-4">
+                <img src="apsbkp.jpg" alt="" style="height:200px;width: 230px;">
+
+              </div>
+              <div class="col-sm-8">
+
+                <h3>🔹 Famous Schools in Telangana</h3>
+                <ol>
+                  <li><b>Hyderabad Public School -</b> Historic school with notable alumni including CEOs of global companies.</li>
+                  <li><b>Delhi Public School -</b> Network of quality CBSE schools across the state.</li>
+                  <li><b>Oakridge International School -</b> Leading IB curriculum school.</li>
+                  <li><b>Chirec International School -</b> Multi-curriculum school with global standards.</li>
+                  <li><b>Narayana and Sri Chaitanya Schools -</b> Known for competitive exam preparation.</li>
+                  <li><b>Army Public School Secunderabad -</b> Quality education for defense personnel's children.</li>
+                </ol>
+
+              </div>
+
+            </div>
+          </div>
+          <div class="box">
+            <h2>🔬 Research & Technological Advancements</h2>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <p>Telangana is home to pioneering research institutions in science, technology, and medical fields:
+                  </p>
+                  <ol>
+                    <li><b>Centre for Cellular and Molecular Biology (CCMB) -</b> Cutting-edge biological research.</li>
+                    <li><b>National Institute of Pharmaceutical Education and Research (NIPER) -</b> Pharmaceutical research.</li>
+                    <li><b>International Crops Research Institute for the Semi-Arid Tropics (ICRISAT) -</b> Agricultural research for dryland farming.</li>
+                  </ol>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="csir.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <h2>📚 Other Notable Institutions</h2>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <ol>
+                    <li><b>T-Hub -</b> India's largest technology incubator for startups. 🚀</li>
+                    <li><b>National Academy of Construction -</b> Training center for construction industry professionals.</li>
+                    <li><b>Dr. MCR HRD Institute -</b> Training institute for civil servants.</li>
+                    <li><b>National Institute of Rural Development -</b> Research and training for rural development.</li>
+                    <li><b>National Institute of Tourism and Hospitality Management -</b> Tourism and hospitality education.</li>
+                    <li><b>Defence Research and Development Organisation (DRDO) Labs -</b> Defense research facilities.</li>
+                  </ol>
+                </div>
+                <div class="col-sm-4">
+                  <img src="Marine.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Telangana continues to be one of India's top educational hubs, producing leaders, scholars, scientists,
+            and entrepreneurs. Whether in engineering, medicine, law, arts, or business, the state offers world-class
+            institutions.</p>
+        </div>
+        <br><br>
+
+      </div>
+
+
+    </div>
+  </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,1023 @@
+{% extends "base.html" %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpiceRoute - Culinary Journeys in India</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Custom CSS -->
+    <style>
+        .bo {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+        }
+    
+        .hero-section {
+            background: url('https://images.unsplash.com/photo-1548943487-a2e4e43b4853?q=80&w=2070') no-repeat center center;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(216, 27, 96, 0.5), rgba(240, 98, 146, 0.5));
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        .hero-section h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease-in-out;
+        }
+        .hero-section p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease-in-out 0.3s;
+            animation-fill-mode: both;
+        }
+        .hero-section .btn {
+            font-size: 1.2rem;
+            padding: 12px 30px;
+            background-color: #d81b60;
+            border: none;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            animation: fadeInUp 1s ease-in-out 0.6s;
+            animation-fill-mode: both;
+        }
+        .hero-section .btn:hover {
+            background-color: #f06292;
+            transform: translateY(-5px) scale(1.05);
+        }
+        .culinary-section {
+            background: url('https://images.unsplash.com/photo-1548943487-a2e4e43b4853?q=80&w=2070') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            padding: 80px 0;
+        }
+        .culinary-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(240, 244, 248, 0.9);
+            z-index: 1;
+        }
+        .culinary-section .container {
+            position: relative;
+            z-index: 2;
+        }
+        .culinary-card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: #fff;
+            animation: fadeInUp 0.5s ease-out;
+            animation-fill-mode: both;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .culinary-card:nth-child(1) { animation-delay: 0.1s; }
+        .culinary-card:nth-child(2) { animation-delay: 0.2s; }
+        .culinary-card:nth-child(3) { animation-delay: 0.3s; }
+        .culinary-card:nth-child(4) { animation-delay: 0.4s; }
+        .culinary-card:nth-child(5) { animation-delay: 0.5s; }
+        .culinary-card:nth-child(6) { animation-delay: 0.6s; }
+        .culinary-card:nth-child(7) { animation-delay: 0.7s; }
+        .culinary-card:nth-child(8) { animation-delay: 0.8s; }
+        .culinary-card:nth-child(9) { animation-delay: 0.9s; }
+        .culinary-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        .culinary-card img {
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .culinary-card:hover img {
+            transform: scale(1.05);
+        }
+        .culinary-card .card-body {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .culinary-card .card-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            color: #d81b60;
+            transition: color 0.3s ease;
+        }
+        .culinary-card:hover .card-title {
+            color: #f06292;
+        }
+        .culinary-card .card-text {
+            color: #555;
+            flex-grow: 1;
+        }
+        .culinary-card .btn {
+            background-color: #f06292;
+            border: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .culinary-card .btn:hover {
+            background-color: #d81b60;
+            transform: translateY(-3px);
+        }
+        .activities-section {
+            background: url('https://images.unsplash.com/photo-1548943487-a2e4e43b4853?q=80&w=2070') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            padding: 80px 0;
+        }
+        .activities-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            z-index: 1;
+        }
+        .activities-section .container {
+            position: relative;
+            z-index: 2;
+        }
+        .activities-section h2, .culinary-section h2, .contact-section h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: #d81b60;
+            font-size: 2.8rem;
+            margin-bottom: 40px;
+            animation: fadeInDown 0.5s ease-out;
+        }
+        .activities-section h4 {
+            color: #f06292;
+            font-family: 'Montserrat', sans-serif;
+            transition: color 0.3s ease;
+        }
+        .activities-section h4:hover {
+            color: #d81b60;
+        }
+        .contact-section {
+            background: url('https://images.unsplash.com/photo-1548943487-a2e4e43b4853?q=80&w=2070') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            padding: 80px 0;
+        }
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(240, 244, 248, 0.9);
+            z-index: 1;
+        }
+        .contact-section .container {
+            position: relative;
+            z-index: 2;
+        }
+        .contact-section .form-control {
+            border-radius: 10px;
+            border: 1px solid #f06292;
+            padding: 12px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .contact-section .form-control:focus {
+            border-color: #d81b60;
+            box-shadow: 0 0 8px rgba(216, 27, 96, 0.3);
+        }
+        .contact-section .btn {
+            background-color: #d81b60;
+            border: none;
+            padding: 12px;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .contact-section .btn:hover {
+            background-color: #f06292;
+            transform: translateY(-3px);
+        }
+        footer {
+            background: url('https://images.unsplash.com/photo-1548943487-a2e4e43b4853?q=80&w=2070') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            color: #fff;
+            padding: 30px 0;
+            font-size: 1rem;
+        }
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(216, 27, 96, 0.8), rgba(240, 98, 146, 0.8));
+            z-index: 1;
+        }
+        footer .container {
+            position: relative;
+            z-index: 2;
+        }
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideInDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .section-title {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-bottom: 1rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, #d81b60, #f06292);
+            animation: pulse 2s infinite;
+        }
+        .card {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+        .btn {
+            border-radius: 25px;
+            padding: 10px 25px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .modal-content {
+            border-radius: 15px;
+            border: none;
+            animation: fadeInUp 0.3s ease-out;
+        }
+        .modal-header {
+            background: linear-gradient(90deg, #d81b60, #f06292);
+            color: white;
+            border-radius: 15px 15px 0 0;
+        }
+        .culinary-card {
+            animation: slideInLeft 0.5s ease-out;
+        }
+        @keyframes slideInLeft {
+            from { transform: translateX(-50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+    </style>
+</head>
+<div class="bo">
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-content">
+            <h1>Savor India's Culinary Heritage</h1>
+            <p>Embark on a flavorful journey through India's diverse cuisines and traditions.</p>
+            <a href="#culinary" class="btn btn-primary btn-lg">Explore Destinations</a>
+        </div>
+    </section>
+
+    <!-- Culinary Destinations Section -->
+    <section id="culinary" class="culinary-section">
+        <div class="container">
+            <h2 class="text-center mb-5 section-title">Top Culinary Destinations in India</h2>
+            <div class="row">
+                <!-- Card 1: Delhi -->
+                <div class="col-md-4 mb-4">
+                    <div class="card culinary-card" data-culinary="delhi">
+                        <img src="https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Delhi Culinary Experience">
+                        <div class="card-body">
+                            <h5 class="card-title">Delhi</h5>
+                            <p class="card-text">A melting pot of North Indian flavors with street food, Mughlai cuisine, and more.</p>
+                            <div class="culinary-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Duration: 2-3 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Signature Dish: Butter Chicken</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-map"></i>
+                                    <span>Region: North India</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-utensils"></i> Street Food Tours</span>
+                                <span><i class="fas fa-pepper-hot"></i> Mughlai Cuisine</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Mumbai -->
+                <div class="col-md-4 mb-4">
+                    <div class="card culinary-card" data-culinary="mumbai">
+                        <img src="https://images.unsplash.com/photo-1653855301179-84e9f58f28bf?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Mumbai Culinary Experience">
+                        <div class="card-body">
+                            <h5 class="card-title">Mumbai</h5>
+                            <p class="card-text">Savor vibrant street food, coastal seafood, and iconic Maharashtrian dishes.</p>
+                            <div class="culinary-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Duration: 2-3 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Signature Dish: Vada Pav</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-map"></i>
+                                    <span>Region: West India</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-utensils"></i> Street Food</span>
+                                <span><i class="fas fa-fish"></i> Coastal Cuisine</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Kolkata -->
+                <div class="col-md-4 mb-4">
+                    <div class="card culinary-card" data-culinary="kolkata">
+                        <img src="https://images.unsplash.com/photo-1710354473051-5c33cc333406?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Kolkata Culinary Experience">
+                        <div class="card-body">
+                            <h5 class="card-title">Kolkata</h5>
+                            <p class="card-text">Indulge in Bengali sweets, seafood, and street food delights.</p>
+                            <div class="culinary-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Duration: 2-3 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Signature Dish: Rosogolla</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-map"></i>
+                                    <span>Region: East India</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-candy-cane"></i> Bengali Sweets</span>
+                                <span><i class="fas fa-utensils"></i> Street Food</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4: Chennai -->
+                <div class="col-md-4 mb-4">
+                    <div class="card culinary-card" data-culinary="chennai">
+                        <img src="https://images.unsplash.com/photo-1668236543090-82eba5ee5976?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Chennai Culinary Experience">
+                        <div class="card-body">
+                            <h5 class="card-title">Chennai</h5>
+                            <p class="card-text">Experience South Indian flavors with dosas, idlis, and spicy Chettinad dishes.</p>
+                            <div class="culinary-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Duration: 2-3 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Signature Dish: Dosa</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-map"></i>
+                                    <span>Region: South India</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-utensils"></i> South Indian Cuisine</span>
+                                <span><i class="fas fa-pepper-hot"></i> Chettinad Flavors</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5: Hyderabad -->
+                <div class="col-md-4 mb-4">
+                    <div class="card culinary-card" data-culinary="hyderabad">
+                        <img src="https://images.unsplash.com/photo-1701579231305-d84d8af9a3fd?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Hyderabad Culinary Experience">
+                        <div class="card-body">
+                            <h5 class="card-title">Hyderabad</h5>
+                            <p class="card-text">Relish royal Hyderabadi biryani, kebabs, and rich Deccani cuisine.</p>
+                            <div class="culinary-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Duration: 2-3 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Signature Dish: Biryani</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-map"></i>
+                                    <span>Region: South India</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-utensils"></i> Hyderabadi Cuisine</span>
+                                <span><i class="fas fa-pepper-hot"></i> Kebabs</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6: Jaipur -->
+                <div class="col-md-4 mb-4">
+                    <div class="card culinary-card" data-culinary="jaipur">
+                        <img src="https://media.istockphoto.com/id/1458973879/photo/rajasthani-traditional-cuisine-dal-baati.jpg?s=2048x2048&w=is&k=20&c=I3q2KUpyJlDz08uXZzNDVYViWa5PWxeMxSS1WLv8Ie8=" class="card-img-top" alt="Jaipur Culinary Experience">
+                        <div class="card-body">
+                            <h5 class="card-title">Jaipur</h5>
+                            <p class="card-text">Discover Rajasthani thalis, spicy curries, and traditional sweets.</p>
+                            <div class="culinary-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Duration: 2-3 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Signature Dish: Dal Baati Churma</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-map"></i>
+                                    <span>Region: North India</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-utensils"></i> Rajasthani Thali</span>
+                                <span><i class="fas fa-candy-cane"></i> Sweets</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 7: Lucknow -->
+                <div class="col-md-4 mb-4">
+                    <div class="card culinary-card" data-culinary="lucknow">
+                        <img src="https://images.unsplash.com/photo-1549541412-71e57c4b9857?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Lucknow Culinary Experience">
+                        <div class="card-body">
+                            <h5 class="card-title">Lucknow</h5>
+                            <p class="card-text">Taste Awadhi cuisine with kebabs, biryanis, and rich gravies.</p>
+                            <div class="culinary-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Duration: 2-3 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Signature Dish: Galouti Kebab</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-map"></i>
+                                    <span>Region: North India</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-utensils"></i> Awadhi Cuisine</span>
+                                <span><i class="fas fa-pepper-hot"></i> Kebabs</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 8: Goa -->
+                <div class="col-md-4 mb-4">
+                    <div class="card culinary-card" data-culinary="goa">
+                        <img src="https://images.unsplash.com/photo-1654863404432-cac67587e25d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Goa Culinary Experience">
+                        <div class="card-body">
+                            <h5 class="card-title">Goa</h5>
+                            <p class="card-text">Enjoy coastal seafood, Indo-Portuguese flavors, and spicy vindaloo.</p>
+                            <div class="culinary-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Duration: 2-3 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Signature Dish: Fish Curry</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-map"></i>
+                                    <span>Region: West India</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-fish"></i> Seafood</span>
+                                <span><i class="fas fa-utensils"></i> Indo-Portuguese</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 9: Amritsar -->
+                <div class="col-md-4 mb-4">
+                    <div class="card culinary-card" data-culinary="amritsar">
+                        <img src="https://media.istockphoto.com/id/2200105804/photo/closeup-of-traditional-amritsari-masala-kulcha-cooked-in-tandoor.jpg?s=2048x2048&w=is&k=20&c=DM4JbE64oOa69UyvMEDx9kSSs41HSoANC7Du_wB7fl0=" class="card-img-top" alt="Amritsar Culinary Experience">
+                        <div class="card-body">
+                            <h5 class="card-title">Amritsar</h5>
+                            <p class="card-text">Savor Punjabi delights like buttery naan, lassi, and hearty curries.</p>
+                            <div class="culinary-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Duration: 2-3 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Signature Dish: Amritsari Kulcha</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-map"></i>
+                                    <span>Region: North India</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-utensils"></i> Punjabi Cuisine</span>
+                                <span><i class="fas fa-glass-whiskey"></i> Lassi</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activities Section -->
+    <section id="activities" class="activities-section">
+        <div class="container">
+            <h2 class="text-center mb-5 section-title">Culinary Journey Activities</h2>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <h4>Street Food Tours</h4>
+                    <p>Explore bustling markets in Delhi, Mumbai, and Kolkata for chaat, vada pav, and kathi rolls.</p>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <h4>Cooking Classes</h4>
+                    <p>Learn to cook regional dishes like biryani in Hyderabad or thali in Jaipur with expert chefs.</p>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <h4>Food Festivals</h4>
+                    <p>Attend vibrant food festivals in Goa and Chennai to taste local and fusion cuisines.</p>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <h4>Spice Market Visits</h4>
+                    <p>Discover exotic spices and ingredients in markets like Lucknow’s Aminabad or Chennai’s Parry’s Corner.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="text-center mb-5 section-title">Share Your Culinary Adventure</h2>
+            <div class="row">
+                <div class="col-md-6 mx-auto">
+                    <div class="culinary-form">
+                        <form id="culinaryForm">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Your Name</label>
+                                <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="culinary" class="form-label">Culinary Destination</label>
+                                <select class="form-control" id="culinary" required>
+                                    <option value="">Select a destination</option>
+                                    <option value="delhi">Delhi</option>
+                                    <option value="mumbai">Mumbai</option>
+                                    <option value="kolkata">Kolkata</option>
+                                    <option value="chennai">Chennai</option>
+                                    <option value="hyderabad">Hyderabad</option>
+                                    <option value="jaipur">Jaipur</option>
+                                    <option value="lucknow">Lucknow</option>
+                                    <option value="goa">Goa</option>
+                                    <option value="amritsar">Amritsar</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="experience" class="form-label">Your Experience</label>
+                                <textarea class="form-control" id="experience" rows="4" placeholder="Share your culinary adventure..." required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="photos" class="form-label">Upload Photos</label>
+                                <input type="file" class="form-control" id="photos" multiple accept="image/*">
+                                <div id="photoPreview" class="mt-2"></div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Share Adventure</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Culinary Modal -->
+    <div class="modal fade" id="culinaryModal" tabindex="-1" aria-labelledby="culinaryModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="culinaryModalLabel">Culinary Destination Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="culinary-detail-content">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <img src="" alt="" class="img-fluid culinary-image">
+                            </div>
+                            <div class="col-md-6">
+                                <h3 class="culinary-name"></h3>
+                                <p class="culinary-description"></p>
+                                <div class="culinary-info">
+                                    <div class="info-item">
+                                        <i class="fas fa-clock"></i>
+                                        <span class="duration"></span>
+                                    </div>
+                                    <div class="info-item">
+                                        <i class="fas fa-star"></i>
+                                        <span class="signature-dish"></span>
+                                    </div>
+                                    <div class="info-item">
+                                        <i class="fas fa-map"></i>
+                                        <span class="region"></span>
+                                    </div>
+                                </div>
+                                <div class="culinary-features"></div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <h4>Culinary Highlights</h4>
+                                <p class="culinary-highlights"></p>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <h4>Things to Do</h4>
+                                <ul class="things-to-do"></ul>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <h4>How to Reach</h4>
+                                <div class="how-to-reach"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="#" class="btn btn-primary book-now-btn">Book Culinary Tour</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+    
+
+    <!-- Bootstrap JS and Custom JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Culinary destinations data
+        const culinaryDestinations = {
+            'delhi': {
+                name: 'Delhi',
+                image: 'https://images.unsplash.com/photo-1605870445919-838d190e8e1b?q=80&w=2070',
+                description: 'Delhi is a culinary hub offering a mix of North Indian street food, rich Mughlai dishes, and modern fusion cuisine.',
+                duration: '2-3 days',
+                signatureDish: 'Butter Chicken',
+                region: 'North India',
+                highlights: 'Delhi’s food scene ranges from bustling street stalls in Chandni Chowk to fine-dining Mughlai restaurants.',
+                features: ['Street Food Tours', 'Mughlai Cuisine'],
+                thingsToDo: [
+                    'Street food tour in Chandni Chowk',
+                    'Try butter chicken at Moti Mahal',
+                    'Explore Paranthe Wali Gali',
+                    'Cooking class for Mughlai dishes',
+                    'Visit spice markets in Khari Baoli'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Indira Gandhi International Airport' },
+                    { type: 'train', text: 'New Delhi Railway Station' },
+                    { type: 'car', text: 'Well-connected by road' }
+                ]
+            },
+            'mumbai': {
+                name: 'Mumbai',
+                image: 'https://images.unsplash.com/photo-1626674683276-6b7c7d5f0d5e?q=80&w=2070',
+                description: 'Mumbai’s culinary scene is vibrant with street food like vada pav, coastal seafood, and spicy Maharashtrian dishes.',
+                duration: '2-3 days',
+                signatureDish: 'Vada Pav',
+                region: 'West India',
+                highlights: 'Mumbai offers a mix of quick street eats and upscale coastal restaurants, reflecting its cosmopolitan vibe.',
+                features: ['Street Food', 'Coastal Cuisine'],
+                thingsToDo: [
+                    'Street food tour at Chowpatty Beach',
+                    'Try vada pav at Ashok Vada Pav',
+                    'Seafood tasting at Mahesh Lunch Home',
+                    'Cooking class for Maharashtrian dishes',
+                    'Visit Crawford Market for spices'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Chhatrapati Shivaji International Airport' },
+                    { type: 'train', text: 'Mumbai Central Railway Station' },
+                    { type: 'car', text: 'Well-connected by road' }
+                ]
+            },
+            'kolkata': {
+                name: 'Kolkata',
+                image: 'https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?q=80&w=2070',
+                description: 'Kolkata is a paradise for food lovers, known for Bengali sweets, seafood, and iconic street food.',
+                duration: '2-3 days',
+                signatureDish: 'Rosogolla',
+                region: 'East India',
+                highlights: 'Kolkata’s culinary heritage shines through its sweets and savory dishes, especially in vibrant markets.',
+                features: ['Bengali Sweets', 'Street Food'],
+                thingsToDo: [
+                    'Taste rosogolla at K.C. Das',
+                    'Street food tour in New Market',
+                    'Try fish curry at Oh! Calcutta',
+                    'Bengali cooking class',
+                    'Visit College Street for snacks'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Netaji Subhas Chandra Bose International Airport' },
+                    { type: 'train', text: 'Howrah Railway Station' },
+                    { type: 'car', text: 'Well-connected by road' }
+                ]
+            },
+            'chennai': {
+                name: 'Chennai',
+                image: 'https://images.unsplash.com/photo-1598103604649-aedeb6ad9d13?q=80&w=2070',
+                description: 'Chennai offers authentic South Indian cuisine with crispy dosas, idlis, and fiery Chettinad dishes.',
+                duration: '2-3 days',
+                signatureDish: 'Dosa',
+                region: 'South India',
+                highlights: 'Chennai’s food scene is a blend of traditional South Indian flavors and spicy regional specialties.',
+                features: ['South Indian Cuisine', 'Chettinad Flavors'],
+                thingsToDo: [
+                    'Try dosa at Saravana Bhavan',
+                    'Chettinad food tasting at Anjappar',
+                    'South Indian cooking class',
+                    'Visit Mylapore for street food',
+                    'Explore Parry’s Corner for spices'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Chennai International Airport' },
+                    { type: 'train', text: 'Chennai Central Railway Station' },
+                    { type: 'car', text: 'Well-connected by road' }
+                ]
+            },
+            'hyderabad': {
+                name: 'Hyderabad',
+                image: 'https://images.unsplash.com/photo-1593566690071-6dd2f2e52f6f?q=80&w=2070',
+                description: 'Hyderabad is famous for its royal biryanis, succulent kebabs, and rich Deccani cuisine.',
+                duration: '2-3 days',
+                signatureDish: 'Biryani',
+                region: 'South India',
+                highlights: 'Hyderabad’s cuisine reflects its Nizami heritage, with biryani being a global favorite.',
+                features: ['Hyderabadi Cuisine', 'Kebabs'],
+                thingsToDo: [
+                    'Try biryani at Paradise Restaurant',
+                    'Kebab tasting at Bawarchi',
+                    'Hyderabadi cooking class',
+                    'Visit Charminar for street food',
+                    'Explore Laad Bazaar for snacks'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Rajiv Gandhi International Airport' },
+                    { type: 'train', text: 'Hyderabad Deccan Railway Station' },
+                    { type: 'car', text: 'Well-connected by road' }
+                ]
+            },
+            'jaipur': {
+                name: 'Jaipur',
+                image: 'https://images.unsplash.com/photo-1628294896516-344868a8ae04?q=80&w=2070',
+                description: 'Jaipur’s cuisine is a royal affair with hearty Rajasthani thalis, spicy curries, and traditional sweets.',
+                duration: '2-3 days',
+                signatureDish: 'Dal Baati Churma',
+                region: 'North India',
+                highlights: 'Jaipur offers a taste of Rajasthan’s royal culinary heritage with rich, flavorful dishes.',
+                features: ['Rajasthani Thali', 'Sweets'],
+                thingsToDo: [
+                    'Try dal baati churma at Chokhi Dhani',
+                    'Rajasthani thali at Suvarna Mahal',
+                    'Cooking class for Rajasthani dishes',
+                    'Visit Johari Bazaar for sweets',
+                    'Explore local dhabas'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Jaipur International Airport' },
+                    { type: 'train', text: 'Jaipur Railway Station' },
+                    { type: 'car', text: 'Well-connected by road' }
+                ]
+            },
+            'lucknow': {
+                name: 'Lucknow',
+                image: 'https://images.unsplash.com/photo-1617692910873-4ef5723ab701?q=80&w=2070',
+                description: 'Lucknow’s Awadhi cuisine is renowned for its delicate kebabs, aromatic biryanis, and rich gravies.',
+                duration: '2-3 days',
+                signatureDish: 'Galouti Kebab',
+                region: 'North India',
+                highlights: 'Lucknow’s culinary tradition is a blend of Mughal and Awadhi flavors, known for its sophistication.',
+                features: ['Awadhi Cuisine', 'Kebabs'],
+                thingsToDo: [
+                    'Try galouti kebab at Tunday Kababi',
+                    'Biryani tasting at Idris Biryani',
+                    'Awadhi cooking class',
+                    'Visit Aminabad for street food',
+                    'Explore Hazratganj for sweets'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Chaudhary Charan Singh International Airport' },
+                    { type: 'train', text: 'Lucknow Railway Station' },
+                    { type: 'car', text: 'Well-connected by road' }
+                ]
+            },
+            'goa': {
+                name: 'Goa',
+                image: 'https://images.unsplash.com/photo-1600011689032-8f620fe70652?q=80&w=2070',
+                description: 'Goa’s cuisine blends coastal seafood with Indo-Portuguese flavors, featuring spicy vindaloo and fresh fish.',
+                duration: '2-3 days',
+                signatureDish: 'Fish Curry',
+                region: 'West India',
+                highlights: 'Goa’s food scene is a fusion of coastal and Portuguese influences, perfect for seafood lovers.',
+                features: ['Seafood', 'Indo-Portuguese'],
+                thingsToDo: [
+                    'Try fish curry at Fisherman’s Wharf',
+                    'Seafood tasting at Martin’s Corner',
+                    'Goan cooking class',
+                    'Visit Panjim market for spices',
+                    'Explore beach shacks for snacks'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Dabolim Airport' },
+                    { type: 'train', text: 'Madgaon Railway Station' },
+                    { type: 'car', text: 'Well-connected by road' }
+                ]
+            },
+            'amritsar': {
+                name: 'Amritsar',
+                image: 'https://images.unsplash.com/photo-1627308594190-5f4f8143a2e6?q=80&w=2070',
+                description: 'Amritsar’s Punjabi cuisine is hearty, featuring buttery naan, creamy lassi, and rich curries.',
+                duration: '2-3 days',
+                signatureDish: 'Amritsari Kulcha',
+                region: 'North India',
+                highlights: 'Amritsar’s food is soulful, with iconic dishes served at dhabas and the Golden Temple’s langar.',
+                features: ['Punjabi Cuisine', 'Lassi'],
+                thingsToDo: [
+                    'Try Amritsari kulcha at Kesar Da Dhaba',
+                    'Taste lassi at Gian Di Lassi',
+                    'Punjabi cooking class',
+                    'Visit Golden Temple langar',
+                    'Explore Hall Bazaar for snacks'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Sri Guru Ram Dass Jee International Airport' },
+                    { type: 'train', text: 'Amritsar Railway Station' },
+                    { type: 'car', text: 'Well-connected by road' }
+                ]
+            }
+        };
+
+        // Function to open culinary modal
+        function openCulinaryModal(culinaryId) {
+            const culinary = culinaryDestinations[culinaryId];
+            if (!culinary) return;
+
+            const modal = document.getElementById('culinaryModal');
+            const modalTitle = modal.querySelector('.modal-title');
+            const modalImage = modal.querySelector('.culinary-image');
+            const modalName = modal.querySelector('.culinary-name');
+            const modalDescription = modal.querySelector('.culinary-description');
+            const modalDuration = modal.querySelector('.duration');
+            const modalSignatureDish = modal.querySelector('.signature-dish');
+            const modalRegion = modal.querySelector('.region');
+            const modalHighlights = modal.querySelector('.culinary-highlights');
+            const modalFeatures = modal.querySelector('.culinary-features');
+            const modalThingsToDo = modal.querySelector('.things-to-do');
+            const modalHowToReach = modal.querySelector('.how-to-reach');
+
+            modalTitle.textContent = culinary.name;
+            modalImage.src = culinary.image;
+            modalImage.alt = culinary.name;
+            modalName.textContent = culinary.name;
+            modalDescription.textContent = culinary.description;
+            modalDuration.textContent = `Duration: ${culinary.duration}`;
+            modalSignatureDish.textContent = `Signature Dish: ${culinary.signatureDish}`;
+            modalRegion.textContent = `Region: ${culinary.region}`;
+            modalHighlights.textContent = culinary.highlights;
+
+            modalFeatures.innerHTML = culinary.features.map(feature => 
+                `<span class="card-features"><i class="fas fa-check"></i> ${feature}</span>`
+            ).join('');
+
+            modalThingsToDo.innerHTML = culinary.thingsToDo.map(thing => 
+                `<li><i class="fas fa-check-circle"></i> ${thing}</li>`
+            ).join('');
+
+            modalHowToReach.innerHTML = culinary.howToReach.map(option => 
+                `<div class="transport-option">
+                    <i class="fas fa-${option.type}"></i>
+                    <span>${option.text}</span>
+                </div>`
+            ).join('');
+
+            const modalInstance = new bootstrap.Modal(modal);
+            modalInstance.show();
+        }
+
+        // Add click event listeners to all Learn More buttons
+        document.querySelectorAll('.culinary-card .btn-primary').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const culinaryId = this.closest('.culinary-card').dataset.culinary;
+                openCulinaryModal(culinaryId);
+            });
+        });
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a.nav-link').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                window.scrollTo({
+                    top: targetElement.offsetTop - 70,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
+{% endblock %}

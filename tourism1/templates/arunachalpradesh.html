@@ -1,0 +1,2614 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Arunachal Pradesh</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> -->
+  <style>
+    .wb {
+      font-size: 10vw;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+      border-spacing: 0;
+      border: 1px solid #ddd;
+    }
+
+    td,
+    th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+      font-size: 1.5vw;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+
+    .trip {
+      text-align: center;
+      font-weight: 900;
+      background: orangered;
+      padding: 20px;
+      border-radius: 20px;
+      width: 60%;
+    }
+
+    p,
+    li,
+    .text {
+      font-size: 1.5vw;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-weight: 600;
+    }
+
+    h4 {
+      font-weight: 900;
+    }
+
+    img {
+      border-radius: 10px;
+      display: block;
+      margin: auto;
+    }
+
+    @media screen and (max-width: 850px) {
+
+      p,
+      li,
+      .text,
+      td,
+      th {
+        font-size: 2vw;
+        ;
+      }
+
+    }
+
+    @media screen and (max-width: 500px) {
+
+      p,
+      li,
+      .text,
+      td,
+      th {
+        font-size: 4.5vw;
+        ;
+      }
+
+    }
+
+    .box:nth-of-type(odd) {
+      background: #f3b37185;
+      padding: 10px;
+    }
+    /* .box:nth-of-type(even) {
+      background: #f3b37185;
+      padding: 10px;
+    } */
+    .weather-container {
+            border-radius: 15px;
+            background: #f0fdf4;
+            padding: 15px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .weather-card {
+            text-align: center;
+            border-radius: 10px;
+            padding: 10px;
+            background: white;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+        .aqi {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            color: white;
+        }
+        .aqi-bad { background: purple; }
+        .aqi-moderate { background: orange; }
+        .aqi-good { background: green; }
+        .best-time {
+            background: #d1fae5;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 15px;
+            color: green;
+        }
+        .wet {
+            max-width: 50px;
+        }
+        
+        .trip {
+          font-size: 18px;
+          padding: 10px 20px;
+          cursor: pointer;
+          background-color:rgb(231, 36, 36);
+          color: white;
+          border: none;
+          border-radius: 5px;
+      }
+      .modal {
+          display: none;
+          position: fixed;
+          z-index: 1;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0,0,0,0.5);
+      }
+      .modal-content {
+          background-color: #fff;
+          margin: 10% auto;
+          padding: 20px;
+          border-radius: 10px;
+          width: 40%;
+          box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+          text-align: center;
+      }
+      .close {
+          color: #aaa;
+          float: right;
+          font-size: 28px;
+          font-weight: bold;
+          cursor: pointer;
+      }
+      .trip-options {
+          display: flex;
+          justify-content: center;
+          gap: 20px;
+          margin-top: 20px;
+      }
+      .trip-options a {
+          display: block;
+          width: 120px;
+          padding: 10px;
+          background-color: #28a745;
+          color: white;
+          text-decoration: none;
+          border-radius: 5px;
+      }
+  </style>
+</head>
+
+<body>
+
+
+  <!-- <h2>Carousel Example</h2> -->
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+      <li data-target="#myCarousel" data-slide-to="4"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+
+      <div class="item active">
+        <img src="/placeholder.svg?height=800&width=1200" alt="Tawang Monastery" style="width:100%; height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Tawang Monastery</h3>
+          <p>The second largest monastery in the world!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="/placeholder.svg?height=800&width=1200" alt="Ziro Valley" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Ziro Valley</h3>
+          <p>Home to the Apatani tribe and stunning rice fields!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="/placeholder.svg?height=800&width=1200" alt="Sela Pass" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Sela Pass</h3>
+          <p>A high-altitude mountain pass with breathtaking views!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="/placeholder.svg?height=800&width=1200" alt="Namdapha National Park" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Namdapha National Park</h3>
+          <p>The third largest national park in India with incredible biodiversity!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="/placeholder.svg?height=800&width=1200" alt="Mechuka Valley" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Mechuka Valley</h3>
+          <p>A pristine valley near the Indo-China border!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+  <div class="container">
+    <br><br>
+    <h1 class="wb">ARUNACHAL PRADESH</h1><br>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <img src="/placeholder.svg?height=700&width=500" alt="Arunachal Pradesh Map" style="height:700px; width: -webkit-fill-available;">
+
+        </div>
+        <div class="col-sm-6">
+          <h1>Arunachal Pradesh: The Land of Dawn-Lit Mountains</h1>
+          <p class="text">Arunachal Pradesh is a pristine and diverse state in northeastern India, known for its breathtaking landscapes, rich tribal heritage, biodiversity, and cultural diversity. It is the easternmost state of India where the sun rises first, hence called the "Land of the Dawn-Lit Mountains."</p>
+
+          <ul>
+            <li><b>Location --</b> Northeastern India</li>
+            <li><b>Capital --</b> Itanagar</li>
+            <li><b>Official Language --</b> English</li>
+            <li><b>Area --</b> 83,743 sq. km</li>
+            <li><b>Population --</b> ~1.4 million (Least populous state after Sikkim and Mizoram)</li>
+            <li><b>Borders --</b> Assam, Nagaland to the south; International borders with Bhutan in the west, China (Tibet) in the north, and Myanmar in the east</li>
+            <li><b>Major Rivers --</b> Brahmaputra, Kameng, Subansiri, Siang, Lohit, Dibang, Tirap</li>
+            <li><b>Major Festivals --</b> Losar, Solung, Mopin, Nyokum, Dree, Torgya, Boori Boot</li>
+            <li><b>State Animal --</b> Mithun (Gayal)</li>
+            <li><b>State Flower --</b> Foxtail Orchid</li>
+            <li><b>State Tree --</b> Hollong Tree</li>
+            <li><b>State Bird --</b> Hornbill</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <br>
+    <hr>
+    <div>
+      <h1>📌 Districts of Arunachal Pradesh</h1>
+      <br>
+      <div style="overflow-x:auto;">
+        <table>
+          <tr>
+            <th>Region</th>
+            <th>Districts</th>
+            <th>Key Highlights</th>
+          </tr>
+          <tr>
+            <td>Western Arunachal</td>
+            <td>1. Tawang 2. West Kameng 3. East Kameng 4. Pakke Kessang 5. Papum Pare</td>
+            <td>Tawang Monastery, Sela Pass, Buddhist Culture, Pakke Tiger Reserve</td>
+          </tr>
+          <tr>
+            <td>Central Arunachal</td>
+            <td>6. Kurung Kumey 7. Kra Daadi 8. Lower Subansiri 9. Upper Subansiri 10. Kamle</td>
+            <td>Ziro Valley, Talley Valley Wildlife Sanctuary, Apatani Tribe</td>
+          </tr>
+          <tr>
+            <td>Eastern Arunachal</td>
+            <td>11. West Siang 12. East Siang 13. Siang 14. Upper Siang 15. Lower Siang 16. Lepa Rada</td>
+            <td>Daying Ering Wildlife Sanctuary, Mouling National Park, Adi Tribe</td>
+          </tr>
+          <tr>
+            <td>Far Eastern Arunachal</td>
+            <td>17. Lower Dibang Valley 18. Dibang Valley 19. Lohit 20. Anjaw 21. Namsai</td>
+            <td>Parshuram Kund, Kamlang Wildlife Sanctuary, Mishmi Tribe</td>
+          </tr>
+          <tr>
+            <td>Southern Arunachal</td>
+            <td>22. Changlang 23. Tirap 24. Longding 25. Shi Yomi</td>
+            <td>Namdapha National Park, Pangsau Pass, Nocte and Wancho Tribes</td>
+          </tr>
+
+        </table>
+      </div>
+      <br><br>
+      <h1>🔹 Major Highlights of Some Key Districts</h1><br><br>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <ul>
+              <li><b>Tawang --</b> Home to the 400-year-old Tawang Monastery, Sela Pass, and Monpa tribe.</li>
+              <li><b>Lower Subansiri --</b> Famous for Ziro Valley, Apatani tribe, and UNESCO World Heritage Site.</li>
+              <li><b>West Kameng --</b> Known for Bomdila Monastery, Dirang hot springs, and Sherdukpen tribe.</li>
+              <li><b>East Siang --</b> Home to Pasighat (oldest town), Daying Ering Wildlife Sanctuary, and Adi tribe.</li>
+              <li><b>Papum Pare --</b> Capital Itanagar, Itafort, and Nyishi tribe.</li>
+              <li><b>Changlang --</b> Namdapha National Park, Pangsau Pass, and Tangsa tribe.</li>
+              <li><b>Lohit --</b> Parshuram Kund pilgrimage site, Tezu town, and Mishmi tribe.</li>
+              <li><b>Dibang Valley --</b> Largest district, home to Idu Mishmi tribe and pristine forests.</li>
+              <li><b>Tirap --</b> Known for Nocte and Wancho tribes and their unique culture.</li>
+            </ul>
+          </div>
+          <div class="col-sm-6">
+            <img src="/placeholder.svg?height=450&width=500" alt="Arunachal Pradesh Map" style="height:450px;width: -webkit-fill-available;">
+
+          </div>
+        </div>
+      </div>
+    </div><br><br>
+    <div class="container">
+        <div class="weather-container">
+            <h4 class="text-center"><strong>Weather in West Bengal</strong></h4>
+            <div class="row">
+                <!-- January -->
+                <div class="col-xs-6 col-sm-4 col-md-2">
+                    <div class="weather-card">
+                        <img class="wet" src="sun.png" alt="sun">
+                        <h6>Jan</h6>
+                        <p>8/30°C</p>
+                        <span class="aqi aqi-bad">AQI 205</span>
+                    </div>
+                </div>
+                <!-- February -->
+                <div class="col-xs-6 col-sm-4 col-md-2">
+                    <div class="weather-card">
+                        <img class="wet" src="sun.png" alt="sun">
+                        <h6>Feb</h6>
+                        <p>12/35°C</p>
+                        <span class="aqi aqi-moderate">AQI 129</span>
+                    </div>
+                </div>
+                <!-- March -->
+                <div class="col-xs-6 col-sm-4 col-md-2">
+                    <div class="weather-card">
+                        <img class="wet" src="sun.png" alt="sun">
+                        <h6>Mar</h6>
+                        <p>17/35°C</p>
+                        <span class="aqi aqi-moderate">AQI 107</span>
+                    </div>
+                </div>
+                <!-- April -->
+                <div class="col-xs-6 col-sm-4 col-md-2">
+                    <div class="weather-card">
+                        <img class="wet" src="sun.png" alt="sun">
+                        <h6>Apr</h6>
+                        <p>19/43°C</p>
+                        <span class="aqi aqi-moderate">AQI 103</span>
+                    </div>
+                </div>
+                <!-- May -->
+                <div class="col-xs-6 col-sm-4 col-md-2">
+                    <div class="weather-card">
+                        <img class="wet" src="sun.png" alt="sun">
+                        <h6>May</h6>
+                        <p>22/41°C</p>
+                        <span class="aqi aqi-moderate">AQI 95</span>
+                    </div>
+                </div>
+                <!-- June -->
+                <div class="col-xs-6 col-sm-4 col-md-2">
+                    <div class="weather-card">
+                        <img class="wet" src="sunrain.png" alt="sunrain">
+                        <h6>Jun</h6>
+                        <p>25/42°C</p>
+                        <span class="aqi aqi-good">AQI 76</span>
+                    </div>
+                </div>
+                <!-- July -->
+                <div class="col-xs-6 col-sm-4 col-md-2">
+                    <div class="weather-card">
+                        <img class="wet" src="rain.png" alt="rain">
+                        <h6>Jul</h6>
+                        <p>25/36°C</p>
+                        <span class="aqi aqi-good">AQI 48</span>
+                    </div>
+                </div>
+                <!-- August -->
+                <div class="col-xs-6 col-sm-4 col-md-2">
+                    <div class="weather-card">
+                        <img class="wet" src="sunrain.png" alt="sunrain">
+                        <h6>Aug</h6>
+                        <p>25/36°C</p>
+                        <span class="aqi aqi-good">AQI 69</span>
+                    </div>
+                </div>
+                <!-- September -->
+                <div class="col-xs-6 col-sm-4 col-md-2">
+                    <div class="weather-card">
+                        <img class="wet" src="sunrain.png" alt="sunrain">
+                        <h6>Sep</h6>
+                        <p>24/37°C</p>
+                        <span class="aqi aqi-good">AQI 49</span>
+                    </div>
+                </div>
+                <!-- October -->
+                <div class="col-xs-6 col-sm-4 col-md-2">
+                    <div class="weather-card">
+                        <img class="wet" src="sun.png" alt="sun">
+                        <h6>Oct</h6>
+                        <p>19/34°C</p>
+                        <span class="aqi aqi-good">AQI 62</span>
+                    </div>
+                </div>
+                <!-- November -->
+                <div class="col-xs-6 col-sm-4 col-md-2">
+                    <div class="weather-card">
+                        <img class="wet" src="sun.png" alt="sun">
+                        <h6>Nov</h6>
+                        <p>16/33°C</p>
+                        <span class="aqi aqi-moderate">AQI 78</span>
+                    </div>
+                </div>
+                <!-- December -->
+                <div class="col-xs-6 col-sm-4 col-md-2">
+                    <div class="weather-card">
+                        <img class="wet" src="sun.png" alt="sun">
+                        <h6>Dec</h6>
+                        <p>20/29°C</p>
+                        <span class="aqi aqi-moderate">AQI 90</span>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <div class="best-time">🏆 Best time to visit: October - March</div>
+            </div>
+        </div>
+      </div>
+    
+
+    <br><br>
+    <button class="trip" id="openModal">Let's go on a trip</button>
+    
+    <div id="tripModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Select Your Trip</h2>
+            <button type="button" class="btn btn-warning" style="margin-bottom: 8px;color:black; border-radius: 5px;" onclick="location.href='{% url 'arunachalpradesh_7days' %}'" >7 days trip</button><br>
+            <button type="button" class="btn btn-warning" style="margin-bottom: 8px;color:black; border-radius: 5px;" onclick="location.href='{% url 'arunachalpradesh_12days' %}'" >12 days trip</button>
+        </div>
+    </div>
+    
+    <script>
+        var modal = document.getElementById("tripModal");
+        var btn = document.getElementById("openModal");
+        var span = document.getElementsByClassName("close")[0];
+        
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+        
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+        
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script><br><br>
+    <div class="container">
+      <ul class="nav nav-tabs">
+        <li class="nav-item"><a data-toggle="tab" href="#wbculture"> Culture</a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbtradition "> Tradition</a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbfestivals"> Festivals </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbfood"> Foods </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbhistory"> History </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbartacraft"> Art and Craft </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbseason"> Season to Visit </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbtourist"> Tourist Spots </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbwild"> Wildlife & Crops </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbedu"> Institutions </a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="wbculture" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Culture of Arunachal Pradesh</h1>
+          <p class="text">Arunachal Pradesh has a rich and diverse culture, shaped by its 26 major tribes and over 100 sub-tribes, each with their own distinct traditions, languages, and customs. Here's an overview of some key aspects of its culture:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Languages</h3>
+                  <ul>
+                    <li>Arunachal Pradesh is home to numerous languages belonging to the Tibeto-Burman, Indo-Aryan, and Tai language families. English is the official language, while Hindi serves as a link language. Some major tribal languages include Nyishi, Adi, Galo, Tagin, Apatani, Monpa, Wancho, and Tangsa.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Languages of Arunachal Pradesh" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>2. Tribal Diversity</h3>
+                  <ul>
+                    <li>The state is home to 26 major tribes and over 100 sub-tribes, each with their own distinct culture, traditions, and social practices.</li>
+                    <li>Major tribes include Monpa, Tani, Nyishi, Adi, Galo, Tagin, Apatani, Mishmi, Tangsa, Nocte, Wancho, Singpho, and Sherdukpen.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Tribal Diversity" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div><br>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Art and Craft" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Art and Craft</h3>
+                  <ul>
+                    <li>Arunachal Pradesh is known for its rich tradition of handloom and handicrafts. Each tribe has its own distinctive patterns and designs in their textiles.</li>
+                    <li>Carpet weaving, wood carving, bamboo and cane crafts, and traditional jewelry making are important crafts.</li>
+                  </ul>
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Music and Dance" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>4. Music and Dance</h3>
+                  <ul>
+                    <li>Music and dance are integral parts of tribal life in Arunachal Pradesh, often performed during festivals and social gatherings.</li>
+                    <li>Popular dance forms include Aji Lamu of the Monpas, Popir of the Adis, Buiya of the Nyishis, Chalo of the Noctes, and Pasi Kongki of the Apatanis.</li>
+                    <li>Traditional musical instruments include drums, gongs, cymbals, and flutes made from bamboo and other natural materials.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Religion and Beliefs</h3>
+                  <ul>
+                    <li>The religious practices in Arunachal Pradesh are diverse, with a mix of indigenous faiths, Buddhism, Hinduism, and Christianity.</li>
+                    <li>The Monpas and Sherdukpens in the west follow Tibetan Buddhism, while tribes like the Noctes and Wanchos practice a form of animism with elements of Theravada Buddhism.</li>
+                    <li>Many tribes follow Donyi-Polo (worship of the Sun and Moon) and other indigenous belief systems.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Religion" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Architecture" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>6. Traditional Architecture</h3>
+                  <ul>
+                    <li>Traditional houses in Arunachal Pradesh are built on stilts to protect from wild animals and floods.</li>
+                    <li>The Apatani tribe is known for their unique bamboo and wood houses with distinctive blue pine roofs.</li>
+                    <li>The Monpa tribe builds houses with stone foundations and wooden superstructures with intricate carvings.</li>
+                  </ul>
+                  <h3>7. Cuisine</h3>
+                  <ul>
+                    <li>Arunachalee cuisine is characterized by the use of local herbs, bamboo shoots, and meat (particularly pork and beef).</li>
+                    <li>Rice is the staple food, often accompanied by boiled vegetables, meat, and spicy chutneys.</li>
+                    <li>Apong (rice beer) and other locally brewed alcoholic beverages are popular and often served during festivals and social gatherings.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Social Structure" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>8. Social Structure</h3>
+                  <ul>
+                    <li>Most tribes follow a patrilineal system, with the family as the basic unit of society.</li>
+                    <li>Village councils (kebang among the Adis, buliang among the Apatanis) play an important role in governance and dispute resolution.</li>
+                    <li>Many tribes practice exogamy, with marriages outside one's own clan.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>9. Festivals</h3>
+                  <ul>
+                    <li>Festivals are an integral part of tribal life, often associated with agricultural cycles, religious beliefs, and community celebrations.</li>
+                    <li>Major festivals include Losar (Monpas), Solung and Aran (Adis), Nyokum (Nyishis), Mopin (Galos), Dree (Apatanis), and Oriah (Wanchos).</li>
+                  </ul>
+                  <h3>10. Traditional Attire</h3>
+                  <ul>
+                    <li>Each tribe has its own distinctive traditional dress, often featuring colorful and intricate designs.</li>
+                    <li>The Adi women wear a skirt called "gale" and a blouse called "galuk," while men wear a loincloth called "galeng."</li>
+                    <li>The Monpa women wear a woolen coat called "shingka" and a sleeveless jacket called "tipi," while men wear a knee-length robe called "bakhu."</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=300&width=200" alt="Festivals" style="height:300px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br><br>
+
+          <p>Arunachal Pradesh's culture is deeply rooted in its tribal heritage and continues to evolve while maintaining a close connection to nature and traditional practices. The state's cultural diversity is a testament to the rich tapestry of indigenous cultures that have thrived in this remote Himalayan region for centuries.</p><br><br>
+        </div>
+        <div id="wbtradition" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Tradition of Arunachal Pradesh</h1>
+          <p>Arunachal Pradesh has a rich and diverse tradition deeply rooted in its tribal heritage, cultural practices, and social customs. Here's an overview of some key traditional aspects of the state:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Clothing Tradition</h3>
+                  <h4>Men</h4>
+                  <ul>
+                    <li><b>Traditional Attire:</b> Different tribes have their own distinctive clothing. For example, Monpa men wear a knee-length robe called "bakhu," while Adi men wear a loincloth called "galeng."</li>
+                    <li><b>Headgear:</b> Many tribes have unique headgear, often made with cane, bamboo, and adorned with hornbill feathers, especially for ceremonial occasions.</li>
+                  </ul>
+                  <h4>Women</h4>
+                  <ul>
+                    <li><b>Traditional Attire:</b> Adi women wear a skirt called "gale" and a blouse called "galuk." Monpa women wear a woolen coat called "shingka" and a sleeveless jacket called "tipi."</li>
+                    <li><b>Jewelry:</b> Traditional jewelry includes beaded necklaces, earrings, and bangles made from silver, brass, and beads.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=250&width=200" alt="Traditional Clothing" style="height:250px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>2. Marriage Traditions</h3>
+                  <ul>
+                    <li><b>Bride Price:</b> Many tribes practice the tradition of bride price, where the groom's family gives gifts or money to the bride's family.</li>
+                    <li><b>Exogamy:</b> Most tribes follow exogamous marriage practices, prohibiting marriages within the same clan.</li>
+                    <li><b>Polygamy:</b> Some tribes traditionally practiced polygamy, though it's becoming less common.</li>
+                    <li><b>Marriage Rituals:</b> Each tribe has its own unique marriage ceremonies, often involving community feasts, traditional dances, and religious rituals.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=250&width=200" alt="Marriage Traditions" style="height:250px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Music and Dance" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Music & Dance Traditions</h3>
+                  <ul>
+                    <li><b>Tribal Dances:</b> Each tribe has its own traditional dances, such as the Aji Lamu of the Monpas, Popir of the Adis, Buiya of the Nyishis, and Chalo of the Noctes.</li>
+                    <li><b>Musical Instruments:</b> Traditional instruments include drums, gongs, cymbals, and bamboo flutes.</li>
+                    <li><b>Folk Songs:</b> Folk songs often narrate tribal legends, historical events, and stories of love and valor.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Social and Religious Traditions" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+
+                  <h3>4. Social & Religious Traditions</h3>
+                  <ul>
+                    <li><b>Village Councils:</b> Traditional governance systems like the kebang (Adi tribe) and buliang (Apatani tribe) play a crucial role in community decision-making and dispute resolution.</li>
+                    <li><b>Donyi-Polo:</b> Many tribes follow the indigenous Donyi-Polo religion, worshipping the Sun (Donyi) and Moon (Polo) as supreme deities.</li>
+                    <li><b>Shamanism:</b> Shamans or traditional healers (nyibu, wye) play important roles in religious ceremonies and healing practices.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Architectural & Handicraft Traditions</h3>
+                  <ul>
+                    <li><b>Traditional Houses:</b> Most tribal houses are built on stilts using bamboo, wood, and thatched roofs. The Apatani tribe is known for their unique bamboo houses with blue pine roofs.</li>
+                    <li><b>Weaving:</b> Each tribe has distinctive patterns and designs in their textiles. The Adi, Apatani, and Monpa tribes are particularly known for their weaving skills.</li>
+                    <li><b>Bamboo and Cane Craft:</b> Arunachal Pradesh is famous for its bamboo and cane products, including baskets, mats, hats, and household items.</li>
+                    <li><b>Wood Carving:</b> Traditional wood carving is practiced by many tribes, especially for masks, religious artifacts, and household items.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Architecture" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>6. Agricultural Traditions</h3>
+                  <ul>
+                    <li><b>Jhum Cultivation:</b> Many tribes practice shifting cultivation (jhum), a traditional method of slash-and-burn agriculture.</li>
+                    <li><b>Wet Rice Cultivation:</b> The Apatani tribe is known for their sophisticated wet rice cultivation techniques without using animals or machines.</li>
+                    <li><b>Agricultural Festivals:</b> Most tribal festivals are linked to agricultural cycles, celebrating sowing, harvesting, and other important agricultural events.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Agriculture" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br><br>
+          <p>Arunachal Pradesh's traditions beautifully combine spirituality, community living, art, music, and a deep connection with nature, making it one of the most culturally diverse and rich states in India.</p><br><br>
+        </div>
+        <div id="wbfestivals" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Festivals of Arunachal Pradesh</h1>
+          <p>Arunachal Pradesh is known for its vibrant and diverse festivals, which reflect its rich tribal heritage, agricultural cycles, and religious beliefs. Here's a list of some of the major festivals celebrated in the state:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Losar (Monpa New Year)</h3>
+                  <ul>
+                    <li>The most important festival of the Monpa tribe, celebrating the Tibetan New Year.</li>
+                    <li>Celebrated with prayers, mask dances, and traditional music at monasteries, especially the famous Tawang Monastery.</li>
+                    <li>Homes are cleaned and decorated, and special dishes like khapse (fried cookies) and guthuk (noodle soup) are prepared.</li>
+                    <li>Colorful prayer flags are hoisted, and religious ceremonies are performed to ward off evil spirits.</li>
+                  </ul>
+                  <p><b>📍 Time: February - March</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=230&width=200" alt="Losar Festival" style="height:230px;width: 200px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Nyokum Festival" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Nyokum</h3>
+                  <ul>
+                    <li>Celebrated by the Nyishi tribe to appease the goddess Nyokum for good harvest, health, and prosperity.</li>
+                    <li>The festival involves traditional dances, music, and community feasts.</li>
+                    <li>Priests (nyibus) perform rituals and offer sacrifices to the deity.</li>
+                  </ul>
+                  <p><b>📍 Time: February</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Mopin</h3>
+                  <ul>
+                    <li>The main festival of the Galo tribe, celebrated to ensure a good harvest and drive away evil spirits.</li>
+                    <li>Characterized by the ritual sacrifice of animals, especially mithun (gayal), and the sprinkling of rice powder (opo) as a symbol of prosperity.</li>
+                    <li>Traditional dances like popir are performed, and rice beer (apong) is consumed.</li>
+                  </ul>
+                  <p><b>📍 Time: April</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Mopin Festival" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Solung Festival" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Solung</h3>
+                  <ul>
+                    <li>A major agricultural festival of the Adi tribe, celebrated after the sowing of crops.</li>
+                    <li>The festival includes prayers for a good harvest, traditional dances, and community feasts.</li>
+                    <li>Ponung, the traditional dance of the Adi tribe, is performed during this festival.</li>
+                  </ul>
+                  <p><b>📍 Time: September</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Dree</h3>
+                  <ul>
+                    <li>Celebrated by the Apatani tribe to appease the gods of crops for a good harvest.</li>
+                    <li>Rituals are performed to ward off natural calamities, pests, and diseases that might affect the crops.</li>
+                    <li>Traditional dances, music, and community feasts are part of the celebrations.</li>
+                  </ul>
+                  <p><b>📍 Time: July</b></p>
+                  <h3>6. Torgya</h3>
+                  <ul>
+                    <li>A three-day monastic festival celebrated at the Tawang Monastery by the Monpa tribe.</li>
+                    <li>Colorful mask dances (cham) are performed by monks to ward off evil spirits and bring good fortune.</li>
+                  </ul>
+                  <p><b>📍 Time: January</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Dree Festival" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Reh Festival" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>7. Reh</h3>
+                  <ul>
+                    <li>The main festival of the Idu Mishmi tribe, celebrated to honor the creator god Nanyi Inyitaya.</li>
+                    <li>The festival includes rituals performed by the village priest (igu), traditional dances, and community feasts.</li>
+                  </ul>
+                  <p><b>📍 Time: February</b></p>
+                  <h3>8. Si-Donyi</h3>
+                  <ul>
+                    <li>Celebrated by the Tagin tribe to worship the Sun (Si) and Moon (Donyi) gods.</li>
+                    <li>The festival includes animal sacrifices, traditional dances, and community feasts.</li>
+                  </ul>
+                  <p><b>📍 Time: January</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>9. Boori Boot</h3>
+                  <ul>
+                    <li>Celebrated by the Hill Miri tribe to ensure a good harvest and the well-being of the community.</li>
+                    <li>The festival includes rituals performed by the village priest, traditional dances, and community feasts.</li>
+                  </ul>
+                  <p><b>📍 Time: February</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Boori Boot Festival" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Sangken Festival" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>10. Sangken</h3>
+                  <ul>
+                    <li>The traditional New Year festival of the Khampti tribe, similar to the Thai Songkran festival.</li>
+                    <li>The festival includes the ritual bathing of Buddha images, water splashing, and community feasts.</li>
+                  </ul>
+                  <p><b>📍 Time: April</b></p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>11. Oriah</h3>
+                  <ul>
+                    <li>Celebrated by the Wancho tribe to mark the end of the sowing season and pray for a good harvest.</li>
+                    <li>The festival includes traditional dances, music, and community feasts.</li>
+                  </ul>
+                  <p><b>📍 Time: March - April</b></p>
+
+                  <h3>12. Chalo Loku</h3>
+                  <ul>
+                    <li>The harvest festival of the Nocte tribe, celebrated after the harvest of crops.</li>
+                    <li>The festival includes traditional dances, music, and community feasts.</li>
+                  </ul>
+                  <p><b>📍 Time: November</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Chalo Loku Festival" style="height:200px;width: 230px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Tamladu Festival" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>13. Tamladu</h3>
+                  <ul>
+                    <li>The harvest festival of the Digaru Mishmi tribe, celebrated to thank the gods for a good harvest.</li>
+                    <li>The festival includes traditional dances, music, and community feasts.</li>
+                  </ul>
+                  <p><b>📍 Time: February</b></p>
+                  <h3>14. Ke-Meh-Ha</h3>
+                  <ul>
+                    <li>Celebrated by the Idu Mishmi tribe to honor the ancestors and pray for the well-being of the community.</li>
+                    <li>The festival includes rituals performed by the village priest, traditional dances, and community feasts.</li>
+                  </ul>
+                  <p><b>📍 Time: December - January</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Arunachal Pradesh's festivals are a blend of religious, agricultural, and cultural celebrations, making the state one of the most festive regions in India! 🎉</p><br><br>
+        </div>
+        <div id="wbfood" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Foods of Arunachal Pradesh</h1>
+          <p>Arunachal Pradesh has a rich and diverse culinary tradition that reflects its tribal heritage and geographical diversity. The cuisine is characterized by the use of local herbs, bamboo shoots, and meat, with minimal use of spices. Here's a look at some of the most iconic foods of Arunachal Pradesh:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Staple Food</h3>
+                  <ul>
+                    <li><b>Rice:</b> The main staple food, often served with boiled vegetables, meat, and spicy chutneys.</li>
+                    <li><b>Millet:</b> Consumed in various forms, especially in the higher altitude regions.</li>
+                  </ul>
+                  <h3>2. Traditional Breads</h3>
+                  <ul>
+                    <li><b>Kholam:</b> A type of bread made from rice flour, popular among the Monpa tribe.</li>
+                    <li><b>Pakku:</b> A bread made from millet flour, commonly eaten in western Arunachal Pradesh.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=220" alt="Staple Food" style="height:200px;width: 220px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=220" alt="Bamboo Shoot Dishes" style="height:200px;width: 220px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Famous Arunachali Dishes</h3>
+                  <h4>Bamboo Shoot Dishes</h4>
+                  <ul>
+                    <li><b>Bamboo Shoot with Pork:</b> A popular dish where bamboo shoots are cooked with pork and minimal spices.</li>
+                    <li><b>Bamboo Shoot with Fish:</b> Fresh fish cooked with fermented bamboo shoots.</li>
+                    <li><b>Bamboo Shoot Pickle:</b> A spicy pickle made from fermented bamboo shoots.</li>
+                  </ul>
+                  <h4>Meat Dishes</h4>
+                  <ul>
+                    <li><b>Pika Pila:</b> A traditional Apatani dish made with pork fat, local herbs, and chili.</li>
+                    <li><b>Dung Po:</b> A Monpa dish of boiled rice wrapped in leaves and served with meat.</li>
+                    <li><b>Wungwut Ngam:</b> A traditional Wancho dish made with dry fish and bamboo shoots.</li>
+                    <li><b>Lukter:</b> A spicy chutney made with dried meat (usually beef or pork) and red chilies.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=220" alt="Vegetarian Dishes" style="height:200px;width: 220px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h4>Vegetarian Dishes</h4>
+                  <ul>
+                    <li><b>Namdung:</b> A soup made with local herbs and vegetables.</li>
+                    <li><b>Kopi:</b> A simple dish of boiled vegetables seasoned with salt and chili.</li>
+                    <li><b>Pehak:</b> Fermented soybean, often used as a condiment or cooked with vegetables.</li>
+                  </ul>
+                  <h4>Soups and Stews</h4>
+                  <ul>
+                    <li><b>Gyapa Khazi:</b> A Monpa soup made with local herbs, vegetables, and sometimes meat.</li>
+                    <li><b>Ngatok:</b> A fish soup popular among the Adi tribe.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>4. Traditional Beverages</h3>
+                  <ul>
+                    <li><b>Apong:</b> A rice beer popular among the Adi, Nyishi, and Galo tribes.</li>
+                    <li><b>Marua:</b> A millet beer consumed by various tribes.</li>
+                    <li><b>Rakshi:</b> A distilled alcoholic beverage popular among the Monpa tribe.</li>
+                    <li><b>Themsing:</b> A millet-based alcoholic drink popular in western Arunachal Pradesh.</li>
+                  </ul>
+
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=220" alt="Traditional Beverages" style="height:200px;width: 220px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Chutneys and Condiments" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>5. Chutneys and Condiments</h3>
+                  <ul>
+                    <li><b>Tatse:</b> A spicy chutney made with red chilies and tomatoes.</li>
+                    <li><b>Lukter:</b> A chutney made with dried meat and red chilies.</li>
+                    <li><b>Bamboo Shoot Pickle:</b> A spicy pickle made from fermented bamboo shoots.</li>
+                    <li><b>Fermented Soybean Chutney:</b> A condiment made from fermented soybeans, popular in eastern Arunachal Pradesh.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>6. Tribal Specialties</h3>
+                  <ul>
+                    <li><b>Adi Cuisine:</b> Known for dishes like bamboo shoot with pork, apong (rice beer), and ngatok (fish soup).</li>
+                    <li><b>Monpa Cuisine:</b> Features dishes like gyapa khazi (soup), kholam (bread), and thukpa (noodle soup).</li>
+                    <li><b>Apatani Cuisine:</b> Famous for pika pila (pork with herbs), tapyo (rice cake), and rice beer.</li>
+                    <li><b>Nyishi Cuisine:</b> Known for dishes like wokoso (pork with bamboo shoot) and apong (rice beer).</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Tribal Specialties" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Festival Foods</h3>
+                  <ul>
+                    <li><b>Khapse:</b> Fried cookies made during Losar (Monpa New Year).</li>
+                    <li><b>Guthuk:</b> A noodle soup prepared during Losar.</li>
+                    <li><b>Purang Apin:</b> A special rice beer prepared during the Solung festival of the Adi tribe.</li>
+                    <li><b>Opo:</b> Rice powder used during the Mopin festival of the Galo tribe.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Festival Foods" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Arunachal Pradesh's cuisine is a reflection of its tribal diversity and close connection with nature. The use of local ingredients, minimal spices, and traditional cooking methods results in a unique and flavorful culinary experience. 🍛🍖🍚</p><br><br>
+        </div>
+        <div id="wbhistory" class="tab-pane fade in active" style="background-color: white;">
+          <h1>History of Arunachal Pradesh</h1>
+          <p>Arunachal Pradesh has a rich and complex history that spans ancient tribal settlements, medieval kingdoms, British colonial influence, and modern political developments. The region has played a significant role in India's northeastern frontier and has been shaped by its unique geographical location and diverse tribal heritage.</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Ancient Period (Before 7th Century CE)</h3>
+                  <ul>
+                    <li><b>Early Settlements:</b> Archaeological evidence suggests human habitation in the region dating back to the Neolithic period.</li>
+                    <li><b>Tribal Migration:</b> Various tribal groups migrated to the region from Tibet, Myanmar, and other parts of Southeast Asia over centuries.</li>
+                    <li><b>Cultural Influences:</b> The region was influenced by Tibetan Buddhism in the west and Theravada Buddhism and indigenous beliefs in other parts.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Ancient Period" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Medieval Period" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Medieval Period (7th - 18th Century)</h3>
+                  <h4>Tibetan Influence (7th - 13th Century):</h4>
+                  <ul>
+                    <li>The western regions (present-day Tawang and West Kameng) came under the influence of Tibet.</li>
+                    <li>Buddhism spread in the region, with the establishment of monasteries like Tawang Monastery (founded in 1680).</li>
+                  </ul>
+                  <h4>Ahom Kingdom (13th - 19th Century):</h4>
+                  <ul>
+                    <li>The southern parts of Arunachal Pradesh had interactions with the Ahom Kingdom of Assam.</li>
+                    <li>Trade and cultural exchanges took place between the hill tribes and the Ahom rulers.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=220&width=200" alt="Tribal Kingdoms" style="height:220px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h4>Tribal Kingdoms and Chiefdoms:</h4>
+                  <ul>
+                    <li>Various tribal groups maintained their own political systems, with chiefs or councils governing their territories.</li>
+                    <li>The Adi, Nyishi, Apatani, and other tribes had their own traditional governance structures.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. British Colonial Period (1826 - 1947)</h3>
+                  <ul>
+                    <li>After the Treaty of Yandaboo in 1826, the British gained control over Assam and began to take interest in the frontier regions.</li>
+                    <li>The region was largely left unadministered, with the British following a policy of non-interference in tribal affairs.</li>
+                    <li>The Inner Line Regulation of 1873 restricted entry of outsiders into the tribal areas.</li>
+                    <li>The Simla Convention of 1914 attempted to define the boundary between Tibet and British India, resulting in the McMahon Line, which later became the basis for the India-China border.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=250" alt="British Colonial Period" style="height:200px;width: 250px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=230&width=200" alt="Post-Independence Period" style="height:230px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h2>4. Post-Independence Period (1947 - Present)</h3>
+                    <h3>North East Frontier Agency (NEFA) (1954 - 1972)</h3>
+                    <ul>
+                      <li>After India's independence, the region was administered as the North East Frontier Agency (NEFA), under the Ministry of External Affairs.</li>
+                      <li>The region was brought under the direct administration of the President of India through the Governor of Assam.</li>
+                    </ul>
+                    <h3>Sino-Indian War (1962)</h3>
+                    <ul>
+                      <li>The border dispute between India and China led to the Sino-Indian War of 1962.</li>
+                      <li>Chinese forces advanced into NEFA, capturing Tawang and other areas before declaring a unilateral ceasefire and withdrawing.</li>
+                    </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Union Territory Status" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>Union Territory Status (1972 - 1987)</h3>
+                  <ul>
+                    <li>In 1972, NEFA was renamed Arunachal Pradesh and granted Union Territory status.</li>
+                    <li>The region saw increased development and integration with the rest of India.</li>
+                  </ul>
+                  <h3>Statehood (1987 - Present)</h3>
+                  <ul>
+                    <li>On February 20, 1987, Arunachal Pradesh became the 24th state of the Indian Union.</li>
+                    <li>The state has since seen political stability and economic development, though border disputes with China remain unresolved.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=230&width=200" alt="Modern Developments" style="height:230px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>Recent Developments</h3>
+                  <ul>
+                    <li>The state has seen significant infrastructure development, including roads, bridges, and hydroelectric projects.</li>
+                    <li>Tourism has emerged as a major industry, with the state promoting its natural beauty and cultural heritage.</li>
+                    <li>Border tensions with China continue, with occasional standoffs and diplomatic exchanges.</li>
+                    <li>Efforts are being made to preserve the state's rich tribal heritage and biodiversity while promoting sustainable development.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Cultural and Social Evolution</h3>
+                  <h4>Tribal Heritage</h4>
+                  <ul>
+                    <li>The state's 26 major tribes and over 100 sub-tribes have maintained their distinct cultural identities.</li>
+                    <li>Traditional governance systems like the kebang (Adi tribe) and buliang (Apatani tribe) continue to play important roles in community life.</li>
+                    <li>Efforts are being made to document and preserve tribal languages, many of which are endangered.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Cultural Evolution" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h4>Religious Evolution</h4>
+                  <ul>
+                    <li>The state has seen a mix of indigenous beliefs, Buddhism, Hinduism, and Christianity.</li>
+                    <li>The Donyi-Polo movement, which began in the 1970s, has sought to revive and systematize indigenous religious practices.</li>
+                    <li>Buddhism remains strong in the western districts, while Christianity has gained followers in other parts of the state.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Religious Evolution" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>6. Present-Day Arunachal Pradesh</h3>
+                  <ul>
+                    <li><b>Political Landscape:</b> The state has a 60-member Legislative Assembly and sends two representatives to the Lok Sabha and one to the Rajya Sabha.</li>
+                    <li><b>Economy:</b> Agriculture, forestry, handicrafts, and tourism are key sectors. Hydroelectric power has significant potential.</li>
+                    <li><b>Strategic Importance:</b> The state holds strategic importance due to its borders with China, Myanmar, and Bhutan.</li>
+                    <li><b>Cultural Hub:</b> The state is known for its rich tribal heritage, biodiversity, and natural beauty.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Present-Day Arunachal Pradesh" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Arunachal Pradesh's history is a fascinating tapestry of tribal heritage, geopolitical significance, and cultural resilience. From ancient tribal settlements to its current status as a vibrant Indian state, Arunachal Pradesh continues to evolve while preserving its unique identity. 🚩📜</p>
+          <br><br>
+        </div>
+        <div id="wbartacraft" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Art & Craft of Arunachal Pradesh 🎨🖌️</h1>
+          <p>Arunachal Pradesh has a rich artistic heritage, with each tribe having its own distinctive art forms and crafts. The art and craft of Arunachal Pradesh are deeply rooted in tribal traditions and are characterized by the use of natural materials, vibrant colors, and intricate designs.</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Textiles and Weaving 🧵</h3>
+                  <h4>🔸 Traditional Weaving</h4>
+                  <ul>
+                    <li><b>Famous for:</b> Each tribe has its own distinctive patterns and designs in their textiles.</li>
+                    <li><b>Materials:</b> Cotton, wool, and natural fibers.</li>
+                    <li><b>Techniques:</b> Backstrap loom weaving, with intricate patterns created using supplementary weft technique.</li>
+                  </ul>
+                  <h4>🔸 Tribal Textiles</h4>
+                  <ul>
+                    <li><b>Adi Textiles:</b> Known for their vibrant colors and geometric patterns.</li>
+                    <li><b>Apatani Textiles:</b> Characterized by blue and black stripes with red borders.</li>
+                    <li><b>Monpa Textiles:</b> Influenced by Tibetan designs, featuring bright colors and intricate patterns.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Textiles and Weaving" style="height:200px;width: 230px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Bamboo and Cane Craft" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Bamboo and Cane Craft 🎋</h3>
+                  <h4>🔸 Basketry</h4>
+                  <ul>
+                    <li><b>Origin:</b> Practiced by all tribes across Arunachal Pradesh.</li>
+                    <li><b>Products:</b> Baskets, mats, hats, bags, and household items.</li>
+                    <li><b>Techniques:</b> Coiling, plaiting, and twining.</li>
+                  </ul>
+                  <h4>🔸 Furniture and Utility Items</h4>
+                  <ul>
+                    <li><b>Products:</b> Chairs, tables, storage containers, and agricultural tools.</li>
+                    <li><b>Notable Tribes:</b> The Adi, Apatani, and Nyishi tribes are particularly skilled in bamboo and cane craft.</li>
+                  </ul>
+                  <h4>🔸 Decorative Items</h4>
+                  <ul>
+                    <li><b>Products:</b> Wall hangings, lampshades, and ornamental items.</li>
+                    <li><b>Features:</b> Intricate designs and patterns, often incorporating natural dyes.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Wood Carving 🪵</h3>
+                  <ul>
+                    <li><b>Origin:</b> Practiced by many tribes, especially the Monpa, Wancho, and Nocte tribes.</li>
+                    <li><b>Products:</b> Masks, religious artifacts, household items, and decorative pieces.</li>
+                    <li><b>Materials:</b> Local hardwoods like oak, pine, and walnut.</li>
+                    <li><b>Designs:</b> Tribal motifs, religious symbols, and animal figures.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Wood Carving" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Painting and Wall Art" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Painting and Wall Art 🖼️</h3>
+                  <h4>🔸 Monpa Thangka Paintings</h4>
+                  <ul>
+                    <li><b>Origin:</b> Influenced by Tibetan Buddhist art.</li>
+                    <li><b>Features:</b> Detailed religious paintings depicting Buddhist deities and mandalas.</li>
+                    <li><b>Materials:</b> Natural pigments on cotton canvas.</li>
+                  </ul>
+                  <h4>🔸 Tribal Wall Paintings</h4>
+                  <ul>
+                    <li><b>Origin:</b> Various tribes, especially the Adi and Apatani.</li>
+                    <li><b>Features:</b> Geometric patterns, tribal motifs, and scenes from daily life.</li>
+                    <li><b>Materials:</b> Natural pigments on mud walls or wooden surfaces.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Jewelry and Ornaments 💍</h3>
+                  <ul>
+                    <li><b>Origin:</b> Each tribe has its own distinctive jewelry styles.</li>
+                    <li><b>Materials:</b> Silver, brass, beads, shells, and semi-precious stones.</li>
+                    <li><b>Types:</b> Necklaces, earrings, bangles, and headgear.</li>
+                    <li><b>Notable Tribes:</b> The Adi tribe is known for their beaded necklaces, while the Apatani women traditionally wore large nose plugs (yaping hurlo).</li>
+                  </ul>
+                  <h3>6. Pottery 🏺</h3>
+                  <ul>
+                    <li><b>Origin:</b> Practiced by several tribes, especially in the central and eastern regions.</li>
+                    <li><b>Techniques:</b> Hand-built pottery using coiling and pinching methods.</li>
+                    <li><b>Products:</b> Cooking pots, storage jars, and ceremonial vessels.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Jewelry and Ornaments" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Mask Making" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>7. Mask Making 🎭</h3>
+                  <ul>
+                    <li><b>Origin:</b> Primarily practiced by the Monpa tribe for religious ceremonies and dances.</li>
+                    <li><b>Materials:</b> Wood, cloth, and natural pigments.</li>
+                    <li><b>Designs:</b> Depictions of Buddhist deities, demons, and animals.</li>
+                    <li><b>Uses:</b> Used in cham dances during religious festivals like Torgya and Losar.</li>
+                  </ul>
+                  <h3>8. Musical Instruments 🎵</h3>
+                  <ul>
+                    <li><b>Types:</b> Drums, gongs, flutes, and string instruments.</li>
+                    <li><b>Materials:</b> Bamboo, wood, animal hide, and metal.</li>
+                    <li><b>Notable Instruments:</b> The Adi tribe's tapu (drum), the Monpa's dungchen (long horn), and the Wancho's khong (gong).</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>9. Traditional Weapons and Tools 🏹</h3>
+                  <ul>
+                    <li><b>Types:</b> Bows and arrows, spears, daos (machetes), and shields.</li>
+                    <li><b>Materials:</b> Bamboo, wood, metal, and animal hide.</li>
+                    <li><b>Decorations:</b> Often adorned with intricate carvings, feathers, and animal hair.</li>
+                    <li><b>Notable Tribes:</b> The Wancho and Nocte tribes are known for their decorative daos, while the Adi tribe is famous for their bows and arrows.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Traditional Weapons" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>📌 Summary: Arunachal Pradesh's Art & Craft Forms</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Art Form</th>
+                <th>Notable Tribes</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Textiles and Weaving</td>
+                <td>Adi, Apatani, Monpa</td>
+                <td>Distinctive patterns, vibrant colors, backstrap loom weaving</td>
+              </tr>
+              <tr>
+                <td>Bamboo and Cane Craft</td>
+                <td>All tribes, especially Adi, Apatani, Nyishi</td>
+                <td>Baskets, mats, furniture, utility items</td>
+              </tr>
+              <tr>
+                <td>Wood Carving</td>
+                <td>Monpa, Wancho, Nocte</td>
+                <td>Masks, religious artifacts, household items</td>
+              </tr>
+              <tr>
+                <td>Painting and Wall Art</td>
+                <td>Monpa, Adi, Apatani</td>
+                <td>Thangka paintings, tribal motifs, geometric patterns</td>
+              </tr>
+              <tr>
+                <td>Jewelry and Ornaments</td>
+                <td>All tribes, especially Adi, Apatani</td>
+                <td>Beaded necklaces, silver jewelry, traditional nose plugs</td>
+              </tr>
+              <tr>
+                <td>Pottery</td>
+                <td>Central and Eastern tribes</td>
+                <td>Hand-built cooking pots, storage jars, ceremonial vessels</td>
+              </tr>
+              <tr>
+                <td>Mask Making</td>
+                <td>Monpa</td>
+                <td>Religious masks for cham dances, festival masks</td>
+              </tr>
+              <tr>
+                <td>Musical Instruments</td>
+                <td>All tribes</td>
+                <td>Drums, gongs, flutes, string instruments</td>
+              </tr>
+              <tr>
+                <td>Traditional Weapons</td>
+                <td>Wancho, Nocte, Adi</td>
+                <td>Decorative daos, bows and arrows, spears, shields</td>
+              </tr>
+            </table>
+          </div>
+          <br><br>
+          <p>Arunachal Pradesh's art and crafts are a vibrant expression of its tribal heritage and cultural diversity. Each tribe has its own unique artistic traditions, passed down through generations, reflecting their deep connection with nature, spiritual beliefs, and way of life. These traditional crafts not only serve practical purposes but also play an important role in preserving the cultural identity of the tribes. 🎭✨</p>
+          <br><br>
+        </div>
+        <div id="wbseason" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Seasons to visit Arunachal Pradesh 🌧️☀️ </h1>
+          <p>Arunachal Pradesh, with its diverse topography ranging from high mountains to lush valleys, experiences varied climatic conditions across different regions. The best time to visit depends on the specific areas you plan to explore and the activities you wish to undertake.</p>
+
+          <br><br>
+
+          <h2> Season-wise Breakdown for Visiting Arunachal Pradesh</h2>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🌸 Spring (March - April)</h3>
+                  <ul>
+                    <li>Perfect time to visit Tawang and West Kameng as rhododendrons and other alpine flowers bloom.</li>
+                    <li>Ideal for trekking in the lower altitude regions.</li>
+                    <li>Mopin and Nyokum festivals are celebrated during this season.</li>
+                    <li>Weather is pleasant with clear skies and moderate temperatures.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Spring in Arunachal Pradesh" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Summer in Arunachal Pradesh" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>☀️ Summer (May – June)</h3>
+                  <ul>
+                    <li>Higher altitude areas like Tawang, Mechuka, and Ziro Valley are pleasant during summer.</li>
+                    <li>Lower altitude areas can be hot and humid.</li>
+                    <li>Good time for adventure activities like river rafting in the Siang River.</li>
+                    <li>Dree festival of the Apatani tribe is celebrated in July.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🌧️ Monsoon (July - September)</h3>
+                  <ul>
+                    <li>Heavy rainfall across the state, with landslides and road blockages common.</li>
+                    <li>Not recommended for tourism, especially in landslide-prone areas.</li>
+                    <li>Some areas like Ziro Valley and Pasighat can still be visited, but with caution.</li>
+                    <li>The landscape turns lush green, offering beautiful scenery for photography.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Monsoon in Arunachal Pradesh" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Autumn in Arunachal Pradesh" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🍁 Autumn (October - November)</h3>
+                  <ul>
+                    <li>One of the best seasons to visit Arunachal Pradesh.</li>
+                    <li>Clear skies offer stunning views of the Himalayan peaks.</li>
+                    <li>Perfect for trekking, wildlife spotting, and outdoor activities.</li>
+                    <li>Tawang Monastery and other Buddhist sites are particularly beautiful during this season.</li>
+                    <li>The Chalo Loku festival of the Nocte tribe is celebrated in November.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>❄️ Winter (December - February)</h3>
+                  <ul>
+                    <li>Higher altitude areas like Tawang and Mechuka experience snowfall.</li>
+                    <li>Lower altitude areas have pleasant weather.</li>
+                    <li>Perfect time for snow enthusiasts and photographers.</li>
+                    <li>Losar (Monpa New Year) and Torgya festivals are celebrated during this season.</li>
+                    <li>Some high-altitude passes like Sela Pass may be temporarily closed due to heavy snowfall.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Winter in Arunachal Pradesh" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>📌 Summary: Best Time to Visit Different Places in Arunachal Pradesh</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Region</th>
+                <th>Best Season</th>
+                <th>Recommended Months</th>
+                <th>Why Visit?</th>
+              </tr>
+              <tr>
+                <td>Tawang</td>
+                <td>Spring, Autumn, Winter</td>
+                <td>March - April, October - February</td>
+                <td>Tawang Monastery, Sela Pass, snowfall in winter, rhododendron blooms in spring</td>
+              </tr>
+              <tr>
+                <td>Ziro Valley</td>
+                <td>Spring, Autumn</td>
+                <td>March - April, October - November</td>
+                <td>Apatani tribe, rice fields, Ziro Music Festival (September)</td>
+              </tr>
+              <tr>
+                <td>Namdapha National Park</td>
+                <td>Winter, Spring</td>
+                <td>November - April</td>
+                <td>Wildlife spotting, bird watching, trekking</td>
+              </tr>
+              <tr>
+                <td>Mechuka</td>
+                <td>Spring, Autumn, Winter</td>
+                <td>March - April, October - February</td>
+                <td>Scenic valley, snow-capped mountains, tribal culture</td>
+              </tr>
+              <tr>
+                <td>Itanagar</td>
+                <td>Autumn, Winter, Spring</td>
+                <td>October - April</td>
+                <td>Itafort, Jawaharlal Nehru State Museum, Ganga Lake</td>
+              </tr>
+              <tr>
+                <td>Bomdila</td>
+                <td>Spring, Autumn</td>
+                <td>March - April, October - November</td>
+                <td>Bomdila Monastery, apple orchards, panoramic views</td>
+              </tr>
+              <tr>
+                <td>Pasighat</td>
+                <td>Winter, Spring</td>
+                <td>November - April</td>
+                <td>Siang River rafting, Daying Ering Wildlife Sanctuary</td>
+              </tr>
+              <tr>
+                <td>Parshuram Kund</td>
+                <td>Winter</td>
+                <td>January - February</td>
+                <td>Pilgrimage site, especially during Makar Sankranti</td>
+              </tr>
+              <tr>
+                <td>Sela Pass</td>
+                <td>Spring, Autumn</td>
+                <td>March - April, October - November</td>
+                <td>Scenic mountain pass, Sela Lake, snow-capped peaks</td>
+              </tr>
+
+            </table>
+          </div><br><br>
+          <div class="container">
+            <div class="row">
+              <h1 style=" text-align: center;">📌 Summary: When to Visit Arunachal Pradesh</h1><br>
+              <ul>
+                <li><b>For festivals & cultural experiences:</b> Winter (Losar, Torgya), Spring (Mopin, Nyokum), Summer (Dree), Autumn (Chalo Loku)</li>
+                <li><b>For trekking & outdoor activities:</b> Spring (March - April), Autumn (October - November)</li>
+                <li><b>For snow & winter landscapes:</b> Winter (December - February), especially in Tawang and Mechuka</li>
+                <li><b>For wildlife & bird watching:</b> Winter and Spring (November - April), especially in Namdapha National Park</li>
+                <li><b>For photography:</b> Spring for flowers, Autumn for clear mountain views, Winter for snow landscapes</li>
+              </ul>
+
+            </div>
+          </div>
+          <br><br>
+        </div>
+        <div id="wbtourist" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Tourist Spots of Arunachal Pradesh 🏔️🌲</h1>
+          <p>Arunachal Pradesh, the "Land of Dawn-Lit Mountains," is a paradise for nature lovers, adventure enthusiasts, and cultural explorers. Here's a categorized list of the best tourist places in Arunachal Pradesh:</p>
+
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Monasteries & Religious Sites 🏯</h3>
+                  <ul>
+                    <li><b>Tawang Monastery -</b> Second largest monastery in the world, perched at 10,000 ft with stunning views</li>
+                    <li><b>Bomdila Monastery -</b> Three beautiful monasteries (Upper, Middle, and Lower Gompa)</li>
+                    <li><b>Urgelling Monastery -</b> Birthplace of the 6th Dalai Lama</li>
+                    <li><b>Taktsang Monastery -</b> Ancient monastery with beautiful architecture</li>
+                    <li><b>Parshuram Kund -</b> Sacred Hindu pilgrimage site on the Lohit River</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Tawang Monastery" style="height:200px;width: 230px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Ziro Valley" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Valleys & Scenic Landscapes 🏞️</h3>
+                  <ul>
+                    <li><b>Ziro Valley -</b> UNESCO World Heritage Site, home to the Apatani tribe and rice fields</li>
+                    <li><b>Tawang Valley -</b> Breathtaking mountain views, lakes, and waterfalls</li>
+                    <li><b>Mechuka Valley -</b> Pristine valley near the Indo-China border with snow-capped mountains</li>
+                    <li><b>Dibang Valley -</b> Remote and untouched valley with stunning landscapes</li>
+                    <li><b>Kameng River Valley -</b> Perfect for river rafting and angling</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Lakes & Waterfalls 💦</h3>
+                  <ul>
+                    <li><b>Sela Lake -</b> High-altitude lake near Sela Pass at 13,700 ft</li>
+                    <li><b>Sangetsar Lake (Madhuri Lake) -</b> Famous after the Bollywood movie "Koyla"</li>
+                    <li><b>Pangateng Tso Lake -</b> Beautiful lake surrounded by mountains</li>
+                    <li><b>Ganga Lake (Gyaker Sinyi) -</b> Popular picnic spot near Itanagar</li>
+                    <li><b>Nuranang Waterfall -</b> Spectacular 100-meter waterfall near Tawang</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Sela Lake" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Namdapha National Park" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Wildlife Sanctuaries & National Parks 🐯</h3>
+                  <ul>
+                    <li><b>Namdapha National Park -</b> India's third-largest national park, home to four big cat species</li>
+                    <li><b>Pakke Tiger Reserve -</b> Known for hornbills and tigers</li>
+                    <li><b>Eaglenest Wildlife Sanctuary -</b> Paradise for birdwatchers with over 500 bird species</li>
+                    <li><b>Daying Ering Wildlife Sanctuary -</b> Located on an island in the Siang River</li>
+                    <li><b>Mouling National Park -</b> Rich biodiversity in the Upper Siang district</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Mountain Passes & Peaks 🏔️</h3>
+                  <ul>
+                    <li><b>Sela Pass -</b> High-altitude mountain pass at 13,700 ft connecting Tawang to the rest of India</li>
+                    <li><b>Bumla Pass -</b> Indo-China border at 15,200 ft (permit required)</li>
+                    <li><b>Gorichen Peak -</b> Highest peak in Arunachal Pradesh at 22,500 ft</li>
+                    <li><b>Kangto Peak -</b> Second-highest peak at 23,260 ft</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Sela Pass" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Tribal Villages" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>6. Tribal Villages & Cultural Sites 🏘️</h3>
+                  <ul>
+                    <li><b>Ziro -</b> Home to the Apatani tribe known for their unique agricultural practices</li>
+                    <li><b>Dong -</b> Easternmost village in India where the sun rises first</li>
+                    <li><b>Miao -</b> Known for Tibetan settlements and handicrafts</li>
+                    <li><b>Roing -</b> Gateway to the Mishmi Hills and Idu Mishmi tribal culture</li>
+                    <li><b>Tuting -</b> Remote village near the Tibet border with unique tribal culture</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Historical & Archaeological Sites 🏛️</h3>
+                  <ul>
+                    <li><b>Itafort -</b> 14th-century fort in Itanagar</li>
+                    <li><b>Jawaharlal Nehru Museum -</b> Showcases tribal artifacts and cultural heritage</li>
+                    <li><b>Malinithan -</b> Ancient temple ruins dating back to the 14th century</li>
+                    <li><b>Bhismaknagar Ruins -</b> Ancient fort associated with the legend of Rukmini and Krishna</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Itafort" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Adventure Activities" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>8. Adventure & Trekking Destinations 🚵‍♂️</h3>
+                  <ul>
+                    <li><b>Siang River -</b> White water rafting and kayaking</li>
+                    <li><b>Bailey Trail -</b> Historic 7-day trek from Tawang to Bomdila</li>
+                    <li><b>Talley Valley -</b> Trekking through pristine forests and meadows</li>
+                    <li><b>Gorichen Base Camp Trek -</b> Challenging high-altitude trek</li>
+                    <li><b>Mechuka -</b> Paragliding and mountain biking</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <br><br>
+
+        </div>
+        <div id="wbwild" class="tab-pane fade in active" style="background-color: white;">
+          <h1> Wildlife & Crops of Arunachal Pradesh 🌿</h1>
+          <p>Arunachal Pradesh, with its diverse topography ranging from snow-capped mountains to tropical forests, is home to a rich variety of flora and fauna. The state's agricultural practices are as diverse as its landscape, with different crops grown at different altitudes.</p>
+
+          <br>
+          <h2>Wildlife of Arunachal Pradesh </h2>
+          <p>Arunachal Pradesh is one of India's biodiversity hotspots, with numerous national parks and wildlife sanctuaries protecting its rich ecosystem.</p>
+
+          <br>
+          <h2>🔹 Major National Parks & Wildlife Sanctuaries</h2>
+          <div>
+            <table>
+              <tr>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Namdapha National Park</td>
+                <td>Changlang District</td>
+                <td>Four big cat species (Tiger 🐅, Leopard 🐆, Snow Leopard, Clouded Leopard), Red Panda, Hoolock Gibbon</td>
+              </tr>
+              <tr>
+                <td>Pakke Tiger Reserve</td>
+                <td>East Kameng District</td>
+                <td>Tigers, Elephants 🐘, Hornbills, Orchids</td>
+              </tr>
+              <tr>
+                <td>Eaglenest Wildlife Sanctuary</td>
+                <td>West Kameng District</td>
+                <td>Over 500 bird species, including the recently discovered Bugun Liocichla</td>
+              </tr>
+              <tr>
+                <td>Mouling National Park</td>
+                <td>Upper Siang District</td>
+                <td>Takin, Serow, Musk Deer, Himalayan Black Bear</td>
+              </tr>
+              <tr>
+                <td>Daying Ering Wildlife Sanctuary</td>
+                <td>East Siang District</td>
+                <td>Migratory Birds, Elephants, Wild Buffalo</td>
+              </tr>
+              <tr>
+                <td>Kamlang Wildlife Sanctuary</td>
+                <td>Lohit District</td>
+                <td>Tigers, Leopards, Elephants, Hornbills</td>
+              </tr>
+              <tr>
+                <td>Sessa Orchid Sanctuary</td>
+                <td>West Kameng District</td>
+                <td>Over 200 species of Orchids, Medicinal Plants</td>
+              </tr>
+            </table>
+          </div>
+          <bt><br></bt>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3> 🔹 Notable Wildlife in Arunachal Pradesh</h3>
+                <ul>
+                  <li><b>Mammals:</b> Mithun (State Animal), Red Panda, Takin, Clouded Leopard, Snow Leopard, Asiatic Black Bear, Hoolock Gibbon, Slow Loris.</li>
+                  <li><b>Birds:</b> Hornbill (State Bird), Tragopan, Monal Pheasant, Sclater's Monal, Bengal Florican, White-winged Duck.</li>
+                  <li><b>Reptiles:</b> King Cobra, Python, Keelback, Various Lizards and Geckos.</li>
+                  <li><b>Butterflies:</b> Over 500 species, including Kaiser-i-Hind, Bhutan Glory, and Krishna Peacock.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=200" alt="Mithun" style="height:200px;width: 200px;">
+
+              </div>
+
+            </div>
+          </div>
+          <hr><br>
+          <h2>🌾 Agriculture & Major Crops in Arunachal Pradesh </h2>
+          <p>Agriculture is the primary occupation for about 80% of the population in Arunachal Pradesh, with different farming practices adapted to the varying altitudes and climatic conditions.</p>
+
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Key Agricultural Features</h3>
+                <ul>
+                  <li><b>Jhum Cultivation:</b> Shifting cultivation practiced by many tribes in the hills.</li>
+                  <li><b>Wet Rice Cultivation:</b> Practiced in valleys, especially by the Apatani tribe in Ziro Valley.</li>
+                  <li><b>Terrace Farming:</b> Common in hilly areas for growing rice and other crops.</li>
+                  <li><b>Climate:</b> Varies from tropical to alpine, supporting a wide range of crops.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=220" alt="Terrace Farming" style="height:200px;width: 220px;">
+
+              </div>
+            </div>
+          </div>
+          <h2>🔹 Major Crops of Arunachal Pradesh</h2>
+          <div>
+            <table>
+              <tr>
+                <th>Category</th>
+                <th>Crops</th>
+              </tr>
+              <tr>
+                <td>Cereals</td>
+                <td>Rice 🍚, Maize 🌽, Millet, Wheat 🌾</td>
+              </tr>
+              <tr>
+                <td>Cash Crops</td>
+                <td>Tea 🍵, Rubber, Sugarcane, Ginger, Large Cardamom</td>
+              </tr>
+              <tr>
+                <td>Pulses</td>
+                <td>Soybean, Black Gram, Green Gram, Pea</td>
+              </tr>
+              <tr>
+                <td>Vegetables</td>
+                <td>Potato 🥔, Cabbage, Cauliflower, Leafy Vegetables, Chili 🌶️</td>
+              </tr>
+              <tr>
+                <td>Fruits</td>
+                <td>Orange 🍊, Apple 🍎, Pineapple 🍍, Banana 🍌, Kiwi, Plum, Pear, Walnut</td>
+              </tr>
+              <tr>
+                <td>Oilseeds</td>
+                <td>Mustard, Sesame, Perilla</td>
+              </tr>
+              <tr>
+                <td>Spices</td>
+                <td>Ginger, Turmeric, Large Cardamom, Chili</td>
+              </tr>
+              <tr>
+                <td>Medicinal Plants</td>
+                <td>Taxus baccata, Coptis teeta, Paris polyphylla, Illicium griffithii</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Special Agricultural Products</h3>
+                <ul>
+                  <li><b>Kiwi:</b> Arunachal Pradesh is the largest kiwi producer in India.</li>
+                  <li><b>Large Cardamom:</b> High-value spice grown in the hills.</li>
+                  <li><b>Arunachal Orange:</b> Known for its sweetness and juiciness.</li>
+                  <li><b>Organic Tea:</b> Grown in the foothills, especially in Lohit and Tirap districts.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=200" alt="Kiwi Fruit" style="height:200px;width: 200px;">
+
+              </div>
+            </div>
+          </div><br>
+          <hr>
+          <div class="box" style=" background: #f3b37185;padding: 10px;">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3> Sustainable Agriculture & Modern Trends 🌾</h3>
+                  <ul>
+                    <li><b>Organic Farming:</b> Many farmers practice traditional organic farming methods.</li>
+                    <li><b>Agroforestry:</b> Integration of trees with crops and livestock.</li>
+                    <li><b>Horticulture Development:</b> Focus on high-value fruits like kiwi, apple, and orange.</li>
+                    <li><b>Medicinal Plant Cultivation:</b> Growing demand for traditional medicinal plants.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Organic Farming" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Arunachal Pradesh's rich biodiversity and varied agricultural practices reflect its unique geographical and cultural diversity. From the snow leopards in the high mountains to the hornbills in the tropical forests, and from rice terraces to kiwi orchards, the state offers a fascinating glimpse into the harmonious relationship between nature and human communities.</p>
+          <br><br>
+        </div>
+        <div id="wbedu" class="tab-pane fade in active" style="background-color: white;">
+          <h1>🎓 Education & Institutions in Arunachal Pradesh</h1>
+          <p>Arunachal Pradesh has made significant strides in education in recent decades, though it faces challenges due to its remote location, difficult terrain, and diverse tribal population with multiple languages. The state government and various organizations are working to improve educational infrastructure and access across the state.</p>
+
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>📌 Education System in Arunachal Pradesh</h3>
+                  <ul>
+                    <li><b>School Education:</b> Follows the CBSE curriculum, with English as the medium of instruction in most schools.</li>
+                    <li><b>Higher Education:</b> Managed by the Department of Education, Government of Arunachal Pradesh, and various central institutions.</li>
+                    <li><b>Literacy Rate:</b> 65.38% (2011 Census), which has been steadily improving.</li>
+                    <li><b>Challenges:</b> Remote locations, difficult terrain, multilingual population, and infrastructure limitations.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Education System" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>🏛️ Top Universities & Institutions </h2>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Central Universities</h3>
+                <ol>
+                  <li><b>Rajiv Gandhi University (Central University) -</b> Located in Rono Hills, Doimukh, it is the premier institution for higher education in the state, offering undergraduate, postgraduate, and doctoral programs in various disciplines.</li>
+                  <li><b>North Eastern Regional Institute of Science and Technology (NERIST) -</b> Located in Nirjuli, it offers technical education from certificate to degree levels in various engineering and technology fields.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=230" alt="Rajiv Gandhi University" style="height:200px;width: 230px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 State Universities</h3>
+                <ol>
+                  <li><b>Arunachal University of Studies -</b> Located in Namsai, it offers various undergraduate and postgraduate programs.</li>
+                  <li><b>Himalayan University -</b> Located in Itanagar, it offers programs in engineering, management, pharmacy, and other disciplines.</li>
+                  <li><b>Venkateshwara Open University -</b> Located in Itanagar, it offers distance education programs.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=230" alt="Arunachal University of Studies" style="height:200px;width: 230px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>University/Institution</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Rajiv Gandhi University</td>
+                <td>Rono Hills, Doimukh</td>
+                <td>Premier central university offering programs in arts, sciences, commerce, and management.</td>
+              </tr>
+              <tr>
+                <td>North Eastern Regional Institute of Science and Technology (NERIST)</td>
+                <td>Nirjuli</td>
+                <td>Technical education in engineering and technology fields.</td>
+              </tr>
+              <tr>
+                <td>National Institute of Technology (NIT)</td>
+                <td>Yupia</td>
+                <td>Engineering education and research.</td>
+              </tr>
+              <tr>
+                <td>Arunachal University of Studies</td>
+                <td>Namsai</td>
+                <td>Private university offering various undergraduate and postgraduate programs.</td>
+              </tr>
+              <tr>
+                <td>Himalayan University</td>
+                <td>Itanagar</td>
+                <td>Programs in engineering, management, pharmacy, and other disciplines.</td>
+              </tr>
+              <tr>
+                <td>Venkateshwara Open University</td>
+                <td>Itanagar</td>
+                <td>Distance education programs.</td>
+              </tr>
+              <tr>
+                <td>Indira Gandhi Technical and Medical Sciences University</td>
+                <td>Ziro</td>
+                <td>Medical and technical education.</td>
+              </tr>
+              <tr>
+                <td>Arunachal Pradesh State University</td>
+                <td>Pasighat</td>
+                <td>Recently established state university.</td>
+              </tr>
+            </table>
+          </div>
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=240" alt="NIT Arunachal Pradesh" style="height:200px;width: 240px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🔹 Technical & Professional Institutions</h3>
+                  <ol>
+                    <li><b>National Institute of Technology (NIT) Arunachal Pradesh -</b> Located in Yupia, it offers undergraduate and postgraduate programs in engineering and technology.</li>
+                    <li><b>Tomo Riba Institute of Health and Medical Sciences (TRIHMS) -</b> Located in Naharlagun, it is the first medical college in the state.</li>
+                    <li><b>North East Homoeopathic Medical College & Hospital -</b> Located in Itanagar, it offers education in homoeopathic medicine.</li>
+                    <li><b>Arunachal Law Academy -</b> Located in Itanagar, it offers legal education.</li>
+                  </ol>
+                </div>
+
+                <br><br>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Institute</th>
+                <th>Location</th>
+                <th>Specialization</th>
+              </tr>
+              <tr>
+                <td>North Eastern Regional Institute of Science and Technology (NERIST)</td>
+                <td>Nirjuli</td>
+                <td>Engineering, technology, forestry, and management.</td>
+              </tr>
+              <tr>
+                <td>National Institute of Technology (NIT) Arunachal Pradesh</td>
+                <td>Yupia</td>
+                <td>Engineering and technology education.</td>
+              </tr>
+              <tr>
+                <td>Rajiv Gandhi Government Polytechnic</td>
+                <td>Itanagar</td>
+                <td>Diploma programs in engineering and technology.</td>
+              </tr>
+              <tr>
+                <td>Government Polytechnic</td>
+                <td>Namsai</td>
+                <td>Diploma programs in engineering and technology.</td>
+              </tr>
+              <tr>
+                <td>Government Polytechnic</td>
+                <td>Pasighat</td>
+                <td>Diploma programs in engineering and technology.</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🔹 Medical Institutions</h3>
+                  <ol>
+                    <li><b>Tomo Riba Institute of Health and Medical Sciences (TRIHMS) -</b> The first medical college in Arunachal Pradesh, located in Naharlagun.</li>
+                    <li><b>North East Homoeopathic Medical College & Hospital -</b> Located in Itanagar, offering education in homoeopathic medicine.</li>
+                    <li><b>Arunachal State Hospital -</b> Located in Naharlagun, it serves as a teaching hospital for TRIHMS.</li>
+                  </ol>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="TRIHMS" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Medical Institution</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Tomo Riba Institute of Health and Medical Sciences (TRIHMS)</td>
+                <td>Naharlagun</td>
+                <td>First medical college in Arunachal Pradesh.</td>
+              </tr>
+              <tr>
+                <td>North East Homoeopathic Medical College & Hospital</td>
+                <td>Itanagar</td>
+                <td>Homoeopathic medical education.</td>
+              </tr>
+              <tr>
+                <td>Arunachal State Hospital</td>
+                <td>Naharlagun</td>
+                <td>Teaching hospital for TRIHMS.</td>
+              </tr>
+              <tr>
+                <td>Regional Institute of Pharmaceutical Science & Technology</td>
+                <td>Itanagar</td>
+                <td>Pharmaceutical education.</td>
+              </tr>
+              <tr>
+                <td>Government Nursing School</td>
+                <td>Naharlagun</td>
+                <td>Nursing education.</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Research Institutions" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🔹 Research Institutions</h3>
+                  <ul>
+                    <li><b>State Forest Research Institute -</b> Located in Itanagar, it conducts research on forestry and biodiversity.</li>
+                    <li><b>ICAR Research Complex for NEH Region, Arunachal Pradesh Centre -</b> Located in Basar, it conducts agricultural research.</li>
+                    <li><b>Centre for Biodiversity, Rajiv Gandhi University -</b> Conducts research on the rich biodiversity of Arunachal Pradesh.</li>
+                    <li><b>North Eastern Institute of Folk Medicine -</b> Located in Pasighat, it researches traditional medicinal practices.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Institute</th>
+                <th>Location</th>
+                <th>Specialization</th>
+              </tr>
+              <tr>
+                <td>Arunachal Law Academy</td>
+                <td>Itanagar</td>
+                <td>Legal education.</td>
+              </tr>
+              <tr>
+                <td>Government Law College</td>
+                <td>Jote</td>
+                <td>Legal education.</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <h2>🏫 School Education in Arunachal Pradesh </h2>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Major School Boards</h3>
+                <ol>
+                  <li><b>Central Board of Secondary Education (CBSE) -</b> Most schools in Arunachal Pradesh follow the CBSE curriculum.</li>
+                  <li><b>State Council of Educational Research and Training (SCERT) -</b> Develops curriculum and educational materials for state schools.</li>
+                  <li><b>Arunachal Pradesh Board of Secondary Education -</b> Recently established to develop a state-specific curriculum.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=200" alt="CBSE" style="height:200px;width: 200px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=230" alt="Sainik School" style="height:200px;width: 230px;">
+
+              </div>
+              <div class="col-sm-8">
+
+                <h3>🔹 Notable Schools in Arunachal Pradesh</h3>
+                <ol>
+                  <li><b>Sainik School Niglok -</b> Located in East Siang district, it prepares students for careers in the armed forces.</li>
+                  <li><b>Kendriya Vidyalayas -</b> Located in various districts, they provide quality education to children of government employees.</li>
+                  <li><b>Jawahar Navodaya Vidyalayas -</b> Residential schools providing free education to talented rural children.</li>
+                  <li><b>Vivekananda Kendra Vidyalayas -</b> Schools run by the Vivekananda Kendra, focusing on value-based education.</li>
+                  <li><b>Don Bosco Schools -</b> Run by the Salesians of Don Bosco, providing quality education across the state.</li>
+                </ol>
+
+              </div>
+
+            </div>
+          </div>
+          <div class="box">
+            <h2>🔬 Research & Development</h2>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <p>Arunachal Pradesh is home to several research institutions focusing on biodiversity, agriculture, and traditional knowledge:</p>
+                  <ol>
+                    <li><b>State Forest Research Institute -</b> Conducts research on forestry, biodiversity, and conservation.</li>
+                    <li><b>ICAR Research Complex for NEH Region -</b> Agricultural research focused on hill farming and sustainable practices.</li>
+                    <li><b>North Eastern Institute of Folk Medicine -</b> Documents and researches traditional medicinal practices of the region.</li>
+                  </ol>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Research Institute" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <h2>📚 Other Notable Institutions</h2>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <ol>
+                    <li><b>Film and Television Institute -</b> Recently established to promote media education and local film industry.</li>
+                    <li><b>Arunachal Pradesh State Council for Science & Technology -</b> Promotes scientific research and technological development.</li>
+                    <li><b>Centre for Cultural Research and Documentation -</b> Documents and preserves the cultural heritage of the state's tribes.</li>
+                    <li><b>North East Regional Institute of Education (NERIE) -</b> Located in Shillong but serves Arunachal Pradesh, focusing on teacher education.</li>
+                  </ol>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Cultural Research" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Education in Arunachal Pradesh has made significant progress in recent years, with the establishment of new institutions and improved infrastructure. However, challenges remain due to the state's remote location, difficult terrain, and diverse tribal population. The government and various organizations continue to work towards providing quality education to all residents of this beautiful northeastern state.</p>
+        </div>
+        <br><br>
+
+      </div>
+
+
+    </div>
+  </div>
+  </div>
+</body>
+
+</html>

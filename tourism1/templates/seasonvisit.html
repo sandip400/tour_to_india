@@ -1,0 +1,1558 @@
+{% extends "base.html" %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% comment %} <title>Discover India's Wonders - Travel Booking</title> {% endcomment %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-orange: #ea580c;
+            --primary-amber: #f59e0b;
+            --light-orange: #fed7aa;
+            --light-amber: #fef3c7;
+            --light-yellow: #fefce8;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #fef7ed 0%, #fef3c7 50%, #fefce8 100%);
+            min-height: 100vh;
+        }
+
+        .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .hero-section {
+            height: 100vh;
+            background: linear-gradient(rgba(234, 88, 12, 0.7), rgba(245, 158, 11, 0.7)), url('https://www.dsij.in/Portals/0/EasyDNNNews/9568/images/img-tourism-800-417-p-L-97.JPG');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content {
+            z-index: 10;
+            max-width: 800px;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .btn-hero {
+            background: var(--primary-orange);
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.125rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-hero:hover {
+            background: var(--primary-amber);
+            transform: scale(1.05);
+        }
+
+        .trip-card {
+            background: white;
+            border: none;
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .trip-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .trip-image {
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .trip-card:hover .trip-image {
+            transform: scale(1.1);
+        }
+
+        .trip-image-container {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .rating-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--primary-orange);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        .trip-title {
+            color: var(--primary-orange);
+            font-weight: 700;
+            transition: color 0.3s ease;
+        }
+
+        .trip-card:hover .trip-title {
+            color: var(--primary-amber);
+        }
+
+        .price-text {
+            color: var(--primary-orange);
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .btn-details {
+            background: var(--primary-amber);
+            border: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-details:hover {
+            background: var(--primary-orange);
+            transform: scale(1.05);
+        }
+
+        .month-header {
+            color: var(--primary-orange);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .modal-header-custom {
+            background: linear-gradient(135deg, var(--primary-orange), var(--primary-amber));
+            color: white;
+            border-radius: 0.5rem 0.5rem 0 0;
+        }
+
+        .highlight-box {
+            background: #fef7ed;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .highlight-box.amber {
+            background: #fef3c7;
+        }
+
+        .section-title {
+            color: var(--primary-orange);
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .text-muted-custom {
+            color: #6b7280;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title font-serif">Discover India's Wonders</h1>
+            <p class="hero-subtitle">Embark on unforgettable journeys through India's diverse landscapes and rich heritage</p>
+            <button class="btn btn-primary btn-hero" onclick="scrollToTrips()">
+                Explore Trips
+            </button>
+        </div>
+    </section>
+
+    <!-- Monthly Trips Section -->
+    <section id="trips" class="py-5">
+        <div class="container">
+            <h2 class="section-title font-serif">Year-Round Adventures</h2>
+            
+            <!-- January Trips -->
+            <div class="mb-5">
+                <div class="month-header font-serif">
+                    <i class="fas fa-calendar-alt me-3"></i>January
+                </div>
+                <div class="row g-4" id="january-trips">
+                    <!-- Trip cards will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- February Trips -->
+            <div class="mb-5">
+                <div class="month-header font-serif">
+                    <i class="fas fa-calendar-alt me-3"></i>February
+                </div>
+                <div class="row g-4" id="february-trips">
+                    <!-- Trip cards will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- March Trips -->
+            <div class="mb-5">
+                <div class="month-header font-serif">
+                    <i class="fas fa-calendar-alt me-3"></i>March
+                </div>
+                <div class="row g-4" id="march-trips">
+                    <!-- Trip cards will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- April Trips -->
+            <div class="mb-5">
+                <div class="month-header font-serif">
+                    <i class="fas fa-calendar-alt me-3"></i>April
+                </div>
+                <div class="row g-4" id="april-trips">
+                    <!-- Trip cards will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- May Trips -->
+            <div class="mb-5">
+                <div class="month-header font-serif">
+                    <i class="fas fa-calendar-alt me-3"></i>May
+                </div>
+                <div class="row g-4" id="may-trips">
+                    <!-- Trip cards will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- June Trips -->
+            <div class="mb-5">
+                <div class="month-header font-serif">
+                    <i class="fas fa-calendar-alt me-3"></i>June
+                </div>
+                <div class="row g-4" id="june-trips">
+                    <!-- Trip cards will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- July Trips -->
+            <div class="mb-5">
+                <div class="month-header font-serif">
+                    <i class="fas fa-calendar-alt me-3"></i>July
+                </div>
+                <div class="row g-4" id="july-trips">
+                    <!-- Trip cards will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- August Trips -->
+            <div class="mb-5">
+                <div class="month-header font-serif">
+                    <i class="fas fa-calendar-alt me-3"></i>August
+                </div>
+                <div class="row g-4" id="august-trips">
+                    <!-- Trip cards will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- September Trips -->
+            <div class="mb-5">
+                <div class="month-header font-serif">
+                    <i class="fas fa-calendar-alt me-3"></i>September
+                </div>
+                <div class="row g-4" id="september-trips">
+                    <!-- Trip cards will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- October Trips -->
+            <div class="mb-5">
+                <div class="month-header font-serif">
+                    <i class="fas fa-calendar-alt me-3"></i>October
+                </div>
+                <div class="row g-4" id="october-trips">
+                    <!-- Trip cards will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- November Trips -->
+            <div class="mb-5">
+                <div class="month-header font-serif">
+                    <i class="fas fa-calendar-alt me-3"></i>November
+                </div>
+                <div class="row g-4" id="november-trips">
+                    <!-- Trip cards will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- December Trips -->
+            <div class="mb-5">
+                <div class="month-header font-serif">
+                    <i class="fas fa-calendar-alt me-3"></i>December
+                </div>
+                <div class="row g-4" id="december-trips">
+                    <!-- Trip cards will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trip Details Modal -->
+    <div class="modal fade" id="tripModal" tabindex="-1" aria-labelledby="tripModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header modal-header-custom">
+                    <div>
+                        <h5 class="modal-title" id="tripModalLabel">Trip Name</h5>
+                        <div class="d-flex align-items-center mt-2">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            <span id="tripLocation">Location</span>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <img id="tripModalImage" src="/placeholder.svg" alt="Trip Image" class="img-fluid rounded mb-4" style="height: 300px; width: 100%; object-fit: cover;">
+                            
+                            <div class="row g-3">
+                                <div class="col-6">
+                                    <div class="highlight-box">
+                                        <i class="fas fa-clock text-warning mb-2" style="font-size: 1.5rem;"></i>
+                                        <div class="fw-bold" id="tripDuration">Duration</div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="highlight-box amber">
+                                        <i class="fas fa-star text-warning mb-2" style="font-size: 1.5rem;"></i>
+                                        <div class="fw-bold" id="tripRating">Rating</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <h4 class="text-warning mb-3">Trip Overview</h4>
+                            <p class="text-muted-custom mb-4" id="tripOverview">Overview text</p>
+                            
+                            <h4 class="text-warning mb-2">Highlights</h4>
+                            <ul class="list-unstyled mb-4" id="tripHighlights">
+                                <!-- Highlights will be populated by JavaScript -->
+                            </ul>
+                            
+                            <h4 class="text-warning mb-2">Package Includes</h4>
+                            <ul class="list-unstyled mb-4" id="tripIncludes">
+                                <!-- Includes will be populated by JavaScript -->
+                            </ul>
+                            
+                            <h4 class="text-warning mb-2">Transportation</h4>
+                            <div class="d-flex flex-wrap gap-2 mb-4" id="tripTransport">
+                                <!-- Transport badges will be populated by JavaScript -->
+                            </div>
+                            
+                            <div class="text-center">
+                                <div class="price-text mb-2" id="tripPrice">₹0</div>
+                                <div class="text-muted-custom small">per person</div>
+                                <button class="btn btn-warning btn-lg mt-3 px-4">Book Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Trip data (same as original React component)
+        const tripData = {
+            January: [
+                {
+                    id: "jan-1",
+                    name: "Golden Triangle Tour",
+                    location: "Delhi - Agra - Jaipur",
+                    image: "https://media.istockphoto.com/id/1135820309/photo/amber-fort-and-maota-lake-jaipur-rajasthan-india.jpg?s=1024x1024&w=is&k=20&c=GzMFwHZE6rktQgOnEnVXQLm3-MPxHF1K6lY6g91O3Kc=",
+                    days: 6,
+                    nights: 5,
+                    rate: 25999,
+                    rating: 4.8,
+                    overview: "Experience India's most iconic destinations in this classic Golden Triangle tour. Visit the majestic Taj Mahal, explore the vibrant Pink City of Jaipur, and discover the rich history of Delhi.",
+                    highlights: ["Taj Mahal at sunrise", "Amber Fort elephant ride", "Red Fort exploration", "Local cuisine tasting"],
+                    includes: ["Accommodation", "Breakfast", "Transportation", "Guide"],
+                    transport: ["Flight", "Car", "Train"],
+                },
+                {
+                    id: "jan-2",
+                    name: "Kerala Backwaters",
+                    location: "Alleppey - Kumarakom",
+                    image: "https://media.istockphoto.com/id/472560436/photo/houseboat-in-southern-india.jpg?s=1024x1024&w=is&k=20&c=aXxsyoBy1jOf6gDLNKmemNzvc25zBemLA6TmK59nIek=",
+                    days: 4,
+                    nights: 3,
+                    rate: 18999,
+                    rating: 4.7,
+                    overview: "Cruise through the serene backwaters of Kerala on a traditional houseboat. Experience the tranquil beauty of coconut groves, paddy fields, and local village life.",
+                    highlights: ["Houseboat stay", "Backwater cruise", "Village visits", "Ayurvedic spa"],
+                    includes: ["Houseboat accommodation", "All meals", "Transfers", "Activities"],
+                    transport: ["Flight", "Car"],
+                },
+                {
+                    id: "jan-3",
+                    name: "Rajasthan Royal Tour",
+                    location: "Udaipur - Jodhpur - Jaisalmer",
+                    image: "https://media.istockphoto.com/id/163851503/photo/indian-palace.jpg?s=1024x1024&w=is&k=20&c=BGlFvRNcStWZf9bxrnGd7c2yhFhVUlSB6d67G84THm4=",
+                    days: 8,
+                    nights: 7,
+                    rate: 35999,
+                    rating: 4.9,
+                    overview: "Immerse yourself in the royal heritage of Rajasthan. Stay in palace hotels, explore magnificent forts, and experience the desert culture of the Thar.",
+                    highlights: ["Palace hotel stays", "Desert safari", "Folk performances", "Heritage walks"],
+                    includes: ["Luxury accommodation", "All meals", "Transportation", "Activities"],
+                    transport: ["Flight", "Car"],
+                },
+                {
+                    id: "jan-4",
+                    name: "Goa Beach Holiday",
+                    location: "North & South Goa",
+                    image: "https://media.istockphoto.com/id/157579910/photo/the-beach.jpg?s=1024x1024&w=is&k=20&c=Gmo1XXJdUQqps6eaSmCTYGUzyi69r_f1o5w8whuvGUc=",
+                    days: 5,
+                    nights: 4,
+                    rate: 15999,
+                    rating: 4.6,
+                    overview: "Relax on pristine beaches, enjoy water sports, and experience the vibrant nightlife of Goa. Perfect blend of relaxation and adventure.",
+                    highlights: ["Beach activities", "Water sports", "Portuguese heritage", "Nightlife"],
+                    includes: ["Beach resort stay", "Breakfast", "Airport transfers", "Activities"],
+                    transport: ["Flight", "Car"],
+                },
+                {
+                    id: "jan-5",
+                    name: "Himachal Adventure",
+                    location: "Manali - Rohtang Pass",
+                    image: "https://media.istockphoto.com/id/1371289822/photo/himalayan-village-town-of-kalpa-with-kailash-mountain-snow-peaks-at-himachal-pradesh-india.jpg?s=1024x1024&w=is&k=20&c=LLOc3mqHeJSKvsqwVJRpL9p-RokC88gP34eaGAwLCT8=",
+                    days: 6,
+                    nights: 5,
+                    rate: 22999,
+                    rating: 4.5,
+                    overview: "Adventure in the snow-capped mountains of Himachal Pradesh. Enjoy skiing, paragliding, and breathtaking mountain views.",
+                    highlights: ["Snow activities", "Adventure sports", "Mountain views", "Local culture"],
+                    includes: ["Mountain resort", "Meals", "Activities", "Equipment"],
+                    transport: ["Flight", "Car"],
+                },
+                {
+                    id: "jan-6",
+                    name: "Tamil Nadu Temple Tour",
+                    location: "Chennai - Madurai - Thanjavur",
+                    image: "https://media.istockphoto.com/id/468012514/photo/kanchipuram-india-1300-year-old-kailasanathar-temple-circumambulatory-passage.jpg?s=1024x1024&w=is&k=20&c=buX1jggFIiouPvxDTt6nB7ZbB5xAmx862cWtY8F8qoA=",
+                    days: 7,
+                    nights: 6,
+                    rate: 28999,
+                    rating: 4.7,
+                    overview: "Explore the magnificent Dravidian temples of Tamil Nadu. Witness ancient architecture, spiritual rituals, and rich cultural heritage.",
+                    highlights: ["Ancient temples", "Cultural performances", "Local cuisine", "Heritage sites"],
+                    includes: ["Accommodation", "Meals", "Transportation", "Guide"],
+                    transport: ["Flight", "Car", "Train"],
+                },
+            ],
+            February: [
+                {
+                    id: "feb-1",
+                    name: "Andaman Islands",
+                    location: "Port Blair - Havelock",
+                    image: "https://media.istockphoto.com/id/666238696/photo/longtail-boats-phi-phi-islands-thailand.jpg?s=1024x1024&w=is&k=20&c=EhWWo0CiRw1z6SUwEWQIYBpkUxI-9vlFnpo8wH_tpoI=",
+                    days: 6,
+                    nights: 5,
+                    rate: 32999,
+                    rating: 4.8,
+                    overview: "Discover pristine beaches, crystal clear waters, and vibrant marine life in the Andaman Islands. Perfect for water sports and relaxation.",
+                    highlights: ["Scuba diving", "Beach hopping", "Water sports", "Island exploration"],
+                    includes: ["Island resort", "All meals", "Activities", "Transfers"],
+                    transport: ["Flight", "Ferry"],
+                },
+                {
+                    id: "feb-2",
+                    name: "Ladakh Winter Trek",
+                    location: "Leh - Nubra Valley",
+                    image: "https://media.istockphoto.com/id/2201955151/photo/majestic-snow-covered-peaks-rise-above-verdant-valleys-in-jammu-and-kashmir-ladakh-showcasing.jpg?s=1024x1024&w=is&k=20&c=Q55D0_W-5IydEXCOR6t7x-41OiMFPCs9EzCA7GD0LBg=",
+                    days: 8,
+                    nights: 7,
+                    rate: 45999,
+                    rating: 4.9,
+                    overview: "Experience the stark beauty of Ladakh in winter. Visit ancient monasteries, frozen lakes, and enjoy the unique high-altitude desert landscape.",
+                    highlights: ["Monastery visits", "Frozen lake trek", "Local culture", "Mountain views"],
+                    includes: ["Guesthouse stay", "Meals", "Permits", "Guide"],
+                    transport: ["Flight", "Car"],
+                },
+                {
+                    id: "feb-3",
+                    name: "Mysore Dasara Festival",
+                    location: "Mysore - Coorg",
+                    image: "https://media.istockphoto.com/id/1318678358/photo/mysore-palace-during-dasara-festival-celebration.jpg?s=1024x1024&w=is&k=20&c=QctYuavo46cIuoLsio6wi4BZzrUIFyWJivz7Qm39-vI=",
+                    days: 5,
+                    nights: 4,
+                    rate: 19999,
+                    rating: 4.6,
+                    overview: "Witness the grand Mysore Dasara festival with royal processions, cultural performances, and illuminated palace. Extend to coffee plantations of Coorg.",
+                    highlights: ["Dasara festival", "Palace illumination", "Coffee plantations", "Cultural shows"],
+                    includes: ["Hotel stay", "Breakfast", "Festival tickets", "Transfers"],
+                    transport: ["Flight", "Car"],
+                },
+                {
+                    id: "feb-4",
+                    name: "Pushkar Camel Fair",
+                    location: "Pushkar - Ajmer",
+                    image: "https://media.istockphoto.com/id/1182317509/photo/camels-at-the-annual-pushkar-camel-fair-in-india.jpg?s=1024x1024&w=is&k=20&c=0-HYksdv7NuP-5NFjEV5nScjz0kZ5hYNZNXklHEoqxQ=",
+                    days: 4,
+                    nights: 3,
+                    rate: 16999,
+                    rating: 4.5,
+                    overview: "Experience the vibrant Pushkar Camel Fair, one of India's most colorful festivals. Enjoy camel races, folk performances, and desert camping.",
+                    highlights: ["Camel fair", "Desert camping", "Folk performances", "Local markets"],
+                    includes: ["Desert camp", "Meals", "Activities", "Transportation"],
+                    transport: ["Flight", "Car"],
+                },
+                {
+                    id: "feb-5",
+                    name: "Sundarbans Wildlife",
+                    location: "Sundarbans National Park",
+                    image: "https://media.istockphoto.com/id/1045841548/photo/tiger-drinking-water-from-river.jpg?s=1024x1024&w=is&k=20&c=B3xSG2-MTj9rwEcmTrsEuHBq8xkgXFG1u7sNdfM7DXQ=",
+                    days: 3,
+                    nights: 2,
+                    rate: 14999,
+                    rating: 4.4,
+                    overview: "Explore the world's largest mangrove forest and spot the elusive Royal Bengal Tiger. Cruise through the delta waterways and experience unique ecosystem.",
+                    highlights: ["Tiger spotting", "Mangrove cruise", "Bird watching", "Local villages"],
+                    includes: ["Boat accommodation", "All meals", "Safari", "Guide"],
+                    transport: ["Car", "Boat"],
+                },
+                {
+                    id: "feb-6",
+                    name: "Hampi Heritage Walk",
+                    location: "Hampi - Badami",
+                    image: "https://media.istockphoto.com/id/916284412/photo/stepped-tank-in-hampi-a-unesco-world-heritage-site.jpg?s=1024x1024&w=is&k=20&c=7UjoNTG5qBxQPTeeoBivRhvaCQkA3I1bcCK0EDcxMUA=",
+                    days: 4,
+                    nights: 3,
+                    rate: 17999,
+                    rating: 4.7,
+                    overview: "Walk through the ruins of the Vijayanagar Empire at Hampi. Explore ancient temples, royal complexes, and cave temples of Badami.",
+                    highlights: ["Ancient ruins", "Temple architecture", "Cave temples", "Heritage walks"],
+                    includes: ["Heritage hotel", "Breakfast", "Guide", "Transfers"],
+                    transport: ["Flight", "Car"],
+                },
+            ],
+            March: [
+                {
+                    id: "mar-1",
+                    name: "Holi Festival Tour",
+                    location: "Mathura - Vrindavan",
+                    image: "https://media.istockphoto.com/id/1141604525/photo/lathmar-holi-festival-in-nandgaon-india-2019.jpg?s=1024x1024&w=is&k=20&c=IYkl_9dq19apMZWj0e7b1iDsNG4FtTQ6SQm12Io50Ig=",
+                    days: 3,
+                    nights: 2,
+                    rate: 12999,
+                    rating: 4.8,
+                    overview: "Celebrate the festival of colors in the birthplace of Lord Krishna. Experience the most authentic Holi celebrations with locals.",
+                    highlights: ["Holi celebrations", "Temple visits", "Cultural immersion", "Local cuisine"],
+                    includes: ["Hotel stay", "Meals", "Festival participation", "Guide"],
+                    transport: ["Car", "Train"],
+                },
+                {
+                    id: "mar-2",
+                    name: "Sikkim Rhododendron",
+                    location: "Gangtok - Pelling",
+                    image: "https://media.istockphoto.com/id/1341096722/photo/rhododendron-multicolored.jpg?s=1024x1024&w=is&k=20&c=QH06ujLesyo5_PVbHRUWCwSWb8u3RT9WJ_2EEEldzl0=",
+                    days: 6,
+                    nights: 5,
+                    rate: 26999,
+                    rating: 4.7,
+                    overview: "Witness the blooming rhododendrons in Sikkim's mountains. Enjoy panoramic views of Kanchenjunga and visit ancient monasteries.",
+                    highlights: ["Rhododendron blooms", "Mountain views", "Monasteries", "Local culture"],
+                    includes: ["Mountain resort", "All meals", "Sightseeing", "Permits"],
+                    transport: ["Flight", "Car"],
+                },
+                {
+                    id: "mar-3",
+                    name: "Konark Sun Temple",
+                    location: "Bhubaneswar - Puri",
+                    image: "https://media.istockphoto.com/id/2184269223/photo/a-stone-wheel-engraved-in-the-walls-of-konark-sun-temple-isolated-white-background.jpg?s=1024x1024&w=is&k=20&c=6HRg7RpxKC0sIQE3V_Y5SpwDnshFmu-s_iUUtgQHCQ0=",
+                    days: 4,
+                    nights: 3,
+                    rate: 15999,
+                    rating: 4.6,
+                    overview: "Explore the architectural marvel of Konark Sun Temple and the spiritual city of Puri. Experience Odisha's rich cultural heritage.",
+                    highlights: ["Sun Temple", "Jagannath Temple", "Beach time", "Local crafts"],
+                    includes: ["Hotel accommodation", "Breakfast", "Sightseeing", "Transfers"],
+                    transport: ["Flight", "Car"],
+                },
+                {
+                    id: "mar-4",
+                    name: "Meghalaya Waterfalls",
+                    location: "Shillong - Cherrapunji",
+                    image: "https://media.istockphoto.com/id/1192120511/photo/nohkalikai-waterfall-in-cherrapunji.jpg?s=1024x1024&w=is&k=20&c=XbNrUq5i6Su6fntx1wvEXgujkeRrG_aVhBvcurJJPRU=",
+                    days: 5,
+                    nights: 4,
+                    rate: 21999,
+                    rating: 4.5,
+                    overview: "Discover the wettest place on earth and magnificent waterfalls of Meghalaya. Experience living root bridges and pristine nature.",
+                    highlights: ["Living root bridges", "Waterfalls", "Cave exploration", "Local tribes"],
+                    includes: ["Eco resort", "Meals", "Trekking", "Guide"],
+                    transport: ["Flight", "Car"],
+                },
+                {
+                    id: "mar-5",
+                    name: "Rann of Kutch",
+                    location: "Bhuj - White Desert",
+                    image: "https://media.istockphoto.com/id/803612302/photo/multicolored-sunset-landscape-silhouette-of-the-great-rann-of-kutch-gujarat.jpg?s=1024x1024&w=is&k=20&c=-ie9dbF6pET4B5_9t1pU8qH4q5lOK2yjazia_Qdr98c=",
+                    days: 4,
+                    nights: 3,
+                    rate: 18999,
+                    rating: 4.7,
+                    overview: "Experience the surreal white desert of Kutch during the Rann Utsav. Enjoy cultural performances, handicrafts, and desert camping.",
+                    highlights: ["White desert", "Cultural festival", "Handicrafts", "Desert camping"],
+                    includes: ["Desert resort", "All meals", "Cultural shows", "Activities"],
+                    transport: ["Flight", "Car"],
+                },
+                {
+                    id: "mar-6",
+                    name: "Coorg Coffee Trail",
+                    location: "Coorg - Chikmagalur",
+                    image: "https://media.istockphoto.com/id/641508828/photo/coffee-plantation.jpg?s=1024x1024&w=is&k=20&c=3J-yOYzSFqR3jg-oI21tBOVjU_azdFAExpadpQeuarA=",
+                    days: 4,
+                    nights: 3,
+                    rate: 16999,
+                    rating: 4.4,
+                    overview: "Explore the coffee plantations of Karnataka. Learn about coffee cultivation, enjoy plantation stays, and experience hill station charm.",
+                    highlights: ["Coffee plantations", "Plantation stay", "Trekking", "Local cuisine"],
+                    includes: ["Plantation resort", "All meals", "Plantation tours", "Activities"],
+                    transport: ["Flight", "Car"],
+                },
+            ],
+            April: [
+                {
+                    id: "apr-1",
+                    name: "Kashmir Valley",
+                    location: "Srinagar - Gulmarg - Pahalgam",
+                    image: "https://media.istockphoto.com/id/1128044709/photo/view-of-the-mountainous-landscape-of-the-himalayas-zozila-pass-jammu-and-kashmir-ladakh.jpg?s=1024x1024&w=is&k=20&c=D_x0vTlQT0tXH2uqy9KtVbrwJALkd4YCE__rXLrP5vU=",
+                    days: 7,
+                    nights: 6,
+                    rate: 34999,
+                    rating: 4.9,
+                    overview: "Experience paradise on earth as Kashmir blooms in spring. Stay in houseboats, enjoy shikara rides, and witness the valley's natural beauty.",
+                    highlights: ["Houseboat stay", "Shikara rides", "Mughal gardens", "Snow activities"],
+                    includes: ["Houseboat & hotels", "All meals", "Sightseeing", "Activities"],
+                    transport: ["Flight", "Car"],
+                },
+                {
+                    id: "apr-2",
+                    name: "Uttarakhand Char Dham",
+                    location: "Haridwar - Rishikesh - Kedarnath",
+                    image: "https://media.istockphoto.com/id/2156329181/photo/char-dham.jpg?s=1024x1024&w=is&k=20&c=fYYKqQYmPaPd1QGnbF5HdMpV2PeFtJ43qkPDefHzGiY=",
+                    days: 8,
+                    nights: 7,
+                    rate: 29999,
+                    rating: 4.6,
+                    overview: "Embark on the sacred Char Dham Yatra. Visit the holy shrines nestled in the Himalayas and experience spiritual awakening.",
+                    highlights: ["Sacred temples", "Himalayan views", "Spiritual journey", "River Ganga"],
+                    includes: ["Dharamshala stay", "Meals", "Transportation", "Guide"],
+                    transport: ["Flight", "Car"],
+                },
+                {
+                    id: "apr-3",
+                    name: "Assam Tea Gardens",
+                    location: "Guwahati - Kaziranga",
+                    image: "https://media.istockphoto.com/id/515584927/photo/tea-gardens-in-munnar.jpg?s=1024x1024&w=is&k=20&c=jR-f0OuWbB-_t0YWmXwXzUJeIinp7WQmsKU7oYZlPEY=",
+                    days: 5,
+                    nights: 4,
+                    rate: 23999,
+                    rating: 4.7,
+                    overview: "Explore the lush tea gardens of Assam and spot one-horned rhinos at Kaziranga National Park. Experience Northeast India's unique culture.",
+                    highlights: ["Tea garden tours", "Rhino safari", "River cruise", "Local culture"],
+                    includes: ["Tea estate stay", "All meals", "Safari", "Activities"],
+                    transport: ["Flight", "Car"],
+                },
+                {
+                    id: "apr-4",
+                    name: "Baisakhi Punjab",
+                    location: "Amritsar - Chandigarh",
+                    image: "https://media.istockphoto.com/id/478673422/photo/golden-temple-amritsar.jpg?s=1024x1024&w=is&k=20&c=gPD3D4SSqarAuqm0vPbycdT-VXNgZBvPRGDFz0jmRTQ=",
+                    days: 4,
+                    nights: 3,
+                    rate: 17999,
+                    rating: 4.5,
+                    overview: "Celebrate Baisakhi in Punjab with vibrant festivities. Visit the Golden Temple, experience Punjabi culture, and enjoy traditional celebrations.",
+                    highlights: ["Baisakhi celebrations", "Golden Temple", "Punjabi culture", "Folk performances"],
+                    includes: ["Hotel stay", "Meals", "Cultural activities", "Transfers"],
+                    transport: ["Flight", "Car"],
+                },
+                {
+                    id: "apr-5",
+                    name: "Orchha Heritage",
+                    location: "Orchha - Khajuraho",
+                    image: "https://media.istockphoto.com/id/186815471/photo/cenotaphs-in-orchha-india.jpg?s=1024x1024&w=is&k=20&c=OFjTfdJ1mF-876fpV1ACLgbmYmidfpI-1V0ostCxdO8=",
+                    days: 4,
+                    nights: 3,
+                    rate: 19999,
+                    rating: 4.6,
+                    overview: "Discover the hidden gem of Orchha with its magnificent palaces and temples. Combine with the famous temples of Khajuraho.",
+                    highlights: ["Palace complex", "Temple architecture", "Heritage walks", "Light & sound show"],
+                    includes: ["Heritage hotel", "Breakfast", "Sightseeing", "Guide"],
+                    transport: ["Flight", "Car", "Train"],
+                },
+                {
+                    id: "apr-6",
+                    name: "Andhra Pradesh Temples",
+                    location: "Tirupati - Srikalahasti",
+                    image: "https://media.istockphoto.com/id/480777502/photo/kodandarama-swamy-temple.jpg?s=1024x1024&w=is&k=20&c=iO4gI_royWyKyV1FcAYfBsQpGt2by03lrZ1P0lIv4UA=",
+                    days: 3,
+                    nights: 2,
+                    rate: 13999,
+                    rating: 4.4,
+                    overview: "Visit the sacred temples of Andhra Pradesh. Experience the spiritual energy of Tirupati Balaji and other ancient temples.",
+                    highlights: ["Temple visits", "Spiritual experience", "Local cuisine", "Cultural immersion"],
+                    includes: ["Hotel accommodation", "Meals", "Temple visits", "Transfers"],
+                    transport: ["Flight", "Car", "Train"],
+                },
+            ],
+            May: [
+                {
+                    id: "may-1",
+                    name: "Spiti Valley Adventure",
+                    location: "Kaza - Key Monastery",
+                    image: "https://media.istockphoto.com/id/1439217764/photo/vertical-shot-of-spiti-valley-in-winter-with-frozen-river-and-snow-peak-mountains.jpg?s=1024x1024&w=is&k=20&c=-n62icdTndiQHmAhzrYRw1BxMAeTjacfpWU9v_vWPLE=",
+                    days: 8,
+                    nights: 7,
+                    rate: 39999,
+                    rating: 4.8,
+                    overview: "Explore the cold desert of Spiti Valley. Visit ancient monasteries, experience Tibetan culture, and witness breathtaking landscapes.",
+                    highlights: ["High altitude desert", "Ancient monasteries", "Tibetan culture", "Adventure activities"],
+                    includes: ["Guesthouse stay", "Meals", "Permits", "Guide"],
+                    transport: ["Flight", "Car"],
+                },
+                {
+                    id: "may-2",
+                    name: "Ooty Hill Station",
+                    location: "Ooty - Coonoor",
+                    image: "https://media.istockphoto.com/id/92007526/photo/ooty-indian-city.jpg?s=1024x1024&w=is&k=20&c=V9acQDPYWYdo7g20OeSHlnv4v3wv0G7JlU04V2fE-Qg=",
+                    days: 4,
+                    nights: 3,
+                    rate: 16999,
+                    rating: 4.5,
+                    overview: "Escape to the Queen of Hill Stations. Enjoy toy train rides, botanical gardens, and pleasant weather in the Nilgiri Hills.",
+                    highlights: ["Toy train ride", "Botanical gardens", "Tea plantations", "Lake boating"],
+                    includes: ["Hill resort", "Breakfast", "Sightseeing", "Activities"],
+                    transport: ["Flight", "Car", "Train"],
+                },
+                {
+                    id: "may-3",
+                    name: "Darjeeling Tea Trail",
+                    location: "Darjeeling - Kalimpong",
+                    image: "https://media.istockphoto.com/id/1188859908/photo/landscape-of-lush-organic-green-tea-plantation-on-hills-during-monsoon-season-with-cloudy-sky.jpg?s=1024x1024&w=is&k=20&c=zS1CaxpGnGzWhfC3eMJF1YL4ksyk_3hCRUmSeRbpQ2s=",
+                    days: 5,
+                    nights: 4,
+                    rate: 22999,
+                    rating: 4.7,
+                    overview: "Experience the world-famous Darjeeling tea gardens. Enjoy sunrise views of Kanchenjunga and ride the heritage toy train.",
+                    highlights: ["Tea garden tours", "Sunrise views", "Toy train ride", "Himalayan views"],
+                    includes: ["Tea estate stay", "All meals", "Sightseeing", "Activities"],
+                    transport: ["Flight", "Car", "Train"],
+                },
+                {
+                    id: "may-4",
+                    name: "Munnar Hill Station",
+                    location: "Munnar - Thekkady",
+                    image: "https://media.istockphoto.com/id/627012646/photo/road-between-tea-plantation-around-munnar.jpg?s=1024x1024&w=is&k=20&c=h0oKrn6WOhxHdkzo7pqjYMZCcHXZJdXQdp1jC3WrwU0=",
+                    days: 5,
+                    nights: 4,
+                    rate: 20999,
+                    rating: 4.6,
+                    overview: "Discover the tea gardens and spice plantations of Kerala. Enjoy cool weather, scenic beauty, and wildlife at Periyar.",
+                    highlights: ["Tea plantations", "Spice gardens", "Wildlife sanctuary", "Scenic beauty"],
+                    includes: ["Hill resort", "All meals", "Plantation tours", "Safari"],
+                    transport: ["Flight", "Car"],
+                },
+                {
+                    id: "may-5",
+                    name: "Mount Abu Retreat",
+                    location: "Mount Abu - Udaipur",
+                    image: "https://media.istockphoto.com/id/1135654650/photo/toad-rock-mount-abu-02.jpg?s=1024x1024&w=is&k=20&c=tPI4Dk4C7bcS0SagaGDe2Ir3G4pZEsjMBlubPRWjC-o=",
+                    days: 4,
+                    nights: 3,
+                    rate: 18999,
+                    rating: 4.4,
+                    overview: "Cool off in Rajasthan's only hill station. Visit Dilwara Jain temples and enjoy the serene Nakki Lake.",
+                    highlights: ["Dilwara temples", "Nakki Lake", "Sunset Point", "Cool weather"],
+                    includes: ["Hill resort", "Breakfast", "Sightseeing", "Transfers"],
+                    transport: ["Flight", "Car"],
+                },
+                {
+                    id: "may-6",
+                    name: "Kodaikanal Princess",
+                    location: "Kodaikanal - Dindigul",
+                    image: "https://media.istockphoto.com/id/1168518748/photo/bear-shola-falls-kodaikanal-tamil-nadu-india.jpg?s=1024x1024&w=is&k=20&c=wYkoqmFfypaVc5uLcuyNjhD7D2rpOsoqhR-vWruPjv8=",
+                    days: 4,
+                    nights: 3,
+                    rate: 17999,
+                    rating: 4.5,
+                    overview: "Visit the Princess of Hill Stations. Enjoy boating in Kodai Lake, visit scenic viewpoints, and experience pleasant weather.",
+                    highlights: ["Kodai Lake", "Viewpoints", "Pleasant weather", "Nature walks"],
+                    includes: ["Hill resort", "Breakfast", "Boating", "Sightseeing"],
+                    transport: ["Flight", "Car"],
+                },
+            ],
+            June: [
+                {
+                    id: "jun-1",
+                    name: "Leh Ladakh Expedition",
+                    location: "Leh - Nubra - Pangong",
+                    image: "https://media.istockphoto.com/id/1297500238/photo/spituk-gompa-indus-valley-near-leh-ladakh-india.jpg?s=1024x1024&w=is&k=20&c=PsdJY0eJaNMoXyvYTB90AS7LrgSM83PqC8k-We8eXOQ=",
+                    days: 9,
+                    nights: 8,
+                    rate: 49999,
+                    rating: 4.9,
+                    overview: "Ultimate Ladakh adventure with high-altitude lakes, desert valleys, and ancient monasteries. Experience the roof of the world.",
+                    highlights: ["Pangong Lake", "Nubra Valley", "Monasteries", "High altitude adventure"],
+                    includes: ["Guesthouse stay", "All meals", "Permits", "Oxygen support"],
+                    transport: ["Flight", "Car"],
+                },
+                {
+                    id: "jun-2",
+                    name: "Rath Yatra Puri",
+                    location: "Puri - Konark",
+                    image: "https://media.istockphoto.com/id/1069137628/photo/top-of-the-jagannath-temple-puri-odisha-india.jpg?s=1024x1024&w=is&k=20&c=TjNBkUbHRL7nT1qHd2uW8YW5CuT6RU--xHaPZGD8Agc=",
+                    days: 3,
+                    nights: 2,
+                    rate: 14999,
+                    rating: 4.6,
+                    overview: "Witness the grand Rath Yatra festival in Puri. Experience one of India's most spectacular religious festivals.",
+                    highlights: ["Rath Yatra festival", "Jagannath Temple", "Beach time", "Cultural immersion"],
+                    includes: ["Hotel stay", "Meals", "Festival participation", "Transfers"],
+                    transport: ["Flight", "Car", "Train"],
+                },
+                {
+                    id: "jun-3",
+                    name: "Monsoon Kerala",
+                    location: "Wayanad - Munnar",
+                    image: "https://media.istockphoto.com/id/626224242/photo/heart-lake-at-the-top-of-hill-waynad-kerala.jpg?s=1024x1024&w=is&k=20&c=nUQZdPUkKwqd6cBl6s6-_ng46jaSxe_2AFTubz7RCIM=",
+                    days: 6,
+                    nights: 5,
+                    rate: 24999,
+                    rating: 4.7,
+                    overview: "Experience Kerala during monsoon season. Enjoy lush greenery, waterfalls, and Ayurvedic treatments in the rain.",
+                    highlights: ["Monsoon beauty", "Waterfalls", "Ayurvedic spa", "Lush landscapes"],
+                    includes: ["Resort stay", "All meals", "Spa treatments", "Activities"],
+                    transport: ["Flight", "Car"],
+                },
+                {
+                    id: "jun-4",
+                    name: "Himachal Monsoon",
+                    location: "Shimla - Manali",
+                    image: "https://media.istockphoto.com/id/2154677719/photo/the-various-views-of-jibhi-village.jpg?s=1024x1024&w=is&k=20&c=VRJtdnsIfQWreH9fs29gQ6Bdq_-3wA8fBeaKNkTHqc4=",
+                    days: 6,
+                    nights: 5,
+                    rate: 26999,
+                    rating: 4.5,
+                    overview: "Enjoy the monsoon charm of Himachal Pradesh. Experience misty mountains, lush valleys, and pleasant weather.",
+                    highlights: ["Monsoon landscapes", "Mountain views", "Pleasant weather", "Local culture"],
+                    includes: ["Hill resort", "Meals", "Sightseeing", "Activities"],
+                    transport: ["Flight", "Car"],
+                },
+                {
+                    id: "jun-5",
+                    name: "Goa Monsoon Magic",
+                    location: "North & South Goa",
+                    image: "https://media.istockphoto.com/id/1408164910/photo/vagator-beach-in-north-goa-on-a-windy-and-cloudy-day-during-monsoon-season.jpg?s=1024x1024&w=is&k=20&c=OR5uGQyfRXICZodn91s3wrNSgfbRAxD4scTZ64zkdKg=",
+                    days: 4,
+                    nights: 3,
+                    rate: 13999,
+                    rating: 4.4,
+                    overview: "Experience Goa's monsoon magic with lush greenery, waterfalls, and fewer crowds. Perfect for a peaceful getaway.",
+                    highlights: ["Monsoon beauty", "Waterfalls", "Less crowded", "Local experiences"],
+                    includes: ["Beach resort", "Breakfast", "Transfers", "Activities"],
+                    transport: ["Flight", "Car"],
+                },
+                {
+                    id: "jun-6",
+                    name: "Arunachal Pradesh",
+                    location: "Itanagar - Tawang",
+                    image: "https://media.istockphoto.com/id/910430170/photo/tawang-arunachal-pradesh.jpg?s=1024x1024&w=is&k=20&c=xPmnZZHEsmYH9R_s7QUCIyMPypJEPtHVGnpx7moUizU=",
+                    days: 7,
+                    nights: 6,
+                    rate: 32999,
+                    rating: 4.8,
+                    overview: "Explore the Land of Rising Sun. Visit Tawang Monastery, experience tribal culture, and enjoy pristine natural beauty.",
+                    highlights: ["Tawang Monastery", "Tribal culture", "Natural beauty", "Adventure activities"],
+                    includes: ["Guesthouse stay", "All meals", "Permits", "Guide"],
+                    transport: ["Flight", "Car"],
+                },
+            ],
+            July: [
+                {
+                    id: "jul-1",
+                    name: "Valley of Flowers",
+                    location: "Haridwar - Valley of Flowers",
+                    image: "https://www.mygoodtrip.in/wp-content/uploads/2020/08/1-lW05RlARF0vAhJMdVRGxVw.png",
+                    days: 6,
+                    nights: 5,
+                    rate: 28999,
+                    rating: 4.8,
+                    overview: "Trek to the UNESCO World Heritage Valley of Flowers. Witness a carpet of alpine flowers in full bloom during monsoon.",
+                    highlights: ["Alpine flowers", "Trekking", "UNESCO site", "Natural beauty"],
+                    includes: ["Trekking accommodation", "Meals", "Guide", "Permits"],
+                    transport: ["Flight", "Car"],
+                },
+                {
+                    id: "jul-2",
+                    name: "Amarnath Yatra",
+                    location: "Srinagar - Amarnath",
+                    image: "https://www.jodytravel.com/images/Amarnath-Yatra.jpg",
+                    days: 5,
+                    nights: 4,
+                    rate: 25999,
+                    rating: 4.7,
+                    overview: "Undertake the sacred Amarnath Yatra. Experience spiritual journey to the holy cave shrine in the Himalayas.",
+                    highlights: ["Sacred pilgrimage", "Ice lingam", "Spiritual journey", "Himalayan trek"],
+                    includes: ["Accommodation", "Meals", "Permits", "Guide"],
+                    transport: ["Flight", "Car"],
+                },
+                {
+                    id: "jul-3",
+                    name: "Monsoon Rajasthan",
+                    location: "Udaipur - Mount Abu",
+                    image: "https://www.rajasthanbest.com/image/cache/catalog/rajasthan-best-tours107-600x600.jpg",
+                    days: 5,
+                    nights: 4,
+                    rate: 21999,
+                    rating: 4.5,
+                    overview: "Experience Rajasthan during monsoon. Enjoy lush landscapes, filled lakes, and pleasant weather in the desert state.",
+                    highlights: ["Monsoon beauty", "Lake views", "Pleasant weather", "Palace stays"],
+                    includes: ["Palace hotel", "Breakfast", "Sightseeing", "Transfers"],
+                    transport: ["Flight", "Car"],
+                },
+                {
+                    id: "jul-4",
+                    name: "Western Ghats Trek",
+                    location: "Lonavala - Mahabaleshwar",
+                    image: "https://live-liamtra-blog.s3.ap-south-1.amazonaws.com/2020/07/main-22.jpg",
+                    days: 4,
+                    nights: 3,
+                    rate: 16999,
+                    rating: 4.6,
+                    overview: "Trek through the Western Ghats during monsoon. Experience waterfalls, misty mountains, and lush green landscapes.",
+                    highlights: ["Waterfall treks", "Monsoon landscapes", "Hill stations", "Adventure activities"],
+                    includes: ["Hill resort", "All meals", "Trekking", "Guide"],
+                    transport: ["Car", "Train"],
+                },
+                {
+                    id: "jul-5",
+                    name: "Monsoon Karnataka",
+                    location: "Chikmagalur - Coorg",
+                    image: "https://storage.justwravel.com/package/images/banner/detail_desktop/cropped/4-night-5-days-chikmagalur-and-coorg-tour-package-JustWravel-1597395229.jpg.webp",
+                    days: 5,
+                    nights: 4,
+                    rate: 19999,
+                    rating: 4.4,
+                    overview: "Explore Karnataka's hill stations during monsoon. Enjoy coffee plantations, waterfalls, and misty landscapes.",
+                    highlights: ["Coffee plantations", "Waterfalls", "Monsoon beauty", "Local cuisine"],
+                    includes: ["Plantation stay", "All meals", "Plantation tours", "Activities"],
+                    transport: ["Flight", "Car"],
+                },
+                {
+                    id: "jul-6",
+                    name: "Teej Festival Rajasthan",
+                    location: "Jaipur - Jodhpur",
+                    image: "https://www.tourmyindia.com/states/rajasthan/images/teej-festival2.jpg",
+                    days: 4,
+                    nights: 3,
+                    rate: 18999,
+                    rating: 4.5,
+                    overview: "Celebrate Teej festival in Rajasthan. Experience colorful celebrations, traditional music, and cultural performances.",
+                    highlights: ["Teej celebrations", "Cultural performances", "Traditional music", "Local cuisine"],
+                    includes: ["Heritage hotel", "Meals", "Cultural activities", "Transfers"],
+                    transport: ["Flight", "Car"],
+                },
+            ],
+            August: [
+                {
+                    id: "aug-1",
+                    name: "Independence Day Delhi",
+                    location: "Delhi - Agra",
+                    image: "https://i.cdn.newsbytesapp.com/images/l75420240815141355.jpeg?tr=w-720",
+                    days: 4,
+                    nights: 3,
+                    rate: 17999,
+                    rating: 4.6,
+                    overview: "Celebrate Independence Day in the national capital. Witness flag hoisting at Red Fort and explore India's heritage.",
+                    highlights: ["Independence Day ceremony", "Red Fort", "Historical monuments", "Patriotic fervor"],
+                    includes: ["Hotel stay", "Breakfast", "Sightseeing", "Transfers"],
+                    transport: ["Flight", "Car", "Train"],
+                },
+                {
+                    id: "aug-2",
+                    name: "Janmashtami Mathura",
+                    location: "Mathura - Vrindavan",
+                    image: "https://www.dailypioneer.com/uploads/2023/story/images/big/janmashtami-celebrated-with-fanfare-in-mathura-2023-09-07.jpg",
+                    days: 3,
+                    nights: 2,
+                    rate: 13999,
+                    rating: 4.7,
+                    overview: "Celebrate Lord Krishna's birthday in his birthplace. Experience devotional fervor and traditional celebrations.",
+                    highlights: ["Janmashtami celebrations", "Temple visits", "Cultural programs", "Devotional atmosphere"],
+                    includes: ["Hotel accommodation", "Meals", "Temple visits", "Cultural activities"],
+                    transport: ["Car", "Train"],
+                },
+                {
+                    id: "aug-3",
+                    name: "Monsoon Meghalaya",
+                    location: "Shillong - Mawlynnong",
+                    image: "https://media.tacdn.com/media/attractions-splice-spp-674x446/07/36/57/23.jpg",
+                    days: 5,
+                    nights: 4,
+                    rate: 23999,
+                    rating: 4.8,
+                    overview: "Experience Meghalaya at its wettest. Visit Asia's cleanest village, living root bridges, and spectacular waterfalls.",
+                    highlights: ["Living root bridges", "Cleanest village", "Waterfalls", "Tribal culture"],
+                    includes: ["Eco resort", "All meals", "Village visits", "Trekking"],
+                    transport: ["Flight", "Car"],
+                },
+                {
+                    id: "aug-4",
+                    name: "Raksha Bandhan Celebration",
+                    location: "Jaipur - Pushkar",
+                    image: "https://organiser.org/wp-content/uploads/2024/08/raksha_bandhan_getty_11_1.webp",
+                    days: 3,
+                    nights: 2,
+                    rate: 15999,
+                    rating: 4.5,
+                    overview: "Celebrate the bond of siblings during Raksha Bandhan. Experience traditional celebrations in colorful Rajasthan.",
+                    highlights: ["Raksha Bandhan celebrations", "Traditional ceremonies", "Local culture", "Festive atmosphere"],
+                    includes: ["Hotel stay", "Meals", "Cultural activities", "Transfers"],
+                    transport: ["Flight", "Car"],
+                },
+                {
+                    id: "aug-5",
+                    name: "Monsoon Goa",
+                    location: "Goa Countryside",
+                    image: "https://images.hindustantimes.com/rf/image_size_630x354/HT/p2/2017/06/24/Pictures/agonda-backwater-goa-india_b6cfc1fa-58ad-11e7-b50f-ad66c5ec5579.jpg",
+                    days: 4,
+                    nights: 3,
+                    rate: 14999,
+                    rating: 4.4,
+                    overview: "Discover Goa's monsoon beauty away from beaches. Explore spice plantations, waterfalls, and lush countryside.",
+                    highlights: ["Spice plantations", "Waterfalls", "Countryside", "Local experiences"],
+                    includes: ["Plantation stay", "All meals", "Plantation tours", "Activities"],
+                    transport: ["Flight", "Car"],
+                },
+                {
+                    id: "aug-6",
+                    name: "Onam Preparation Kerala",
+                    location: "Kochi - Alleppey",
+                    image: "https://www.indianholidaytrip.com/Upload/News/Img_9649_202240230641_News_Blog_23_Augt_min.jpg?w=740",
+                    days: 5,
+                    nights: 4,
+                    rate: 22999,
+                    rating: 4.6,
+                    overview: "Experience Kerala preparing for Onam festival. Witness cultural preparations, boat races, and traditional activities.",
+                    highlights: ["Onam preparations", "Boat races", "Cultural activities", "Traditional cuisine"],
+                    includes: ["Backwater resort", "All meals", "Cultural experiences", "Boat rides"],
+                    transport: ["Flight", "Car"],
+                },
+            ],
+            September: [
+                {
+                    id: "sep-1",
+                    name: "Onam Festival Kerala",
+                    location: "Kochi - Trivandrum",
+                    image: "https://www.thehosteller.com/_next/image/?url=https%3A%2F%2Fstatic.thehosteller.com%2Fhostel%2Fimages%2FIMG_boat_race.jpg%2FIMG_boat_race-1720182609568.jpg&w=1200&q=75",
+                    days: 6,
+                    nights: 5,
+                    rate: 26999,
+                    rating: 4.8,
+                    overview: "Celebrate Kerala's harvest festival Onam. Experience traditional boat races, cultural performances, and festive meals.",
+                    highlights: ["Onam celebrations", "Snake boat races", "Cultural performances", "Traditional feast"],
+                    includes: ["Resort stay", "All meals", "Cultural activities", "Boat race viewing"],
+                    transport: ["Flight", "Car"],
+                },
+                {
+                    id: "sep-2",
+                    name: "Ganesh Chaturthi Mumbai",
+                    location: "Mumbai - Pune",
+                    image: "https://cdn.abhibus.com/2024/09/Ganesh-Festival-Mumbai-696x385.jpg",
+                    days: 4,
+                    nights: 3,
+                    rate: 18999,
+                    rating: 4.7,
+                    overview: "Experience the grandest Ganesh Chaturthi celebrations in Mumbai. Witness elaborate processions and cultural fervor.",
+                    highlights: ["Ganesh processions", "Cultural celebrations", "Street festivals", "Local experiences"],
+                    includes: ["Hotel stay", "Meals", "Festival participation", "City tours"],
+                    transport: ["Flight", "Car", "Train"],
+                },
+                {
+                    id: "sep-3",
+                    name: "Post Monsoon Himachal",
+                    location: "Dharamshala - McLeod Ganj",
+                    image: "https://images.travelandleisureasia.com/wp-content/uploads/sites/2/2022/01/07105808/Untitled-design-1-8-e1643959704752.jpg?tr=w-1366,f-jpg,pr-true",
+                    days: 5,
+                    nights: 4,
+                    rate: 21999,
+                    rating: 4.6,
+                    overview: "Visit Himachal after monsoon for clear skies and fresh air. Experience Tibetan culture in the Dalai Lama's residence.",
+                    highlights: ["Clear mountain views", "Tibetan culture", "Monasteries", "Pleasant weather"],
+                    includes: ["Mountain resort", "Breakfast", "Monastery visits", "Cultural activities"],
+                    transport: ["Flight", "Car"],
+                },
+                {
+                    id: "sep-4",
+                    name: "Navratri Preparation Gujarat",
+                    location: "Ahmedabad - Vadodara",
+                    image: "https://www.tourmyindia.com/images/navratri-festival-gujarat1.jpg",
+                    days: 4,
+                    nights: 3,
+                    rate: 16999,
+                    rating: 4.5,
+                    overview: "Experience Gujarat preparing for Navratri. Learn traditional dances, visit temples, and enjoy cultural preparations.",
+                    highlights: ["Navratri preparations", "Garba dance", "Temple visits", "Cultural immersion"],
+                    includes: ["Hotel accommodation", "Meals", "Cultural activities", "Dance lessons"],
+                    transport: ["Flight", "Car"],
+                },
+                {
+                    id: "sep-5",
+                    name: "Karnataka Temples",
+                    location: "Belur - Halebid - Sravanabelagola",
+                    image: "https://karnatakatourism.org/wp-content/uploads/2020/05/Shravanabelagola.jpg",
+                    days: 4,
+                    nights: 3,
+                    rate: 19999,
+                    rating: 4.7,
+                    overview: "Explore the architectural marvels of Karnataka. Visit Hoysala temples and the towering Jain statue at Sravanabelagola.",
+                    highlights: ["Hoysala architecture", "Ancient temples", "Jain heritage", "Sculptural art"],
+                    includes: ["Heritage hotel", "Breakfast", "Guide", "Transfers"],
+                    transport: ["Flight", "Car"],
+                },
+                {
+                    id: "sep-6",
+                    name: "Uttarakhand Autumn",
+                    location: "Nainital - Ranikhet",
+                    image: "https://www.naturetravelagency.com/uploads/1711105196best%20time%20to%20visit%20Nainita.jpg",
+                    days: 5,
+                    nights: 4,
+                    rate: 20999,
+                    rating: 4.4,
+                    overview: "Experience Uttarakhand's autumn beauty. Enjoy clear mountain views, pleasant weather, and serene hill stations.",
+                    highlights: ["Autumn colors", "Lake views", "Mountain vistas", "Pleasant weather"],
+                    includes: ["Hill resort", "All meals", "Sightseeing", "Boating"],
+                    transport: ["Flight", "Car"],
+                },
+            ],
+            October: [
+                {
+                    id: "oct-1",
+                    name: "Navratri Gujarat",
+                    location: "Ahmedabad - Dwarka",
+                    image: "https://www.vibesofindia.com/wp-content/uploads/2024/10/download-2024-10-09t170610-890-930x527.png",
+                    days: 5,
+                    nights: 4,
+                    rate: 22999,
+                    rating: 4.9,
+                    overview: "Experience the most vibrant Navratri celebrations in Gujarat. Dance to Garba and Dandiya rhythms in colorful festivities.",
+                    highlights: ["Navratri celebrations", "Garba & Dandiya", "Cultural performances", "Traditional costumes"],
+                    includes: ["Hotel stay", "All meals", "Festival participation", "Cultural activities"],
+                    transport: ["Flight", "Car"],
+                },
+                {
+                    id: "oct-2",
+                    name: "Dussehra Mysore",
+                    location: "Mysore - Srirangapatna",
+                    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Mysore_palace_illuminated.jpg/1280px-Mysore_palace_illuminated.jpg",
+                    days: 4,
+                    nights: 3,
+                    rate: 19999,
+                    rating: 4.8,
+                    overview: "Witness the royal Dussehra celebrations in Mysore. Experience the grand procession and illuminated palace.",
+                    highlights: ["Royal Dussehra", "Palace procession", "Cultural shows", "Illuminated palace"],
+                    includes: ["Heritage hotel", "All meals", "Festival viewing", "Palace tours"],
+                    transport: ["Flight", "Car"],
+                },
+                {
+                    id: "oct-3",
+                    name: "Rajasthan Post Monsoon",
+                    location: "Jodhpur - Jaisalmer",
+                    image: "https://www.bharatbooking.com/admin/webroot/img/uploads/holiday-package-gallery/1700041730_97654-3n-4d-jodhpur-jaisalmer-tour-package-slider-image.webp",
+                    days: 6,
+                    nights: 5,
+                    rate: 28999,
+                    rating: 4.7,
+                    overview: "Explore Rajasthan after monsoon with pleasant weather. Visit the Blue City and Golden City with comfortable temperatures.",
+                    highlights: ["Pleasant weather", "Desert safari", "Fort visits", "Cultural experiences"],
+                    includes: ["Heritage hotels", "All meals", "Sightseeing", "Desert camp"],
+                    transport: ["Flight", "Car"],
+                },
+                {
+                    id: "oct-4",
+                    name: "Durga Puja Bengal",
+                    location: "Kolkata - Shantiniketan",
+                    image: "https://www.setmytrip.in/wp-content/uploads/2023/09/Beautiful-interior-of-decorated-Durga-Puja-pandal-at-Kolkata-West-Bengal-India.-Durga-Puja-is-biggest-religious-festival-of-Hinduism-1200x800.jpg",
+                    days: 5,
+                    nights: 4,
+                    rate: 21999,
+                    rating: 4.8,
+                    overview: "Experience the grandest Durga Puja celebrations in Bengal. Witness artistic pandals and cultural festivities.",
+                    highlights: ["Durga Puja celebrations", "Artistic pandals", "Cultural programs", "Traditional cuisine"],
+                    includes: ["Hotel accommodation", "Meals", "Pandal hopping", "Cultural activities"],
+                    transport: ["Flight", "Car", "Train"],
+                },
+                {
+                    id: "oct-5",
+                    name: "Karva Chauth Celebration",
+                    location: "Delhi - Mathura",
+                    image: "https://www.karwachauth.com/images/karwa-chauth-puja-process.jpg",
+                    days: 3,
+                    nights: 2,
+                    rate: 14999,
+                    rating: 4.5,
+                    overview: "Experience the traditional Karva Chauth celebrations. Witness the devotion and cultural significance of this festival.",
+                    highlights: ["Karva Chauth rituals", "Traditional ceremonies", "Cultural significance", "Local experiences"],
+                    includes: ["Hotel stay", "Meals", "Cultural activities", "Temple visits"],
+                    transport: ["Car", "Train"],
+                },
+                {
+                    id: "oct-6",
+                    name: "Goa Post Monsoon",
+                    location: "North & South Goa",
+                    image: "https://www.industraveller.com/wp-content/uploads/2019/04/Goa-Sightseeing.jpg",
+                    days: 5,
+                    nights: 4,
+                    rate: 18999,
+                    rating: 4.6,
+                    overview: "Visit Goa after monsoon for lush landscapes and pleasant weather. Enjoy beaches, waterfalls, and cultural sites.",
+                    highlights: ["Post-monsoon beauty", "Clean beaches", "Waterfalls", "Pleasant weather"],
+                    includes: ["Beach resort", "Breakfast", "Sightseeing", "Water activities"],
+                    transport: ["Flight", "Car"],
+                },
+            ],
+            November: [
+                {
+                    id: "nov-1",
+                    name: "Diwali Golden Triangle",
+                    location: "Delhi - Agra - Jaipur",
+                    image: "https://images.asiahighlights.com/allpicture/2020/01/1ce7cfa94db040dcaa147143_cut_2560x800_296.jpg",
+                    days: 6,
+                    nights: 5,
+                    rate: 29999,
+                    rating: 4.9,
+                    overview: "Celebrate Diwali in the Golden Triangle. Experience the festival of lights with illuminated monuments and cultural celebrations.",
+                    highlights: ["Diwali celebrations", "Illuminated monuments", "Cultural programs", "Traditional sweets"],
+                    includes: ["Luxury hotels", "All meals", "Festival celebrations", "Sightseeing"],
+                    transport: ["Flight", "Car"],
+                },
+                {
+                    id: "nov-2",
+                    name: "Pushkar Camel Fair",
+                    location: "Pushkar - Ajmer",
+                    image: "https://blog.holyvoyages.com/wp-content/uploads/2021/08/puskar-fair-festival-4-1536x992.jpg",
+                    days: 4,
+                    nights: 3,
+                    rate: 18999,
+                    rating: 4.8,
+                    overview: "Attend the famous Pushkar Camel Fair. Experience the vibrant desert festival with camel races and folk performances.",
+                    highlights: ["Camel fair", "Desert camping", "Folk performances", "Cultural immersion"],
+                    includes: ["Desert camp", "All meals", "Fair activities", "Cultural shows"],
+                    transport: ["Flight", "Car"],
+                },
+                {
+                    id: "nov-3",
+                    name: "Bhai Dooj Celebration",
+                    location: "Varanasi - Allahabad",
+                    image: "https://www.kreditbee.in/blog/content/images/size/w2000/2024/08/Blog-Image_Aug_35_Bhai-Dooj-Festival-in-India-2024.png",
+                    days: 4,
+                    nights: 3,
+                    rate: 17999,
+                    rating: 4.6,
+                    overview: "Celebrate Bhai Dooj in the spiritual cities. Experience the bond between siblings in traditional settings.",
+                    highlights: ["Bhai Dooj celebrations", "Spiritual atmosphere", "Traditional rituals", "Cultural experiences"],
+                    includes: ["Hotel accommodation", "Meals", "Cultural activities", "Temple visits"],
+                    transport: ["Flight", "Car", "Train"],
+                },
+                {
+                    id: "nov-4",
+                    name: "Goa Season Opening",
+                    location: "Goa Beaches",
+                    image: "https://s3.india.com/wp-content/uploads/2024/06/List-of-8-Famous-Beaches-Around-Goa.jpg?impolicy=Medium_Widthonly&w=800&h=541",
+                    days: 5,
+                    nights: 4,
+                    rate: 20999,
+                    rating: 4.7,
+                    overview: "Experience Goa as the tourist season begins. Enjoy perfect weather, clean beaches, and vibrant nightlife.",
+                    highlights: ["Perfect weather", "Beach activities", "Water sports", "Nightlife"],
+                    includes: ["Beach resort", "Breakfast", "Water activities", "Transfers"],
+                    transport: ["Flight", "Car"],
+                },
+                {
+                    id: "nov-5",
+                    name: "Rajasthan Winter",
+                    location: "Udaipur - Chittorgarh",
+                    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Chittorgarh_fort.JPG/1024px-Chittorgarh_fort.JPG",
+                    days: 5,
+                    nights: 4,
+                    rate: 24999,
+                    rating: 4.8,
+                    overview: "Explore Rajasthan in perfect winter weather. Visit the City of Lakes and historic Chittorgarh Fort.",
+                    highlights: ["Perfect weather", "Lake city", "Historic forts", "Royal heritage"],
+                    includes: ["Palace hotels", "All meals", "Sightseeing", "Cultural activities"],
+                    transport: ["Flight", "Car"],
+                },
+                {
+                    id: "nov-6",
+                    name: "Guru Nanak Jayanti",
+                    location: "Amritsar - Anandpur Sahib",
+                    image: "https://images.indianexpress.com/2015/11/gurunanak3.jpg?w=630",
+                    days: 3,
+                    nights: 2,
+                    rate: 15999,
+                    rating: 4.7,
+                    overview: "Celebrate Guru Nanak's birthday at Sikh holy places. Experience devotional atmosphere and community service.",
+                    highlights: ["Guru Nanak Jayanti", "Golden Temple", "Sikh heritage", "Community service"],
+                    includes: ["Gurdwara accommodation", "Langar meals", "Religious activities", "Cultural programs"],
+                    transport: ["Flight", "Car"],
+                },
+            ],
+            December: [
+                {
+                    id: "dec-1",
+                    name: "Christmas Goa",
+                    location: "Goa Churches & Beaches",
+                    image: "https://blog.lohono.com/wp-content/uploads/2024/10/christmas-goa-edited-1536x863.jpg",
+                    days: 5,
+                    nights: 4,
+                    rate: 24999,
+                    rating: 4.8,
+                    overview: "Celebrate Christmas in Goa with midnight mass, decorated churches, and beach festivities. Experience Portuguese heritage.",
+                    highlights: ["Christmas celebrations", "Midnight mass", "Beach parties", "Portuguese heritage"],
+                    includes: ["Beach resort", "All meals", "Christmas activities", "Church visits"],
+                    transport: ["Flight", "Car"],
+                },
+                {
+                    id: "dec-2",
+                    name: "New Year Rajasthan",
+                    location: "Jaipur - Udaipur",
+                    image: "https://www.gorajasthan.travel/blog/wp-content/uploads/2022/12/New-Year-Parties3-min-1200x664.jpg",
+                    days: 6,
+                    nights: 5,
+                    rate: 32999,
+                    rating: 4.9,
+                    overview: "Welcome the New Year in royal style in Rajasthan. Enjoy palace parties, cultural shows, and heritage experiences.",
+                    highlights: ["New Year celebrations", "Palace parties", "Cultural shows", "Royal experiences"],
+                    includes: ["Palace hotels", "All meals", "New Year party", "Sightseeing"],
+                    transport: ["Flight", "Car"],
+                },
+                {
+                    id: "dec-3",
+                    name: "Winter Kerala",
+                    location: "Munnar - Thekkady - Alleppey",
+                    image: "https://keralatourpackagesguide.com/wp-content/uploads/2017/04/slide_p1.jpg",
+                    days: 7,
+                    nights: 6,
+                    rate: 28999,
+                    rating: 4.7,
+                    overview: "Experience Kerala's perfect winter weather. Enjoy hill stations, wildlife, and backwaters in comfortable temperatures.",
+                    highlights: ["Perfect weather", "Hill stations", "Wildlife sanctuary", "Backwaters"],
+                    includes: ["Resort stays", "All meals", "Sightseeing", "Boat rides"],
+                    transport: ["Flight", "Car"],
+                },
+                {
+                    id: "dec-4",
+                    name: "Rann Utsav Gujarat",
+                    location: "Kutch - White Desert",
+                    image: "https://www.rannutsav.com/blog/wp-content/uploads/2024/12/rann-utsav-tour-packeges-768x428.jpg",
+                    days: 4,
+                    nights: 3,
+                    rate: 21999,
+                    rating: 4.8,
+                    overview: "Experience the Rann Utsav festival in the white desert of Kutch. Enjoy cultural performances under the full moon.",
+                    highlights: ["Rann Utsav festival", "White desert", "Cultural performances", "Full moon nights"],
+                    includes: ["Desert resort", "All meals", "Cultural shows", "Desert activities"],
+                    transport: ["Flight", "Car"],
+                },
+                {
+                    id: "dec-5",
+                    name: "Hornbill Festival Nagaland",
+                    location: "Kohima - Dimapur",
+                    image: "https://img.theweek.in/content/dam/week/week/news/tourism/images/2024/11/30/hornbill-file-photo.jpg",
+                    days: 5,
+                    nights: 4,
+                    rate: 26999,
+                    rating: 4.6,
+                    overview: "Attend the Hornbill Festival showcasing Naga tribal culture. Experience traditional dances, crafts, and cuisine.",
+                    highlights: ["Hornbill Festival", "Tribal culture", "Traditional dances", "Local crafts"],
+                    includes: ["Local accommodation", "All meals", "Festival participation", "Cultural activities"],
+                    transport: ["Flight", "Car"],
+                },
+                {
+                    id: "dec-6",
+                    name: "Winter Himachal",
+                    location: "Shimla - Kufri - Chail",
+                    image: "https://dynamic.tourtravelworld.com/package-images/photo-big/dir_16/459557/330541.jpgw",
+                    days: 5,
+                    nights: 4,
+                    rate: 23999,
+                    rating: 4.5,
+                    overview: "Experience winter wonderland in Himachal Pradesh. Enjoy snow activities, cozy hill stations, and mountain views.",
+                    highlights: ["Snow activities", "Winter sports", "Mountain views", "Cozy atmosphere"],
+                    includes: ["Hill resort", "All meals", "Snow activities", "Sightseeing"],
+                    transport: ["Flight", "Car"],
+                },
+            ],
+        };
+
+        // Function to create trip card HTML
+        function createTripCard(trip) {
+            return `
+                <div class="col-lg-4 col-md-6">
+                    <div class="card trip-card h-100" onclick="openTripModal('${trip.id}')">
+                        <div class="trip-image-container">
+                            <img src="${trip.image}" class="card-img-top trip-image" alt="${trip.name}">
+                            <div class="rating-badge">
+                                <i class="fas fa-star me-1"></i>${trip.rating}
+                            </div>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title trip-title">${trip.name}</h5>
+                            <div class="d-flex align-items-center text-muted-custom mb-3">
+                                <i class="fas fa-map-marker-alt me-2"></i>
+                                <small>${trip.location}</small>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div class="d-flex align-items-center text-muted-custom">
+                                    <i class="fas fa-clock me-1"></i>
+                                    <small>${trip.days}D/${trip.nights}N</small>
+                                </div>
+                                <div class="text-end">
+                                    <div class="price-text">₹${trip.rate.toLocaleString()}</div>
+                                    <small class="text-muted-custom">per person</small>
+                                </div>
+                            </div>
+                            <button class="btn btn-details text-white mt-auto">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Function to populate trips for each month
+        function populateTrips() {
+            Object.keys(tripData).forEach(month => {
+                const monthId = month.toLowerCase() + '-trips';
+                const container = document.getElementById(monthId);
+                if (container) {
+                    container.innerHTML = tripData[month].map(trip => createTripCard(trip)).join('');
+                }
+            });
+        }
+
+        // Function to open trip modal
+        function openTripModal(tripId) {
+            let selectedTrip = null;
+            
+            // Find the trip in all months
+            Object.values(tripData).forEach(monthTrips => {
+                const trip = monthTrips.find(t => t.id === tripId);
+                if (trip) {
+                    selectedTrip = trip;
+                }
+            });
+
+            if (selectedTrip) {
+                // Populate modal content
+                document.getElementById('tripModalLabel').textContent = selectedTrip.name;
+                document.getElementById('tripLocation').textContent = selectedTrip.location;
+                document.getElementById('tripModalImage').src = selectedTrip.image;
+                document.getElementById('tripDuration').textContent = `${selectedTrip.days}D/${selectedTrip.nights}N`;
+                document.getElementById('tripRating').textContent = `${selectedTrip.rating} Rating`;
+                document.getElementById('tripOverview').textContent = selectedTrip.overview;
+                document.getElementById('tripPrice').textContent = `₹${selectedTrip.rate.toLocaleString()}`;
+
+                // Populate highlights
+                const highlightsList = document.getElementById('tripHighlights');
+                highlightsList.innerHTML = selectedTrip.highlights.map(highlight => 
+                    `<li class="text-muted-custom mb-1"><i class="fas fa-check text-success me-2"></i>${highlight}</li>`
+                ).join('');
+
+                // Populate includes
+                const includesList = document.getElementById('tripIncludes');
+                includesList.innerHTML = selectedTrip.includes.map(include => 
+                    `<li class="text-muted-custom mb-1"><i class="fas fa-check text-success me-2"></i>${include}</li>`
+                ).join('');
+
+                // Populate transport
+                const transportContainer = document.getElementById('tripTransport');
+                transportContainer.innerHTML = selectedTrip.transport.map(transport => 
+                    `<span class="badge bg-secondary">${transport}</span>`
+                ).join('');
+
+                // Show modal
+                const modal = new bootstrap.Modal(document.getElementById('tripModal'));
+                modal.show();
+            }
+        }
+
+        // Function to scroll to trips section
+        function scrollToTrips() {
+            document.getElementById('trips').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            populateTrips();
+        });
+    </script>
+ {% endblock %}

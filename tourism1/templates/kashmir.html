@@ -1,0 +1,2600 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Jammu and Kashmir</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> -->
+  <style>
+    .wb {
+      font-size: 10vw;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+      border-spacing: 0;
+      border: 1px solid #ddd;
+    }
+
+    td,
+    th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+      font-size: 1.5vw;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+
+    .trip {
+      text-align: center;
+      font-weight: 900;
+      background: orangered;
+      padding: 20px;
+      border-radius: 20px;
+      width: 60%;
+    }
+
+    p,
+    li,
+    .text {
+      font-size: 1.5vw;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-weight: 600;
+    }
+
+    h4 {
+      font-weight: 900;
+    }
+
+    img {
+      border-radius: 10px;
+      display: block;
+      margin: auto;
+    }
+
+    @media screen and (max-width: 850px) {
+
+      p,
+      li,
+      .text,
+      td,
+      th {
+        font-size: 2vw;
+        ;
+      }
+
+    }
+
+    @media screen and (max-width: 500px) {
+
+      p,
+      li,
+      .text,
+      td,
+      th {
+        font-size: 4.5vw;
+        ;
+      }
+
+    }
+
+    .box:nth-of-type(odd) {
+      background: #f3b37185;
+      padding: 10px;
+    }
+
+    .weather-container {
+            border-radius: 15px;
+            background: #f0fdf4;
+            padding: 15px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .weather-card {
+            text-align: center;
+            border-radius: 10px;
+            padding: 10px;
+            background: white;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+        .aqi {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            color: white;
+        }
+        .aqi-bad { background: purple; }
+        .aqi-moderate { background: orange; }
+        .aqi-good { background: green; }
+        .best-time {
+            background: #d1fae5;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 15px;
+            color: green;
+        }
+        .wet {
+            max-width: 50px;
+        }
+        
+        .trip {
+          font-size: 18px;
+          padding: 10px 20px;
+          cursor: pointer;
+          background-color:rgb(231, 36, 36);
+          color: white;
+          border: none;
+          border-radius: 5px;
+      }
+      .modal {
+          display: none;
+          position: fixed;
+          z-index: 1;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0,0,0,0.5);
+      }
+      .modal-content {
+          background-color: #fff;
+          margin: 10% auto;
+          padding: 20px;
+          border-radius: 10px;
+          width: 40%;
+          box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+          text-align: center;
+      }
+      .close {
+          color: #aaa;
+          float: right;
+          font-size: 28px;
+          font-weight: bold;
+          cursor: pointer;
+      }
+      .trip-options {
+          display: flex;
+          justify-content: center;
+          gap: 20px;
+          margin-top: 20px;
+      }
+      .trip-options a {
+          display: block;
+          width: 120px;
+          padding: 10px;
+          background-color: #28a745;
+          color: white;
+          text-decoration: none;
+          border-radius: 5px;
+      }
+  </style>
+</head>
+
+<body>
+
+
+  <!-- <h2>Carousel Example</h2> -->
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+      <li data-target="#myCarousel" data-slide-to="4"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+
+      <div class="item active">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Gulmarg_in_winter.jpg/1280px-Gulmarg_in_winter.jpg" alt="Gulmarg" style="width:100%; height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Gulmarg</h3>
+          <p>We love the mountains and scenic beauty!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Dal_Lake_Srinagar.jpg/1280px-Dal_Lake_Srinagar.jpg" alt="Dal Lake" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Dal Lake</h3>
+          <p>The amazing natural beauty and houseboats!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Srinagar_Jamia_Masjid.jpg/1280px-Srinagar_Jamia_Masjid.jpg" alt="Jamia Masjid" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Jamia Masjid</h3>
+          <p>A magnificent architectural marvel!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Vaishno_Devi_Temple.jpg/1280px-Vaishno_Devi_Temple.jpg" alt="Vaishno Devi" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Vaishno Devi</h3>
+          <p>We love the spiritual journey!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Saffron_Flower%2C_Pampore%2C_Kashmir.jpg/1280px-Saffron_Flower%2C_Pampore%2C_Kashmir.jpg" alt="Saffron Fields" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Saffron Fields</h3>
+          <p>We love the aroma of the saffron fields!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+  <div class="container">
+    <br><br>
+    <h1 class="wb">JAMMU AND KASHMIR</h1><br>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Jammu_and_Kashmir_in_India_%28de-facto%29.svg/800px-Jammu_and_Kashmir_in_India_%28de-facto%29.svg.png" alt="" style="height:700px; width: -webkit-fill-available;">
+
+        </div>
+        <div class="col-sm-6">
+          <h1>Jammu and Kashmir: The Paradise on Earth</h1>
+          <p class="text">Jammu and Kashmir is a diverse and picturesque region in northern India, known for its breathtaking landscapes, rich cultural heritage, unique crafts, festivals, and natural beauty. It is often referred to as "Paradise on Earth" and attracts tourists from around the world.</p>
+
+          <ul>
+            <li><b>Location --</b> Northern India</li>
+            <li><b>Capital --</b> Srinagar (Summer), Jammu (Winter)</li>
+            <li><b>Official Languages --</b> Kashmiri, Dogri, Hindi, Urdu, English</li>
+            <li><b>Area --</b> 42,241 sq. km</li>
+            <li><b>Population --</b> ~12.5 million</li>
+            <li><b>Borders --</b> Himachal Pradesh, Punjab, Ladakh & International borders with Pakistan, China</li>
+            <li><b>Major Rivers --</b> Jhelum, Chenab, Indus, Tawi</li>
+            <li><b>Major Festivals --</b> Eid, Baisakhi, Lohri, Hemis Festival, Navratri, Diwali</li>
+            <li><b>State Animal --</b> Hangul (Kashmir Stag)</li>
+            <li><b>State Flower --</b> Pink Rhododendron</li>
+            <li><b>State Tree --</b> Chinar</li>
+            <li><b>State Bird --</b> Black-necked Crane</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <br>
+    <hr>
+    <div>
+      <h1>📌 Divisions & Districts of Jammu and Kashmir</h1>
+      <br>
+      <div style="overflow-x:auto;">
+        <table>
+          <tr>
+            <th>Division</th>
+            <th>Districts</th>
+            <th>Key Highlights</th>
+          </tr>
+          <tr>
+            <td>Kashmir Division</td>
+            <td>1. Srinagar 2. Baramulla 3. Kupwara 4. Bandipora 5. Ganderbal 6. Budgam 7. Pulwama 8. Shopian 9. Kulgam 10. Anantnag</td>
+            <td>Dal Lake, Gulmarg, Pahalgam, Sonamarg, Saffron Fields, Apple Orchards</td>
+          </tr>
+          <tr>
+            <td>Jammu Division</td>
+            <td>11. Jammu 12. Samba 13. Kathua 14. Udhampur 15. Reasi 16. Doda 17. Kishtwar 18. Ramban 19. Poonch 20. Rajouri</td>
+            <td>Vaishno Devi Temple, Patnitop, Bhaderwah, Dogra Culture, Raghunath Temple</td>
+          </tr>
+        </table>
+      </div>
+      <br><br>
+      <h1>🔹 Major Highlights of Some Key Districts</h1><br><br>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <ul>
+              <li><b>Srinagar --</b> Summer capital, famous for Dal Lake, houseboats, and Mughal Gardens.</li>
+              <li><b>Jammu --</b> Winter capital, known for Raghunath Temple, Bahu Fort, and Dogra culture.</li>
+              <li><b>Baramulla --</b> Gateway to Kashmir, home to Uri and Gulmarg hill station.</li>
+              <li><b>Anantnag --</b> Known for Martand Sun Temple, Pahalgam, and religious sites.</li>
+              <li><b>Pulwama --</b> Famous for saffron cultivation and apple orchards.</li>
+              <li><b>Udhampur --</b> Home to Northern Command of Indian Army and Patnitop hill station.</li>
+              <li><b>Reasi --</b> Famous for Vaishno Devi Temple and Shiv Khori Cave.</li>
+              <li><b>Doda --</b> Known as "Mini Kashmir" for its scenic beauty and Bhaderwah Valley.</li>
+              <li><b>Poonch & Rajouri --</b> Border districts with rich Pahari and Gujjar culture.</li>
+            </ul>
+          </div>
+          <div class="col-sm-6">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Jammu_and_Kashmir_in_India_%28de-facto%29.svg/800px-Jammu_and_Kashmir_in_India_%28de-facto%29.svg.png" alt="" style="height:450px;width: -webkit-fill-available;">
+
+          </div>
+        </div>
+      </div>
+    </div><br><br>
+    <div class="container">
+      <div class="weather-container">
+          <h4 class="text-center"><strong>Weather in Jammu and Kashmir</strong></h4>
+          <div class="row">
+              <!-- January -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Jan</h6>
+                      <p>-2/7°C</p>
+                      <span class="aqi aqi-good">AQI 45</span>
+                  </div>
+              </div>
+              <!-- February -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Feb</h6>
+                      <p>0/10°C</p>
+                      <span class="aqi aqi-good">AQI 50</span>
+                  </div>
+              </div>
+              <!-- March -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Mar</h6>
+                      <p>5/15°C</p>
+                      <span class="aqi aqi-good">AQI 55</span>
+                  </div>
+              </div>
+              <!-- April -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Apr</h6>
+                      <p>10/20°C</p>
+                      <span class="aqi aqi-good">AQI 60</span>
+                  </div>
+              </div>
+              <!-- May -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>May</h6>
+                      <p>14/25°C</p>
+                      <span class="aqi aqi-good">AQI 65</span>
+                  </div>
+              </div>
+              <!-- June -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Jun</h6>
+                      <p>18/30°C</p>
+                      <span class="aqi aqi-good">AQI 70</span>
+                  </div>
+              </div>
+              <!-- July -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="rain.png" alt="rain">
+                      <h6>Jul</h6>
+                      <p>20/30°C</p>
+                      <span class="aqi aqi-good">AQI 60</span>
+                  </div>
+              </div>
+              <!-- August -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Aug</h6>
+                      <p>19/29°C</p>
+                      <span class="aqi aqi-good">AQI 55</span>
+                  </div>
+              </div>
+              <!-- September -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Sep</h6>
+                      <p>15/27°C</p>
+                      <span class="aqi aqi-good">AQI 50</span>
+                  </div>
+              </div>
+              <!-- October -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Oct</h6>
+                      <p>10/23°C</p>
+                      <span class="aqi aqi-good">AQI 45</span>
+                  </div>
+              </div>
+              <!-- November -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Nov</h6>
+                      <p>5/17°C</p>
+                      <span class="aqi aqi-good">AQI 40</span>
+                  </div>
+              </div>
+              <!-- December -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Dec</h6>
+                      <p>0/10°C</p>
+                      <span class="aqi aqi-good">AQI 45</span>
+                  </div>
+              </div>
+          </div>
+          <div class="text-center">
+              <div class="best-time">🏆 Best time to visit: April - October</div>
+          </div>
+      </div>
+    </div>
+    
+
+    <br><br>
+    <button class="trip" id="openModal">Let's go on a trip</button>
+    
+    <div id="tripModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Select Your Trip</h2>
+            <button type="button" class="btn btn-warning" style="margin-bottom: 8px;color:black; border-radius: 5px;" onclick="location.href='{% url 'kashmir_7days' %}'">7 days trip</button><br>
+            <button type="button" class="btn btn-warning" style="margin-bottom: 8px;color:black; border-radius: 5px;" onclick="location.href='{% url 'kashmir_12days' %}'">12 days trip</button>
+        </div>
+    </div>
+    
+    <script>
+        var modal = document.getElementById("tripModal");
+        var btn = document.getElementById("openModal");
+        var span = document.getElementsByClassName("close")[0];
+        
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+        
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+        
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script><br><br>
+    <div class="container">
+      <ul class="nav nav-tabs">
+        <li class="nav-item"><a data-toggle="tab" href="#wbculture"> Culture</a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbtradition "> Tradition</a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbfestivals"> Festivals </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbfood"> Foods </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbhistory"> History </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbartacraft"> Art and Craft </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbseason"> Season to Visit </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbtourist"> Tourist Spots </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbwild"> Wildlife & Crops </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbedu"> Institutions </a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="wbculture" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Culture of Jammu and Kashmir</h1>
+          <p class="text">Jammu and Kashmir has a rich and diverse culture, shaped by its history, literature, art, music, festivals, and traditions. The culture is a unique blend of various influences including Hindu, Muslim, Buddhist, and Sikh traditions. Here's an overview of some key aspects of its culture:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Languages</h3>
+                  <ul>
+                    <li>Kashmiri is the primary language in the Kashmir Valley, while Dogri is widely spoken in the Jammu region. Other languages include Urdu, Hindi, Pahari, Gojri, and Ladakhi. This linguistic diversity reflects the cultural richness of the region.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Kashmiri_Script.jpg/800px-Kashmiri_Script.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>2. Literature</h3>
+                  <ul>
+                    <li>Jammu and Kashmir has a rich literary tradition, with notable poets like Lal Ded (Lalleshwari), Sheikh Noor-ud-din Wali (Nund Rishi), and Habba Khatoon. Modern Kashmiri literature has been influenced by progressive writers like Ghulam Ahmad Mahjoor and Zinda Kaul.</li>
+                    <li>Dogri literature from the Jammu region has also gained recognition with writers like Padma Sachdev and Narsingh Dev Jamwal.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Lal_Ded_-_Lalleshwari.jpg/800px-Lal_Ded_-_Lalleshwari.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div><br>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Kashmiri_Pashmina.jpg/800px-Kashmiri_Pashmina.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Art and Craft</h3>
+                  <ul>
+                    <li>The region is renowned for its exquisite handicrafts, including Pashmina shawls, Kashmiri carpets, papier-mâché, wood carving, and Basohli paintings. These crafts reflect the artistic heritage and skilled craftsmanship of the people.</li>
+                    <li>Kashmiri embroidery, particularly Sozni and Kashida work, is famous worldwide for its intricate designs and vibrant colors.</li>
+                  </ul>
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Kashmiri_musicians.jpg/800px-Kashmiri_musicians.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>4. Music</h3>
+                  <ul>
+                    <li>Kashmiri music has its own distinct style, with Sufiana Kalam being the classical music form. Traditional instruments include the santoor, rabab, and nout (earthen pot).</li>
+                    <li>Folk music like Chakri, Rouf, and Bhaand Pather are popular in the Kashmir Valley, while the Jammu region has its own folk traditions like Kud, Heren, and Fumenie.</li>
+                    <li>Sufi music and qawwali have a strong presence, reflecting the region's spiritual heritage.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Dance</h3>
+                  <ul>
+                    <li>Traditional dance forms include Rouf and Hikat in Kashmir, and Kud, Dandaras, and Geetru in Jammu.</li>
+                    <li>Dumhal is a famous dance performed by Kashmiri Sufi mystics, while Rauf is performed during festivals and celebrations.</li>
+                    <li>The Bhaand Pather is a unique form of theater that combines dance, music, and satirical acting.</li>
+                  </ul>
+                  <h3>6. Cuisine</h3>
+                  <ul>
+                    <li>Kashmiri cuisine is known for its rich flavors, aromatic spices, and use of dry fruits. Famous dishes include Rogan Josh, Yakhni, Dum Aloo, and the elaborate Wazwan feast.</li>
+                    <li>Kashmiri tea varieties like Kahwa (green tea with saffron and almonds) and Noon Chai (pink salt tea) are popular beverages.</li>
+                    <li>Jammu cuisine features dishes like Rajma Chawal, Ambal, and various types of pickles and chutneys.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Kashmiri_Wazwan.jpg/800px-Kashmiri_Wazwan.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Shalimar_Bagh_Srinagar.jpg/800px-Shalimar_Bagh_Srinagar.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>7. Architecture</h3>
+                  <ul>
+                    <li>The architecture of Jammu and Kashmir reflects a blend of various styles, including Mughal, Buddhist, and Hindu influences.</li>
+                    <li>Famous architectural marvels include the Mughal Gardens (Shalimar Bagh, Nishat Bagh), wooden mosques like Khanqah-e-Moula, ancient temples like Martand Sun Temple, and the distinctive houseboats on Dal Lake.</li>
+                  </ul>
+                  <h3>8. Architecture</h3>
+                  <ul>
+                    <li>The traditional Kashmiri house, known as "Kuth," features wooden structures with intricate carvings and sloped roofs designed to withstand heavy snowfall.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Hazratbal_Shrine.jpg/800px-Hazratbal_Shrine.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>9. Religious Diversity</h3>
+                  <ul>
+                    <li>The region is home to a variety of religions, with Islam being predominant in the Kashmir Valley, Hinduism in Jammu, and Buddhism in Ladakh (now a separate Union Territory). This diversity is reflected in the region's festivals, rituals, and cultural practices.</li>
+                    <li>Important religious sites include the Hazratbal Shrine, Jamia Masjid, and Charar-e-Sharif in Kashmir, and the Raghunath Temple and Vaishno Devi Temple in Jammu.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>10. Folk Traditions</h3>
+                  <ul>
+                    <li>Jammu and Kashmir is rich in folk traditions, including storytelling, folk songs, and traditional games.</li>
+                    <li>The Bhand Pather, a traditional theater form, combines elements of comedy, satire, and social commentary. It has been recognized as an important cultural heritage of Kashmir.</li>
+                  </ul>
+                  <h3>11. Philosophy</h3>
+                  <ul>
+                    <li>Kashmir Shaivism, a philosophical tradition that developed in Kashmir, has made significant contributions to Indian philosophy with its non-dualistic approach.</li>
+                    <li>Sufism has also had a profound influence on the culture and philosophy of the region, promoting values of love, tolerance, and spiritual devotion.</li>
+                  </ul>
+                  <h3>12. Handicrafts</h3>
+                  <ul>
+                    <li>Jammu and Kashmir is known for its handicrafts such as Pashmina shawls, Kashmiri carpets, walnut wood carving, and papier-mâché items that showcase intricate designs and patterns.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Kashmir_Shaivism.jpg/800px-Kashmir_Shaivism.jpg" alt="" style="height:300px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br><br>
+
+          <p>Jammu and Kashmir's culture is deeply rooted in its history, and it continues to evolve while maintaining a close connection to its heritage. It's a region where modernity and tradition coexist beautifully!</p><br><br>
+        </div>
+        <div id="wbtradition" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Tradition of Jammu and Kashmir</h1>
+          <p>Jammu and Kashmir has a rich and diverse tradition deeply rooted in its history, culture, and social practices. Here's an overview of some key traditional aspects of the region:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Clothing Tradition</h3>
+                  <h4>Men</h4>
+                  <ul>
+                    <li><b>Pheran:</b> Traditional Kashmiri men wear the pheran, a loose, woolen cloak-like garment, especially during winter. It's often worn with a warm undergarment called poots.</li>
+                    <li><b>Turban:</b> Traditionally worn by men, especially during ceremonies and by religious leaders.</li>
+                  </ul>
+                  <h4>Women</h4>
+                  <ul>
+                    <li><b>Pheran:</b> Kashmiri women also wear pherans, but they are more colorful and embroidered, especially around the neck, sleeves, and edges.</li>
+                    <li><b>Taranga:</b> A traditional headdress worn by married Kashmiri Pandit women, consisting of a cap and a long cloth that hangs down the back.</li>
+                    <li><b>Kasaba:</b> A traditional headgear worn by Muslim women in Kashmir.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Kashmiri_Pheran.jpg/800px-Kashmiri_Pheran.jpg" alt="" style="height:250px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>2. Wedding Traditions</h3>
+                  <ul>
+                    <li><b>Wanvun:</b> Traditional Kashmiri wedding songs sung by women during various ceremonies.</li>
+                    <li><b>Mehndi Raat:</b> The night before the wedding when the bride's hands and feet are adorned with henna designs.</li>
+                    <li><b>Nikah/Lagan:</b> The main wedding ceremony performed according to religious customs.</li>
+                    <li><b>Wazwan:</b> An elaborate multi-course meal served during Kashmiri weddings, consisting of various meat dishes.</li>
+                    <li><b>Satband:</b> Seven colorful threads tied around the bride's neck as a symbol of marriage in Kashmiri Pandit weddings.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Kashmiri_Wedding.jpg/800px-Kashmiri_Wedding.jpg" alt="" style="height:250px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Kashmiri_musicians.jpg/800px-Kashmiri_musicians.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Music & Dance Traditions</h3>
+                  <ul>
+                    <li><b>Sufiana Kalam:</b> Classical music of Kashmir, influenced by Persian music and performed with instruments like santoor, sitar, and tabla.</li>
+                    <li><b>Chakri:</b> A traditional form of folk music where singers perform in a chorus accompanied by instruments like the harmonium, rabab, and sarangi.</li>
+                    <li><b>Rouf:</b> A traditional Kashmiri dance performed by women during festivals and celebrations.</li>
+                    <li><b>Kud:</b> A popular folk dance of the Jammu region performed to the beats of drums.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Kashmiri_Storytelling.jpg/800px-Kashmiri_Storytelling.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+
+                  <h3>4. Social & Religious Traditions</h3>
+                  <ul>
+                    <li><b>Kashmiri Pandits' Herath:</b> The most important festival of Kashmiri Pandits, dedicated to Lord Shiva, celebrated with rituals and feasts.</li>
+                    <li><b>Eid Celebrations:</b> Elaborate celebrations with special prayers, feasts, and exchange of gifts.</li>
+                    <li><b>Ziyarat Visits:</b> Pilgrimages to the shrines of Sufi saints, an important tradition in Kashmiri Muslim culture.</li>
+                    <li><b>Storytelling:</b> Traditional storytelling sessions, especially during winter evenings, passing down folklore and legends.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Architectural & Handicraft Traditions</h3>
+                  <ul>
+                    <li><b>Houseboats:</b> Traditional wooden houseboats on Dal and Nigeen Lakes, a unique feature of Kashmiri culture.</li>
+                    <li><b>Khatamband:</b> Intricate wooden ceiling work, a traditional Kashmiri craft.</li>
+                    <li><b>Papier-mâché:</b> The art of making decorative objects from paper pulp, known for vibrant colors and intricate designs.</li>
+                    <li><b>Carpet Weaving:</b> Hand-knotted Kashmiri carpets with Persian-inspired designs, a centuries-old tradition.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Kashmir_Houseboat.jpg/800px-Kashmir_Houseboat.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>6. Sports & Games</h3>
+                  <ul>
+                    <li><b>Snow Sports:</b> Traditional winter sports like skiing in Gulmarg, one of Asia's premier skiing destinations.</li>
+                    <li><b>Water Sports:</b> Shikara races and water skiing on Dal Lake.</li>
+                    <li><b>Traditional Games:</b> Games like Kabaddi, Kho-Kho, and Gillidanda are popular in rural areas.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Skiing_in_Gulmarg.jpg/800px-Skiing_in_Gulmarg.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br><br>
+          <p>Jammu and Kashmir's traditions beautifully combine history, art, food, music, and festivals, making it one of the most culturally vibrant regions in India.</p><br><br>
+        </div>
+        <div id="wbfestivals" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Festivals of Jammu and Kashmir</h1>
+          <p>Jammu and Kashmir is known for its vibrant and diverse festivals, which reflect its rich cultural heritage, religious harmony, and artistic traditions. Here's a list of some of the major festivals celebrated in the region:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Eid-ul-Fitr & Eid-ul-Adha</h3>
+                  <ul>
+                    <li>The most significant festivals for Muslims in Kashmir, celebrated with great enthusiasm.</li>
+                    <li>Special prayers are offered at mosques, followed by feasting and exchange of gifts.</li>
+                    <li>Families prepare special dishes like Rogan Josh, Yakhni, and various sweet treats.</li>
+                    <li>The markets and homes are beautifully decorated during these festivals.</li>
+                  </ul>
+                  <p><b>📍 Time: Based on Islamic Calendar</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Eid_Prayers_in_Kashmir.jpg/800px-Eid_Prayers_in_Kashmir.jpg" alt="" style="height:230px;width: 200px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Vaishno_Devi_Navratri.jpg/800px-Vaishno_Devi_Navratri.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Navratri & Vaishno Devi Pilgrimage</h3>
+                  <ul>
+                    <li>A major Hindu festival celebrated with great devotion in the Jammu region.</li>
+                    <li>Thousands of pilgrims visit the Vaishno Devi Temple during this time.</li>
+                    <li>The nine-day festival includes fasting, prayers, and cultural performances.</li>
+                  </ul>
+                  <p><b>📍 Time: September - October (Sharad Navratri) and March - April (Chaitra Navratri)</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Baisakhi</h3>
+                  <ul>
+                    <li>Marks the beginning of the harvest season and the Sikh New Year.</li>
+                    <li>Celebrated with great enthusiasm in the Jammu region.</li>
+                    <li>Features Bhangra and Giddha dance performances, processions, and fairs.</li>
+                    <li>Special langar (community meals) are organized at Gurudwaras.</li>
+                  </ul>
+                  <p><b>📍 Time: April 13 - 14</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Baisakhi_Celebration.jpg/800px-Baisakhi_Celebration.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Saffron_Flower%2C_Pampore%2C_Kashmir.jpg/800px-Saffron_Flower%2C_Pampore%2C_Kashmir.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Shikara Festival</h3>
+                  <ul>
+                    <li>A unique festival celebrating the iconic shikaras (boats) of Dal Lake.</li>
+                    <li>Features decorated boat races, cultural performances, and handicraft exhibitions.</li>
+                    <li>Attracts tourists from around the world to witness the colorful spectacle.</li>
+                  </ul>
+                  <p><b>📍 Time: July - August</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Lohri</h3>
+                  <ul>
+                    <li>A popular winter festival celebrated mainly in the Jammu region.</li>
+                    <li>Marks the end of winter and is celebrated with bonfires, folk songs, and dances.</li>
+                    <li>Traditional foods like til (sesame) sweets, peanuts, and popcorn are distributed.</li>
+                  </ul>
+                  <p><b>📍 Time: January 13</b></p>
+                  <h3>6. Tulip Festival</h3>
+                  <ul>
+                    <li>A relatively new festival that celebrates the blooming of tulips in Asia's largest tulip garden in Srinagar.</li>
+                    <li>The garden displays over 1.5 million tulips of various colors and varieties.</li>
+                    <li>Cultural programs, folk performances, and handicraft exhibitions are organized during the festival.</li>
+                  </ul>
+                  <p><b>📍 Time: April</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Tulip_Garden_Srinagar.jpg/800px-Tulip_Garden_Srinagar.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Hemis_Festival.jpg/800px-Hemis_Festival.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>7. Hemis Festival</h3>
+                  <ul>
+                    <li>A Buddhist festival celebrated at the Hemis Monastery.</li>
+                    <li>Features colorful mask dances (Cham dance) performed by monks, depicting the victory of good over evil.</li>
+                    <li>Traditional music, religious ceremonies, and handicraft exhibitions are part of the celebrations.</li>
+                  </ul>
+                  <p><b>📍 Time: June - July</b></p>
+                  <h3>8. Losar</h3>
+                  <ul>
+                    <li>The Buddhist New Year celebration, particularly important in the Ladakh region (now a separate Union Territory).</li>
+                    <li>Monasteries are decorated, and special prayers and rituals are performed.</li>
+                    <li>Traditional dances, music, and feasts are organized.</li>
+                  </ul>
+                  <p><b>📍 Time: December - January</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>9. Shivratri (Herath)</h3>
+                  <ul>
+                    <li>The most important festival for Kashmiri Pandits, dedicated to Lord Shiva.</li>
+                    <li>Unique traditions include the ritual of "Vatuk" (earthen pots) and "Nout" (earthen vessel filled with walnuts).</li>
+                    <li>Families prepare special dishes and offer prayers for prosperity and well-being.</li>
+                  </ul>
+                  <p><b>📍 Time: February - March</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Kashmiri_Pandit_Herath.jpg/800px-Kashmiri_Pandit_Herath.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Urs_Celebration.jpg/800px-Urs_Celebration.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>10. Urs Festivals</h3>
+                  <ul>
+                    <li>Commemorations of Sufi saints held at various shrines across Kashmir.</li>
+                    <li>The most prominent is the Urs of Hazrat Sheikh Noor-ud-Din Wali at Charar-e-Sharif.</li>
+                    <li>Features Sufi music, qawwali performances, and special prayers.</li>
+                    <li>Devotees from different faiths participate in these celebrations.</li>
+                  </ul>
+                  <p><b>📍 Time: Throughout the year, depending on the death anniversary of the saint</b></p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>11. Jhiri Mela</h3>
+                  <ul>
+                    <li>A traditional fair held in the Jhiri village near Jammu.</li>
+                    <li>Commemorates the sacrifice of Baba Jitto, a farmer who fought against oppression.</li>
+                    <li>Features cultural performances, wrestling competitions, and rural sports.</li>
+                  </ul>
+                  <p><b>📍 Time: October - November</b></p>
+
+                  <h3>12. Diwali</h3>
+                  <ul>
+                    <li>The festival of lights celebrated with great enthusiasm in the Jammu region.</li>
+                    <li>Homes and public places are decorated with oil lamps and colorful rangoli.</li>
+                    <li>Fireworks, exchange of sweets, and family gatherings mark the celebrations.</li>
+                  </ul>
+                  <p><b>📍 Time: October - November</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Diwali_in_Jammu.jpg/800px-Diwali_in_Jammu.jpg" alt="" style="height:200px;width: 230px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Skiing_in_Gulmarg.jpg/800px-Skiing_in_Gulmarg.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>13. Gulmarg Winter Festival</h3>
+                  <ul>
+                    <li>A celebration of winter sports and tourism in the famous ski resort of Gulmarg.</li>
+                    <li>Features skiing competitions, snowboarding, and snow sculpture contests.</li>
+                    <li>Cultural performances, food festivals, and handicraft exhibitions are organized.</li>
+                  </ul>
+                  <p><b>📍 Time: January - February</b></p>
+                  <h3>14. Purmandal Mela</h3>
+                  <ul>
+                    <li>A religious fair held at Purmandal, known as the "Chota Kashi" of Jammu.</li>
+                    <li>Devotees take a holy dip in the Devak River and offer prayers at the ancient Shiva temple.</li>
+                    <li>Traditional folk performances and handicraft stalls are set up during the fair.</li>
+                  </ul>
+                  <p><b>📍 Time: February - March (Mahashivratri)</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Jammu and Kashmir's festivals are a blend of religious, cultural, and artistic celebrations, making the region one of the most festive in India! 🎉</p><br><br>
+        </div>
+        <div id="wbfood" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Foods of Jammu and Kashmir</h1>
+          <p>Jammu and Kashmir has a rich and diverse culinary tradition that blends flavors from different regions and cultures. The cuisine is known for its aromatic spices, slow cooking methods, and use of dried fruits and nuts. Here's a look at some of the most iconic foods of Jammu and Kashmir:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Staple Food of Kashmir</h3>
+                  <ul>
+                    <li><b>Rice:</b> The main staple food, served with various meat and vegetable dishes.</li>
+                    <li><b>Noon Chai (Pink Tea):</b> A traditional Kashmiri beverage made with special tea leaves, milk, salt, and baking soda, giving it a distinctive pink color.</li>
+                  </ul>
+                  <h3>2. Kashmiri Breads</h3>
+                  <ul>
+                    <li><b>Tsot:</b> A round-shaped bread made from wheat flour.</li>
+                    <li><b>Lavasa:</b> A thin, unleavened bread similar to naan.</li>
+                    <li><b>Girda:</b> A thick, round bread with a crisp crust.</li>
+                    <li><b>Sheermal:</b> A saffron-flavored sweet bread.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Kashmiri_Noon_Chai.jpg/800px-Kashmiri_Noon_Chai.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Kashmiri_Wazwan.jpg/800px-Kashmiri_Wazwan.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Famous Kashmiri Dishes</h3>
+                  <h4>Wazwan (Traditional Kashmiri Feast)</h4>
+                  <ul>
+                    <li><b>Rogan Josh:</b> A aromatic lamb dish cooked with Kashmiri red chillies and various spices.</li>
+                    <li><b>Gushtaba:</b> Soft meatballs made from minced mutton, cooked in a yogurt-based gravy.</li>
+                    <li><b>Rista:</b> Spicy meatballs in a fiery red gravy.</li>
+                    <li><b>Tabak Maaz:</b> Fried lamb ribs, a popular Wazwan dish.</li>
+                    <li><b>Yakhni:</b> A yogurt-based mutton curry flavored with aromatic spices.</li>
+                    <li><b>Aab Gosht:</b> Lamb cooked in milk with spices.</li>
+                  </ul>
+                  <h4>Vegetarian Dishes</h4>
+                  <ul>
+                    <li><b>Dum Aloo:</b> Baby potatoes cooked in a spicy gravy, a signature Kashmiri dish.</li>
+                    <li><b>Nadru Yakhni:</b> Lotus stems cooked in a yogurt-based gravy.</li>
+                    <li><b>Haak:</b> A simple dish of collard greens, a staple in Kashmiri homes.</li>
+                    <li><b>Chaman Kaliya:</b> Paneer (cottage cheese) cooked in a milk-based gravy with spices.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Kashmiri_Rajma_Chawal.jpg/800px-Kashmiri_Rajma_Chawal.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h4>Jammu Region Specialties</h4>
+                  <ul>
+                    <li><b>Rajma Chawal:</b> Red kidney beans curry served with rice, a staple in the Jammu region.</li>
+                    <li><b>Ambal:</b> A sweet and sour pumpkin dish.</li>
+                    <li><b>Kulthein di Dal:</b> A protein-rich lentil preparation.</li>
+                    <li><b>Auriya:</b> A dish made from corn flour and buttermilk.</li>
+                  </ul>
+                  <h4>Rice & Accompaniments</h4>
+                  <ul>
+                    <li><b>Modur Pulao:</b> Sweet rice cooked with dry fruits, saffron, and sugar.</li>
+                    <li><b>Chutney:</b> Various types including walnut chutney, radish chutney, and apple chutney.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>4. Kashmiri Sweets & Desserts</h3>
+                  <ul>
+                    <li><b>Phirni:</b> A rice pudding dessert garnished with dry fruits and saffron.</li>
+                    <li><b>Shufta:</b> A rich dessert made with dry fruits, sugar, and various spices.</li>
+                    <li><b>Kheer:</b> Rice pudding cooked with milk, sugar, and flavored with cardamom and saffron.</li>
+                    <li><b>Bakirkhani:</b> A sweet bread often enjoyed with tea.</li>
+                    <li><b>Basrakh:</b> A sweet made from deep-fried flour soaked in sugar syrup.</li>
+                  </ul>
+
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Kashmiri_Phirni.jpg/800px-Kashmiri_Phirni.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Kashmiri_Kahwa.jpg/800px-Kashmiri_Kahwa.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>5. Beverages of Jammu and Kashmir</h3>
+                  <ul>
+                    <li><b>Kahwa:</b> A traditional green tea prepared with saffron, cinnamon, cardamom, and almonds, served in a special pot called samovar.</li>
+                    <li><b>Noon Chai (Pink Tea):</b> A salty tea with a distinctive pink color, often served with special Kashmiri breads.</li>  A salty tea with a distinctive pink color, often served with special Kashmiri breads.</li>
+                    <li><b>Sheer Chai:</b> A milk tea popular in the Jammu region.</li>
+                    <li><b>Kashmiri Saffron Milk:</b> Milk infused with saffron, cardamom, and nuts, often served during special occasions.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>6. Street Food & Snacks</h3>
+                  <ul>
+                    <li><b>Nadru Monji:</b> Fried lotus stem fritters, a popular street food in Kashmir.</li>
+                    <li><b>Masala Tchot:</b> Bread topped with spicy chutney and vegetables.</li>
+                    <li><b>Kulcha:</b> A type of bread often served with chole (chickpea curry).</li>
+                    <li><b>Lyodur Tschaman:</b> Cottage cheese in turmeric-based yellow gravy.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Nadru_Monji.jpg/800px-Nadru_Monji.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Special Festival Foods</h3>
+                  <ul>
+                    <li><b>Harissa:</b> A slow-cooked meat dish prepared during winter, especially for breakfast.</li>
+                    <li><b>Roth:</b> A sweet bread prepared during special occasions and festivals.</li>
+                    <li><b>Taher:</b> Yellow rice with turmeric, often prepared during religious occasions.</li>
+                    <li><b>Modur Pulao:</b> Sweet rice prepared during celebrations and festivals.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Kashmiri_Harissa.jpg/800px-Kashmiri_Harissa.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Jammu and Kashmir's cuisine is a mix of rich flavors, aromatic spices, and traditional cooking methods, making it one of the most delicious regional cuisines in India! 🍛🍚🍵</p><br><br>
+        </div>
+        <div id="wbhistory" class="tab-pane fade in active" style="background-color: white;">
+          <h1>History of Jammu and Kashmir</h1>
+          <p>Jammu and Kashmir has a rich and complex history that spans ancient civilizations, medieval kingdoms, Mughal rule, Dogra dynasty, and the modern era. The region has played a significant role in India's political, cultural, and intellectual history.</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Ancient Period (Before 7th Century CE)</h3>
+                  <ul>
+                    <li><b>Neolithic Period (3000-1500 BCE):</b> Archaeological evidence suggests early settlements in the Kashmir Valley.</li>
+                    <li><b>Mauryan Empire (3rd Century BCE):</b> Emperor Ashoka introduced Buddhism to Kashmir, building many stupas and monasteries.</li>
+                    <li><b>Kushan Empire (1st-3rd Century CE):</b> Kashmir became an important center of Buddhism and Sanskrit learning.</li>
+                    <li><b>Huns & Gonanda Dynasty:</b> Various rulers controlled the region, including the White Huns and local Gonanda kings.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Martand_Sun_Temple.jpg/800px-Martand_Sun_Temple.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Kashmir_Shaivism.jpg/800px-Kashmir_Shaivism.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Medieval Period (7th - 14th Century)</h3>
+                  <h4>Karkota Dynasty (7th-9th Century):</h4>
+                  <ul>
+                    <li>Ruled by King Lalitaditya Muktapida, who expanded the kingdom and built the famous Martand Sun Temple.</li>
+                    <li>Kashmir became a center of art, culture, and Sanskrit literature.</li>
+                  </ul>
+                  <h4>Utpala & Lohara Dynasties (9th-12th Century):</h4>
+                  <ul>
+                    <li>Kashmir Shaivism flourished during this period.</li>
+                    <li>Queen Didda ruled for over five decades, showing the prominence of women rulers in Kashmir's history.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Hazratbal_Shrine.jpg/800px-Hazratbal_Shrine.jpg" alt="" style="height:220px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h4>Islamic Rule (14th-16th Century):</h4>
+                  <ul>
+                    <li>Shah Mir established the first Muslim dynasty in 1339.</li>
+                    <li>Sultan Zain-ul-Abidin (Budshah) was known for his religious tolerance and promotion of arts and crafts.</li>
+                    <li>Sufi saints like Sheikh Noor-ud-Din Wali (Nund Rishi) spread Islam through peaceful means.</li>
+                  </ul>
+                  <h4>Chak Dynasty (16th Century):</h4>
+                  <ul>
+                    <li>The last independent rulers of Kashmir before Mughal conquest.</li>
+                    <li>Promoted Shia Islam in the region.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Mughal Period (1586-1752)</h3>
+                  <ul>
+                    <li>Emperor Akbar conquered Kashmir in 1586, making it part of the Mughal Empire.</li>
+                    <li>Jahangir and Shah Jahan were particularly fond of Kashmir, building beautiful gardens like Shalimar Bagh and Nishat Bagh.</li>
+                    <li>Kashmir was called "Paradise on Earth" by the Mughals.</li>
+                    <li>Persian influence on art, architecture, and culture increased during this period.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Shalimar_Bagh_Srinagar.jpg/800px-Shalimar_Bagh_Srinagar.jpg" alt="" style="height:200px;width: 250px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Afghan_Rule_in_Kashmir.jpg/800px-Afghan_Rule_in_Kashmir.jpg" alt="" style="height:230px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h2>4. Afghan & Sikh Rule (1752-1846)</h3>
+                    <h3>Afghan Period (1752-1819)</h3>
+                    <ul>
+                      <li>Ahmad Shah Durrani conquered Kashmir, beginning Afghan rule.</li>
+                      <li>This period was marked by oppressive governance and economic decline.</li>
+                    </ul>
+                    <h3>Sikh Rule (1819-1846)</h3>
+                    <ul>
+                      <li>Maharaja Ranjit Singh's forces defeated the Afghans and annexed Kashmir to the Sikh Empire.</li>
+                      <li>The region saw relative stability but continued economic challenges.</li>
+                    </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Maharaja_Gulab_Singh.jpg/800px-Maharaja_Gulab_Singh.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>5. Dogra Rule (1846-1947)</h3>
+                  <ul>
+                    <li>After the First Anglo-Sikh War, the British sold Kashmir to Gulab Singh, the Dogra ruler of Jammu, through the Treaty of Amritsar (1846).</li>
+                    <li>The Dogra dynasty ruled the princely state of Jammu and Kashmir for over a century.</li>
+                    <li>Maharaja Hari Singh was the last Dogra ruler, who signed the Instrument of Accession to India in 1947.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Sheikh_Abdullah.jpg/800px-Sheikh_Abdullah.jpg" alt="" style="height:230px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>6. Modern Period (Post-1947)</h3>
+                  <ul>
+                    <li><b>Accession to India:</b> Maharaja Hari Singh signed the Instrument of Accession to India on October 26, 1947, following a tribal invasion from Pakistan.</li>
+                    <li><b>First Indo-Pak War (1947-48):</b> Resulted in the division of the region, with Pakistan occupying what is now known as Pakistan-occupied Kashmir (PoK).</li>
+                    <li><b>Sheikh Abdullah's Leadership:</b> The popular leader became the Prime Minister of Jammu and Kashmir and later Chief Minister, playing a crucial role in the state's politics.</li>
+                    <li><b>Article 370 & Special Status:</b> Jammu and Kashmir was granted special autonomous status under Article 370 of the Indian Constitution.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Recent Developments</h3>
+                  <h4>Political Changes</h4>
+                  <ul>
+                    <li>In August 2019, the Government of India revoked the special status of Jammu and Kashmir under Article 370.</li>
+                    <li>The state was reorganized into two Union Territories: Jammu and Kashmir (with a legislature) and Ladakh (without a legislature).</li>
+                  </ul>
+                  <h4>Current Scenario</h4>
+                  <ul>
+                    <li>The region continues to develop its tourism, handicrafts, and agricultural sectors.</li>
+                    <li>Efforts are being made to promote peace, development, and integration with the rest of India.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Jammu_and_Kashmir_in_India_%28de-facto%29.svg/800px-Jammu_and_Kashmir_in_India_%28de-facto%29.svg.png" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>8. Cultural & Intellectual History</h3>
+                  <ul>
+                    <li><b>Kalhana's Rajatarangini:</b> One of the earliest known historical chronicles in India, written in the 12th century, documenting Kashmir's history.</li>
+                    <li><b>Kashmir Shaivism:</b> A non-dualistic philosophy that flourished in the region.</li>
+                    <li><b>Sufi-Rishi Tradition:</b> A unique blend of Sufi Islam and local traditions that promoted harmony and coexistence.</li>
+                    <li><b>Literary Contributions:</b> Works by poets like Lal Ded, Sheikh Noor-ud-Din Wali, and Habba Khatoon have enriched the cultural heritage of the region.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Lal_Ded_-_Lalleshwari.jpg/800px-Lal_Ded_-_Lalleshwari.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Jammu and Kashmir has witnessed ancient empires, Islamic rule, Mughal grandeur, Dogra dynasty, and modern political transformations. It remains a region of cultural richness, natural beauty, and historical significance in India. 🚩📜</p>
+          <br><br>
+        </div>
+        <div id="wbartacraft" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Art & Craft of Jammu and Kashmir 🎨🖌️</h1>
+          <p>Jammu and Kashmir has a rich artistic heritage, blending traditional craftsmanship with cultural influences from Central Asia, Persia, and the Indian subcontinent. The region's artisans are known for their intricate craftsmanship, attention to detail, and use of diverse materials like wool, silk, wood, and metal.</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Kashmiri Carpets & Rugs 🧶</h3>
+                  <h4>🔸 Hand-knotted Carpets</h4>
+                  <ul>
+                    <li><b>Origin:</b> Introduced to Kashmir during the reign of Sultan Zain-ul-Abidin in the 15th century.</li>
+                    <li><b>Features:</b> Intricate Persian-inspired designs, made with silk or wool, featuring motifs like the chinar leaf, flowers, and paisley patterns.</li>
+                    <li><b>Process:</b> Each carpet can take months or even years to complete, with knot counts ranging from 200 to 900 knots per square inch.</li>
+                  </ul>
+                  <h4>🔸 Namdas & Gabbas</h4>
+                  <ul>
+                    <li><b>Namda:</b> Felted wool rugs with chain-stitch embroidery.</li>
+                    <li><b>Gabba:</b> Thick floor coverings made from old woolen clothes with colorful patchwork and embroidery.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Kashmiri_Carpet.jpg/800px-Kashmiri_Carpet.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Kashmiri_Pashmina.jpg/800px-Kashmiri_Pashmina.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Pashmina & Textile Crafts 🧵</h3>
+                  <h4>🔸 Pashmina Shawls</h4>
+                  <ul>
+                    <li><b>Origin:</b> Made from the fine wool of the Changthangi goat found in the high altitudes of Ladakh.</li>
+                    <li><b>Features:</b> Incredibly soft, warm, and lightweight; often adorned with intricate embroidery.</li>
+                    <li><b>Types:</b> Plain Pashmina, Sozni (needle embroidery), Kani (woven patterns), and Jamawar (all-over pattern).</li>
+                  </ul>
+                  <h4>🔸 Kashmiri Embroidery</h4>
+                  <ul>
+                    <li><b>Sozni:</b> Fine needle embroidery that appears identical on both sides of the fabric.</li>
+                    <li><b>Kashida:</b> Colorful thread work featuring motifs of flowers, birds, and chinar leaves.</li>
+                    <li><b>Crewel:</b> Wool embroidery on cotton fabric, often used for upholstery and drapery.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Papier-Mâché 🎭</h3>
+                  <ul>
+                    <li><b>Origin:</b> Introduced to Kashmir from Persia in the 15th century.</li>
+                    <li><b>Process:</b> Paper pulp is molded, dried, and then painted with intricate designs and lacquered.</li>
+                    <li><b>Products:</b> Decorative boxes, vases, trays, Christmas ornaments, and wall hangings.</li>
+                    <li><b>Designs:</b> Traditional motifs include flowers, birds, hunting scenes, and geometric patterns.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Kashmiri_Papier_Mache.jpg/800px-Kashmiri_Papier_Mache.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Walnut_Wood_Carving_Kashmir.jpg/800px-Walnut_Wood_Carving_Kashmir.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Woodwork & Carving 🌳</h3>
+                  <h4>🔸 Walnut Wood Carving</h4>
+                  <ul>
+                    <li><b>Material:</b> High-quality walnut wood, known for its rich color and durability.</li>
+                    <li><b>Products:</b> Furniture, decorative items, trays, bowls, and jewelry boxes.</li>
+                    <li><b>Techniques:</b> Deep carving, undercut carving, and lattice work.</li>
+                  </ul>
+                  <h4>🔸 Khatamband</h4>
+                  <ul>
+                    <li><b>Technique:</b> Geometric wooden ceiling patterns created by fitting small pieces of wood together without nails.</li>
+                    <li><b>Usage:</b> Traditional Kashmiri homes, houseboats, and mosques.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Metalwork & Jewelry 🔨</h3>
+                  <ul>
+                    <li><b>Copper & Silver Work:</b> Traditional utensils, decorative items, and samovars (tea kettles) with intricate engravings.</li>
+                    <li><b>Kashmiri Jewelry:</b> Silver jewelry with turquoise, coral, and other semi-precious stones.</li>
+                    <li><b>Techniques:</b> Naqashi (engraving), chasing, and repoussé work.</li>
+                  </ul>
+                  <h3>6. Basohli & Kangra Paintings 🖼️</h3>
+                  <ul>
+                    <li><b>Basohli Paintings:</b> Vibrant miniature paintings from the Jammu region, known for bold colors and distinctive facial features.</li>
+                    <li><b>Themes:</b> Ramayana, Mahabharata, Bhagavata Purana, and portraits of local rulers.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Basohli_Painting.jpg/800px-Basohli_Painting.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Kashmir_Houseboat.jpg/800px-Kashmir_Houseboat.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>7. Houseboat Architecture 🏠</h3>
+                  <ul>
+                    <li><b>Origin:</b> Developed during the British colonial period when foreigners were not allowed to own land in Kashmir.</li>
+                    <li><b>Features:</b> Intricately carved wooden exteriors, luxurious interiors with traditional Kashmiri crafts.</li>
+                    <li><b>Design:</b> Combines elements of British colonial architecture with traditional Kashmiri woodwork.</li>
+                  </ul>
+                  <h3>8. Calligraphy & Manuscript Art 📜</h3>
+                  <ul>
+                    <li><b>Islamic Calligraphy:</b> Beautiful renditions of Quranic verses and poetry.</li>
+                    <li><b>Manuscript Illumination:</b> Decorative borders and illustrations in historical texts.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>9. Traditional Musical Instruments 🎵</h3>
+                  <h4>🔸 Santoor</h4>
+                  <ul>
+                    <li>A trapezoid-shaped string instrument played with wooden mallets.</li>
+                    <li>Made from walnut wood with 100 strings stretched across 25 bridges.</li>
+                  </ul>
+                  <h4>🔸 Rabab</h4>
+                  <ul>
+                    <li>A lute-like string instrument with a carved wooden body and goatskin covering.</li>
+                    <li>Used in traditional Kashmiri Sufiana music.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Kashmiri_Santoor.jpg/800px-Kashmiri_Santoor.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>📌 Summary: Jammu and Kashmir's Art & Craft Forms</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Art Form</th>
+                <th>Region</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Pashmina Shawls</td>
+                <td>Kashmir Valley</td>
+                <td>Ultra-fine wool, intricate embroidery</td>
+              </tr>
+              <tr>
+                <td>Carpets</td>
+                <td>Kashmir Valley</td>
+                <td>Hand-knotted, Persian-inspired designs</td>
+              </tr>
+              <tr>
+                <td>Papier-Mâché</td>
+                <td>Srinagar</td>
+                <td>Colorful decorative items with floral motifs</td>
+              </tr>
+              <tr>
+                <td>Walnut Wood Carving</td>
+                <td>Kashmir Valley</td>
+                <td>Intricate furniture and decorative items</td>
+              </tr>
+              <tr>
+                <td>Sozni Embroidery</td>
+                <td>Kashmir Valley</td>
+                <td>Fine needle work on Pashmina</td>
+              </tr>
+              <tr>
+                <td>Basohli Painting</td>
+                <td>Jammu Region</td>
+                <td>Vibrant miniature paintings</td>
+              </tr>
+              <tr>
+                <td>Copper & Silverware</td>
+                <td>Kashmir Valley</td>
+                <td>Engraved utensils and decorative items</td>
+              </tr>
+              <tr>
+                <td>Khatamband</td>
+                <td>Kashmir Valley</td>
+                <td>Geometric wooden ceiling patterns</td>
+              </tr>
+              <tr>
+                <td>Crewel Embroidery</td>
+                <td>Kashmir Valley</td>
+                <td>Wool embroidery on cotton fabric</td>
+              </tr>
+              <tr>
+                <td>Calligraphy</td>
+                <td>Throughout J&K</td>
+                <td>Islamic and Persian-inspired text art</td>
+              </tr>
+              <tr>
+                <td>Musical Instruments</td>
+                <td>Throughout J&K</td>
+                <td>Santoor, Rabab, and traditional drums</td>
+              </tr>
+              <tr>
+                <td>Houseboat Crafting</td>
+                <td>Dal & Nigeen Lakes</td>
+                <td>Floating wooden architectural marvels</td>
+              </tr>
+            </table>
+          </div>
+          <br><br>
+          <p>Jammu and Kashmir's art and crafts are a blend of history, culture, and traditional skills, passed down through generations. Whether it's the luxurious Pashmina shawls, intricate papier-mâché work, or the detailed walnut wood carvings, the region's artisans continue to preserve and innovate their heritage. 🎭✨</p>
+          <br><br>
+        </div>
+        <div id="wbseason" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Seasons to visit Jammu and Kashmir 🌧️☀️ </h1>
+          <p>Jammu and Kashmir experiences distinct seasons, each offering a unique experience for visitors. The region's varied topography, from the subtropical Jammu region to the temperate Kashmir Valley and the high-altitude areas, creates diverse climatic conditions throughout the year.</p>
+
+          <br><br>
+
+          <h2> Season-wise Breakdown for Visiting Jammu and Kashmir</h2>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🌸 Spring (March - May)</h3>
+                  <ul>
+                    <li>The Kashmir Valley comes alive with blooming flowers, especially tulips, apple, and almond blossoms.</li>
+                    <li>The famous Tulip Garden in Srinagar, Asia's largest, is in full bloom during April.</li>
+                    <li>Pleasant temperatures ranging from 10°C to 25°C make it ideal for sightseeing.</li>
+                    <li>Perfect time for visiting Srinagar, Gulmarg, Sonamarg, and Pahalgam.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Tulip_Garden_Srinagar.jpg/800px-Tulip_Garden_Srinagar.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Dal_Lake_Srinagar.jpg/800px-Dal_Lake_Srinagar.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>☀️ Summer (June – August)</h3>
+                  <ul>
+                    <li>The Kashmir Valley offers a cool retreat from the scorching heat of the plains.</li>
+                    <li>Temperatures range from 15°C to 30°C, making it pleasant for outdoor activities.</li>
+                    <li>Ideal time for trekking, water sports on Dal Lake, and visiting high-altitude destinations like Sonamarg and Gulmarg.</li>
+                    <li>The Amarnath Yatra (pilgrimage) typically takes place during this season.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🍁 Autumn (September - November)</h3>
+                  <ul>
+                    <li>The landscape transforms with stunning golden and amber hues as the chinar trees change color.</li>
+                    <li>Temperatures begin to drop, ranging from 10°C to 20°C.</li>
+                    <li>Perfect time for photography, especially in Srinagar and Pahalgam.</li>
+                    <li>The saffron fields of Pampore bloom during late autumn, creating a purple carpet across the landscape.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Autumn_in_Kashmir.jpg/800px-Autumn_in_Kashmir.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Gulmarg_in_winter.jpg/800px-Gulmarg_in_winter.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>❄️ Winter (December - February)</h3>
+                  <ul>
+                    <li>The Kashmir Valley transforms into a winter wonderland with heavy snowfall.</li>
+                    <li>Temperatures can drop below freezing, ranging from -10°C to 10°C.</li>
+                    <li>Perfect time for winter sports like skiing and snowboarding in Gulmarg, one of Asia's premier ski destinations.</li>
+                    <li>The frozen Dal Lake and snow-covered Mughal Gardens offer unique photo opportunities.</li>
+                    <li>Jammu region remains relatively warmer and is ideal for visiting temples and historical sites.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🌧️ Monsoon (July - September)</h3>
+                  <ul>
+                    <li>The Kashmir Valley receives moderate rainfall, unlike the heavy downpours in other parts of India.</li>
+                    <li>The landscape becomes lush and green, with flowing streams and waterfalls.</li>
+                    <li>There can be occasional landslides in mountainous areas, so some caution is advised while traveling.</li>
+                    <li>The Jammu region receives heavier rainfall during this period.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Monsoon_in_Kashmir.jpg/800px-Monsoon_in_Kashmir.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>📌 Summary: Best Time to Visit Different Places in Jammu and Kashmir</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Region</th>
+                <th>Best Season</th>
+                <th>Recommended Months</th>
+                <th>Why Visit?</th>
+              </tr>
+              <tr>
+                <td>Srinagar</td>
+                <td>Spring, Summer, Autumn</td>
+                <td>April - October</td>
+                <td>Dal Lake, Mughal Gardens, Shikara rides, pleasant weather</td>
+              </tr>
+              <tr>
+                <td>Gulmarg</td>
+                <td>Winter, Spring, Summer</td>
+                <td>December - June</td>
+                <td>Skiing in winter, meadows and trekking in summer</td>
+              </tr>
+              <tr>
+                <td>Pahalgam</td>
+                <td>Spring, Summer, Autumn</td>
+                <td>March - October</td>
+                <td>Lidder River, meadows, trekking, pleasant climate</td>
+              </tr>
+              <tr>
+                <td>Sonamarg</td>
+                <td>Summer</td>
+                <td>May - September</td>
+                <td>Thajiwas Glacier, meadows, trekking</td>
+              </tr>
+              <tr>
+                <td>Jammu</td>
+                <td>Winter, Spring</td>
+                <td>October - March</td>
+                <td>Temples, historical sites, pleasant weather</td>
+              </tr>
+              <tr>
+                <td>Patnitop</td>
+                <td>All year</td>
+                <td>Year-round</td>
+                <td>Hill station, snow in winter, pleasant in summer</td>
+              </tr>
+              <tr>
+                <td>Vaishno Devi</td>
+                <td>Spring, Autumn, Winter</td>
+                <td>March - June, September - February</td>
+                <td>Pilgrimage, comfortable weather for the trek</td>
+              </tr>
+              <tr>
+                <td>Doda & Bhaderwah</td>
+                <td>Spring, Summer</td>
+                <td>April - September</td>
+                <td>Mini Kashmir, meadows, trekking</td>
+              </tr>
+              <tr>
+                <td>Leh-Ladakh (now a separate UT)</td>
+                <td>Summer</td>
+                <td>June - September</td>
+                <td>High-altitude desert, monasteries, lakes</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="container">
+            <div class="row">
+              <h1 style=" text-align: center;">📌 Summary: When to Visit Jammu and Kashmir</h1><br>
+              <ul>
+                <li><b>For snow and winter sports:</b> December - February (Gulmarg, Pahalgam)</li>
+                <li><b>For tulips and spring blossoms:</b> March - April (Srinagar, Tulip Garden)</li>
+                <li><b>For trekking and outdoor activities:</b> May - September (Sonamarg, Pahalgam, Gulmarg)</li>
+                <li><b>For autumn colors:</b> October - November (Srinagar, especially the Chinar trees)</li>
+                <li><b>For pilgrimage to Vaishno Devi:</b> Year-round, but best in March-June and September-February</li>
+                <li><b>For Amarnath Yatra:</b> July - August (weather permitting)</li>
+              </ul>
+
+            </div>
+          </div>
+          <br><br>
+        </div>
+        <div id="wbtourist" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Tourist Spots of Jammu and Kashmir 🏖️🏔️</h1>
+          <p>Jammu and Kashmir, often referred to as "Paradise on Earth," offers a diverse range of tourist attractions, from serene lakes and majestic mountains to historical monuments and religious sites. Here's a categorized list of the best tourist places in Jammu and Kashmir:</p>
+
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Lakes & Waterways 🚣‍♀️</h3>
+                  <ul>
+                    <li><b>Dal Lake (Srinagar) -</b> Famous for houseboats, floating gardens, and shikara rides.</li>
+                    <li><b>Nigeen Lake (Srinagar) -</b> A quieter alternative to Dal Lake, known for its pristine waters.</li>
+                    <li><b>Wular Lake -</b> One of Asia's largest freshwater lakes, great for bird watching.</li>
+                    <li><b>Manasbal Lake -</b> Known for lotus flowers and peaceful surroundings.</li>
+                    <li><b>Pangong Lake -</b> A high-altitude lake with changing colors (now in Ladakh UT).</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Dal_Lake_Srinagar.jpg/800px-Dal_Lake_Srinagar.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Shalimar_Bagh_Srinagar.jpg/800px-Shalimar_Bagh_Srinagar.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Gardens & Parks 🌷</h3>
+                  <ul>
+                    <li><b>Mughal Gardens -</b> A collection of Persian-style gardens including:</li>
+                    <ul>
+                      <li><b>Shalimar Bagh -</b> The largest Mughal garden with terraced lawns and fountains.</li>
+                      <li><b>Nishat Bagh -</b> The "Garden of Bliss" with 12 terraces representing zodiac signs.</li>
+                      <li><b>Chashme Shahi -</b> Known for its fresh spring water and beautiful landscaping.</li>
+                    </ul>
+                    <li><b>Indira Gandhi Memorial Tulip Garden -</b> Asia's largest tulip garden, blooming in April.</li>
+                    <li><b>Botanical Garden -</b> Home to rare plant species and beautiful landscapes.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Hill Stations & Mountain Destinations 🏔️</h3>
+                  <ul>
+                    <li><b>Gulmarg -</b> Famous for skiing, the Gondola cable car (one of the highest in the world), and meadows.</li>
+                    <li><b>Pahalgam -</b> The "Valley of Shepherds" with the beautiful Lidder River, meadows, and trekking routes.</li>
+                    <li><b>Sonamarg -</b> The "Meadow of Gold" with Thajiwas Glacier and stunning mountain views.</li>
+                    <li><b>Patnitop -</b> A hill station in Jammu region with panoramic views and adventure activities.</li>
+                    <li><b>Yusmarg -</b> A less crowded meadow destination with pristine beauty.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Gulmarg_in_winter.jpg/800px-Gulmarg_in_winter.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Vaishno_Devi_Temple.jpg/800px-Vaishno_Devi_Temple.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Religious & Spiritual Sites ⛩️</h3>
+                  <ul>
+                    <li><b>Vaishno Devi Temple (Katra) -</b> One of India's most visited pilgrimage sites, located in the Trikuta Mountains.</li>
+                    <li><b>Hazratbal Shrine (Srinagar) -</b> A revered Muslim shrine housing a relic believed to be a hair of Prophet Muhammad.</li>
+                    <li><b>Jamia Masjid (Srinagar) -</b> An impressive mosque built in 1394, showcasing Indo-Saracenic architecture.</li>
+                    <li><b>Raghunath Temple (Jammu) -</b> A complex of seven Hindu temples dedicated to Lord Rama.</li>
+                    <li><b>Shankaracharya Temple (Srinagar) -</b> An ancient Shiva temple on a hilltop offering panoramic views of the city.</li>
+                    <li><b>Amarnath Cave -</b> A sacred Hindu shrine with a naturally formed ice lingam.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Historical & Cultural Sites 🏛️</h3>
+                  <ul>
+                    <li><b>Martand Sun Temple (Anantnag) -</b> Ruins of an 8th-century temple dedicated to Surya (Sun God).</li>
+                    <li><b>Pari Mahal (Srinagar) -</b> A terraced garden and former observatory with beautiful architecture.</li>
+                    <li><b>Mubarak Mandi Palace (Jammu) -</b> The former royal residence of the Dogra dynasty.</li>
+                    <li><b>Avantipur Ruins -</b> Ancient temple complex built by King Avantivarman in the 9th century.</li>
+                    <li><b>Hari Parbat Fort -</b> A historic fort with religious significance for Hindus, Muslims, and Sikhs.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Martand_Sun_Temple.jpg/800px-Martand_Sun_Temple.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Dachigam_National_Park.jpg/800px-Dachigam_National_Park.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>6. Wildlife & Nature Destinations 🌳🦌</h3>
+                  <ul>
+                    <li><b>Dachigam National Park -</b> Home to the endangered Hangul (Kashmir Stag) and diverse wildlife.</li>
+                    <li><b>Overa-Aru Wildlife Sanctuary -</b> Rich biodiversity with Himalayan black bears, musk deer, and various bird species.</li>
+                    <li><b>Gulmarg Biosphere Reserve -</b> A protected area with diverse flora and fauna.</li>
+                    <li><b>Kishtwar National Park -</b> Known for snow leopards, brown bears, and Himalayan musk deer.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Adventure & Trekking Destinations 🎢🚵</h3>
+                  <ul>
+                    <li><b>Gulmarg -</b> Skiing, snowboarding, and the Gondola ride.</li>
+                    <li><b>Pahalgam -</b> Trekking routes, white water rafting on the Lidder River, and horse riding.</li>
+                    <li><b>Sonamarg -</b> Trekking to Thajiwas Glacier and various alpine lakes.</li>
+                    <li><b>Bhaderwah -</b> Known as "Mini Kashmir" with trekking routes and scenic beauty.</li>
+                    <li><b>Sinthan Top -</b> A mountain pass offering adventure activities and stunning views.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Skiing_in_Gulmarg.jpg/800px-Skiing_in_Gulmarg.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br><br>
+
+        </div>
+        <div id="wbwild" class="tab-pane fade in active" style="background-color: white;">
+          <h1> Wildlife & Crops of Jammu and Kashmir 🌿</h1>
+          <p>Jammu and Kashmir has diverse wildlife and a rich agricultural landscape due to its varied geography, from the subtropical Jammu region to the temperate Kashmir Valley and the high-altitude areas.</p>
+
+          <br>
+          <h2>Wildlife of Jammu and Kashmir </h2>
+          <p>Jammu and Kashmir is home to several national parks and wildlife sanctuaries, preserving its unique biodiversity and endangered species.</p>
+
+          <br>
+          <h2>🔹 Major National Parks & Wildlife Sanctuaries</h2>
+          <div>
+            <table>
+              <tr>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Dachigam National Park</td>
+                <td>Near Srinagar</td>
+                <td>Hangul (Kashmir Stag) 🦌, Himalayan Black Bear 🐻, Leopards 🐆</td>
+              </tr>
+              <tr>
+                <td>Kishtwar National Park</td>
+                <td>Kishtwar District</td>
+                <td>Snow Leopard, Himalayan Brown Bear, Musk Deer</td>
+              </tr>
+              <tr>
+                <td>Hemis National Park</td>
+                <td>Ladakh (now separate UT)</td>
+                <td>Snow Leopards, Tibetan Wolf, Bharal (Blue Sheep)</td>
+              </tr>
+              <tr>
+                <td>Overa-Aru Wildlife Sanctuary</td>
+                <td>Pahalgam</td>
+                <td>Musk Deer, Himalayan Black Bear, Leopard</td>
+              </tr>
+              <tr>
+                <td>Gulmarg Biosphere Reserve</td>
+                <td>Baramulla District</td>
+                <td>Rich Biodiversity, Himalayan Flora and Fauna</td>
+              </tr>
+              <tr>
+                <td>Hirpora Wildlife Sanctuary</td>
+                <td>Shopian District</td>
+                <td>Markhor (State Animal), Musk Deer, Himalayan Griffon</td>
+              </tr>
+              <tr>
+                <td>Jasrota Wildlife Sanctuary</td>
+                <td>Kathua District</td>
+                <td>Sambar Deer, Wild Boar, Jungle Cat</td>
+              </tr>
+            </table>
+          </div>
+          <bt><br></bt>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3> 🔹 Notable Wildlife in Jammu and Kashmir</h3>
+                <ul>
+                  <li><b>Mammals:</b> Hangul (Kashmir Stag - State Animal), Snow Leopard, Himalayan Black Bear, Markhor, Ibex, Musk Deer, Leopard, Himalayan Brown Bear.</li>
+                  <li><b>Birds:</b> Black-necked Crane (State Bird), Himalayan Monal, Western Tragopan, Lammergeier, Golden Eagle, Kashmir Flycatcher.</li>
+                  <li><b>Reptiles:</b> Kashmir Rock Agama, Himalayan Pit Viper, Common Krait.</li>
+                  <li><b>Aquatic Life:</b> Brown Trout, Schizothorax (Snow Trout), Common Carp.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Kashmir_Stag.jpg/800px-Kashmir_Stag.jpg" alt="" style="height:200px;width: 200px;">
+
+              </div>
+
+            </div>
+          </div>
+          <hr><br>
+          <h2>🌾 Agriculture & Major Crops in Jammu and Kashmir </h2>
+          <p>Jammu and Kashmir has a diverse agricultural landscape, with different crops grown in its various agro-climatic zones.</p>
+
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Key Agricultural Features</h3>
+                <ul>
+                  <li>Agriculture is the backbone of the economy, employing about 70% of the population.</li>
+                  <li><b>Diverse Agro-climatic Zones:</b> From subtropical Jammu to temperate Kashmir Valley and cold arid regions.</li>
+                  <li><b>Irrigation:</b> Rivers like Jhelum, Chenab, and Tawi support farming.</li>
+                  <li><b>Terrace Farming:</b> Common in hilly areas to maximize agricultural land.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Saffron_Flower%2C_Pampore%2C_Kashmir.jpg/800px-Saffron_Flower%2C_Pampore%2C_Kashmir.jpg" alt="" style="height:200px;width: 220px;">
+
+              </div>
+            </div>
+          </div>
+          <h2>🔹 Major Crops of Jammu and Kashmir</h2>
+          <div>
+            <table>
+              <tr>
+                <th>Category</th>
+                <th>Crops</th>
+              </tr>
+              <tr>
+                <td>Cereals</td>
+                <td>Rice 🍚, Maize 🌽, Wheat 🌾, Barley</td>
+              </tr>
+              <tr>
+                <td>Cash Crops</td>
+                <td>Saffron, Apples 🍎, Walnuts, Almonds</td>
+              </tr>
+              <tr>
+                <td>Pulses</td>
+                <td>Rajmah (Kidney Beans), Moong Dal, Masoor Dal</td>
+              </tr>
+              <tr>
+                <td>Vegetables</td>
+                <td>Potato 🥔, Tomato 🍅, Cabbage, Cauliflower, Turnip, Radish</td>
+              </tr>
+              <tr>
+                <td>Fruits</td>
+                <td>Apple 🍎, Cherry 🍒, Walnut, Almond, Pear, Apricot, Peach, Plum</td>
+              </tr>
+              <tr>
+                <td>Oilseeds</td>
+                <td>Mustard, Linseed, Rapeseed</td>
+              </tr>
+              <tr>
+                <td>Spices</td>
+                <td>Saffron, Zeera (Cumin), Black Cumin, Garlic 🧄</td>
+              </tr>
+              <tr>
+                <td>Medicinal Plants</td>
+                <td>Kuth, Kutki, Karvi, Artemisia, Belladonna</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Special Agricultural Products</h3>
+                <ul>
+                  <li><b>Kashmiri Saffron:</b> World-famous, GI-tagged, grown primarily in Pampore (known as "Saffron Town").</li>
+                  <li><b>Kashmiri Apples:</b> Known for their crisp texture, sweetness, and long shelf life.</li>
+                  <li><b>Kashmiri Walnuts:</b> Prized for their thin shells and high-quality kernels.</li>
+                  <li><b>Basmati Rice:</b> Aromatic rice grown in the Jammu region.</li>
+                  <li><b>Rajmah (Kidney Beans):</b> The famous red kidney beans from the Jammu region.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Kashmir_Apple_Orchards.jpg/800px-Kashmir_Apple_Orchards.jpg" alt="" style="height:200px;width: 200px;">
+
+              </div>
+            </div>
+          </div><br>
+          <hr>
+          <div class="box" style=" background: #f3b37185;padding: 10px;">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3> Sustainable Agriculture & Modern Trends 🌾</h3>
+                  <ul>
+                    <li><b>Organic Farming:</b> Growing in popularity, especially for apples, saffron, and walnuts.</li>
+                    <li><b>High-Density Apple Orchards:</b> Modern techniques to increase yield and quality.</li>
+                    <li><b>Protected Cultivation:</b> Greenhouses and polyhouses for off-season vegetables.</li>
+                    <li><b>Trout Farming:</b> Cold-water fish farming in the Kashmir Valley and hilly areas.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Trout_Farming_in_Kashmir.jpg/800px-Trout_Farming_in_Kashmir.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Jammu and Kashmir is a paradise for both nature lovers and agricultural enthusiasts. It has rich wildlife sanctuaries, lush orchards, and fertile farmlands that support a diverse ecosystem and economy.</p>
+          <br><br>
+        </div>
+        <div id="wbedu" class="tab-pane fade in active" style="background-color: white;">
+          <h1>🎓 Education & Institutions in Jammu and Kashmir</h1>
+          <p>Jammu and Kashmir has a growing educational infrastructure with universities, colleges, and schools that cater to the diverse needs of its population. The region has made significant strides in education despite geographical challenges and other constraints.</p>
+
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>📌 Education System in Jammu and Kashmir</h3>
+                  <ul>
+                    <li><b>School Education:</b> Follows JKBOSE (Jammu and Kashmir Board of School Education), CBSE, and ICSE boards.</li>
+                    <li><b>Higher Education:</b> Managed by UGC, AICTE, and state universities.</li>
+                    <li><b>Major Fields:</b> Engineering, Medical, Science, Arts, Commerce, Agriculture, and Management.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/JKBOSE.jpg/800px-JKBOSE.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>🏛️ Top Universities & Institutions </h2>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 General Universities</h3>
+                <ol>
+                  <li><b>University of Kashmir (Srinagar) -</b> Established in 1948, offering programs in sciences, humanities, commerce, and law.</li>
+                  <li><b>University of Jammu -</b> Founded in 1969, known for research and academic excellence.</li>
+                  <li><b>Islamic University of Science and Technology (Awantipora) -</b> A modern university focusing on technical education.</li>
+                  <li><b>Central University of Kashmir -</b> A centrally funded university established in 2009.</li>
+                  <li><b>Central University of Jammu -</b> Established in 2011, offering diverse academic programs.</li>
+                  <li><b>Baba Ghulam Shah Badshah University (Rajouri) -</b> Named after the Sufi saint, focusing on technical and professional education.</li>
+                  <li><b>Cluster University of Srinagar -</b> A cluster of five colleges offering undergraduate and postgraduate programs.</li>
+                  <li><b>Cluster University of Jammu -</b> Similar to Srinagar, a cluster of colleges in the Jammu region.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/University_of_Kashmir.jpg/800px-University_of_Kashmir.jpg" alt="" style="height:200px;width: 230px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>University</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>University of Kashmir</td>
+                <td>Srinagar</td>
+                <td>Oldest university in the region, strong in humanities and sciences</td>
+              </tr>
+              <tr>
+                <td>University of Jammu</td>
+                <td>Jammu</td>
+                <td>Research, science programs, and regional studies</td>
+              </tr>
+              <tr>
+                <td>Islamic University of Science & Technology</td>
+                <td>Awantipora</td>
+                <td>Technical education, engineering, and business studies</td>
+              </tr>
+              <tr>
+                <td>Central University of Kashmir</td>
+                <td>Ganderbal</td>
+                <td>Modern curriculum, law, and management studies</td>
+              </tr>
+              <tr>
+                <td>Central University of Jammu</td>
+                <td>Jammu</td>
+                <td>Diverse academic programs and research initiatives</td>
+              </tr>
+              <tr>
+                <td>Baba Ghulam Shah Badshah University</td>
+                <td>Rajouri</td>
+                <td>Technical education and professional courses</td>
+              </tr>
+              <tr>
+                <td>Cluster University of Srinagar</td>
+                <td>Srinagar</td>
+                <td>Integrated programs across constituent colleges</td>
+              </tr>
+              <tr>
+                <td>Cluster University of Jammu</td>
+                <td>Jammu</td>
+                <td>Collaborative higher education model</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/NIT_Srinagar.jpg/800px-NIT_Srinagar.jpg" alt="" style="height:200px;width: 240px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🔹 Technical & Professional Institutions</h3>
+                  <ol>
+                    <li><b>National Institute of Technology (NIT) Srinagar -</b> Premier engineering institute established in 1960.</li>
+                    <li><b>Indian Institute of Technology (IIT) Jammu -</b> Established in 2016, one of the newer IITs in India.</li>
+                    <li><b>Indian Institute of Management (IIM) Jammu -</b> Established in 2016, offering management education.</li>
+                    <li><b>Government College of Engineering and Technology, Jammu -</b> Offering various engineering programs.</li>
+                    <li><b>Shri Mata Vaishno Devi University -</b> A technical university in Katra with diverse programs.</li>
+                  </ol>
+                </div>
+
+                <br><br>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Institute</th>
+                <th>Location</th>
+                <th>Specialization</th>
+              </tr>
+              <tr>
+                <td>NIT Srinagar</td>
+                <td>Srinagar</td>
+                <td>Engineering and technology education</td>
+              </tr>
+              <tr>
+                <td>IIT Jammu</td>
+                <td>Jammu</td>
+                <td>Advanced engineering and research</td>
+              </tr>
+              <tr>
+                <td>IIM Jammu</td>
+                <td>Jammu</td>
+                <td>Management education and business studies</td>
+              </tr>
+              <tr>
+                <td>GCET Jammu</td>
+                <td>Jammu</td>
+                <td>Engineering education at undergraduate level</td>
+              </tr>
+              <tr>
+                <td>SMVDU</td>
+                <td>Katra</td>
+                <td>Technical and professional education</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🔹 Medical Colleges</h3>
+                  <ol>
+                    <li><b>Government Medical College, Srinagar -</b> Established in 1959, the oldest medical college in the region.</li>
+                    <li><b>Government Medical College, Jammu -</b> A premier medical institution in the Jammu region.</li>
+                    <li><b>SKIMS Medical College, Bemina -</b> Associated with Sher-i-Kashmir Institute of Medical Sciences.</li>
+                    <li><b>Government Medical College, Baramulla -</b> A newer medical college expanding healthcare education.</li>
+                    <li><b>Government Medical College, Anantnag -</b> Established to serve the southern Kashmir region.</li>
+                  </ol>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/GMC_Srinagar.jpg/800px-GMC_Srinagar.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Medical College</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Government Medical College</td>
+                <td>Srinagar</td>
+                <td>Oldest medical institution in the region</td>
+              </tr>
+              <tr>
+                <td>Government Medical College</td>
+                <td>Jammu</td>
+                <td>Premier medical education in Jammu region</td>
+              </tr>
+              <tr>
+                <td>SKIMS Medical College</td>
+                <td>Bemina, Srinagar</td>
+                <td>Associated with SKIMS super-specialty hospital</td>
+              </tr>
+              <tr>
+                <td>Government Medical College</td>
+                <td>Baramulla</td>
+                <td>Serving northern Kashmir's medical education needs</td>
+              </tr>
+              <tr>
+                <td>Government Medical College</td>
+                <td>Anantnag</td>
+                <td>Medical education in southern Kashmir</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/SKUAST_Kashmir.jpg/800px-SKUAST_Kashmir.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🔹 Agricultural & Other Specialized Institutions</h3>
+                  <ul>
+                    <li><b>Sher-e-Kashmir University of Agricultural Sciences and Technology (SKUAST-K) -</b> Agricultural university in Kashmir.</li>
+                    <li><b>Sher-e-Kashmir University of Agricultural Sciences and Technology (SKUAST-J) -</b> Agricultural university in Jammu.</li>
+                    <li><b>Institute of Music and Fine Arts -</b> Specialized in arts education under the University of Kashmir.</li>
+                    <li><b>National Institute of Fashion Technology (NIFT) Srinagar -</b> Offering education in fashion design and technology.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Institute</th>
+                <th>Location</th>
+                <th>Specialization</th>
+              </tr>
+              <tr>
+                <td>SKUAST-Kashmir</td>
+                <td>Srinagar</td>
+                <td>Agricultural sciences, horticulture, forestry</td>
+              </tr>
+              <tr>
+                <td>SKUAST-Jammu</td>
+                <td>Jammu</td>
+                <td>Agricultural research and education</td>
+              </tr>
+              <tr>
+                <td>NIFT Srinagar</td>
+                <td>Srinagar</td>
+                <td>Fashion design and technology</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <h2>🏫 School Education in Jammu and Kashmir </h2>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Major School Boards</h3>
+                <ol>
+                  <li><b>JKBOSE (Jammu and Kashmir Board of School Education) -</b> The state board conducting examinations for 10th and 12th standards.</li>
+                  <li><b>CBSE (Central Board of Secondary Education) -</b> Many private and Kendriya Vidyalayas follow this national curriculum.</li>
+                  <li><b>ICSE (Indian Certificate of Secondary Education) -</b> Some private schools follow this board.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Presentation_Convent_School_Srinagar.jpg/800px-Presentation_Convent_School_Srinagar.jpg" alt="" style="height:200px;width: 200px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Burn_Hall_School_Srinagar.jpg/800px-Burn_Hall_School_Srinagar.jpg" alt="" style="height:200px;width: 230px;">
+
+              </div>
+              <div class="col-sm-8">
+
+                <h3>🔹 Notable Schools in Jammu and Kashmir</h3>
+                <ol>
+                  <li><b>Burn Hall School (Srinagar) -</b> One of the oldest and most prestigious schools in Kashmir.</li>
+                  <li><b>Presentation Convent School (Srinagar) -</b> A renowned girls' school established in 1936.</li>
+                  <li><b>Delhi Public School (Srinagar & Jammu) -</b> Part of the DPS Society, offering quality education.</li>
+                  <li><b>Kendriya Vidyalayas -</b> Central government schools in various districts.</li>
+                  <li><b>Jawahar Navodaya Vidyalayas -</b> Residential schools for talented students from rural areas.</li>
+                  <li><b>Army Public Schools -</b> Schools run by the Indian Army in various locations.</li>
+                </ol>
+
+              </div>
+
+            </div>
+          </div>
+          <div class="box">
+            <h2>🔬 Research & Development Institutions</h2>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <p>Jammu and Kashmir hosts several research institutions focusing on regional needs:</p>
+                  <ol>
+                    <li><b>Sher-e-Kashmir Institute of Medical Sciences (SKIMS) -</b> Advanced medical research and treatment.</li>
+                    <li><b>Indian Institute of Integrative Medicine (IIIM) -</b> Research on medicinal plants and drug development.</li>
+                    <li><b>Central Institute of Temperate Horticulture -</b> Research on fruit crops suitable for temperate regions.</li>
+                    <li><b>Defence Institute of High Altitude Research (DIHAR) -</b> Research on high-altitude agriculture and food preservation.</li>
+                  </ol>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/SKIMS_Soura.jpg/800px-SKIMS_Soura.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <h2>📚 Challenges & Initiatives in Education</h2>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <ol>
+                    <li><b>Geographical Challenges:</b> Mountainous terrain makes access to education difficult in remote areas.</li>
+                    <li><b>Digital Initiatives:</b> Efforts to bridge the digital divide through online education platforms.</li>
+                    <li><b>Skill Development Programs:</b> Various initiatives to enhance employability of youth.</li>
+                    <li><b>Scholarship Programs:</b> Special scholarships for students from Jammu and Kashmir to study within the region and across India.</li>
+                    <li><b>Infrastructure Development:</b> Ongoing projects to improve educational infrastructure.</li>
+                  </ol>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Digital_Education_in_Kashmir.jpg/800px-Digital_Education_in_Kashmir.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Jammu and Kashmir continues to develop its educational infrastructure, producing scholars, scientists, doctors, engineers, and entrepreneurs. Despite challenges, the region is making significant progress in expanding access to quality education across all levels.</p>
+        </div>
+        <br><br>
+
+      </div>
+
+
+    </div>
+  </div>
+  </div>
+</body>
+
+</html>

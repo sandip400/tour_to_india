@@ -1,0 +1,2656 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NCRB Crime Statistics Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+        .card {
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        }
+
+        .progress-bar {
+            background-color: #e5e7eb;
+            border-radius: 9999px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background-color: #3b82f6;
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+
+        .tab-active {
+            background-color: white;
+            color: #1f2937;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        .tab-inactive {
+            color: #6b7280;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.5rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .badge-default {
+            background-color: #f3f4f6;
+            color: #374151;
+        }
+
+        .badge-destructive {
+            background-color: #fef2f2;
+            color: #dc2626;
+        }
+
+        .badge-secondary {
+            background-color: #f1f5f9;
+            color: #475569;
+        }
+
+        .badge-outline {
+            border: 1px solid #d1d5db;
+            background-color: transparent;
+            color: #374151;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .error {
+            display: none;
+            background-color: #fef2f2;
+            color: #dc2626;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+
+<body class="gradient-bg min-h-screen">
+    <div class="max-w-7xl mx-auto p-6 space-y-6">
+        <!-- Header -->
+        <div class="text-center space-y-4">
+            <h1 class="text-4xl font-bold text-slate-800 flex items-center justify-center gap-3">
+                <i class="fas fa-shield-alt text-blue-600"></i>
+                NCRB Crime Statistics Dashboard
+            </h1>
+            <p class="text-slate-600 text-lg">Comprehensive crime data analysis and insights across Indian states</p>
+        </div>
+
+        <!-- Loading and Error Messages -->
+        <div class="loading" id="loadingMessage">
+            <i class="fas fa-spinner fa-spin"></i>
+            Loading crime data...
+        </div>
+        <div class="error" id="errorMessage"></div>
+
+        <!-- Controls -->
+        <div class="card p-6">
+            <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
+                <i class="fas fa-map-marker-alt"></i>
+                Select State and Year
+            </h3>
+            <div class="flex gap-4">
+                <div class="flex-1">
+                    <select id="stateSelect" class="w-full p-2 border border-gray-300 rounded-md bg-white">
+                        <option value="">Select a state</option>
+                        <option value="Uttar Pradesh" selected>Uttar Pradesh</option>
+                        <option value="Andhra Pradesh">Andhra Pradesh</option>
+                        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                        <option value="Assam">Assam</option>
+                        <option value="Bihar">Bihar</option>
+                        <option value="Chhattisgarh">Chhattisgarh</option>
+                        <option value="Goa">Goa</option>
+                        <option value="Gujarat">Gujarat</option>
+                        <option value="Haryana">Haryana</option>
+                        <option value="Himachal Pradesh">Himachal Pradesh</option>
+                        <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                        <option value="Jharkhand">Jharkhand</option>
+                        <option value="Karnataka">Karnataka</option>
+                        <option value="Kerala">Kerala</option>
+                        <option value="Madhya Pradesh">Madhya Pradesh</option>
+                        <option value="Maharashtra">Maharashtra</option>
+                        <option value="Manipur">Manipur</option>
+                        <option value="Meghalaya">Meghalaya</option>
+                        <option value="Mizoram">Mizoram</option>
+                        <option value="Nagaland">Nagaland</option>
+                        <option value="Odisha">Odisha</option>
+                        <option value="Punjab">Punjab</option>
+                        <option value="Rajasthan">Rajasthan</option>
+                        <option value="Sikkim">Sikkim</option>
+                        <option value="Tamil Nadu">Tamil Nadu</option>
+                        <option value="Telangana">Telangana</option>
+                        <option value="Tripura">Tripura</option>
+                        <option value="Uttarakhand">Uttarakhand</option>
+                        <option value="West Bengal">West Bengal</option>
+                    </select>
+                </div>
+                <div class="flex-1">
+                    <select id="yearSelect" class="w-full p-2 border border-gray-300 rounded-md bg-white">
+                        <option value="2021">2021</option>
+                        <option value="2022">2022</option>
+                        <option value="2023" selected>2023</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Metrics -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="card p-6">
+                <div class="flex items-center justify-between mb-2">
+                    <h4 class="text-sm font-medium text-gray-600">Total Crimes</h4>
+                    <i class="fas fa-exclamation-triangle text-red-500"></i>
+                </div>
+                <div class="text-2xl font-bold" id="totalCrimes">247,158</div>
+                <div class="flex items-center text-xs text-gray-500 mt-1">
+                    <i class="fas fa-arrow-up text-red-500 mr-1"></i>
+                    <span id="totalCrimesChange">3.44% from last year</span>
+                </div>
+            </div>
+
+            <div class="card p-6">
+                <div class="flex items-center justify-between mb-2">
+                    <h4 class="text-sm font-medium text-gray-600">Crime Rate</h4>
+                    <i class="fas fa-chart-bar text-blue-500"></i>
+                </div>
+                <div class="text-2xl font-bold" id="crimeRate">124</div>
+                <p class="text-xs text-gray-500">per 100,000 population</p>
+            </div>
+
+            <div class="card p-6">
+                <div class="flex items-center justify-between mb-2">
+                    <h4 class="text-sm font-medium text-gray-600">Crimes Against Women</h4>
+                    <i class="fas fa-users text-purple-500"></i>
+                </div>
+                <div class="text-2xl font-bold" id="womenCrimes">65,432</div>
+                <div class="flex items-center text-xs text-gray-500 mt-1">
+                    <i class="fas fa-arrow-up text-red-500 mr-1"></i>
+                    <span id="womenCrimesChange">4.96% from last year</span>
+                </div>
+            </div>
+
+            <div class="card p-6">
+                <div class="flex items-center justify-between mb-2">
+                    <h4 class="text-sm font-medium text-gray-600">Cyber Crimes</h4>
+                    <i class="fas fa-shield-alt text-orange-500"></i>
+                </div>
+                <div class="text-2xl font-bold" id="cyberCrimes">12,456</div>
+                <div class="flex items-center text-xs text-gray-500 mt-1">
+                    <i class="fas fa-arrow-up text-red-500 mr-1"></i>
+                    <span id="cyberCrimesChange">21.72% from last year</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detailed Analysis Tabs -->
+        <div class="space-y-4">
+            <div class="flex border-b border-gray-200">
+                <button class="px-4 py-2 tab-active rounded-t-md">Overview</button>
+                {% comment %} <button class="px-4 py-2 tab-inactive">Trends</button>
+                <button class="px-4 py-2 tab-inactive">Categories</button>
+                <button class="px-4 py-2 tab-inactive">Detailed Data</button> {% endcomment %}
+            </div>
+
+            <!-- Overview Tab Content -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="card p-6">
+                    <h3 class="text-lg font-semibold mb-4">State Profile</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between">
+                            <span class="font-medium">Population:</span>
+                            <span id="population">199,812,341</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="font-medium">Area:</span>
+                            <span id="area">240,928 km²</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="font-medium">Population Density:</span>
+                            <span id="density">829 per km²</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="font-medium">Crime Rate:</span>
+                            <span class="badge badge-secondary" id="profileCrimeRate">124 per 100K</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg font-semibold mb-2">Crime Severity Index</h3>
+                    <p class="text-sm text-gray-600 mb-4">Based on violent crimes per capita</p>
+                    <div class="space-y-4">
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-sm">
+                                <span>Murders</span>
+                                <span id="murderRate">1.95 per 100K</span>
+                            </div>
+                            <div class="progress-bar h-2">
+                                <div class="progress-fill" id="murderProgress" style="width: 19.5%"></div>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-sm">
+                                <span>Rapes</span>
+                                <span id="rapeRate">2.12 per 100K</span>
+                            </div>
+                            <div class="progress-bar h-2">
+                                <div class="progress-fill" id="rapeProgress" style="width: 21.2%"></div>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-sm">
+                                <span>Kidnapping</span>
+                                <span id="kidnappingRate">7.85 per 100K</span>
+                            </div>
+                            <div class="progress-bar h-2">
+                                <div class="progress-fill" id="kidnappingProgress" style="width: 31.4%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Property vs Violent Crimes Section -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+                <div class="card p-6">
+                    <h3 class="text-lg font-semibold mb-4">Crime Distribution</h3>
+                    <p class="text-sm text-gray-600 mb-4">Breakdown by major crime categories</p>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm">Theft</span>
+                            <span class="badge badge-outline" id="theftCount">45,123 (18.3%)</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm">Vehicle Theft</span>
+                            <span class="badge badge-outline" id="vehicleTheftCount">23,456 (9.5%)</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm">Kidnapping</span>
+                            <span class="badge badge-outline" id="kidnappingCount">15,678 (6.3%)</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm">Burglary</span>
+                            <span class="badge badge-outline" id="burglaryCount">12,456 (5.0%)</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm">Robbery</span>
+                            <span class="badge badge-outline" id="robberyCount">8,934 (3.6%)</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm">Economic Offences</span>
+                            <span class="badge badge-outline" id="economicCount">8,765 (3.5%)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg font-semibold mb-4">Property vs Violent Crimes</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">Property Crimes</span>
+                                <span id="propertyCrimes">81,035</span>
+                            </div>
+                            <div class="progress-bar h-3">
+                                <div class="progress-fill" id="propertyProgress" style="width: 32.8%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">Violent Crimes</span>
+                                <span id="violentCrimes">32,741</span>
+                            </div>
+                            <div class="progress-bar h-3">
+                                <div class="progress-fill" id="violentProgress" style="width: 13.2%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">White Collar Crimes</span>
+                                <span id="whiteCollarCrimes">23,566</span>
+                            </div>
+                            <div class="progress-bar h-3">
+                                <div class="progress-fill" id="whiteCollarProgress" style="width: 9.5%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comprehensive Crime Data -->
+            <div class="card p-6 mt-6">
+                <h3 class="text-lg font-semibold mb-4">Comprehensive Crime Data - <span id="selectedState">Uttar Pradesh</span> (<span id="selectedYear">2023</span>)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                        <span class="font-medium">Total Crimes</span>
+                        <span class="badge badge-outline" id="totalCrimesDetail">247,158</span>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                        <span class="font-medium">Crimes Against Women</span>
+                        <span class="badge badge-outline" id="womenCrimesDetail">65,432</span>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                        <span class="font-medium">Crimes Against Children</span>
+                        <span class="badge badge-outline" id="childrenCrimes">18,765</span>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                        <span class="font-medium">Cyber Crimes</span>
+                        <span class="badge badge-outline" id="cyberCrimesDetail">12,456</span>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                        <span class="font-medium">Murders</span>
+                        <span class="badge badge-outline" id="murdersDetail">3,891</span>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                        <span class="font-medium">Rapes</span>
+                        <span class="badge badge-outline" id="rapesDetail">4,238</span>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                        <span class="font-medium">Kidnapping</span>
+                        <span class="badge badge-outline" id="kidnappingDetail">15,678</span>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                        <span class="font-medium">Theft</span>
+                        <span class="badge badge-outline" id="theftDetail">45,123</span>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                        <span class="font-medium">Robbery</span>
+                        <span class="badge badge-outline" id="robberyDetail">8,934</span>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                        <span class="font-medium">Burglary</span>
+                        <span class="badge badge-outline" id="burglaryDetail">12,456</span>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                        <span class="font-medium">Vehicle Theft</span>
+                        <span class="badge badge-outline" id="vehicleTheftDetail">23,456</span>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                        <span class="font-medium">Economic Offences</span>
+                        <span class="badge badge-outline" id="economicDetail">8,765</span>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                        <span class="font-medium">Drug Offences</span>
+                        <span class="badge badge-outline" id="drugOffences">6,543</span>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                        <span class="font-medium">Arms Act</span>
+                        <span class="badge badge-outline" id="armsAct">4,321</span>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                        <span class="font-medium">Corruption Cases</span>
+                        <span class="badge badge-outline" id="corruption">2,345</span>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                        <span class="font-medium">Environmental Crimes</span>
+                        <span class="badge badge-outline" id="environmental">1,234</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Crime Rates per 100,000 Population -->
+            <div class="card p-6">
+                <h3 class="text-lg font-semibold mb-4">Crime Rates per 100,000 Population</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                        <span class="font-medium">Total Crimes</span>
+                        <span class="badge badge-secondary" id="totalCrimesRate">123.67</span>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                        <span class="font-medium">Crimes Against Women</span>
+                        <span class="badge badge-secondary" id="womenCrimesRate">32.75</span>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                        <span class="font-medium">Crimes Against Children</span>
+                        <span class="badge badge-secondary" id="childrenCrimesRate">9.39</span>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                        <span class="font-medium">Cyber Crimes</span>
+                        <span class="badge badge-secondary" id="cyberCrimesRate">6.23</span>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                        <span class="font-medium">Murders</span>
+                        <span class="badge badge-secondary" id="murdersRate">1.95</span>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                        <span class="font-medium">Rapes</span>
+                        <span class="badge badge-secondary" id="rapesRate">2.12</span>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                        <span class="font-medium">Kidnapping</span>
+                        <span class="badge badge-secondary" id="kidnappingRateDetail">7.85</span>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                        <span class="font-medium">Theft</span>
+                        <span class="badge badge-secondary" id="theftRate">22.58</span>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                        <span class="font-medium">Robbery</span>
+                        <span class="badge badge-secondary" id="robberyRate">4.47</span>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                        <span class="font-medium">Burglary</span>
+                        <span class="badge badge-secondary" id="burglaryRate">6.23</span>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                        <span class="font-medium">Vehicle Theft</span>
+                        <span class="badge badge-secondary" id="vehicleTheftRate">11.74</span>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                        <span class="font-medium">Economic Offences</span>
+                        <span class="badge badge-secondary" id="economicRate">4.39</span>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                        <span class="font-medium">Drug Offences</span>
+                        <span class="badge badge-secondary" id="drugOffencesRate">3.27</span>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                        <span class="font-medium">Arms Act</span>
+                        <span class="badge badge-secondary" id="armsActRate">2.16</span>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                        <span class="font-medium">Corruption Cases</span>
+                        <span class="badge badge-secondary" id="corruptionRate">1.17</span>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                        <span class="font-medium">Environmental Crimes</span>
+                        <span class="badge badge-secondary" id="environmentalRate">0.62</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Embedded crime data - no need for external file loading
+        const crimeData = {
+  "Uttar Pradesh": {
+    "2021": {
+      "totalCrimes": 235000,
+      "crimeRate": 118,
+      "women": 62000,
+      "cyber": 8500,
+      "murders": 3650,
+      "rapes": 3980,
+      "kidnapping": 14500,
+      "theft": 42000,
+      "robbery": 8200,
+      "burglary": 11800,
+      "vehicleTheft": 22000,
+      "economic": 8200,
+      "children": 17500,
+      "drugOffences": 6100,
+      "armsAct": 4000,
+      "corruption": 2100,
+      "environmental": 1100,
+      "population": 199812341,
+      "area": "240,928 km²",
+      "density": "829 per km²"
+    },
+    "2022": {
+      "totalCrimes": 241000,
+      "crimeRate": 121,
+      "women": 63500,
+      "cyber": 10200,
+      "murders": 3750,
+      "rapes": 4100,
+      "kidnapping": 15200,
+      "theft": 43500,
+      "robbery": 8500,
+      "burglary": 12100,
+      "vehicleTheft": 22800,
+      "economic": 8500,
+      "children": 18200,
+      "drugOffences": 6300,
+      "armsAct": 4150,
+      "corruption": 2250,
+      "environmental": 1150,
+      "population": 199812341,
+      "area": "240,928 km²",
+      "density": "829 per km²"
+    },
+    "2023": {
+      "totalCrimes": 247158,
+      "crimeRate": 124,
+      "women": 65432,
+      "cyber": 12456,
+      "murders": 3891,
+      "rapes": 4238,
+      "kidnapping": 15678,
+      "theft": 45123,
+      "robbery": 8934,
+      "burglary": 12456,
+      "vehicleTheft": 23456,
+      "economic": 8765,
+      "children": 18765,
+      "drugOffences": 6543,
+      "armsAct": 4321,
+      "corruption": 2345,
+      "environmental": 1234,
+      "population": 199812341,
+      "area": "240,928 km²",
+      "density": "829 per km²"
+    }
+  },
+  "Maharashtra": {
+    "2021": {
+      "totalCrimes": 198000,
+      "crimeRate": 176,
+      "women": 45000,
+      "cyber": 15000,
+      "murders": 2800,
+      "rapes": 3200,
+      "kidnapping": 8500,
+      "theft": 38000,
+      "robbery": 6500,
+      "burglary": 9800,
+      "vehicleTheft": 28000,
+      "economic": 12000,
+      "children": 16500,
+      "drugOffences": 5200,
+      "armsAct": 3800,
+      "corruption": 2800,
+      "environmental": 1500,
+      "population": 112374333,
+      "area": "307,713 km²",
+      "density": "365 per km²"
+    },
+    "2022": {
+      "totalCrimes": 205000,
+      "crimeRate": 182,
+      "women": 47500,
+      "cyber": 18500,
+      "murders": 2950,
+      "rapes": 3400,
+      "kidnapping": 9200,
+      "theft": 39500,
+      "robbery": 6800,
+      "burglary": 10200,
+      "vehicleTheft": 29500,
+      "economic": 13200,
+      "children": 17200,
+      "drugOffences": 5500,
+      "armsAct": 4000,
+      "corruption": 3000,
+      "environmental": 1600,
+      "population": 112374333,
+      "area": "307,713 km²",
+      "density": "365 per km²"
+    },
+    "2023": {
+      "totalCrimes": 212000,
+      "crimeRate": 189,
+      "women": 49800,
+      "cyber": 22000,
+      "murders": 3100,
+      "rapes": 3600,
+      "kidnapping": 9800,
+      "theft": 41000,
+      "robbery": 7200,
+      "burglary": 10800,
+      "vehicleTheft": 31000,
+      "economic": 14500,
+      "children": 18000,
+      "drugOffences": 5800,
+      "armsAct": 4200,
+      "corruption": 3200,
+      "environmental": 1700,
+      "population": 112374333,
+      "area": "307,713 km²",
+      "density": "365 per km²"
+    }
+  },
+  "Rajasthan": {
+    "2021": {
+      "totalCrimes": 156000,
+      "crimeRate": 203,
+      "women": 38000,
+      "cyber": 4500,
+      "murders": 2100,
+      "rapes": 2800,
+      "kidnapping": 6500,
+      "theft": 28000,
+      "robbery": 4200,
+      "burglary": 7800,
+      "vehicleTheft": 18000,
+      "economic": 5500,
+      "children": 12500,
+      "drugOffences": 8200,
+      "armsAct": 5500,
+      "corruption": 1800,
+      "environmental": 900,
+      "population": 68548437,
+      "area": "342,239 km²",
+      "density": "200 per km²"
+    },
+    "2022": {
+      "totalCrimes": 162000,
+      "crimeRate": 210,
+      "women": 40000,
+      "cyber": 5800,
+      "murders": 2200,
+      "rapes": 2950,
+      "kidnapping": 6800,
+      "theft": 29500,
+      "robbery": 4500,
+      "burglary": 8200,
+      "vehicleTheft": 19000,
+      "economic": 6000,
+      "children": 13200,
+      "drugOffences": 8800,
+      "armsAct": 5800,
+      "corruption": 1950,
+      "environmental": 950,
+      "population": 68548437,
+      "area": "342,239 km²",
+      "density": "200 per km²"
+    },
+    "2023": {
+      "totalCrimes": 168500,
+      "crimeRate": 218,
+      "women": 42500,
+      "cyber": 7200,
+      "murders": 2350,
+      "rapes": 3100,
+      "kidnapping": 7200,
+      "theft": 31000,
+      "robbery": 4800,
+      "burglary": 8600,
+      "vehicleTheft": 20000,
+      "economic": 6500,
+      "children": 14000,
+      "drugOffences": 9500,
+      "armsAct": 6200,
+      "corruption": 2100,
+      "environmental": 1000,
+      "population": 68548437,
+      "area": "342,239 km²",
+      "density": "200 per km²"
+    }
+  },
+  "West Bengal": {
+    "2021": {
+      "totalCrimes": 142000,
+      "crimeRate": 155,
+      "women": 35000,
+      "cyber": 6500,
+      "murders": 1800,
+      "rapes": 2200,
+      "kidnapping": 8500,
+      "theft": 32000,
+      "robbery": 3500,
+      "burglary": 6800,
+      "vehicleTheft": 15000,
+      "economic": 7200,
+      "children": 11500,
+      "drugOffences": 3200,
+      "armsAct": 2800,
+      "corruption": 2200,
+      "environmental": 1200,
+      "population": 91276115,
+      "area": "88,752 km²",
+      "density": "1,028 per km²"
+    },
+    "2022": {
+      "totalCrimes": 148000,
+      "crimeRate": 162,
+      "women": 37000,
+      "cyber": 8200,
+      "murders": 1900,
+      "rapes": 2350,
+      "kidnapping": 8800,
+      "theft": 33500,
+      "robbery": 3700,
+      "burglary": 7100,
+      "vehicleTheft": 15800,
+      "economic": 7800,
+      "children": 12200,
+      "drugOffences": 3500,
+      "armsAct": 3000,
+      "corruption": 2350,
+      "environmental": 1250,
+      "population": 91276115,
+      "area": "88,752 km²",
+      "density": "1,028 per km²"
+    },
+    "2023": {
+      "totalCrimes": 154500,
+      "crimeRate": 169,
+      "women": 39200,
+      "cyber": 10000,
+      "murders": 2000,
+      "rapes": 2500,
+      "kidnapping": 9200,
+      "theft": 35000,
+      "robbery": 3900,
+      "burglary": 7500,
+      "vehicleTheft": 16500,
+      "economic": 8500,
+      "children": 13000,
+      "drugOffences": 3800,
+      "armsAct": 3200,
+      "corruption": 2500,
+      "environmental": 1300,
+      "population": 91276115,
+      "area": "88,752 km²",
+      "density": "1,028 per km²"
+    }
+  },
+  "Tamil Nadu": {
+    "2021": {
+      "totalCrimes": 135000,
+      "crimeRate": 188,
+      "women": 32000,
+      "cyber": 12000,
+      "murders": 1650,
+      "rapes": 1800,
+      "kidnapping": 4500,
+      "theft": 35000,
+      "robbery": 2800,
+      "burglary": 5500,
+      "vehicleTheft": 22000,
+      "economic": 9500,
+      "children": 10500,
+      "drugOffences": 4200,
+      "armsAct": 2200,
+      "corruption": 2800,
+      "environmental": 1400,
+      "population": 72147030,
+      "area": "130,060 km²",
+      "density": "555 per km²"
+    },
+    "2022": {
+      "totalCrimes": 141000,
+      "crimeRate": 195,
+      "women": 34000,
+      "cyber": 15000,
+      "murders": 1750,
+      "rapes": 1950,
+      "kidnapping": 4800,
+      "theft": 36500,
+      "robbery": 3000,
+      "burglary": 5800,
+      "vehicleTheft": 23500,
+      "economic": 10200,
+      "children": 11200,
+      "drugOffences": 4500,
+      "armsAct": 2350,
+      "corruption": 3000,
+      "environmental": 1450,
+      "population": 72147030,
+      "area": "130,060 km²",
+      "density": "555 per km²"
+    },
+    "2023": {
+      "totalCrimes": 147500,
+      "crimeRate": 204,
+      "women": 36500,
+      "cyber": 18500,
+      "murders": 1850,
+      "rapes": 2100,
+      "kidnapping": 5200,
+      "theft": 38000,
+      "robbery": 3200,
+      "burglary": 6200,
+      "vehicleTheft": 25000,
+      "economic": 11000,
+      "children": 12000,
+      "drugOffences": 4800,
+      "armsAct": 2500,
+      "corruption": 3200,
+      "environmental": 1500,
+      "population": 72147030,
+      "area": "130,060 km²",
+      "density": "555 per km²"
+    }
+  },
+  "Bihar": {
+    "2021": {
+      "totalCrimes": 128000,
+      "crimeRate": 123,
+      "women": 28000,
+      "cyber": 3200,
+      "murders": 2800,
+      "rapes": 3100,
+      "kidnapping": 12500,
+      "theft": 22000,
+      "robbery": 5200,
+      "burglary": 8500,
+      "vehicleTheft": 8000,
+      "economic": 4500,
+      "children": 15000,
+      "drugOffences": 2800,
+      "armsAct": 6500,
+      "corruption": 1500,
+      "environmental": 800,
+      "population": 104099452,
+      "area": "94,163 km²",
+      "density": "1,106 per km²"
+    },
+    "2022": {
+      "totalCrimes": 134000,
+      "crimeRate": 129,
+      "women": 30000,
+      "cyber": 4100,
+      "murders": 2950,
+      "rapes": 3300,
+      "kidnapping": 13200,
+      "theft": 23500,
+      "robbery": 5500,
+      "burglary": 8900,
+      "vehicleTheft": 8500,
+      "economic": 4800,
+      "children": 15800,
+      "drugOffences": 3000,
+      "armsAct": 6800,
+      "corruption": 1600,
+      "environmental": 850,
+      "population": 104099452,
+      "area": "94,163 km²",
+      "density": "1,106 per km²"
+    },
+    "2023": {
+      "totalCrimes": 140500,
+      "crimeRate": 135,
+      "women": 32000,
+      "cyber": 5200,
+      "murders": 3100,
+      "rapes": 3500,
+      "kidnapping": 14000,
+      "theft": 25000,
+      "robbery": 5800,
+      "burglary": 9400,
+      "vehicleTheft": 9000,
+      "economic": 5200,
+      "children": 16500,
+      "drugOffences": 3200,
+      "armsAct": 7200,
+      "corruption": 1700,
+      "environmental": 900,
+      "population": 104099452,
+      "area": "94,163 km²",
+      "density": "1,106 per km²"
+    }
+  },
+  "Karnataka": {
+    "2021": {
+      "totalCrimes": 118000,
+      "crimeRate": 193,
+      "women": 28000,
+      "cyber": 18000,
+      "murders": 1450,
+      "rapes": 1650,
+      "kidnapping": 3800,
+      "theft": 32000,
+      "robbery": 2200,
+      "burglary": 4500,
+      "vehicleTheft": 20000,
+      "economic": 8500,
+      "children": 9500,
+      "drugOffences": 3800,
+      "armsAct": 1800,
+      "corruption": 2500,
+      "environmental": 1200,
+      "population": 61095297,
+      "area": "191,791 km²",
+      "density": "319 per km²"
+    },
+    "2022": {
+      "totalCrimes": 125000,
+      "crimeRate": 205,
+      "women": 30000,
+      "cyber": 22000,
+      "murders": 1550,
+      "rapes": 1800,
+      "kidnapping": 4100,
+      "theft": 33500,
+      "robbery": 2400,
+      "burglary": 4800,
+      "vehicleTheft": 21500,
+      "economic": 9200,
+      "children": 10200,
+      "drugOffences": 4100,
+      "armsAct": 1950,
+      "corruption": 2700,
+      "environmental": 1300,
+      "population": 61095297,
+      "area": "191,791 km²",
+      "density": "319 per km²"
+    },
+    "2023": {
+      "totalCrimes": 132000,
+      "crimeRate": 216,
+      "women": 32500,
+      "cyber": 26000,
+      "murders": 1650,
+      "rapes": 1950,
+      "kidnapping": 4500,
+      "theft": 35000,
+      "robbery": 2600,
+      "burglary": 5200,
+      "vehicleTheft": 23000,
+      "economic": 10000,
+      "children": 11000,
+      "drugOffences": 4400,
+      "armsAct": 2100,
+      "corruption": 2900,
+      "environmental": 1400,
+      "population": 61095297,
+      "area": "191,791 km²",
+      "density": "319 per km²"
+    }
+  },
+  "Gujarat": {
+    "2021": {
+      "totalCrimes": 95000,
+      "crimeRate": 157,
+      "women": 22000,
+      "cyber": 8500,
+      "murders": 1200,
+      "rapes": 1400,
+      "kidnapping": 2800,
+      "theft": 25000,
+      "robbery": 1800,
+      "burglary": 3500,
+      "vehicleTheft": 18000,
+      "economic": 7500,
+      "children": 8000,
+      "drugOffences": 6200,
+      "armsAct": 2200,
+      "corruption": 1800,
+      "environmental": 1100,
+      "population": 60439692,
+      "area": "196,244 km²",
+      "density": "308 per km²"
+    },
+    "2022": {
+      "totalCrimes": 101000,
+      "crimeRate": 167,
+      "women": 24000,
+      "cyber": 11000,
+      "murders": 1300,
+      "rapes": 1550,
+      "kidnapping": 3100,
+      "theft": 26500,
+      "robbery": 1950,
+      "burglary": 3800,
+      "vehicleTheft": 19500,
+      "economic": 8200,
+      "children": 8600,
+      "drugOffences": 6800,
+      "armsAct": 2400,
+      "corruption": 1950,
+      "environmental": 1200,
+      "population": 60439692,
+      "area": "196,244 km²",
+      "density": "308 per km²"
+    },
+    "2023": {
+      "totalCrimes": 107500,
+      "crimeRate": 178,
+      "women": 26000,
+      "cyber": 13500,
+      "murders": 1400,
+      "rapes": 1700,
+      "kidnapping": 3400,
+      "theft": 28000,
+      "robbery": 2100,
+      "burglary": 4100,
+      "vehicleTheft": 21000,
+      "economic": 9000,
+      "children": 9200,
+      "drugOffences": 7400,
+      "armsAct": 2600,
+      "corruption": 2100,
+      "environmental": 1300,
+      "population": 60439692,
+      "area": "196,244 km²",
+      "density": "308 per km²"
+    }
+  },
+  "Madhya Pradesh": {
+    "2021": {
+      "totalCrimes": 165000,
+      "crimeRate": 227,
+      "women": 42000,
+      "cyber": 5500,
+      "murders": 2400,
+      "rapes": 4200,
+      "kidnapping": 8500,
+      "theft": 28000,
+      "robbery": 5800,
+      "burglary": 9200,
+      "vehicleTheft": 15000,
+      "economic": 6500,
+      "children": 18000,
+      "drugOffences": 4800,
+      "armsAct": 6200,
+      "corruption": 2200,
+      "environmental": 1000,
+      "population": 72626809,
+      "area": "308,245 km²",
+      "density": "236 per km²"
+    },
+    "2022": {
+      "totalCrimes": 172000,
+      "crimeRate": 237,
+      "women": 44500,
+      "cyber": 7200,
+      "murders": 2550,
+      "rapes": 4500,
+      "kidnapping": 9000,
+      "theft": 29500,
+      "robbery": 6200,
+      "burglary": 9800,
+      "vehicleTheft": 16000,
+      "economic": 7000,
+      "children": 19000,
+      "drugOffences": 5200,
+      "armsAct": 6600,
+      "corruption": 2400,
+      "environmental": 1100,
+      "population": 72626809,
+      "area": "308,245 km²",
+      "density": "236 per km²"
+    },
+    "2023": {
+      "totalCrimes": 179500,
+      "crimeRate": 247,
+      "women": 47000,
+      "cyber": 9000,
+      "murders": 2700,
+      "rapes": 4800,
+      "kidnapping": 9600,
+      "theft": 31000,
+      "robbery": 6600,
+      "burglary": 10400,
+      "vehicleTheft": 17000,
+      "economic": 7500,
+      "children": 20000,
+      "drugOffences": 5600,
+      "armsAct": 7000,
+      "corruption": 2600,
+      "environmental": 1200,
+      "population": 72626809,
+      "area": "308,245 km²",
+      "density": "236 per km²"
+    }
+  },
+  "Andhra Pradesh": {
+    "2021": {
+      "totalCrimes": 89000,
+      "crimeRate": 178,
+      "women": 21000,
+      "cyber": 6500,
+      "murders": 1100,
+      "rapes": 1300,
+      "kidnapping": 2800,
+      "theft": 22000,
+      "robbery": 1800,
+      "burglary": 3200,
+      "vehicleTheft": 15000,
+      "economic": 5500,
+      "children": 7500,
+      "drugOffences": 2800,
+      "armsAct": 1500,
+      "corruption": 1800,
+      "environmental": 900,
+      "population": 49577103,
+      "area": "162,968 km²",
+      "density": "304 per km²"
+    },
+    "2022": {
+      "totalCrimes": 94000,
+      "crimeRate": 190,
+      "women": 22500,
+      "cyber": 8200,
+      "murders": 1200,
+      "rapes": 1450,
+      "kidnapping": 3000,
+      "theft": 23500,
+      "robbery": 1950,
+      "burglary": 3500,
+      "vehicleTheft": 16000,
+      "economic": 6000,
+      "children": 8000,
+      "drugOffences": 3000,
+      "armsAct": 1600,
+      "corruption": 1950,
+      "environmental": 950,
+      "population": 49577103,
+      "area": "162,968 km²",
+      "density": "304 per km²"
+    },
+    "2023": {
+      "totalCrimes": 99500,
+      "crimeRate": 201,
+      "women": 24000,
+      "cyber": 10000,
+      "murders": 1300,
+      "rapes": 1600,
+      "kidnapping": 3200,
+      "theft": 25000,
+      "robbery": 2100,
+      "burglary": 3800,
+      "vehicleTheft": 17000,
+      "economic": 6500,
+      "children": 8500,
+      "drugOffences": 3200,
+      "armsAct": 1700,
+      "corruption": 2100,
+      "environmental": 1000,
+      "population": 49577103,
+      "area": "162,968 km²",
+      "density": "304 per km²"
+    }
+  },
+  "Telangana": {
+    "2021": {
+      "totalCrimes": 78000,
+      "crimeRate": 221,
+      "women": 18000,
+      "cyber": 12000,
+      "murders": 850,
+      "rapes": 1100,
+      "kidnapping": 2200,
+      "theft": 20000,
+      "robbery": 1500,
+      "burglary": 2800,
+      "vehicleTheft": 14000,
+      "economic": 6500,
+      "children": 6500,
+      "drugOffences": 2500,
+      "armsAct": 1200,
+      "corruption": 1600,
+      "environmental": 800,
+      "population": 35003674,
+      "area": "112,077 km²",
+      "density": "312 per km²"
+    },
+    "2022": {
+      "totalCrimes": 83000,
+      "crimeRate": 237,
+      "women": 19500,
+      "cyber": 15000,
+      "murders": 920,
+      "rapes": 1250,
+      "kidnapping": 2400,
+      "theft": 21500,
+      "robbery": 1650,
+      "burglary": 3000,
+      "vehicleTheft": 15000,
+      "economic": 7200,
+      "children": 7000,
+      "drugOffences": 2700,
+      "armsAct": 1300,
+      "corruption": 1750,
+      "environmental": 850,
+      "population": 35003674,
+      "area": "112,077 km²",
+      "density": "312 per km²"
+    },
+    "2023": {
+      "totalCrimes": 88500,
+      "crimeRate": 253,
+      "women": 21000,
+      "cyber": 18000,
+      "murders": 1000,
+      "rapes": 1400,
+      "kidnapping": 2600,
+      "theft": 23000,
+      "robbery": 1800,
+      "burglary": 3200,
+      "vehicleTheft": 16000,
+      "economic": 8000,
+      "children": 7500,
+      "drugOffences": 2900,
+      "armsAct": 1400,
+      "corruption": 1900,
+      "environmental": 900,
+      "population": 35003674,
+      "area": "112,077 km²",
+      "density": "312 per km²"
+    }
+  },
+  "Odisha": {
+    "2021": {
+      "totalCrimes": 68000,
+      "crimeRate": 162,
+      "women": 16000,
+      "cyber": 3500,
+      "murders": 1200,
+      "rapes": 1800,
+      "kidnapping": 3500,
+      "theft": 15000,
+      "robbery": 2200,
+      "burglary": 4500,
+      "vehicleTheft": 8000,
+      "economic": 3200,
+      "children": 8500,
+      "drugOffences": 2800,
+      "armsAct": 2500,
+      "corruption": 1200,
+      "environmental": 600,
+      "population": 42003000,
+      "area": "155,707 km²",
+      "density": "270 per km²"
+    },
+    "2022": {
+      "totalCrimes": 72000,
+      "crimeRate": 171,
+      "women": 17500,
+      "cyber": 4500,
+      "murders": 1300,
+      "rapes": 1950,
+      "kidnapping": 3800,
+      "theft": 16000,
+      "robbery": 2400,
+      "burglary": 4800,
+      "vehicleTheft": 8500,
+      "economic": 3500,
+      "children": 9000,
+      "drugOffences": 3000,
+      "armsAct": 2700,
+      "corruption": 1300,
+      "environmental": 650,
+      "population": 42003000,
+      "area": "155,707 km²",
+      "density": "270 per km²"
+    },
+    "2023": {
+      "totalCrimes": 76500,
+      "crimeRate": 182,
+      "women": 19000,
+      "cyber": 5800,
+      "murders": 1400,
+      "rapes": 2100,
+      "kidnapping": 4100,
+      "theft": 17000,
+      "robbery": 2600,
+      "burglary": 5100,
+      "vehicleTheft": 9000,
+      "economic": 3800,
+      "children": 9500,
+      "drugOffences": 3200,
+      "armsAct": 2900,
+      "corruption": 1400,
+      "environmental": 700,
+      "population": 42003000,
+      "area": "155,707 km²",
+      "density": "270 per km²"
+    }
+  },
+  "Kerala": {
+    "2021": {
+      "totalCrimes": 58000,
+      "crimeRate": 173,
+      "women": 14000,
+      "cyber": 8500,
+      "murders": 450,
+      "rapes": 850,
+      "kidnapping": 1200,
+      "theft": 18000,
+      "robbery": 800,
+      "burglary": 2200,
+      "vehicleTheft": 12000,
+      "economic": 4500,
+      "children": 4500,
+      "drugOffences": 3800,
+      "armsAct": 600,
+      "corruption": 1200,
+      "environmental": 700,
+      "population": 33406061,
+      "area": "38,852 km²",
+      "density": "860 per km²"
+    },
+    "2022": {
+      "totalCrimes": 61000,
+      "crimeRate": 183,
+      "women": 15000,
+      "cyber": 11000,
+      "murders": 480,
+      "rapes": 920,
+      "kidnapping": 1300,
+      "theft": 19000,
+      "robbery": 850,
+      "burglary": 2400,
+      "vehicleTheft": 13000,
+      "economic": 5000,
+      "children": 4800,
+      "drugOffences": 4100,
+      "armsAct": 650,
+      "corruption": 1300,
+      "environmental": 750,
+      "population": 33406061,
+      "area": "38,852 km²",
+      "density": "860 per km²"
+    },
+    "2023": {
+      "totalCrimes": 64500,
+      "crimeRate": 193,
+      "women": 16500,
+      "cyber": 13500,
+      "murders": 520,
+      "rapes": 1000,
+      "kidnapping": 1400,
+      "theft": 20000,
+      "robbery": 900,
+      "burglary": 2600,
+      "vehicleTheft": 14000,
+      "economic": 5500,
+      "children": 5200,
+      "drugOffences": 4400,
+      "armsAct": 700,
+      "corruption": 1400,
+      "environmental": 800,
+      "population": 33406061,
+      "area": "38,852 km²",
+      "density": "860 per km²"
+    }
+  },
+  "Assam": {
+    "2021": {
+      "totalCrimes": 52000,
+      "crimeRate": 149,
+      "women": 12000,
+      "cyber": 2800,
+      "murders": 850,
+      "rapes": 1400,
+      "kidnapping": 3200,
+      "theft": 12000,
+      "robbery": 1800,
+      "burglary": 3500,
+      "vehicleTheft": 6000,
+      "economic": 2500,
+      "children": 6500,
+      "drugOffences": 1800,
+      "armsAct": 2200,
+      "corruption": 800,
+      "environmental": 400,
+      "population": 31205576,
+      "area": "78,438 km²",
+      "density": "398 per km²"
+    },
+    "2022": {
+      "totalCrimes": 55000,
+      "crimeRate": 176,
+      "women": 13000,
+      "cyber": 3500,
+      "murders": 920,
+      "rapes": 1550,
+      "kidnapping": 3500,
+      "theft": 13000,
+      "robbery": 1950,
+      "burglary": 3800,
+      "vehicleTheft": 6500,
+      "economic": 2700,
+      "children": 7000,
+      "drugOffences": 1950,
+      "armsAct": 2400,
+      "corruption": 850,
+      "environmental": 450,
+      "population": 31205576,
+      "area": "78,438 km²",
+      "density": "398 per km²"
+    },
+    "2023": {
+      "totalCrimes": 58500,
+      "crimeRate": 187,
+      "women": 14500,
+      "cyber": 4200,
+      "murders": 1000,
+      "rapes": 1700,
+      "kidnapping": 3800,
+      "theft": 14000,
+      "robbery": 2100,
+      "burglary": 4100,
+      "vehicleTheft": 7000,
+      "economic": 2900,
+      "children": 7500,
+      "drugOffences": 2100,
+      "armsAct": 2600,
+      "corruption": 900,
+      "environmental": 500,
+      "population": 31205576,
+      "area": "78,438 km²",
+      "density": "398 per km²"
+    }
+  },
+  "Punjab": {
+    "2021": {
+      "totalCrimes": 48000,
+      "crimeRate": 172,
+      "women": 11000,
+      "cyber": 4200,
+      "murders": 650,
+      "rapes": 850,
+      "kidnapping": 1800,
+      "theft": 12000,
+      "robbery": 1200,
+      "burglary": 2500,
+      "vehicleTheft": 8000,
+      "economic": 3500,
+      "children": 4500,
+      "drugOffences": 8500,
+      "armsAct": 2800,
+      "corruption": 1100,
+      "environmental": 600,
+      "population": 27743338,
+      "area": "50,362 km²",
+      "density": "551 per km²"
+    },
+    "2022": {
+      "totalCrimes": 51000,
+      "crimeRate": 184,
+      "women": 12000,
+      "cyber": 5500,
+      "murders": 720,
+      "rapes": 950,
+      "kidnapping": 2000,
+      "theft": 13000,
+      "robbery": 1300,
+      "burglary": 2700,
+      "vehicleTheft": 8500,
+      "economic": 3800,
+      "children": 4800,
+      "drugOffences": 9200,
+      "armsAct": 3000,
+      "corruption": 1200,
+      "environmental": 650,
+      "population": 27743338,
+      "area": "50,362 km²",
+      "density": "551 per km²"
+    },
+    "2023": {
+      "totalCrimes": 54500,
+      "crimeRate": 196,
+      "women": 13500,
+      "cyber": 6800,
+      "murders": 800,
+      "rapes": 1050,
+      "kidnapping": 2200,
+      "theft": 14000,
+      "robbery": 1400,
+      "burglary": 2900,
+      "vehicleTheft": 9000,
+      "economic": 4100,
+      "children": 5200,
+      "drugOffences": 10000,
+      "armsAct": 3200,
+      "corruption": 1300,
+      "environmental": 700,
+      "population": 27743338,
+      "area": "50,362 km²",
+      "density": "551 per km²"
+    }
+  },
+  "Haryana": {
+    "2021": {
+      "totalCrimes": 45000,
+      "crimeRate": 178,
+      "women": 10500,
+      "cyber": 3800,
+      "murders": 850,
+      "rapes": 1200,
+      "kidnapping": 2500,
+      "theft": 11000,
+      "robbery": 1500,
+      "burglary": 2800,
+      "vehicleTheft": 7500,
+      "economic": 3200,
+      "children": 4200,
+      "drugOffences": 3500,
+      "armsAct": 2200,
+      "corruption": 1000,
+      "environmental": 500,
+      "population": 25351462,
+      "area": "44,212 km²",
+      "density": "573 per km²"
+    },
+    "2022": {
+      "totalCrimes": 48000,
+      "crimeRate": 189,
+      "women": 11500,
+      "cyber": 4800,
+      "murders": 920,
+      "rapes": 1350,
+      "kidnapping": 2700,
+      "theft": 12000,
+      "robbery": 1600,
+      "burglary": 3000,
+      "vehicleTheft": 8000,
+      "economic": 3500,
+      "children": 4500,
+      "drugOffences": 3800,
+      "armsAct": 2400,
+      "corruption": 1100,
+      "environmental": 550,
+      "population": 25351462,
+      "area": "44,212 km²",
+      "density": "573 per km²"
+    },
+    "2023": {
+      "totalCrimes": 51500,
+      "crimeRate": 203,
+      "women": 12800,
+      "cyber": 5800,
+      "murders": 1000,
+      "rapes": 1500,
+      "kidnapping": 2900,
+      "theft": 13000,
+      "robbery": 1700,
+      "burglary": 3200,
+      "vehicleTheft": 8500,
+      "economic": 3800,
+      "children": 4800,
+      "drugOffences": 4100,
+      "armsAct": 2600,
+      "corruption": 1200,
+      "environmental": 600,
+      "population": 25351462,
+      "area": "44,212 km²",
+      "density": "573 per km²"
+    }
+  },
+  "Jharkhand": {
+    "2021": {
+      "totalCrimes": 42000,
+      "crimeRate": 127,
+      "women": 9500,
+      "cyber": 2200,
+      "murders": 1100,
+      "rapes": 1400,
+      "kidnapping": 3800,
+      "theft": 8500,
+      "robbery": 2200,
+      "burglary": 3500,
+      "vehicleTheft": 4500,
+      "economic": 2800,
+      "children": 5500,
+      "drugOffences": 1800,
+      "armsAct": 2500,
+      "corruption": 800,
+      "environmental": 400,
+      "population": 32988134,
+      "area": "79,716 km²",
+      "density": "414 per km²"
+    },
+    "2022": {
+      "totalCrimes": 45000,
+      "crimeRate": 136,
+      "women": 10500,
+      "cyber": 2800,
+      "murders": 1200,
+      "rapes": 1550,
+      "kidnapping": 4100,
+      "theft": 9200,
+      "robbery": 2400,
+      "burglary": 3800,
+      "vehicleTheft": 4800,
+      "economic": 3000,
+      "children": 5900,
+      "drugOffences": 1950,
+      "armsAct": 2700,
+      "corruption": 850,
+      "environmental": 450,
+      "population": 32988134,
+      "area": "79,716 km²",
+      "density": "414 per km²"
+    },
+    "2023": {
+      "totalCrimes": 48500,
+      "crimeRate": 147,
+      "women": 11800,
+      "cyber": 3500,
+      "murders": 1300,
+      "rapes": 1700,
+      "kidnapping": 4400,
+      "theft": 10000,
+      "robbery": 2600,
+      "burglary": 4100,
+      "vehicleTheft": 5200,
+      "economic": 3200,
+      "children": 6300,
+      "drugOffences": 2100,
+      "armsAct": 2900,
+      "corruption": 900,
+      "environmental": 500,
+      "population": 32988134,
+      "area": "79,716 km²",
+      "density": "414 per km²"
+    }
+  },
+  "Chhattisgarh": {
+    "2021": {
+      "totalCrimes": 38000,
+      "crimeRate": 149,
+      "women": 8500,
+      "cyber": 1800,
+      "murders": 950,
+      "rapes": 1300,
+      "kidnapping": 2800,
+      "theft": 8000,
+      "robbery": 1800,
+      "burglary": 3200,
+      "vehicleTheft": 4200,
+      "economic": 2200,
+      "children": 4500,
+      "drugOffences": 1500,
+      "armsAct": 2000,
+      "corruption": 700,
+      "environmental": 350,
+      "population": 25545198,
+      "area": "135,192 km²",
+      "density": "189 per km²"
+    },
+    "2022": {
+      "totalCrimes": 40500,
+      "crimeRate": 159,
+      "women": 9200,
+      "cyber": 2300,
+      "murders": 1050,
+      "rapes": 1450,
+      "kidnapping": 3000,
+      "theft": 8500,
+      "robbery": 1950,
+      "burglary": 3500,
+      "vehicleTheft": 4500,
+      "economic": 2400,
+      "children": 4800,
+      "drugOffences": 1650,
+      "armsAct": 2200,
+      "corruption": 750,
+      "environmental": 400,
+      "population": 25545198,
+      "area": "135,192 km²",
+      "density": "189 per km²"
+    },
+    "2023": {
+      "totalCrimes": 43500,
+      "crimeRate": 170,
+      "women": 10000,
+      "cyber": 2800,
+      "murders": 1150,
+      "rapes": 1600,
+      "kidnapping": 3200,
+      "theft": 9000,
+      "robbery": 2100,
+      "burglary": 3800,
+      "vehicleTheft": 4800,
+      "economic": 2600,
+      "children": 5100,
+      "drugOffences": 1800,
+      "armsAct": 2400,
+      "corruption": 800,
+      "environmental": 450,
+      "population": 25545198,
+      "area": "135,192 km²",
+      "density": "189 per km²"
+    }
+  },
+  "Uttarakhand": {
+    "2021": {
+      "totalCrimes": 22000,
+      "crimeRate": 218,
+      "women": 5200,
+      "cyber": 1500,
+      "murders": 320,
+      "rapes": 650,
+      "kidnapping": 1200,
+      "theft": 5500,
+      "robbery": 800,
+      "burglary": 1500,
+      "vehicleTheft": 3200,
+      "economic": 1200,
+      "children": 2200,
+      "drugOffences": 1800,
+      "armsAct": 800,
+      "corruption": 400,
+      "environmental": 200,
+      "population": 10086292,
+      "area": "53,483 km²",
+      "density": "189 per km²"
+    },
+    "2022": {
+      "totalCrimes": 24000,
+      "crimeRate": 238,
+      "women": 5800,
+      "cyber": 1900,
+      "murders": 350,
+      "rapes": 720,
+      "kidnapping": 1300,
+      "theft": 6000,
+      "robbery": 850,
+      "burglary": 1600,
+      "vehicleTheft": 3500,
+      "economic": 1300,
+      "children": 2400,
+      "drugOffences": 2000,
+      "armsAct": 850,
+      "corruption": 450,
+      "environmental": 220,
+      "population": 10086292,
+      "area": "53,483 km²",
+      "density": "189 per km²"
+    },
+    "2023": {
+      "totalCrimes": 26500,
+      "crimeRate": 263,
+      "women": 6500,
+      "cyber": 2300,
+      "murders": 380,
+      "rapes": 800,
+      "kidnapping": 1400,
+      "theft": 6500,
+      "robbery": 900,
+      "burglary": 1700,
+      "vehicleTheft": 3800,
+      "economic": 1400,
+      "children": 2600,
+      "drugOffences": 2200,
+      "armsAct": 900,
+      "corruption": 500,
+      "environmental": 250,
+      "population": 10086292,
+      "area": "53,483 km²",
+      "density": "189 per km²"
+    }
+  },
+  "Himachal Pradesh": {
+    "2021": {
+      "totalCrimes": 12000,
+      "crimeRate": 175,
+      "women": 2800,
+      "cyber": 800,
+      "murders": 180,
+      "rapes": 320,
+      "kidnapping": 450,
+      "theft": 3200,
+      "robbery": 280,
+      "burglary": 650,
+      "vehicleTheft": 1800,
+      "economic": 600,
+      "children": 1200,
+      "drugOffences": 1500,
+      "armsAct": 350,
+      "corruption": 200,
+      "environmental": 120,
+      "population": 6864602,
+      "area": "55,673 km²",
+      "density": "123 per km²"
+    },
+    "2022": {
+      "totalCrimes": 13000,
+      "crimeRate": 189,
+      "women": 3100,
+      "cyber": 1000,
+      "murders": 200,
+      "rapes": 350,
+      "kidnapping": 480,
+      "theft": 3500,
+      "robbery": 300,
+      "burglary": 700,
+      "vehicleTheft": 1950,
+      "economic": 650,
+      "children": 1300,
+      "drugOffences": 1650,
+      "armsAct": 380,
+      "corruption": 220,
+      "environmental": 130,
+      "population": 6864602,
+      "area": "55,673 km²",
+      "density": "123 per km²"
+    },
+    "2023": {
+      "totalCrimes": 14500,
+      "crimeRate": 211,
+      "women": 3500,
+      "cyber": 1200,
+      "murders": 220,
+      "rapes": 380,
+      "kidnapping": 520,
+      "theft": 3800,
+      "robbery": 320,
+      "burglary": 750,
+      "vehicleTheft": 2100,
+      "economic": 700,
+      "children": 1400,
+      "drugOffences": 1800,
+      "armsAct": 400,
+      "corruption": 240,
+      "environmental": 140,
+      "population": 6864602,
+      "area": "55,673 km²",
+      "density": "123 per km²"
+    }
+  },
+  "Jammu and Kashmir": {
+    "2021": {
+      "totalCrimes": 18000,
+      "crimeRate": 143,
+      "women": 4200,
+      "cyber": 1200,
+      "murders": 280,
+      "rapes": 450,
+      "kidnapping": 800,
+      "theft": 4500,
+      "robbery": 650,
+      "burglary": 1200,
+      "vehicleTheft": 2200,
+      "economic": 800,
+      "children": 1800,
+      "drugOffences": 2800,
+      "armsAct": 1500,
+      "corruption": 350,
+      "environmental": 180,
+      "population": 12541302,
+      "area": "125,535 km²",
+      "density": "100 per km²"
+    },
+    "2022": {
+      "totalCrimes": 19500,
+      "crimeRate": 155,
+      "women": 4600,
+      "cyber": 1500,
+      "murders": 300,
+      "rapes": 500,
+      "kidnapping": 850,
+      "theft": 4800,
+      "robbery": 700,
+      "burglary": 1300,
+      "vehicleTheft": 2400,
+      "economic": 850,
+      "children": 1950,
+      "drugOffences": 3000,
+      "armsAct": 1600,
+      "corruption": 380,
+      "environmental": 200,
+      "population": 12541302,
+      "area": "125,535 km²",
+      "density": "100 per km²"
+    },
+    "2023": {
+      "totalCrimes": 21000,
+      "crimeRate": 167,
+      "women": 5000,
+      "cyber": 1800,
+      "murders": 320,
+      "rapes": 550,
+      "kidnapping": 900,
+      "theft": 5200,
+      "robbery": 750,
+      "burglary": 1400,
+      "vehicleTheft": 2600,
+      "economic": 900,
+      "children": 2100,
+      "drugOffences": 3200,
+      "armsAct": 1700,
+      "corruption": 400,
+      "environmental": 220,
+      "population": 12541302,
+      "area": "125,535 km²",
+      "density": "100 per km²"
+    }
+  },
+  "Goa": {
+    "2021": {
+      "totalCrimes": 3500,
+      "crimeRate": 238,
+      "women": 800,
+      "cyber": 450,
+      "murders": 25,
+      "rapes": 45,
+      "kidnapping": 85,
+      "theft": 950,
+      "robbery": 120,
+      "burglary": 180,
+      "vehicleTheft": 650,
+      "economic": 280,
+      "children": 220,
+      "drugOffences": 380,
+      "armsAct": 85,
+      "corruption": 120,
+      "environmental": 65,
+      "population": 1458545,
+      "area": "3,702 km²",
+      "density": "394 per km²"
+    },
+    "2022": {
+      "totalCrimes": 3800,
+      "crimeRate": 261,
+      "women": 900,
+      "cyber": 580,
+      "murders": 28,
+      "rapes": 50,
+      "kidnapping": 95,
+      "theft": 1050,
+      "robbery": 130,
+      "burglary": 200,
+      "vehicleTheft": 700,
+      "economic": 320,
+      "children": 240,
+      "drugOffences": 420,
+      "armsAct": 95,
+      "corruption": 130,
+      "environmental": 70,
+      "population": 1458545,
+      "area": "3,702 km²",
+      "density": "394 per km²"
+    },
+    "2023": {
+      "totalCrimes": 4200,
+      "crimeRate": 288,
+      "women": 1000,
+      "cyber": 720,
+      "murders": 32,
+      "rapes": 55,
+      "kidnapping": 105,
+      "theft": 1150,
+      "robbery": 140,
+      "burglary": 220,
+      "vehicleTheft": 750,
+      "economic": 360,
+      "children": 260,
+      "drugOffences": 460,
+      "armsAct": 105,
+      "corruption": 140,
+      "environmental": 75,
+      "population": 1458545,
+      "area": "3,702 km²",
+      "density": "394 per km²"
+    }
+  },
+  "Manipur": {
+    "2021": {
+      "totalCrimes": 4200,
+      "crimeRate": 146,
+      "women": 950,
+      "cyber": 280,
+      "murders": 85,
+      "rapes": 120,
+      "kidnapping": 180,
+      "theft": 850,
+      "robbery": 150,
+      "burglary": 280,
+      "vehicleTheft": 420,
+      "economic": 180,
+      "children": 320,
+      "drugOffences": 650,
+      "armsAct": 450,
+      "corruption": 85,
+      "environmental": 45,
+      "population": 2855794,
+      "area": "22,327 km²",
+      "density": "128 per km²"
+    },
+    "2022": {
+      "totalCrimes": 4600,
+      "crimeRate": 161,
+      "women": 1050,
+      "cyber": 350,
+      "murders": 95,
+      "rapes": 135,
+      "kidnapping": 200,
+      "theft": 920,
+      "robbery": 165,
+      "burglary": 300,
+      "vehicleTheft": 450,
+      "economic": 200,
+      "children": 350,
+      "drugOffences": 720,
+      "armsAct": 500,
+      "corruption": 95,
+      "environmental": 50,
+      "population": 2855794,
+      "area": "22,327 km²",
+      "density": "128 per km²"
+    },
+    "2023": {
+      "totalCrimes": 5000,
+      "crimeRate": 175,
+      "women": 1150,
+      "cyber": 420,
+      "murders": 105,
+      "rapes": 150,
+      "kidnapping": 220,
+      "theft": 1000,
+      "robbery": 180,
+      "burglary": 320,
+      "vehicleTheft": 480,
+      "economic": 220,
+      "children": 380,
+      "drugOffences": 800,
+      "armsAct": 550,
+      "corruption": 105,
+      "environmental": 55,
+      "population": 2855794,
+      "area": "22,327 km²",
+      "density": "128 per km²"
+    }
+  },
+  "Tripura": {
+    "2021": {
+      "totalCrimes": 5500,
+      "crimeRate": 149,
+      "women": 1200,
+      "cyber": 320,
+      "murders": 95,
+      "rapes": 180,
+      "kidnapping": 280,
+      "theft": 1200,
+      "robbery": 220,
+      "burglary": 380,
+      "vehicleTheft": 450,
+      "economic": 220,
+      "children": 450,
+      "drugOffences": 280,
+      "armsAct": 320,
+      "corruption": 120,
+      "environmental": 65,
+      "population": 3673917,
+      "area": "10,486 km²",
+      "density": "350 per km²"
+    },
+    "2022": {
+      "totalCrimes": 6000,
+      "crimeRate": 163,
+      "women": 1350,
+      "cyber": 400,
+      "murders": 105,
+      "rapes": 200,
+      "kidnapping": 300,
+      "theft": 1300,
+      "robbery": 240,
+      "burglary": 420,
+      "vehicleTheft": 480,
+      "economic": 240,
+      "children": 480,
+      "drugOffences": 320,
+      "armsAct": 350,
+      "corruption": 130,
+      "environmental": 70,
+      "population": 3673917,
+      "area": "10,486 km²",
+      "density": "350 per km²"
+    },
+    "2023": {
+      "totalCrimes": 6500,
+      "crimeRate": 177,
+      "women": 1500,
+      "cyber": 480,
+      "murders": 115,
+      "rapes": 220,
+      "kidnapping": 320,
+      "theft": 1400,
+      "robbery": 260,
+      "burglary": 460,
+      "vehicleTheft": 520,
+      "economic": 260,
+      "children": 520,
+      "drugOffences": 360,
+      "armsAct": 380,
+      "corruption": 140,
+      "environmental": 75,
+      "population": 3673917,
+      "area": "10,486 km²",
+      "density": "350 per km²"
+    }
+  },
+  "Meghalaya": {
+    "2021": {
+      "totalCrimes": 3800,
+      "crimeRate": 130,
+      "women": 850,
+      "cyber": 220,
+      "murders": 65,
+      "rapes": 120,
+      "kidnapping": 180,
+      "theft": 950,
+      "robbery": 150,
+      "burglary": 280,
+      "vehicleTheft": 380,
+      "economic": 150,
+      "children": 320,
+      "drugOffences": 180,
+      "armsAct": 220,
+      "corruption": 85,
+      "environmental": 45,
+      "population": 2966889,
+      "area": "22,429 km²",
+      "density": "132 per km²"
+    },
+    "2022": {
+      "totalCrimes": 4200,
+      "crimeRate": 142,
+      "women": 950,
+      "cyber": 280,
+      "murders": 72,
+      "rapes": 135,
+      "kidnapping": 200,
+      "theft": 1050,
+      "robbery": 165,
+      "burglary": 300,
+      "vehicleTheft": 420,
+      "economic": 165,
+      "children": 350,
+      "drugOffences": 200,
+      "armsAct": 240,
+      "corruption": 95,
+      "environmental": 50,
+      "population": 2966889,
+      "area": "22,429 km²",
+      "density": "132 per km²"
+    },
+    "2023": {
+      "totalCrimes": 4600,
+      "crimeRate": 155,
+      "women": 1050,
+      "cyber": 340,
+      "murders": 80,
+      "rapes": 150,
+      "kidnapping": 220,
+      "theft": 1150,
+      "robbery": 180,
+      "burglary": 320,
+      "vehicleTheft": 460,
+      "economic": 180,
+      "children": 380,
+      "drugOffences": 220,
+      "armsAct": 260,
+      "corruption": 105,
+      "environmental": 55,
+      "population": 2966889,
+      "area": "22,429 km²",
+      "density": "132 per km²"
+    }
+  },
+  "Nagaland": {
+    "2021": {
+      "totalCrimes": 2200,
+      "crimeRate": 112,
+      "women": 480,
+      "cyber": 150,
+      "murders": 45,
+      "rapes": 65,
+      "kidnapping": 120,
+      "theft": 520,
+      "robbery": 85,
+      "burglary": 180,
+      "vehicleTheft": 220,
+      "economic": 95,
+      "children": 180,
+      "drugOffences": 120,
+      "armsAct": 280,
+      "corruption": 65,
+      "environmental": 35,
+      "population": 1978502,
+      "area": "16,579 km²",
+      "density": "119 per km²"
+    },
+    "2022": {
+      "totalCrimes": 2400,
+      "crimeRate": 121,
+      "women": 520,
+      "cyber": 180,
+      "murders": 50,
+      "rapes": 72,
+      "kidnapping": 130,
+      "theft": 580,
+      "robbery": 95,
+      "burglary": 200,
+      "vehicleTheft": 240,
+      "economic": 105,
+      "children": 200,
+      "drugOffences": 135,
+      "armsAct": 300,
+      "corruption": 72,
+      "environmental": 40,
+      "population": 1978502,
+      "area": "16,579 km²",
+      "density": "119 per km²"
+    },
+    "2023": {
+      "totalCrimes": 2650,
+      "crimeRate": 134,
+      "women": 580,
+      "cyber": 220,
+      "murders": 55,
+      "rapes": 80,
+      "kidnapping": 145,
+      "theft": 650,
+      "robbery": 105,
+      "burglary": 220,
+      "vehicleTheft": 260,
+      "economic": 115,
+      "children": 220,
+      "drugOffences": 150,
+      "armsAct": 320,
+      "corruption": 80,
+      "environmental": 45,
+      "population": 1978502,
+      "area": "16,579 km²",
+      "density": "119 per km²"
+    }
+  },
+  "Mizoram": {
+    "2021": {
+      "totalCrimes": 1800,
+      "crimeRate": 164,
+      "women": 380,
+      "cyber": 120,
+      "murders": 25,
+      "rapes": 45,
+      "kidnapping": 85,
+      "theft": 450,
+      "robbery": 65,
+      "burglary": 120,
+      "vehicleTheft": 180,
+      "economic": 85,
+      "children": 150,
+      "drugOffences": 220,
+      "armsAct": 150,
+      "corruption": 45,
+      "environmental": 25,
+      "population": 1097206,
+      "area": "21,081 km²",
+      "density": "52 per km²"
+    },
+    "2022": {
+      "totalCrimes": 1950,
+      "crimeRate": 178,
+      "women": 420,
+      "cyber": 150,
+      "murders": 28,
+      "rapes": 50,
+      "kidnapping": 95,
+      "theft": 500,
+      "robbery": 72,
+      "burglary": 135,
+      "vehicleTheft": 200,
+      "economic": 95,
+      "children": 165,
+      "drugOffences": 240,
+      "armsAct": 165,
+      "corruption": 50,
+      "environmental": 28,
+      "population": 1097206,
+      "area": "21,081 km²",
+      "density": "52 per km²"
+    },
+    "2023": {
+      "totalCrimes": 2150,
+      "crimeRate": 196,
+      "women": 480,
+      "cyber": 180,
+      "murders": 32,
+      "rapes": 55,
+      "kidnapping": 105,
+      "theft": 550,
+      "robbery": 80,
+      "burglary": 150,
+      "vehicleTheft": 220,
+      "economic": 105,
+      "children": 180,
+      "drugOffences": 260,
+      "armsAct": 180,
+      "corruption": 55,
+      "environmental": 32,
+      "population": 1097206,
+      "area": "21,081 km²",
+      "density": "52 per km²"
+    }
+  },
+  "Arunachal Pradesh": {
+    "2021": {
+      "totalCrimes": 2800,
+      "crimeRate": 203,
+      "women": 620,
+      "cyber": 180,
+      "murders": 65,
+      "rapes": 95,
+      "kidnapping": 150,
+      "theft": 680,
+      "robbery": 120,
+      "burglary": 220,
+      "vehicleTheft": 280,
+      "economic": 120,
+      "children": 220,
+      "drugOffences": 150,
+      "armsAct": 220,
+      "corruption": 85,
+      "environmental": 45,
+      "population": 1383727,
+      "area": "83,743 km²",
+      "density": "17 per km²"
+    },
+    "2022": {
+      "totalCrimes": 3100,
+      "crimeRate": 224,
+      "women": 700,
+      "cyber": 220,
+      "murders": 72,
+      "rapes": 105,
+      "kidnapping": 165,
+      "theft": 750,
+      "robbery": 135,
+      "burglary": 240,
+      "vehicleTheft": 320,
+      "economic": 135,
+      "children": 240,
+      "drugOffences": 165,
+      "armsAct": 240,
+      "corruption": 95,
+      "environmental": 50,
+      "population": 1383727,
+      "area": "83,743 km²",
+      "density": "17 per km²"
+    },
+    "2023": {
+      "totalCrimes": 3400,
+      "crimeRate": 246,
+      "women": 780,
+      "cyber": 260,
+      "murders": 80,
+      "rapes": 115,
+      "kidnapping": 180,
+      "theft": 820,
+      "robbery": 150,
+      "burglary": 260,
+      "vehicleTheft": 360,
+      "economic": 150,
+      "children": 260,
+      "drugOffences": 180,
+      "armsAct": 260,
+      "corruption": 105,
+      "environmental": 55,
+      "population": 1383727,
+      "area": "83,743 km²",
+      "density": "17 per km²"
+    }
+  },
+  "Sikkim": {
+    "2021": {
+      "totalCrimes": 1200,
+      "crimeRate": 196,
+      "women": 280,
+      "cyber": 85,
+      "murders": 15,
+      "rapes": 25,
+      "kidnapping": 45,
+      "theft": 320,
+      "robbery": 35,
+      "burglary": 85,
+      "vehicleTheft": 150,
+      "economic": 65,
+      "children": 95,
+      "drugOffences": 120,
+      "armsAct": 65,
+      "corruption": 35,
+      "environmental": 20,
+      "population": 610577,
+      "area": "7,096 km²",
+      "density": "86 per km²"
+    },
+    "2022": {
+      "totalCrimes": 1350,
+      "crimeRate": 221,
+      "women": 320,
+      "cyber": 105,
+      "murders": 18,
+      "rapes": 28,
+      "kidnapping": 50,
+      "theft": 360,
+      "robbery": 40,
+      "burglary": 95,
+      "vehicleTheft": 165,
+      "economic": 72,
+      "children": 105,
+      "drugOffences": 135,
+      "armsAct": 72,
+      "corruption": 40,
+      "environmental": 22,
+      "population": 610577,
+      "area": "7,096 km²",
+      "density": "86 per km²"
+    },
+    "2023": {
+      "totalCrimes": 1500,
+      "crimeRate": 246,
+      "women": 360,
+      "cyber": 125,
+      "murders": 20,
+      "rapes": 32,
+      "kidnapping": 55,
+      "theft": 400,
+      "robbery": 45,
+      "burglary": 105,
+      "vehicleTheft": 180,
+      "economic": 80,
+      "children": 115,
+      "drugOffences": 150,
+      "armsAct": 80,
+      "corruption": 45,
+      "environmental": 25,
+      "population": 610577,
+      "area": "7,096 km²",
+      "density": "86 per km²"
+    }
+  }
+};
+
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function () {
+            const stateSelect = document.getElementById('stateSelect');
+            const yearSelect = document.getElementById('yearSelect');
+
+            if (!stateSelect || !yearSelect) {
+                console.error('Select elements not found');
+                return;
+            }
+
+            const updateDashboard = (data, state, year) => {
+                if (!data) {
+                    console.error('No data provided to updateDashboard');
+                    return;
+                }
+
+                // Calculate year-over-year changes
+                const calculateChange = (current, previous) => {
+                    if (!previous) return { percentage: 0, direction: 'up' };
+                    const change = ((current - previous) / previous * 100);
+                    return {
+                        percentage: Math.abs(change).toFixed(2),
+                        direction: change >= 0 ? 'up' : 'down'
+                    };
+                };
+
+                // Get previous year data for comparison
+                const currentYear = parseInt(year);
+                const previousYear = currentYear - 1;
+                const previousData = crimeData[state] && crimeData[state][previousYear.toString()] ? crimeData[state][previousYear.toString()] : null;
+
+                // Update key metrics
+                const updateElement = (id, value) => {
+                    const element = document.getElementById(id);
+                    if (element) {
+                        element.textContent = typeof value === 'number' ? value.toLocaleString() : value;
+                    }
+                };
+
+                // Update main metrics
+                updateElement('totalCrimes', data.totalCrimes);
+                updateElement('crimeRate', data.crimeRate);
+                updateElement('womenCrimes', data.women);
+                updateElement('cyberCrimes', data.cyber);
+
+                // Update year-over-year changes
+                if (previousData) {
+                    const totalChange = calculateChange(data.totalCrimes, previousData.totalCrimes);
+                    const womenChange = calculateChange(data.women, previousData.women);
+                    const cyberChange = calculateChange(data.cyber, previousData.cyber);
+
+                    updateElement('totalCrimesChange', `${totalChange.percentage}% from last year`);
+                    updateElement('womenCrimesChange', `${womenChange.percentage}% from last year`);
+                    updateElement('cyberCrimesChange', `${cyberChange.percentage}% from last year`);
+
+                    // Update arrow directions
+                    const updateArrow = (id, direction) => {
+                        const element = document.querySelector(`#${id} i`);
+                        if (element) {
+                            element.className = direction === 'up' ? 'fas fa-arrow-up text-red-500 mr-1' : 'fas fa-arrow-down text-green-500 mr-1';
+                        }
+                    };
+
+                    updateArrow('totalCrimesChange', totalChange.direction);
+                    updateArrow('womenCrimesChange', womenChange.direction);
+                    updateArrow('cyberCrimesChange', cyberChange.direction);
+                }
+
+                // Update state profile
+                updateElement('population', data.population);
+                updateElement('area', data.area);
+                updateElement('density', data.density);
+                updateElement('profileCrimeRate', `${data.crimeRate} per 100K`);
+
+                // Update crime severity index
+                const murderRate = (data.murders / data.population * 100000).toFixed(2);
+                const rapeRate = (data.rapes / data.population * 100000).toFixed(2);
+                const kidnappingRate = (data.kidnapping / data.population * 100000).toFixed(2);
+
+                updateElement('murderRate', `${murderRate} per 100K`);
+                updateElement('rapeRate', `${rapeRate} per 100K`);
+                updateElement('kidnappingRate', `${kidnappingRate} per 100K`);
+
+                // Update progress bars
+                const updateProgress = (id, percentage) => {
+                    const element = document.getElementById(id);
+                    if (element) {
+                        element.style.width = `${Math.min(percentage, 100)}%`;
+                    }
+                };
+
+                updateProgress('murderProgress', parseFloat(murderRate) * 5);
+                updateProgress('rapeProgress', parseFloat(rapeRate) * 5);
+                updateProgress('kidnappingProgress', parseFloat(kidnappingRate) * 2);
+
+                // Update detailed crime data
+                updateElement('totalCrimesDetail', data.totalCrimes);
+                updateElement('womenCrimesDetail', data.women);
+                updateElement('cyberCrimesDetail', data.cyber);
+                updateElement('murdersDetail', data.murders);
+                updateElement('rapesDetail', data.rapes);
+                updateElement('kidnappingDetail', data.kidnapping);
+                updateElement('theftDetail', data.theft);
+                updateElement('robberyDetail', data.robbery);
+                updateElement('burglaryDetail', data.burglary);
+                updateElement('vehicleTheftDetail', data.vehicleTheft);
+                updateElement('economicDetail', data.economic);
+                updateElement('childrenCrimes', data.children || 0);
+                updateElement('drugOffences', data.drugOffences || 0);
+                updateElement('armsAct', data.armsAct || 0);
+                updateElement('corruption', data.corruption || 0);
+                updateElement('environmental', data.environmental || 0);
+
+                // Update selected state and year display
+                updateElement('selectedState', state);
+                updateElement('selectedYear', year);
+
+                // Update crime distribution with percentages
+                const totalCrimes = data.totalCrimes;
+                updateElement('theftCount', `${data.theft.toLocaleString()} (${(data.theft / totalCrimes * 100).toFixed(1)}%)`);
+                updateElement('vehicleTheftCount', `${data.vehicleTheft.toLocaleString()} (${(data.vehicleTheft / totalCrimes * 100).toFixed(1)}%)`);
+                updateElement('kidnappingCount', `${data.kidnapping.toLocaleString()} (${(data.kidnapping / totalCrimes * 100).toFixed(1)}%)`);
+                updateElement('burglaryCount', `${data.burglary.toLocaleString()} (${(data.burglary / totalCrimes * 100).toFixed(1)}%)`);
+                updateElement('robberyCount', `${data.robbery.toLocaleString()} (${(data.robbery / totalCrimes * 100).toFixed(1)}%)`);
+                updateElement('economicCount', `${data.economic.toLocaleString()} (${(data.economic / totalCrimes * 100).toFixed(1)}%)`);
+
+                // Update property vs violent crimes
+                const propertyCrimes = data.theft + data.burglary + data.vehicleTheft;
+                const violentCrimes = data.murders + data.rapes + data.robbery;
+                const whiteCollarCrimes = data.economic + data.cyber;
+
+                updateElement('propertyCrimes', propertyCrimes);
+                updateElement('violentCrimes', violentCrimes);
+                updateElement('whiteCollarCrimes', whiteCollarCrimes);
+
+                updateProgress('propertyProgress', (propertyCrimes / totalCrimes * 100));
+                updateProgress('violentProgress', (violentCrimes / totalCrimes * 100));
+                updateProgress('whiteCollarProgress', (whiteCollarCrimes / totalCrimes * 100));
+
+                // Update crime rates per 100,000 population
+                const updateRate = (id, value) => {
+                    const rate = (value / data.population * 100000).toFixed(2);
+                    updateElement(id, rate);
+                };
+
+                updateRate('totalCrimesRate', data.totalCrimes);
+                updateRate('womenCrimesRate', data.women);
+                updateRate('childrenCrimesRate', data.children || 0);
+                updateRate('cyberCrimesRate', data.cyber);
+                updateRate('murdersRate', data.murders);
+                updateRate('rapesRate', data.rapes);
+                updateRate('kidnappingRateDetail', data.kidnapping);
+                updateRate('theftRate', data.theft);
+                updateRate('robberyRate', data.robbery);
+                updateRate('burglaryRate', data.burglary);
+                updateRate('vehicleTheftRate', data.vehicleTheft);
+                updateRate('economicRate', data.economic);
+                updateRate('drugOffencesRate', data.drugOffences || 0);
+                updateRate('armsActRate', data.armsAct || 0);
+                updateRate('corruptionRate', data.corruption || 0);
+                updateRate('environmentalRate', data.environmental || 0);
+
+                console.log('Dashboard updated successfully');
+            };
+
+            const handleChange = () => {
+                const state = stateSelect.value;
+                const year = yearSelect.value;
+
+                console.log(`Selected: ${state}, ${year}`);
+
+                if (state && year && crimeData[state] && crimeData[state][year]) {
+                    updateDashboard(crimeData[state][year], state, year);
+                } else if (Object.keys(crimeData).length > 0) {
+                    console.warn('No data found for this selection:', state, year);
+                    const errorElement = document.getElementById('errorMessage');
+                    if (errorElement) {
+                        errorElement.style.display = 'block';
+                        errorElement.textContent = 'No data available for the selected state and year combination.';
+                    }
+                }
+            };
+
+            // Add event listeners
+            stateSelect.addEventListener('change', handleChange);
+            yearSelect.addEventListener('change', handleChange);
+
+            // Initialize dashboard with default values
+            handleChange();
+        });
+    </script>
+</body>
+
+</html>

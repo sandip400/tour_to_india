@@ -1,0 +1,2675 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Punjab</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> -->
+  <style>
+    .wb {
+      font-size: 10vw;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+      border-spacing: 0;
+      border: 1px solid #ddd;
+    }
+
+    td,
+    th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+      font-size: 1.5vw;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+
+    .trip {
+      text-align: center;
+      font-weight: 900;
+      background: orangered;
+      padding: 20px;
+      border-radius: 20px;
+      width: 60%;
+    }
+
+    p,
+    li,
+    .text {
+      font-size: 1.5vw;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-weight: 600;
+    }
+
+    h4 {
+      font-weight: 900;
+    }
+
+    img {
+      border-radius: 10px;
+      display: block;
+      margin: auto;
+    }
+
+    @media screen and (max-width: 850px) {
+
+      p,
+      li,
+      .text,
+      td,
+      th {
+        font-size: 2vw;
+        ;
+      }
+
+    }
+
+    @media screen and (max-width: 500px) {
+
+      p,
+      li,
+      .text,
+      td,
+      th {
+        font-size: 4.5vw;
+        ;
+      }
+
+    }
+
+    .box:nth-of-type(odd) {
+      background: #f3b37185;
+      padding: 10px;
+    }
+
+    .weather-container {
+            border-radius: 15px;
+            background: #f0fdf4;
+            padding: 15px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .weather-card {
+            text-align: center;
+            border-radius: 10px;
+            padding: 10px;
+            background: white;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+        .aqi {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            color: white;
+        }
+        .aqi-bad { background: purple; }
+        .aqi-moderate { background: orange; }
+        .aqi-good { background: green; }
+        .best-time {
+            background: #d1fae5;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 15px;
+            color: green;
+        }
+        .wet {
+            max-width: 50px;
+        }
+        
+        .trip {
+          font-size: 18px;
+          padding: 10px 20px;
+          cursor: pointer;
+          background-color:rgb(231, 36, 36);
+          color: white;
+          border: none;
+          border-radius: 5px;
+      }
+      .modal {
+          display: none;
+          position: fixed;
+          z-index: 1;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0,0,0,0.5);
+      }
+      .modal-content {
+          background-color: #fff;
+          margin: 10% auto;
+          padding: 20px;
+          border-radius: 10px;
+          width: 40%;
+          box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+          text-align: center;
+      }
+      .close {
+          color: #aaa;
+          float: right;
+          font-size: 28px;
+          font-weight: bold;
+          cursor: pointer;
+      }
+      .trip-options {
+          display: flex;
+          justify-content: center;
+          gap: 20px;
+          margin-top: 20px;
+      }
+      .trip-options a {
+          display: block;
+          width: 120px;
+          padding: 10px;
+          background-color: #28a745;
+          color: white;
+          text-decoration: none;
+          border-radius: 5px;
+      }
+  </style>
+</head>
+
+<body>
+
+
+  <!-- <h2>Carousel Example</h2> -->
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+      <li data-target="#myCarousel" data-slide-to="4"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+
+      <div class="item active">
+        <img src="darjeeling wlp.jpg" alt="Golden Temple" style="width:100%; height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Golden Temple</h3>
+          <p>We love the spiritual beauty and serenity!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="victoria wlp.jpg" alt="Amritsar" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Wagah Border</h3>
+          <p>The patriotic ceremony and historic significance!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="howrah bridge wlp.jpg" alt="Jallianwala Bagh" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Jallianwala Bagh</h3>
+          <p>A historic memorial of freedom struggle!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="Digha wlp2.png" alt="Chandigarh" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Chandigarh</h3>
+          <p>We love the planned city!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="teegarden wlp.jpg" alt="Mustard Fields" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Mustard Fields</h3>
+          <p>We love the golden yellow fields of Punjab!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+  <div class="container">
+    <br><br>
+    <h1 class="wb"> PUNJAB</h1><br>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <img src="westbengal-map.jpg" alt="" style="height:700px; width: -webkit-fill-available;">
+
+        </div>
+        <div class="col-sm-6">
+          <h1> Punjab: The Land of Five Rivers & Cultural Heart of India</h1>
+          <p class="text">Punjab is a vibrant and prosperous state in northern India, known for its rich agricultural heritage, 
+            Sikh culture, delicious cuisine, colorful festivals, and warm hospitality. It is often called the "Breadbasket of India" 
+            due to its significant contribution to the country's food production.</p>
+
+          <ul>
+            <li><b>Location --</b> Northern India</li>
+            <li><b>Capital --</b> Chandigarh (Union Territory, shared with Haryana)</li>
+            <li><b>Official Languages --</b> Punjabi</li>
+            <li><b>Area --</b> 50,362 sq. km</li>
+            <li><b>Population --</b> ~28 million</li>
+            <li><b>Borders --</b> Jammu & Kashmir, Himachal Pradesh, Haryana, Rajasthan & International border with Pakistan</li>
+            <li><b>Major Rivers --</b> Sutlej, Beas, Ravi, Chenab, Jhelum (historically)</li>
+            <li><b>Major Festivals --</b> Baisakhi, Lohri, Hola Mohalla, Gurpurbs, Diwali, Maghi</li>
+            <li><b>State Animal --</b> Blackbuck</li>
+            <li><b>State Flower --</b> Gladiolus</li>
+            <li><b>State Tree --</b> Shisham (Indian Rosewood)</li>
+            <li><b>State Bird --</b> Northern Goshawk (Baaz)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <br>
+    <hr>
+    <div>
+      <h1>📌 Divisions & Districts of Punjab</h1>
+      <br>
+      <div style="overflow-x:auto;">
+        <table>
+          <tr>
+            <th>Division</th>
+            <th>Districts</th>
+            <th>Key Highlights</th>
+          </tr>
+          <tr>
+            <td>Patiala Division</td>
+            <td>1. Patiala 2. Fatehgarh Sahib 3. Sangrur 4. Barnala 5. Malerkotla</td>
+            <td>Qila Mubarak, Gurdwara Fatehgarh Sahib, Agricultural Hub</td>
+          </tr>
+          <tr>
+            <td>Faridkot Division</td>
+            <td>6. Faridkot 7. Bathinda 8. Mansa 9. Muktsar</td>
+            <td>Qila Mubarak Faridkot, Thermal Plants, Cotton Belt</td>
+          </tr>
+          <tr>
+            <td>Ferozepur Division</td>
+            <td>10. Ferozepur 11. Fazilka</td>
+            <td>Indo-Pak Border, Historical Monuments, Agriculture</td>
+          </tr>
+          <tr>
+            <td>Jalandhar Division</td>
+            <td>12. Jalandhar 13. Hoshiarpur 14. Kapurthala 15. Shaheed Bhagat Singh Nagar (Nawanshahr)</td>
+            <td>Sports Industry, Pushpa Gujral Science City, Kanjli Wetland</td>
+          </tr>
+          <tr>
+            <td>Amritsar Division</td>
+            <td>16. Amritsar 17. Tarn Taran 18. Gurdaspur 19. Pathankot</td>
+            <td>Golden Temple, Wagah Border, Jallianwala Bagh, Harike Wetland</td>
+          </tr>
+          <tr>
+            <td>Roopnagar Division</td>
+            <td>20. Roopnagar (Ropar) 21. SAS Nagar (Mohali) 22. Ludhiana 23. Moga</td>
+            <td>IT Hub, Industrial Center, Textile Industry, Hosiery</td>
+          </tr>
+        </table>
+      </div>
+      <br><br>
+      <h1>🔹 Major Highlights of Some Key Districts</h1><br><br>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <ul>
+              <li><b>Amritsar --</b> Home to the Golden Temple, Jallianwala Bagh, and Wagah Border.</li>
+              <li><b>Ludhiana --</b> Industrial capital, known for hosiery, textiles, and bicycle manufacturing.</li>
+              <li><b>Patiala --</b> Known for its royal heritage, Qila Mubarak, and Patiala peg.</li>
+              <li><b>Jalandhar --</b> Sports goods manufacturing hub and educational center.</li>
+              <li><b>Bathinda --</b> Known for thermal power plants and Qila Mubarak fort.</li>
+              <li><b>Kapurthala --</b> Famous for its Indo-French architecture and Jagatjit Palace.</li>
+              <li><b>Mohali --</b> IT hub and home to Punjab Cricket Association Stadium.</li>
+              <li><b>Pathankot --</b> Gateway to Jammu & Kashmir and Himachal Pradesh.</li>
+              <li><b>Hoshiarpur --</b> Known for its furniture industry and Shivalik foothills.</li>
+            </ul>
+          </div>
+          <div class="col-sm-6">
+            <img src="westbengal-map.jpg" alt="" style="height:450px;width: -webkit-fill-available;">
+
+          </div>
+        </div>
+      </div>
+    </div><br><br>
+    <div class="container">
+      <div class="weather-container">
+          <h4 class="text-center"><strong>Weather in Punjab</strong></h4>
+          <div class="row">
+              <!-- January -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Jan</h6>
+                      <p>5/18°C</p>
+                      <span class="aqi aqi-bad">AQI 210</span>
+                  </div>
+              </div>
+              <!-- February -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Feb</h6>
+                      <p>8/22°C</p>
+                      <span class="aqi aqi-moderate">AQI 150</span>
+                  </div>
+              </div>
+              <!-- March -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Mar</h6>
+                      <p>13/28°C</p>
+                      <span class="aqi aqi-moderate">AQI 120</span>
+                  </div>
+              </div>
+              <!-- April -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Apr</h6>
+                      <p>18/36°C</p>
+                      <span class="aqi aqi-moderate">AQI 110</span>
+                  </div>
+              </div>
+              <!-- May -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>May</h6>
+                      <p>23/41°C</p>
+                      <span class="aqi aqi-moderate">AQI 105</span>
+                  </div>
+              </div>
+              <!-- June -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Jun</h6>
+                      <p>26/40°C</p>
+                      <span class="aqi aqi-good">AQI 85</span>
+                  </div>
+              </div>
+              <!-- July -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="rain.png" alt="rain">
+                      <h6>Jul</h6>
+                      <p>27/36°C</p>
+                      <span class="aqi aqi-good">AQI 60</span>
+                  </div>
+              </div>
+              <!-- August -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Aug</h6>
+                      <p>26/35°C</p>
+                      <span class="aqi aqi-good">AQI 70</span>
+                  </div>
+              </div>
+              <!-- September -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Sep</h6>
+                      <p>24/34°C</p>
+                      <span class="aqi aqi-good">AQI 65</span>
+                  </div>
+              </div>
+              <!-- October -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Oct</h6>
+                      <p>18/32°C</p>
+                      <span class="aqi aqi-moderate">AQI 95</span>
+                  </div>
+              </div>
+              <!-- November -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Nov</h6>
+                      <p>12/27°C</p>
+                      <span class="aqi aqi-bad">AQI 180</span>
+                  </div>
+              </div>
+              <!-- December -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Dec</h6>
+                      <p>7/22°C</p>
+                      <span class="aqi aqi-bad">AQI 200</span>
+                  </div>
+              </div>
+          </div>
+          <div class="text-center">
+              <div class="best-time">🏆 Best time to visit: October - March</div>
+          </div>
+      </div>
+    </div>
+    
+
+    <br><br>
+    <button class="trip" id="openModal">Let's go on a trip</button>
+    
+    <div id="tripModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Select Your Trip</h2>
+            <button type="button" class="btn btn-warning" style="margin-bottom: 8px;color:black; border-radius: 5px;" onclick="location.href='{% url 'punjab_7days' %}'" >7 days trip</button><br>
+            <button type="button" class="btn btn-warning" style="margin-bottom: 8px;color:black; border-radius: 5px;" onclick="location.href='{% url 'punjab_12days' %}'" >12 days trip</button>
+        </div>
+    </div>
+    
+    <script>
+        var modal = document.getElementById("tripModal");
+        var btn = document.getElementById("openModal");
+        var span = document.getElementsByClassName("close")[0];
+        
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+        
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+        
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script><br><br>
+    <div class="container">
+      <ul class="nav nav-tabs">
+        <li class="nav-item"><a data-toggle="tab" href="#wbculture"> Culture</a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbtradition "> Tradition</a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbfestivals"> Festivals </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbfood"> Foods </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbhistory"> History </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbartacraft"> Art and Craft </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbseason"> Season to Visit </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbtourist"> Tourist Spots </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbwild"> Agriculture & Crops </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbedu"> Institutions </a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="wbculture" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Culture of Punjab</h1>
+          <p class="text">Punjab has a vibrant and colorful culture, shaped by its history, religion, music, dance, festivals, and 
+            traditions. Here's an overview of some key aspects of its culture:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Language</h3>
+                  <ul>
+                    <li>Punjabi is the official language and a major part of the cultural identity of Punjab. It's written in the 
+                      Gurmukhi script and is known for its rich literary heritage with famous poets like Baba Farid, Bulleh Shah, 
+                      Waris Shah, and modern writers like Amrita Pritam and Shiv Kumar Batalvi.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="bang.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>2. Literature</h3>
+                  <ul>
+                    <li>Punjab has a rich literary tradition, particularly in poetry and folk tales. The epic love story "Heer Ranjha" 
+                      by Waris Shah is considered the pinnacle of Punjabi literature.</li>
+                    <li>Modern Punjabi literature has been enriched by writers like Amrita Pritam, the first prominent woman Punjabi 
+                      poet and novelist, and Shiv Kumar Batalvi, known as the "Birha poet."</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="lit.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div><br>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="art.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Art and Craft</h3>
+                  <ul>
+                    <li>Punjab is known for its vibrant handicrafts including Phulkari embroidery, Punjabi jutti (footwear), 
+                      Paranda (colorful tassels for braiding hair), and intricate woodwork.</li>
+                    <li>Traditional Punjabi homes often feature colorful wall paintings and intricate designs.</li>
+                  </ul>
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="music.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>4. Music</h3>
+                  <ul>
+                    <li>Punjabi folk music is characterized by the dhol drum and includes various forms like Bhangra, Giddha, 
+                      Jugni, and Mahiya.</li>
+                    <li>Traditional musical instruments include the tumbi, algoza, dhad, sarangi, and chimta.</li>
+                    <li>Sufi music, particularly at shrines like Bulleh Shah's, is an important part of Punjab's musical heritage.</li>
+                    <li>Modern Punjabi music, including Bhangra-pop, has gained international popularity.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Dance</h3>
+                  <ul>
+                    <li>Bhangra is the most famous Punjabi folk dance, traditionally performed by men during harvest festivals.</li>
+                    <li>Giddha is the female counterpart to Bhangra, featuring graceful movements and singing.</li>
+                    <li>Other folk dances include Jhumar, Luddi, Dankara, and Sammi.</li>
+                  </ul>
+                  <h3>6. Cuisine</h3>
+                  <ul>
+                    <li>Punjabi cuisine is famous for its rich, buttery flavors and hearty dishes like Butter Chicken, Sarson da Saag 
+                      with Makki di Roti, Chole Bhature, and various tandoori items.</li>
+                    <li>Lassi (yogurt drink), Punjabi kadhi, and Amritsari fish are other popular dishes.</li>
+                    <li>The Langar (community kitchen) at Sikh Gurdwaras represents the Punjabi tradition of serving free meals to all.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="chau.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="theater.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>7. Theatre and Cinema</h3>
+                  <ul>
+                    <li>Punjab has a rich tradition of folk theater forms like Nautanki and Swang.</li>
+                    <li>Punjabi cinema (Pollywood) has grown significantly, producing films that showcase Punjabi culture and issues.</li>
+                  </ul>
+                  <h3>8. Architecture</h3>
+                  <ul>
+                    <li>Punjab's architectural style blends Sikh, Mughal, and colonial influences. Notable structures include the 
+                      Golden Temple in Amritsar, Qila Mubarak in Patiala, and the planned city of Chandigarh designed by Le Corbusier.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="religion.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>9. Religious Diversity</h3>
+                  <ul>
+                    <li>Punjab is the spiritual homeland of Sikhism, with the Golden Temple (Harmandir Sahib) as its holiest shrine. 
+                      The state also has significant Hindu and Muslim populations, with various temples, gurdwaras, and mosques 
+                      reflecting this diversity.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>10. Folk Traditions</h3>
+                  <ul>
+                    <li>Punjab is famous for its rich folk traditions, including Teeyan (women's festival), Lohri celebrations, 
+                      and various harvest festivals.</li>
+                    <li>Storytelling traditions include Qissa (narrative stories) like Heer-Ranjha and Mirza-Sahiban.</li>
+                  </ul>
+                  <h3>11. Philosophy</h3>
+                  <ul>
+                    <li>Punjabi culture is deeply influenced by Sikh philosophy, which emphasizes equality, service to humanity 
+                      (seva), and honest living. The concept of "Charhdi Kala" (eternal optimism) is central to Punjabi spirit.</li>
+                  </ul>
+                  <h3>12. Handicrafts</h3>
+                  <ul>
+                    <li>Punjab is known for its handicrafts such as Phulkari embroidery, Punjabi juttis, Paranda, and intricate 
+                      woodwork and metalwork.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="phi.jpg" alt="" style="height:300px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br><br>
+
+          <p>Punjab's culture is deeply rooted in its agricultural heritage, religious traditions, and history of resilience. 
+            It continues to evolve while maintaining a close connection to its roots, creating a vibrant blend of tradition and modernity!</p><br><br>
+        </div>
+        <div id="wbtradition" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Tradition of Punjab</h1>
+          <p>Punjab has a rich and diverse tradition deeply rooted in its agricultural heritage, religious practices, and social customs. 
+            Here's an overview of some key traditional aspects of the state:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Clothing Tradition</h3>
+                  <h4>Men</h4>
+                  <ul>
+                    <li><b>Kurta and Pajama:</b> Traditional Punjabi men wear kurta (a long shirt) with pajama (loose trousers), 
+                      especially during religious ceremonies and festivals.</li>
+                    <li><b>Turban (Pagri/Dastar):</b> An essential part of Sikh identity and commonly worn by Punjabi men.</li>
+                  </ul>
+                  <h4>Women</h4>
+                  <ul>
+                    <li><b>Salwar Kameez:</b> The traditional Punjabi dress with a long tunic (kameez) and loose-fitting pants (salwar), 
+                      often accompanied by a dupatta (scarf).</li>
+                    <li><b>Phulkari:</b> Traditional embroidered shawls and dupattas, especially worn during celebrations.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="cloth.jpg" alt="" style="height:250px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>2. Wedding Traditions</h3>
+                  <ul>
+                    <li><b>Roka/Thaka:</b> The official engagement ceremony where families exchange gifts and sweets.</li>
+                    <li><b>Mehndi:</b> Intricate henna designs applied to the bride's hands and feet.</li>
+                    <li><b>Choora Ceremony:</b> The bride wears red and white bangles given by her maternal uncle.</li>
+                    <li><b>Anand Karaj:</b> The Sikh wedding ceremony performed around the Guru Granth Sahib.</li>
+                    <li><b>Doli:</b> The emotional departure of the bride from her parents' home.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="wedding.jpg" alt="" style="height:250px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="dance.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Music & Dance Traditions</h3>
+                  <ul>
+                    <li><b>Bhangra:</b> Energetic folk dance traditionally performed by men to celebrate the harvest season.</li>
+                    <li><b>Giddha:</b> Women's folk dance performed in a circle with rhythmic clapping and singing.</li>
+                    <li><b>Folk Songs:</b> Boliyan, Tappe, Jugni, and Mahiya are traditional song forms.</li>
+                    <li><b>Musical Instruments:</b> Dhol, tumbi, algoza, chimta, and dholki are traditional Punjabi instruments.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="book.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+
+                  <h3>4. Social & Religious Traditions</h3>
+                  <ul>
+                    <li><b>Langar:</b> The tradition of free community kitchen at Gurdwaras, serving meals to all regardless of caste, 
+                      religion, or social status.</li>
+                    <li><b>Seva:</b> Selfless service, a core principle in Punjabi culture, especially in Sikhism.</li>
+                    <li><b>Akhand Path:</b> Continuous reading of the Guru Granth Sahib over 48 hours.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Architectural & Handicraft Traditions</h3>
+                  <ul>
+                    <li><b>Phulkari Embroidery:</b> Intricate handwork on shawls and clothing using bright colored threads.</li>
+                    <li><b>Punjabi Jutti:</b> Traditional footwear made of leather with colorful embroidery.</li>
+                    <li><b>Paranda:</b> Colorful silk tassels used to decorate and extend braids.</li>
+                    <li><b>Pidhis:</b> Low wooden stools with woven seats, traditionally used in Punjabi homes.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="arch.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>6. Sports & Games</h3>
+                  <ul>
+                    <li><b>Kabaddi:</b> Punjab's traditional contact sport, now played internationally.</li>
+                    <li><b>Wrestling (Kushti):</b> Traditional mud wrestling popular in rural Punjab.</li>
+                    <li><b>Gatka:</b> Traditional Sikh martial art form using wooden sticks.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="foot1.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br><br>
+          <p>Punjab's traditions beautifully combine agriculture, religion, food, music, and festivals, making it one of the most 
+            culturally vibrant states in India.</p><br><br>
+        </div>
+        <div id="wbfestivals" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Festivals of Punjab</h1>
+          <p>Punjab is known for its vibrant and joyous festivals, which reflect its rich cultural heritage, agricultural traditions, 
+            and religious diversity. Here's a list of some of the major festivals celebrated in the state:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Baisakhi (Biggest Festival of Punjab)</h3>
+                  <ul>
+                    <li>Marks the Punjabi New Year and the harvest of winter crops.</li>
+                    <li>Commemorates the formation of the Khalsa Panth by Guru Gobind Singh in 1699.</li>
+                    <li>Celebrated with Bhangra and Giddha dances, fairs, and processions.</li>
+                    <li>Gurdwaras are decorated, and special langars (community meals) are organized.</li>
+                  </ul>
+                  <p><b>📍 Time: April 13-14</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="durga1.jpg" alt="" style="height:230px;width: 200px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="kali.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Lohri</h3>
+                  <ul>
+                    <li>Marks the end of winter and is celebrated by lighting bonfires.</li>
+                    <li>People throw sesame seeds, jaggery, and popcorn into the fire as offerings.</li>
+                    <li>Traditional folk songs and dances are performed around the bonfire.</li>
+                    <li>Special significance for newly married couples and newborn babies.</li>
+                  </ul>
+                  <p><b>📍 Time: January 13</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Gurpurbs (Sikh Festivals)</h3>
+                  <ul>
+                    <li>Celebrations of the birth or martyrdom of Sikh Gurus.</li>
+                    <li>Major Gurpurbs include Guru Nanak Jayanti, Guru Gobind Singh Jayanti, and Martyrdom Day of Guru Arjan Dev Ji.</li>
+                    <li>Celebrated with Akhand Path (continuous reading of the Guru Granth Sahib), Nagar Kirtans (processions), 
+                      and langars.</li>
+                  </ul>
+                  <p><b>📍 Time: Throughout the year as per Sikh calendar</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="poila.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="saras.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Hola Mohalla</h3>
+                  <ul>
+                    <li>A three-day festival established by Guru Gobind Singh as a gathering of Sikhs for military exercises and mock battles.</li>
+                    <li>Celebrated a day after Holi at Anandpur Sahib.</li>
+                    <li>Features displays of horsemanship, martial arts, and traditional weapons.</li>
+                  </ul>
+                  <p><b>📍 Time: March (day after Holi)</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Maghi</h3>
+                  <ul>
+                    <li>Commemorates the sacrifice of the Forty Martyrs (Chali Mukte) who fought for Guru Gobind Singh.</li>
+                    <li>People take a holy dip in sacred tanks and visit Gurdwaras.</li>
+                    <li>Traditional foods like kheer, jaggery, and sesame seeds are prepared.</li>
+                  </ul>
+                  <p><b>📍 Time: January 14</b></p>
+                  <h3>6. Diwali</h3>
+                  <ul>
+                    <li>In Punjab, Diwali has special significance as it marks the release of Guru Hargobind Ji from Gwalior Fort.</li>
+                    <li>The Golden Temple and homes are illuminated with lights and diyas.</li>
+                    <li>Fireworks, sweets exchange, and family gatherings are common.</li>
+                  </ul>
+                  <p><b>📍 Time: October-November</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="roth.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="bhai.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>7. Basant Panchami</h3>
+                  <ul>
+                    <li>Marks the arrival of spring with yellow as the predominant color.</li>
+                    <li>Kite flying is a major activity, especially in Amritsar and Ludhiana.</li>
+                    <li>Traditional yellow rice and sweets are prepared.</li>
+                  </ul>
+                  <p><b>📍 Time: January-February</b></p>
+                  <h3>8. Teej</h3>
+                  <ul>
+                    <li>Primarily celebrated by women, who wear green clothes and bangles.</li>
+                    <li>Women swing on decorated swings and sing traditional songs.</li>
+                    <li>Married women visit their parents' homes and receive gifts.</li>
+                  </ul>
+                  <p><b>📍 Time: July-August</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>9. Rakhar Punia</h3>
+                  <ul>
+                    <li>A festival dedicated to the sport of Kabaddi.</li>
+                    <li>Major Kabaddi tournaments are organized across Punjab.</li>
+                    <li>Celebrated on the full moon day of the month of Sawan.</li>
+                  </ul>
+                  <p><b>📍 Time: August</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="nabanna.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="alla.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>10. Eid-ul-Fitr & Eid-ul-Adha</h3>
+                  <ul>
+                    <li>Celebrated by the Muslim community in Punjab, especially in Malerkotla.</li>
+                    <li>Special prayers, feasts, and exchange of gifts mark the celebrations.</li>
+                    <li>Malerkotla is known for its unique Hindu-Muslim brotherhood during these festivals.</li>
+                  </ul>
+                  <p><b>📍 Time: Based on Islamic Calendar</b></p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>11. Teeyan</h3>
+                  <ul>
+                    <li>A festival for women celebrated during the monsoon season.</li>
+                    <li>Women gather to perform Giddha, swing on decorated swings, and apply henna.</li>
+                    <li>Married women visit their parents' homes during this period.</li>
+                  </ul>
+                  <p><b>📍 Time: July-August</b></p>
+
+                  <h3>12. Christmas </h3>
+                  <ul>
+                    <li>Celebrated by the Christian community in Punjab, especially in cities like Amritsar and Jalandhar.</li>
+                    <li>Churches are decorated, and special midnight masses are held.</li>
+                  </ul>
+                  <p><b>📍 Time: December 25</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="chris.jpg" alt="" style="height:200px;width: 230px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="biswa.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>13. Karva Chauth</h3>
+                  <ul>
+                    <li>Married women fast from sunrise to moonrise for the long life and well-being of their husbands.</li>
+                    <li>Women dress in bridal attire, apply henna, and perform special rituals.</li>
+                    <li>The fast is broken after sighting the moon through a sieve while offering water.</li>
+                  </ul>
+                  <p><b>📍 Time: October-November</b></p>
+                  <h3>14. Rural Olympics (Kila Raipur Sports Festival)</h3>
+                  <ul>
+                    <li>A unique sports festival featuring traditional rural sports.</li>
+                    <li>Includes bullock cart races, tractor races, kabaddi, and other traditional games.</li>
+                    <li>Held annually in Kila Raipur village near Ludhiana.</li>
+                  </ul>
+                  <p><b>📍 Time: February</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Punjab's festivals are a blend of religious, cultural, and agricultural celebrations, making the state one
+            of the most festive regions in India! 🎉</p><br><br>
+        </div>
+        <div id="wbfood" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Foods of Punjab</h1>
+          <p>Punjab has a rich and diverse culinary tradition that is famous throughout India and internationally. Punjabi cuisine 
+            is known for its rich, buttery flavors, generous use of spices, and hearty dishes that reflect the region's agricultural 
+            abundance. Here's a look at some of the most iconic foods of Punjab:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Staple Food of Punjab</h3>
+                  <ul>
+                    <li><b>Roti & Dal:</b> The most basic Punjabi meal consists of wheat rotis (flatbread) served with dal (lentils).</li>
+                    <li><b>Paratha:</b> Stuffed flatbreads with fillings like potato (aloo), cauliflower (gobi), or paneer, typically 
+                      served with yogurt and pickle.</li>
+                  </ul>
+                  <h3>2. Punjabi Breads</h3>
+                  <ul>
+                    <li><b>Naan:</b> Leavened bread baked in a tandoor (clay oven).</li>
+                    <li><b>Kulcha:</b> Leavened bread often stuffed with potatoes or paneer, a specialty of Amritsar.</li>
+                    <li><b>Makki di Roti:</b> Cornmeal flatbread, traditionally paired with Sarson da Saag.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="staple.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="veg.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Famous Punjabi Dishes</h3>
+                  <h4>Vegetarian Dishes</h4>
+                  <ul>
+                    <li><b>Sarson da Saag:</b> A dish made from mustard greens, traditionally served with Makki di Roti.</li>
+                    <li><b>Chole Bhature:</b> Spicy chickpea curry served with deep-fried bread.</li>
+                    <li><b>Paneer Tikka:</b> Marinated and grilled cottage cheese cubes.</li>
+                    <li><b>Dal Makhani:</b> Creamy black lentils slow-cooked with butter and cream.</li>
+                    <li><b>Punjabi Kadhi:</b> Yogurt-based curry with gram flour fritters (pakoras).</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="meat.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h4>Non-Vegetarian Dishes</h4>
+                  <ul>
+                    <li><b>Butter Chicken:</b> Tandoori chicken pieces in a rich, creamy tomato sauce.</li>
+                    <li><b>Amritsari Fish:</b> Spiced and battered fish, deep-fried to perfection.</li>
+                    <li><b>Tandoori Chicken:</b> Chicken marinated in yogurt and spices, cooked in a tandoor.</li>
+                    <li><b>Chicken Tikka:</b> Boneless chicken pieces marinated and grilled.</li>
+                    <li><b>Punjabi Mutton Curry:</b> Slow-cooked mutton in a spicy gravy.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>4. Punjabi Sweets (Mithai)</h3>
+                  <ul>
+                    <li><b>Jalebi:</b> Deep-fried sweet batter soaked in sugar syrup.</li>
+                    <li><b>Gulab Jamun:</b> Deep-fried milk solids soaked in sugar syrup.</li>
+                    <li><b>Pinni:</b> A traditional Punjabi sweet made with wheat flour, ghee, and jaggery.</li>
+                    <li><b>Phirni:</b> Rice pudding served in earthen pots.</li>
+                    <li><b>Gajar ka Halwa:</b> Carrot pudding cooked with milk, sugar, and ghee.</li>
+                    <li><b>Kheer:</b> Rice pudding with nuts and cardamom.</li>
+                  </ul>
+
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="rosso.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="phuchka.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>5. Street Food of Punjab</h3>
+                  <ul>
+                    <li><b>Amritsari Kulcha:</b> Stuffed bread served with chole (chickpea curry).</li>
+                    <li><b>Tandoori Momos:</b> Dumplings cooked in a tandoor, a fusion dish popular in Punjab.</li>
+                    <li><b>Golgappe/Pani Puri:</b> Hollow crisp puris filled with spicy water, potatoes, and chickpeas.</li>
+                    <li><b>Tikki:</b> Spiced potato patties served with yogurt and chutneys.</li>
+                    <li><b>Samosa:</b> Deep-fried pastry with a savory filling, usually potatoes and peas.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>6. Famous Drinks</h3>
+                  <ul>
+                    <li><b>Lassi:</b> A yogurt-based drink, either sweet or salted, often topped with malai (cream).</li>
+                    <li><b>Chaach/Mattha:</b> Buttermilk, a refreshing summer drink.</li>
+                    <li><b>Kanji:</b> A fermented drink made from black carrots, popular during winters.</li>
+                    <li><b>Punjabi Chai:</b> Strong tea often made with buffalo milk and spices.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="tea.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Special Festival Foods</h3>
+                  <ul>
+                    <li><b>Kada Prasad:</b> A semolina halwa served as offering in Gurdwaras.</li>
+                    <li><b>Langar Food:</b> The community meal served in Gurdwaras, typically consisting of dal, roti, sabzi, and kheer.</li>
+                    <li><b>Lohri Special:</b> Revri, gajak, and peanuts are traditional Lohri foods.</li>
+                    <li><b>Baisakhi Special:</b> Meethe Chawal (sweet rice) and special kadhi-pakora.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="pithe.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Punjabi cuisine is a celebration of rich flavors, generous portions, and the agricultural bounty of the region. 
+            Whether it's the hearty sarson da saag, the creamy butter chicken, or the refreshing lassi, Punjab's food culture 
+            is one of the most beloved and widely recognized in India and around the world! 🍛🍗🥛</p><br><br>
+        </div>
+        <div id="wbhistory" class="tab-pane fade in active" style="background-color: white;">
+          <h1>History of Punjab</h1>
+          <p>Punjab has a rich and diverse history that spans ancient civilizations, medieval kingdoms, Sikh empire, British colonial rule, 
+            and the modern era. The region has played a significant role in India's political, cultural, and religious history.</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Ancient Punjab (Before 7th Century CE)</h3>
+                  <ul>
+                    <li><b>Indus Valley Civilization (3300 BCE - 1300 BCE):</b> Parts of Punjab were home to one of the world's 
+                      oldest civilizations, with major sites at Harappa and Ropar.</li>
+                    <li><b>Vedic Period (1500 BCE - 500 BCE):</b> Punjab was known as "Sapta Sindhu" (land of seven rivers) and 
+                      was the setting for parts of the Rigveda.</li>
+                    <li><b>Persian & Greek Invasions:</b> Punjab was conquered by Darius I of Persia and later by Alexander the Great in 326 BCE.</li>
+                    <li><b>Maurya Empire (321 BCE - 185 BCE):</b> Emperor Chandragupta Maurya and later Ashoka ruled over Punjab.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="maurya.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="pala.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Medieval Punjab (7th - 16th Century)</h3>
+                  <h4>Arab & Turkic Invasions:</h4>
+                  <ul>
+                    <li>Muhammad bin Qasim invaded Sindh in 712 CE.</li>
+                    <li>Mahmud of Ghazni conducted several raids into Punjab in the 11th century.</li>
+                  </ul>
+                  <h4>Delhi Sultanate (1206 CE - 1526 CE):</h4>
+                  <ul>
+                    <li>Punjab became part of the Delhi Sultanate under various dynasties.</li>
+                    <li>Sufi saints like Baba Farid and Bulleh Shah spread Islam in the region.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="delhi.png" alt="" style="height:220px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h4>Mughal Era (1526 CE - 1707 CE):</h4>
+                  <ul>
+                    <li>Babur defeated Ibrahim Lodi at the First Battle of Panipat in 1526.</li>
+                    <li>Punjab flourished under Akbar's rule with religious tolerance.</li>
+                    <li>Guru Arjan Dev, the fifth Sikh Guru, was martyred during Jahangir's reign in 1606.</li>
+                    <li>Guru Tegh Bahadur, the ninth Sikh Guru, was executed by Aurangzeb in 1675.</li>
+                  </ul>
+                  <h4>Rise of Sikhism (15th - 17th Century):</h4>
+                  <ul>
+                    <li>Guru Nanak Dev founded Sikhism in the late 15th century.</li>
+                    <li>The Golden Temple (Harmandir Sahib) was built by Guru Arjan Dev in 1604.</li>
+                    <li>Guru Gobind Singh formed the Khalsa Panth in 1699, transforming the Sikh community into a martial order to fight against Mughal oppression.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Sikh Empire (1799 CE - 1849 CE)</h3>
+                  <ul>
+                    <li>Maharaja Ranjit Singh united the Sikh misls (confederacies) and established the Sikh Empire in 1799.</li>
+                    <li>The empire extended from the Khyber Pass in the west to Kashmir in the north and Delhi in the east.</li>
+                    <li>Ranjit Singh's rule was known for religious tolerance, modernization of the army, and administrative reforms.</li>
+                    <li>After Ranjit Singh's death in 1839, the empire weakened due to internal conflicts.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="mughal.jpg" alt="" style="height:200px;width: 250px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="plassey.jpg" alt="" style="height:230px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h2>4. British Colonial Rule (1849 CE - 1947 CE)</h3>
+                    <h3>Anglo-Sikh Wars & Annexation</h3>
+                    <ul>
+                      <li>The First Anglo-Sikh War (1845-1846) resulted in the Treaty of Lahore.</li>
+                      <li>The Second Anglo-Sikh War (1848-1849) led to the annexation of Punjab by the British East India Company.</li>
+                      <li>Punjab became a province of British India with Lahore as its capital.</li>
+                    </ul>
+                    <h3>Colonial Development & Resistance</h3>
+                    <ul>
+                      <li>The British developed canal colonies, transforming Punjab into an agricultural powerhouse.</li>
+                      <li>The Singh Sabha Movement and Arya Samaj emerged as social reform movements.</li>
+                      <li>Punjab became a center of revolutionary activities during the freedom struggle.</li>
+                    </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="rammohan.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>Freedom Movement & Tragedy</h3>
+                  <ul>
+                    <li><b>Jallianwala Bagh Massacre (1919):</b></li>
+                    <ul>
+                      <li>British troops under General Dyer fired on unarmed civilians gathered at Jallianwala Bagh in Amritsar.</li>
+                      <li>Hundreds were killed, sparking nationwide outrage and intensifying the freedom movement.</li>
+                    </ul>
+                    <li><b>Revolutionary Heroes:</b></li>
+                    <ul>
+                      <li>Bhagat Singh, Rajguru, and Sukhdev became symbols of revolutionary resistance.</li>
+                      <li>The Ghadar Movement, led by Punjabi expatriates, fought for independence.</li>
+                    </ul>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="netaji.jpg" alt="" style="height:230px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <ul>
+                    <li><b>Partition of Punjab (1947):</b></li>
+                    <ul>
+                      <li>The Radcliffe Line divided Punjab between India and Pakistan.</li>
+                      <li>Massive population exchanges occurred with horrific communal violence.</li>
+                      <li>Millions were displaced, and hundreds of thousands were killed.</li>
+                    </ul>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Post-Independence Punjab (1947 - Present)</h3>
+                  <h4>Reorganization of Punjab (1966)</h4>
+                  <ul>
+                    <li>Based on linguistic grounds, Punjab was divided into:</li>
+                    <ul>
+                      <li>Punjabi-speaking Punjab.</li>
+                      <li>Hindi-speaking Haryana.</li>
+                      <li>Chandigarh became a Union Territory and joint capital.</li>
+                    </ul>
+                    <li>Hilly regions were merged with Himachal Pradesh.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="part.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h4>Green Revolution & Economic Growth</h4>
+                  <ul>
+                    <li>Punjab became the breadbasket of India through the Green Revolution in the 1960s-70s.</li>
+                    <li>Agricultural productivity increased dramatically with new farming techniques and high-yield crops.</li>
+                    <li>Punjab became one of India's most prosperous states.</li>
+                  </ul>
+                  <h4>Political Turbulence (1980s-1990s)</h4>
+                  <ul>
+                    <li>The Khalistan movement demanded a separate Sikh homeland.</li>
+                    <li>Operation Blue Star (1984) at the Golden Temple and subsequent anti-Sikh riots led to years of insurgency.</li>
+                    <li>The state gradually returned to peace in the late 1990s.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="part1.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>6. Present-Day Punjab</h3>
+                  <ul>
+                    <li><b>Agricultural Powerhouse:</b> Punjab contributes significantly to India's food security.</li>
+                    <li><b>Economic Challenges:</b> Facing issues like groundwater depletion, drug abuse, and farmer distress.</li>
+                    <li><b>Cultural Hub:</b> Punjabi music, films, and culture have gained global recognition.</li>
+                    <li><b>Diaspora Influence:</b> The Punjabi diaspora maintains strong connections and contributes to the state's economy.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="present.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Punjab has witnessed ancient civilizations, Islamic rule, the rise of Sikhism, British colonization, partition trauma, 
+            and modern challenges. Despite these turbulent times, it remains a vibrant center of culture, agriculture, and resilience in India. 🚩📜</p>
+          <br><br>
+        </div>
+        <div id="wbartacraft" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Art & Craft of Punjab 🎨🖌️</h1>
+          <p>Punjab has a rich artistic heritage, blending traditional craftsmanship with cultural influences from its agricultural lifestyle, 
+            religious traditions, and historical experiences. Punjabi artisans are known for their vibrant colors, intricate designs, and 
+            functional yet beautiful creations.</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Phulkari Embroidery 🧵</h3>
+                  <ul>
+                    <li><b>Origin:</b> Traditional Punjabi embroidery, literally meaning "flower work."</li>
+                    <li><b>Features:</b> Colorful thread work on cotton fabric, typically using darn stitch on the wrong side of the cloth.</li>
+                    <li><b>Types:</b> Bagh (fully covered), Chope (wedding gift), and Darshan Dwar (temple offerings).</li>
+                    <li><b>Usage:</b> Shawls, dupattas, bed covers, and wall hangings.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="tera.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="textile.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Punjabi Jutti (Footwear) 👞</h3>
+                  <ul>
+                    <li><b>Origin:</b> Traditional Punjabi footwear with Mughal influences.</li>
+                    <li><b>Features:</b> Handcrafted leather shoes with intricate embroidery, beadwork, and mirror work.</li>
+                    <li><b>Famous Centers:</b> Patiala, Amritsar, and Muktsar.</li>
+                    <li><b>Unique Aspect:</b> No left or right distinction; they take the shape of the foot with wear.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Paranda 🎀</h3>
+                  <ul>
+                    <li><b>Origin:</b> Traditional Punjabi hair accessory.</li>
+                    <li><b>Material:</b> Colorful silk threads with tassels, often decorated with beads and trinkets.</li>
+                    <li><b>Usage:</b> Used to decorate and extend braids, especially during festivals and weddings.</li>
+                    <li><b>Cultural Significance:</b> Symbol of Punjabi feminine identity and beauty.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="dokra.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="gomira.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Woodwork & Furniture 🪑</h3>
+                  <ul>
+                    <li><b>Pinjore Woodwork:</b> Intricate wooden furniture with carving and inlay work.</li>
+                    <li><b>Pidhis:</b> Low wooden stools with woven seats, traditionally used in Punjabi homes.</li>
+                    <li><b>Carved Doors:</b> Ornate wooden doors with religious and floral motifs.</li>
+                    <li><b>Famous Centers:</b> Hoshiarpur and Kartarpur are known for their quality woodwork.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Durrie & Carpet Weaving 🧶</h3>
+                  <ul>
+                    <li><b>Origin:</b> Traditional floor coverings woven on handlooms.</li>
+                    <li><b>Features:</b> Geometric patterns, vibrant colors, and durable cotton or wool material.</li>
+                    <li><b>Famous Centers:</b> Amritsar, Ludhiana, and rural Punjab.</li>
+                    <li><b>Types:</b> Panja durries (hand-woven) and Namdas (felted wool rugs).</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="potochitra.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="kalighat.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>6. Metalwork & Utensils 🍲</h3>
+                  <ul>
+                    <li><b>Brass Utensils:</b> Traditional kitchen items like kadhai (wok), thali (plate), and lota (water pot).</li>
+                    <li><b>Decorative Items:</b> Ornate brass and copper items for religious and decorative purposes.</li>
+                    <li><b>Famous Centers:</b> Amritsar, Patiala, and Jalandhar.</li>
+                    <li><b>Unique Items:</b> Punjabi gadva (water pitcher) and parat (large plate for kneading dough).</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Textile Crafts 🧵</h3>
+                  <h4>🔸 Punjabi Suits & Fabrics</h4>
+                  <ul>
+                    <li><b>Patiala Salwar:</b> Distinctive loose-fitting salwar with numerous pleats.</li>
+                    <li><b>Phulkari Dupattas:</b> Embroidered scarves worn with traditional attire.</li>
+                    <li><b>Ludhiana Hosiery:</b> Known for quality woolen garments and knitwear.</li>
+                  </ul>
+                  <h4>🔸 Weaving Traditions</h4>
+                  <ul>
+                    <li><b>Khes:</b> Traditional cotton bedspread with checkered patterns.</li>
+                    <li><b>Ludhiana Shawls:</b> Warm woolen shawls with intricate designs.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="jute.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>📌 Summary: Punjab's Art & Craft Forms</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Art Form</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Phulkari Embroidery</td>
+                <td>Patiala, Bathinda, Sangrur</td>
+                <td>Colorful thread work on cotton fabric</td>
+              </tr>
+              <tr>
+                <td>Punjabi Jutti</td>
+                <td>Patiala, Amritsar, Muktsar</td>
+                <td>Handcrafted leather footwear with embroidery</td>
+              </tr>
+              <tr>
+                <td>Paranda</td>
+                <td>Throughout Punjab</td>
+                <td>Colorful hair accessory with tassels</td>
+              </tr>
+              <tr>
+                <td>Woodwork</td>
+                <td>Hoshiarpur, Kartarpur</td>
+                <td>Intricate carving and inlay work</td>
+              </tr>
+              <tr>
+                <td>Durrie Weaving</td>
+                <td>Amritsar, Ludhiana</td>
+                <td>Handwoven floor coverings</td>
+              </tr>
+              <tr>
+                <td>Metalwork</td>
+                <td>Amritsar, Patiala</td>
+                <td>Brass and copper utensils and decorative items</td>
+              </tr>
+              <tr>
+                <td>Textile Crafts</td>
+                <td>Ludhiana, Patiala, Amritsar</td>
+                <td>Patiala salwar, Phulkari dupattas, Khes</td>
+              </tr>
+              <tr>
+                <td>Pottery</td>
+                <td>Rural Punjab</td>
+                <td>Traditional clay utensils and decorative items</td>
+              </tr>
+              <tr>
+                <td>Basketry</td>
+                <td>Rural Punjab</td>
+                <td>Functional items made from reeds and bamboo</td>
+              </tr>
+              <tr>
+                <td>Musical Instruments</td>
+                <td>Moga, Jalandhar</td>
+                <td>Dhol, Tumbi, Algoza, Chimta</td>
+              </tr>
+            </table>
+          </div>
+          <br><br>
+          <p>Punjab's arts and crafts are a vibrant reflection of its cultural heritage, agricultural lifestyle, and artistic traditions. 
+            From the colorful Phulkari embroidery to the intricate Punjabi juttis, these crafts continue to be preserved and celebrated 
+            as important aspects of Punjabi identity. 🎭✨</p>
+          <br><br>
+        </div>
+        <div id="wbseason" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Seasons to visit Punjab 🌧️☀️ </h1>
+          <p>Punjab experiences a continental climate with distinct seasons, each offering a unique experience for visitors. 
+            The state's weather ranges from extremely hot summers to cold winters, with moderate rainfall during the monsoon season.</p>
+
+          <br><br>
+
+          <h2> Season-wise Breakdown for Visiting Punjab</h2>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🌸 Spring (February - March)</h3>
+                  <ul>
+                    <li>Pleasant weather with temperatures ranging from 15°C to 30°C.</li>
+                    <li>Mustard fields in full bloom create a stunning yellow landscape.</li>
+                    <li>Ideal for visiting Amritsar, Chandigarh, and rural Punjab.</li>
+                    <li>Hola Mohalla festival in Anandpur Sahib is a major attraction.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="spring.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="summer.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>☀️ Summer (April – June)</h3>
+                  <ul>
+                    <li>Extremely hot with temperatures often exceeding 40°C.</li>
+                    <li>Not ideal for tourism, but early mornings and evenings can be manageable.</li>
+                    <li>Baisakhi festival in April is a major cultural event worth experiencing.</li>
+                    <li>Hill stations like Pathankot can provide some relief from the heat.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🌧️ Monsoon (July - September)</h3>
+                  <ul>
+                    <li>Moderate rainfall brings relief from the summer heat.</li>
+                    <li>The countryside turns lush green, making rural Punjab particularly beautiful.</li>
+                    <li>Teej and Rakhar Punia festivals are celebrated during this season.</li>
+                    <li>Humidity can be high, and occasional flooding may disrupt travel plans.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="rain.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="autmn.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🍁 Autumn (October - November)</h3>
+                  <ul>
+                    <li>One of the best seasons to visit Punjab with pleasant temperatures (15°C to 30°C).</li>
+                    <li>Harvest season with golden fields creating picturesque landscapes.</li>
+                    <li>Major festivals like Diwali and Guru Nanak Jayanti are celebrated.</li>
+                    <li>Perfect for exploring cities, historical sites, and rural areas.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>❄️ Winter (December - January)</h3>
+                  <ul>
+                    <li>Cold weather with temperatures ranging from 5°C to 20°C.</li>
+                    <li>Occasional fog can affect visibility and travel plans.</li>
+                    <li>Lohri and Maghi festivals are major winter celebrations.</li>
+                    <li>The Golden Temple in winter fog creates a mystical atmosphere.</li>
+                    <li>Perfect for enjoying traditional Punjabi winter foods like Sarson da Saag and Makki di Roti.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="winter.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>📌 Summary: Best Time to Visit Different Places in Punjab</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Region</th>
+                <th>Best Season</th>
+                <th>Recommended Months</th>
+                <th>Why Visit?</th>
+              </tr>
+              <tr>
+                <td>Amritsar</td>
+                <td>Autumn, Winter, Spring</td>
+                <td>October - March</td>
+                <td>Golden Temple, Wagah Border, Jallianwala Bagh, pleasant weather</td>
+              </tr>
+              <tr>
+                <td>Chandigarh</td>
+                <td>Autumn, Spring</td>
+                <td>February - April, September - November</td>
+                <td>Rock Garden, Sukhna Lake, Rose Garden, pleasant weather</td>
+              </tr>
+              <tr>
+                <td>Patiala</td>
+                <td>Autumn, Winter</td>
+                <td>October - February</td>
+                <td>Qila Mubarak, Sheesh Mahal, comfortable weather for sightseeing</td>
+              </tr>
+              <tr>
+                <td>Ludhiana</td>
+                <td>Autumn, Winter</td>
+                <td>October - February</td>
+                <td>Punjab Agricultural University, shopping, industrial tours</td>
+              </tr>
+              <tr>
+                <td>Anandpur Sahib</td>
+                <td>Spring</td>
+                <td>March</td>
+                <td>Hola Mohalla festival, Sikh heritage sites</td>
+              </tr>
+              <tr>
+                <td>Kapurthala</td>
+                <td>Autumn, Winter</td>
+                <td>October - February</td>
+                <td>Jagatjit Palace, Moorish Mosque, pleasant weather</td>
+              </tr>
+              <tr>
+                <td>Bathinda</td>
+                <td>Autumn, Winter</td>
+                <td>October - February</td>
+                <td>Qila Mubarak, Thermal Lakes, comfortable temperatures</td>
+              </tr>
+              <tr>
+                <td>Rural Punjab</td>
+                <td>Spring, Autumn</td>
+                <td>February - March, October - November</td>
+                <td>Mustard fields in spring, harvest scenes in autumn</td>
+              </tr>
+              <tr>
+                <td>Pathankot</td>
+                <td>Spring, Autumn</td>
+                <td>February - April, September - November</td>
+                <td>Gateway to hills, Nurpur Fort, pleasant climate</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="container">
+            <div class="row">
+              <h1 style=" text-align: center;">📌 Summary: When to Visit Punjab</h1><br>
+              <ul>
+                <li><b>For festivals & cultural experiences:</b> February (Basant Panchami), April (Baisakhi), October-November (Diwali), 
+                  January (Lohri, Maghi)</li>
+                <li><b>For nature & landscapes:</b> February-March (mustard fields), October-November (harvest season)</li>
+                <li><b>For comfortable sightseeing:</b> October to March (pleasant temperatures)</li>
+                <li><b>For rural tourism:</b> February-March, October-November</li>
+                <li><b>For heritage & historical sites:</b> October to March (comfortable weather for exploration)</li>
+              </ul>
+
+            </div>
+          </div>
+          <br><br>
+        </div>
+        <div id="wbtourist" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Tourist Spots of Punjab 🏛️🙏</h1>
+          <p>Punjab is a diverse state with historical sites, religious places, cultural hubs, and natural beauty. Here's a categorized 
+            list of the best tourist places in Punjab:</p>
+
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Religious & Spiritual Destinations 🙏</h3>
+                  <ul>
+                    <li><b>Golden Temple (Harmandir Sahib), Amritsar -</b> The holiest shrine of Sikhism, known for its golden dome 
+                      and Langar (community kitchen)</li>
+                    <li><b>Durgiana Temple, Amritsar -</b> Hindu temple built in the style of the Golden Temple</li>
+                    <li><b>Takht Sri Kesgarh Sahib, Anandpur Sahib -</b> One of the five Takhts (seats of authority) of Sikhism</li>
+                    <li><b>Tarn Taran Sahib -</b> Historic Gurdwara with the largest sarovar (holy tank)</li>
+                    <li><b>Fatehgarh Sahib -</b> Site commemorating the martyrdom of the younger sons of Guru Gobind Singh</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="darj.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="biswagate.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Historical & Heritage Sites 🏛️</h3>
+                  <ul>
+                    <li><b>Jallianwala Bagh, Amritsar -</b> Memorial of the 1919 massacre during British rule</li>
+                    <li><b>Qila Mubarak, Patiala -</b> 18th-century fort complex with Mughal and Rajput architecture</li>
+                    <li><b>Qila Mubarak, Bathinda -</b> One of the oldest surviving forts in India</li>
+                    <li><b>Sheesh Mahal, Patiala -</b> Palace known for its mirror work and paintings</li>
+                    <li><b>Jagatjit Palace, Kapurthala -</b> Indo-French style palace built in the early 20th century</li>
+                    <li><b>Moorish Mosque, Kapurthala -</b> Mosque inspired by the Grand Mosque of Marrakesh</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Museums & Cultural Centers 🏛️</h3>
+                  <ul>
+                    <li><b>Partition Museum, Amritsar -</b> World's first museum dedicated to the Partition of India</li>
+                    <li><b>Maharaja Ranjit Singh Museum, Amritsar -</b> Dedicated to the founder of the Sikh Empire</li>
+                    <li><b>Punjab State War Heroes Memorial & Museum, Amritsar -</b> Honors Punjab's military heritage</li>
+                    <li><b>Virasat-e-Khalsa, Anandpur Sahib -</b> Museum showcasing Sikh heritage and history</li>
+                    <li><b>Rural Museum, Ludhiana -</b> Displays traditional Punjabi rural life and artifacts</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="sundar.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="digha.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Modern Attractions & Urban Centers 🏙️</h3>
+                  <ul>
+                    <li><b>Chandigarh -</b> The planned city designed by Le Corbusier</li>
+                    <li><b>Rock Garden, Chandigarh -</b> Unique garden made from industrial and urban waste</li>
+                    <li><b>Sukhna Lake, Chandigarh -</b> Artificial lake with boating facilities</li>
+                    <li><b>Rose Garden, Chandigarh -</b> Asia's largest rose garden</li>
+                    <li><b>Pushpa Gujral Science City, Kapurthala -</b> Science museum with interactive exhibits</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Border Attractions 🇮🇳</h3>
+                  <ul>
+                    <li><b>Wagah-Attari Border -</b> Famous for the daily retreat ceremony between Indian and Pakistani forces</li>
+                    <li><b>Hussainiwala Border -</b> Another border post with a retreat ceremony, near the memorial of Bhagat Singh</li>
+                    <li><b>Sadqi Border, Fazilka -</b> Less crowded border post with a retreat ceremony</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="dak.png" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="ajhills.png" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>6. Natural Attractions & Wildlife 🌿</h3>
+                  <ul>
+                    <li><b>Harike Wetland -</b> Largest wetland in northern India, home to diverse bird species</li>
+                    <li><b>Kanjli Wetland -</b> Bird sanctuary and wetland near Kapurthala</li>
+                    <li><b>Chhatbir Zoo, Zirakpur -</b> Houses various species of animals and birds</li>
+                    <li><b>Pathankot -</b> Gateway to the Himalayan foothills</li>
+                    <li><b>Ranjit Sagar Lake -</b> Large reservoir with scenic views</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Rural Tourism & Farm Stays 🚜</h3>
+                  <ul>
+                    <li><b>Punjabiyat, Amritsar -</b> Farm stay experience in rural Punjab</li>
+                    <li><b>Citrus County, Hoshiarpur -</b> Farm retreat amidst citrus orchards</li>
+                    <li><b>Mustard fields -</b> Scenic yellow fields during winter months</li>
+                    <li><b>Kila Raipur Sports Festival -</b> Rural Olympics showcasing traditional sports</li>
+                    <li><b>Gurudwara Mehdiana Sahib, Jagraon -</b> Known for its floating structure</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="kumar.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br><br>
+
+        </div>
+        <div id="wbwild" class="tab-pane fade in active" style="background-color: white;">
+          <h1> Agriculture & Crops of Punjab 🌿</h1>
+          <p>Punjab is known as the "Breadbasket of India" due to its significant contribution to the country's agricultural production. 
+            The state's fertile plains, extensive irrigation network, and progressive farming techniques have made it a leader in 
+            agricultural productivity.</p>
+
+          <br>
+          <h2>Agriculture in Punjab </h2>
+          <p>Punjab contributes approximately 17% of India's wheat production and 11% of rice production, despite occupying only 1.5% 
+            of the country's geographical area.</p>
+
+          <br>
+          <h2>🔹 Key Agricultural Features</h2>
+          <div>
+            <table>
+              <tr>
+                <th>Feature</th>
+                <th>Description</th>
+              </tr>
+              <tr>
+                <td>Geographical Advantage</td>
+                <td>Fertile alluvial plains of the Indo-Gangetic basin</td>
+              </tr>
+              <tr>
+                <td>Irrigation Network</td>
+                <td>Extensive canal system and high density of tube wells</td>
+              </tr>
+              <tr>
+                <td>Green Revolution Impact</td>
+                <td>Pioneer in adopting high-yielding varieties and modern farming techniques</td>
+              </tr>
+              <tr>
+                <td>Mechanization</td>
+                <td>Highest tractor density in India</td>
+              </tr>
+              <tr>
+                <td>Cropping Intensity</td>
+                <td>About 190%, meaning most land is cultivated more than once a year</td>
+              </tr>
+              <tr>
+                <td>Farm Size</td>
+                <td>Average holding of 3.8 hectares, higher than the national average</td>
+              </tr>
+              <tr>
+                <td>Agricultural Infrastructure</td>
+                <td>Well-developed network of markets, roads, and storage facilities</td>
+              </tr>
+            </table>
+          </div>
+          <bt><br></bt>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3> 🔹 Major Crops of Punjab</h3>
+                <ul>
+                  <li><b>Wheat:</b> The primary rabi (winter) crop, harvested in April-May.</li>
+                  <li><b>Rice:</b> The main kharif (monsoon) crop, primarily grown in the Majha and Doaba regions.</li>
+                  <li><b>Cotton:</b> Grown in the southwestern districts of Malwa region.</li>
+                  <li><b>Maize:</b> Cultivated in the sub-mountainous areas and as a rotation crop.</li>
+                  <li><b>Sugarcane:</b> Grown in the Doaba region, supporting sugar mills in the area.</li>
+                  <li><b>Oilseeds:</b> Mustard, sunflower, and groundnut are important oilseed crops.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="ele.jpg" alt="" style="height:200px;width: 200px;">
+
+              </div>
+
+            </div>
+          </div>
+          <hr><br>
+          <h2>🌾 Crop-wise Production in Punjab </h2>
+          <p>Punjab's agricultural calendar is dominated by the wheat-rice rotation, but the state produces a variety of other crops as well.</p>
+
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Rabi Crops (Winter Season)</h3>
+                <ul>
+                  <li><b>Wheat:</b> Punjab's flagship crop, with production of approximately 18 million tonnes annually.</li>
+                  <li><b>Barley:</b> Grown in limited areas, used for brewing and animal feed.</li>
+                  <li><b>Mustard:</b> Cultivated for oil production, particularly in the southwestern districts.</li>
+                  <li><b>Vegetables:</b> Winter vegetables like potato, peas, cauliflower, and carrots.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="jutep.jpg" alt="" style="height:200px;width: 220px;">
+
+              </div>
+            </div>
+          </div>
+          <h2>🔹 Kharif Crops (Summer/Monsoon Season)</h2>
+          <div>
+            <table>
+              <tr>
+                <th>Crop</th>
+                <th>Production Areas</th>
+                <th>Significance</th>
+              </tr>
+              <tr>
+                <td>Rice 🍚</td>
+                <td>Amritsar, Gurdaspur, Tarn Taran, Kapurthala</td>
+                <td>Major export crop, primarily basmati and non-basmati varieties</td>
+              </tr>
+              <tr>
+                <td>Cotton 🧵</td>
+                <td>Bathinda, Mansa, Fazilka, Muktsar</td>
+                <td>Important cash crop, supports textile industry</td>
+              </tr>
+              <tr>
+                <td>Maize 🌽</td>
+                <td>Hoshiarpur, Roopnagar, SBS Nagar</td>
+                <td>Used for food, feed, and industrial purposes</td>
+              </tr>
+              <tr>
+                <td>Sugarcane</td>
+                <td>Jalandhar, Hoshiarpur, Gurdaspur</td>
+                <td>Supports sugar mills and jaggery production</td>
+              </tr>
+              <tr>
+                <td>Pulses</td>
+                <td>Throughout Punjab</td>
+                <td>Moong, arhar, and masoor varieties</td>
+              </tr>
+              <tr>
+                <td>Vegetables 🥬</td>
+                <td>Peri-urban areas</td>
+                <td>Okra, eggplant, tomato, and other summer vegetables</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Fruits and Specialty Crops</h3>
+                <ul>
+                  <li><b>Kinnow (Mandarin):</b> Major fruit crop, particularly in Abohar and Fazilka.</li>
+                  <li><b>Guava:</b> Grown in Hoshiarpur and surrounding areas.</li>
+                  <li><b>Pear:</b> Cultivated in sub-mountainous regions.</li>
+                  <li><b>Peach:</b> Grown in Kandi areas of Punjab.</li>
+                  <li><b>Litchi:</b> Produced in limited quantities in suitable areas.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="mango.jpg" alt="" style="height:200px;width: 200px;">
+
+              </div>
+            </div>
+          </div><br>
+          <hr>
+          <div class="box" style=" background: #f3b37185;padding: 10px;">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3> Challenges & Modern Trends in Punjab Agriculture 🌾</h3>
+                  <ul>
+                    <li><b>Groundwater Depletion:</b> Excessive use of tube wells has led to falling water tables.</li>
+                    <li><b>Soil Health:</b> Intensive farming has affected soil fertility and structure.</li>
+                    <li><b>Crop Diversification:</b> Efforts to move beyond the wheat-rice cycle to more sustainable crops.</li>
+                    <li><b>Organic Farming:</b> Growing interest in organic methods to reduce chemical inputs.</li>
+                    <li><b>Precision Agriculture:</b> Adoption of technology for more efficient resource use.</li>
+                    <li><b>Contract Farming:</b> Increasing partnerships between farmers and food processing companies.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="teag.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Punjab's agricultural success story is a testament to the hard work of its farmers and the state's progressive agricultural 
+            policies. While facing challenges like water scarcity and soil degradation, Punjab continues to be the food security backbone 
+            of India, adapting to new technologies and sustainable practices.</p>
+          <br><br>
+        </div>
+        <div id="wbedu" class="tab-pane fade in active" style="background-color: white;">
+          <h1>🎓 Education & Institutions in Punjab</h1>
+          <p>Punjab has a strong educational foundation with numerous universities, colleges, and schools. The state has made significant 
+            strides in higher education, technical training, and research, contributing to India's academic and professional landscape.</p>
+
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>📌 Education System in Punjab</h3>
+                  <ul>
+                    <li><b>School Education:</b> Follows Punjab School Education Board (PSEB), CBSE, and ICSE curricula.</li>
+                    <li><b>Higher Education:</b> Managed by state universities, central universities, and private institutions.</li>
+                    <li><b>Technical Education:</b> Strong focus on engineering, agriculture, and medical education.</li>
+                    <li><b>Literacy Rate:</b> Approximately 76%, with efforts to improve rural and female literacy.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="wbbse.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>🏛️ Top Universities & Institutions </h2>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Central Universities</h3>
+                <ol>
+                  <li><b>Central University of Punjab (Bathinda) -</b> Established in 2009, focuses on research and interdisciplinary studies.</li>
+                  <li><b>Indian Institute of Technology Ropar -</b> One of the newer IITs, known for engineering and technology education.</li>
+                  <li><b>Indian Institute of Science Education and Research (IISER) Mohali -</b> Premier institute for basic sciences research.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="visva.jpg" alt="" style="height:200px;width: 230px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 State Universities</h3>
+                <ol>
+                  <li><b>Punjabi University (Patiala) -</b> Established in 1962, known for Punjabi language, literature, and cultural studies.</li>
+                  <li><b>Guru Nanak Dev University (Amritsar) -</b> Founded in 1969, recognized for sports, sciences, and humanities.</li>
+                  <li><b>Punjab Agricultural University (Ludhiana) -</b> Pioneer of the Green Revolution in India, leading agricultural research.</li>
+                  <li><b>Baba Farid University of Health Sciences (Faridkot) -</b> Oversees medical education in Punjab.</li>
+                  <li><b>Rajiv Gandhi National University of Law (Patiala) -</b> Premier legal education institution.</li>
+                  <li><b>Punjab Technical University (Kapurthala) -</b> Focuses on technical education across the state.</li>
+                  <li><b>Guru Angad Dev Veterinary and Animal Sciences University (Ludhiana) -</b> Specializes in veterinary sciences.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="jadav.png" alt="" style="height:200px;width: 230px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>University</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Punjab Agricultural University</td>
+                <td>Ludhiana</td>
+                <td>Agricultural research, Green Revolution contributions</td>
+              </tr>
+              <tr>
+                <td>Guru Nanak Dev University</td>
+                <td>Amritsar</td>
+                <td>Sports, Sciences, Arts, ranked among top universities</td>
+              </tr>
+              <tr>
+                <td>Punjabi University</td>
+                <td>Patiala</td>
+                <td>Punjabi language, literature, and cultural studies</td>
+              </tr>
+              <tr>
+                <td>IIT Ropar</td>
+                <td>Rupnagar</td>
+                <td>Engineering and technology education</td>
+              </tr>
+              <tr>
+                <td>IISER Mohali</td>
+                <td>Mohali</td>
+                <td>Basic sciences research and education</td>
+              </tr>
+              <tr>
+                <td>Central University of Punjab</td>
+                <td>Bathinda</td>
+                <td>Interdisciplinary research and studies</td>
+              </tr>
+              <tr>
+                <td>Lovely Professional University</td>
+                <td>Phagwara</td>
+                <td>One of India's largest private universities</td>
+              </tr>
+              <tr>
+                <td>Thapar Institute of Engineering & Technology</td>
+                <td>Patiala</td>
+                <td>Engineering education and research</td>
+              </tr>
+              <tr>
+                <td>Chandigarh University</td>
+                <td>Mohali</td>
+                <td>Modern infrastructure and industry connections</td>
+              </tr>
+            </table>
+          </div>
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="iitkgp.jpg" alt="" style="height:200px;width: 240px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🔹 Engineering & Technical Institutions</h3>
+                  <ol>
+                    <li><b>Indian Institute of Technology (IIT) Ropar -</b> Established in 2008, among the newer IITs.</li>
+                    <li><b>Thapar Institute of Engineering and Technology (Patiala) -</b> One of the oldest and most prestigious 
+                      engineering institutes in North India.</li>
+                    <li><b>Sant Longowal Institute of Engineering and Technology (Sangrur) -</b> Deemed university focusing on 
+                      technical education.</li>
+                    <li><b>Guru Nanak Dev Engineering College (Ludhiana) -</b> Established in 1956, one of the oldest engineering 
+                      colleges in the region.</li>
+                    <li><b>Dr. B.R. Ambedkar National Institute of Technology (Jalandhar) -</b> One of the 31 NITs in India.</li>
+                  </ol>
+                </div>
+
+                <br><br>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Institute</th>
+                <th>Location</th>
+                <th>Specialization</th>
+              </tr>
+              <tr>
+                <td>IIT Ropar</td>
+                <td>Rupnagar</td>
+                <td>Engineering, Technology, Sciences</td>
+              </tr>
+              <tr>
+                <td>Thapar Institute of Engineering & Technology</td>
+                <td>Patiala</td>
+                <td>Engineering, Computer Applications, Management</td>
+              </tr>
+              <tr>
+                <td>Dr. B.R. Ambedkar National Institute of Technology</td>
+                <td>Jalandhar</td>
+                <td>Engineering, Technology, Sciences</td>
+              </tr>
+              <tr>
+                <td>Guru Nanak Dev Engineering College</td>
+                <td>Ludhiana</td>
+                <td>Engineering, Technology</td>
+              </tr>
+              <tr>
+                <td>Sant Longowal Institute of Engineering and Technology</td>
+                <td>Sangrur</td>
+                <td>Engineering, Technology, Vocational Training</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🔹 Medical Colleges</h3>
+                  <ol>
+                    <li><b>Government Medical College, Amritsar -</b> Established in 1864, one of the oldest medical colleges in India.</li>
+                    <li><b>Government Medical College, Patiala -</b> Founded in 1953, a major medical education center.</li>
+                    <li><b>Dayanand Medical College, Ludhiana -</b> Leading private medical institution.</li>
+                    <li><b>Christian Medical College, Ludhiana -</b> Established in 1894, known for quality medical education.</li>
+                    <li><b>AIIMS Bathinda -</b> One of the newer AIIMS campuses in India.</li>
+                  </ol>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="calmed.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Medical College</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Government Medical College</td>
+                <td>Amritsar</td>
+                <td>One of the oldest medical colleges in India</td>
+              </tr>
+              <tr>
+                <td>Government Medical College</td>
+                <td>Patiala</td>
+                <td>Established medical education center</td>
+              </tr>
+              <tr>
+                <td>Christian Medical College</td>
+                <td>Ludhiana</td>
+                <td>Pioneer in medical education and research</td>
+              </tr>
+              <tr>
+                <td>Dayanand Medical College</td>
+                <td>Ludhiana</td>
+                <td>Modern facilities and quality education</td>
+              </tr>
+              <tr>
+                <td>AIIMS</td>
+                <td>Bathinda</td>
+                <td>Newest premier medical institution</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="bckv.svg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🔹 Agricultural & Veterinary Institutions</h3>
+                  <ul>
+                    <li><b>Punjab Agricultural University (PAU), Ludhiana -</b> Established in 1962, played a crucial role in the 
+                      Green Revolution.</li>
+                    <li><b>Guru Angad Dev Veterinary and Animal Sciences University, Ludhiana -</b> Specializes in veterinary sciences 
+                      and animal husbandry.</li>
+                    <li><b>National Dairy Research Institute, Karnal -</b> Though in Haryana, serves Punjab's dairy sector significantly.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Institute</th>
+                <th>Location</th>
+                <th>Specialization</th>
+              </tr>
+              <tr>
+                <td>Punjab Agricultural University</td>
+                <td>Ludhiana</td>
+                <td>Agricultural Sciences, Research, Extension</td>
+              </tr>
+              <tr>
+                <td>Guru Angad Dev Veterinary and Animal Sciences University</td>
+                <td>Ludhiana</td>
+                <td>Veterinary Sciences, Animal Husbandry</td>
+              </tr>
+              <tr>
+                <td>Rajiv Gandhi National University of Law</td>
+                <td>Patiala</td>
+                <td>Legal Education and Research</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <h2>🏫 School Education in Punjab </h2>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Major School Boards</h3>
+                <ol>
+                  <li><b>Punjab School Education Board (PSEB) -</b> State board for primary and secondary education.</li>
+                  <li><b>Central Board of Secondary Education (CBSE) -</b> National board with many affiliated schools in Punjab.</li>
+                  <li><b>Indian Certificate of Secondary Education (ICSE) -</b> Several prestigious schools follow this curriculum.</li>
+                  <li><b>International Baccalaureate (IB) -</b> A few schools offer international curriculum.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="cbse.jpg" alt="" style="height:200px;width: 200px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-4">
+                <img src="apsbkp.jpg" alt="" style="height:200px;width: 230px;">
+
+              </div>
+              <div class="col-sm-8">
+
+                <h3>🔹 Famous Schools in Punjab</h3>
+                <ol>
+                  <li><b>Yadavindra Public School, Patiala -</b> Established in 1948, one of the oldest public schools.</li>
+                  <li><b>The Punjab Public School, Nabha -</b> Prestigious residential school founded in 1960.</li>
+                  <li><b>Welham Boys' School, Patiala -</b> Branch of the famous Dehradun school.</li>
+                  <li><b>Sacred Heart Convent School, Ludhiana -</b> Leading convent school.</li>
+                  <li><b>Vivek High School, Mohali -</b> Known for its modern approach to education.</li>
+                  <li><b>Army Public Schools -</b> Located in various cantonments across Punjab.</li>
+                </ol>
+
+              </div>
+
+            </div>
+          </div>
+          <div class="box">
+            <h2>🔬 Research & Innovation</h2>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <p>Punjab has several institutions known for research and innovation:</p>
+                  <ol>
+                    <li><b>Punjab Agricultural University -</b> Pioneer in agricultural research, developed numerous crop varieties.</li>
+                    <li><b>IISER Mohali -</b> Cutting-edge research in basic sciences.</li>
+                    <li><b>IIT Ropar -</b> Research in engineering, technology, and interdisciplinary areas.</li>
+                    <li><b>Central University of Punjab -</b> Focus on environmental and pharmaceutical research.</li>
+                    <li><b>Institute of Microbial Technology, Chandigarh -</b> Though in Chandigarh, serves Punjab's biotechnology sector.</li>
+                  </ol>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="csir.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <h2>📚 Other Notable Institutions</h2>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <ol>
+                    <li><b>Indian School of Business (ISB), Mohali -</b> World-class business school with a campus in Mohali.</li>
+                    <li><b>National Institute of Pharmaceutical Education and Research (NIPER), Mohali -</b> Premier institute for 
+                      pharmaceutical education.</li>
+                    <li><b>Institute of Hotel Management, Gurdaspur -</b> Leading hospitality education institute.</li>
+                    <li><b>Pushpa Gujral Science City, Kapurthala -</b> Science education and awareness center.</li>
+                    <li><b>Regional Institute of English, Chandigarh -</b> Focuses on English language teaching and research.</li>
+                  </ol>
+                </div>
+                <div class="col-sm-4">
+                  <img src="Marine.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Punjab has made significant strides in education, with institutions that contribute to national and global knowledge. From agricultural research that fueled the Green Revolution to modern technical education, Punjab continues to be an important educational hub in northern India. The state's focus on quality education has produced leaders, scholars, scientists, and entrepreneurs across various fields.</p>
+        </div>
+        <br><br>
+
+      </div>
+
+
+    </div>
+  </div>
+  </div>
+</body>
+
+</html>

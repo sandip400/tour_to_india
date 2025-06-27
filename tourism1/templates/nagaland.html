@@ -1,0 +1,2621 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Nagaland</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> -->
+  <style>
+    .wb {
+      font-size: 10vw;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+      border-spacing: 0;
+      border: 1px solid #ddd;
+    }
+
+    td,
+    th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+      font-size: 1.5vw;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+
+    .trip {
+      text-align: center;
+      font-weight: 900;
+      background: orangered;
+      padding: 20px;
+      border-radius: 20px;
+      width: 60%;
+    }
+
+    p,
+    li,
+    .text {
+      font-size: 1.5vw;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-weight: 600;
+    }
+
+    h4 {
+      font-weight: 900;
+    }
+
+    img {
+      border-radius: 10px;
+      display: block;
+      margin: auto;
+    }
+
+    @media screen and (max-width: 850px) {
+
+      p,
+      li,
+      .text,
+      td,
+      th {
+        font-size: 2vw;
+        ;
+      }
+
+    }
+
+    @media screen and (max-width: 500px) {
+
+      p,
+      li,
+      .text,
+      td,
+      th {
+        font-size: 4.5vw;
+        ;
+      }
+
+    }
+
+    .box:nth-of-type(odd) {
+      background: #f3b37185;
+      padding: 10px;
+    }
+    /* .box:nth-of-type(even) {
+      background: #f3b37185;
+      padding: 10px;
+    } */
+    .weather-container {
+            border-radius: 15px;
+            background: #f0fdf4;
+            padding: 15px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .weather-card {
+            text-align: center;
+            border-radius: 10px;
+            padding: 10px;
+            background: white;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+        .aqi {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            color: white;
+        }
+        .aqi-bad { background: purple; }
+        .aqi-moderate { background: orange; }
+        .aqi-good { background: green; }
+        .best-time {
+            background: #d1fae5;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 15px;
+            color: green;
+        }
+        .wet {
+            max-width: 50px;
+        }
+        
+        .trip {
+          font-size: 18px;
+          padding: 10px 20px;
+          cursor: pointer;
+          background-color:rgb(231, 36, 36);
+          color: white;
+          border: none;
+          border-radius: 5px;
+      }
+      .modal {
+          display: none;
+          position: fixed;
+          z-index: 1;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0,0,0,0.5);
+      }
+      .modal-content {
+          background-color: #fff;
+          margin: 10% auto;
+          padding: 20px;
+          border-radius: 10px;
+          width: 40%;
+          box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+          text-align: center;
+      }
+      .close {
+          color: #aaa;
+          float: right;
+          font-size: 28px;
+          font-weight: bold;
+          cursor: pointer;
+      }
+      .trip-options {
+          display: flex;
+          justify-content: center;
+          gap: 20px;
+          margin-top: 20px;
+      }
+      .trip-options a {
+          display: block;
+          width: 120px;
+          padding: 10px;
+          background-color: #28a745;
+          color: white;
+          text-decoration: none;
+          border-radius: 5px;
+      }
+  </style>
+</head>
+
+<body>
+
+
+  <!-- <h2>Carousel Example</h2> -->
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+      <li data-target="#myCarousel" data-slide-to="4"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+
+      <div class="item active">
+        <img src="/placeholder.svg?height=800&width=1200" alt="Kohima" style="width:100%; height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Kohima</h3>
+          <p>The capital city with stunning hills and rich history!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="/placeholder.svg?height=800&width=1200" alt="Dzukou Valley" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Dzukou Valley</h3>
+          <p>The valley of flowers with breathtaking landscapes!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="/placeholder.svg?height=800&width=1200" alt="Hornbill Festival" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Hornbill Festival</h3>
+          <p>The festival of festivals showcasing Naga culture!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="/placeholder.svg?height=800&width=1200" alt="Khonoma Village" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Khonoma Village</h3>
+          <p>India's first green village with terraced fields!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="/placeholder.svg?height=800&width=1200" alt="Naga Tribes" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Naga Tribes</h3>
+          <p>The diverse tribal heritage of Nagaland!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+  <div class="container">
+    <br><br>
+    <h1 class="wb"> NAGALAND</h1><br>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <img src="/placeholder.svg?height=700&width=500" alt="Nagaland Map" style="height:700px; width: -webkit-fill-available;">
+
+        </div>
+        <div class="col-sm-6">
+          <h1> Nagaland: The Land of Festivals & Cultural Diversity</h1>
+          <p class="text">Nagaland is a mountainous state in northeastern India, known for its diverse tribal culture, 
+            vibrant festivals, traditional arts, and stunning natural landscapes. It is home to 16 major tribes, each with 
+            their own distinct customs, language, and attire.</p>
+
+          <ul>
+            <li><b>Location --</b> Northeastern India</li>
+            <li><b>Capital --</b> Kohima</li>
+            <li><b>Official Language --</b> English</li>
+            <li><b>Area --</b> 16,579 sq. km</li>
+            <li><b>Population --</b> ~2 million (16th most populous state in India)</li>
+            <li><b>Borders --</b> Assam, Arunachal Pradesh, Manipur & International border with Myanmar</li>
+            <li><b>Major Rivers --</b> Doyang, Dikhu, Dhansiri, Tizu</li>
+            <li><b>Major Festivals --</b> Hornbill Festival, Moatsu, Sekrenyi, Tuluni, Tokhu Emong, Yemshe</li>
+            <li><b>State Animal --</b> Mithun (Gayal)</li>
+            <li><b>State Flower --</b> Rhododendron</li>
+            <li><b>State Tree --</b> Alder (Alnus nepalensis)</li>
+            <li><b>State Bird --</b> Blyth's Tragopan</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <br>
+    <hr>
+    <div>
+      <h1>📌 Districts of Nagaland</h1>
+      <br>
+      <div style="overflow-x:auto;">
+        <table>
+          <tr>
+            <th>Region</th>
+            <th>Districts</th>
+            <th>Key Highlights</th>
+          </tr>
+          <tr>
+            <td>Central Nagaland</td>
+            <td>1. Kohima 2. Dimapur 3. Peren</td>
+            <td>State Capital, Commercial Hub, War Cemetery, Dzukou Valley</td>
+          </tr>
+          <tr>
+            <td>Eastern Nagaland</td>
+            <td>4. Mon 5. Longleng 6. Tuensang 7. Kiphire</td>
+            <td>Konyak Tribe Villages, Longwa Village (Indo-Myanmar Border)</td>
+          </tr>
+          <tr>
+            <td>Northern Nagaland</td>
+            <td>8. Mokokchung 9. Zunheboto 10. Wokha</td>
+            <td>Ao Tribe Homeland, Doyang Reservoir, Amur Falcon Migration</td>
+          </tr>
+          <tr>
+            <td>Western Nagaland</td>
+            <td>11. Phek 12. Noklak</td>
+            <td>Shilloi Lake, Mount Saramati (Highest Peak), Chakhesang Villages</td>
+          </tr>
+          <tr>
+            <td>New Districts</td>
+            <td>13. Tseminyu 14. Niuland 15. Chumoukedima 16. Shamator</td>
+            <td>Recently formed districts with developing infrastructure</td>
+          </tr>
+        </table>
+      </div>
+      <br><br>
+      <h1>🔹 Major Highlights of Some Key Districts</h1><br><br>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <ul>
+              <li><b>Kohima --</b> Capital of Nagaland, home to the famous Kohima War Cemetery and Hornbill Festival.</li>
+              <li><b>Dimapur --</b> Commercial hub and gateway to Nagaland with the only airport and railway station.</li>
+              <li><b>Mokokchung --</b> Cultural center of the Ao tribe, known for its cleanliness and education.</li>
+              <li><b>Mon --</b> Home to the fierce Konyak tribe, famous for their facial tattoos and headhunting history.</li>
+              <li><b>Wokha --</b> Known for Doyang Reservoir, the "Falcon Capital of the World" where Amur falcons migrate.</li>
+              <li><b>Phek --</b> Home to Shilloi Lake and the Chakhesang tribe, known for terraced rice cultivation.</li>
+              <li><b>Tuensang --</b> One of the oldest districts with diverse tribal populations.</li>
+              <li><b>Zunheboto --</b> Home to the Sumi tribe and the largest Baptist church in Asia.</li>
+              <li><b>Kiphire --</b> Houses Mount Saramati, the highest peak in Nagaland (3,841 meters).</li>
+            </ul>
+          </div>
+          <div class="col-sm-6">
+            <img src="/placeholder.svg?height=450&width=500" alt="Nagaland Map" style="height:450px;width: -webkit-fill-available;">
+
+          </div>
+        </div>
+      </div>
+    </div><br><br>
+    <div class="container">
+      <div class="weather-container">
+          <h4 class="text-center"><strong>Weather in Nagaland</strong></h4>
+          <div class="row">
+              <!-- January -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Jan</h6>
+                      <p>10/20°C</p>
+                      <span class="aqi aqi-good">AQI 45</span>
+                  </div>
+              </div>
+              <!-- February -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Feb</h6>
+                      <p>12/22°C</p>
+                      <span class="aqi aqi-good">AQI 50</span>
+                  </div>
+              </div>
+              <!-- March -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Mar</h6>
+                      <p>15/25°C</p>
+                      <span class="aqi aqi-good">AQI 55</span>
+                  </div>
+              </div>
+              <!-- April -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Apr</h6>
+                      <p>18/27°C</p>
+                      <span class="aqi aqi-good">AQI 60</span>
+                  </div>
+              </div>
+              <!-- May -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>May</h6>
+                      <p>20/28°C</p>
+                      <span class="aqi aqi-good">AQI 65</span>
+                  </div>
+              </div>
+              <!-- June -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Jun</h6>
+                      <p>21/29°C</p>
+                      <span class="aqi aqi-good">AQI 70</span>
+                  </div>
+              </div>
+              <!-- July -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="rain.png" alt="rain">
+                      <h6>Jul</h6>
+                      <p>22/28°C</p>
+                      <span class="aqi aqi-good">AQI 45</span>
+                  </div>
+              </div>
+              <!-- August -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Aug</h6>
+                      <p>22/28°C</p>
+                      <span class="aqi aqi-good">AQI 50</span>
+                  </div>
+              </div>
+              <!-- September -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Sep</h6>
+                      <p>21/27°C</p>
+                      <span class="aqi aqi-good">AQI 55</span>
+                  </div>
+              </div>
+              <!-- October -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Oct</h6>
+                      <p>19/26°C</p>
+                      <span class="aqi aqi-good">AQI 50</span>
+                  </div>
+              </div>
+              <!-- November -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Nov</h6>
+                      <p>15/24°C</p>
+                      <span class="aqi aqi-good">AQI 45</span>
+                  </div>
+              </div>
+              <!-- December -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Dec</h6>
+                      <p>12/22°C</p>
+                      <span class="aqi aqi-good">AQI 40</span>
+                  </div>
+              </div>
+          </div>
+          <div class="text-center">
+              <div class="best-time">🏆 Best time to visit: October - May</div>
+          </div>
+      </div>
+    </div>
+    
+
+    <br><br>
+    <button class="trip" id="openModal">Let's go on a trip</button>
+    
+    <div id="tripModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Select Your Trip</h2>
+            <button type="button" class="btn btn-warning" style="margin-bottom: 8px;color:black; border-radius: 5px;" onclick="location.href='{% url 'nagaland_7days' %}'" >7 days trip</button><br>
+            <button type="button" class="btn btn-warning" style="margin-bottom: 8px;color:black; border-radius: 5px;" onclick="location.href='{% url 'nagaland_12days' %}'" >12 days trip</button>
+        </div>
+    </div>
+    
+    <script>
+        var modal = document.getElementById("tripModal");
+        var btn = document.getElementById("openModal");
+        var span = document.getElementsByClassName("close")[0];
+        
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+        
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+        
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script><br><br>
+    <div class="container">
+      <ul class="nav nav-tabs">
+        <li class="nav-item"><a data-toggle="tab" href="#wbculture"> Culture</a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbtradition "> Tradition</a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbfestivals"> Festivals </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbfood"> Foods </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbhistory"> History </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbartacraft"> Art and Craft </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbseason"> Season to Visit </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbtourist"> Tourist Spots </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbwild"> Wildlife & Crops </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbedu"> Institutions </a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="wbculture" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Culture of Nagaland</h1>
+          <p class="text">Nagaland has a rich and diverse culture, shaped by its 16 major tribes, each with their own distinct traditions, languages, customs, and attire. Here's an overview of some key aspects of Nagaland's culture:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Language</h3>
+                  <ul>
+                    <li>Nagaland is home to over 20 languages and dialects. English is the official language, while Nagamese (a creole language) serves as a lingua franca. Major tribal languages include Ao, Angami, Sumi, Lotha, Konyak, and Chakhesang, each with their own unique vocabulary and expressions.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Naga Languages" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>2. Tribal Heritage</h3>
+                  <ul>
+                    <li>The 16 recognized tribes of Nagaland include Angami, Ao, Chakhesang, Chang, Khiamniungan, Konyak, Lotha, Phom, Pochury, Rengma, Sangtam, Sumi, Yimchunger, Zeliang, Kuki, and Tikhir.</li>
+                    <li>Each tribe has distinct traditional attire, ornaments, customs, dances, and festivals that reflect their unique identity and history.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Naga Tribes" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div><br>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Naga Art" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Art and Craft</h3>
+                  <ul>
+                    <li>Nagaland is renowned for its vibrant handicrafts, including intricate wood carvings, bamboo works, pottery, and metalwork.</li>
+                    <li>Naga shawls and textiles are distinctive, with each tribe having unique patterns, colors, and motifs that often indicate social status, achievements, and tribal identity.</li>
+                  </ul>
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Naga Music" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>4. Music</h3>
+                  <ul>
+                    <li>Folk songs and music are integral to Naga culture, often narrating stories of bravery, love, and historical events.</li>
+                    <li>Traditional musical instruments include bamboo mouth organs, log drums, bamboo flutes, and cup violins.</li>
+                    <li>Modern Naga music blends traditional elements with contemporary styles, creating a unique sound.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Dance</h3>
+                  <ul>
+                    <li>Naga folk dances are vibrant expressions of community life, often performed during festivals and celebrations.</li>
+                    <li>War dances showcase the martial traditions, while harvest dances celebrate agricultural abundance.</li>
+                    <li>Each tribe has distinctive dance forms with unique steps, formations, and accompanying songs.</li>
+                  </ul>
+                  <h3>6. Cuisine</h3>
+                  <ul>
+                    <li>Naga cuisine is known for its simplicity, distinctive flavors, and use of local ingredients.</li>
+                    <li>Fermented bamboo shoots, Axone (fermented soybean), and Raja mircha (King Chili, one of the world's hottest) are staple ingredients.</li>
+                    <li>Smoked meat, especially pork, is a delicacy, often cooked with indigenous herbs and spices.</li>
+                    <li>Rice beer (Zutho) is a traditional alcoholic beverage served during festivals and special occasions.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Naga Dance" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Naga Village" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>7. Village Structure & Governance</h3>
+                  <ul>
+                    <li>Traditional Naga villages are typically built on hilltops for defensive purposes.</li>
+                    <li>The Morung (bachelor's dormitory) serves as a traditional educational institution where young men learn tribal customs, warfare, and social responsibilities.</li>
+                    <li>Village councils (Gaon Buras) and tribal customary laws govern community life and resolve disputes.</li>
+                  </ul>
+                  <h3>8. Architecture</h3>
+                  <ul>
+                    <li>Traditional Naga houses are built with locally available materials like bamboo, wood, and thatch.</li>
+                    <li>Houses often feature distinctive decorations, including skulls of animals (and historically, human skulls from headhunting expeditions) that symbolize status and achievements.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Naga Religion" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>9. Religious Practices</h3>
+                  <ul>
+                    <li>Christianity is the predominant religion (over 90% of the population), with Baptist being the largest denomination.</li>
+                    <li>Traditional animistic beliefs and practices still influence cultural life, with many rituals and festivals incorporating pre-Christian elements.</li>
+                    <li>The fusion of Christianity and traditional beliefs has created a unique spiritual landscape in Nagaland.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>10. Social Structure</h3>
+                  <ul>
+                    <li>Naga society is organized around clans and kinship groups, with each tribe having its own social hierarchy.</li>
+                    <li>Age-based groupings are important, with elders commanding respect and authority in community decisions.</li>
+                    <li>Traditional gender roles are defined, though modern education has brought significant changes.</li>
+                  </ul>
+                  <h3>11. Festivals</h3>
+                  <ul>
+                    <li>The Hornbill Festival, celebrated annually in December, showcases the cultural diversity of all Naga tribes.</li>
+                    <li>Tribal festivals like Sekrenyi (Angami), Moatsu (Ao), Tuluni (Sumi), and Tokhu Emong (Lotha) mark important agricultural cycles and community events.</li>
+                  </ul>
+                  <h3>12. Handicrafts</h3>
+                  <ul>
+                    <li>Nagaland is famous for its cane and bamboo products, wood carvings, pottery, and traditional jewelry.</li>
+                    <li>Weaving is an important craft, with each tribe producing distinctive textiles with symbolic patterns and motifs.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=300&width=200" alt="Naga Social Structure" style="height:300px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br><br>
+
+          <p>Nagaland's culture is a vibrant tapestry of tribal traditions, modern influences, and Christian values. Despite rapid modernization, Nagas have maintained their cultural identity, making the state one of India's most culturally diverse and fascinating regions.</p><br><br>
+        </div>
+        <div id="wbtradition" class="tab-pane fade in active" style="background-color: white;">
+          
+          <h1>Tradition of Nagaland</h1>
+          <p>Nagaland has a rich and diverse tradition deeply rooted in its tribal history, culture, and social practices. Here's an overview of some key traditional aspects of the state:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Clothing Tradition</h3>
+                  <h4>Men</h4>
+                  <ul>
+                    <li><b>Traditional Attire:</b> Naga men wear distinctive shawls with tribal-specific patterns and colors that often indicate social status and achievements.</li>
+                    <li><b>Headgear:</b> Elaborate headgear adorned with hornbill feathers, wild boar tusks, and other symbolic elements.</li>
+                  </ul>
+                  <h4>Women</h4>
+                  <ul>
+                    <li><b>Mekhela:</b> Women wear colorful wrap-around skirts with intricate tribal patterns and designs.</li>
+                    <li><b>Jewelry:</b> Traditional necklaces made of beads, shells, brass, and silver, often indicating marital status and tribal affiliation.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=250&width=200" alt="Naga Traditional Clothing" style="height:250px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>2. Marriage Traditions</h3>
+                  <ul>
+                    <li><b>Bride Price:</b> The groom's family traditionally offers gifts or "bride price" to the bride's family, which may include mithun (gayal), pigs, or other valuable items.</li>
+                    <li><b>Community Celebration:</b> Weddings are community affairs with feasting, singing, and dancing that can last for several days.</li>
+                    <li><b>Tribal Variations:</b> Each tribe has unique marriage customs, from the Angami's elaborate ceremonies to the Konyak's more straightforward rituals.</li>
+                    <li><b>Modern Influence:</b> While Christian ceremonies are now common, traditional elements are often incorporated.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=250&width=200" alt="Naga Wedding" style="height:250px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Naga Dance" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Music & Dance Traditions</h3>
+                  <ul>
+                    <li><b>War Dances:</b> Performed to commemorate victories and showcase martial prowess, featuring spears, dao (machetes), and shields.</li>
+                    <li><b>Harvest Dances:</b> Celebratory dances performed after successful harvests, with rhythmic movements mimicking agricultural activities.</li>
+                    <li><b>Folk Songs:</b> Narrative songs that preserve tribal history, legends, and cultural knowledge.</li>
+                    <li><b>Musical Instruments:</b> Traditional instruments include bamboo flutes, log drums, and indigenous string instruments.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Morung" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+
+                  <h3>4. Social & Educational Traditions</h3>
+                  <ul>
+                    <li><b>Morung System:</b> Traditional dormitories where young men learn tribal customs, warfare techniques, crafts, and social responsibilities from elders.</li>
+                    <li><b>Village Councils:</b> Traditional governance systems led by village elders who make decisions based on customary laws.</li>
+                    <li><b>Storytelling:</b> Oral traditions where elders pass down tribal history, folklore, and wisdom to younger generations.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Craft & Artistic Traditions</h3>
+                  <ul>
+                    <li><b>Weaving:</b> Each tribe has distinctive textile patterns with symbolic meanings, woven on traditional looms.</li>
+                    <li><b>Wood Carving:</b> Elaborate carvings on house posts, gates, and utensils depicting animals, human figures, and geometric patterns.</li>
+                    <li><b>Bamboo & Cane Work:</b> Crafting of household items, weapons, and decorative pieces from locally available bamboo and cane.</li>
+                    <li><b>Blacksmithing:</b> Traditional forging of daos (machetes), spears, and agricultural tools.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Naga Crafts" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>6. Sports & Games</h3>
+                  <ul>
+                    <li><b>Wrestling:</b> Traditional wrestling competitions are popular, especially among the Angami tribe.</li>
+                    <li><b>Archery:</b> Both practical skill and competitive sport, with traditional bamboo bows and arrows.</li>
+                    <li><b>Stone Pulling:</b> A community event where men pull massive stones as a demonstration of strength and unity.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Naga Sports" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br><br>
+          <p>Nagaland's traditions beautifully combine tribal heritage, community values, and artistic expression, making it one of India's most culturally distinctive states. Despite modernization and widespread Christianity, traditional practices continue to thrive and evolve.</p><br><br>
+        </div>
+        <div id="wbfestivals" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Festivals of Nagaland</h1>
+          <p>Nagaland is often called the "Land of Festivals" because each tribe celebrates numerous festivals throughout the year, marking agricultural cycles, seasonal changes, and important social events. Here's a list of some of the major festivals celebrated in the state:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Hornbill Festival (Festival of Festivals)</h3>
+                  <ul>
+                    <li>The most significant festival that showcases the cultural heritage of all 16 major Naga tribes.</li>
+                    <li>Features traditional music, dance, arts, crafts, games, and food from across Nagaland.</li>
+                    <li>Includes competitions like Naga chili eating, pork fat eating, and traditional games.</li>
+                    <li>Held at Kisama Heritage Village near Kohima, attracting tourists from around the world.</li>
+                  </ul>
+                  <p><b>📍 Time: December 1-10 annually</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=230&width=200" alt="Hornbill Festival" style="height:230px;width: 200px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Sekrenyi Festival" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Sekrenyi (Phousanyi)</h3>
+                  <ul>
+                    <li>A purification festival celebrated by the Angami tribe.</li>
+                    <li>Involves ritual baths, singing, dancing, and feasting.</li>
+                    <li>Young men and women participate in various games and competitions.</li>
+                    <li>Marks the beginning of the agricultural season.</li>
+                  </ul>
+                  <p><b>📍 Time: February (25th day of the Angami month of Kezei)</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Moatsu</h3>
+                  <ul>
+                    <li>Celebrated by the Ao tribe after the sowing season.</li>
+                    <li>Features singing, dancing, and feasting for three days.</li>
+                    <li>Includes the construction of "Sangpangtu" (a large decorated platform) where community elders gather.</li>
+                    <li>Traditional rice beer (Zutho) is served during celebrations.</li>
+                  </ul>
+                  <p><b>📍 Time: First week of May</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Moatsu Festival" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Tuluni Festival" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Tuluni</h3>
+                  <ul>
+                    <li>A major festival of the Sumi tribe celebrating the harvest season.</li>
+                    <li>Marked by feasting, singing, and exchange of gifts.</li>
+                    <li>Special rice beer is prepared and shared among community members.</li>
+                    <li>Features traditional games and storytelling sessions.</li>
+                  </ul>
+                  <p><b>📍 Time: July</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Tokhu Emong</h3>
+                  <ul>
+                    <li>The post-harvest festival of the Lotha tribe.</li>
+                    <li>Celebrates abundance and community harmony.</li>
+                    <li>Features traditional dances, songs, and communal feasts.</li>
+                    <li>A time for resolving disputes and strengthening community bonds.</li>
+                  </ul>
+                  <p><b>📍 Time: November</b></p>
+                  <h3>6. Yemshe</h3>
+                  <ul>
+                    <li>Celebrated by the Pochury tribe after the harvest.</li>
+                    <li>Involves rituals for good health, prosperity, and protection from natural calamities.</li>
+                    <li>Features traditional dances and community feasting.</li>
+                  </ul>
+                  <p><b>📍 Time: October</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Tokhu Emong Festival" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Amongmong Festival" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>7. Amongmong</h3>
+                  <ul>
+                    <li>A thanksgiving festival celebrated by the Sangtam tribe.</li>
+                    <li>Marks the completion of major agricultural activities.</li>
+                    <li>Features traditional games, dances, and community feasts.</li>
+                  </ul>
+                  <p><b>📍 Time: September</b></p>
+                  <h3>8. Ngada</h3>
+                  <ul>
+                    <li>Celebrated by the Rengma tribe after the harvest season.</li>
+                    <li>Involves rituals for prosperity and protection.</li>
+                    <li>Features traditional dances, songs, and feasting.</li>
+                  </ul>
+                  <p><b>📍 Time: November-December</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>9. Tsukhenye</h3>
+                  <ul>
+                    <li>A major festival of the Chakhesang tribe.</li>
+                    <li>Celebrates the completion of the agricultural cycle.</li>
+                    <li>Features traditional games, dances, and community feasts.</li>
+                    <li>Includes rituals for good fortune in the coming year.</li>
+                  </ul>
+                  <p><b>📍 Time: January</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Tsukhenye Festival" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Naknyulum Festival" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>10. Naknyulum</h3>
+                  <ul>
+                    <li>Celebrated by the Chang tribe after the harvest.</li>
+                    <li>Features traditional dances, songs, and feasting.</li>
+                    <li>Includes rituals for prosperity and good health.</li>
+                  </ul>
+                  <p><b>📍 Time: July</b></p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>11. Metemneo</h3>
+                  <ul>
+                    <li>A festival of the Yimchunger tribe celebrating the harvest.</li>
+                    <li>Features traditional dances, songs, and community feasts.</li>
+                    <li>Includes rituals for prosperity and protection.</li>
+                  </ul>
+                  <p><b>📍 Time: August</b></p>
+
+                  <h3>12. Monyu</h3>
+                  <ul>
+                    <li>Celebrated by the Phom tribe to mark the beginning of the spring season.</li>
+                    <li>Features traditional dances, songs, and community feasts.</li>
+                    <li>Includes rituals for good crops and prosperity.</li>
+                  </ul>
+                  <p><b>📍 Time: April</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Monyu Festival" style="height:200px;width: 230px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Khiamniungan Festival" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>13. Miu Festival</h3>
+                  <ul>
+                    <li>Celebrated by the Khiamniungan tribe after the harvest.</li>
+                    <li>Features traditional dances, songs, and community feasts.</li>
+                    <li>Includes rituals for prosperity and protection.</li>
+                  </ul>
+                  <p><b>📍 Time: February</b></p>
+                  <h3>14. Christmas</h3>
+                  <ul>
+                    <li>With over 90% of the population being Christian, Christmas is widely celebrated across Nagaland.</li>
+                    <li>Features church services, community singing, feasting, and gift-giving.</li>
+                    <li>Villages and towns are beautifully decorated with lights and Christmas trees.</li>
+                  </ul>
+                  <p><b>📍 Time: December 25</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Nagaland's festivals are vibrant celebrations of tribal culture, agricultural cycles, and community bonds. Each festival offers a unique glimpse into the rich cultural heritage of the Naga tribes, making the state truly the "Land of Festivals." 🎉</p><br><br>
+        </div>
+        <div id="wbfood" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Foods of Nagaland</h1>
+          <p>Nagaland cuisine is known for its distinctive flavors, simplicity, and use of local ingredients. It's characterized by minimal use of spices, fermented foods, and smoked meats. Here's a look at some of the most iconic foods of Nagaland:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Staple Food of Nagaland</h3>
+                  <ul>
+                    <li><b>Rice:</b> The main staple food, often served with meat or vegetable dishes.</li>
+                    <li><b>Job's Tears (Adlay):</b> A nutritious grain that's a staple in some parts of Nagaland.</li>
+                    <li><b>Millet:</b> Used to make porridge and traditional breads.</li>
+                  </ul>
+                  <h3>2. Fermented Foods</h3>
+                  <ul>
+                    <li><b>Axone/Akhuni:</b> Fermented soybean, with a strong aroma, used as a condiment or in curries.</li>
+                    <li><b>Anishi:</b> Fermented yam leaves, often used with pork dishes.</li>
+                    <li><b>Bamboo Shoot:</b> Fermented bamboo shoots add a tangy flavor to dishes.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=220" alt="Naga Staple Food" style="height:200px;width: 220px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=220" alt="Naga Meat Dishes" style="height:200px;width: 220px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Famous Naga Dishes</h3>
+                  <h4>Meat Dishes</h4>
+                  <ul>
+                    <li><b>Smoked Pork with Axone:</b> A signature dish combining smoked pork with fermented soybeans.</li>
+                    <li><b>Pork with Bamboo Shoot:</b> Tender pork cooked with fermented bamboo shoots.</li>
+                    <li><b>Dog Meat (Traditional):</b> Though controversial and now banned, it was traditionally consumed in some tribes.</li>
+                    <li><b>Smoked Beef:</b> Dried and smoked beef, often cooked with indigenous herbs.</li>
+                  </ul>
+                  <h4>Vegetarian Dishes</h4>
+                  <ul>
+                    <li><b>Galho:</b> A rice porridge cooked with vegetables and sometimes meat.</li>
+                    <li><b>Akibiye:</b> Colocasia leaves cooked with fermented bamboo shoots.</li>
+                    <li><b>Naga Dal:</b> Lentils cooked with local herbs and sometimes fermented ingredients.</li>
+                    <li><b>Wild Mushrooms:</b> Various forest mushrooms cooked with minimal spices.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=220" alt="Raja Mircha" style="height:200px;width: 220px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h4>Condiments and Accompaniments</h4>
+                  <ul>
+                    <li><b>Raja Mircha (King Chili/Bhut Jolokia):</b> One of the world's hottest chilies, used in chutneys and pickles.</li>
+                    <li><b>Bamboo Shoot Pickle:</b> Tangy pickle made from fermented bamboo shoots.</li>
+                    <li><b>Naga Chutney:</b> Made with Raja Mircha, tomatoes, and local herbs.</li>
+                  </ul>
+                  <h4>Tribal Variations</h4>
+                  <ul>
+                    <li><b>Ao Cuisine:</b> Known for Pork with Axone and Bamboo Shoot dishes.</li>
+                    <li><b>Angami Cuisine:</b> Features dishes like Galho and various smoked meats.</li>
+                    <li><b>Sumi Cuisine:</b> Famous for Tuluni (rice beer) and pork dishes.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>4. Traditional Beverages</h3>
+                  <ul>
+                    <li><b>Zutho:</b> Traditional rice beer made by the Angami tribe.</li>
+                    <li><b>Ruhi:</b> Rice beer made by the Sumi tribe, especially during the Tuluni festival.</li>
+                    <li><b>Lichie:</b> A potent rice beer made by the Ao tribe.</li>
+                    <li><b>Phelap:</b> A mild rice beer popular among various tribes.</li>
+                  </ul>
+
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=220" alt="Naga Rice Beer" style="height:200px;width: 220px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Naga Street Food" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>5. Street Food of Nagaland</h3>
+                  <ul>
+                    <li><b>Pork Momos:</b> Dumplings filled with spiced pork, popular in urban areas.</li>
+                    <li><b>Smoked Meat Skewers:</b> Grilled smoked meat sold at local markets.</li>
+                    <li><b>Aloo Tikki:</b> Potato patties with Naga spices, reflecting outside influences.</li>
+                    <li><b>Steamed Corn:</b> Simple street snack, often seasoned with Raja Mircha.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>6. Cooking Methods</h3>
+                  <ul>
+                    <li><b>Smoking:</b> Meats are traditionally smoked over wood fires for preservation and flavor.</li>
+                    <li><b>Fermentation:</b> Many ingredients are fermented, adding unique flavors to Naga cuisine.</li>
+                    <li><b>Boiling:</b> Simple boiling with minimal spices is a common cooking method.</li>
+                    <li><b>Bamboo Cooking:</b> Food cooked inside bamboo tubes over fire, imparting a distinctive flavor.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Naga Cooking Methods" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Special Festival Foods</h3>
+                  <ul>
+                    <li><b>Hornbill Festival Specialties:</b> During the Hornbill Festival, each tribe showcases their traditional dishes.</li>
+                    <li><b>Feast Meats:</b> Special cuts of meat prepared for tribal festivals and celebrations.</li>
+                    <li><b>Ceremonial Rice Beer:</b> Special brews prepared for festivals and important ceremonies.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Naga Festival Food" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Nagaland's cuisine is a reflection of its tribal heritage, natural resources, and sustainable food practices. The emphasis on locally sourced ingredients, fermentation techniques, and minimal spicing creates a unique culinary experience that's gaining recognition beyond the state's borders. 🍲🌶️</p><br><br>
+        </div>
+        <div id="wbhistory" class="tab-pane fade in active" style="background-color: white;">
+          <h1>History of Nagaland</h1>
+          <p>Nagaland has a rich and complex history shaped by its tribal heritage, colonial encounters, and post-independence political developments. The region's history is marked by fierce independence, tribal traditions, and a struggle for identity.</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Ancient Nagaland (Before 13th Century)</h3>
+                  <ul>
+                    <li><b>Origins:</b> The Naga tribes are believed to have migrated from different directions - some from Mongolia, others from Southeast Asia.</li>
+                    <li><b>Tribal Settlements:</b> Different tribes established autonomous village-states on hilltops for defensive purposes.</li>
+                    <li><b>Isolation:</b> The mountainous terrain kept Naga tribes relatively isolated from the plains civilizations of India.</li>
+                    <li><b>Traditional Governance:</b> Each village functioned as an independent republic with its own customary laws and governance systems.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Ancient Naga Village" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Headhunting Tradition" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Pre-Colonial Era (13th - 18th Century)</h3>
+                  <h4>Tribal Warfare and Culture:</h4>
+                  <ul>
+                    <li>Inter-tribal conflicts and headhunting were common practices.</li>
+                    <li>Each tribe developed distinct cultural identities, languages, and customs.</li>
+                    <li>The Morung (bachelor's dormitory) system served as an educational institution for young men.</li>
+                  </ul>
+                  <h4>Limited External Contact:</h4>
+                  <ul>
+                    <li>Minimal interaction with the Ahom Kingdom of Assam and other neighboring powers.</li>
+                    <li>Trade relations existed with plains people, exchanging forest products for salt and other goods.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=220&width=200" alt="British Colonial Era" style="height:220px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h4>Early External Influences:</h4>
+                  <ul>
+                    <li>The Ahom kings of Assam occasionally attempted to control Naga territories but were largely unsuccessful.</li>
+                    <li>Burmese invasions in the early 19th century pushed some Naga tribes further into the hills.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. British Colonial Period (1832-1947)</h3>
+                  <ul>
+                    <li><b>Initial Contact (1832):</b> The British East India Company first entered Naga Hills to establish control over the region.</li>
+                    <li><b>Resistance and Annexation:</b> Fierce Naga resistance led to several military expeditions, with the British gradually annexing territories.</li>
+                    <li><b>Administrative Division:</b> In 1866, the British established the Naga Hills District as part of Assam.</li>
+                    <li><b>Inner Line Permit System:</b> Introduced in 1873 to restrict entry of outsiders into tribal areas.</li>
+                    <li><b>Christian Missionaries:</b> American Baptist missionaries arrived in the 1870s, leading to widespread conversion to Christianity.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=250" alt="British in Naga Hills" style="height:200px;width: 250px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=230&width=200" alt="Naga National Council" style="height:230px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h2>4. Independence Movement & Formation of Nagaland (1947-1963)</h3>
+                    <h3>Naga Independence Movement</h3>
+                    <ul>
+                      <li>In 1929, the Naga Club submitted a memorandum to the Simon Commission requesting to be left outside the proposed Indian Union.</li>
+                      <li>The Naga National Council (NNC) under A.Z. Phizo declared Naga independence on August 14, 1947, a day before Indian independence.</li>
+                      <li>The NNC conducted a plebiscite in 1951, claiming 99.9% support for Naga independence.</li>
+                    </ul>
+                    <h3>Armed Struggle & Negotiations</h3>
+                    <ul>
+                      <li>Armed insurgency began in the 1950s, leading to military operations by the Indian Army.</li>
+                      <li>The Indian government created the Naga Hills Tuensang Area (NHTA) in 1957 as a step toward addressing Naga demands.</li>
+                    </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Nagaland Statehood" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>Formation of Nagaland State</h3>
+                  <ul>
+                    <li>The 16-Point Agreement was signed in 1960 between the Government of India and the Naga People's Convention.</li>
+                    <li>Nagaland became the 16th state of India on December 1, 1963, with special constitutional provisions under Article 371A.</li>
+                    <li>P. Shilu Ao became the first Chief Minister of Nagaland.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=230&width=200" alt="Naga Peace Process" style="height:230px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <ul>
+                    <li><b>Continued Insurgency:</b></li>
+                    <ul>
+                      <li>Despite statehood, various factions continued the armed struggle for sovereignty.</li>
+                      <li>The National Socialist Council of Nagaland (NSCN) was formed in 1980 after the NNC signed the Shillong Accord.</li>
+                      <li>NSCN later split into NSCN-IM (led by Isak Chishi Swu and Thuingaleng Muivah) and NSCN-K (led by S.S. Khaplang).</li>
+                    </ul>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Modern Nagaland (1963 - Present)</h3>
+                  <h4>Peace Process</h4>
+                  <ul>
+                    <li>Ceasefire agreement between the Government of India and NSCN-IM in 1997.</li>
+                    <li>Framework Agreement signed in 2015 between the Government of India and NSCN-IM.</li>
+                    <li>Peace talks continue with various factions toward a comprehensive solution.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Modern Nagaland" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h4>Development & Challenges</h4>
+                  <ul>
+                    <li>Economic development has been slow due to insurgency, geographical isolation, and infrastructure challenges.</li>
+                    <li>High literacy rate (79.55% as per 2011 census) with emphasis on education.</li>
+                    <li>Growing tourism sector, especially after the initiation of the Hornbill Festival in 2000.</li>
+                    <li>Challenges include connectivity issues, unemployment, and sustainable development.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Nagaland Development" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>6. Present-Day Nagaland</h3>
+                  <ul>
+                    <li><b>Cultural Renaissance:</b> Revival and preservation of tribal heritage through festivals, museums, and cultural initiatives.</li>
+                    <li><b>Political Landscape:</b> Democratic governance with active participation of tribal councils in administration.</li>
+                    <li><b>Economic Growth:</b> Focus on organic farming, tourism, handicrafts, and sustainable development.</li>
+                    <li><b>Peace Process:</b> Ongoing negotiations for a final settlement of the Naga political issue.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Present Day Nagaland" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Nagaland's history is a complex narrative of tribal identity, resistance, adaptation, and aspiration. From autonomous village republics to a modern Indian state with special constitutional provisions, the Naga people have maintained their cultural distinctiveness while navigating the challenges of modernization and political integration. 🏔️📜</p>
+          <br><br>
+        </div>
+        <div id="wbartacraft" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Art & Craft of Nagaland 🎨🖌️</h1>
+          <p>Nagaland has a rich artistic heritage, with each tribe having distinctive art forms that reflect their cultural identity, history, and spiritual beliefs. Naga craftsmanship is characterized by vibrant colors, geometric patterns, and symbolic motifs that tell stories of tribal life, warfare, and spirituality.</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Textile & Weaving 🧵</h3>
+                  <h4>🔸 Naga Shawls</h4>
+                  <ul>
+                    <li><b>Tribal Identity:</b> Each tribe has distinctive shawl patterns that indicate social status, achievements, and tribal affiliation.</li>
+                    <li><b>Warrior Shawls:</b> Special shawls awarded to warriors who have proven their valor in battle or headhunting expeditions.</li>
+                    <li><b>Ceremonial Shawls:</b> Worn during festivals, ceremonies, and important life events.</li>
+                  </ul>
+                  <h4>🔸 Weaving Traditions</h4>
+                  <ul>
+                    <li><b>Backstrap Looms:</b> Traditional looms used by Naga women to create intricate textiles.</li>
+                    <li><b>Motifs:</b> Geometric patterns, animal figures, and symbolic designs that represent tribal stories and beliefs.</li>
+                    <li><b>Colors:</b> Vibrant reds, blacks, whites, and yellows derived from natural dyes.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Naga Textiles" style="height:200px;width: 230px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Naga Woodcarving" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Wood Carving 🪵</h3>
+                  <h4>🔸 Morungs (Bachelor Dormitories)</h4>
+                  <ul>
+                    <li><b>Elaborate Carvings:</b> Morung entrances and posts feature intricate carvings depicting tribal symbols, animals, and human figures.</li>
+                    <li><b>Symbolic Motifs:</b> Carvings often represent tribal victories, myths, and spiritual beliefs.</li>
+                  </ul>
+                  <h4>🔸 House Posts and Gates</h4>
+                  <ul>
+                    <li><b>Status Symbols:</b> Carved house posts indicate the homeowner's social status and achievements.</li>
+                    <li><b>Village Gates:</b> Elaborately carved village entrance gates with protective symbols and tribal motifs.</li>
+                  </ul>
+                  <h4>🔸 Wooden Utensils and Tools</h4>
+                  <ul>
+                    <li><b>Functional Art:</b> Everyday items like rice beer containers, dishes, and tools are adorned with artistic carvings.</li>
+                    <li><b>Ceremonial Objects:</b> Special wooden items used in rituals and ceremonies.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Bamboo & Cane Craft 🎋</h3>
+                  <ul>
+                    <li><b>Baskets:</b> Various types of baskets for storage, carrying, and fishing, each with specific designs and purposes.</li>
+                    <li><b>Furniture:</b> Chairs, tables, and stools made from bamboo and cane, often with intricate weaving patterns.</li>
+                    <li><b>Household Items:</b> Mats, containers, sieves, and decorative items crafted from bamboo and cane.</li>
+                    <li><b>Musical Instruments:</b> Bamboo flutes, mouth organs, and percussion instruments used in traditional music.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Naga Bamboo Craft" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Naga Jewelry" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Jewelry & Ornaments 💍</h3>
+                  <ul>
+                    <li><b>Tribal Necklaces:</b> Made from beads, shells, animal teeth, brass, and silver, often indicating social status.</li>
+                    <li><b>Headgear:</b> Elaborate headdresses adorned with hornbill feathers, wild boar tusks, and other symbolic elements.</li>
+                    <li><b>Earrings:</b> Distinctive tribal designs, often large and made from brass, wood, or animal horn.</li>
+                    <li><b>Armlets and Anklets:</b> Worn during ceremonies and dances, made from metal, cane, or cloth.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Metalwork & Weaponry ⚔️</h3>
+                  <ul>
+                    <li><b>Dao (Machete):</b> Traditional multipurpose tool and weapon, often with carved wooden handles and decorative sheaths.</li>
+                    <li><b>Spears:</b> Ceremonial and functional spears with intricate metalwork and decorative elements.</li>
+                    <li><b>Shields:</b> Wooden shields with distinctive tribal designs, sometimes covered with animal hide or fur.</li>
+                    <li><b>Brass Work:</b> Decorative items, containers, and ceremonial objects made from brass.</li>
+                  </ul>
+                  <h3>6. Pottery 🏺</h3>
+                  <ul>
+                    <li><b>Traditional Techniques:</b> Hand-built pottery using coiling and pinching methods.</li>
+                    <li><b>Functional Items:</b> Cooking pots, storage containers, and vessels for rice beer.</li>
+                    <li><b>Decorative Elements:</b> Simple geometric patterns and symbolic motifs.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Naga Weapons" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Naga Body Art" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>7. Body Art & Tattoos 🖋️</h3>
+                  <ul>
+                    <li><b>Facial Tattoos:</b> The Konyak tribe is famous for facial tattoos that indicate achievements in warfare and headhunting.</li>
+                    <li><b>Body Tattoos:</b> Various patterns and designs that signify tribal identity, social status, and personal achievements.</li>
+                    <li><b>Traditional Methods:</b> Using natural pigments and thorns or bamboo needles for tattooing.</li>
+                  </ul>
+                  <h3>8. Contemporary Naga Art 🎨</h3>
+                  <ul>
+                    <li><b>Modern Interpretations:</b> Contemporary artists blending traditional motifs with modern techniques and materials.</li>
+                    <li><b>Painting:</b> Modern Naga paintings depicting tribal life, myths, and cultural narratives.</li>
+                    <li><b>Sculpture:</b> Contemporary sculptures inspired by traditional Naga forms and symbols.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>9. Tribal Variations in Art & Craft 🏺</h3>
+                  <h4>🔸 Ao Tribe</h4>
+                  <ul>
+                    <li>Known for their distinctive blue and black shawls with red stripes.</li>
+                    <li>Skilled in bamboo craft and wood carving.</li>
+                  </ul>
+                  <h4>🔸 Angami Tribe</h4>
+                  <ul>
+                    <li>Famous for their black shawls with colored stripes and ceremonial spears.</li>
+                    <li>Elaborate wood carvings on Morung and house posts.</li>
+                  </ul>
+                  <h4>🔸 Konyak Tribe</h4>
+                  <ul>
+                    <li>Renowned for facial tattoos, brass headgear, and elaborate jewelry.</li>
+                    <li>Skilled blacksmiths producing traditional weapons and tools.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Tribal Art Variations" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>📌 Summary: Nagaland's Art & Craft Forms</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Art Form</th>
+                <th>Notable Features</th>
+                <th>Tribal Specialization</th>
+              </tr>
+              <tr>
+                <td>Textile Weaving</td>
+                <td>Distinctive shawls with tribal patterns</td>
+                <td>All tribes, with unique patterns for each</td>
+              </tr>
+              <tr>
+                <td>Wood Carving</td>
+                <td>Morung posts, house gates, ceremonial items</td>
+                <td>Angami, Ao, Sumi</td>
+              </tr>
+              <tr>
+                <td>Bamboo & Cane Craft</td>
+                <td>Baskets, furniture, household items</td>
+                <td>Widespread across all tribes</td>
+              </tr>
+              <tr>
+                <td>Jewelry & Ornaments</td>
+                <td>Beaded necklaces, headgear, ceremonial attire</td>
+                <td>Konyak, Chang, Yimchunger</td>
+              </tr>
+              <tr>
+                <td>Metalwork</td>
+                <td>Daos, spears, ceremonial weapons</td>
+                <td>Konyak, Angami, Sumi</td>
+              </tr>
+              <tr>
+                <td>Pottery</td>
+                <td>Functional vessels, ceremonial containers</td>
+                <td>Chakhesang, Pochury</td>
+              </tr>
+              <tr>
+                <td>Body Art & Tattoos</td>
+                <td>Facial and body tattoos indicating status</td>
+                <td>Konyak, Chang</td>
+              </tr>
+              <tr>
+                <td>Contemporary Art</td>
+                <td>Modern interpretations of traditional motifs</td>
+                <td>Urban centers, especially Kohima and Dimapur</td>
+              </tr>
+            </table>
+          </div>
+          <br><br>
+          <p>Nagaland's art and crafts are not merely decorative but deeply symbolic, reflecting the tribes' history, beliefs, and social structures. Despite modernization, these traditional art forms continue to thrive, with artisans passing down techniques through generations and adapting to contemporary contexts while preserving their cultural essence. 🎭✨</p>
+          <br><br>
+        </div>
+        <div id="wbseason" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Seasons to visit Nagaland 🌧️☀️ </h1>
+          <p>Nagaland has a moderate climate influenced by its mountainous terrain and varying altitudes. The state experiences distinct seasons, each offering unique experiences for visitors. Here's a comprehensive guide to help you plan your visit to this beautiful northeastern state.</p>
+
+          <br><br>
+
+          <h2> Season-wise Breakdown for Visiting Nagaland</h2>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🌸 Spring (March - May)</h3>
+                  <ul>
+                    <li>Pleasant temperatures ranging from 16°C to 31°C (61°F to 88°F).</li>
+                    <li>Rhododendrons and other wildflowers bloom across the hills.</li>
+                    <li>Perfect for trekking in Dzukou Valley and visiting Japfu Peak.</li>
+                    <li>Moatsu Festival (Ao tribe) in May is a cultural highlight.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Nagaland Spring" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Nagaland Summer" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>☀️ Summer (June – August)</h3>
+                  <ul>
+                    <li>Temperatures range from 21°C to 30°C (70°F to 86°F).</li>
+                    <li>Monsoon season with heavy rainfall, especially in July and August.</li>
+                    <li>Lush green landscapes and flowing waterfalls make for beautiful scenery.</li>
+                    <li>Tuluni Festival (Sumi tribe) in July offers cultural experiences despite the rain.</li>
+                    <li>Not ideal for trekking due to slippery trails and leeches.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🍁 Autumn (September - November)</h3>
+                  <ul>
+                    <li>Pleasant weather with temperatures between 15°C to 24°C (59°F to 75°F).</li>
+                    <li>Rainfall decreases, making it ideal for outdoor activities.</li>
+                    <li>Tokhu Emong Festival (Lotha tribe) in November is a cultural highlight.</li>
+                    <li>Perfect time for birdwatching, especially to witness the Amur Falcon migration in Doyang Reservoir (October-November).</li>
+                    <li>Harvest season with vibrant agricultural activities across villages.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Nagaland Autumn" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Nagaland Winter" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>❄️ Winter (December - February)</h3>
+                  <ul>
+                    <li>Temperatures range from 4°C to 24°C (39°F to 75°F), with higher altitudes experiencing near-freezing temperatures.</li>
+                    <li>Clear skies and excellent visibility for mountain views.</li>
+                    <li>Hornbill Festival (December 1-10) is the biggest cultural event in Nagaland.</li>
+                    <li>Christmas celebrations across the predominantly Christian state.</li>
+                    <li>Sekrenyi Festival (Angami tribe) in February offers unique cultural experiences.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🌧️ Monsoon Season (June - September)</h3>
+                  <ul>
+                    <li>Heavy rainfall with occasional landslides and road blockages.</li>
+                    <li>Lush green landscapes and flowing waterfalls.</li>
+                    <li>Lower tourist numbers mean better accommodation rates.</li>
+                    <li>Not recommended for trekking or extensive outdoor activities.</li>
+                    <li>Some tribal festivals occur during this period despite the rain.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Nagaland Monsoon" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>📌 Summary: Best Time to Visit Different Places in Nagaland</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Region</th>
+                <th>Best Season</th>
+                <th>Recommended Months</th>
+                <th>Why Visit?</th>
+              </tr>
+              <tr>
+                <td>Kohima (Capital)</td>
+                <td>Winter, Autumn</td>
+                <td>October - December</td>
+                <td>Hornbill Festival, War Cemetery, pleasant weather for sightseeing</td>
+              </tr>
+              <tr>
+                <td>Dimapur (Gateway to Nagaland)</td>
+                <td>Winter, Spring</td>
+                <td>November - April</td>
+                <td>Comfortable weather, Kachari Ruins, Triple Falls</td>
+              </tr>
+              <tr>
+                <td>Dzukou Valley</td>
+                <td>Spring, Autumn</td>
+                <td>April - June, September - November</td>
+                <td>Wildflower blooms (especially lilies in June), trekking, camping</td>
+              </tr>
+              <tr>
+                <td>Mon (Konyak Tribe Region)</td>
+                <td>Winter, Spring</td>
+                <td>November - April</td>
+                <td>Visit tattooed headhunters, Longwa village (Indo-Myanmar border)</td>
+              </tr>
+              <tr>
+                <td>Mokokchung (Ao Tribe Region)</td>
+                <td>Spring, Winter</td>
+                <td>March - May, October - December</td>
+                <td>Moatsu Festival (May), tribal villages, cultural experiences</td>
+              </tr>
+              <tr>
+                <td>Wokha (Lotha Tribe Region)</td>
+                <td>Autumn</td>
+                <td>October - November</td>
+                <td>Amur Falcon migration, Doyang Reservoir, Tokhu Emong Festival</td>
+              </tr>
+              <tr>
+                <td>Khonoma (Green Village)</td>
+                <td>Winter, Spring</td>
+                <td>November - April</td>
+                <td>First green village in India, terraced fields, trekking</td>
+              </tr>
+              <tr>
+                <td>Phek & Mount Saramati</td>
+                <td>Spring, Autumn</td>
+                <td>March - May, October - November</td>
+                <td>Trekking to Nagaland's highest peak, Chakhesang villages</td>
+              </tr>
+              <tr>
+                <td>Tuensang & Longleng</td>
+                <td>Winter, Spring</td>
+                <td>November - April</td>
+                <td>Remote tribal villages, traditional culture, handicrafts</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="container">
+            <div class="row">
+              <h1 style=" text-align: center;">📌 Summary: When to Visit Nagaland</h1><br>
+              <ul>
+                <li><b>For Hornbill Festival & cultural experiences:</b> December (Hornbill Festival), February (Sekrenyi), May (Moatsu), July (Tuluni)</li>
+                <li><b>For trekking & outdoor activities:</b> March - May, October - November (Dzukou Valley, Mount Saramati)</li>
+                <li><b>For wildlife & birdwatching:</b> October - November (Amur Falcon migration in Doyang)</li>
+                <li><b>For tribal village tours:</b> November - April (Mon, Mokokchung, Tuensang)</li>
+                <li><b>For photography:</b> April - May (spring flowers), October - November (clear mountain views)</li>
+              </ul>
+
+            </div>
+          </div>
+          <br><br>
+        </div>
+        <div id="wbtourist" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Tourist Spots of Nagaland 🏔️🌄</h1>
+          <p>Nagaland offers a diverse range of attractions from stunning landscapes and tribal villages to historical sites and cultural experiences. Here's a categorized list of the best tourist places in Nagaland:</p>
+
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Natural Attractions & Landscapes 🏔️</h3>
+                  <ul>
+                    <li><b>Dzukou Valley -</b> Famous for its rolling hills, seasonal wildflowers, and pristine streams.</li>
+                    <li><b>Mount Saramati -</b> Highest peak in Nagaland (3,841 meters) offering challenging treks and panoramic views.</li>
+                    <li><b>Shilloi Lake -</b> Heart-shaped lake in Phek district with serene surroundings.</li>
+                    <li><b>Doyang Reservoir -</b> Known as the "Falcon Capital of the World" where thousands of Amur falcons migrate annually.</li>
+                    <li><b>Triple Falls -</b> Three-tiered waterfall near Seithekima village, perfect for day trips from Dimapur.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Dzukou Valley" style="height:200px;width: 230px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Kohima War Cemetery" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Historical & Cultural Sites 🏛️</h3>
+                  <ul>
+                    <li><b>Kohima War Cemetery -</b> Memorial to soldiers who died in the Battle of Kohima during World War II.</li>
+                    <li><b>Kisama Heritage Village -</b> Venue of the Hornbill Festival, showcasing traditional Naga houses and cultural exhibits.</li>
+                    <li><b>Kachari Ruins -</b> Ancient ruins in Dimapur dating back to the 13th century.</li>
+                    <li><b>State Museum (Kohima) -</b> Houses artifacts, traditional attire, weapons, and historical items from various Naga tribes.</li>
+                    <li><b>Morung Exhibition -</b> Displays of traditional bachelor dormitories from different tribes.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Tribal Villages & Cultural Experiences 🏘️</h3>
+                  <ul>
+                    <li><b>Khonoma -</b> India's first green village with terraced rice fields and rich history of resistance against British colonization.</li>
+                    <li><b>Longwa Village -</b> Unique village where the Indo-Myanmar border passes through the chief's house.</li>
+                    <li><b>Touphema Tourist Village -</b> Cultural tourism initiative offering traditional Naga lifestyle experiences.</li>
+                    <li><b>Mopungchuket -</b> Well-planned Ao village with traditional houses and the famous Jina and Etiben love story site.</li>
+                    <li><b>Benreu -</b> Scenic Zeliang tribe village known for its terraced fields and traditional lifestyle.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Khonoma Village" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Hornbill Festival" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Festivals & Cultural Events 🎭</h3>
+                  <ul>
+                    <li><b>Hornbill Festival -</b> Nagaland's premier cultural event held annually from December 1-10 at Kisama Heritage Village.</li>
+                    <li><b>Moatsu Festival -</b> Celebrated by the Ao tribe in May with traditional dances, feasts, and games.</li>
+                    <li><b>Sekrenyi Festival -</b> Important purification festival of the Angami tribe held in February.</li>
+                    <li><b>Tuluni Festival -</b> Harvest festival of the Sumi tribe celebrated in July.</li>
+                    <li><b>Tokhu Emong -</b> Post-harvest festival of the Lotha tribe in November.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Religious Sites ⛪</h3>
+                  <ul>
+                    <li><b>Kohima Cathedral -</b> Largest cathedral in Northeast India with beautiful architecture.</li>
+                    <li><b>Mary Help of Christians Cathedral (Dimapur) -</b> Impressive Catholic church with distinctive design.</li>
+                    <li><b>Sumi Baptist Church (Zunheboto) -</b> Asia's largest Baptist church with seating capacity for 8,500 people.</li>
+                    <li><b>Revival Church (Kohima) -</b> Beautiful church with panoramic views of the city.</li>
+                    <li><b>Traditional Religious Sites -</b> Ancient stone monoliths and sacred groves in various villages.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Kohima Cathedral" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Japfu Peak" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>6. Adventure & Trekking Destinations 🥾</h3>
+                  <ul>
+                    <li><b>Dzukou Valley Trek -</b> Popular 2-3 day trek through rolling hills and valleys.</li>
+                    <li><b>Mount Saramati Trek -</b> Challenging trek to Nagaland's highest peak.</li>
+                    <li><b>Japfu Peak -</b> Second-highest peak in Nagaland with the world's tallest rhododendron trees.</li>
+                    <li><b>Khonoma Nature Conservation Area -</b> Excellent for birdwatching and nature walks.</li>
+                    <li><b>Intanki National Park -</b> Wildlife sanctuary with elephants, hoolock gibbons, and various bird species.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Markets & Shopping Destinations 🛍️</h3>
+                  <ul>
+                    <li><b>Naga Bazaar (Kohima) -</b> Traditional market selling local produce, handicrafts, and tribal artifacts.</li>
+                    <li><b>Night Market (Dimapur) -</b> Vibrant market with street food, clothing, and local products.</li>
+                    <li><b>Hornbill Festival Craft Bazaar -</b> Extensive market during the festival with authentic tribal crafts.</li>
+                    <li><b>Diezephe Craft Village -</b> Artisan village near Dimapur specializing in traditional handicrafts.</li>
+                    <li><b>Hong Kong Market (Dimapur) -</b> Popular for imported goods and electronics.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Naga Market" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br><br>
+
+        </div>
+        <div id="wbwild" class="tab-pane fade in active" style="background-color: white;">
+          <h1> Wildlife & Crops of Nagaland 🌿</h1>
+          <p>Nagaland has rich biodiversity due to its varied topography, ranging from subtropical to temperate forests. The state's agricultural practices are deeply intertwined with its tribal culture and mountainous terrain.</p>
+
+          <br>
+          <h2>Wildlife of Nagaland </h2>
+          <p>Nagaland's forests cover about 80% of its geographical area, providing habitat for diverse flora and fauna, including several endangered species.</p>
+
+          <br>
+          <h2>🔹 Major Wildlife Sanctuaries & Protected Areas</h2>
+          <div>
+            <table>
+              <tr>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Intanki National Park</td>
+                <td>Peren District</td>
+                <td>Elephants 🐘, Hoolock Gibbons 🐒, Hornbills 🦅, Tigers 🐅</td>
+              </tr>
+              <tr>
+                <td>Fakim Wildlife Sanctuary</td>
+                <td>Kiphire District</td>
+                <td>Clouded Leopards 🐆, Serow, Tragopan, Rare Orchids</td>
+              </tr>
+              <tr>
+                <td>Puliebadze Wildlife Sanctuary</td>
+                <td>Kohima District</td>
+                <td>Blyth's Tragopan (State Bird), Barking Deer 🦌</td>
+              </tr>
+              <tr>
+                <td>Rangapahar Wildlife Sanctuary</td>
+                <td>Dimapur District</td>
+                <td>Sambar Deer, Wild Boars 🐗, Python 🐍</td>
+              </tr>
+              <tr>
+                <td>Singphan Wildlife Sanctuary</td>
+                <td>Mon District</td>
+                <td>Elephants, Leopards, Rare Bird Species</td>
+              </tr>
+              <tr>
+                <td>Khonoma Nature Conservation Area</td>
+                <td>Kohima District</td>
+                <td>Community-protected Forest, Blyth's Tragopan, Diverse Bird Species</td>
+              </tr>
+              <tr>
+                <td>Doyang Reservoir</td>
+                <td>Wokha District</td>
+                <td>Amur Falcons 🦅 (World's largest congregation during migration)</td>
+              </tr>
+            </table>
+          </div>
+          <bt><br></bt>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3> 🔹 Notable Wildlife in Nagaland</h3>
+                <ul>
+                  <li><b>Mammals:</b> Mithun (State Animal), Hoolock Gibbon, Clouded Leopard, Himalayan Black Bear, Slow Loris, Stump-tailed Macaque.</li>
+                  <li><b>Birds: </b>Blyth's Tragopan (State Bird), Great Indian Hornbill, Rufous-necked Hornbill, Amur Falcon, Naga Wren Babbler.</li>
+                  <li><b>Reptiles:</b> King Cobra, Python, Various Vipers, Mountain Lizards.</li>
+                  <li><b>Butterflies:</b> Over 200 species including Kaiser-i-Hind, Bhutan Glory.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=200" alt="Nagaland Wildlife" style="height:200px;width: 200px;">
+
+              </div>
+
+            </div>
+          </div>
+          <hr><br>
+          <h2>🌾 Agriculture & Major Crops in Nagaland </h2>
+          <p>Nagaland's agriculture is characterized by jhum (shifting cultivation) and terrace farming on hillsides. The state is moving toward organic farming practices and sustainable agriculture.</p>
+
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Key Agricultural Features</h3>
+                <ul>
+                  <li><b>Jhum Cultivation:</b> Traditional slash-and-burn agriculture practiced by most tribes.</li>
+                  <li><b>Terrace Farming:</b> Especially in Angami and Chakhesang areas like Khonoma village.</li>
+                  <li><b>Organic Farming:</b> Nagaland is promoting organic cultivation with minimal chemical inputs.</li>
+                  <li><b>Agroforestry:</b> Integration of trees and crops in farming systems.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=220" alt="Nagaland Agriculture" style="height:200px;width: 220px;">
+
+              </div>
+            </div>
+          </div>
+          <h2>🔹 Major Crops of Nagaland</h2>
+          <div>
+            <table>
+              <tr>
+                <th>Category</th>
+                <th>Crops</th>
+              </tr>
+              <tr>
+                <td>Cereals</td>
+                <td>Rice 🍚, Maize 🌽, Millet, Job's Tears (Adlay)</td>
+              </tr>
+              <tr>
+                <td>Cash Crops</td>
+                <td>Cardamom, Ginger, Turmeric, Coffee ☕, Tea 🍵</td>
+              </tr>
+              <tr>
+                <td>Pulses</td>
+                <td>Kholar (Naga Dal), Beans, Peas</td>
+              </tr>
+              <tr>
+                <td>Vegetables</td>
+                <td>Naga King Chili 🌶️ (Bhut Jolokia), Cabbage, Squash, Taro, Yam</td>
+              </tr>
+              <tr>
+                <td>Fruits</td>
+                <td>Pineapple 🍍, Passion Fruit, Kiwi 🥝, Banana 🍌, Plum, Pear</td>
+              </tr>
+              <tr>
+                <td>Oilseeds</td>
+                <td>Mustard, Soybean, Perilla</td>
+              </tr>
+              <tr>
+                <td>Others</td>
+                <td>Bamboo 🎋, Large Cardamom, Black Pepper</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Special Agricultural Products</h3>
+                <ul>
+                  <li><b>Naga King Chili (Raja Mircha):</b> One of the world's hottest chilies with GI tag.</li>
+                  <li><b>Naga Tree Tomato:</b> Unique variety with distinctive flavor.</li>
+                  <li><b>Naga Cucumber:</b> Large, sweet variety popular in local cuisine.</li>
+                  <li><b>Bamboo Shoots:</b> Harvested and fermented for traditional dishes.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=200" alt="Naga King Chili" style="height:200px;width: 200px;">
+
+              </div>
+            </div>
+          </div><br>
+          <hr>
+          <div class="box" style=" background: #f3b37185;padding: 10px;">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3> Sustainable Agriculture & Modern Trends 🌾</h3>
+                  <ul>
+                    <li><b>Organic Farming:</b> Nagaland is promoting itself as an organic farming state.</li>
+                    <li><b>Alder-based Farming:</b> Traditional sustainable system using nitrogen-fixing Alder trees.</li>
+                    <li><b>Apiculture:</b> Honey production is growing as a sustainable livelihood option.</li>
+                    <li><b>Horticulture:</b> Focus on high-value fruits like kiwi, passion fruit, and avocados.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Organic Farming in Nagaland" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Nagaland's biodiversity and agricultural practices reflect its unique geographical position and tribal heritage. The state is working to balance traditional farming methods with modern sustainable practices while protecting its rich wildlife.</p>
+          <br><br>
+        </div>
+        <div id="wbedu" class="tab-pane fade in active" style="background-color: white;">
+          <h1>🎓 Education & Institutions in Nagaland</h1>
+          <p>Nagaland has made significant strides in education since becoming a state in 1963. With one of the highest literacy rates in Northeast India (79.55% according to the 2011 census), the state has a strong educational foundation built on a combination of government initiatives, missionary efforts, and tribal community support.</p>
+
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>📌 Education System in Nagaland</h3>
+                  <ul>
+                    <li><b>School Education:</b> Follows the Nagaland Board of School Education (NBSE) curriculum, along with CBSE and ICSE in some schools.</li>
+                    <li><b>Higher Education:</b> Managed by the Department of Higher Education, with universities and colleges offering various undergraduate and postgraduate programs.</li>
+                    <li><b>Technical Education:</b> Polytechnics and ITIs provide technical and vocational training.</li>
+                    <li><b>Language of Instruction:</b> English is the official medium of instruction in schools and colleges.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Nagaland Education" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>🏛️ Top Universities & Institutions </h2>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Universities</h3>
+                <ol>
+                  <li><b>Nagaland University -</b> A central university with campuses in Lumami, Kohima, and Medziphema, offering various undergraduate, postgraduate, and doctoral programs.</li>
+                  <li><b>St. Joseph University (Dimapur) -</b> A private university offering programs in arts, science, commerce, and management.</li>
+                  <li><b>ICFAI University (Dimapur) -</b> Offers programs in management, law, and technology.</li>
+                  <li><b>Global Open University (Dimapur) -</b> Focuses on distance education and vocational training.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=230" alt="Nagaland University" style="height:200px;width: 230px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Colleges</h3>
+                <ol>
+                  <li><b>Kohima Science College -</b> Premier science institution offering undergraduate and postgraduate programs.</li>
+                  <li><b>St. Joseph's College (Jakhama) -</b> One of the oldest and most prestigious colleges in Nagaland.</li>
+                  <li><b>Patkai Christian College -</b> Affiliated to Nagaland University, known for quality education.</li>
+                  <li><b>Fazl Ali College (Mokokchung) -</b> Established college offering arts and science programs.</li>
+                  <li><b>Tetso College (Dimapur) -</b> Known for innovative teaching methods and quality education.</li>
+                  <li><b>Dimapur Government College -</b> One of the oldest government colleges in the state.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=230" alt="Nagaland College" style="height:200px;width: 230px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Institution</th>
+                <th>Location</th>
+                <th>Notable Features</th>
+              </tr>
+              <tr>
+                <td>Nagaland University</td>
+                <td>Lumami, Kohima, Medziphema</td>
+                <td>Central university with multiple campuses, diverse academic programs</td>
+              </tr>
+              <tr>
+                <td>St. Joseph University</td>
+                <td>Dimapur</td>
+                <td>Private university with modern facilities and diverse courses</td>
+              </tr>
+              <tr>
+                <td>Kohima Science College</td>
+                <td>Jotsoma, Kohima</td>
+                <td>Premier science institution with research facilities</td>
+              </tr>
+              <tr>
+                <td>Patkai Christian College</td>
+                <td>Chumukedima, Dimapur</td>
+                <td>Christian institution with strong academic reputation</td>
+              </tr>
+              <tr>
+                <td>Tetso College</td>
+                <td>Dimapur</td>
+                <td>Modern facilities, innovative teaching methods</td>
+              </tr>
+              <tr>
+                <td>National Institute of Technology</td>
+                <td>Chumukedima, Dimapur</td>
+                <td>Technical education, engineering programs</td>
+              </tr>
+              <tr>
+                <td>North East Christian University</td>
+                <td>Dimapur</td>
+                <td>Christian values-based education, diverse programs</td>
+              </tr>
+            </table>
+          </div>
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=240" alt="Technical Education in Nagaland" style="height:200px;width: 240px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🔹 Technical & Professional Institutions</h3>
+                  <ol>
+                    <li><b>National Institute of Technology (NIT) Nagaland -</b> Located in Chumukedima, offering engineering and technology programs.</li>
+                    <li><b>Nagaland Tool Room & Training Centre -</b> Provides technical training in tool and die making.</li>
+                    <li><b>State Agricultural Research Station -</b> Conducts research on agricultural practices suitable for Nagaland's terrain.</li>
+                    <li><b>Industrial Training Institutes (ITIs) -</b> Located in various districts, offering vocational training.</li>
+                    <li><b>Nagaland Institute of Health Education & Research -</b> Focuses on healthcare education.</li>
+                  </ol>
+                </div>
+
+                <br><br>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Technical Institution</th>
+                <th>Location</th>
+                <th>Specialization</th>
+              </tr>
+              <tr>
+                <td>National Institute of Technology (NIT)</td>
+                <td>Chumukedima, Dimapur</td>
+                <td>Engineering, Technology, Computer Science</td>
+              </tr>
+              <tr>
+                <td>Nagaland Tool Room & Training Centre</td>
+                <td>Dimapur</td>
+                <td>Tool and Die Making, Precision Engineering</td>
+              </tr>
+              <tr>
+                <td>Government Polytechnic</td>
+                <td>Kohima</td>
+                <td>Diploma in Engineering courses</td>
+              </tr>
+              <tr>
+                <td>ITI Kohima</td>
+                <td>Kohima</td>
+                <td>Vocational training in various trades</td>
+              </tr>
+              <tr>
+                <td>ITI Dimapur</td>
+                <td>Dimapur</td>
+                <td>Vocational training in various trades</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🔹 Medical Education</h3>
+                  <ol>
+                    <li><b>Nagaland Institute of Medical Sciences & Research -</b> Recently established medical college in Kohima.</li>
+                    <li><b>School of Nursing, Naga Hospital Authority -</b> Offers nursing education and training.</li>
+                    <li><b>Christian Institute of Health Sciences & Research (CIHSR) -</b> Located in Dimapur, offering medical and allied health programs.</li>
+                  </ol>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Medical Education in Nagaland" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Medical Institution</th>
+                <th>Location</th>
+                <th>Programs Offered</th>
+              </tr>
+              <tr>
+                <td>Nagaland Institute of Medical Sciences & Research</td>
+                <td>Kohima</td>
+                <td>MBBS program (recently established)</td>
+              </tr>
+              <tr>
+                <td>Christian Institute of Health Sciences & Research</td>
+                <td>Dimapur</td>
+                <td>Allied health programs, nursing</td>
+              </tr>
+              <tr>
+                <td>School of Nursing, Naga Hospital Authority</td>
+                <td>Kohima</td>
+                <td>Nursing programs</td>
+              </tr>
+              <tr>
+                <td>Dimapur District Hospital Nursing School</td>
+                <td>Dimapur</td>
+                <td>Nursing programs</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Law Education in Nagaland" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🔹 Law & Management Institutions</h3>
+                  <ul>
+                    <li><b>School of Law, Nagaland University -</b> Offers undergraduate and postgraduate law programs.</li>
+                    <li><b>ICFAI Law School -</b> Part of ICFAI University, offering legal education.</li>
+                    <li><b>Kohima Law College -</b> Affiliated to Nagaland University, offering law programs.</li>
+                    <li><b>Department of Business Administration, Nagaland University -</b> Offers MBA and other management programs.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Institution</th>
+                <th>Location</th>
+                <th>Specialization</th>
+              </tr>
+              <tr>
+                <td>School of Law, Nagaland University</td>
+                <td>Lumami</td>
+                <td>LLB, LLM programs</td>
+              </tr>
+              <tr>
+                <td>ICFAI Law School</td>
+                <td>Dimapur</td>
+                <td>Integrated law programs</td>
+              </tr>
+              <tr>
+                <td>Kohima Law College</td>
+                <td>Kohima</td>
+                <td>LLB program</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <h2>🏫 School Education in Nagaland </h2>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 School Boards</h3>
+                <ol>
+                  <li><b>Nagaland Board of School Education (NBSE) -</b> State board conducting High School Leaving Certificate (HSLC) and Higher Secondary School Leaving Certificate (HSSLC) examinations.</li>
+                  <li><b>Central Board of Secondary Education (CBSE) -</b> Several schools follow the CBSE curriculum.</li>
+                  <li><b>Indian Certificate of Secondary Education (ICSE) -</b> A few schools follow the ICSE curriculum.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=200" alt="Nagaland School Education" style="height:200px;width: 200px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=230" alt="Nagaland Schools" style="height:200px;width: 230px;">
+
+              </div>
+              <div class="col-sm-8">
+
+                <h3>🔹 Notable Schools in Nagaland</h3>
+                <ol>
+                  <li><b>Baptist High School (Kohima) -</b> One of the oldest and most prestigious schools in Nagaland.</li>
+                  <li><b>Don Bosco Higher Secondary School (Dimapur) -</b> Well-known for quality education and discipline.</li>
+                  <li><b>Little Flower Higher Secondary School (Kohima) -</b> Established Catholic school with strong academic reputation.</li>
+                  <li><b>Mezhür Higher Secondary School (Kohima) -</b> Known for academic excellence and extracurricular activities.</li>
+                  <li><b>Fernwood School (Kohima) -</b> Modern school with innovative teaching methods.</li>
+                  <li><b>Holy Cross Higher Secondary School (Dimapur) -</b> Reputed for quality education and values.</li>
+                </ol>
+
+              </div>
+
+            </div>
+          </div>
+          <div class="box">
+            <h2>🔬 Research & Development</h2>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <p>Nagaland has several research institutions focusing on regional development, agriculture, and tribal studies:</p>
+                  <ol>
+                    <li><b>ICAR Research Complex for NEH Region, Nagaland Centre -</b> Agricultural research specific to the region.</li>
+                    <li><b>Nagaland Science & Technology Council -</b> Promotes scientific research and technological development.</li>
+                    <li><b>North East Christian University Research Centre -</b> Focuses on tribal studies and regional development.</li>
+                  </ol>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Research in Nagaland" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <h2>📚 Other Notable Institutions</h2>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <ol>
+                    <li><b>State Council of Educational Research and Training (SCERT) -</b> Develops curriculum and teaching methodologies.</li>
+                    <li><b>Nagaland Institute of Communication and Information Technology -</b> Focuses on IT education and digital skills.</li>
+                    <li><b>Regional Centre of Excellence for Music & Performing Arts -</b> Promotes traditional and contemporary arts.</li>
+                    <li><b>Entrepreneurs Associates (EA) -</b> Provides entrepreneurship education and support.</li>
+                    <li><b>Nagaland State Library -</b> Repository of knowledge and research materials.</li>
+                  </ol>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Nagaland Institutions" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Nagaland's educational landscape continues to evolve, with increasing focus on quality education, skill development, and research. The state faces challenges like infrastructure gaps and accessibility issues in remote areas, but significant progress has been made in expanding educational opportunities for its youth.</p>
+        </div>
+        <br><br>
+
+      </div>
+
+
+    </div>
+  </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,2747 @@
+{% extends "base.html" %}
+{% block content %}
+
+<head>
+ 
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> -->
+  {% load static %}
+  <style>
+    .hp {
+      font-size: 6vw;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+      border-spacing: 0;
+      border: 1px solid #ddd;
+    }
+
+    td,
+    th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+      font-size: 1.5vw;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+
+    .trip {
+      text-align: center;
+      font-weight: 900;
+      background: orangered;
+      padding: 20px;
+      border-radius: 20px;
+      width: 60%;
+    }
+
+    p,
+    li,
+    .text {
+      font-size: 1.5vw;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-weight: 600;
+    }
+
+    h4 {
+      font-weight: 900;
+    }
+
+    img {
+      border-radius: 10px;
+      display: block;
+      margin: auto;
+    }
+
+    @media screen and (max-width: 850px) {
+
+      p,
+      li,
+      .text,
+      td,
+      th {
+        font-size: 2vw;
+        ;
+      }
+
+    }
+
+    @media screen and (max-width: 500px) {
+
+      p,
+      li,
+      .text,
+      td,
+      th {
+        font-size: 4.5vw;
+        ;
+      }
+
+    }
+
+    .box:nth-of-type(odd) {
+      background: #f3b37185;
+      padding: 10px;
+    }
+
+    .weather-container {
+            border-radius: 15px;
+            background: #f0fdf4;
+            padding: 15px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .weather-card {
+            text-align: center;
+            border-radius: 10px;
+            padding: 10px;
+            background: white;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+        .aqi {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            color: white;
+        }
+        .aqi-bad { background: purple; }
+        .aqi-moderate { background: orange; }
+        .aqi-good { background: green; }
+        .best-time {
+            background: #d1fae5;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 15px;
+            color: green;
+        }
+        .wet {
+            max-width: 50px;
+        }
+        
+        .trip {
+          font-size: 18px;
+          padding: 10px 20px;
+          cursor: pointer;
+          background-color:rgb(231, 36, 36);
+          color: white;
+          border: none;
+          border-radius: 5px;
+      }
+      .modal {
+          display: none;
+          position: fixed;
+          z-index: 1;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0,0,0,0.5);
+      }
+      .modal-content {
+          background-color: #fff;
+          margin: 10% auto;
+          padding: 20px;
+          border-radius: 10px;
+          width: 40%;
+          box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+          text-align: center;
+      }
+      .close {
+          color: #aaa;
+          float: right;
+          font-size: 28px;
+          font-weight: bold;
+          cursor: pointer;
+      }
+      .trip-options {
+          display: flex;
+          justify-content: center;
+          gap: 20px;
+          margin-top: 20px;
+      }
+      .trip-options a {
+          display: block;
+          width: 120px;
+          padding: 10px;
+          background-color: #28a745;
+          color: white;
+          text-decoration: none;
+          border-radius: 5px;
+      }
+  </style>
+</head>
+
+
+  <!-- <h2>Carousel Example</h2> -->
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+      <li data-target="#myCarousel" data-slide-to="4"></li>
+    </ol>
+    <!-- Carousel IMAGES NOT FIXED -->
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+
+      <div class="item active">
+        <img src="{% static 'manali.jpeg' %}" alt="Manali" style="width:100%; height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Manali</h3>
+          <p>Famous for adventure sports and Rohtang Pass.  
+          </p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="{% static 'shimla.jpeg' %}" alt="Shimla" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Shimla</h3>
+          <p>Known for colonial charm and Mall Road. </p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="{% static 'dharamshala.jpg' %}" alt="Dharamshala" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Dharamshala</h3>
+          <p>Home to the Dalai Lama and Tibetan culture.  
+          </p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="{% static 'kasol.jpeg' %}" alt="Kasol" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Kasol</h3>
+          <p> A backpacker’s paradise in Parvati Valley.</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="{% static 'spitivalley.jpg' %}" alt="Spiti Valley" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Spiti Valley</h3>
+          <p>A high-altitude desert with monasteries.</p>
+        </div>
+      </div>
+    </div>
+    <!-- Carousel IMAGES NOT FIXED -->
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+  <div class="container">
+    <br><br>
+    <h1 class="hp"> HIMACHAL PRADESH</h1><br>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <img src="{% static 'himachal-pradesh-map.jpg'%}" alt="" style="height:700px; width: -webkit-fill-available;">
+
+        </div>
+        <div class="col-sm-6">
+          <h1> Himachal Pradesh: The Land of Snowy Mountains</h1>
+          <p class="text">Himachal Pradesh, often called the "Devbhumi" (Land of Gods), is a beautiful state in northern India, known for its snow-covered peaks, lush valleys, adventure sports, temples, and vibrant culture. It is a paradise for nature lovers, trekkers, and spiritual seekers.</p>
+
+          <ul>
+            <li><b>Location --</b> Northern India, in the western Himalayas</li>
+            <li><b>Capital --</b> Summer: Shimla 🏔️, Winter: Dharamshala 🏡</li>
+            <li><b>Official Language --</b> Hindi, Pahari dialects</li>
+            <li><b>Major Cities --</b> Shimla, Manali, Dharamshala, Kullu, Mandi, Chamba, Kinnaur</li>
+            <li><b>Formation --</b>Became a full state on 25th January 1971</li>
+            <li><b>Total Area --</b> 55,673 sq. km</li>
+            <li><b>Population --</b> Approx. 7.3 million (2021 Census)</li>
+            <li><b>Borders --</b> Punjab, Haryana, Uttarakhand, Jammu & Kashmir, Tibet (China)</li>
+            <li><b>Major Rivers --</b> Sutlej, Beas, Ravi, Chenab, Yamuna</li>
+            <li><b>State Animal --</b> snow leopard (Panthera uncia)</li>
+            <li><b>State Flower --</b> Pink Rhododendron</li>
+            <li><b>State Tree --</b> Deodar cedar (Cedrus deodara)</li>
+            <li><b>State Bird --</b> Western Tragopan (Tragopan melanocephalus)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <br>
+    <hr>
+    <div>
+      <h1>📌 Divisions & Districts of Himachal Pradesh</h1><br>
+      <p class="text">Himachal Pradesh is divided into 12 districts, each with its own unique geography, culture, and attractions. The state is further divided into three regions: Shivalik (Lower Himachal), Inner Himalayas (Middle Himachal), and Greater Himalayas (High Himalayas).</p>
+      <br>
+      <div style="overflow-x:auto;">
+        <table>
+          <tr>
+            <th>District</th>
+            <th>Headquarters</th>
+            <th>Famous For</th>
+          </tr>
+          <tr>
+            <td>1. Bilaspur</td>
+            <td>Bilaspur</td>
+            <td>Gobind Sagar Lake, Bhakra Dam</td>
+          </tr>
+          <tr>
+            <td>2. Chamba</td>
+            <td>Chamba</td>
+            <td>Chamba Rumal, Khajjiar, Manimahesh Yatra</td>
+          </tr>
+          <tr>
+            <td>3. Hamirpur</td>
+            <td>Hamirpur</td>
+            <td>Educational Hub, Sujanpur Tira Fort</td>
+          </tr>
+          <tr>
+            <td>4. Kangra</td>
+            <td>Dharamshala</td>
+            <td>Kangra Fort, McLeod Ganj, Masroor Rock Temple</td>
+          </tr>
+          <tr>
+            <td>5. Kinnaur</td>
+            <td>Reckong Peo</td>
+            <td>Apple Orchards, Kinnauri Shawls, Kinner Kailash</td>
+          </tr>
+          <tr>
+            <td>6. Kullu</td>
+            <td>Kullu</td>
+            <td>Great Himalayan National Park, Manali, Bijli Mahadev</td>
+          </tr>
+          <tr>
+            <td>7. Lahaul and Spiti</td>
+            <td>Keylong</td>
+            <td>Cold Desert, Spiti Valley, Key Monastery</td>
+          </tr>
+          <tr>
+            <td>8. Mandi</td>
+            <td>Mandi</td>
+            <td>Prashar Lake, Rewalsar Lake, Shivratri Fair</td>
+          </tr>
+          <tr>
+            <td>9. Shimla</td>
+            <td>Shimla</td>
+            <td>Capital City, Mall Road, Kufri, Ridge</td>
+          </tr>
+          <tr>
+            <td>10. Sirmaur</td>
+            <td>Nahan</td>
+            <td>Renuka Lake, Paonta Sahib, Shivalik Hills</td>
+          </tr>
+          <tr>
+            <td>11. Solan</td>
+            <td>Solan</td>
+            <td>Mushroom Capital, Shoolini Temple, Kasauli</td>
+          </tr>
+          <tr>
+            <td>12. Una</td>
+            <td>Una</td>
+            <td>Gateway to Himachal, Chintpurni Temple</td>
+          </tr>
+
+        </table>
+      </div>
+      <br><br>
+      <h1>🔹 Overview of the Districts by Region</h1><br><br>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <ol>
+              <li>A. Lower Himachal (Shivalik Region) 🌄</li>
+              <ul>
+                <li>Bilaspur, Hamirpur, Kangra, Una</li>
+                <li>Low-altitude areas with plains, rivers, and small hills.</li>
+                <li>Major attractions: Pong Dam, Chintpurni Temple, Sujanpur Fort.</li>
+              </ul>
+            
+            
+              <li>Middle Himachal (Inner Himalayas) 🏕️</li>
+              <ul>
+                <li>Mandi, Solan, Shimla, Sirmaur</li>
+                <li>Rolling hills, apple orchards, and dense forests.</li>
+                <li>Major attractions: Shimla Mall Road, Prashar Lake, Kasauli, Renuka Lake.</li>
+              </ul>
+            
+            
+              <li>Greater Himalayas (High Himalayas) ❄️🏔️</li>
+              <ul>
+                <li>Chamba, Kinnaur, Kullu, Lahaul-Spiti</li>
+                <li>Snow-covered mountains, cold deserts, and monasteries.</li>
+                <li>Major attractions: Manali, Spiti Valley, Key Monastery, Khajjiar.</li>
+              </ul>
+            
+            
+              <li>Interesting Facts About Himachal's Districts</li>
+              <ul>
+                <li>Largest District (Area): Lahaul and Spiti</li>
+                <li>Smallest District (Area): Hamirpur</li>
+                <li>Most Populated District: Kangra</li>
+                <li>Least Populated District: Lahaul and Spiti</li>
+                <li>Best for Adventure: Kullu, Lahaul-Spiti</li>
+                <li>Best for Spiritual Tourism: Kangra, Chamba, Sirmaur</li>
+              </ul>
+            </ol>
+          </div>
+          <div class="col-sm-6">
+            <img src="{% static 'himachal_pradesh_district.jpg'%}" alt="" style="height:450px;width: -webkit-fill-available;">
+
+          </div>
+        </div>
+      </div>
+    </div><br><br>
+    <div class="container">
+      <div class="weather-container">
+          <h4 class="text-center"><strong>Weather in Himachal Pradesh</strong></h4>
+          <div class="row">
+              <!-- January -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Jan</h6>
+                      <p>8/30°C</p>
+                      <span class="aqi aqi-bad">AQI 205</span>
+                  </div>
+              </div>
+              <!-- February -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Feb</h6>
+                      <p>12/35°C</p>
+                      <span class="aqi aqi-moderate">AQI 129</span>
+                  </div>
+              </div>
+              <!-- March -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Mar</h6>
+                      <p>17/35°C</p>
+                      <span class="aqi aqi-moderate">AQI 107</span>
+                  </div>
+              </div>
+              <!-- April -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Apr</h6>
+                      <p>19/43°C</p>
+                      <span class="aqi aqi-moderate">AQI 103</span>
+                  </div>
+              </div>
+              <!-- May -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>May</h6>
+                      <p>22/41°C</p>
+                      <span class="aqi aqi-moderate">AQI 95</span>
+                  </div>
+              </div>
+              <!-- June -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Jun</h6>
+                      <p>25/42°C</p>
+                      <span class="aqi aqi-good">AQI 76</span>
+                  </div>
+              </div>
+              <!-- July -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="rain.png" alt="rain">
+                      <h6>Jul</h6>
+                      <p>25/36°C</p>
+                      <span class="aqi aqi-good">AQI 48</span>
+                  </div>
+              </div>
+              <!-- August -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Aug</h6>
+                      <p>25/36°C</p>
+                      <span class="aqi aqi-good">AQI 69</span>
+                  </div>
+              </div>
+              <!-- September -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Sep</h6>
+                      <p>24/37°C</p>
+                      <span class="aqi aqi-good">AQI 49</span>
+                  </div>
+              </div>
+              <!-- October -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Oct</h6>
+                      <p>19/34°C</p>
+                      <span class="aqi aqi-good">AQI 62</span>
+                  </div>
+              </div>
+              <!-- November -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Nov</h6>
+                      <p>16/33°C</p>
+                      <span class="aqi aqi-moderate">AQI 78</span>
+                  </div>
+              </div>
+              <!-- December -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Dec</h6>
+                      <p>20/29°C</p>
+                      <span class="aqi aqi-moderate">AQI 90</span>
+                  </div>
+              </div>
+          </div>
+          <div class="text-center">
+              <div class="best-time">🏆 Best time to visit: October - March</div>
+          </div>
+      </div>
+    </div>
+    
+
+    <br><br>
+    <button class="trip" id="openModal">Let's go on a trip</button>
+    
+    <div id="tripModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Select Your Trip</h2>
+            <button type="button" class="btn btn-warning" style="margin-bottom: 8px;color:black; border-radius: 5px;" onclick="location.href='{% url 'hp_7days_new' %}'" >7 days trip</button><br>
+            <button type="button" class="btn btn-warning" style="margin-bottom: 8px;color:black; border-radius: 5px;" onclick="location.href='{% url 'himachalpradesh_12days' %}'" >12 days trip</button>
+        </div>
+    </div>
+    
+    <script>
+        var modal = document.getElementById("tripModal");
+        var btn = document.getElementById("openModal");
+        var span = document.getElementsByClassName("close")[0];
+        
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+        
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+        
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script><br><br>
+    <div class="container">
+      <ul class="nav nav-tabs">
+        <li class="nav-item"><a data-toggle="tab" href="#hpculture"> Culture</a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#hptradition "> Tradition</a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#hpfestivals"> Festivals </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#hpfood"> Foods </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#hphistory"> History </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#hpartacraft"> Art and Craft </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#hpseason"> Season to Visit </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#hptourist"> Tourist Spots </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#hpwild"> Wildlife & Crops </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#hpedu"> Institutions </a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="hpculture" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Culture of Himachal Pradesh</h1>
+          <p class="text">The culture of Himachal Pradesh is deeply rooted in its rich traditions, diverse ethnic groups, and religious influences. It reflects a blend of Hindu and Buddhist heritage, colorful festivals, folk dances, and traditional arts. Below is a detailed overview of Himachal Pradesh's culture:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Traditional Attire</h3>
+                  <p class="text">The traditional clothing of Himachal Pradesh varies by region and season:</p>
+                  <ul>
+                    <li><b>Men:</b> Wear Churidar Pajamas or Kurta Pajamas along with a long woolen coat (Chola). The famous Pahari topi (colorful woolen cap) is a symbol of pride.</li>
+                    <li><b>Women:</b> Wear Ghaghra-Choli with Dupatta or Reshta (a long woolen garment) in colder regions. Married women often wear Choker (silver or gold necklace).</li>
+                  </ul>
+                  <p class="text">In Buddhist-dominated areas like Spiti and Lahaul, people wear traditional Gonchas (long robes) with colorful sashes.</p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="bang.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>2. Language and Literature</h3>
+                  <ul>
+                    <li>The official language is Hindi, but many people speak Pahari, a collection of dialects like Mandeali, Kinnauri, Kangri, and Chambeali.</li>
+                    <li>Tibetan languages are spoken in Lahaul, Spiti, and Kinnaur due to the influence of Buddhism.</li>
+                    <li>Himachal also has a rich oral tradition of folk songs, epics, and stories.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="lit.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div><br>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="art.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Festivals and Fairs</h3>
+                  <p class="text">Festivals in Himachal are colorful and vibrant, reflecting local traditions and religious beliefs:</p>
+                  <h3>Major Festivals:</h3>
+                  <ul>
+                    <li><b>Kullu Dussehra -</b> A week-long grand celebration in Kullu, attended by thousands.</li>
+                    <li><b>Lohri and Maghi -</b> Winter festivals celebrated with bonfires, dance, and traditional songs.</li>
+                    <li><b>Baisakhi -</b> Celebrated in April, marking the harvest season.</li>
+                    <li><b>Diwali -</b> Celebrated like in the rest of India but with regional variations.</li>
+                    <li><b>Navratri and Shivratri -</b> Particularly famous in temples like Baijnath and Jwala Ji.</li>
+                    <li><b>Losar Festival -</b> Celebrated in Lahaul-Spiti by Buddhists, marking the Tibetan New Year.</li>
+                  </ul>
+                  
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="music.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>Famous Fairs:</h3>
+                  <ul>
+                    <li><b>Minjar Fair (Chamba) -</b> A week-long festival with processions, music, and folk dances.</li>
+                    <li><b>Renuka Fair (Sirmaur) -</b> Dedicated to Goddess Renuka, mother of Parshuram.</li>
+                    <li><b>Sissu Fair (Lahaul-Spiti) -</b> A Buddhist fair marked by masked dances.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>4. Folk Music and Dance</h3>
+                  <p class="text">Music and dance play a significant role in Himachali culture, often performed during festivals and social gatherings.</p>
+                  <h3>Folk Music:</h3>
+                  <ul>
+                    <li>Traditional songs (Jhoori, Ainchali, and Laman) are based on love, nature, and folk tales.</li>
+                    <li>Instruments like Ektara, Karnal, Narsingha, and Dhol are commonly used.</li>
+                  </ul>
+                  
+                </div>
+                <div class="col-sm-4">
+                  <img src="chau.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>Folk Dances:</h3>
+                  <ul>
+                    <li></b>Nati Dance -</b> The most popular folk dance, performed in groups during festivals like Kullu Dussehra.</li>
+                    <li></b>Chham Dance -</b> A masked dance performed by Lamas in Buddhist monasteries.</li>
+                    <li></b>Kayang Dance -</b> A synchronized group dance performed in tribal regions.</li>
+                    <li></b>Gugga Dance -</b> A dance in honor of Gugga Pir, a local deity.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="chau.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="theater.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>5. Art and Handicrafts</h3>
+                  <p class="text">Himachal Pradesh is famous for its exquisite handicrafts and traditional art forms:</p>
+                  <ul>
+                    <li>Pashmina Shawls – Woven from fine wool, mainly in Kullu and Kinnaur.</li>
+                    <li>Chamba Rumal – A hand-embroidered cloth known for its intricate designs.</li>
+                    <li>Wood Carving – Seen in temple doors, windows, and furniture.</li>
+                    <li>Metalwork and Jewelry – Silver and gold jewelry, including tribal designs, are common.</li>
+                    <li>Thangka Paintings – Tibetan Buddhist scroll paintings found in Lahaul-Spiti.
+                    </li>
+                  </ul>
+                  
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="religion.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>6. Religious and Spiritual Beliefs</h3>
+                  <p class="text">Himachal Pradesh is known as the "Land of Gods" (Dev Bhoomi) due to its deep spiritual heritage.</p>
+                  <ul>
+                    <li>Hinduism is the predominant religion, with major temples like Jwala Ji, Naina Devi, Chintpurni, and Hadimba Devi.</li>
+                    <li>Buddhism is practiced in Lahaul-Spiti and Kinnaur, with famous monasteries like Key Monastery and Tabo Monastery.</li>
+                    <li>Local deities (Devtas and Devis) are worshipped in villages, with grand processions during fairs.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div><br>
+          </div>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Architecture and Heritage</h3>
+                  <p class="text">Himachal's architecture reflects a mix of Hindu, Buddhist, and colonial influences:</p>
+                  <ul>
+                    <li>Kath-Kuni Style - A traditional wood and stone construction seen in temples and houses.</li>
+                    <li>Pagoda-Style Temples - Found in places like Hadimba Devi Temple (Manali).</li>
+                    <li>Colonial Architecture - Seen in British-era buildings like Viceregal Lodge (Shimla).</li>
+                    <li>Buddhist Monasteries - Vibrant structures with prayer wheels and murals.</li>
+
+                  </ul>
+                  
+                </div>
+                <div class="col-sm-4">
+                  <img src="phi.jpg" alt="" style="height:300px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br><br>
+
+          <p>The culture of Himachal Pradesh is a unique blend of tradition, spirituality, and artistic expression. Whether through its folk music, colorful festivals, or intricate handicrafts, the state showcases a deep connection with nature and heritage.</p><br><br>
+        </div>
+        <div id="hptradition" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Tradition of Himachal Pradesh</h1>
+          <p>Himachal Pradesh is known for its rich traditions, deeply rooted in its cultural, religious, and social customs. The traditions of the state reflect its Hindu and Buddhist influences, tribal customs, and strong connection with nature. Below is a detailed overview of the traditions of Himachal Pradesh:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Traditional Social Customs</h3>
+                  <h4>Joint Family System</h4>
+                  <ul>
+                    <li>Himachali society traditionally follows the joint family system, where multiple generations live under one roof.</li>
+                    <li>Respect for elders and strong family bonds are key aspects of social life.</li>
+                  </ul>
+                  <h4>Polyandry in Some Regions</h4>
+                  <ul>
+                    <li>In remote areas like Kinnaur, polyandry (a woman having multiple husbands, usually brothers) was traditionally practiced, though it is now rare.</li>
+                    <li>This custom was influenced by economic and land-sharing practices in difficult mountainous terrains.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="cloth.jpg" alt="" style="height:250px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h4>Folk Deities and Local Gods (Devta Tradition)</h4>
+                  <ul>
+                    <li>Himachal Pradesh is known as “Dev Bhoomi” (Land of Gods) because of its deep spiritual traditions.</li>
+                    <li>Villages have their own local deities (Devta or Devi), who are worshipped through grand processions (Jataras) and temple rituals.</li>
+                    <li>The famous “Devta Dance” involves villagers carrying idols of gods on palanquins during festivals.</li>
+                    
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="wedding.jpg" alt="" style="height:250px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="dance.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Traditional Festivals and Rituals</h3>
+                  <p class="text">Himachal Pradesh celebrates a mix of Hindu, Buddhist, and tribal festivals, many of which are unique to the region.</p>
+                  <h4>Sacred Rituals and Worship:</h4>
+                  <ul>
+                    <li>Jagrata and Kirtans – Devotional singing sessions held in temples and homes.</li>
+                    <li>Kaal Puja in Kinnaur – A special worship to ward off evil spirits.</li>
+                    <li>Animal Sacrifice (Now Declining) – Some regions used to follow animal sacrifice as an offering to local deities, but this practice has declined due to legal and ethical reasons.</li>
+                    
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <br>
+          </div>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Traditional Clothing and Jewelry</h3>
+                  <p class="text">The attire of Himachal Pradesh is region-specific and influenced by the cold climate.</p>
+                  <h4>Men’s Traditional Attire:</h4>
+                  <ul>
+                    <li>Chola – A long woolen coat worn in Kinnaur and Spiti.</li>
+                    <li>Kurta-Pajama with Woolen Shawl – Worn in the lower hills.</li>
+                    <li>Pahari Topi (Himachali Cap) – A symbol of Himachali pride, popular in Kullu and Chamba.</li>
+                    
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="arch.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h4>Women’s Traditional Attire:</h4>
+                  <ul>
+                    <li>Reshta & Ghaghra – Long skirt-like attire with a woolen shawl.</li>
+                    <li>Pashmina and Kinnauri Shawls – Handwoven and beautifully embroidered woolen shawls.</li>
+                    <li>Silver Jewelry – Includes Chokers (Hansli), Nose Rings (Nath), and Bangles (Chuda).</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="foot1.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="foot1.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>4. Traditional Dance and Music</h3>
+                  <p class="text"> Himachal has a strong tradition of folk music and dance, performed during celebrations and festivals.</p>
+                  <h4>Folk Dances:</h4>
+                  <ul>
+                    <li>Nati Dance – A slow circular dance performed during Kullu Dussehra.</li>
+                    <li>Chham Dance – A Buddhist masked dance performed by Lamas in monasteries.</li>
+                    <li>Kayang Dance – A synchronized tribal dance of Kinnaur.</li>
+                    <li>Gugga Dance – Dedicated to the snake deity Gugga Pir.</li>
+                  </ul>
+                  <h4>Folk Music:</h4>
+                  <ul>
+                    <li>Songs are based on themes of nature, love, mythology, and heroic tales.</li>
+                    <li>Instruments like Ektara, Narsingha, Karnal, and Flute are commonly used.</li>
+                  </ul>
+                </div>
+                
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>5. Marriage Traditions</h3>
+                  <p class="text">Himachal Pradesh has unique wedding customs, varying across regions.</p>
+                  <ul>
+                    <li>Arrange Marriages – The most common tradition, with families deciding the match.</li>
+                    <li>Pahari Wedding Rituals:</li>
+                    <ul>
+                      <li>The groom arrives at the bride’s house with a band and is welcomed with aarti and tilak.</li>
+                      <li>Doli Tradition – The bride is carried in a palanquin (doli) to her new home.</li>
+                    </ul>
+                    <li>Buddhist Marriages – In Lahaul-Spiti, weddings involve chanting, mask dances, and offerings in monasteries.</li>
+                    <li>Jhanjhar and Dulchi Marriage – Traditional elopement marriage customs in some tribal areas.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="foot1.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="foot1.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>6. Traditional Occupations and Agriculture</h3>
+                  <h4>Farming and Animal Husbandry:</h4>
+                  <ul>
+                    <li>People in lower Himachal cultivate wheat, rice, and maize, while in higher regions, they grow barley, apples, and apricots.</li>
+                    <li>Sheep and yak rearing is common in Spiti and Kinnaur.</li>
+                  </ul>
+                  <h4>Handicrafts and Weaving:</h4>
+                  <ul>
+                    <li>Many families are involved in weaving shawls, carpets, and woolen clothes.</li>
+                    <li>Wood carving and metalwork are important traditional skills.</li>
+                  </ul>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Himachal Pradesh’s traditions are deeply tied to its natural environment, religious beliefs, and cultural heritage. The state has preserved its unique customs, festivals, clothing, music, and cuisine for generations, making it a culturally rich and vibrant region.</p><br><br>
+        </div>
+        <div id="hpfestivals" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Festivals of Himachal Pradesh</h1>
+          <p>Himachal Pradesh celebrates a variety of festivals that reflect its cultural diversity, religious beliefs, and seasonal changes. These festivals are a mix of Hindu, Buddhist, and tribal traditions, celebrated with dance, music, and grand processions. Here’s a detailed look at the major festivals of Himachal Pradesh:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>Kullu Dussehra  🎉🔥</h3>
+                  <ul>
+                    <li>The most famous festival of Himachal Pradesh, celebrated in Kullu Valley for a week.</li>
+                    <li>Unlike other parts of India, where Ravan’s effigy is burned, in Kullu, over 200 deities (devtas) are carried in grand processions to honor Lord Raghunath (Rama).</li>
+                    <li>The festival attracts thousands of visitors and features folk music, Nati dance, and fairs.</li>
+                  </ul>
+                  <p><b>📍 Time: October </b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="durga1.jpg" alt="" style="height:230px;width: 200px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="kali.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Lohri / Maghi 🔥</h3>
+                  <ul>
+                    <li>Lohri is mainly celebrated in the lower Himachal regions (Kangra, Una, Hamirpur), marking the harvest season.</li>
+                    <li>Maghi follows Lohri and is a time for feasting and community gatherings.</li>
+                    <li>People light bonfires, sing traditional songs, and dance around the fire.</li>
+                  </ul>
+                  <p><b>📍 Time: January</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Shivratri (Mandi Shivratri Festival) 🛕</h3>
+                  <ul>
+                    <li>Celebrated with great devotion, especially at Mandi (also called the “Chhoti Kashi” of Himachal).</li>
+                    <li>More than 200 deities from nearby temples are brought in palanquins to the main temple, and a week-long fair is held.</li>
+                    <li>Devotees observe fasts and perform special prayers for Lord Shiva.</li>
+                  </ul>
+                  <p><b>📍 Time: February - March </b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="poila.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="saras.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Baisakhi 🌾</h3>
+                  <ul>
+                    <li>Celebrated as the harvest festival, mainly in Kangra, Bilaspur, and Mandi.</li>
+                    <li>Farmers express gratitude for a good harvest, and fairs with folk dances, wrestling matches, and handicraft stalls are organized.</li>
+                    
+                  </ul>
+                  <p><b>📍 Time: April</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Minjar Fair (Chamba) 🌸</h3>
+                  <ul>
+                    <li>A week-long festival in Chamba celebrating the ripening of maize (Minjar = maize flower).</li>
+                    <li>The festival includes processions, traditional dances, and a symbolic offering of silk tassels in the Ravi River.</li>
+                    <li>People wear colorful Minjar threads and enjoy fairs and music performances.</li>
+                  </ul>
+                  <p><b>📍 Time: July - August</b></p>
+                  
+                </div>
+                <div class="col-sm-4">
+                  <img src="roth.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="bhai.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>6. Losar Festival (Tibetan New Year) 🏮</h3>
+                  <ul>
+                    <li>Celebrated in Lahaul-Spiti and Kinnaur by the Tibetan Buddhist community.</li>
+                    <li>People clean and decorate their houses, light lamps, and offer prayers in monasteries.</li>
+                    <li>Chham Dance (masked dance) is performed by monks in monasteries like Key Monastery.</li>
+                  </ul>
+                  <p><b>📍 Time: January - February</b></p>
+                  
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Renuka Fair (Sirmaur) 🛕</h3>
+                  <ul>
+                    <li>Held near Renuka Lake, dedicated to Goddess Renuka (mother of Lord Parshuram).</li>
+                    <li>Devotees take a holy dip in the lake, and a grand procession of Lord Parshuram’s idol is carried around.</li>
+                    <li>The fair also includes cultural programs and local handicraft stalls.</li>
+                  </ul>
+                  <p><b>📍 Time: November </b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="nabanna.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="alla.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>8. Phulaich Festival (Kinnaur) 🌺</h3>
+                  <ul>
+                    <li>Also called "Festival of Flowers", celebrated in Kinnaur.</li>
+                    <li>Villagers collect wildflowers from nearby hills and offer them to local deities.</li>
+                    <li>Includes traditional dances, music, and feasting.</li>
+                  </ul>
+                  <p><b>📍 Time:  September</b></p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>9. Sazo Festival (Kinnaur) 🕯️</h3>
+                  <ul>
+                    <li>A spiritual festival where people worship their local deities, believing they return to heaven during this time.</li>
+                    <li>Families clean their houses, offer food to the gods, and perform rituals.
+                    </li>
+                  </ul>
+                  <p><b>📍 Time: January</b></p>
+
+                  <h3>10. Halda Festival (Lahaul-Spiti) 🔥 </h3>
+                  <ul>
+                    <li>A Tibetan festival similar to Diwali, celebrated with lighting of lamps and bonfires.</li>
+                    <li>Marked by dancing, music, and traditional feasts.</li>
+                  </ul>
+                  <p><b>📍 Time: January </b></p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="chris.jpg" alt="" style="height:200px;width: 230px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="biswa.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>11. Fagli Festival (Lahaul-Spiti) 🎭</h3>
+                  <ul>
+                    <li>Celebrated to mark the end of winter, featuring masked dances and theatrical performances.</li>
+                    <li>People decorate their homes with torches and cook special festive dishes.</li>
+                  </ul>
+                  <p><b>📍 Time: February </b></p>
+                  <h3>12. Sair Festival (Shimla, Mandi, Kullu, Solan) 🌳</h3>
+                  <ul>
+                    <li>Celebrates the end of the rainy season and honors local deities.</li>
+                    <li>People offer new grains, fruits, and flowers to the gods and seek blessings.</li>
+                  </ul>
+                  <p><b>📍 Time: November - September </b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>13. Himachal Winter Carnival (Manali) ⛄🎭</h3>
+                  <ul>
+                    <li>A modern cultural festival started in 1977, attracting tourists from across India.</li>
+                    <li>Features skiing competitions, folk dances, food stalls, and adventure sports.
+                    </li>
+                  </ul>
+                  <p><b>📍 Time: January</b></p>
+
+                  <h3>14. Holi (Sujanpur Tira Holi Festival) 🌈</h3>
+                  <ul>
+                    <li>Though Holi is celebrated across India, in Sujanpur Tira (Hamirpur), it is a grand festival with processions, cultural performances, and fairs.</li>
+                    <li>People play with colors, dance to folk music, and enjoy festive sweets.</li>
+                  </ul>
+                  <p><b>📍 Time: March </b></p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="chris.jpg" alt="" style="height:200px;width: 230px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="biswa.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>15. Raksha Bandhan (Shivratri of Chamba) 🏵️</h3>
+                  <ul>
+                    <li>In Chamba, Raksha Bandhan coincides with a unique tradition where sisters tie rakhis to Lord Shiva's idol at the Chamba temples.</li>
+                  
+                  </ul>
+                  <p><b>📍 Time: August  </b></p>
+                  <h3>16. Chrewal Festival (Tribal Harvest Festival) 🌾</h3>
+                  <ul>
+                    <li>Celebrated in Shimla, Sirmaur, and Kinnaur to mark the new agricultural season.</li>
+                    <li>Includes folk songs, dances, and traditional rituals.</li>
+                  </ul>
+                  <p><b>📍 Time: November - Mid-August </b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>17. Bhoj Fair (Kullu) 🎵</h3>
+                  <ul>
+                    <li>Held in Aut village, Kullu, in honor of Devta Bansor.</li>
+                    <li>Features Nati dances, wrestling matches, and grand feasts.</li>
+                  </ul>
+                  <p><b>📍 Time: November</b></p>
+
+                  <h3>18. Rakhadumni Festival (Women’s Festival in Kinnaur) 👩‍🦰</h3>
+                  <ul>
+                    <li>Celebrated by women in Kinnaur, where married women return to their parental homes and enjoy feasts and cultural programs.</li>
+                    
+                  </ul>
+                  <p><b>📍 Time: July  </b></p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="chris.jpg" alt="" style="height:200px;width: 230px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+
+          <p>Himachal Pradesh’s festivals reflect its deep-rooted traditions, spiritual beliefs, and close connection with nature. Whether it's the devotion of Kullu Dussehra, the joy of Lohri, the Tibetan traditions of Losar, or the beauty of the Minjar Fair, every festival adds to the vibrant culture of the state.</p><br><br>
+        </div>
+        <div id="hpfood" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Foods of Himachal Pradesh</h1>
+          <p>Himachal Pradesh has a unique and diverse cuisine influenced by its cold climate, local produce, and traditional cooking methods. The food is simple yet flavorful, often cooked with ghee, yogurt, pulses, and seasonal vegetables. Here’s a detailed look at the traditional food of Himachal Pradesh:
+          </p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Traditional Dishes of Himachal Pradesh 🍲</h3>
+                  <h3>1.1 Dham – The Traditional Feast 🍛</h3>
+                  <ul>
+                    <li>A vegetarian meal served on festive occasions, especially in Kangra, Mandi, and Chamba.</li>
+                    <li>Cooked by special chefs called "Botis", served on leaf plates (pattal).</li>
+                    <li>Includes:</li>
+                    <ul>
+                      <li>Chana Madra – Chickpeas cooked in yogurt-based gravy.</li>
+                      <li>Teliya Mah (Urad Dal in ghee)</li>
+                      <li>Rajma (Kidney Beans) in curd-based gravy</li>
+                      <li>Boiled Rice</li>
+                      <li>Kadhi (spiced yogurt curry with pakoras)</li>
+                      <li>Meetha Bhatt (sweet rice with jaggery and raisins)</li>
+                    </ul>
+                  </ul>
+                </div> 
+                <div class="col-sm-4">
+                  <img src="staple.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="veg.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>1.2 Siddu – Popular Stuffed Bread 🥟</h3>
+                  <ul>
+                    <li>A steamed wheat flour bread, stuffed with walnuts, poppy seeds, and spices.</li>
+                    <li>Served with ghee, dal, or mutton curry.</li>
+                    <li>Popular in Shimla, Kullu, and Mandi.</li>
+                  </ul>
+                  <h3>1.3 Chana Madra – Yogurt-Based Chickpea Curry 🥣</h3>
+                  <ul>
+                    <li>A delicious dish made with chickpeas (chana) and spiced yogurt gravy.</li>
+                    <li>Cooked with mustard seeds, cloves, cinnamon, and cardamom.</li>
+                    <li>Served with rice or chapati.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="meat.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>1.4 Babru – Himachali Kachori 🥠</h3>
+                  <ul>
+                    <li>Similar to kachori, but stuffed with black gram dal paste.</li>
+                    <li>Crispy and deep-fried, served with tamarind chutney.</li>
+                    <li>Famous in Shimla and Kangra regions.</li>
+                  </ul>
+                  <h3>1.5 Tudkiya Bhath – Pahari Pulao 🍚</h3>
+                  <ul>
+                    <li>A flavorful spiced rice dish from Chamba.</li>
+                    <li>Made with lentils, yogurt, potatoes, cinnamon, and bay leaves.</li>
+                    <li>Served with curd and mash dal.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1.6 Chha Gosht – Himachali Mutton Curry 🍖</h3>
+                  <ul>
+                    <li>A traditional mutton dish cooked in spiced yogurt gravy.</li>
+                    <li>Flavored with cardamom, cinnamon, bay leaves, and coriander.</li>
+                    <li>Best served with rice or chapati.</li>
+                    
+                  </ul>
+                  <h3>1.7 Kullu Trout Fish – Famous River Fish Dish 🐟</h3>
+                  <ul>
+                    <li>A delicacy from Kullu Valley, prepared with freshly caught trout fish.</li>
+                    <li>The fish is marinated in lemon juice and local spices and shallow-fried.</li>
+                    <li>Served with steamed rice and chutney.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="rosso.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="phuchka.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>1.8 Bhey (Spiced Lotus Stem) 🌿</h3>
+                  <ul>
+                    <li>A popular dish made from lotus stem slices, stir-fried with gram flour, onions, and spices.</li>
+                    <li>Famous in Kangra and Mandi regions.</li>
+                  </ul>
+                  <h3>1.9 Patande – Himachali Pancakes 🥞</h3>
+                  <ul>
+                    <li>A sweet wheat-flour pancake from Sirmaur district.</li>
+                    <li>Similar to crepes, served with honey or ghee.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1.10 Sepu Vadi – Deep-Fried Lentil Cakes in Gravy 🍛</h3>
+                  <ul>
+                    <li>A unique dish from Mandi, made with deep-fried lentil dumplings in a yogurt-based gravy.</li>
+                    <li>Served with boiled rice.</li>
+                  </ul>
+                  <h3>1.11 Auriya Kaddu – Pumpkin Curry 🎃</h3>
+                  <ul>
+                    <li>A delicious pumpkin dish cooked in a tangy mustard and yogurt-based gravy.</li>
+                    <li>Common in rural areas of Himachal Pradesh.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="tea.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>2. Traditional Sweets and Desserts 🍬🍰</h3>
+                  <h3>2.1 Mittha – Sweet Rice with Dry Fruits 🍚</h3>
+                  <ul>
+                    <li>A Himachali dessert made of sweetened rice cooked with jaggery, saffron, and dry fruits.</li>
+                    <li>Often served at weddings and festivals.</li>
+                  </ul>
+                  <h3>2.2 Aktori – Festive Buckwheat Pancake 🥞</h3>
+                  <ul>
+                    <li>A traditional pancake made from buckwheat flour, popular in Lahaul-Spiti and Kinnaur.</li>
+                    <li>Served with butter and honey.</li>
+                  </ul>
+                  <h3>2.3 Badana – Sweet Fried Gram Flour Balls 🍯</h3>
+                  <ul>
+                    <li>A traditional sweet similar to Boondi, made with gram flour and sugar syrup.</li>
+                    <li>Often prepared during festivals and weddings.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="pithe.jpg" alt="" style="height:270px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="pithe.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Beverages of Himachal Pradesh 🍵🍷</h3>
+                  <h3>3.1 Chulli (Apricot Wine) 🍷</h3>
+                  <ul>
+                    <li>A famous homemade alcoholic drink made from fermented apricots.</li>
+                    <li>Commonly consumed in Kinnaur and Lahaul-Spiti.</li>
+                  </ul>
+                  <h3>3.2 Lugdi – Local Fermented Rice Beer 🍶</h3>
+                  <ul>
+                    <li>A traditional drink made from fermented rice or barley, mainly consumed in cold regions like Manali and Kullu.</li>
+                    <li>It has a mild alcohol content and is often homemade by villagers.</li>
+                  </ul>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>3.3 Kangra Tea – The Famous Green Tea 🍵</h3>
+                  <ul>
+                    <li>Kangra Valley is known for producing high-quality green and black tea.</li>
+                    <li>It has a mild flavor and is believed to have medicinal properties.</li>
+                  </ul>
+                  <h3>3.4 Butter Tea (Po Cha) – Tibetan Influence ☕</h3>
+                  <ul>
+                    <li>A traditional tea made with butter, salt, and Yak milk, mainly consumed in Lahaul-Spiti and Kinnaur.</li>
+                    <li>Keeps people warm in the cold climate.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="pithe.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="pithe.jpg" alt="" style="height:270px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>4. Traditional Eating Habits & Cooking Style</h3>
+                  <h3>4.1 Use of Ghee & Yogurt:</h3>
+                  <ul>
+                    <li>Himachali dishes heavily use ghee, butter, and yogurt, giving them a rich taste.</li>
+                  </ul>
+                  <h3>4.2 Slow Cooking Method:</h3>
+                  <ul>
+                    <li>Most dishes are slow-cooked to retain flavors and nutrition.</li>
+                  </ul>
+                  <h3>4.3 Organic & Seasonal Ingredients:</h3>
+                  <ul>
+                    <li>People use locally grown pulses, grains, fruits, and vegetables, avoiding excessive spices.</li>
+                  </ul>
+                </div>
+                
+              </div>
+            </div>
+          </div><br><br>
+          <p>Himachali cuisine is a beautiful blend of flavors, traditions, and locally sourced ingredients. Whether it’s the royal Dham feast, the spicy Chha Gosht, the healthy Siddu, or the delicious Patande pancakes, every dish reflects the culture and climate of the region.</p><br><br>
+        </div>
+        <div id="hphistory" class="tab-pane fade in active" style="background-color: white;">
+          <h1>History of Himachal Pradesh 🏔️📜</h1>
+          <p>Himachal Pradesh has a rich and diverse history that dates back to the ancient period. Over centuries, it has been home to different tribes, kings, and empires, influenced by Hinduism, Buddhism, and colonial rule. Below is a detailed historical timeline of Himachal Pradesh:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Ancient History (Prehistoric – 7th Century CE)</h3>
+                  <h4>1.1 Prehistoric Era</h4>
+                  <ul>
+                    <li>Archaeological evidence from Kangra, Mandi, and Bilaspur suggests that Himachal was inhabited as early as the Stone Age.</li>
+                    <li>The region was home to hunter-gatherers and early agricultural settlements.</li>
+                  </ul>
+                  <h4>1.2 Vedic Period (1500 BCE – 600 BCE)</h4>
+                  <ul>
+                    <li>Himachal Pradesh finds mention in the Rigveda and Mahabharata.</li>
+                    <li>The region was inhabited by various tribes like Kol, Kirat, and Khasas.</li>
+                    <li>It was part of several ancient kingdoms, including the Trigarta Kingdom (modern-day Kangra).</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="maurya.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h4>1.3 Mauryan & Gupta Influence (4th Century BCE – 7th Century CE)</h4>
+                  <ul>
+                    <li>The Mauryan emperor Chandragupta Maurya extended his influence into parts of Himachal.</li>
+                    <li>Ashoka spread Buddhism in the region, especially in Lahaul-Spiti and Kinnaur.</li>
+                    <li>The Gupta Empire (4th–6th century CE) ruled over parts of Himachal, bringing Hindu culture.</li>
+                  </ul>
+                  
+                </div>
+                <div class="col-sm-4">
+                  <img src="maurya.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="pala.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Medieval History (7th – 18th Century CE)</h3>
+                  <h4>2.1 Rajput Kingdoms (7th – 14th Century CE)</h4>
+                  <ul>
+                    <li>By the 7th century, many small Rajput kingdoms emerged in the region.</li>
+                    <li>Powerful Hindu rulers from Chamba, Kangra, and Kullu built temples, forts, and palaces.</li>
+                    <li>The famous Kangra Fort, one of the oldest forts in India, was built by the Katoch dynasty.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="delhi.png" alt="" style="height:220px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h4>2.2 Mughal Rule (16th – 18th Century CE)</h4>
+                  <ul>
+                    <li>The Mughals invaded Himachal during Akbar’s reign (1556–1605).</li>
+                    <li>Many local rulers paid tribute to the Mughal Empire but retained autonomy.</li>
+                    <li>The Kangra Fort was briefly controlled by Jahangir before being reclaimed by the Katoch rulers.</li>
+                  </ul>
+                  <h4>2.3 Sikh Influence (17th – 18th Century CE)</h4>
+                  <ul>
+                    <li>Guru Gobind Singh, the 10th Sikh Guru, visited Himachal and fought battles against the Mughals.</li>
+                    <li>The Kangra, Bilaspur, and Sirmaur rulers had close relations with the Sikh Empire.</li>
+                    <li>Maharaja Ranjit Singh (Sikh ruler of Punjab) captured Kangra Fort in 1809.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. British Rule (19th – 20th Century CE)</h3>
+                  <h4>3.1 British Annexation (1846)</h4>
+                  <ul>
+                    <li>After the Anglo-Sikh War (1846), the British defeated the Sikhs and annexed Kangra, Kullu, and Spiti into British India.</li>
+                    <li>The British made Shimla the summer capital of India (1864) due to its pleasant climate.</li>
+                    <li>The British developed roads, railways, and schools in Himachal Pradesh.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="mughal.jpg" alt="" style="height:200px;width: 250px;">
+
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h4>3.2 Freedom Struggle (20th Century)</h4>
+                  <ul>
+                    <li>Himachal Pradesh played a role in India’s independence movement, with leaders like Dr. Yashwant Singh Parmar leading protests.</li>
+                    <li>Local rulers faced pressure from Mahatma Gandhi’s Quit India Movement.</li>
+                    <li>After India’s independence (1947), the princely states merged into the Union of India.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="mughal.jpg" alt="" style="height:200px;width: 250px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="plassey.jpg" alt="" style="height:230px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h2>4. Modern History (Post-1947 – Present)</h3>
+                  <h3>4.1 Formation of Himachal Pradesh (1948–1971)</h3>
+                  <ul>
+                    <li>1948: 30 princely states merged to form Himachal Pradesh as a Union Territory.</li>
+                    <li>1950s: More regions, including Kangra, Kullu, and Lahaul-Spiti, were added.</li>
+                    <li>1971: Himachal Pradesh was granted full statehood, becoming the 18th state of India.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="rammohan.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4.2 Development & Tourism (1971–Present)</h3>
+                  <ul>
+                    <li>Himachal Pradesh became famous for tourism, hydropower, agriculture, and education.</li>
+                    <li>The state was recognized for its high literacy rate and environmental conservation.</li>
+                    <li>Shimla, Manali, and Dharamshala became major tourist hubs.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>Summary of Himachal Pradesh's History in a Table</h2><br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Period</th>
+                <th>Key Events & Rulers</th>
+              </tr>
+              <tr>
+                <td>Ancient History (Prehistoric – 7th Century CE)</td>
+                <td>Stone Age settlements, Vedic references, Mauryan and Gupta influence.</td>
+              </tr>
+              <tr>
+                <td>Medieval History (7th – 18th Century CE)</td>
+                <td>Rajput kingdoms (Kangra, Kullu, Chamba), Mughal invasions, Sikh influence.</td>
+              </tr>
+              <tr>
+                <td>British Rule (19th – 20th Century CE)</td>
+                <td>British annexation (1846), Shimla became summer capital, Independence movement.</td>
+              </tr>
+              <tr>
+                <td>Post-Independence (1947–1971)</td>
+                <td>Merged with India, became a Union Territory (1948), full statehood (1971).</td>
+              </tr>
+              <tr>
+                <td>Modern Himachal (1971–Present)</td>
+                <td>Development in tourism, infrastructure, and education.</td>
+              </tr>
+            </table>
+          </div>
+          <br><br>
+          <p>Himachal Pradesh has evolved from ancient tribal settlements to a land of Rajput rulers, Mughal invasions, Sikh influence, British governance, and finally an independent Indian state. Today, it is known for its natural beauty, religious significance, and rich cultural heritage. 🚩📜</p>
+          <br><br>
+        </div>
+        <div id="hpartacraft" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Art and Craft of Himachal Pradesh 🎨🖌️</h1>
+          <p>Himachal Pradesh has a rich artistic heritage, influenced by Rajput, Mughal, Tibetan, and local Pahari traditions. The art and craft of the region include wood carving, metalwork, embroidery, handloom weaving, painting, and pottery. Most of these crafts are handmade, preserving age-old traditions. </p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Paintings 🎨</h3>
+                  <h4>1.1 Thangka Paintings (Tibetan Buddhist Art)</h4>
+                  <ul>
+                    <li>Found in Lahaul-Spiti and Kinnaur.</li>
+                    <li>Used in Buddhist monasteries to depict Buddha, deities, and mandalas.</li>
+                    <li>Made on cotton or silk, framed with brocade.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="tera.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+
+              </div>
+            </div>
+            <br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h4>1.2 Pahari Paintings</h4>
+                  <ul>
+                    <li>Originated during the 17th–19th century in the courts of Kangra, Chamba, and Basohli.</li>
+                    <li>Influenced by Mughal and Rajput miniature art.</li>
+                    <li>Depict Hindu mythology, Radha-Krishna, Ramayana, and Mahabharata scenes.</li>
+                    <li>Famous styles:</li>
+                    <ul>
+                      <li>Kangra Paintings – Soft colors, natural scenery, and romantic themes.</li>
+                      <li>Basohli Paintings – Bold colors, geometric patterns, and gold work.</li>
+                      <li>Chamba Paintings – Religious and folk themes.</li>
+                    </ul>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="tera.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="textile.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Handloom & Textile Weaving 🧶</h3>
+                  <h4>2.1 Kullu & Kinnauri Shawls</h4>
+                  <ul>
+                    <li>Woven from fine wool, featuring geometric patterns and bright colors.</li>
+                    <li>Kullu Shawls – Have simple patterns in red, yellow, green, and black.</li>
+                    <li>Kinnauri Shawls – More intricate, inspired by Tibetan and Buddhist motifs.</li>
+                  </ul>
+                  
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="textile.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h4>2.2 Pashmina Wool Weaving</h4>
+                  <ul>
+                    <li>Made from Pashmina (fine wool from Himalayan goats).</li>
+                    <li>Soft, warm, and luxurious.</li>
+                  </ul>
+                  <h4>2.3 Chamba Rumal (Handkerchief Embroidery)</h4>
+                  <ul>
+                    <li>Silk embroidery on muslin cloth, featuring scenes from Ramayana, Mahabharata, and Krishna Leela.</li>
+                    <li>Uses double-sided embroidery, so the design looks the same on both sides.</li>
+                    <li>Recognized as a GI (Geographical Indication) product.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Wood Carving & Architecture 🏡</h3>
+                  <h4>3.1 Traditional Wood Carving</h4>
+                  <ul>
+                    <li>Found in temples, homes, and furniture.</li>
+                    <li>Intricate carvings of Hindu gods, goddesses, and floral designs.</li>
+                    <li>Examples: Hadimba Temple (Manali), Naggar Castle, and Kangra Fort.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="dokra.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h4>3.2 Kath-Kuni Architecture (Wood & Stone Houses)</h4>
+                  <ul>
+                    <li>Unique Himalayan architectural style.</li>
+                    <li>Made with interlocked wood and stone, providing insulation against cold.</li>
+                    <li>Common in Kullu, Chamba, and Kinnaur villages.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="dokra.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="gomira.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Metal Craft & Jewelry 💍</h3>
+                  <h4>4.1 Traditional Jewelry</h4>
+                  <ul>
+                    <li>Women wear silver and gold ornaments with Tibetan and Rajput influences.</li>
+                    <li>Chandanhaar – Multi-layered silver necklace.</li>
+                    <li>Chak, Boomani & Toke – Large earrings and nose rings.</li>
+                    <li>Silver bangles & anklets are common in Kinnaur & Lahaul-Spiti.</li>
+                  </ul>
+                  <h4>4.2 Metalwork & Temple Bells</h4>
+                  <ul>
+                    <li>Brass, copper, and silver idols of Hindu and Buddhist deities are crafted.</li>
+                    <li>Large temple bells and ritual objects are made in Kangra, Kullu, and Chamba.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Pottery & Clay Art 🏺</h3>
+                  <ul>
+                    <li>Handmade earthenware pots, bowls, and lamps are produced in Kangra and Mandi.</li>
+                    <li>Black pottery from Kangra is popular.</li>
+                    
+                  </ul>
+                  <h3>6. Bamboo & Grass Weaving 🎋</h3>
+                  <ul>
+                    <li>Himachali artisans make mats, baskets, hand fans, and household items from bamboo and dried grass.</li>
+                    <li>Common in Bilaspur, Kullu, and Chamba.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="potochitra.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          
+          <br>
+          <h2>📌 Summary of Himachal Pradesh’s Art & Craft</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Famous Places</th>
+              </tr>
+              <tr>
+                <td>Pahari Paintings</td>
+                <td>Miniature paintings depicting mythology and nature	</td>
+                <td>Kangra, Chamba, Basohli</td>
+              </tr>
+              <tr>
+                <td>Thangka Paintings</td>
+                <td>Tibetan Buddhist paintings on silk or cotton</td>
+                <td>Lahaul-Spiti, Kinnaur</td>
+              </tr>
+              <tr>
+                <td>Kullu & Kinnauri Shawls</td>
+                <td>Woolen shawls with geometric designs</td>
+                <td>Kullu, Kinnaur</td>
+              </tr>
+              <tr>
+                <td>Chamba Rumal</td>
+                <td>Silk embroidery on muslin cloth</td>
+                <td>Chamba</td>
+              </tr>
+              <tr>
+                <td>Wood Carving</td>
+                <td>Intricate temple and home carvings</td>
+                <td>Manali, Kangra, Naggar</td>
+              </tr>
+              <tr>
+                <td>Kath-Kuni Architecture</td>
+                <td>Traditional wood-stone houses</td>
+                <td>Kullu, Chamba, Kinnaur</td>
+              </tr>
+              <tr>
+                <td>Metal Craft & Jewelry</td>
+                <td>Silver ornaments, temple bells, brass idols</td>
+                <td>Kangra, Kullu, Chamba</td>
+              </tr>
+              <tr>
+                <td>Kalighat Paintings</td>
+                <td>Handmade earthen pots and black pottery</td>
+                <td>Kangra, Mandi</td>
+              </tr>
+              <tr>
+                <td>Bamboo Weaving</td>
+                <td>Mats, baskets, and fans made from bamboo</td>
+                <td>Bilaspur, Kullu, Chamba</td>
+              </tr>
+              
+            </table>
+          </div>
+          <br><br>
+          <p>Himachal Pradesh’s art and craft reflect its rich history, religious traditions, and Himalayan culture. Whether it's the delicate Pahari paintings, luxurious Kullu shawls, or intricate wood carvings, each craft tells a story of the state's skilled artisans. 🎭✨</p>
+          <br><br>
+        </div>
+        <div id="hpseason" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Seasons to visit Himachal Pradesh 🌧️☀️ </h1>
+          <p>Himachal Pradesh is a year-round destination, offering different experiences in summer, monsoon, autumn, and winter. The best time to visit depends on the purpose of your trip—whether it's for snow, adventure, sightseeing, or spiritual retreats.</p>
+          <br>
+          <h2>Best Time to Visit Different Places in Himachal Pradesh</h2><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Summer (March – June) ☀️</h3>
+                  <ul>
+                    <li>Best for: Sightseeing, trekking, camping, adventure sports.</li>
+                    <li>Places to Visit: Shimla, Manali, Dharamshala, Kullu, Dalhousie, Spiti Valley.</li>
+                    <li>Why Visit? Pleasant weather, ideal for outdoor activities.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="spring.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="summer.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Monsoon (July – September) 🌧️</h3>
+                  <ul>
+                    <li>Best for: Lush green landscapes, nature lovers, cultural festivals.</li>
+                    <li>Places to Visit: Kinnaur, Chamba, Dharamshala (avoid landslide-prone areas).</li>
+                    <li>Why Visit? Fewer crowds, stunning scenery, traditional fairs like Minjar Fair (Chamba).</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Autumn (September – November) 🍂</h3>
+                  <ul>
+                    <li>Best for: Trekking, photography, experiencing local festivals.</li>
+                    <li>Places to Visit: Bir Billing (paragliding), Spiti, Kullu, Mandi.</li>
+                    <li>Why Visit? Clear skies, colorful landscapes, adventure sports season.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="rain.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="autmn.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Winter (December – February) ❄️</h3>
+                  <ul>
+                    <li>Best for: Snowfall, skiing, honeymoon, winter sports.</li>
+                    <li>Places to Visit: Manali, Kufri, Narkanda, Dalhousie, Lahaul-Spiti.</li>
+                    <li>Why Visit? Snow-covered mountains, adventure activities like skiing & snowboarding.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          
+          <br>
+          <h2>📌 Best Time to Visit Himachal – Summary</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Season</th>
+                <th>Months</th>
+                <th>Best For</th>
+                <th>Places to Visit</th>
+              </tr>
+              <tr>
+                <td>Summer ☀️</td>
+                <td>March – June </td>
+                <td>Sightseeing, trekking, adventure sports</td>
+                <td>Shimla, Manali, Dharamshala, Kullu, Spiti</td>
+              </tr>
+              <tr>
+                <td>Monsoon 🌧️</td>
+                <td>July – September </td>
+                <td>Greenery, cultural festivals, nature lovers</td>
+                <td>Chamba, Dharamshala, Kinnaur (Avoid landslides)</td>
+              </tr>
+              <tr>
+                <td>Autumn 🍂</td>
+                <td>September – November</td>
+                <td>Trekking, photography, festivals	</td>
+                <td>Bir Billing, Spiti, Kullu, Mandi</td>
+              </tr>
+              <tr>
+                <td>Winter ❄️</td>
+                <td>December – February </td>
+                <td>Snowfall, skiing, honeymoon trips</td>
+                <td>Manali, Kufri, Narkanda, Dalhousie, Lahaul-Spiti</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="container">
+            <div class="row">
+              <h1 style=" text-align: center;">📌 Final Recommendations</h1><br>
+              <ul>
+                <li>For Snow Lovers – Visit December to February (Manali, Kufri, Lahaul-Spiti).</li>
+                <li>For Adventure Seekers – Visit March to June or September to November (Trekking, Paragliding, River Rafting).</li>
+                <li>For Cultural & Festival Enthusiasts – Visit during monsoon & autumn (Minjar Fair, Dussehra, Losar).</li>
+              </ul>
+
+            </div>
+          </div>
+          <br><br>
+        </div>
+        <div id="hptourist" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Tourist Spots of Himachal Pradesh 🏔️</h1>
+          <p>Himachal Pradesh is a paradise for nature lovers, adventure seekers, and spiritual travelers. Here are some of the top tourist destinations in the state:</p>
+
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Hill Stations & Mountain Destinations 🏔️</h3>
+                  <ul>
+                    <li>Shimla – Ridge, Mall Road, Jakhoo Temple, Kufri</li>
+                    <li>Manali – Rohtang Pass, Solang Valley, Hidimba Temple</li>
+                    <li>Dalhousie – Khajjiar (Mini Switzerland), Dainkund Peak</li>
+                    <li>Dharamshala & McLeod Ganj – Triund Trek, Dalai Lama Temple</li>
+                    <li>Kasauli – Monkey Point, Christ Church, Gilbert Trail</li>
+                    <li>Narkanda – Hatu Peak, Tannu Jubbar Lake</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="darj.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="biswagate.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Adventure & Trekking Destinations 🎢🚵</h3>
+                  <ul>
+                    <li>Spiti Valley – Key Monastery, Chandratal Lake, Pin Valley</li>
+                    <li>Bir Billing – Paragliding capital of India</li>
+                    <li>Tirthan Valley – Great Himalayan National Park, Serolsar Lake</li>
+                    <li>Barot Valley – Trout fishing, trekking trails</li>
+                    <li>Churdhar Peak – Highest peak in the Shivalik range</li>
+                    <li>Hampta Pass Trek – Stunning cross-valley trek</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Heritage & Cultural Destinations 🏛️</h3>
+                  <ul>
+                    <li>Naggar – Naggar Castle, Roerich Art Gallery</li>
+                    <li>Kinnaur – Kalpa, Sangla, Chitkul (Last Indian village near Tibet)</li>
+                    <li>Chamba – Bhuri Singh Museum, Chamunda Devi Temple</li>
+                    <li>Rewalsar – Sacred Buddhist and Hindu pilgrimage site</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="sundar.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="digha.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Wildlife & Nature Destinations 🌳🐯</h3>
+                  <ul>
+                    <li>Great Himalayan National Park (UNESCO site) – Rich biodiversity</li>
+                    <li>Pin Valley National Park – Home to the snow leopard</li>
+                    <li>Kalatop Wildlife Sanctuary – Thick cedar forests, trekking</li>
+                    <li>Renuka Lake & Wildlife Sanctuary – Scenic lake with wildlife</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Religious & Spiritual Destinations ⛩️</h3>
+                  <ul>
+                    <li>Baijnath Temple – Ancient Shiva temple</li>
+                    <li>Manikaran Sahib – Gurudwara with hot springs</li>
+                    <li>Tara Devi Temple – Scenic temple near Shimla</li>
+                    <li>Jwala Ji Temple – Famous for its eternal flame</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="dak.png" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="ajhills.png" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>6. Offbeat & Hidden Gems 🏕️</h3>
+                  <ul>
+                    <li>Jibhi & Tirthan Valley – Quaint villages with waterfalls</li>
+                    <li>Mashobra – Peaceful alternative to Shimla</li>
+                    <li>Malana – Unique village with ancient customs</li>
+                    <li>Gushaini – Offbeat nature retreat</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Food & Shopping Hotspots 🍛🛍️</h3>
+                  <ul>
+                    <li>Mall Road, Shimla – Shopping & street food</li>
+                    <li>Old Manali – Cafés & local handicrafts</li>
+                    <li>Kotwali Bazaar, Dharamshala – Tibetan market</li>
+                    <li>Kullu – Famous for woolen shawls & apples</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="kumar.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br><br>
+
+        </div>
+        <div id="hpwild" class="tab-pane fade in active" style="background-color: white;">
+          <h1> Wildlife and Crops of Himachal Pradesh 🌿🐾</h1>
+          <p>Himachal Pradesh, with its diverse geography and climatic zones, is home to rich wildlife and a variety of crops. The state's forests, grasslands, and high-altitude regions support many unique species of animals and birds, while its fertile valleys and terraced farms produce a range of fruits, grains, and vegetables.</p>
+
+          <br>
+          <h2>1. Wildlife of Himachal Pradesh 🦌🐻 </h2>
+          <p>Himachal Pradesh has 32 wildlife sanctuaries and 5 national parks, covering a wide range of ecosystems from tropical forests to alpine meadows and cold deserts.</p>
+
+          <br>
+          <h2>🔹1.1 Famous National Parks & Wildlife Sanctuaries</h2>
+          <div>
+            <table>
+              <tr>
+                <th>Protected Area</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Great Himalayan National Park (UNESCO Site)	</td>
+                <td>Kullu </td>
+                <td>Snow Leopard, Himalayan Tahr, Musk Deer</td>
+              </tr>
+              <tr>
+                <td>Pin Valley National Park</td>
+                <td>Lahaul-Spiti </td>
+                <td>Ibex, Tibetan Wolf, Red Fox</td>
+              </tr>
+              <tr>
+                <td>Kalatop-Khajjiar Sanctuary</td>
+                <td>Chamba</td>
+                <td>Black Bears, Himalayan Monal</td>
+              </tr>
+              <tr>
+                <td>Chail Wildlife Sanctuary</td>
+                <td>Solan </td>
+                <td>Barking Deer, Sambar, Wild Boars</td>
+              </tr>
+              <tr>
+                <td>Simbalbara National Park</td>
+                <td>Sirmaur </td>
+                <td>Goral, Himalayan Black Bear</td>
+              </tr>
+            </table>
+          </div>
+          <bt><br></bt>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3> 1.2 Major Wildlife Species</h3>
+                <h3>🦊 Mammals</h3>
+                <ul>
+                  <li>Snow Leopard – Found in high-altitude regions like Spiti.</li>
+                  <li>Himalayan Brown Bear & Black Bear – Seen in the Great Himalayan National Park & Chail.</li>
+                  <li>Musk Deer – An endangered species found in Kullu & Chamba.</li>
+                  <li>Himalayan Tahr – A wild goat with thick fur, seen in rocky areas.</li>
+                  <li>Barking Deer, Sambar, and Goral – Common in lower forests.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="ele.jpg" alt="" style="height:200px;width: 200px;">
+
+              </div>
+
+            </div>
+          </div>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-4">
+                <img src="ele.jpg" alt="" style="height:200px;width: 200px;">
+
+              </div>
+              <div class="col-sm-8">
+                <h3>🦜 Birds</h3>
+                <ul>
+                  <li>Himalayan Monal (State Bird of Himachal) – A colorful pheasant found in the upper Himalayas.</li>
+                  <li>Western Tragopan – A rare and beautiful bird seen in Kullu and Chamba.</li>
+                  <li>Snow Partridge & Himalayan Griffon – Found in Spiti and high-altitude areas.</li>
+                </ul>
+                <h3>🐍 Reptiles & Amphibians</h3>
+                <ul>
+                  <li>Common Indian Cobra & Russell’s Viper – Found in low-lying forests.</li>
+                  <li>Himalayan Salamander – A rare species in the wetlands of the state.</li>
+                </ul>
+              </div>
+              
+
+            </div>
+          </div>
+          <hr><br>
+          <h2>2. Crops of Himachal Pradesh 🌾🍏 </h2>
+          <p>Himachal Pradesh’s terraced farms and diverse climate support the cultivation of cereals, fruits, vegetables, and medicinal plants.</p>
+
+          <h2>🔹 2.1 Main Types of Crops</h2>
+          <div>
+            <table>
+              <tr>
+                <th>Category</th>
+                <th>Major Crops</th>
+                <th>Regions</th>
+              </tr>
+              <tr>
+                <td>Cereals & Pulses</td>
+                <td>Wheat, Maize, Rice, Barley, Millets </td>
+                <td>Kangra, Mandi, Chamba, Bilaspur</td>
+              </tr>
+              <tr>
+                <td>Fruits (Horticulture)</td>
+                <td>Apple, Plum, Pear, Apricot, Cherry </td>
+                <td>Kinnaur, Kullu, Shimla, Chamba</td>
+              </tr>
+              <tr>
+                <td>Vegetables</td>
+                <td>Potato, Peas, Cauliflower, Cabbage, Tomato	 </td>
+                <td>Solan, Lahaul-Spiti, Kullu</td>
+              </tr>
+              <tr>
+                <td>Cash Crops</td>
+                <td>Tea, Ginger, Garlic, Sugarcane</td>
+                <td>Kangra, Sirmaur, Una</td>
+              </tr>
+              <tr>
+                <td>Medicinal Plants</td>
+                <td>Tulsi, Ashwagandha, Kuth, Cardamom </td>
+                <td>Kinnaur, Lahaul-Spiti, Chamba</td>
+              </tr>
+              
+            </table>
+          </div><br><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>2.2 Apple Farming – The Backbone of Himachal's Economy 🍏</h3>
+                <ul>
+                  <li>Himachal Pradesh is India's second-largest apple producer after Jammu & Kashmir.</li>
+                  <li>Shimla, Kinnaur, Kullu, and Chamba are major apple-growing districts.</li>
+                  <li>Malda Mangoes 🥭 (Highly exported).</li>
+                  <li>Other fruits like plum, pear, and cherry are also grown in high-altitude regions.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="mango.jpg" alt="" style="height:200px;width: 200px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-4">
+                <img src="mango.jpg" alt="" style="height:200px;width: 200px;">
+
+              </div>
+              <div class="col-sm-8">
+
+                <h3>2.3 Kangra Tea – A Unique Himachali Product 🍵</h3>
+                <ul>
+                  <li>Grown in Kangra Valley, it is known for its aromatic flavor.</li>
+                  <li>Recognized with a Geographical Indication (GI) tag.</li>
+                </ul>
+                <h3>2.4 Vegetable Farming – A Growing Sector 🥦</h3>
+                <ul>
+                  <li>Himachal is called the "Vegetable Bowl of India" due to its high-altitude farming.</li>
+                  <li>Solan is famous as the Mushroom Capital of India.</li>
+                </ul>
+              </div>
+              
+            </div>
+          </div>
+          <br><br>
+          <p>Himachal Pradesh is rich in biodiversity and plays an important role in wildlife conservation. At the same time, agriculture and horticulture form the backbone of the state’s economy. Whether it's the majestic snow leopards, lush apple orchards, or high-altitude organic farming, Himachal’s natural wealth makes it a treasure trove of flora and fauna.</p>
+          <br><br>
+        </div>
+        <div id="hpedu" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Education & Institutions in Himachal Pradesh 🎓📚</h1>
+          
+          <p>Himachal Pradesh has a well-developed education system with high literacy rates and renowned institutions. The state provides quality education in schools, colleges, and universities, along with specialized institutes for technology, management, law, and research.</p>
+
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>📌 Literacy Rate in Himachal Pradesh 📊</h3>
+                  <ul>
+                    <li>Overall Literacy Rate: 83.78% (Census 2011)</li>
+                    <li>Male Literacy Rate: 90.83%</li>
+                    <li>Female Literacy Rate: 76.60%</li>
+                    <li>Himachal has one of the highest literacy rates in India.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="wbbse.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>2. Major Educational Institutions in Himachal Pradesh 🏫</h2>
+          <br>
+          <h3>2.1 Universities & Higher Education Institutions 🎓</h3>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Institution Name</th>
+                <th>Location</th>
+                <th>Specialization</th>
+              </tr>
+              <tr>
+                <td>Himachal Pradesh University (HPU)</td>
+                <td>Shimla</td>
+                <td>General Studies, Arts, Science, Commerce</td>
+              </tr>
+              <tr>
+                <td>Central University of Himachal Pradesh (CUHP)</td>
+                <td>Dharamshala</td>
+                <td>Humanities, Social Sciences, Business</td>
+              </tr>
+              <tr>
+                <td>Indian Institute of Technology (IIT) Mandi</td>
+                <td>Mandi</td>
+                <td>Engineering & Technology</td>
+              </tr>
+              <tr>
+                <td>National Institute of Technology (NIT) Hamirpur</td>
+                <td>Hamirpur</td>
+                <td>Engineering, Technology, Science</td>
+              </tr>
+              <tr>
+                <td>Dr. Yashwant Singh Parmar University of Horticulture & Forestry</td>
+                <td>Solan</td>
+                <td>Agriculture, Horticulture, Forestry</td>
+              </tr>
+              <tr>
+                <td>CSK Himachal Pradesh Krishi Vishvavidyalaya (Palampur Agricultural University)</td>
+                <td>Palampur</td>
+                <td>Agriculture & Veterinary Sciences</td>
+              </tr>
+              <tr>
+                <td>Abhilashi University</td>
+                <td>Mandi</td>
+                <td>Ayurvedic & Allied Sciences</td>
+              </tr>
+              <tr>
+                <td>Shoolini University</td>
+                <td>Solan</td>
+                <td>Biotechnology, Management, Science</td>
+              </tr>
+              <tr>
+                <td>Himachal Pradesh Technical University (HPTU)</td>
+                <td>Hamirpur</td>
+                <td>Engineering, Technology</td>
+              </tr>
+              <tr>
+                <td>Himachal Pradesh National Law University (HPNLU)</td>
+                <td>Shimla</td>
+                <td>Law & Legal Studies</td>
+              </tr>
+              <tr>
+                <td>Eternal University</td>
+                <td>Sirmaur</td>
+                <td>Women’s Education, Sciences</td>
+              </tr>
+              
+            </table>
+          </div><br>
+          <h3>2.2 Medical & Healthcare Education 🏥</h3>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Institution Name</th>
+                <th>Location</th>
+                <th>Specialization</th>
+              </tr>
+              <tr>
+                <td>Indira Gandhi Medical College (IGMC)</td>
+                <td>Shimla</td>
+                <td>Medical & Surgery</td>
+              </tr>
+              <tr>
+                <td>Dr. Rajendra Prasad Government Medical College (RPGMC)</td>
+                <td>Tanda, Kangra</td>
+                <td>MBBS, MD, Research</td>
+              </tr>
+              <tr>
+                <td>Shri Lal Bahadur Shastri Medical College (SLBSMC)</td>
+                <td>Mandi</td>
+                <td>Medical & Paramedical</td>
+              </tr>
+              <tr>
+                <td>Dr. YS Parmar Government Homoeopathic Medical College</td>
+                <td>Solan</td>
+                <td>Homeopathy</td>
+              </tr>
+              
+            </table>
+          </div><br>
+          <h3>2.3 Engineering & Technical Education ⚙️</h3>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Institution Name</th>
+                <th>Location</th>
+                <th>Specialization</th>
+              </tr>
+              <tr>
+                <td>IIT Mandi</td>
+                <td>Mandi</td>
+                <td>Engineering, Research</td>
+              </tr>
+              <tr>
+                <td>NIT Hamirpur</td>
+                <td>Hamirpur</td>
+                <td>Engineering, Architecture</td>
+              </tr>
+              <tr>
+                <td>HPTU (Himachal Pradesh Technical University)</td>
+                <td>Hamirpur</td>
+                <td>Engineering, Technology</td>
+              </tr>
+              <tr>
+                <td>Jawaharlal Nehru Government Engineering College</td>
+                <td>Sundernagar, Mandi</td>
+                <td>Various Engineering Fields</td>
+              </tr>
+              
+            </table>
+          </div><br>
+          <h3>2.4 Law, Management & Other Specialized Institutions 📖</h3>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Institution Name</th>
+                <th>Location</th>
+                <th>Specialization</th>
+              </tr>
+              <tr>
+                <td>HP National Law University (HPNLU)</td>
+                <td>Shimla</td>
+                <td>Law & Legal Studies</td>
+              </tr>
+              <tr>
+                <td>Indian Institute of Management (IIM) Sirmaur</td>
+                <td>Sirmaur</td>
+                <td>Business Management</td>
+              </tr>
+              <tr>
+                <td>Shoolini University</td>
+                <td>Solan</td>
+                <td>Management, Sciences</td>
+              </tr>
+              <tr>
+                <td>Himalayan Forest Research Institute (HFRI)</td>
+                <td>Shimla</td>
+                <td>Forestry & Environment</td>
+              </tr>
+              
+            </table>
+          </div><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>3. School Education System 🏫</h3>
+                <ol>
+                  <li>Primary & Secondary Education: The state has a strong network of government and private schools under HP Board of School Education (HPBOSE) and CBSE/ICSE-affiliated institutions.</li>
+                  <li>Famous Schools:</li>
+                  <ul>
+                    <li>Bishop Cotton School (Shimla) – One of India’s oldest schools.</li>
+                    <li>DAV Schools, Kendriya Vidyalayas, Army Schools – Spread across the state.</li>
+                    <li>Jawahar Navodaya Vidyalayas (JNVs) – Provide free quality education to rural students.</li>
+                  </ul>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="visva.jpg" alt="" style="height:200px;width: 230px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>3.1 Education Schemes & Initiatives</h3>
+                <ol>
+                  <li>Sarva Shiksha Abhiyan (SSA) – Ensuring 100% primary education.</li>
+                  <li>Rashtriya Madhyamik Shiksha Abhiyan (RMSA) – Improving secondary education.</li>
+                  <li>Mid-Day Meal Scheme – Provides free meals to students.</li>
+                  <li>Scholarships for Girls & SC/ST Students – Promoting inclusive education.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="jadav.png" alt="" style="height:200px;width: 230px;">
+
+              </div>
+            </div>
+          </div><br>
+          <h3>4. Summary of Education & Institutions in Himachal Pradesh</h3>
+          <br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Category</th>
+                <th>Details</th>
+              </tr>
+              <tr>
+                <td>Literacy Rate</td>
+                <td>83.78%</td>
+              </tr>
+              <tr>
+                <td>Best Universities</td>
+                <td>HPU, CUHP, Shoolini University</td>
+              </tr>
+              <tr>
+                <td>Top Engineering Colleges</td>
+                <td>IIT Mandi, NIT Hamirpur</td>
+              </tr>
+              <tr>
+                <td>Best Medical Colleges</td>
+                <td>IGMC Shimla, RPGMC Tanda</td>
+              </tr>
+              <tr>
+                <td>Best Agriculture & Forestry Institutes</td>
+                <td>Palampur Agricultural University, YS Parmar University</td>
+              </tr>
+              <tr>
+                <td>Law & Management</td>
+                <td>HP National Law University, IIM Sirmaur</td>
+              </tr>
+              <tr>
+                <td>Best Schools</td>
+                <td>Bishop Cotton School, DAV Schools, JNVs</td>
+              </tr>
+              
+            </table>
+          </div>
+          <br><br>
+          <p>Himachal Pradesh has a strong educational foundation with prestigious universities, IITs, IIMs, and medical institutions. The high literacy rate and government initiatives ensure that quality education reaches every corner of the state. Whether you're looking for engineering, law, medical, or agricultural education, Himachal Pradesh has excellent options to offer!</p>
+        </div>
+        <br><br>
+
+      </div>
+
+
+    </div>
+  </div>
+  </div>
+  {% endblock %}

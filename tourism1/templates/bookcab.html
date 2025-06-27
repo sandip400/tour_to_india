@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cab Booking</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .container {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        h1,
+        h2 {
+            text-align: center;
+            color: #2b2b2b;
+        }
+
+        form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form-group {
+            flex: 1 1 200px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: 500;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        select,
+        input {
+            padding: 14px;
+            border: 1px solid #ccc;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        select:focus,
+        input:focus {
+            border-color: #008cff;
+            outline: none;
+        }
+
+        #swap-btn {
+            padding: 10px 20px;
+            background-color: #ffc107;
+            color: black;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            height: 48px;
+            align-self: flex-end;
+        }
+
+        #swap-btn:hover {
+            background-color: #e0a800;
+        }
+
+        button[type="submit"] {
+            flex: 1 1 100%;
+            padding: 15px;
+            margin-top: 10px;
+            background-color: #008cff;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0070e0;
+        }
+
+        #cabs {
+            margin-top: 40px;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        #cab-list li {
+            list-style: none;
+            margin: 20px 0;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        #cab-list button {
+            margin-top: 10px;
+            background-color: #34a853;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        #cab-list button:hover {
+            background-color: #2c8e45;
+        }
+
+        @media (max-width: 768px) {
+            form {
+                flex-direction: column;
+            }
+
+            #swap-btn {
+                align-self: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Book Your Cab</h1>
+
+        <form id="cab-form">
+            <div class="form-group">
+                <label for="pickup">Pickup City</label>
+                <select id="pickup" required>
+                    <option value="">Select Pickup City</option>
+                    <option value="Delhi">Delhi</option>
+                    <option value="Mumbai">Mumbai</option>
+                    <option value="Bengaluru">Bengaluru</option>
+                    <option value="Chennai">Chennai</option>
+                    <option value="Kolkata">Kolkata</option>
+                    <option value="Hyderabad">Hyderabad</option>
+                    <option value="Pune">Pune</option>
+                    <option value="Ahmedabad">Ahmedabad</option>
+                    <option value="Jaipur">Jaipur</option>
+                    <option value="Lucknow">Lucknow</option>
+                </select>
+            </div>
+
+            <button type="button" id="swap-btn">Swap ↔</button>
+
+            <div class="form-group">
+                <label for="drop">Drop City</label>
+                <select id="drop" required>
+                    <option value="">Select Drop City</option>
+                    <option value="Delhi">Delhi</option>
+                    <option value="Mumbai">Mumbai</option>
+                    <option value="Bengaluru">Bengaluru</option>
+                    <option value="Chennai">Chennai</option>
+                    <option value="Kolkata">Kolkata</option>
+                    <option value="Hyderabad">Hyderabad</option>
+                    <option value="Pune">Pune</option>
+                    <option value="Ahmedabad">Ahmedabad</option>
+                    <option value="Jaipur">Jaipur</option>
+                    <option value="Lucknow">Lucknow</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="pickup-time">Pickup Date & Time</label>
+                <input type="datetime-local" id="pickup-time" required>
+            </div>
+
+            <div class="form-group">
+                <label for="passengers">Passengers</label>
+                <input type="number" id="passengers" value="1" min="1" required>
+            </div>
+
+            <div class="form-group">
+                <label for="cab-type">Cab Type</label>
+                <select id="cab-type" required>
+                    <!-- Filled dynamically -->
+                </select>
+            </div>
+
+            <button type="submit">Search Cabs</button>
+        </form>
+
+        <div id="cabs">
+            <h2>Available Cabs</h2>
+            <ul id="cab-list"></ul>
+        </div>
+    </div>
+
+    <script>
+        // --- Sample Cab Data (only 10 cabs) ---
+        const cabsData = [
+            { "Cab Name": "CityRide Sedan", "Cab Number": "CR1234", "Type": "Sedan", "Base Fare": 300 },
+            { "Cab Name": "Smart Sedan", "Cab Number": "SS1425", "Type": "Sedan", "Base Fare": 320 },
+            { "Cab Name": "Elegant Sedan", "Cab Number": "ES2536", "Type": "Sedan", "Base Fare": 340 },
+            { "Cab Name": "Urban Sedan", "Cab Number": "US3647", "Type": "Sedan", "Base Fare": 330 },
+            { "Cab Name": "Family Sedan", "Cab Number": "FS4758", "Type": "Sedan", "Base Fare": 310 },
+
+            { "Cab Name": "Speedy SUV", "Cab Number": "SS5678", "Type": "SUV", "Base Fare": 500 },
+            { "Cab Name": "Mountain SUV", "Cab Number": "MS6789", "Type": "SUV", "Base Fare": 550 },
+            { "Cab Name": "Urban SUV", "Cab Number": "US7890", "Type": "SUV", "Base Fare": 530 },
+            { "Cab Name": "Royal SUV", "Cab Number": "RS8901", "Type": "SUV", "Base Fare": 600 },
+            { "Cab Name": "Adventure SUV", "Cab Number": "AS9012", "Type": "SUV", "Base Fare": 580 },
+
+            { "Cab Name": "Luxury Cruiser", "Cab Number": "LC1011", "Type": "Luxury", "Base Fare": 800 },
+            { "Cab Name": "Business Luxury", "Cab Number": "BL1122", "Type": "Luxury", "Base Fare": 850 },
+            { "Cab Name": "Golden Luxury", "Cab Number": "GL1233", "Type": "Luxury", "Base Fare": 880 },
+            { "Cab Name": "Elite Luxury", "Cab Number": "EL1344", "Type": "Luxury", "Base Fare": 900 },
+            { "Cab Name": "Presidential Luxury", "Cab Number": "PL1455", "Type": "Luxury", "Base Fare": 950 },
+
+            { "Cab Name": "Quick Mini", "Cab Number": "QM1566", "Type": "Mini", "Base Fare": 200 },
+            { "Cab Name": "Zoom Mini", "Cab Number": "ZM1677", "Type": "Mini", "Base Fare": 220 },
+            { "Cab Name": "Swift Mini", "Cab Number": "SM1788", "Type": "Mini", "Base Fare": 210 },
+            { "Cab Name": "Lite Mini", "Cab Number": "LM1899", "Type": "Mini", "Base Fare": 190 },
+            { "Cab Name": "Budget Mini", "Cab Number": "BM1910", "Type": "Mini", "Base Fare": 180 },
+
+            { "Cab Name": "City Hatchback", "Cab Number": "CH2021", "Type": "Hatchback", "Base Fare": 250 },
+            { "Cab Name": "Mega Hatch", "Cab Number": "MH2132", "Type": "Hatchback", "Base Fare": 240 },
+            { "Cab Name": "Classic Hatch", "Cab Number": "CH2243", "Type": "Hatchback", "Base Fare": 260 },
+            { "Cab Name": "Turbo Hatchback", "Cab Number": "TH2354", "Type": "Hatchback", "Base Fare": 270 },
+            { "Cab Name": "Pulse Hatch", "Cab Number": "PH2465", "Type": "Hatchback", "Base Fare": 255 },
+
+            { "Cab Name": "EcoDrive Electric", "Cab Number": "ED2576", "Type": "Electric Car", "Base Fare": 320 },
+            { "Cab Name": "GreenGo Electric", "Cab Number": "GE2687", "Type": "Electric Car", "Base Fare": 350 },
+            { "Cab Name": "Bolt Electric", "Cab Number": "BE2798", "Type": "Electric Car", "Base Fare": 340 },
+            { "Cab Name": "Zap Electric", "Cab Number": "ZE2809", "Type": "Electric Car", "Base Fare": 330 },
+            { "Cab Name": "Thunder Electric", "Cab Number": "TE2910", "Type": "Electric Car", "Base Fare": 360 },
+
+            { "Cab Name": "FastRider Bike", "Cab Number": "FB3011", "Type": "Bike Taxi", "Base Fare": 100 },
+            { "Cab Name": "QuickRide Bike", "Cab Number": "QB3122", "Type": "Bike Taxi", "Base Fare": 110 },
+            { "Cab Name": "RushBike Taxi", "Cab Number": "RB3233", "Type": "Bike Taxi", "Base Fare": 90 },
+            { "Cab Name": "Zippy Bike Taxi", "Cab Number": "ZB3344", "Type": "Bike Taxi", "Base Fare": 95 },
+            { "Cab Name": "Speedster Bike", "Cab Number": "SB3455", "Type": "Bike Taxi", "Base Fare": 105 },
+
+            { "Cab Name": "Premium Sedan Plus", "Cab Number": "PS3566", "Type": "Premium Sedan", "Base Fare": 400 },
+            { "Cab Name": "Executive Sedan Pro", "Cab Number": "EP3677", "Type": "Premium Sedan", "Base Fare": 450 },
+            { "Cab Name": "Luxe Sedan Max", "Cab Number": "LS3788", "Type": "Premium Sedan", "Base Fare": 430 },
+
+            { "Cab Name": "SUV XL Adventure", "Cab Number": "SX3899", "Type": "SUV XL", "Base Fare": 700 },
+            { "Cab Name": "Mega SUV XL", "Cab Number": "MS3900", "Type": "SUV XL", "Base Fare": 720 },
+            { "Cab Name": "Xtreme SUV XL", "Cab Number": "XS4011", "Type": "SUV XL", "Base Fare": 750 },
+
+            { "Cab Name": "Traveller 12-Seater", "Cab Number": "TT4122", "Type": "Tempo Traveller", "Base Fare": 1000 },
+            { "Cab Name": "Family Traveller", "Cab Number": "FT4233", "Type": "Tempo Traveller", "Base Fare": 1050 },
+            { "Cab Name": "Metro Traveller", "Cab Number": "MT4344", "Type": "Tempo Traveller", "Base Fare": 980 }
+        ];
+
+
+        // Distances between cities
+        const distances = {
+            "Delhi-Mumbai": 1400, "Delhi-Bengaluru": 2150, "Delhi-Chennai": 2200, "Delhi-Kolkata": 1500,
+            "Delhi-Hyderabad": 1550, "Delhi-Pune": 1450, "Delhi-Ahmedabad": 950, "Delhi-Jaipur": 280, "Delhi-Lucknow": 550,
+            "Mumbai-Bengaluru": 980, "Mumbai-Chennai": 1330, "Mumbai-Kolkata": 2000, "Mumbai-Hyderabad": 710,
+            "Mumbai-Pune": 150, "Mumbai-Ahmedabad": 530, "Mumbai-Jaipur": 1150, "Mumbai-Lucknow": 1350,
+            "Bengaluru-Chennai": 350, "Bengaluru-Kolkata": 1870, "Bengaluru-Hyderabad": 570, "Bengaluru-Pune": 840,
+            "Bengaluru-Ahmedabad": 1500, "Bengaluru-Jaipur": 2000, "Bengaluru-Lucknow": 2100,
+            "Chennai-Kolkata": 1670, "Chennai-Hyderabad": 630, "Chennai-Pune": 1150, "Chennai-Ahmedabad": 1750,
+            "Chennai-Jaipur": 2100, "Chennai-Lucknow": 2100,
+            "Kolkata-Hyderabad": 1500, "Kolkata-Pune": 2050, "Kolkata-Ahmedabad": 2100, "Kolkata-Jaipur": 1500,
+            "Kolkata-Lucknow": 1000,
+            "Hyderabad-Pune": 560, "Hyderabad-Ahmedabad": 1250, "Hyderabad-Jaipur": 1400, "Hyderabad-Lucknow": 1350,
+            "Pune-Ahmedabad": 660, "Pune-Jaipur": 1200, "Pune-Lucknow": 1450,
+            "Ahmedabad-Jaipur": 660, "Ahmedabad-Lucknow": 1100,
+            "Jaipur-Lucknow": 600,
+            "default": 800
+        };
+
+        function getDistance(pickup, drop) {
+            const key1 = `${pickup}-${drop}`;
+            const key2 = `${drop}-${pickup}`;
+            return distances[key1] || distances[key2] || distances["default"];
+        }
+
+        function updateCabTypeOptions(distance) {
+            const cabTypeSelect = document.getElementById('cab-type');
+            cabTypeSelect.innerHTML = '';
+            let types = [];
+
+            if (distance < 500) {
+                types = ["Sedan", "SUV", "Luxury", "Hatchback", "Electric Car", "Bike Taxi", "Premium Sedan", "SUV XL", "Tempo Traveller", "Mini"];
+            } else if (distance <= 1000) {
+                types = ["Sedan", "SUV", "Luxury", "Electric Car", "Premium Sedan", "SUV XL", "Tempo Traveller"];
+            } else {
+                types = ["SUV XL", "Tempo Traveller", "Luxury"];
+            }
+
+            types.forEach(type => {
+                const option = document.createElement('option');
+                option.value = type;
+                option.textContent = type;
+                cabTypeSelect.appendChild(option);
+            });
+        }
+
+        const pickupSelect = document.getElementById('pickup');
+        const dropSelect = document.getElementById('drop');
+
+        pickupSelect.addEventListener('change', refreshCabTypes);
+        dropSelect.addEventListener('change', refreshCabTypes);
+
+        function refreshCabTypes() {
+            const pickup = pickupSelect.value;
+            const drop = dropSelect.value;
+            if (pickup && drop && pickup !== drop) {
+                const distance = getDistance(pickup, drop);
+                updateCabTypeOptions(distance);
+            }
+        }
+
+        document.getElementById('swap-btn').addEventListener('click', function () {
+            const temp = pickupSelect.value;
+            pickupSelect.value = dropSelect.value;
+            dropSelect.value = temp;
+            refreshCabTypes();
+        });
+
+        document.getElementById('cab-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const pickup = pickupSelect.value;
+            const drop = dropSelect.value;
+            const passengers = document.getElementById('passengers').value;
+            const cabType = document.getElementById('cab-type').value;
+            const cabList = document.getElementById('cab-list');
+            cabList.innerHTML = '';
+
+            if (!pickup || !drop || pickup === drop) {
+                alert('Please select different Pickup and Drop cities.');
+                return;
+            }
+
+            const distance = getDistance(pickup, drop);
+
+            const matchingCabs = cabsData.filter(cab => cab.Type === cabType);
+
+            if (matchingCabs.length === 0) {
+                cabList.innerHTML = "<li>No matching cabs available.</li>";
+            } else {
+                matchingCabs.forEach(cab => {
+                    const price = cab["Base Fare"] + (distance * 5) + (passengers * 50);
+                    const estimatedTime = Math.ceil(distance / 60);
+
+                    const li = document.createElement('li');
+                    li.innerHTML = `
+        <strong>${cab["Cab Name"]} (${cab["Cab Number"]})</strong><br>
+        Type: ${cab.Type}<br>
+        Distance: ${distance} km<br>
+        Estimated Time: ${estimatedTime} hrs<br>
+        Fare: ₹${price}<br>
+        Pickup: ${pickup}<br>
+        Drop: ${drop}<br>
+        Passengers: ${passengers}<br>
+        <button onclick="alert('Booking ${cab['Cab Name']}!')">Book Now</button>
+      `;
+                    cabList.appendChild(li);
+                });
+            }
+        });
+    </script>
+
+</body>
+
+</html>

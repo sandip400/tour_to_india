@@ -1,0 +1,1567 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discover Himachal Pradesh - 7 Day Itinerary</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="itinerary_style.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+        }
+
+        .h2 {
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #e7ece8, #8BC34A);
+            color: white;
+            padding: 18px;
+            border-radius: 12px;
+            width: 80%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+        }
+
+        .map {
+            text-align: center;
+            font-weight: 900;
+            padding: 25px;
+            border-radius: 12px;
+            width: 95%;
+            margin: 20px auto;
+            background-color: #f0f8ff;
+        }
+
+        #map1 {
+            height: 500px;
+            width: 100%;
+            margin-top: 0px;
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .map1 {
+            text-align: center;
+            justify-items: center;
+            font-weight: 900;
+            padding: 20px;
+            border-radius: 12px;
+            width: 60%;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #4CAF50, #8BC34A);
+            color: white;
+            padding: 18px;
+            border-radius: 12px;
+            width: 95%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+        }
+
+        .day-header {
+            margin: 15px 0;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid #4CAF50;
+        }
+
+        .day-title {
+            margin-top: 0;
+            color: #333;
+            font-size: 1.5rem;
+        }
+
+        .day-badge {
+            background-color: #4CAF50;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-right: 10px;
+        }
+
+        .card {
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border: none;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            color: #333;
+            font-weight: 700;
+        }
+
+        .btn-primary {
+            background-color: #4CAF50;
+            border-color: #4CAF50;
+            padding: 10px 20px;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #45a049;
+            border-color: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-outline-light {
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-light:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .timeline-item {
+            margin-bottom: 20px;
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 24px;
+            height: 24px;
+            background-color: #4CAF50;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+        }
+
+        .timeline-content h4 {
+            margin-top: 0;
+            color: #333;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .image-caption {
+            text-align: center;
+            margin-top: 5px;
+            font-style: italic;
+            color: #666;
+        }
+
+        .highlight-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .highlight-item i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .contact-item {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .contact-item i {
+            margin-right: 15px;
+            width: 20px;
+            text-align: center;
+            color: #4CAF50;
+            font-size: 1.2rem;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background-color: #45a049;
+            transform: translateY(-2px);
+        }
+
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #8BC34A;
+            padding-left: 5px;
+        }
+
+        .weather-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .weather-list li {
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .weather-list li:last-child {
+            border-bottom: none;
+        }
+
+        @media (max-width: 768px) {
+            .map1 {
+                width: 95%;
+            }
+
+            .timeline-item {
+                padding-left: 25px;
+            }
+
+            .timeline-marker {
+                width: 20px;
+                height: 20px;
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-map-marked-alt me-2"></i>Discover Himachal Pradesh
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#overview">Overview</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            Itinerary
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#day1">Day 1: Shimla</a></li>
+                            <li><a class="dropdown-item" href="#day2">Day 2: Shimla</a></li>
+                            <li><a class="dropdown-item" href="#day3">Day 3: Kufri & Naldehra</a></li>
+                            <li><a class="dropdown-item" href="#day4">Day 4: Manali</a></li>
+                            <li><a class="dropdown-item" href="#day5">Day 5: Manali</a></li>
+                            <li><a class="dropdown-item" href="#day6">Day 6: Solang Valley</a></li>
+                            <li><a class="dropdown-item" href="#day7">Day 7: Return</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#tips">Travel Tips</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-section">
+        <div class="overlay"></div>
+        <div class="container text-center text-white hero-content">
+            <h1 class="display-3 fw-bold" style="color: #4CAF50;">Explore the Wonders of Himachal Pradesh</h1>
+            <p class="lead" style="color: #8BC34A;">A 7-day journey through mountains, valleys, and cultural heritage
+            </p>
+            <a href="#overview" class="btn btn-lg btn-outline-light mt-3">
+                Start Planning <i class="fas fa-arrow-right ms-2"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- Overview Section -->
+    <section id="overview" class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <h2 class="section-title">Himachal Pradesh: The Land of Snow</h2>
+                    <p class="lead">Himachal Pradesh offers breathtaking mountain landscapes, lush valleys, and rich
+                        cultural heritage. From the colonial charm of Shimla to the adventure hub of Manali, this 7-day
+                        itinerary covers the best of what this northern Indian state has to offer.</p>
+
+                    <div class="highlights mt-4">
+                        <h3>Highlights of the Tour</h3>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="highlight-item">
+                                    <i class="fas fa-landmark text-primary"></i>
+                                    <span>Colonial architecture in Shimla</span>
+                                </div>
+                                <div class="highlight-item">
+                                    <i class="fas fa-utensils text-primary"></i>
+                                    <span>Authentic Himachali cuisine</span>
+                                </div>
+                                <div class="highlight-item">
+                                    <i class="fas fa-skiing text-primary"></i>
+                                    <span>Adventure activities in Solang Valley</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="highlight-item">
+                                    <i class="fas fa-mountain text-primary"></i>
+                                    <span>Himalayan views from Rohtang Pass</span>
+                                </div>
+                                <div class="highlight-item">
+                                    <i class="fas fa-train text-primary"></i>
+                                    <span>Toy train ride in Shimla</span>
+                                </div>
+                                <div class="highlight-item">
+                                    <i class="fas fa-hot-tub text-primary"></i>
+                                    <span>Hot springs at Vashisht</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card info-card">
+                        <div class="card-body">
+                            <h3 class="card-title">Quick Facts</h3>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span><i class="fas fa-calendar-alt text-primary me-2"></i>Duration:</span>
+                                    <span class="fw-bold">7 Days</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span><i class="fas fa-map-marker-alt text-primary me-2"></i>Starting Point:</span>
+                                    <span class="fw-bold">Shimla</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span><i class="fas fa-plane-arrival text-primary me-2"></i>Ending Point:</span>
+                                    <span class="fw-bold">Manali</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span><i class="fas fa-language text-primary me-2"></i>Languages:</span>
+                                    <span class="fw-bold">Hindi, English, Pahari</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span><i class="fas fa-money-bill-wave text-primary me-2"></i>Currency:</span>
+                                    <span class="fw-bold">Indian Rupee (₹)</span>
+                                </li>
+                            </ul>
+                            <div class="mt-3">
+                                <a href="#day1" class="btn btn-primary w-100">View Full Itinerary</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Itinerary Map -->
+    <section class="bg-light py-5">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Your Journey Through Himachal Pradesh</h2>
+            <div class="itinerary-map">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="map-container">
+                            <img src="/placeholder.svg?height=400&width=1000" alt="Himachal Pradesh Map"
+                                class="img-fluid rounded shadow">
+                            <div class="map-overlay">
+                                <p class="text-center text-white">Interactive map will be displayed here</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Day 1 -->
+    <section id="day1" class="itinerary-day py-5">
+        <div class="container">
+            <div class="day-header">
+                <span class="day-badge">Day 1</span>
+                <h2 class="day-title">Arrival in Shimla & City Exploration</h2>
+            </div>
+            <div class="row mt-4">
+                <div class="col-lg-6">
+                    <div class="day-content">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-marker">
+                                    <i class="fas fa-plane-arrival"></i>
+                                </div>
+                                <div class="timeline-content">
+                                    <h4>Morning: Arrival & Check-in</h4>
+                                    <p>Arrive at Shimla by road from Chandigarh or Delhi. Transfer to your hotel in
+                                        central Shimla. Take some time to rest and refresh after your journey.</p>
+                                    <p><strong>Accommodation:</strong> The Oberoi Cecil or Wildflower Hall for luxury
+                                        stays; Hotel Willow Banks or Clarkes Hotel for mid-range options.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker">
+                                    <i class="fas fa-utensils"></i>
+                                </div>
+                                <div class="timeline-content">
+                                    <h4>Afternoon: Lunch & Mall Road</h4>
+                                    <p>Enjoy your first Himachali meal at a traditional restaurant like 'Himachali
+                                        Rasoi' or 'Cafe Sol'. Explore the famous Mall Road, the main street of Shimla
+                                        lined with shops, cafes, and colonial buildings.</p>
+                                    <p><strong>Lunch recommendation:</strong> Try Himachali classics like Madra
+                                        (chickpeas in yogurt gravy), Chana Madra, and Sidu (local bread).</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker">
+                                    <i class="fas fa-monument"></i>
+                                </div>
+                                <div class="timeline-content">
+                                    <h4>Evening: Ridge & Christ Church</h4>
+                                    <p>Visit the Ridge, a large open space in the heart of Shimla offering panoramic
+                                        views of the surrounding mountains. Explore the neo-gothic Christ Church, one of
+                                        the oldest churches in North India.</p>
+                                    <p><strong>Evening activity:</strong> Enjoy the sunset views from the Ridge and take
+                                        a leisurely stroll along the Mall Road as it lights up in the evening.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="day-images">
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <img src="/placeholder.svg?height=250&width=300" alt="Mall Road Shimla"
+                                    class="img-fluid rounded shadow">
+                                <p class="image-caption">Mall Road, Shimla</p>
+                            </div>
+                            <div class="col-6">
+                                <img src="/placeholder.svg?height=250&width=300" alt="Christ Church"
+                                    class="img-fluid rounded shadow">
+                                <p class="image-caption">Christ Church</p>
+                            </div>
+                            <div class="col-12 mt-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><i class="fas fa-lightbulb text-warning me-2"></i>Day 1
+                                            Tips</h5>
+                                        <ul class="card-text">
+                                            <li>Carry a water bottle and stay hydrated, especially due to the high
+                                                altitude.</li>
+                                            <li>Wear comfortable walking shoes as Shimla involves a lot of walking.</li>
+                                            <li>Mall Road is pedestrian-only, so be prepared to walk.</li>
+                                            <li>Acclimatize to the altitude by taking it easy on your first day.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 mt-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><i class="fas fa-cloud-sun text-info me-2"></i>Past 15
+                                            Days Weather Recap - Shimla</h5>
+                                        <p>Weather data for Shimla from March 5–March 19, 2025:</p>
+                                        <ul class="weather-list">
+                                            <li><strong>March 5–9:</strong> Partly cloudy, avg. temp 10–18°C, occasional
+                                                light rain.</li>
+                                            <li><strong>March 10–14:</strong> Clear skies, avg. temp 12–20°C, cool
+                                                nights.</li>
+                                            <li><strong>March 15–19:</strong> Mildly sunny, avg. temp 13–21°C, dry
+                                                conditions.</li>
+                                        </ul>
+                                        <p><small>Source: Replace with actual data from IMD or similar.</small></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Day 2 -->
+    <section id="day2" class="itinerary-day py-5 bg-light">
+        <div class="container">
+            <div class="day-header">
+                <span class="day-badge">Day 2</span>
+                <h2 class="day-title">Shimla Heritage Tour</h2>
+            </div>
+            <div class="row mt-4">
+                <div class="col-lg-6 order-lg-2">
+                    <div class="day-content">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-marker">
+                                    <i class="fas fa-coffee"></i>
+                                </div>
+                                <div class="timeline-content">
+                                    <h4>Morning: Viceregal Lodge</h4>
+                                    <p>Start your day with a visit to the Viceregal Lodge (now Indian Institute of
+                                        Advanced Study), a magnificent British-era building with beautiful gardens. Take
+                                        a guided tour to learn about its historical significance.</p>
+                                    <p><strong>Activity:</strong> Explore the surrounding botanical gardens and enjoy
+                                        the colonial architecture.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker">
+                                    <i class="fas fa-landmark"></i>
+                                </div>
+                                <div class="timeline-content">
+                                    <h4>Afternoon: Jakhu Temple & Hanuman Statue</h4>
+                                    <p>Visit the Jakhu Temple, dedicated to Lord Hanuman, situated at the highest point
+                                        in Shimla. The temple houses a 108-feet tall statue of Lord Hanuman, one of the
+                                        tallest in the world.</p>
+                                    <p><strong>Note:</strong> Be cautious of the monkeys around the temple area. Avoid
+                                        carrying food items or shiny objects.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker">
+                                    <i class="fas fa-moon"></i>
+                                </div>
+                                <div class="timeline-content">
+                                    <h4>Evening: Lakkar Bazaar & Local Cuisine</h4>
+                                    <p>Explore Lakkar Bazaar, famous for its wooden crafts and souvenirs. Enjoy dinner
+                                        at a local restaurant trying authentic Himachali dishes.</p>
+                                    <p><strong>Dinner:</strong> Try local specialties like Dham (traditional festive
+                                        meal), Tudkiya Bhath (spiced rice), and Chha Gosht (lamb curry).</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 order-lg-1">
+                    <div class="day-images">
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <img src="/placeholder.svg?height=250&width=300" alt="Viceregal Lodge"
+                                    class="img-fluid rounded shadow">
+                                <p class="image-caption">Viceregal Lodge</p>
+                            </div>
+                            <div class="col-6">
+                                <img src="/placeholder.svg?height=250&width=300" alt="Jakhu Temple"
+                                    class="img-fluid rounded shadow">
+                                <p class="image-caption">Jakhu Temple</p>
+                            </div>
+                            <div class="col-12 mt-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><i
+                                                class="fas fa-map-marked-alt text-primary me-2"></i>Day 2 Route</h5>
+                                        <p>Hotel → Viceregal Lodge (15 min) → Lunch break → Jakhu Temple (20 min) →
+                                            Lakkar Bazaar (walking distance from Mall Road) → Hotel</p>
+                                        <div class="transportation-options mt-3">
+                                            <span class="badge bg-info me-2"><i class="fas fa-taxi me-1"></i>
+                                                Taxi</span>
+                                            <span class="badge bg-success me-2"><i class="fas fa-walking me-1"></i>
+                                                Walking</span>
+                                            <span class="badge bg-warning text-dark"><i class="fas fa-car me-1"></i>
+                                                Local Transport</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 mt-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><i class="fas fa-cloud-sun text-info me-2"></i>Past 15
+                                            Days Weather Recap - Shimla</h5>
+                                        <p>Weather data for Shimla from March 5–March 19, 2025:</p>
+                                        <ul class="weather-list">
+                                            <li><strong>March 5–9:</strong> Partly cloudy, avg. temp 10–18°C, occasional
+                                                light rain.</li>
+                                            <li><strong>March 10–14:</strong> Clear skies, avg. temp 12–20°C, cool
+                                                nights.</li>
+                                            <li><strong>March 15–19:</strong> Mildly sunny, avg. temp 13–21°C, dry
+                                                conditions.</li>
+                                        </ul>
+                                        <p><small>Source: Replace with actual data from IMD or similar.</small></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Day 3 -->
+    <section id="day3" class="itinerary-day py-5">
+        <div class="container">
+            <div class="day-header">
+                <span class="day-badge">Day 3</span>
+                <h2 class="day-title">Kufri & Naldehra</h2>
+            </div>
+            <div class="row mt-4">
+                <div class="col-lg-6">
+                    <div class="day-content">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-marker">
+                                    <i class="fas fa-car"></i>
+                                </div>
+                                <div class="timeline-content">
+                                    <h4>Morning: Excursion to Kufri</h4>
+                                    <p>After breakfast, drive to Kufri (approximately 30 minutes from Shimla), a small
+                                        hill station known for its scenic beauty and adventure activities. Visit the
+                                        Himalayan Wildlife Zoo which houses various Himalayan species.</p>
+                                    <p><strong>Activity:</strong> Enjoy horseback riding to Mahasu Peak for panoramic
+                                        views of the Himalayas.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker">
+                                    <i class="fas fa-hiking"></i>
+                                </div>
+                                <div class="timeline-content">
+                                    <h4>Afternoon: Naldehra Golf Course</h4>
+                                    <p>Continue to Naldehra, home to one of the oldest and highest golf courses in
+                                        India, designed by Lord Curzon. Enjoy the beautiful cedar forests and panoramic
+                                        views.</p>
+                                    <p><strong>Lunch:</strong> Have a picnic lunch amidst the beautiful surroundings or
+                                        eat at a local restaurant.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker">
+                                    <i class="fas fa-home"></i>
+                                </div>
+                                <div class="timeline-content">
+                                    <h4>Evening: Return to Shimla</h4>
+                                    <p>Return to Shimla by evening. Spend the evening at leisure, perhaps enjoying a
+                                        cultural show or shopping for local handicrafts.</p>
+                                    <p><strong>Dinner:</strong> Try a different local restaurant in Shimla for dinner,
+                                        perhaps sampling some Tibetan influences like momos and thukpa.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="day-images">
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <img src="/placeholder.svg?height=300&width=600" alt="Kufri Landscape"
+                                    class="img-fluid rounded shadow">
+                                <p class="image-caption">Scenic Landscape of Kufri</p>
+                            </div>
+                            <div class="col-12 mt-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><i
+                                                class="fas fa-exclamation-triangle text-warning me-2"></i>Important
+                                            Information</h5>
+                                        <ul class="card-text">
+                                            <li>Kufri can be quite crowded during peak season, try to reach early.</li>
+                                            <li>Horseback riding in Kufri is optional but highly recommended for the
+                                                views.</li>
+                                            <li>Naldehra Golf Course has an entry fee even if you're not playing golf.
+                                            </li>
+                                            <li>Weather can change quickly in the mountains, carry a light jacket.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 mt-3">
+                                <div class="card bg-primary text-white">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><i class="fas fa-mountain me-2"></i>Scenic Views</h5>
+                                        <p>Kufri and Naldehra offer some of the most spectacular views of the Himalayan
+                                            ranges. On a clear day, you can see snow-capped peaks stretching across the
+                                            horizon. Don't forget your camera!</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 mt-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><i class="fas fa-cloud-sun text-info me-2"></i>Past 15
+                                            Days Weather Recap - Kufri & Naldehra</h5>
+                                        <p>Weather data for Kufri and Naldehra from March 5–March 19, 2025:</p>
+                                        <ul class="weather-list">
+                                            <li><strong>March 5–9:</strong> Cool and cloudy, avg. temp 8–16°C, light
+                                                snow possible in Kufri.</li>
+                                            <li><strong>March 10–14:</strong> Sunny, avg. temp 10–18°C, chilly winds.
+                                            </li>
+                                            <li><strong>March 15–19:</strong> Clear and pleasant, avg. temp 11–19°C,
+                                                dry.</li>
+                                        </ul>
+                                        <p><small>Source: Replace with actual data from IMD or similar.</small></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Day 4 -->
+    <section id="day4" class="itinerary-day py-5 bg-light">
+        <div class="container">
+            <div class="day-header">
+                <span class="day-badge">Day 4</span>
+                <h2 class="day-title">Shimla to Manali</h2>
+            </div>
+            <div class="row mt-4">
+                <div class="col-lg-6 order-lg-2">
+                    <div class="day-content">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-marker">
+                                    <i class="fas fa-bus"></i>
+                                </div>
+                                <div class="timeline-content">
+                                    <h4>Morning: Departure to Manali</h4>
+                                    <p>After an early breakfast, check out from your hotel in Shimla and begin your
+                                        journey to Manali (approximately 7-8 hours drive). The route takes you through
+                                        beautiful landscapes, including the Kullu Valley.</p>
+                                    <p><strong>Stops:</strong> Make brief stops at scenic viewpoints along the way for
+                                        photographs and refreshments.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker">
+                                    <i class="fas fa-utensils"></i>
+                                </div>
+                                <div class="timeline-content">
+                                    <h4>Afternoon: Lunch at Kullu</h4>
+                                    <p>Stop at Kullu for lunch and a short break. If time permits, visit the Kullu Shawl
+                                        factories or shops to see the famous Kullu shawls being made.</p>
+                                    <p><strong>Shopping:</strong> Kullu is known for its handwoven shawls, caps, and
+                                        other woolen items.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker">
+                                    <i class="fas fa-hotel"></i>
+                                </div>
+                                <div class="timeline-content">
+                                    <h4>Evening: Arrival in Manali</h4>
+                                    <p>Reach Manali by evening and check into your hotel. Rest and relax after the long
+                                        journey. If energy permits, take a short stroll along the Mall Road in Manali.
+                                    </p>
+                                    <p><strong>Accommodation:</strong> The Himalayan, Span Resort & Spa, or Manuallaya
+                                        Resort for luxury stays; Honeymoon Inn or Johnson Lodge for mid-range options.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 order-lg-1">
+                    <div class="day-images">
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <img src="/placeholder.svg?height=250&width=300" alt="Kullu Valley"
+                                    class="img-fluid rounded shadow">
+                                <p class="image-caption">Kullu Valley</p>
+                            </div>
+                            <div class="col-6">
+                                <img src="/placeholder.svg?height=250&width=300" alt="Manali Town"
+                                    class="img-fluid rounded shadow">
+                                <p class="image-caption">Manali Town</p>
+                            </div>
+                            <div class="col-12 mt-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><i class="fas fa-road me-2 text-info"></i>Travel Details
+                                        </h5>
+                                        <div class="travel-details">
+                                            <div class="d-flex justify-content-between border-bottom py-2">
+                                                <span><strong>Distance:</strong></span>
+                                                <span>250 km approximately</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between border-bottom py-2">
+                                                <span><strong>Travel Time:</strong></span>
+                                                <span>7-8 hours</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between border-bottom py-2">
+                                                <span><strong>Road Condition:</strong></span>
+                                                <span>Mostly good, some winding mountain roads</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between py-2">
+                                                <span><strong>Recommended:</strong></span>
+                                                <span>Private taxi for comfort and flexibility</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 mt-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><i class="fas fa-cloud-sun text-info me-2"></i>Past 15
+                                            Days Weather Recap - Kullu Valley</h5>
+                                        <p>Weather data for Kullu Valley (en route) from March 5–March 19, 2025:</p>
+                                        <ul class="weather-list">
+                                            <li><strong>March 5–9:</strong> Partly cloudy, avg. temp 12–20°C, light
+                                                showers.</li>
+                                            <li><strong>March 10–14:</strong> Mostly sunny, avg. temp 14–22°C, breezy.
+                                            </li>
+                                            <li><strong>March 15–19:</strong> Clear skies, avg. temp 15–23°C, dry
+                                                conditions.</li>
+                                        </ul>
+                                        <p><small>Source: Replace with actual data from IMD or similar.</small></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Day 5 -->
+    <section id="day5" class="itinerary-day py-5">
+        <div class="container">
+            <div class="day-header">
+                <span class="day-badge">Day 5</span>
+                <h2 class="day-title">Manali Exploration</h2>
+            </div>
+            <div class="row mt-4">
+                <div class="col-lg-6">
+                    <div class="day-content">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-marker">
+                                    <i class="fas fa-place-of-worship"></i>
+                                </div>
+                                <div class="timeline-content">
+                                    <h4>Morning: Hadimba Temple</h4>
+                                    <p>After breakfast, visit the ancient Hadimba Temple, a wooden temple dedicated to
+                                        Hadimba Devi, wife of Bhima from the Mahabharata. The temple is surrounded by a
+                                        beautiful cedar forest.</p>
+                                    <p><strong>Next:</strong> Visit the Vashisht Temple and Hot Springs, known for their
+                                        healing properties. You can take a dip in the hot springs if you wish.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker">
+                                    <i class="fas fa-water"></i>
+                                </div>
+                                <div class="timeline-content">
+                                    <h4>Afternoon: Manu Temple & Tibetan Monasteries</h4>
+                                    <p>Visit the Manu Temple, dedicated to sage Manu, the creator of the world according
+                                        to Hindu mythology. Continue to the Tibetan Monasteries in Manali to learn about
+                                        Buddhist culture and traditions.</p>
+                                    <p><strong>Lunch:</strong> Enjoy lunch at a local restaurant, trying Tibetan
+                                        specialties like momos, thukpa, and tingmo.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker">
+                                    <i class="fas fa-shopping-bag"></i>
+                                </div>
+                                <div class="timeline-content">
+                                    <h4>Evening: Mall Road & Local Shopping</h4>
+                                    <p>Spend the evening exploring Mall Road, the main shopping street in Manali. Shop
+                                        for local handicrafts, woolen items, and souvenirs. Enjoy dinner at a restaurant
+                                        on Mall Road.</p>
+                                    <p><strong>Try:</strong> Local Himachali dishes or enjoy international cuisine
+                                        available at various restaurants.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="day-images">
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <img src="/placeholder.svg?height=250&width=300" alt="Hadimba Temple"
+                                    class="img-fluid rounded shadow">
+                                <p class="image-caption">Hadimba Temple</p>
+                            </div>
+                            <div class="col-6">
+                                <img src="/placeholder.svg?height=250&width=300" alt="Vashisht Hot Springs"
+                                    class="img-fluid rounded shadow">
+                                <p class="image-caption">Vashisht Hot Springs</p>
+                            </div>
+                            <div class="col-12 mt-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><i class="fas fa-clock text-primary me-2"></i>Day 5
+                                            Schedule</h5>
+                                        <div class="schedule">
+                                            <div class="d-flex justify-content-between border-bottom py-2">
+                                                <span><strong>9:00 AM - 10:30 AM:</strong></span>
+                                                <span>Hadimba Temple</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between border-bottom py-2">
+                                                <span><strong>11:00 AM - 12:30 PM:</strong></span>
+                                                <span>Vashisht Temple & Hot Springs</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between border-bottom py-2">
+                                                <span><strong>1:00 PM - 2:30 PM:</strong></span>
+                                                <span>Lunch</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between border-bottom py-2">
+                                                <span><strong>3:00 PM - 4:30 PM:</strong></span>
+                                                <span>Manu Temple & Tibetan Monasteries</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between py-2">
+                                                <span><strong>5:00 PM onwards:</strong></span>
+                                                <span>Mall Road & Dinner</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 mt-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><i class="fas fa-cloud-sun text-info me-2"></i>Past 15
+                                            Days Weather Recap - Manali</h5>
+                                        <p>Weather data for Manali from March 5–March 19, 2025:</p>
+                                        <ul class="weather-list">
+                                            <li><strong>March 5–9:</strong> Cool with clouds, avg. temp 6–15°C,
+                                                occasional rain.</li>
+                                            <li><strong>March 10–14:</strong> Clear and sunny, avg. temp 8–17°C, cold
+                                                nights.</li>
+                                            <li><strong>March 15–19:</strong> Pleasant, avg. temp 9–18°C, dry weather.
+                                            </li>
+                                        </ul>
+                                        <p><small>Source: Replace with actual data from IMD or similar.</small></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Day 6 -->
+    <section id="day6" class="itinerary-day py-5 bg-light">
+        <div class="container">
+            <div class="day-header">
+                <span class="day-badge">Day 6</span>
+                <h2 class="day-title">Solang Valley</h2>
+            </div>
+            <div class="row mt-4">
+                <div class="col-lg-6 order-lg-2">
+                    <div class="day-content">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-marker">
+                                    <i class="fas fa-skiing"></i>
+                                </div>
+                                <div class="timeline-content">
+                                    <h4>Morning: Solang Valley Adventure</h4>
+                                    <p>After breakfast, drive to Solang Valley (approximately 30 minutes from Manali), a
+                                        popular spot for adventure activities. Depending on the season, you can enjoy
+                                        paragliding, zorbing, skiing (in winter), or simply enjoy the scenic beauty.</p>
+                                    <p><strong>Activities:</strong> Try paragliding for breathtaking aerial views of the
+                                        valley (weather permitting).</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker">
+                                    <i class="fas fa-utensils"></i>
+                                </div>
+                                <div class="timeline-content">
+                                    <h4>Afternoon: Picnic Lunch & More Activities</h4>
+                                    <p>Enjoy a picnic lunch in the valley or eat at one of the small eateries. Continue
+                                        with more adventure activities or simply relax and enjoy the mountain views.</p>
+                                    <p><strong>Note:</strong> Adventure activities are subject to weather conditions and
+                                        may require additional fees.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker">
+                                    <i class="fas fa-glass-cheers"></i>
+                                </div>
+                                <div class="timeline-content">
+                                    <h4>Evening: Riverside Dinner</h4>
+                                    <p>Return to Manali by evening. Enjoy a special dinner at a riverside restaurant,
+                                        listening to the soothing sound of the Beas River.</p>
+                                    <p><strong>Recommendation:</strong> Try Johnson's Cafe or River Music Cafe for a
+                                        memorable dining experience.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 order-lg-1">
+                    <div class="day-images">
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <img src="/placeholder.svg?height=250&width=300" alt="Solang Valley"
+                                    class="img-fluid rounded shadow">
+                                <p class="image-caption">Solang Valley</p>
+                            </div>
+                            <div class="col-6">
+                                <img src="/placeholder.svg?height=250&width=300" alt="Paragliding in Solang"
+                                    class="img-fluid rounded shadow">
+                                <p class="image-caption">Paragliding in Solang</p>
+                            </div>
+                            <div class="col-12 mt-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><i class="fas fa-info-circle text-info me-2"></i>About
+                                            Solang Valley</h5>
+                                        <p>Solang Valley, situated between Solang village and Beas Kund, offers
+                                            panoramic views of the surrounding snow-capped mountains and glaciers. It's
+                                            a hub for adventure sports in both summer and winter.</p>
+                                        <div class="highlights mt-3">
+                                            <div class="highlight-item">
+                                                <i class="fas fa-mountain text-success"></i>
+                                                <span>Elevation: 2,560 meters (8,400 ft)</span>
+                                            </div>
+                                            <div class="highlight-item">
+                                                <i class="fas fa-snowflake text-primary"></i>
+                                                <span>Winter activities: Skiing, snowboarding</span>
+                                            </div>
+                                            <div class="highlight-item">
+                                                <i class="fas fa-parachute-box text-danger"></i>
+                                                <span>Summer activities: Paragliding, zorbing, trekking</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 mt-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><i class="fas fa-cloud-sun text-info me-2"></i>Past 15
+                                            Days Weather Recap - Solang Valley</h5>
+                                        <p>Weather data for Solang Valley from March 5–March 19, 2025:</p>
+                                        <ul class="weather-list">
+                                            <li><strong>March 5–9:</strong> Cold and cloudy, avg. temp 4–12°C, light
+                                                snow possible.</li>
+                                            <li><strong>March 10–14:</strong> Sunny with clear views, avg. temp 6–14°C,
+                                                windy.</li>
+                                            <li><strong>March 15–19:</strong> Mild and clear, avg. temp 7–15°C, dry
+                                                conditions.</li>
+                                        </ul>
+                                        <p><small>Source: Replace with actual data from IMD or similar.</small></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Day 7 -->
+    <section id="day7" class="itinerary-day py-5">
+        <div class="container">
+            <div class="day-header">
+                <span class="day-badge">Day 7</span>
+                <h2 class="day-title">Manali & Departure</h2>
+            </div>
+            <div class="row mt-4">
+                <div class="col-lg-6">
+                    <div class="day-content">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-marker">
+                                    <i class="fas fa-tree"></i>
+                                </div>
+                                <div class="timeline-content">
+                                    <h4>Morning: Nature Walk</h4>
+                                    <p>Take a morning nature walk along the Beas River or in the nearby Van Vihar
+                                        National Park, a municipal garden with tall deodar trees.</p>
+                                    <p><strong>Activity:</strong> Enjoy the fresh mountain air and peaceful surroundings
+                                        before your departure.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker">
+                                    <i class="fas fa-shopping-bag"></i>
+                                </div>
+                                <div class="timeline-content">
+                                    <h4>Afternoon: Last-Minute Shopping</h4>
+                                    <p>After checking out from your hotel, spend some time doing last-minute shopping
+                                        for souvenirs and local products. The Tibetan Market and Mall Road are good
+                                        options.</p>
+                                    <p><strong>Souvenirs:</strong> Consider buying Kullu shawls, Himachali caps, wooden
+                                        crafts, or local fruit products like apple jam.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker">
+                                    <i class="fas fa-bus"></i>
+                                </div>
+                                <div class="timeline-content">
+                                    <h4>Evening: Departure</h4>
+                                    <p>Depart from Manali to your next destination or return journey. If heading to
+                                        Delhi or Chandigarh, overnight buses are a popular option.</p>
+                                    <p><strong>Alternative:</strong> If your schedule allows, you can extend your stay
+                                        in Manali or visit nearby destinations like Kasol or Naggar.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="day-images">
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <img src="/placeholder.svg?height=300&width=600" alt="Beas River"
+                                    class="img-fluid rounded shadow">
+                                <p class="image-caption">Beas River, Manali</p>
+                            </div>
+                            <div class="col-12 mt-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><i class="fas fa-suitcase text-warning me-2"></i>Packing
+                                            Up</h5>
+                                        <p>As your Himachal Pradesh journey comes to an end, here are some souvenirs to
+                                            consider taking home:</p>
+                                        <ul>
+                                            <li>Kullu shawls and caps</li>
+                                            <li>Tibetan handicrafts</li>
+                                            <li>Himachali wooden crafts</li>
+                                            <li>Local fruit products (apple, apricot)</li>
+                                            <li>Kangra tea</li>
+                                            <li>Himachali honey</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 mt-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><i class="fas fa-cloud-sun text-info me-2"></i>Past 15
+                                            Days Weather Recap - Manali</h5>
+                                        <p>Weather data for Manali from March 5–March 19, 2025:</p>
+                                        <ul class="weather-list">
+                                            <li><strong>March 5–9:</strong> Cool with clouds, avg. temp 6–15°C,
+                                                occasional rain.</li>
+                                            <li><strong>March 10–14:</strong> Clear and sunny, avg. temp 8–17°C, cold
+                                                nights.</li>
+                                            <li><strong>March 15–19:</strong> Pleasant, avg. temp 9–18°C, dry weather.
+                                            </li>
+                                        </ul>
+                                        <p><small>Source: Replace with actual data from IMD or similar.</small></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 mt-3">
+                                <div class="card bg-success text-white">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title"><i class="fas fa-heart me-2"></i>Thank You for Visiting
+                                            Himachal Pradesh</h5>
+                                        <p>We hope you enjoyed your journey through the mountains and valleys of
+                                            Himachal Pradesh. Safe travels and come back soon!</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div style="justify-content: center;display: flex;">
+        <h2 class="map">Map View with alternate routes</h2>
+    </div>
+    <div class="map1">
+        <div id="map1"></div>
+    </div>
+
+    <!-- Travel Tips -->
+    <section id="tips" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Essential Travel Tips</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <div class="text-center mb-3">
+                                <i class="fas fa-calendar-alt fa-3x text-primary"></i>
+                            </div>
+                            <h3 class="card-title text-center">Best Time to Visit</h3>
+                            <ul class="card-text">
+                                <li><strong>Spring (March-May):</strong> Pleasant weather, blooming flowers</li>
+                                <li><strong>Summer (June-August):</strong> Peak tourist season, ideal for escaping the
+                                    heat</li>
+                                <li><strong>Autumn (September-November):</strong> Clear skies, perfect for photography
+                                </li>
+                                <li><strong>Winter (December-February):</strong> Snowfall, skiing, and winter sports
+                                </li>
+                                <li>Avoid monsoon season (July-August) as landslides can disrupt travel</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <div class="text-center mb-3">
+                                <i class="fas fa-plane-departure fa-3x text-primary"></i>
+                            </div>
+                            <h3 class="card-title text-center">Transportation</h3>
+                            <ul class="card-text">
+                                <li><strong>Air:</strong> Nearest airports are Chandigarh and Bhuntar (Kullu)</li>
+                                <li><strong>Train:</strong> Nearest railway stations are Kalka (for Shimla) and
+                                    Pathankot (for Manali)</li>
+                                <li><strong>Road:</strong> Well-connected by road from Delhi, Chandigarh, and other
+                                    major cities</li>
+                                <li><strong>Local Transport:</strong> Taxis, local buses, and shared jeeps available
+                                </li>
+                                <li>Consider hiring a driver for the entire trip for convenience</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <div class="text-center mb-3">
+                                <i class="fas fa-suitcase fa-3x text-primary"></i>
+                            </div>
+                            <h3 class="card-title text-center">Packing Essentials</h3>
+                            <ul class="card-text">
+                                <li><strong>Clothing:</strong> Layers are key; pack for varying temperatures</li>
+                                <li><strong>Summer:</strong> Light woolens, comfortable walking shoes</li>
+                                <li><strong>Winter:</strong> Heavy woolens, thermals, gloves, caps, mufflers</li>
+                                <li><strong>Accessories:</strong> Sunglasses, sunscreen, lip balm, moisturizer</li>
+                                <li><strong>Medication:</strong> Personal medications, altitude sickness pills</li>
+                                <li><strong>Electronics:</strong> Camera, power bank, universal adapter</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mt-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <div class="text-center mb-3">
+                                <i class="fas fa-utensils fa-3x text-primary"></i>
+                            </div>
+                            <h3 class="card-title text-center">Food & Cuisine</h3>
+                            <p>Himachal Pradesh offers a diverse culinary experience:</p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Himachali Cuisine</h5>
+                                    <ul>
+                                        <li>Dham (traditional festive meal)</li>
+                                        <li>Madra (chickpeas in yogurt gravy)</li>
+                                        <li>Chha Gosht (lamb curry)</li>
+                                        <li>Sidu (local bread)</li>
+                                        <li>Babru (black gram fritters)</li>
+                                        <li>Tudkiya Bhath (spiced rice)</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Other Influences</h5>
+                                    <ul>
+                                        <li>Tibetan: Momos, thukpa, tingmo</li>
+                                        <li>Punjabi: Various vegetarian and non-vegetarian dishes</li>
+                                        <li>Street Food: Chana bhatura, aloo tikki</li>
+                                        <li>Beverages: Kangra tea, apple cider</li>
+                                        <li>Desserts: Mittha (sweet rice), fruit wines</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mt-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <div class="text-center mb-3">
+                                <i class="fas fa-info-circle fa-3x text-primary"></i>
+                            </div>
+                            <h3 class="card-title text-center">Practical Information</h3>
+                            <ul class="card-text">
+                                <li><strong>Language:</strong> Hindi is widely spoken. English is understood in tourist
+                                    areas</li>
+                                <li><strong>Currency:</strong> Indian Rupee (₹). ATMs available in major towns</li>
+                                <li><strong>Electricity:</strong> 230V, 50Hz. Type C, D, and M plugs</li>
+                                <li><strong>Internet:</strong> Good connectivity in towns; limited in remote areas</li>
+                                <li><strong>Altitude:</strong> Be aware of altitude sickness in higher regions</li>
+                                <li><strong>Safety:</strong> Himachal Pradesh is generally safe for tourists</li>
+                                <li><strong>Permits:</strong> Inner Line Permits required for certain areas like Spiti
+                                    and Kinnaur</li>
+                                <li><strong>Tipping:</strong> 10% is customary at restaurants if service charge is not
+                                    included</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div style="justify-content: center;display: flex;">
+        <h2 class="h2"><a href="{% url 'recom' %}">Confirm this Itinerary</a></h2>
+    </div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Contact Us</h2>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title">Get in Touch</h3>
+                            <form>
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Your Name</label>
+                                    <input type="text" class="form-control" id="name" placeholder="Enter your name">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email Address</label>
+                                    <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="subject" class="form-label">Subject</label>
+                                    <input type="text" class="form-control" id="subject" placeholder="Enter subject">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="message" class="form-label">Message</label>
+                                    <textarea class="form-control" id="message" rows="5"
+                                        placeholder="Enter your message"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Send Message</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mt-4 mt-lg-0">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h3 class="card-title">Contact Information</h3>
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <i class="fas fa-map-marker-alt text-primary"></i>
+                                    <div>
+                                        <h5>Address</h5>
+                                        <p>123 Tourism Street, Shimla, Himachal Pradesh, India</p>
+                                    </div>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fas fa-phone text-primary"></i>
+                                    <div>
+                                        <h5>Phone</h5>
+                                        <p>+91 98765 43210</p>
+                                    </div>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fas fa-envelope text-primary"></i>
+                                    <div>
+                                        <h5>Email</h5>
+                                        <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
+                                                data-cfemail="cca5a2aaa38cbba9bfb8aea9a2abada0b8a3b9bebfe2afa3a1">[email
+                                                protected]</a></p>
+                                    </div>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fas fa-clock text-primary"></i>
+                                    <div>
+                                        <h5>Working Hours</h5>
+                                        <p>Monday - Saturday: 9:00 AM - 6:00 PM</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="social-media mt-4">
+                                <h5>Follow Us</h5>
+                                <div class="social-icons">
+                                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                                    <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h4>Discover Himachal Pradesh</h4>
+                    <p>Your ultimate guide to exploring the mountains and valleys of Himachal Pradesh, India.</p>
+                    <div class="mt-3">
+                        <a href="#" class="btn btn-outline-light me-2"><i class="fas fa-download me-2"></i>Download
+                            Itinerary</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h4>Quick Links</h4>
+                    <ul class="list-unstyled footer-links">
+                        <li><a href="#overview">Overview</a></li>
+                        <li><a href="#day1">Day 1: Shimla</a></li>
+                        <li><a href="#day3">Day 3: Kufri & Naldehra</a></li>
+                        <li><a href="#day4">Day 4: Manali</a></li>
+                        <li><a href="#day6">Day 6: Solang Valley</a></li>
+                        <li><a href="#tips">Travel Tips</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe to our newsletter for travel tips and exclusive offers.</p>
+                    <form class="mt-3">
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control" placeholder="Your Email" aria-label="Your Email">
+                            <button class="btn btn-primary" type="button">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <hr class="mt-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0">© 2025 Discover Himachal Pradesh. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="#" class="text-white me-3">Privacy Policy</a>
+                    <a href="#" class="text-white me-3">Terms of Service</a>
+                    <a href="#" class="text-white">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Activate scrollspy
+        const scrollSpy = new bootstrap.ScrollSpy(document.body, {
+            target: '#navbarNav'
+        });
+
+        // Add fixed-top class to navbar when scrolled
+        window.addEventListener('scroll', function () {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('navbar-scrolled');
+            } else {
+                navbar.classList.remove('navbar-scrolled');
+            }
+        });
+    </script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // --- Map 1: Itinerary Map ---
+        const map1 = L.map('map1').setView([31.1048, 77.1734], 7);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map1);
+
+        // Primary itinerary locations
+        const primaryLocations = [
+            { name: "Shimla", lat: 31.1048, lng: 77.1734, alternate: "Via Chail" },
+            { name: "Kufri", lat: 31.0982, lng: 77.2674, alternate: "Via Mashobra" },
+            { name: "Naldehra", lat: 31.1716, lng: 77.1872, alternate: "Via Fagu" },
+            { name: "Manali", lat: 32.2432, lng: 77.1892, alternate: "Via Mandi" },
+            { name: "Solang Valley", lat: 32.3167, lng: 77.1667, alternate: "Via Old Manali" },
+            { name: "Kullu", lat: 31.9579, lng: 77.1095, alternate: "Via Bhuntar" },
+        ];
+
+        // Alternative routes
+        const alternateRoutes = [
+            [[31.1048, 77.1734], [30.9717, 77.1836], [31.0982, 77.2674]], // Shimla -> Kufri via Chail
+            [[31.0982, 77.2674], [31.1446, 77.2181], [31.1716, 77.1872]], // Kufri -> Naldehra via Mashobra
+            [[31.1716, 77.1872], [31.0109, 77.2840], [32.2432, 77.1892]], // Naldehra -> Manali via Fagu
+            [[32.2432, 77.1892], [31.7055, 76.9326], [31.9579, 77.1095]], // Manali -> Kullu via Mandi
+            [[32.2432, 77.1892], [32.2565, 77.1745], [32.3167, 77.1667]], // Manali -> Solang Valley via Old Manali
+            [[31.9579, 77.1095], [31.8786, 77.1556], [31.8715, 77.2028]]  // Kullu -> Bhuntar
+        ];
+        // Add primary route markers to map1
+        primaryLocations.forEach(location => {
+            L.marker([location.lat, location.lng]).addTo(map1)
+                .bindPopup(`<b>${location.name}</b><br>Alternate Route: ${location.alternate}`);
+        });
+
+        // Draw primary route (blue) on map1
+        const primaryRouteCoordinates = primaryLocations.map(loc => [loc.lat, loc.lng]);
+        L.polyline(primaryRouteCoordinates, { color: 'blue', weight: 5 }).addTo(map1)
+            .bindPopup("Primary Route");
+
+        // Draw alternate routes (red) on map1
+        alternateRoutes.forEach(route => {
+            L.polyline(route, { color: 'red', weight: 4, dashArray: '10, 10' }).addTo(map1)
+                .bindPopup("Alternate Route");
+        });
+
+        // Fit map1 to show all routes
+        map1.fitBounds(L.polyline(primaryRouteCoordinates).getBounds());
+    </script>
+</body>
+
+</html>
+
+<Actions>
+    <Action name="Add responsive design improvements"
+        description="Enhance mobile responsiveness for better viewing on small devices" />
+    <Action name="Add image gallery" description="Create a photo gallery for each day's attractions" />
+    <Action name="Implement dark mode" description="Add a dark mode toggle for better night viewing" />
+    <Action name="Add booking functionality" description="Implement a booking form to reserve this itinerary" />
+    <Action name="Create printable version" description="Add a printer-friendly version of the itinerary" />
+</Actions>

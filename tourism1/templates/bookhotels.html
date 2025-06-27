@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hotel Booking (Responsive Improved)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    h1,
+    h2 {
+      text-align: center;
+      color: #2b2b2b;
+    }
+
+    form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .form-group {
+      flex: 1 1 200px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      font-weight: 500;
+      color: #555;
+      margin-bottom: 5px;
+    }
+
+    select,
+    input {
+      padding: 14px;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      font-size: 16px;
+      transition: border-color 0.3s;
+    }
+
+    select:focus,
+    input:focus {
+      border-color: #008cff;
+      outline: none;
+    }
+
+    button[type="submit"] {
+      flex: 1 1 100%;
+      padding: 18px;
+      margin-top: 10px;
+      background-color: #008cff;
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #0070e0;
+    }
+
+    #hotels {
+      margin-top: 40px;
+    }
+
+    #hotel-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+      list-style: none;
+      padding: 0;
+    }
+
+    #hotel-list li {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    #hotel-list button {
+      margin-top: 15px;
+      background-color: #34a853;
+      border: none;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: bold;
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    #hotel-list button:hover {
+      background-color: #2c8e45;
+    }
+
+    @media (max-width: 600px) {
+      form {
+        flex-direction: column;
+      }
+
+      #hotel-list {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Book Your Hotel</h1>
+
+    <form id="hotel-form">
+      <div class="form-group">
+        <label>State</label>
+        <select id="state" required>
+          <option value="">Select State</option>
+          <option value="Goa">Goa</option>
+          <option value="Himachal Pradesh">Himachal Pradesh</option>
+          <option value="Kerala">Kerala</option>
+          <option value="Maharashtra">Maharashtra</option>
+          <option value="Manipur">Manipur</option>
+          <option value="Punjab">Punjab</option>
+          <option value="Rajasthan">Rajasthan</option>
+          <option value="Sikkim">Sikkim</option>
+          <option value="Tamil Nadu">Tamil Nadu</option>
+          <option value="West Bengal">West Bengal</option>
+          <option value="Delhi">Delhi</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Check-in</label>
+        <input type="date" id="checkin" required>
+      </div>
+
+      <div class="form-group">
+        <label>Check-out</label>
+        <input type="date" id="checkout" required>
+      </div>
+
+      <div class="form-group">
+        <label>Guests</label>
+        <input type="number" id="guests" value="1" min="1" required>
+      </div>
+
+      <button type="submit">Search Hotels</button>
+    </form>
+
+    <div>
+      <label>Prices listed for 1 room per day</label>
+    </div>
+
+    <div id="hotels">
+      <h2>Available Hotels</h2>
+      <ul id="hotel-list"></ul>
+    </div>
+  </div>
+
+  <script>
+
+    const hotelsData = [
+      { "Hotel Name": "The Oberoi Grand", "City": "Kolkata", "State": "West Bengal", "Rating": 5, "Price (INR)": 12000 },
+      { "Hotel Name": "Taj Bengal", "City": "Kolkata", "State": "West Bengal", "Rating": 5, "Price (INR)": 13500 },
+      { "Hotel Name": "ITC Royal Bengal", "City": "Kolkata", "State": "West Bengal", "Rating": 5, "Price (INR)": 14000 },
+      { "Hotel Name": "The Westin Kolkata Rajarhat", "City": "Kolkata", "State": "West Bengal", "Rating": 5, "Price (INR)": 9500 },
+      { "Hotel Name": "Courtyard by Marriott", "City": "Siliguri", "State": "West Bengal", "Rating": 5, "Price (INR)": 8500 },
+      { "Hotel Name": "The Elgin", "City": "Darjeeling", "State": "West Bengal", "Rating": 4, "Price (INR)": 11000 },
+      { "Hotel Name": "Windamere Hotel", "City": "Darjeeling", "State": "West Bengal", "Rating": 4, "Price (INR)": 9500 },
+      { "Hotel Name": "Elgin Fairlawn", "City": "Kolkata", "State": "West Bengal", "Rating": 4, "Price (INR)": 7000 },
+      { "Hotel Name": "Cedar Inn", "City": "Darjeeling", "State": "West Bengal", "Rating": 4, "Price (INR)": 8500 },
+      { "Hotel Name": "Ging Tea House", "City": "Darjeeling", "State": "West Bengal", "Rating": 4, "Price (INR)": 12000 },
+      { "Hotel Name": "MAYFAIR Tea Resort", "City": "Siliguri", "State": "West Bengal", "Rating": 5, "Price (INR)": 10500 },
+      { "Hotel Name": "The Ffort Raichak", "City": "Raichak", "State": "West Bengal", "Rating": 4, "Price (INR)": 9000 },
+      { "Hotel Name": "Vedic Village Spa Resort", "City": "Kolkata", "State": "West Bengal", "Rating": 4, "Price (INR)": 9500 },
+      { "Hotel Name": "The Oberoi New Delhi", "City": "New Delhi", "State": "Delhi", "Rating": 5, "Price (INR)": 27500 },
+      { "Hotel Name": "The Leela Palace New Delhi", "City": "New Delhi", "State": "Delhi", "Rating": 5, "Price (INR)": 29500 },
+      { "Hotel Name": "Taj Mahal Hotel", "City": "New Delhi", "State": "Delhi", "Rating": 5, "Price (INR)": 24000 },
+      { "Hotel Name": "ITC Maurya", "City": "New Delhi", "State": "Delhi", "Rating": 5, "Price (INR)": 22000 },
+      { "Hotel Name": "The Lodhi", "City": "New Delhi", "State": "Delhi", "Rating": 5, "Price (INR)": 26000 },
+      { "Hotel Name": "Andaz Delhi", "City": "New Delhi", "State": "Delhi", "Rating": 5, "Price (INR)": 18000 },
+      { "Hotel Name": "Shangri-La's - Eros Hotel", "City": "New Delhi", "State": "Delhi", "Rating": 5, "Price (INR)": 20000 },
+      { "Hotel Name": "The Imperial New Delhi", "City": "New Delhi", "State": "Delhi", "Rating": 5, "Price (INR)": 25000 },
+      { "Hotel Name": "The Claridges", "City": "New Delhi", "State": "Delhi", "Rating": 5, "Price (INR)": 15000 },
+      { "Hotel Name": "Maidens Hotel", "City": "New Delhi", "State": "Delhi", "Rating": 5, "Price (INR)": 14000 },
+      { "Hotel Name": "Wildflower Hall, An Oberoi Resort", "City": "Shimla", "State": "Himachal Pradesh", "Rating": 5, "Price (INR)": 30000 },
+      { "Hotel Name": "The Oberoi Cecil", "City": "Shimla", "State": "Himachal Pradesh", "Rating": 5, "Price (INR)": 25000 },
+      { "Hotel Name": "Taj Theog Resort & Spa", "City": "Theog", "State": "Himachal Pradesh", "Rating": 5, "Price (INR)": 22000 },
+      { "Hotel Name": "Radisson Blu Resort", "City": "Dharamshala", "State": "Himachal Pradesh", "Rating": 5, "Price (INR)": 18000 },
+      { "Hotel Name": "Hyatt Regency", "City": "Dharamshala", "State": "Himachal Pradesh", "Rating": 5, "Price (INR)": 17000 },
+      { "Hotel Name": "The Himalayan", "City": "Manali", "State": "Himachal Pradesh", "Rating": 5, "Price (INR)": 15000 },
+      { "Hotel Name": "Baragarh Resort & Spa, IHCL SeleQtions", "City": "Manali", "State": "Himachal Pradesh", "Rating": 5, "Price (INR)": 16000 },
+      { "Hotel Name": "WelcomHeritage Elysium Resort & Spa", "City": "Shimla", "State": "Himachal Pradesh", "Rating": 5, "Price (INR)": 14000 },
+      { "Hotel Name": "Storii by ITC Hotels, The Kaba Retreat", "City": "Solan", "State": "Himachal Pradesh", "Rating": 5, "Price (INR)": 13000 },
+      { "Hotel Name": "The Orchid Shimla", "City": "Shimla", "State": "Himachal Pradesh", "Rating": 5, "Price (INR)": 12000 },
+      { "Hotel Name": "Hotel Willow Banks", "City": "Shimla", "State": "Himachal Pradesh", "Rating": 4, "Price (INR)": 10000 },
+      { "Hotel Name": "Clarkes Hotel", "City": "Shimla", "State": "Himachal Pradesh", "Rating": 5, "Price (INR)": 13000 },
+      { "Hotel Name": "The Leela Palace Chennai", "City": "Chennai", "State": "Tamil Nadu", "Rating": 5, "Price (INR)": 12500 },
+      { "Hotel Name": "ITC Grand Chola", "City": "Chennai", "State": "Tamil Nadu", "Rating": 5, "Price (INR)": 12300 },
+      { "Hotel Name": "Taj Coromandel", "City": "Chennai", "State": "Tamil Nadu", "Rating": 5, "Price (INR)": 11000 },
+      { "Hotel Name": "Park Hyatt Chennai", "City": "Chennai", "State": "Tamil Nadu", "Rating": 5, "Price (INR)": 10000 },
+      { "Hotel Name": "The Westin Chennai Velachery", "City": "Chennai", "State": "Tamil Nadu", "Rating": 5, "Price (INR)": 9500 },
+      { "Hotel Name": "Taj Club House", "City": "Chennai", "State": "Tamil Nadu", "Rating": 5, "Price (INR)": 9000 },
+      { "Hotel Name": "Trident Chennai", "City": "Chennai", "State": "Tamil Nadu", "Rating": 5, "Price (INR)": 8500 },
+      { "Hotel Name": "The Park Chennai", "City": "Chennai", "State": "Tamil Nadu", "Rating": 5, "Price (INR)": 8000 },
+      { "Hotel Name": "Radisson Blu Hotel Chennai City Centre", "City": "Chennai", "State": "Tamil Nadu", "Rating": 5, "Price (INR)": 7500 },
+      { "Hotel Name": "Hilton Chennai", "City": "Chennai", "State": "Tamil Nadu", "Rating": 5, "Price (INR)": 7000 },
+      { "Hotel Name": "The Taj Mahal Palace", "City": "Mumbai", "State": "Maharashtra", "Rating": 5, "Price (INR)": 25000 },
+      { "Hotel Name": "The Oberoi Mumbai", "City": "Mumbai", "State": "Maharashtra", "Rating": 5, "Price (INR)": 24000 },
+      { "Hotel Name": "The St. Regis Mumbai", "City": "Mumbai", "State": "Maharashtra", "Rating": 5, "Price (INR)": 22000 },
+      { "Hotel Name": "Four Seasons Hotel Mumbai", "City": "Mumbai", "State": "Maharashtra", "Rating": 5, "Price (INR)": 21000 },
+      { "Hotel Name": "JW Marriott Mumbai Juhu", "City": "Mumbai", "State": "Maharashtra", "Rating": 5, "Price (INR)": 20000 },
+      { "Hotel Name": "Trident Nariman Point", "City": "Mumbai", "State": "Maharashtra", "Rating": 5, "Price (INR)": 19000 },
+      { "Hotel Name": "Taj Lands End", "City": "Mumbai", "State": "Maharashtra", "Rating": 5, "Price (INR)": 18000 },
+      { "Hotel Name": "Sofitel Mumbai BKC", "City": "Mumbai", "State": "Maharashtra", "Rating": 5, "Price (INR)": 17000 },
+      { "Hotel Name": "ITC Grand Central", "City": "Mumbai", "State": "Maharashtra", "Rating": 5, "Price (INR)": 16000 },
+      { "Hotel Name": "InterContinental Marine Drive", "City": "Mumbai", "State": "Maharashtra", "Rating": 5, "Price (INR)": 15000 },
+      { "Hotel Name": "The Leela Goa", "City": "Cavelossim", "State": "Goa", "Rating": 5, "Price (INR)": 20000 },
+      { "Hotel Name": "Taj Exotica Resort & Spa", "City": "Benaulim", "State": "Goa", "Rating": 5, "Price (INR)": 18000 },
+      { "Hotel Name": "ITC Grand Goa Resort & Spa", "City": "Arossim", "State": "Goa", "Rating": 5, "Price (INR)": 17000 },
+      { "Hotel Name": "Grand Hyatt Goa", "City": "Bambolim", "State": "Goa", "Rating": 5, "Price (INR)": 16000 },
+      { "Hotel Name": "W Goa", "City": "Vagator", "State": "Goa", "Rating": 5, "Price (INR)": 15000 },
+      { "Hotel Name": "Alila Diwa Goa", "City": "Majorda", "State": "Goa", "Rating": 5, "Price (INR)": 14000 },
+      { "Hotel Name": "Taj Fort Aguada Resort & Spa", "City": "Candolim", "State": "Goa", "Rating": 5, "Price (INR)": 13000 },
+      { "Hotel Name": "Ahilya by the Sea", "City": "Nerul", "State": "Goa", "Rating": 5, "Price (INR)": 12000 },
+      { "Hotel Name": "Planet Hollywood Beach Resort", "City": "Utorda", "State": "Goa", "Rating": 5, "Price (INR)": 11000 },
+      { "Hotel Name": "JW Marriott Goa", "City": "Vagator", "State": "Goa", "Rating": 5, "Price (INR)": 10000 },
+      { "Hotel Name": "The Khyber Himalayan Resort & Spa", "City": "Gulmarg", "State": "Jammu and Kashmir", "Rating": 5, "Price (INR)": 22000 },
+      { "Hotel Name": "Lalit Grand Palace", "City": "Srinagar", "State": "Jammu and Kashmir", "Rating": 5, "Price (INR)": 20000 },
+      { "Hotel Name": "Vivanta Dal View", "City": "Srinagar", "State": "Jammu and Kashmir", "Rating": 5, "Price (INR)": 18000 },
+      { "Hotel Name": "Hotel Heevan", "City": "Pahalgam", "State": "Jammu and Kashmir", "Rating": 4, "Price (INR)": 8500 },
+      { "Hotel Name": "Hotel Pine Spring", "City": "Gulmarg", "State": "Jammu and Kashmir", "Rating": 4, "Price (INR)": 8000 },
+      { "Hotel Name": "Royal Hillton Pahalgam", "City": "Pahalgam", "State": "Jammu and Kashmir", "Rating": 4, "Price (INR)": 9500 },
+      { "Hotel Name": "Kumarakom Lake Resort", "City": "Kumarakom", "State": "Kerala", "Rating": 5, "Price (INR)": 20000 },
+      { "Hotel Name": "Taj Green Cove Resort & Spa", "City": "Kovalam", "State": "Kerala", "Rating": 5, "Price (INR)": 18000 },
+      { "Hotel Name": "Brunton Boatyard", "City": "Kochi", "State": "Kerala", "Rating": 5, "Price (INR)": 17000 },
+      { "Hotel Name": "The Leela Kovalam, A Raviz Hotel", "City": "Kovalam", "State": "Kerala", "Rating": 5, "Price (INR)": 19000 },
+      { "Hotel Name": "Spice Village – CGH Earth", "City": "Thekkady", "State": "Kerala", "Rating": 4, "Price (INR)": 13000 },
+      { "Hotel Name": "Niraamaya Retreats Surya Samudra", "City": "Kovalam", "State": "Kerala", "Rating": 5, "Price (INR)": 16000 },
+      { "Hotel Name": "Spice Routes Luxury Cruises", "City": "Alleppey", "State": "Kerala", "Rating": 5, "Price (INR)": 25000 },
+      { "Hotel Name": "Xandari Riverscapes", "City": "Alleppey", "State": "Kerala", "Rating": 5, "Price (INR)": 22000 },
+      { "Hotel Name": "Rainbow Cruises", "City": "Alleppey", "State": "Kerala", "Rating": 4, "Price (INR)": 18000 },
+      { "Hotel Name": "Spice Coast Cruises – CGH Earth", "City": "Alleppey", "State": "Kerala", "Rating": 5, "Price (INR)": 23000 },
+      { "Hotel Name": "Pulickattil Houseboats", "City": "Alleppey", "State": "Kerala", "Rating": 4, "Price (INR)": 16000 }
+    ]
+
+
+
+    document.getElementById('hotel-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const state = document.getElementById('state').value.toLowerCase();
+      const hotelList = document.getElementById('hotel-list');
+      hotelList.innerHTML = '';
+
+      const matchedHotels = hotelsData.filter(hotel => hotel.State.toLowerCase() === state);
+
+      if (matchedHotels.length > 0) {
+        matchedHotels.forEach(hotel => {
+          const li = document.createElement('li');
+          li.innerHTML = `
+            <strong>${hotel["Hotel Name"]}</strong><br>
+            City: ${hotel.City}<br>
+            State: ${hotel.State}<br>
+            Rating: ${hotel.Rating}★<br>
+            Price: ₹${hotel["Price (INR)"]}<br>
+            <button onclick="bookHotel('${hotel["Hotel Name"]}')">Book Now</button>
+          `;
+          hotelList.appendChild(li);
+        });
+      } else {
+        hotelList.innerHTML = '<li>No hotels found for the selected state.</li>';
+      }
+    });
+
+    function bookHotel(hotelName) {
+      alert('Booking hotel: ' + hotelName);
+    }
+  </script>
+
+</body>
+
+</html>

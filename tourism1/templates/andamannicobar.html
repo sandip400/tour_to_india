@@ -1,0 +1,2633 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Andaman and Nicobar Islands</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> -->
+  <style>
+    .wb {
+      font-size: 8vw;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+      border-spacing: 0;
+      border: 1px solid #ddd;
+    }
+
+    td,
+    th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+      font-size: 1.5vw;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+
+    .trip {
+      text-align: center;
+      font-weight: 900;
+      background: orangered;
+      padding: 20px;
+      border-radius: 20px;
+      width: 60%;
+    }
+
+    p,
+    li,
+    .text {
+      font-size: 1.5vw;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-weight: 600;
+    }
+
+    h4 {
+      font-weight: 900;
+    }
+
+    img {
+      border-radius: 10px;
+      display: block;
+      margin: auto;
+    }
+
+    @media screen and (max-width: 850px) {
+
+      p,
+      li,
+      .text,
+      td,
+      th {
+        font-size: 2vw;
+        ;
+      }
+
+    }
+
+    @media screen and (max-width: 500px) {
+
+      p,
+      li,
+      .text,
+      td,
+      th {
+        font-size: 4.5vw;
+        ;
+      }
+
+    }
+
+    .box:nth-of-type(odd) {
+      background: #f3b37185;
+      padding: 10px;
+    }
+
+    .weather-container {
+            border-radius: 15px;
+            background: #f0fdf4;
+            padding: 15px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .weather-card {
+            text-align: center;
+            border-radius: 10px;
+            padding: 10px;
+            background: white;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+        .aqi {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            color: white;
+        }
+        .aqi-bad { background: purple; }
+        .aqi-moderate { background: orange; }
+        .aqi-good { background: green; }
+        .best-time {
+            background: #d1fae5;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 15px;
+            color: green;
+        }
+        .wet {
+            max-width: 50px;
+        }
+        
+        .trip {
+          font-size: 18px;
+          padding: 10px 20px;
+          cursor: pointer;
+          background-color:rgb(231, 36, 36);
+          color: white;
+          border: none;
+          border-radius: 5px;
+      }
+      .modal {
+          display: none;
+          position: fixed;
+          z-index: 1;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0,0,0,0.5);
+      }
+      .modal-content {
+          background-color: #fff;
+          margin: 10% auto;
+          padding: 20px;
+          border-radius: 10px;
+          width: 40%;
+          box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+          text-align: center;
+      }
+      .close {
+          color: #aaa;
+          float: right;
+          font-size: 28px;
+          font-weight: bold;
+          cursor: pointer;
+      }
+      .trip-options {
+          display: flex;
+          justify-content: center;
+          gap: 20px;
+          margin-top: 20px;
+      }
+      .trip-options a {
+          display: block;
+          width: 120px;
+          padding: 10px;
+          background-color: #28a745;
+          color: white;
+          text-decoration: none;
+          border-radius: 5px;
+      }
+  </style>
+</head>
+
+<body>
+
+
+  <!-- <h2>Carousel Example</h2> -->
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+      <li data-target="#myCarousel" data-slide-to="4"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+
+      <div class="item active">
+        <img src="/placeholder.svg?height=800&width=1200" alt="Radhanagar Beach" style="width:100%; height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Radhanagar Beach</h3>
+          <p>We love the pristine white sands and crystal clear waters!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="/placeholder.svg?height=800&width=1200" alt="Cellular Jail" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Cellular Jail</h3>
+          <p>The historic monument and symbol of India's freedom struggle!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="/placeholder.svg?height=800&width=1200" alt="Ross Island" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Ross Island</h3>
+          <p>A glimpse into the colonial past!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="/placeholder.svg?height=800&width=1200" alt="Havelock Island" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Havelock Island</h3>
+          <p>We love the coral reefs and diving spots!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="/placeholder.svg?height=800&width=1200" alt="Mangrove Forests" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Mangrove Forests</h3>
+          <p>We love the rich biodiversity of the mangrove ecosystems!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+  <div class="container">
+    <br><br>
+    <h1 class="wb">ANDAMAN AND NICOBAR ISLANDS</h1><br>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <img src="/placeholder.svg?height=700&width=500" alt="Andaman and Nicobar Islands Map" style="height:700px; width: -webkit-fill-available;">
+
+        </div>
+        <div class="col-sm-6">
+          <h1>Andaman and Nicobar Islands: Paradise in the Bay of Bengal</h1>
+          <p class="text">The Andaman and Nicobar Islands are a union territory of India consisting of 572 islands, of which only about 38 are inhabited. Known for their pristine beaches, coral reefs, rich marine life, and lush tropical rainforests, these islands offer a unique blend of natural beauty, indigenous cultures, and colonial history.</p>
+
+          <ul>
+            <li><b>Location --</b> Bay of Bengal, Southeast of mainland India</li>
+            <li><b>Capital --</b> Port Blair</li>
+            <li><b>Official Language --</b> Hindi, English</li>
+            <li><b>Area --</b> 8,249 sq. km</li>
+            <li><b>Population --</b> ~400,000</li>
+            <li><b>Geography --</b> 572 islands (38 inhabited) divided into Andaman Islands and Nicobar Islands</li>
+            <li><b>Major Islands --</b> North Andaman, Middle Andaman, South Andaman, Little Andaman, Great Nicobar</li>
+            <li><b>Major Festivals --</b> Island Tourism Festival, Beach Festival, Subhash Mela, Monsoon Festival</li>
+            <li><b>State Animal --</b> Dugong (Sea Cow)</li>
+            <li><b>State Flower --</b> Pyinma (Lagerstroemia speciosa)</li>
+            <li><b>State Tree --</b> Andaman Padauk</li>
+            <li><b>State Bird --</b> Andaman Wood Pigeon</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <br>
+    <hr>
+    <div>
+      <h1>📌 Districts & Divisions of Andaman and Nicobar Islands</h1>
+      <br>
+      <div style="overflow-x:auto;">
+        <table>
+          <tr>
+            <th>Division</th>
+            <th>Districts</th>
+            <th>Key Highlights</th>
+          </tr>
+          <tr>
+            <td>Andaman Division</td>
+            <td>1. North & Middle Andaman 2. South Andaman</td>
+            <td>Port Blair (Capital), Cellular Jail, Radhanagar Beach, Havelock Island, Ross Island</td>
+          </tr>
+          <tr>
+            <td>Nicobar Division</td>
+            <td>3. Nicobar</td>
+            <td>Great Nicobar Biosphere Reserve, Indigenous Nicobarese Tribes, Campbell Bay National Park</td>
+          </tr>
+        </table>
+      </div>
+      <br><br>
+      <h1>🔹 Major Highlights of Some Key Areas</h1><br><br>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <ul>
+              <li><b>Port Blair --</b> Capital city, home to the historic Cellular Jail and administrative center.</li>
+              <li><b>Havelock Island (Swaraj Dweep) --</b> Famous for Radhanagar Beach, water sports, and diving.</li>
+              <li><b>Neil Island (Shaheed Dweep) --</b> Known for its pristine beaches, coral reefs, and natural rock formations.</li>
+              <li><b>Ross Island (Netaji Subhas Chandra Bose Island) --</b> Former British administrative headquarters with colonial ruins.</li>
+              <li><b>Baratang Island --</b> Home to limestone caves, mud volcanoes, and mangrove creeks.</li>
+              <li><b>Little Andaman --</b> Known for Butler Bay Beach, waterfalls, and elephant training center.</li>
+              <li><b>Car Nicobar --</b> Largest of the Nicobar Islands and home to the Nicobarese tribe.</li>
+              <li><b>Great Nicobar --</b> Southernmost island with rich biodiversity and Shompen tribal communities.</li>
+              <li><b>North Sentinel Island --</b> Home to the isolated Sentinelese tribe, one of the last uncontacted peoples.</li>
+            </ul>
+          </div>
+          <div class="col-sm-6">
+            <img src="/placeholder.svg?height=450&width=500" alt="Andaman and Nicobar Islands Map" style="height:450px;width: -webkit-fill-available;">
+
+          </div>
+        </div>
+      </div>
+    </div><br><br>
+    <!-- <div class="container">
+      <div class="weather-container">
+          <h4 class="text-center"><strong>Weather in Andaman and Nicobar Islands</strong></h4>
+          <div class="row">
+               January 
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Jan</h6>
+                      <p>23/30°C</p>
+                      <span class="aqi aqi-good">AQI 25</span>
+                  </div>
+              </div>
+               February 
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Feb</h6>
+                      <p>23/31°C</p>
+                      <span class="aqi aqi-good">AQI 22</span>
+                  </div>
+              </div>
+               March 
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Mar</h6>
+                      <p>24/32°C</p>
+                      <span class="aqi aqi-good">AQI 20</span>
+                  </div>
+              </div>
+               April 
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Apr</h6>
+                      <p>25/33°C</p>
+                      <span class="aqi aqi-good">AQI 18</span>
+                  </div>
+              </div>
+               May 
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>May</h6>
+                      <p>25/32°C</p>
+                      <span class="aqi aqi-good">AQI 15</span>
+                  </div>
+              </div>
+               June 
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="rain.png" alt="rain">
+                      <h6>Jun</h6>
+                      <p>24/30°C</p>
+                      <span class="aqi aqi-good">AQI 12</span>
+                  </div>
+              </div>
+               July 
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="rain.png" alt="rain">
+                      <h6>Jul</h6>
+                      <p>24/29°C</p>
+                      <span class="aqi aqi-good">AQI 10</span>
+                  </div>
+              </div>
+               August 
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="rain.png" alt="rain">
+                      <h6>Aug</h6>
+                      <p>24/29°C</p>
+                      <span class="aqi aqi-good">AQI 12</span>
+                  </div>
+              </div>
+               September 
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="rain.png" alt="rain">
+                      <h6>Sep</h6>
+                      <p>24/29°C</p>
+                      <span class="aqi aqi-good">AQI 15</span>
+                  </div>
+              </div>
+               October 
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Oct</h6>
+                      <p>24/30°C</p>
+                      <span class="aqi aqi-good">AQI 18</span>
+                  </div>
+              </div>
+               November 
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Nov</h6>
+                      <p>24/30°C</p>
+                      <span class="aqi aqi-good">AQI 20</span>
+                  </div>
+              </div>
+               December 
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Dec</h6>
+                      <p>23/30°C</p>
+                      <span class="aqi aqi-good">AQI 22</span>
+                  </div>
+              </div>
+          </div>
+          <div class="text-center">
+              <div class="best-time">🏆 Best time to visit: October - May</div>
+          </div>
+      </div>
+    </div> -->
+    <div class="container">
+      <div class="weather-container">
+          <h4 class="text-center"><strong>Weather in Lakshadweep</strong></h4>
+          <div class="row">
+              <!-- January -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Jan</h6>
+                      <p>25/30°C</p>
+                      <span class="aqi aqi-good">AQI 25</span>
+                  </div>
+              </div>
+              <!-- February -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Feb</h6>
+                      <p>25/31°C</p>
+                      <span class="aqi aqi-good">AQI 22</span>
+                  </div>
+              </div>
+              <!-- March -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Mar</h6>
+                      <p>26/32°C</p>
+                      <span class="aqi aqi-good">AQI 20</span>
+                  </div>
+              </div>
+              <!-- April -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Apr</h6>
+                      <p>27/33°C</p>
+                      <span class="aqi aqi-good">AQI 18</span>
+                  </div>
+              </div>
+              <!-- May -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>May</h6>
+                      <p>27/33°C</p>
+                      <span class="aqi aqi-good">AQI 15</span>
+                  </div>
+              </div>
+              <!-- June -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Jun</h6>
+                      <p>26/31°C</p>
+                      <span class="aqi aqi-good">AQI 12</span>
+                  </div>
+              </div>
+              <!-- July -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="rain.png" alt="rain">
+                      <h6>Jul</h6>
+                      <p>25/30°C</p>
+                      <span class="aqi aqi-good">AQI 10</span>
+                  </div>
+              </div>
+              <!-- August -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Aug</h6>
+                      <p>25/30°C</p>
+                      <span class="aqi aqi-good">AQI 12</span>
+                  </div>
+              </div>
+              <!-- September -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Sep</h6>
+                      <p>25/30°C</p>
+                      <span class="aqi aqi-good">AQI 15</span>
+                  </div>
+              </div>
+              <!-- October -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Oct</h6>
+                      <p>25/31°C</p>
+                      <span class="aqi aqi-good">AQI 18</span>
+                  </div>
+              </div>
+              <!-- November -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Nov</h6>
+                      <p>25/31°C</p>
+                      <span class="aqi aqi-good">AQI 20</span>
+                  </div>
+              </div>
+              <!-- December -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Dec</h6>
+                      <p>25/30°C</p>
+                      <span class="aqi aqi-good">AQI 22</span>
+                  </div>
+              </div>
+          </div>
+          <div class="text-center">
+              <div class="best-time">🏆 Best time to visit: October - May</div>
+          </div>
+      </div>
+    </div>
+
+    <br><br>
+    <button class="trip" id="openModal">Let's go on a trip</button>
+    
+    <div id="tripModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Select Your Trip</h2>
+            <button type="button" class="btn btn-warning" style="margin-bottom: 8px;color:black; border-radius: 5px;" onclick="location.href='{% url 'andamannicobar_7days' %}'">7 days trip</button><br>
+            <button type="button" class="btn btn-warning" style="margin-bottom: 8px;color:black; border-radius: 5px;" onclick="location.href='{% url 'andamannicobar_12days' %}'">12 days trip</button>
+        </div>
+    </div>
+    
+    <script>
+        var modal = document.getElementById("tripModal");
+        var btn = document.getElementById("openModal");
+        var span = document.getElementsByClassName("close")[0];
+        
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+        
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+        
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script><br><br>
+    <div class="container">
+      <ul class="nav nav-tabs">
+        <li class="nav-item"><a data-toggle="tab" href="#wbculture"> Culture</a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbtradition "> Tradition</a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbfestivals"> Festivals </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbfood"> Foods </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbhistory"> History </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbartacraft"> Art and Craft </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbseason"> Season to Visit </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbtourist"> Tourist Spots </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbwild"> Wildlife & Crops </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbedu"> Institutions </a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="wbculture" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Culture of Andaman and Nicobar Islands</h1>
+          <p class="text">The Andaman and Nicobar Islands have a unique and diverse culture, shaped by indigenous tribes, settlers from mainland India, and colonial influences. Here's an overview of some key aspects of its culture:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Indigenous Tribes</h3>
+                  <ul>
+                    <li>The islands are home to six indigenous tribal communities: Great Andamanese, Onge, Jarawa, Sentinelese, Nicobarese, and Shompen. Each has its own distinct language, customs, and way of life. The Sentinelese remain one of the world's last uncontacted peoples and are protected by strict non-interference policies.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Indigenous Tribes" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>2. Languages</h3>
+                  <ul>
+                    <li>Hindi and English are the official languages, but Bengali, Tamil, Telugu, Malayalam, and Nicobarese are also widely spoken due to the diverse settler population.</li>
+                    <li>The indigenous tribes have their own languages, many of which are endangered or critically endangered.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Languages" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div><br>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Art and Craft" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Art and Craft</h3>
+                  <ul>
+                    <li>The islands are known for their unique handicrafts made from natural materials like shells, coconut shells, bamboo, and wood.</li>
+                    <li>Shell jewelry, wooden carvings, and cane furniture are popular crafts that reflect the islands' natural resources.</li>
+                  </ul>
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Music" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>4. Music and Dance</h3>
+                  <ul>
+                    <li>The Nicobarese are known for their traditional dances like the Pig Dance and Coconut Dance, which celebrate harvests and special occasions.</li>
+                    <li>Settler communities have brought their own music and dance forms, creating a fusion of mainland Indian cultural expressions.</li>
+                    <li>The Karen community (descendants of Myanmar settlers) has its own distinct musical traditions.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Cuisine</h3>
+                  <ul>
+                    <li>Seafood dominates the local cuisine, with fish, crabs, prawns, and lobsters prepared in various styles.</li>
+                    <li>Coconut is a staple ingredient, used in curries, chutneys, and desserts.</li>
+                    <li>The cuisine reflects the diverse settler population, with Bengali, South Indian, and other regional influences.</li>
+                  </ul>
+                  <h3>6. Architecture</h3>
+                  <ul>
+                    <li>Traditional Nicobarese houses are built on stilts with thatched roofs to withstand monsoons and high tides.</li>
+                    <li>Colonial architecture is visible in Port Blair, especially in buildings like the Cellular Jail and Ross Island ruins.</li>
+                    <li>Modern architecture blends mainland Indian styles with adaptations for the tropical climate.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Cuisine" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Festivals" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>7. Festivals</h3>
+                  <ul>
+                    <li>The Island Tourism Festival (January) is a major cultural event showcasing the islands' diversity.</li>
+                    <li>Subhash Mela commemorates Netaji Subhash Chandra Bose's visit to the islands in 1943.</li>
+                    <li>Settlers celebrate mainland festivals like Diwali, Eid, Christmas, and Durga Puja.</li>
+                    <li>The Nicobarese celebrate Ossuary Feast, a ceremony honoring ancestors.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Religion" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>8. Religious Diversity</h3>
+                  <ul>
+                    <li>The islands have a mix of Hinduism, Christianity, Islam, and indigenous belief systems. The Nicobarese are predominantly Christian, while the Andamanese tribes follow their traditional animistic beliefs. This religious diversity is reflected in the various places of worship and festivals celebrated across the islands.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>9. Lifestyle</h3>
+                  <ul>
+                    <li>Island life is closely connected to the sea, with fishing being a major occupation.</li>
+                    <li>The pace of life is relaxed compared to mainland India, with a strong emphasis on community bonds.</li>
+                    <li>Environmental consciousness is high due to the islands' fragile ecosystem.</li>
+                  </ul>
+                  <h3>10. Colonial Heritage</h3>
+                  <ul>
+                    <li>The islands' history as a British penal colony has left a lasting impact on the culture, visible in architecture, place names, and historical narratives.</li>
+                    <li>The Cellular Jail stands as a powerful symbol of India's freedom struggle.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=300&width=200" alt="Lifestyle" style="height:300px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br><br>
+
+          <p>The culture of the Andaman and Nicobar Islands is a fascinating blend of indigenous traditions, settler influences, and colonial history, creating a unique identity that continues to evolve while maintaining connections to its diverse heritage.</p><br><br>
+        </div>
+        <div id="wbtradition" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Traditions of Andaman and Nicobar Islands</h1>
+          <p>The Andaman and Nicobar Islands have diverse traditions shaped by indigenous tribes, settlers from mainland India, and colonial influences. Here's an overview of some key traditional aspects of the islands:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Indigenous Tribal Traditions</h3>
+                  <h4>Nicobarese Traditions</h4>
+                  <ul>
+                    <li><b>Hodi (Outrigger Canoe) Racing:</b> Traditional canoe races held during festivals and celebrations.</li>
+                    <li><b>Pig Rearing:</b> Pigs are considered valuable possessions and are central to many ceremonies.</li>
+                    <li><b>Ossuary Feast:</b> A ceremony to honor ancestors where bones are exhumed, cleaned, and reburied.</li>
+                  </ul>
+                  <h4>Andamanese Tribal Traditions</h4>
+                  <ul>
+                    <li><b>Hunting and Gathering:</b> Traditional subsistence methods using bows, arrows, and spears.</li>
+                    <li><b>Body Decoration:</b> Clay painting and natural ornaments for ceremonial occasions.</li>
+                    <li><b>Communal Living:</b> Shared resources and collective decision-making.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=250&width=200" alt="Indigenous Traditions" style="height:250px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>2. Marriage Traditions</h3>
+                  <ul>
+                    <li><b>Nicobarese Marriage:</b> Involves elaborate ceremonies with exchange of gifts, feasting, and dancing.</li>
+                    <li><b>Settler Communities:</b> Follow their mainland traditions with adaptations to island life.</li>
+                    <li><b>Karen Community:</b> Unique wedding ceremonies blending Myanmar traditions with Christian practices.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=250&width=200" alt="Marriage Traditions" style="height:250px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Music and Dance" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Music & Dance Traditions</h3>
+                  <ul>
+                    <li><b>Nicobari Dance:</b> Traditional dances like the Pig Dance and Coconut Dance performed during festivals and celebrations.</li>
+                    <li><b>Karen Dance:</b> Bamboo dance and other traditional performances from their Myanmar heritage.</li>
+                    <li><b>Settler Folk Dances:</b> Bengali, Tamil, Telugu, and other mainland dance forms that have been adapted to island life.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Fishing Traditions" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+
+                  <h3>4. Fishing & Maritime Traditions</h3>
+                  <ul>
+                    <li><b>Traditional Fishing Methods:</b> Hand-line fishing, spear fishing, and net fishing techniques passed down through generations.</li>
+                    <li><b>Boat Building:</b> Crafting of traditional outrigger canoes (hodi) by Nicobarese and other wooden vessels.</li>
+                    <li><b>Navigation Skills:</b> Traditional knowledge of currents, stars, and weather patterns for sea travel.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Craft & Artistic Traditions</h3>
+                  <ul>
+                    <li><b>Shell Craft:</b> Creating jewelry, decorative items, and utensils from various seashells.</li>
+                    <li><b>Coconut Craft:</b> Utilizing coconut shells and fibers for household items, decorations, and tools.</li>
+                    <li><b>Wood Carving:</b> Traditional carvings depicting tribal life, nature, and spiritual beliefs.</li>
+                    <li><b>Cane & Bamboo Work:</b> Weaving baskets, mats, and furniture using traditional techniques.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Craft Traditions" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>6. Culinary Traditions</h3>
+                  <ul>
+                    <li><b>Seafood Preparation:</b> Traditional methods of cooking fish, crabs, and other seafood using minimal spices to preserve natural flavors.</li>
+                    <li><b>Coconut-Based Cuisine:</b> Extensive use of coconut in various forms (milk, oil, grated) in cooking.</li>
+                    <li><b>Tribal Food Preservation:</b> Traditional smoking, drying, and fermenting techniques for preserving food.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Culinary Traditions" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br><br>
+          <p>The traditions of the Andaman and Nicobar Islands represent a unique blend of indigenous practices, settler influences, and adaptations to island life, creating a rich cultural tapestry that continues to evolve while maintaining connections to diverse heritage.</p><br><br>
+        </div>
+        <div id="wbfestivals" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Festivals of Andaman and Nicobar Islands</h1>
+          <p>The Andaman and Nicobar Islands celebrate a diverse range of festivals that reflect their unique cultural blend of indigenous traditions, settler influences, and historical significance. Here's a list of some of the major festivals celebrated in the islands:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Island Tourism Festival</h3>
+                  <ul>
+                    <li>The most significant festival of the islands, showcasing the cultural diversity, arts, crafts, and cuisine.</li>
+                    <li>Features cultural performances, food stalls, handicraft exhibitions, and water sports competitions.</li>
+                    <li>Includes beach festivals at popular beaches like Radhanagar and Corbyn's Cove.</li>
+                    <li>Attracts tourists and promotes the islands' unique cultural heritage.</li>
+                  </ul>
+                  <p><b>📍 Time: January (10-15 days)</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=230&width=200" alt="Island Tourism Festival" style="height:230px;width: 200px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Subhash Mela" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Subhash Mela</h3>
+                  <ul>
+                    <li>Commemorates Netaji Subhash Chandra Bose's visit to the islands in December 1943.</li>
+                    <li>Celebrated at Marina Park in Port Blair with cultural programs, patriotic events, and exhibitions.</li>
+                    <li>Includes hoisting of the first tricolor flag on Indian soil by Netaji.</li>
+                  </ul>
+                  <p><b>📍 Time: December 29-30</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Beach Festival</h3>
+                  <ul>
+                    <li>Celebrates the islands' pristine beaches with water sports, sand art competitions, and beach volleyball tournaments.</li>
+                    <li>Features cultural performances, food stalls, and beach camping.</li>
+                    <li>Held at different beaches across the islands, including Radhanagar Beach (Havelock Island) and Corbyn's Cove (Port Blair).</li>
+                  </ul>
+                  <p><b>📍 Time: April-May</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Beach Festival" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Monsoon Festival" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Monsoon Festival</h3>
+                  <ul>
+                    <li>Celebrates the arrival of monsoon with cultural programs, boat races, and traditional games.</li>
+                    <li>Features special monsoon cuisine and agricultural exhibitions.</li>
+                    <li>Includes trekking events through the lush rainforests during the rainy season.</li>
+                  </ul>
+                  <p><b>📍 Time: July-August</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Ossuary Feast (Nicobarese)</h3>
+                  <ul>
+                    <li>A traditional Nicobarese ceremony to honor ancestors.</li>
+                    <li>Involves exhuming the bones of deceased family members, cleaning them, and reburying them with rituals.</li>
+                    <li>Accompanied by feasting, pig sacrifices, and traditional dances.</li>
+                  </ul>
+                  <p><b>📍 Time: Varies based on community decisions</b></p>
+                  <h3>6. Karen New Year</h3>
+                  <ul>
+                    <li>Celebrated by the Karen community (descendants of Myanmar settlers) in Middle and North Andaman.</li>
+                    <li>Features traditional bamboo dance, music, and feasting.</li>
+                    <li>Includes religious ceremonies and cultural performances.</li>
+                  </ul>
+                  <p><b>📍 Time: December-January</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Karen New Year" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Freedom Fighters Day" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>7. Freedom Fighters Day</h3>
+                  <ul>
+                    <li>Commemorates the freedom fighters who were imprisoned in the Cellular Jail.</li>
+                    <li>Features light and sound show at the Cellular Jail, patriotic programs, and exhibitions.</li>
+                    <li>Honors the sacrifices made during India's struggle for independence.</li>
+                  </ul>
+                  <p><b>📍 Time: February 10</b></p>
+                  <h3>8. Diwali</h3>
+                  <ul>
+                    <li>Celebrated by the Hindu community across the islands with traditional fervor.</li>
+                    <li>Features lighting of lamps, fireworks, and special prayers.</li>
+                    <li>Port Blair and other settlements are beautifully illuminated during this festival.</li>
+                  </ul>
+                  <p><b>📍 Time: October-November (as per Hindu calendar)</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>9. Christmas</h3>
+                  <ul>
+                    <li>Widely celebrated across the islands, especially by the Christian Nicobarese and settler communities.</li>
+                    <li>Churches in Port Blair, Car Nicobar, and other areas are decorated.</li>
+                    <li>Features midnight mass, carol singing, and community feasts.</li>
+                  </ul>
+                  <p><b>📍 Time: December 25</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Christmas" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Eid" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>10. Eid-ul-Fitr & Eid-ul-Adha</h3>
+                  <ul>
+                    <li>Celebrated by the Muslim community in the islands.</li>
+                    <li>Features congregational prayers, feasting, and community gatherings.</li>
+                    <li>Jama Masjid in Port Blair is the center of celebrations.</li>
+                  </ul>
+                  <p><b>📍 Time: Based on Islamic Calendar</b></p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>11. Pongal</h3>
+                  <ul>
+                    <li>Celebrated by the Tamil community in the islands.</li>
+                    <li>Features traditional cooking of Pongal (sweet rice), kolam (rangoli) making, and cultural programs.</li>
+                    <li>Includes prayers for a good harvest and prosperity.</li>
+                  </ul>
+                  <p><b>📍 Time: January 14-16</b></p>
+
+                  <h3>12. Durga Puja</h3>
+                  <ul>
+                    <li>Celebrated by the Bengali community with traditional fervor.</li>
+                    <li>Features pandals (temporary structures) with Durga idols, cultural programs, and community feasts.</li>
+                    <li>Port Blair hosts several pandals during this festival.</li>
+                  </ul>
+                  <p><b>📍 Time: September-October (as per Hindu calendar)</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Durga Puja" style="height:200px;width: 230px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Coconut Festival" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>13. Coconut Festival</h3>
+                  <ul>
+                    <li>Celebrates the importance of coconut in island life and economy.</li>
+                    <li>Features coconut-based food competitions, craft exhibitions, and cultural programs.</li>
+                    <li>Includes demonstrations of traditional coconut harvesting techniques.</li>
+                  </ul>
+                  <p><b>📍 Time: September</b></p>
+                  <h3>14. Naval Day</h3>
+                  <ul>
+                    <li>Commemorates the Indian Navy's role in the islands' security and development.</li>
+                    <li>Features naval ship displays, band performances, and maritime exhibitions.</li>
+                    <li>Held at the Naval Jetty in Port Blair.</li>
+                  </ul>
+                  <p><b>📍 Time: December 4</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>The festivals of the Andaman and Nicobar Islands reflect the rich cultural diversity of the region, blending indigenous traditions with settler influences and historical commemorations. These celebrations provide a glimpse into the unique island way of life and the harmonious coexistence of different communities. 🎉</p><br><br>
+        </div>
+        <div id="wbfood" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Foods of Andaman and Nicobar Islands</h1>
+          <p>The cuisine of the Andaman and Nicobar Islands is a delightful blend of indigenous flavors, settler influences, and abundant seafood. The islands' culinary tradition is characterized by fresh ingredients, minimal spices, and cooking techniques that preserve natural flavors. Here's a look at some of the most iconic foods of the Andaman and Nicobar Islands:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Staple Food of the Islands</h3>
+                  <ul>
+                    <li><b>Rice & Seafood:</b> The most common meal combination, with rice served alongside fresh fish or shellfish.</li>
+                    <li><b>Coconut Rice:</b> Rice cooked with coconut milk, a popular dish among the Nicobarese.</li>
+                    <li><b>Tapioca:</b> A staple among some indigenous communities, prepared in various ways.</li>
+                  </ul>
+                  <h3>2. Breads & Rice Products</h3>
+                  <ul>
+                    <li><b>Roti:</b> Flatbreads made from wheat flour, common among settler communities.</li>
+                    <li><b>Appam:</b> Fermented rice pancakes popular in South Indian settler communities.</li>
+                    <li><b>Idli & Dosa:</b> South Indian rice-based dishes that have become part of island cuisine.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=220" alt="Staple Food" style="height:200px;width: 220px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=220" alt="Seafood" style="height:200px;width: 220px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Famous Island Dishes</h3>
+                  <h4>Seafood Specialties</h4>
+                  <ul>
+                    <li><b>Grilled Fish:</b> Fresh fish marinated with minimal spices and grilled over open flame.</li>
+                    <li><b>Fish Curry with Coconut Milk:</b> A delicate curry made with local fish and coconut milk.</li>
+                    <li><b>Crab Masala:</b> Mud crabs cooked with spices, a popular dish in Port Blair.</li>
+                    <li><b>Lobster Thermidor:</b> A colonial influence, now prepared with local lobsters.</li>
+                    <li><b>Prawn Pickle:</b> A spicy, tangy pickle made with local prawns, perfect as a side dish.</li>
+                  </ul>
+                  <h4>Vegetarian Dishes</h4>
+                  <ul>
+                    <li><b>Coconut Vegetable Curry:</b> Mixed vegetables cooked in coconut milk with mild spices.</li>
+                    <li><b>Banana Flower Curry:</b> A unique dish made from banana blossoms, popular among locals.</li>
+                    <li><b>Jackfruit Curry:</b> Young jackfruit cooked with spices, a delicacy during season.</li>
+                    <li><b>Drumstick Leaves Stir-Fry:</b> Nutritious moringa leaves prepared with minimal spices.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=220" alt="Meat Dishes" style="height:200px;width: 220px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h4>Meat Dishes</h4>
+                  <ul>
+                    <li><b>Pork with Bamboo Shoots:</b> A traditional Nicobarese dish, slow-cooked with minimal spices.</li>
+                    <li><b>Chicken Curry:</b> Influenced by mainland styles but adapted to island tastes.</li>
+                    <li><b>Nicobari Hodi:</b> A traditional chicken dish cooked in coconut milk by the Nicobarese.</li>
+                  </ul>
+                  <h4>Accompaniments</h4>
+                  <ul>
+                    <li><b>Coconut Chutney:</b> Fresh coconut ground with green chilies and herbs.</li>
+                    <li><b>Mango Pickle:</b> Tangy pickle made from local mangoes, a perfect side dish.</li>
+                    <li><b>Papaya Salad:</b> Fresh green papaya with lime juice and chilies.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>4. Desserts & Sweet Treats</h3>
+                  <ul>
+                    <li><b>Coconut Ladoo:</b> Sweet balls made from grated coconut and jaggery.</li>
+                    <li><b>Banana Halwa:</b> A sweet dish made from ripe bananas, popular among settlers.</li>
+                    <li><b>Payasam:</b> Rice pudding with coconut milk, a festive dessert.</li>
+                    <li><b>Fresh Fruit Platters:</b> Tropical fruits like pineapple, mango, and papaya served fresh.</li>
+                    <li><b>Coconut Pancakes:</b> Sweet pancakes made with coconut milk and jaggery.</li>
+                  </ul>
+
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=220" alt="Desserts" style="height:200px;width: 220px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Street Food" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>5. Street Food of the Islands</h3>
+                  <ul>
+                    <li><b>Fish Cutlets:</b> Spiced fish patties, a popular snack in Port Blair.</li>
+                    <li><b>Pakoras:</b> Deep-fried fritters made with fish, prawns, or vegetables.</li>
+                    <li><b>Samosas:</b> Triangular pastries with savory fillings, often with a seafood twist.</li>
+                    <li><b>Jhalmuri:</b> Puffed rice mixed with spices, a Bengali influence popular in the islands.</li>
+                    <li><b>Coconut Water:</b> Fresh coconut water sold by vendors, a refreshing natural drink.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>6. Beverages</h3>
+                  <ul>
+                    <li><b>Coconut Water:</b> Fresh and naturally sweet, available throughout the islands.</li>
+                    <li><b>Toddy:</b> Fermented coconut sap, a traditional alcoholic beverage.</li>
+                    <li><b>Fresh Fruit Juices:</b> Pineapple, watermelon, and other tropical fruit juices.</li>
+                    <li><b>Lemon Tea:</b> Tea with fresh lemon, popular among locals and tourists.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Beverages" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Special Festival Foods</h3>
+                  <ul>
+                    <li><b>Feast Dishes:</b> Special preparations during Nicobarese festivals, often including whole roasted pig.</li>
+                    <li><b>Biryani:</b> Prepared during Muslim festivals, with a seafood twist.</li>
+                    <li><b>Christmas Cake:</b> Traditional fruitcake prepared by Christian communities.</li>
+                    <li><b>Pongal:</b> Sweet rice dish prepared during the Tamil harvest festival.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Festival Foods" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>The cuisine of the Andaman and Nicobar Islands is a delightful reflection of its diverse cultural influences and abundant natural resources. With seafood as its centerpiece and coconut as a versatile ingredient, island cuisine offers a unique culinary experience that combines freshness, simplicity, and rich flavors. 🍛🐟🥥</p><br><br>
+        </div>
+        <div id="wbhistory" class="tab-pane fade in active" style="background-color: white;">
+          <h1>History of Andaman and Nicobar Islands</h1>
+          <p>The Andaman and Nicobar Islands have a rich and complex history spanning ancient settlements, colonial rule, and modern development. These islands have witnessed prehistoric human habitation, European colonization, Japanese occupation during World War II, and finally, integration with independent India.</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Prehistoric Era (Before 800 CE)</h3>
+                  <ul>
+                    <li><b>Ancient Inhabitants:</b> Archaeological evidence suggests human presence dating back to the Middle Paleolithic period (around 30,000-40,000 years ago).</li>
+                    <li><b>Indigenous Tribes:</b> The Andamanese tribes (Great Andamanese, Onge, Jarawa, and Sentinelese) are believed to be descendants of the earliest human populations to migrate out of Africa.</li>
+                    <li><b>Isolation:</b> These tribes remained largely isolated from the outside world for thousands of years, developing their own unique cultures and languages.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Prehistoric Era" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Medieval Period" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Medieval Period (800 CE - 1700 CE)</h3>
+                  <h4>Early References:</h4>
+                  <ul>
+                    <li>The islands were known to Arab and Chinese travelers as early as the 9th century.</li>
+                    <li>I-Tsing, a Chinese Buddhist monk, mentioned the islands in his writings around 672 CE.</li>
+                    <li>The Chola dynasty from South India had some influence over the islands during the 10th-11th centuries.</li>
+                  </ul>
+                  <h4>Nicobar Islands:</h4>
+                  <ul>
+                    <li>The Nicobar Islands had more contact with outside civilizations compared to the Andamans.</li>
+                    <li>Trade relations existed with Southeast Asian kingdoms.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=220&width=200" alt="European Contact" style="height:220px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h4>European Contact (1700s):</h4>
+                  <ul>
+                    <li>Danish East India Company established the first European settlement in the Nicobars in 1756.</li>
+                    <li>The Austrians briefly attempted to colonize the Nicobars in 1778.</li>
+                    <li>The British surveyed the Andaman Islands in the late 18th century but did not establish permanent settlements.</li>
+                  </ul>
+                  <h4>Reputation as "Cannibal Islands":</h4>
+                  <ul>
+                    <li>The Andamans gained a fearsome reputation among sailors as the "Cannibal Islands."</li>
+                    <li>Ships avoided the islands due to hostile encounters with indigenous tribes.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. British Colonial Period (1789 - 1947)</h3>
+                  <h4>First British Settlement (1789-1796):</h4>
+                  <ul>
+                    <li>Lieutenant Archibald Blair established the first British settlement at Port Cornwallis (now Port Blair).</li>
+                    <li>The settlement was abandoned in 1796 due to disease and harsh conditions.</li>
+                  </ul>
+                  <h4>Penal Colony Establishment (1858):</h4>
+                  <ul>
+                    <li>After the Indian Rebellion of 1857, the British established a penal colony on the islands.</li>
+                    <li>The infamous Cellular Jail (Kala Pani) was constructed between 1896 and 1906 to house political prisoners.</li>
+                    <li>Freedom fighters like Vinayak Damodar Savarkar, Batukeshwar Dutt, and the Savarkar brothers were imprisoned here.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=250" alt="Cellular Jail" style="height:200px;width: 250px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=230&width=200" alt="Japanese Occupation" style="height:230px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h2>4. World War II & Japanese Occupation (1942 - 1945)</h3>
+                    <h3>Japanese Invasion</h3>
+                    <ul>
+                      <li>The Japanese Imperial Army invaded and occupied the islands in March 1942 during World War II.</li>
+                      <li>Many British officials and settlers were killed or imprisoned.</li>
+                    </ul>
+                    <h3>Azad Hind Government</h3>
+                    <ul>
+                      <li>Netaji Subhas Chandra Bose visited the islands in December 1943.</li>
+                      <li>He hoisted the Indian National Flag at Port Blair, declaring the islands the first Indian territory freed from British rule.</li>
+                      <li>The islands were renamed "Shaheed" (Martyr) and "Swaraj" (Self-rule) during this period.</li>
+                    </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Post-War Period" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>Japanese Atrocities</h3>
+                  <ul>
+                    <li>The Japanese occupation was marked by brutality and atrocities against the local population.</li>
+                    <li>Many islanders were tortured, executed, or died from starvation.</li>
+                    <li>The Homfreyganj Massacre saw the execution of hundreds of locals suspected of spying.</li>
+                  </ul>
+                  <h3>British Reoccupation</h3>
+                  <ul>
+                    <li>The British reoccupied the islands in October 1945 after Japan's surrender.</li>
+                    <li>The islands were in ruins, and rebuilding efforts began immediately.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Post-Independence Era (1947 - Present)</h3>
+                  <h4>Integration with India</h4>
+                  <ul>
+                    <li>The islands became part of independent India in 1947.</li>
+                    <li>They were established as a Union Territory in 1956.</li>
+                    <li>The Cellular Jail was declared a National Memorial in 1979.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Post-Independence" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h4>Development and Modernization</h4>
+                  <ul>
+                    <li>Significant development initiatives began in the 1960s and 1970s.</li>
+                    <li>Settlers from mainland India (particularly from Bengal, Tamil Nadu, and Kerala) were encouraged to migrate to the islands.</li>
+                    <li>Tourism emerged as a major industry from the 1980s onwards.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Modern Development" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>6. Recent History</h3>
+                  <ul>
+                    <li><b>2004 Indian Ocean Tsunami:</b> The islands were severely affected by the tsunami on December 26, 2004, with thousands of lives lost and extensive damage to infrastructure.</li>
+                    <li><b>Tribal Protection:</b> Increased efforts to protect indigenous tribes, especially after the 2004 tsunami exposed the Jarawa tribe to more outside contact.</li>
+                    <li><b>Tourism Growth:</b> Significant expansion of tourism infrastructure, with the islands becoming a popular destination for both Indian and international tourists.</li>
+                    <li><b>Strategic Importance:</b> Growing recognition of the islands' strategic importance in the Indian Ocean region, with increased naval presence and infrastructure development.</li>
+                    <li><b>Renaming of Islands:</b> In 2018, three islands were renamed: Ross Island became Netaji Subhas Chandra Bose Island, Neil Island became Shaheed Dweep, and Havelock Island became Swaraj Dweep.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Recent History" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>The history of the Andaman and Nicobar Islands is a fascinating tapestry of indigenous cultures, colonial exploitation, wartime occupation, and post-independence development. From being feared as the "Cannibal Islands" to becoming a symbol of India's freedom struggle and now a popular tourist destination, these islands have undergone remarkable transformations while still preserving their unique cultural and ecological heritage. 🏝️📜</p>
+          <br><br>
+        </div>
+        <div id="wbartacraft" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Art & Craft of Andaman and Nicobar Islands 🎨🖌️</h1>
+          <p>The Andaman and Nicobar Islands have a unique artistic heritage that reflects the islands' indigenous cultures, natural resources, and diverse settler influences. The art and craft traditions of these islands are characterized by the use of locally available materials like shells, coconut, bamboo, and wood, creating distinctive items that showcase the islanders' creativity and connection to their environment.</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Shell Craft 🐚</h3>
+                  <h4>🔸 Shell Jewelry and Ornaments</h4>
+                  <ul>
+                    <li><b>Famous for:</b> Intricate jewelry made from various seashells found on the islands' beaches.</li>
+                    <li><b>Where?</b> Port Blair, Havelock Island, and Neil Island.</li>
+                    <li><b>Items:</b> Necklaces, earrings, bracelets, and hair accessories.</li>
+                  </ul>
+                  <h4>🔸 Shell Decorative Items</h4>
+                  <ul>
+                    <li><b>Shell Curtains:</b> Decorative curtains made by stringing together small shells.</li>
+                    <li><b>Shell Art:</b> Decorative pieces, wall hangings, and showpieces made from shells.</li>
+                    <li><b>Shell Lamps:</b> Lampshades and decorative lamps crafted from larger shells.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Shell Craft" style="height:200px;width: 230px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Coconut Craft" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Coconut Craft 🥥</h3>
+                  <h4>🔸 Coconut Shell Products</h4>
+                  <ul>
+                    <li><b>Origin:</b> Traditional craft practiced across the islands, especially in Nicobar.</li>
+                    <li><b>Features:</b> Utilizes coconut shells to create bowls, cups, ladles, and decorative items.</li>
+                    <li><b>Techniques:</b> Cleaning, polishing, carving, and sometimes painting the shells.</li>
+                  </ul>
+                  <h4>🔸 Coconut Fiber Craft</h4>
+                  <ul>
+                    <li><b>Origin:</b> Traditional Nicobarese craft.</li>
+                    <li><b>Features:</b> Uses coconut fiber (coir) to make ropes, mats, baskets, and brushes.</li>
+                    <li><b>Significance:</b> Important for traditional fishing and household items.</li>
+                  </ul>
+                  <h4>🔸 Coconut Leaf Weaving</h4>
+                  <ul>
+                    <li><b>Origin:</b> Indigenous craft practiced by tribal communities.</li>
+                    <li><b>Features:</b> Weaving coconut palm leaves to create hats, baskets, and mats.</li>
+                    <li><b>Uses:</b> Both functional household items and decorative pieces for tourists.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Wood Carving 🪵</h3>
+                  <ul>
+                    <li><b>Origin:</b> Traditional craft practiced by indigenous tribes and settler communities.</li>
+                    <li><b>Materials:</b> Locally available woods like Padauk, Gurjan, and Marble Wood.</li>
+                    <li><b>Designs:</b> Tribal motifs, marine life, and scenes from island life.</li>
+                    <li><b>Products:</b> Statues, masks, walking sticks, furniture, and decorative items.</li>
+                    <li><b>Specialty:</b> Miniature wooden canoe models, replicas of tribal huts, and figurines.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Wood Carving" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Bamboo and Cane Craft" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Bamboo & Cane Craft 🎋</h3>
+                  <h4>🔸 Bamboo Products</h4>
+                  <ul>
+                    <li><b>Origin:</b> Traditional craft practiced across the islands.</li>
+                    <li><b>Products:</b> Furniture, baskets, fishing traps, musical instruments, and decorative items.</li>
+                    <li><b>Techniques:</b> Splitting, weaving, and binding bamboo strips.</li>
+                  </ul>
+                  <h4>🔸 Cane Furniture</h4>
+                  <ul>
+                    <li><b>Origin:</b> Influenced by mainland Indian and Southeast Asian styles.</li>
+                    <li><b>Products:</b> Chairs, tables, sofas, and other furniture items.</li>
+                    <li><b>Features:</b> Durable, lightweight, and suited to the tropical climate.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Tribal Art & Artifacts 🏺</h3>
+                  <ul>
+                    <li><b>Origin:</b> Indigenous Andamanese and Nicobarese tribes.</li>
+                    <li><b>Andamanese Bows & Arrows:</b> Traditional hunting tools now made as souvenirs.</li>
+                    <li><b>Nicobarese Canoe Models:</b> Miniature replicas of traditional outrigger canoes (hodi).</li>
+                    <li><b>Body Ornaments:</b> Replicas of traditional tribal jewelry and decorations.</li>
+                    <li><b>Tribal Masks:</b> Decorative masks inspired by indigenous designs.</li>
+                  </ul>
+                  <h3>6. Pandanus Leaf Craft 🍃</h3>
+                  <ul>
+                    <li><b>Origin:</b> Traditional Nicobarese craft.</li>
+                    <li><b>Features:</b> Weaving pandanus leaves to create mats, baskets, and hats.</li>
+                    <li><b>Significance:</b> Important for traditional Nicobarese households.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Tribal Art" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Painting and Contemporary Art" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>7. Painting & Contemporary Art 🖌️</h3>
+                  <ul>
+                    <li><b>Marine Themes:</b> Paintings depicting the islands' underwater life, beaches, and landscapes.</li>
+                    <li><b>Tribal Life Depictions:</b> Artistic representations of indigenous communities and their traditions.</li>
+                    <li><b>Historical Scenes:</b> Paintings of the Cellular Jail, Japanese occupation, and freedom struggle.</li>
+                    <li><b>Nature Art:</b> Depictions of the islands' unique flora and fauna.</li>
+                  </ul>
+                  <h3>8. Textile Crafts 🧵</h3>
+                  <ul>
+                    <li><b>Karen Weaving:</b> Traditional weaving by the Karen community (descendants of Myanmar settlers).</li>
+                    <li><b>Nicobarese Textiles:</b> Traditional loincloth and ceremonial garments.</li>
+                    <li><b>Batik Work:</b> Introduced by settlers, now featuring island motifs.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>9. Pottery & Clay Craft 🏺</h3>
+                  <h4>🔸 Traditional Pottery</h4>
+                  <ul>
+                    <li>Limited traditional pottery due to lack of suitable clay in many islands.</li>
+                    <li>Some Nicobarese communities practice basic pottery for household items.</li>
+                  </ul>
+                  <h4>🔸 Contemporary Ceramic Art</h4>
+                  <ul>
+                    <li>Modern ceramic art influenced by the islands' natural beauty.</li>
+                    <li>Decorative items featuring marine life, tribal motifs, and island scenes.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Pottery" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>📌 Summary: Andaman & Nicobar Islands' Art & Craft Forms</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Art Form</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Shell Craft</td>
+                <td>Port Blair, Havelock, Neil Island</td>
+                <td>Jewelry, Decorative Items, Shell Curtains</td>
+              </tr>
+              <tr>
+                <td>Coconut Craft</td>
+                <td>Nicobar Islands, South Andaman</td>
+                <td>Utensils, Decorative Items, Fiber Products</td>
+              </tr>
+              <tr>
+                <td>Wood Carving</td>
+                <td>Middle Andaman, Little Andaman</td>
+                <td>Statues, Masks, Miniature Models</td>
+              </tr>
+              <tr>
+                <td>Bamboo & Cane Craft</td>
+                <td>Throughout the Islands</td>
+                <td>Furniture, Baskets, Fishing Equipment</td>
+              </tr>
+              <tr>
+                <td>Tribal Artifacts</td>
+                <td>Andaman & Nicobar Islands</td>
+                <td>Bows & Arrows, Canoe Models, Ornaments</td>
+              </tr>
+              <tr>
+                <td>Pandanus Leaf Craft</td>
+                <td>Nicobar Islands</td>
+                <td>Mats, Baskets, Traditional Hats</td>
+              </tr>
+              <tr>
+                <td>Contemporary Art</td>
+                <td>Port Blair, Havelock Island</td>
+                <td>Marine Life Paintings, Historical Scenes</td>
+              </tr>
+              <tr>
+                <td>Textile Crafts</td>
+                <td>Mayabunder, Car Nicobar</td>
+                <td>Karen Weaving, Traditional Garments</td>
+              </tr>
+              <tr>
+                <td>Pottery & Clay Craft</td>
+                <td>Limited Locations</td>
+                <td>Contemporary Ceramic Art, Traditional Pots</td>
+              </tr>
+            </table>
+          </div>
+          <br><br>
+          <p>The art and crafts of the Andaman and Nicobar Islands represent a beautiful blend of indigenous traditions, natural resources, and creative adaptations. These crafts not only serve as souvenirs for tourists but also preserve the cultural heritage of the islands and provide livelihoods for local artisans. The use of sustainable, locally available materials reflects the islanders' deep connection with their natural environment. 🎭✨</p>
+          <br><br>
+        </div>
+        <div id="wbseason" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Seasons to visit Andaman and Nicobar Islands 🌧️☀️ </h1>
+          <p>The Andaman and Nicobar Islands have a tropical climate with warm temperatures throughout the year. However, different seasons offer varying experiences for visitors. Understanding the seasonal patterns can help you plan the perfect island getaway.</p>
+
+          <br><br>
+
+          <h2>Season-wise Breakdown for Visiting Andaman and Nicobar Islands</h2>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🌞 Dry Season (November - April)</h3>
+                  <ul>
+                    <li>The peak tourist season with clear skies, calm seas, and minimal rainfall.</li>
+                    <li>Perfect for beach activities, water sports, and island hopping.</li>
+                    <li>Underwater visibility is excellent for snorkeling and scuba diving.</li>
+                    <li>December to February offers the most pleasant temperatures (24-30°C).</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Dry Season" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Shoulder Season" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🌤️ Shoulder Season (October & May)</h3>
+                  <ul>
+                    <li>Transition months between wet and dry seasons.</li>
+                    <li>Fewer tourists and slightly lower prices than peak season.</li>
+                    <li>Occasional rain showers, but still good for most activities.</li>
+                    <li>May can be quite hot and humid before the monsoon arrives.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🌧️ Monsoon Season (June - September)</h3>
+                  <ul>
+                    <li>Heavy rainfall, strong winds, and rough seas characterize this period.</li>
+                    <li>Many water activities and island-hopping tours are restricted or unavailable.</li>
+                    <li>Ferry services may be irregular or canceled due to weather conditions.</li>
+                    <li>The islands are lush and green, with waterfalls at their fullest.</li>
+                    <li>Significantly fewer tourists and lower accommodation rates.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Monsoon Season" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>📌 Summary: Best Time to Visit Different Places in Andaman and Nicobar Islands</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Region</th>
+                <th>Best Season</th>
+                <th>Recommended Months</th>
+                <th>Why Visit?</th>
+              </tr>
+              <tr>
+                <td>Port Blair</td>
+                <td>Dry Season</td>
+                <td>November - April</td>
+                <td>Comfortable weather for sightseeing, Cellular Jail, museums, and historical sites</td>
+              </tr>
+              <tr>
+                <td>Havelock Island (Swaraj Dweep)</td>
+                <td>Dry Season</td>
+                <td>November - April</td>
+                <td>Best for Radhanagar Beach, water sports, diving, and snorkeling</td>
+              </tr>
+              <tr>
+                <td>Neil Island (Shaheed Dweep)</td>
+                <td>Dry Season</td>
+                <td>November - April</td>
+                <td>Perfect for beaches, natural rock formations, and coral reefs</td>
+              </tr>
+              <tr>
+                <td>Ross Island (Netaji Subhas Chandra Bose Island)</td>
+                <td>Dry Season</td>
+                <td>November - April</td>
+                <td>Ideal for exploring colonial ruins and historical sites</td>
+              </tr>
+              <tr>
+                <td>Baratang Island</td>
+                <td>Dry Season</td>
+                <td>December - March</td>
+                <td>Best for limestone caves, mud volcanoes, and mangrove creeks</td>
+              </tr>
+              <tr>
+                <td>North & Middle Andaman</td>
+                <td>Dry Season</td>
+                <td>November - April</td>
+                <td>Good for Diglipur, Ross & Smith Islands, and trekking</td>
+              </tr>
+              <tr>
+                <td>Little Andaman</td>
+                <td>Dry Season</td>
+                <td>December - March</td>
+                <td>Ideal for surfing, waterfalls, and elephant training center</td>
+              </tr>
+              <tr>
+                <td>Nicobar Islands</td>
+                <td>Dry Season</td>
+                <td>November - April</td>
+                <td>Limited tourism; special permits required</td>
+              </tr>
+              <tr>
+                <td>Underwater Activities (Diving/Snorkeling)</td>
+                <td>Dry Season</td>
+                <td>January - May</td>
+                <td>Best underwater visibility and calm seas</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="container">
+            <div class="row">
+              <h1 style=" text-align: center;">📌 Summary: When to Visit Andaman and Nicobar Islands</h1><br>
+              <ul>
+                <li><b>For beach activities & water sports:</b> November - April (peak season with best weather)</li>
+                <li><b>For budget travelers:</b> October & May (shoulder season with fewer crowds)</li>
+                <li><b>For nature lovers & photography:</b> Post-monsoon (October - November) when islands are lushest</li>
+                <li><b>For diving & snorkeling:</b> January - May (best underwater visibility)</li>
+                <li><b>For avoiding crowds:</b> Weekdays during December - February</li>
+                <li><b>Not recommended:</b> June - September (monsoon season with limited activities)</li>
+              </ul>
+
+            </div>
+          </div>
+          <br><br>
+        </div>
+        <div id="wbtourist" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Tourist Spots of Andaman and Nicobar Islands 🏖️🌴</h1>
+          <p>The Andaman and Nicobar Islands offer a diverse range of attractions from pristine beaches and coral reefs to historical sites and lush rainforests. Here's a categorized list of the best tourist places in these beautiful islands:</p>
+
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Stunning Beaches 🏖️</h3>
+                  <ul>
+                    <li><b>Radhanagar Beach (Havelock Island) -</b> Consistently rated among Asia's best beaches, known for white sands and turquoise waters</li>
+                    <li><b>Elephant Beach (Havelock Island) -</b> Famous for coral reefs and water sports</li>
+                    <li><b>Kalapathar Beach (Havelock Island) -</b> Known for black rocks contrasting with white sand</li>
+                    <li><b>Bharatpur Beach (Neil Island) -</b> Perfect for snorkeling and glass-bottom boat rides</li>
+                    <li><b>Laxmanpur Beach (Neil Island) -</b> Famous for spectacular sunsets and natural rock formations</li>
+                    <li><b>Corbyn's Cove (Port Blair) -</b> Closest beach to the capital, popular for jet skiing and banana boat rides</li>
+                    <li><b>Wandoor Beach (South Andaman) -</b> Gateway to Mahatma Gandhi Marine National Park</li>
+                    <li><b>Butler Bay Beach (Little Andaman) -</b> Known for surfing opportunities</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Radhanagar Beach" style="height:200px;width: 230px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Cellular Jail" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Historical & Cultural Sites 🏛️</h3>
+                  <ul>
+                    <li><b>Cellular Jail (Port Blair) -</b> Historic colonial prison that housed freedom fighters, featuring a light and sound show</li>
+                    <li><b>Ross Island (Netaji Subhas Chandra Bose Island) -</b> Former British administrative headquarters with colonial ruins</li>
+                    <li><b>Viper Island -</b> Site of the first British penal settlement with gallows and ruins</li>
+                    <li><b>Anthropological Museum (Port Blair) -</b> Showcases the culture and artifacts of indigenous tribes</li>
+                    <li><b>Samudrika Naval Marine Museum -</b> Displays marine life, tribal culture, and island history</li>
+                    <li><b>Japanese Bunkers (Ross & Smith Islands) -</b> Remnants from World War II Japanese occupation</li>
+                    <li><b>Chatham Saw Mill -</b> One of Asia's oldest and largest saw mills</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Natural Wonders & Wildlife 🌳🐠</h3>
+                  <ul>
+                    <li><b>Mahatma Gandhi Marine National Park -</b> Protected area with rich marine biodiversity</li>
+                    <li><b>Limestone Caves (Baratang Island) -</b> Natural limestone formations accessible by boat through mangrove creeks</li>
+                    <li><b>Mud Volcano (Baratang Island) -</b> Natural geological phenomenon with bubbling mud</li>
+                    <li><b>Chidiya Tapu -</b> Bird watching paradise known as the "Sunset Point" with stunning views</li>
+                    <li><b>North Bay Island -</b> Famous for coral reefs and underwater marine life</li>
+                    <li><b>Mount Harriet National Park -</b> Highest peak in South Andaman with rich biodiversity</li>
+                    <li><b>Saddle Peak National Park -</b> Highest point in the islands with trekking opportunities</li>
+                    <li><b>Great Nicobar Biosphere Reserve -</b> UNESCO site with unique flora and fauna (restricted access)</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Marine Life" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Scuba Diving" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Adventure & Water Sports 🤿🏄</h3>
+                  <ul>
+                    <li><b>Havelock Island -</b> Premier destination for scuba diving and snorkeling</li>
+                    <li><b>Neil Island -</b> Popular for snorkeling and glass-bottom boat rides</li>
+                    <li><b>North Bay Island -</b> Offers sea walking, snorkeling, and jet skiing</li>
+                    <li><b>Butler Bay (Little Andaman) -</b> Surfing spot with consistent waves</li>
+                    <li><b>Jolly Buoy Island -</b> Snorkeling and glass-bottom boat tours</li>
+                    <li><b>Cinque Island -</b> Remote diving spot with pristine coral reefs</li>
+                    <li><b>Diglipur -</b> Trekking to Saddle Peak, the highest point in the islands</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Island Hopping Destinations 🏝️</h3>
+                  <ul>
+                    <li><b>Havelock Island (Swaraj Dweep) -</b> Most popular tourist island with beautiful beaches</li>
+                    <li><b>Neil Island (Shaheed Dweep) -</b> Quieter alternative to Havelock with natural rock formations</li>
+                    <li><b>Ross & Smith Islands -</b> Twin islands connected by a natural sand bar</li>
+                    <li><b>Long Island -</b> Off-the-beaten-path destination with pristine beaches</li>
+                    <li><b>Guitar Island -</b> Shaped like a guitar, accessible from Baratang</li>
+                    <li><b>Barren Island -</b> Home to India's only active volcano (viewable from boats)</li>
+                    <li><b>Parrot Island -</b> Famous for thousands of parrots returning at sunset</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Island Hopping" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Mangrove Forests" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>6. Eco-Tourism Spots 🌿</h3>
+                  <ul>
+                    <li><b>Mangrove Creeks (Baratang) -</b> Boat ride through dense mangrove forests</li>
+                    <li><b>Karmatang Beach -</b> Turtle nesting site (seasonal)</li>
+                    <li><b>Ramnagar Beach -</b> Another important turtle nesting location</li>
+                    <li><b>Kalipur Beach -</b> Known for turtle nesting and coral reefs</li>
+                    <li><b>Rutland Island -</b> Pristine beaches and rich biodiversity</li>
+                    <li><b>Interview Island -</b> Wildlife sanctuary with feral elephants</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Unique Experiences 🌊</h3>
+                  <ul>
+                    <li><b>Bioluminescent Beach (Havelock Island) -</b> Natural phenomenon where the shoreline glows at night</li>
+                    <li><b>Andaman Trunk Road -</b> Scenic drive through the islands (passes through Jarawa tribal reserve)</li>
+                    <li><b>Katchal Island -</b> First place in India to witness the sunrise (restricted access)</li>
+                    <li><b>Elephant Training Camp (Little Andaman) -</b> Watch elephants being trained for logging operations</li>
+                    <li><b>Fisheries Museum -</b> Displays various marine species found in Andaman waters</li>
+                    <li><b>Floating Restaurant (Port Blair) -</b> Dining experience on a floating platform</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Bioluminescent Beach" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br><br>
+          <p>The Andaman and Nicobar Islands offer a perfect blend of natural beauty, adventure, history, and cultural experiences. From relaxing on pristine beaches to exploring underwater coral gardens, from learning about India's freedom struggle to witnessing unique geological formations, these islands have something for every type of traveler. 🏝️🌊</p>
+          <br><br>
+
+        </div>
+        <div id="wbwild" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Wildlife & Agriculture of Andaman and Nicobar Islands 🌿</h1>
+          <p>The Andaman and Nicobar Islands are a biodiversity hotspot with unique ecosystems ranging from tropical rainforests and mangroves to coral reefs and marine habitats. The islands' isolation has led to the evolution of many endemic species found nowhere else on Earth.</p>
+
+          <br>
+          <h2>Wildlife of Andaman and Nicobar Islands</h2>
+          <p>The islands are home to 9 national parks, 96 wildlife sanctuaries, and 1 biosphere reserve, making them one of India's most protected ecological regions.</p>
+
+          <br>
+          <h2>🔹 Major National Parks & Wildlife Sanctuaries</h2>
+          <div>
+            <table>
+              <tr>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Mahatma Gandhi Marine National Park</td>
+                <td>Wandoor, South Andaman</td>
+                <td>Coral reefs 🐠, Marine biodiversity, Jolly Buoy and Red Skin Islands</td>
+              </tr>
+              <tr>
+                <td>Campbell Bay National Park</td>
+                <td>Great Nicobar Island</td>
+                <td>Megapode birds, Giant robber crabs 🦀, Crab-eating macaques</td>
+              </tr>
+              <tr>
+                <td>Galathea National Park</td>
+                <td>Great Nicobar Island</td>
+                <td>Leatherback turtle nesting sites 🐢, Nicobar megapode</td>
+              </tr>
+              <tr>
+                <td>Mount Harriet National Park</td>
+                <td>South Andaman</td>
+                <td>Andaman wild pigs 🐗, Diverse butterflies 🦋, Bird species</td>
+              </tr>
+              <tr>
+                <td>Saddle Peak National Park</td>
+                <td>North Andaman</td>
+                <td>Highest peak in the islands, Andaman imperial pigeon</td>
+              </tr>
+              <tr>
+                <td>Rani Jhansi Marine National Park</td>
+                <td>Ritchie's Archipelago</td>
+                <td>Dugongs (sea cows) 🐬, Dolphins, Coral gardens</td>
+              </tr>
+              <tr>
+                <td>Great Nicobar Biosphere Reserve (UNESCO)</td>
+                <td>Great Nicobar Island</td>
+                <td>Endemic species, Shompen and Nicobarese tribes</td>
+              </tr>
+            </table>
+          </div>
+          <bt><br></bt>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Endemic Wildlife Species</h3>
+                <ul>
+                  <li><b>Mammals:</b> Andaman wild pig, Andaman masked palm civet, Dugong (State Animal), Narcondam hornbill (State Bird), Nicobar tree shrew, Andaman horseshoe bat</li>
+                  <li><b>Birds:</b> Andaman wood pigeon, Andaman scops owl, Nicobar megapode, Andaman crake, Narcondam hornbill</li>
+                  <li><b>Reptiles:</b> Andaman cobra, Andaman water monitor lizard, Andaman day gecko, Leatherback sea turtles</li>
+                  <li><b>Marine Life:</b> Dugongs, Saltwater crocodiles, Whale sharks, Manta rays, Giant clams</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=200" alt="Endemic Wildlife" style="height:200px;width: 200px;">
+
+              </div>
+
+            </div>
+          </div>
+          <hr><br>
+          <h2>🌾 Agriculture & Major Crops in Andaman and Nicobar Islands</h2>
+          <p>Agriculture in the Andaman and Nicobar Islands is characterized by tropical crops, plantation farming, and subsistence agriculture. The sector employs about 18% of the population and is adapted to the islands' unique climate and soil conditions.</p>
+
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Key Agricultural Features</h3>
+                <ul>
+                  <li>Limited arable land (only about 6% of total area is cultivated)</li>
+                  <li><b>Tropical Climate:</b> Supports year-round cultivation of certain crops</li>
+                  <li><b>Plantation Economy:</b> Focus on coconut, areca nut, and spices</li>
+                  <li><b>Challenges:</b> Limited land, isolation from mainland, transportation costs</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=220" alt="Agriculture" style="height:200px;width: 220px;">
+
+              </div>
+            </div>
+          </div>
+          <h2>🔹 Major Crops of Andaman and Nicobar Islands</h2>
+          <div>
+            <table>
+              <tr>
+                <th>Category</th>
+                <th>Crops</th>
+              </tr>
+              <tr>
+                <td>Plantation Crops</td>
+                <td>Coconut 🥥, Areca nut, Rubber, Oil palm</td>
+              </tr>
+              <tr>
+                <td>Cereals</td>
+                <td>Rice 🍚, Maize 🌽 (limited cultivation)</td>
+              </tr>
+              <tr>
+                <td>Pulses</td>
+                <td>Green gram, Black gram, Red gram</td>
+              </tr>
+              <tr>
+                <td>Vegetables</td>
+                <td>Okra, Brinjal, Cucumber 🥒, Pumpkin, Bitter gourd</td>
+              </tr>
+              <tr>
+                <td>Fruits</td>
+                <td>Banana 🍌, Pineapple 🍍, Papaya, Mango 🥭, Jackfruit</td>
+              </tr>
+              <tr>
+                <td>Spices</td>
+                <td>Black pepper, Cinnamon, Cloves, Nutmeg, Vanilla</td>
+              </tr>
+              <tr>
+                <td>Root Crops</td>
+                <td>Tapioca, Sweet potato, Yam, Taro</td>
+              </tr>
+              <tr>
+                <td>Others</td>
+                <td>Cashew nuts, Betel leaf, Sugarcane</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Special Agricultural Products</h3>
+                <ul>
+                  <li><b>Nicobari Coconut:</b> A unique variety with medicinal properties and high oil content.</li>
+                  <li><b>Andaman Padauk Wood:</b> Valuable timber used for furniture and construction.</li>
+                  <li><b>Organic Spices:</b> High-quality pepper, cinnamon, and cloves grown in pristine conditions.</li>
+                  <li><b>Island Honey:</b> Produced from the nectar of mangrove and forest flowers.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=200" alt="Coconut" style="height:200px;width: 200px;">
+
+              </div>
+            </div>
+          </div><br>
+          <hr>
+          <div class="box" style=" background: #f3b37185;padding: 10px;">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>Marine Resources & Fisheries 🐟</h3>
+                  <ul>
+                    <li><b>Fisheries:</b> A major economic activity with rich marine resources.</li>
+                    <li><b>Types of Fishing:</b> Deep-sea fishing, reef fishing, and traditional methods.</li>
+                    <li><b>Major Catches:</b> Tuna, mackerel, snappers, groupers, lobsters, and prawns.</li>
+                    <li><b>Aquaculture:</b> Growing sector focusing on sustainable fish farming.</li>
+                    <li><b>Challenges:</b> Protecting coral reefs while supporting local fishing communities.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Fisheries" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>The Andaman and Nicobar Islands represent a unique ecological treasure with exceptional biodiversity both on land and in the surrounding waters. The islands' agriculture, though limited in scale, is diverse and adapted to the tropical conditions, with a focus on sustainable practices to preserve the fragile island ecosystem. Conservation efforts are crucial to protect the many endemic species while supporting the livelihoods of local communities. 🏝️🌱</p>
+          <br><br>
+        </div>
+        <div id="wbedu" class="tab-pane fade in active" style="background-color: white;">
+          <h1>🎓 Education & Institutions in Andaman and Nicobar Islands</h1>
+          <p>The Andaman and Nicobar Islands have a developing educational infrastructure that has evolved significantly in recent decades. Despite geographical challenges and isolation from the mainland, the islands have established various educational institutions to serve their diverse population.</p>
+
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>📌 Education System in Andaman and Nicobar Islands</h3>
+                  <ul>
+                    <li><b>School Education:</b> Follows CBSE curriculum with some schools under the Andaman and Nicobar Administration.</li>
+                    <li><b>Higher Education:</b> Limited but growing options with one central university and several colleges.</li>
+                    <li><b>Challenges:</b> Geographical isolation, limited faculty, infrastructure constraints, and the need for students to travel to mainland for specialized courses.</li>
+                    <li><b>Recent Developments:</b> Digital education initiatives and distance learning programs to overcome geographical barriers.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Education System" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>🏛️ Higher Education Institutions</h2>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 University</h3>
+                <ol>
+                  <li><b>Pondicherry University (Port Blair Campus) -</b> The only university in the islands, offering undergraduate and postgraduate programs in various disciplines.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=230" alt="Pondicherry University" style="height:200px;width: 230px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Colleges</h3>
+                <ol>
+                  <li><b>Jawaharlal Nehru Rajkeeya Mahavidyalaya (JNRM) -</b> The oldest and largest college in the islands, offering arts, science, commerce, and professional courses.</li>
+                  <li><b>Tagore Government College of Education -</b> Offers B.Ed. programs for teacher training.</li>
+                  <li><b>Dr. B.R. Ambedkar Institute of Technology -</b> Provides diploma and degree courses in engineering and technical fields.</li>
+                  <li><b>Mahatma Gandhi Government College (Mayabunder) -</b> Serves the educational needs of North and Middle Andaman.</li>
+                  <li><b>Port Blair Law College -</b> Offers legal education with LLB programs.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=230" alt="JNRM College" style="height:200px;width: 230px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Institution</th>
+                <th>Location</th>
+                <th>Specialization</th>
+              </tr>
+              <tr>
+                <td>Jawaharlal Nehru Rajkeeya Mahavidyalaya (JNRM)</td>
+                <td>Port Blair</td>
+                <td>Arts, Science, Commerce, Computer Applications</td>
+              </tr>
+              <tr>
+                <td>Tagore Government College of Education</td>
+                <td>Port Blair</td>
+                <td>Teacher Education (B.Ed.)</td>
+              </tr>
+              <tr>
+                <td>Dr. B.R. Ambedkar Institute of Technology</td>
+                <td>Port Blair</td>
+                <td>Engineering, Technical Education</td>
+              </tr>
+              <tr>
+                <td>Mahatma Gandhi Government College</td>
+                <td>Mayabunder</td>
+                <td>Arts, Science, Commerce</td>
+              </tr>
+              <tr>
+                <td>Port Blair Law College</td>
+                <td>Port Blair</td>
+                <td>Legal Education</td>
+              </tr>
+              <tr>
+                <td>Andaman Law College</td>
+                <td>Port Blair</td>
+                <td>Legal Education</td>
+              </tr>
+              <tr>
+                <td>Andaman College (ANCOL)</td>
+                <td>Port Blair</td>
+                <td>Vocational and Professional Courses</td>
+              </tr>
+            </table>
+          </div>
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=240" alt="Medical Education" style="height:200px;width: 240px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🔹 Medical & Healthcare Education</h3>
+                  <ol>
+                    <li><b>Andaman and Nicobar Islands Institute of Medical Sciences (ANIIMS) -</b> Recently established medical college offering MBBS program.</li>
+                    <li><b>School of Nursing -</b> Attached to G.B. Pant Hospital, offering nursing courses.</li>
+                    <li><b>Paramedical Training Institute -</b> Provides training for various paramedical roles.</li>
+                  </ol>
+                </div>
+
+                <br><br>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Institution</th>
+                <th>Location</th>
+                <th>Specialization</th>
+              </tr>
+              <tr>
+                <td>Andaman and Nicobar Islands Institute of Medical Sciences (ANIIMS)</td>
+                <td>Port Blair</td>
+                <td>Medical Education (MBBS)</td>
+              </tr>
+              <tr>
+                <td>School of Nursing</td>
+                <td>Port Blair</td>
+                <td>Nursing Education</td>
+              </tr>
+              <tr>
+                <td>Paramedical Training Institute</td>
+                <td>Port Blair</td>
+                <td>Paramedical Courses</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🔹 Vocational & Technical Education</h3>
+                  <ol>
+                    <li><b>Industrial Training Institute (ITI) -</b> Offers various technical and vocational courses.</li>
+                    <li><b>Fisheries Training Centre -</b> Provides training in fisheries and marine resources management.</li>
+                    <li><b>Central Agricultural Research Institute (CARI) -</b> Conducts research and training in tropical island agriculture.</li>
+                    <li><b>Andaman and Nicobar Centre for Ocean Science and Technology -</b> Research and education in marine sciences.</li>
+                  </ol>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Vocational Education" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Institution</th>
+                <th>Location</th>
+                <th>Specialization</th>
+              </tr>
+              <tr>
+                <td>Industrial Training Institute (ITI)</td>
+                <td>Port Blair</td>
+                <td>Technical and Vocational Training</td>
+              </tr>
+              <tr>
+                <td>Fisheries Training Centre</td>
+                <td>Port Blair</td>
+                <td>Fisheries Management</td>
+              </tr>
+              <tr>
+                <td>Central Agricultural Research Institute (CARI)</td>
+                <td>Port Blair</td>
+                <td>Agricultural Research and Training</td>
+              </tr>
+              <tr>
+                <td>Andaman and Nicobar Centre for Ocean Science and Technology</td>
+                <td>Port Blair</td>
+                <td>Marine Sciences</td>
+              </tr>
+              <tr>
+                <td>Forest Training Institute</td>
+                <td>Port Blair</td>
+                <td>Forestry and Wildlife Management</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <h2>🏫 School Education in Andaman and Nicobar Islands</h2>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 School System</h3>
+                <ol>
+                  <li><b>Government Schools -</b> Run by the Andaman and Nicobar Administration, following CBSE curriculum.</li>
+                  <li><b>Kendriya Vidyalayas -</b> Central government schools serving children of government employees.</li>
+                  <li><b>Jawahar Navodaya Vidyalaya -</b> Residential school for talented students from rural areas.</li>
+                  <li><b>Private Schools -</b> Several private institutions offering education up to senior secondary level.</li>
+                  <li><b>Tribal Schools -</b> Special schools for children from indigenous communities.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=200" alt="School Education" style="height:200px;width: 200px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=230" alt="Notable Schools" style="height:200px;width: 230px;">
+
+              </div>
+              <div class="col-sm-8">
+
+                <h3>🔹 Notable Schools</h3>
+                <ol>
+                  <li><b>Kendriya Vidyalaya No. 1 & 2 -</b> Premier CBSE schools in Port Blair.</li>
+                  <li><b>Jawahar Navodaya Vidyalaya -</b> Residential school on Brookshabad.</li>
+                  <li><b>Carmel Senior Secondary School -</b> One of the oldest private schools in the islands.</li>
+                  <li><b>Vivekananda Kendra Vidyalaya -</b> School with emphasis on cultural values.</li>
+                  <li><b>Navy Children School -</b> Run by the Indian Navy for children of naval personnel.</li>
+                  <li><b>Model School -</b> Government school with enhanced facilities.</li>
+                </ol>
+
+              </div>
+
+            </div>
+          </div>
+          <div class="box">
+            <h2>🔬 Research Institutions</h2>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <p>The islands host several research institutions focused on their unique ecology and environment:</p>
+                  <ol>
+                    <li><b>Zoological Survey of India (Andaman & Nicobar Regional Centre) -</b> Research on island fauna.</li>
+                    <li><b>Botanical Survey of India (Andaman & Nicobar Circle) -</b> Study of the islands' unique flora.</li>
+                    <li><b>Central Agricultural Research Institute (CARI) -</b> Research on tropical island agriculture.</li>
+                    <li><b>National Institute of Ocean Technology (NIOT) -</b> Marine research and technology development.</li>
+                    <li><b>Anthropological Survey of India -</b> Research on indigenous tribal communities.</li>
+                  </ol>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Research Institutions" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <h2>📚 Libraries and Knowledge Centers</h2>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <ol>
+                    <li><b>Andaman and Nicobar State Library -</b> Main public library in Port Blair.</li>
+                    <li><b>District Libraries -</b> Located in major settlements across the islands.</li>
+                    <li><b>Community Knowledge Centers -</b> Digital resource centers in remote areas.</li>
+                    <li><b>Tribal Knowledge Centers -</b> Preserving and documenting indigenous knowledge.</li>
+                  </ol>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Libraries" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Education in the Andaman and Nicobar Islands faces unique challenges due to geographical isolation and limited resources. However, significant progress has been made in recent years with the establishment of new institutions and the expansion of existing ones. Digital education initiatives and distance learning programs are helping to bridge the gap between the islands and mainland educational opportunities. The focus on specialized fields like marine sciences, agriculture, and forestry reflects the islands' unique environment and economic needs. 🏝️📚</p>
+        </div>
+        <br><br>
+
+      </div>
+
+
+    </div>
+  </div>
+  </div>
+</body>
+
+</html>

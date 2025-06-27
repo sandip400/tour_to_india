@@ -1,0 +1,1002 @@
+{% extends "base.html" %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Priceless Memories</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Custom CSS -->
+    <style>
+        .bo {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+        }
+        
+        .hero-section {
+            background: url('https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=2070') no-repeat center center;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(56, 142, 60, 0.5), rgba(102, 187, 106, 0.5));
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        .hero-section h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease-in-out;
+        }
+        .hero-section p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease-in-out 0.3s;
+            animation-fill-mode: both;
+        }
+        .hero-section .btn {
+            font-size: 1.2rem;
+            padding: 12px 30px;
+            background-color: #388e3c;
+            border: none;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            animation: fadeInUp 1s ease-in-out 0.6s;
+            animation-fill-mode: both;
+        }
+        .hero-section .btn:hover {
+            background-color: #66bb6a;
+            transform: translateY(-5px) scale(1.05);
+        }
+        .safaris-section {
+            background: url('https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=2070') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            padding: 80px 0;
+        }
+        .safaris-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(240, 244, 248, 0.9);
+            z-index: 1;
+        }
+        .safaris-section .container {
+            position: relative;
+            z-index: 2;
+        }
+        .safari-card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: #fff;
+            animation: fadeInUp 0.5s ease-out;
+            animation-fill-mode: both;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .safari-card:nth-child(1) { animation-delay: 0.1s; }
+        .safari-card:nth-child(2) { animation-delay: 0.2s; }
+        .safari-card:nth-child(3) { animation-delay: 0.3s; }
+        .safari-card:nth-child(4) { animation-delay: 0.4s; }
+        .safari-card:nth-child(5) { animation-delay: 0.5s; }
+        .safari-card:nth-child(6) { animation-delay: 0.6s; }
+        .safari-card:nth-child(7) { animation-delay: 0.7s; }
+        .safari-card:nth-child(8) { animation-delay: 0.8s; }
+        .safari-card:nth-child(9) { animation-delay: 0.9s; }
+        .safari-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        .safari-card img {
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .safari-card:hover img {
+            transform: scale(1.05);
+        }
+        .safari-card .card-body {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .safari-card .card-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            color: #388e3c;
+            transition: color 0.3s ease;
+        }
+        .safari-card:hover .card-title {
+            color: #66bb6a;
+        }
+        .safari-card .card-text {
+            color: #555;
+            flex-grow: 1;
+        }
+        .safari-card .btn {
+            background-color: #66bb6a;
+            border: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .safari-card .btn:hover {
+            background-color: #388e3c;
+            transform: translateY(-3px);
+        }
+        .activities-section {
+            background: url('https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=2070') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            padding: 80px 0;
+        }
+        .activities-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            z-index: 1;
+        }
+        .activities-section .container {
+            position: relative;
+            z-index: 2;
+        }
+        .activities-section h2, .safaris-section h2, .contact-section h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: #388e3c;
+            font-size: 2.8rem;
+            margin-bottom: 40px;
+            animation: fadeInDown 0.5s ease-out;
+        }
+        .activities-section h4 {
+            color: #66bb6a;
+            font-family: 'Montserrat', sans-serif;
+            transition: color 0.3s ease;
+        }
+        .activities-section h4:hover {
+            color: #388e3c;
+        }
+        .contact-section {
+            background: url('https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=2070') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            padding: 80px 0;
+        }
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(240, 244, 248, 0.9);
+            z-index: 1;
+        }
+        .contact-section .container {
+            position: relative;
+            z-index: 2;
+        }
+        .contact-section .form-control {
+            border-radius: 10px;
+            border: 1px solid #66bb6a;
+            padding: 12px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .contact-section .form-control:focus {
+            border-color: #388e3c;
+            box-shadow: 0 0 8px rgba(56, 142, 60, 0.3);
+        }
+        .contact-section .btn {
+            background-color: #388e3c;
+            border: none;
+            padding: 12px;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .contact-section .btn:hover {
+            background-color: #66bb6a;
+            transform: translateY(-3px);
+        }
+        
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideInDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .section-title {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-bottom: 1rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, #388e3c, #66bb6a);
+            animation: pulse 2s infinite;
+        }
+        .card {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+        .btn {
+            border-radius: 25px;
+            padding: 10px 25px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .modal-content {
+            border-radius: 15px;
+            border: none;
+            animation: fadeInUp 0.3s ease-out;
+        }
+        .modal-header {
+            background: linear-gradient(90deg, #388e3c, #66bb6a);
+            color: white;
+            border-radius: 15px 15px 0 0;
+        }
+        .safari-card {
+            animation: slideInLeft 0.5s ease-out;
+        }
+        @keyframes slideInLeft {
+            from { transform: translateX(-50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+    </style>
+</head>
+
+<div class="bo">
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-content">
+            <h1>Roam the Wilds of India</h1>
+            <p>Embark on thrilling wildlife safaris to spot tigers, elephants, and exotic birds.</p>
+            <a href="#safaris" class="btn btn-primary btn-lg">Explore Safaris</a>
+        </div>
+    </section>
+
+    <!-- Safaris Section -->
+    <section id="safaris" class="safaris-section">
+        <div class="container">
+            <h2 class="text-center mb-5 section-title">Top Wildlife Safari Destinations in India</h2>
+            <div class="row">
+                <!-- Card 1: Jim Corbett National Park -->
+                <div class="col-md-4 mb-4">
+                    <div class="card safari-card" data-safari="jimcorbett">
+                        <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?q=80&w=2070" class="card-img-top" alt="Jim Corbett National Park">
+                        <div class="card-body">
+                            <h5 class="card-title">Jim Corbett National Park, Uttarakhand</h5>
+                            <p class="card-text">India’s oldest national park, famous for its Bengal tigers and diverse wildlife.</p>
+                            <div class="safari-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Duration: 2-3 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Key Species: Tiger, Elephant</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-map"></i>
+                                    <span>Area: 520 km²</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-paw"></i> Jeep Safari</span>
+                                <span><i class="fas fa-camera"></i> Wildlife Photography</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Ranthambore National Park -->
+                <div class="col-md-4 mb-4">
+                    <div class="card safari-card" data-safari="ranthambore">
+                        <img src="https://images.unsplash.com/photo-1709727934810-e9089d02465b?q=80&w=2076&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Ranthambore National Park">
+                        <div class="card-body">
+                            <h5 class="card-title">Ranthambore National Park, Rajasthan</h5>
+                            <p class="card-text">Known for its tiger population and historic fort, offering thrilling safaris.</p>
+                            <div class="safari-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Duration: 2-3 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Key Species: Tiger, Leopard</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-map"></i>
+                                    <span>Area: 392 km²</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-paw"></i> Jeep Safari</span>
+                                <span><i class="fas fa-fort-awesome"></i> Ranthambore Fort</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Kaziranga National Park -->
+                <div class="col-md-4 mb-4">
+                    <div class="card safari-card" data-safari="kaziranga">
+                        <img src="https://images.unsplash.com/photo-1675296098616-53e3d4a1dd57?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Kaziranga National Park">
+                        <div class="card-body">
+                            <h5 class="card-title">Kaziranga National Park, Assam</h5>
+                            <p class="card-text">A UNESCO World Heritage Site, home to the one-horned rhinoceros.</p>
+                            <div class="safari-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Duration: 2-3 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Key Species: Rhino, Elephant</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-map"></i>
+                                    <span>Area: 430 km²</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-paw"></i> Jeep Safari</span>
+                                <span><i class="fas fa-elephant"></i> Elephant Safari</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4: Bandhavgarh National Park -->
+                <div class="col-md-4 mb-4">
+                    <div class="card safari-card" data-safari="bandhavgarh">
+                        <img src="https://images.unsplash.com/photo-1701368533954-f0dc06ebfbed?q=80&w=2018&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Bandhavgarh National Park">
+                        <div class="card-body">
+                            <h5 class="card-title">Bandhavgarh National Park, Madhya Pradesh</h5>
+                            <p class="card-text">Famous for its high density of tigers and ancient fort ruins.</p>
+                            <div class="safari-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Duration: 2-3 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Key Species: Tiger, Leopard</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-map"></i>
+                                    <span>Area: 450 km²</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-paw"></i> Jeep Safari</span>
+                                <span><i class="fas fa-camera"></i> Wildlife Photography</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5: Sundarbans National Park -->
+                <div class="col-md-4 mb-4">
+                    <div class="card safari-card" data-safari="sundarbans">
+                        <img src="https://images.unsplash.com/photo-1706459671568-9809c9d13430?q=80&w=1930&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Sundarbans National Park">
+                        <div class="card-body">
+                            <h5 class="card-title">Sundarbans National Park, West Bengal</h5>
+                            <p class="card-text">A UNESCO site, known for its mangrove forests and Royal Bengal tigers.</p>
+                            <div class="safari-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Duration: 3-4 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Key Species: Tiger, Crocodile</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-map"></i>
+                                    <span>Area: 1330 km²</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-ship"></i> Boat Safari</span>
+                                <span><i class="fas fa-tree"></i> Mangroves</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6: Periyar National Park -->
+                <div class="col-md-4 mb-4">
+                    <div class="card safari-card" data-safari="periyar">
+                        <img src="https://images.unsplash.com/photo-1675267149427-5d2caacc01fc?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Periyar National Park">
+                        <div class="card-body">
+                            <h5 class="card-title">Periyar National Park, Kerala</h5>
+                            <p class="card-text">A lush reserve known for elephants, tigers, and scenic boat safaris.</p>
+                            <div class="safari-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Duration: 2-3 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Key Species: Elephant, Tiger</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-map"></i>
+                                    <span>Area: 925 km²</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-ship"></i> Boat Safari</span>
+                                <span><i class="fas fa-hiking"></i> Nature Walks</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 7: Kanha National Park -->
+                <div class="col-md-4 mb-4">
+                    <div class="card safari-card" data-safari="kanha">
+                        <img src="https://images.unsplash.com/photo-1604657976833-5c0ebc419bba?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Kanha National Park">
+                        <div class="card-body">
+                            <h5 class="card-title">Kanha National Park, Madhya Pradesh</h5>
+                            <p class="card-text">Inspiration for The Jungle Book, known for tigers and barasingha deer.</p>
+                            <div class="safari-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Duration: 2-3 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Key Species: Tiger, Barasingha</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-map"></i>
+                                    <span>Area: 940 km²</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-paw"></i> Jeep Safari</span>
+                                <span><i class="fas fa-camera"></i> Wildlife Photography</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 8: Gir National Park -->
+                <div class="col-md-4 mb-4">
+                    <div class="card safari-card" data-safari="gir">
+                        <img src="https://plus.unsplash.com/premium_photo-1664302791179-0c60a6d414e8?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Gir National Park">
+                        <div class="card-body">
+                            <h5 class="card-title">Gir National Park, Gujarat</h5>
+                            <p class="card-text">The last refuge of the Asiatic lion, offering unique safari experiences.</p>
+                            <div class="safari-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Duration: 2-3 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Key Species: Asiatic Lion</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-map"></i>
+                                    <span>Area: 1412 km²</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-paw"></i> Jeep Safari</span>
+                                <span><i class="fas fa-camera"></i> Wildlife Photography</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 9: Keoladeo National Park -->
+                <div class="col-md-4 mb-4">
+                    <div class="card safari-card" data-safari="keoladeo">
+                        <img src="https://images.unsplash.com/photo-1679721169887-1bd5d9d7534a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Keoladeo National Park">
+                        <div class="card-body">
+                            <h5 class="card-title">Keoladeo National Park, Rajasthan</h5>
+                            <p class="card-text">A UNESCO site, renowned for its migratory birds and wetlands.</p>
+                            <div class="safari-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Duration: 1-2 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Key Species: Migratory Birds</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-map"></i>
+                                    <span>Area: 29 km²</span>
+                                </div>
+                            </div>
+                            <div class="card-features">
+                                <span><i class="fas fa-bicycle"></i> Cycle Safari</span>
+                                <span><i class="fas fa-binoculars"></i> Bird Watching</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-auto">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activities Section -->
+    <section id="activities" class="activities-section">
+        <div class="container">
+            <h2 class="text-center mb-5 section-title">Wildlife Safari Activities</h2>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <h4>Jeep Safaris</h4>
+                    <p>Explore the wilderness in open jeeps, spotting tigers and leopards in parks like Ranthambore and Bandhavgarh.</p>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <h4>Elephant Safaris</h4>
+                    <p>Ride elephants for a unique safari experience in Kaziranga and Jim Corbett.</p>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <h4>Boat Safaris</h4>
+                    <p>Navigate mangroves and rivers in Sundarbans and Periyar to spot tigers and crocodiles.</p>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <h4>Bird Watching</h4>
+                    <p>Observe exotic and migratory birds in Keoladeo and Kaziranga with expert guides.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="text-center mb-5 section-title">Share Your Safari Adventure</h2>
+            <div class="row">
+                <div class="col-md-6 mx-auto">
+                    <div class="safari-form">
+                        <form id="safariForm">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Your Name</label>
+                                <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="safari" class="form-label">Safari Destination</label>
+                                <select class="form-control" id="safari" required>
+                                    <option value="">Select a safari</option>
+                                    <option value="jimcorbett">Jim Corbett National Park, Uttarakhand</option>
+                                    <option value="ranthambore">Ranthambore National Park, Rajasthan</option>
+                                    <option value="kaziranga">Kaziranga National Park, Assam</option>
+                                    <option value="bandhavgarh">Bandhavgarh National Park, Madhya Pradesh</option>
+                                    <option value="sundarbans">Sundarbans National Park, West Bengal</option>
+                                    <option value="periyar">Periyar National Park, Kerala</option>
+                                    <option value="kanha">Kanha National Park, Madhya Pradesh</option>
+                                    <option value="gir">Gir National Park, Gujarat</option>
+                                    <option value="keoladeo">Keoladeo National Park, Rajasthan</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="experience" class="form-label">Your Experience</label>
+                                <textarea class="form-control" id="experience" rows="4" placeholder="Share your safari adventure..." required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="photos" class="form-label">Upload Photos</label>
+                                <input type="file" class="form-control" id="photos" multiple accept="image/*">
+                                <div id="photoPreview" class="mt-2"></div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Share Adventure</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Safari Modal -->
+    <div class="modal fade" id="safariModal" tabindex="-1" aria-labelledby="safariModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="safariModalLabel">Safari Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="safari-detail-content">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <img src="" alt="" class="img-fluid safari-image">
+                            </div>
+                            <div class="col-md-6">
+                                <h3 class="safari-name"></h3>
+                                <p class="safari-description"></p>
+                                <div class="safari-info">
+                                    <div class="info-item">
+                                        <i class="fas fa-clock"></i>
+                                        <span class="duration"></span>
+                                    </div>
+                                    <div class="info-item">
+                                        <i class="fas fa-star"></i>
+                                        <span class="key-species"></span>
+                                    </div>
+                                    <div class="info-item">
+                                        <i class="fas fa-map"></i>
+                                        <span class="area"></span>
+                                    </div>
+                                </div>
+                                <div class="safari-features"></div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <h4>Safari Highlights</h4>
+                                <p class="safari-highlights"></p>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <h4>Things to Do</h4>
+                                <ul class="things-to-do"></ul>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <h4>How to Reach</h4>
+                                <div class="how-to-reach"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="#" class="btn btn-primary book-now-btn">Book Safari</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    
+
+    <!-- Bootstrap JS and Custom JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Safari data
+        const safaris = {
+            'jimcorbett': {
+                name: 'Jim Corbett National Park, Uttarakhand',
+                image: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?q=80&w=2070',
+                description: 'India’s oldest national park, famous for its Bengal tigers, elephants, and diverse flora and fauna.',
+                duration: '2-3 days',
+                keySpecies: 'Tiger, Elephant',
+                area: '520 km²',
+                highlights: 'Jim Corbett offers thrilling jeep and elephant safaris with a high chance of spotting tigers in their natural habitat.',
+                features: ['Jeep Safari', 'Wildlife Photography'],
+                thingsToDo: [
+                    'Jeep safari in Dhikala zone',
+                    'Elephant safari in Bijrani',
+                    'Visit Corbett Museum',
+                    'Wildlife photography',
+                    'Explore Garjiya Devi Temple'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Pantnagar Airport (80 km)' },
+                    { type: 'train', text: 'Ramnagar Railway Station (5 km)' },
+                    { type: 'car', text: 'Well-connected by road from Delhi' }
+                ]
+            },
+            'ranthambore': {
+                name: 'Ranthambore National Park, Rajasthan',
+                image: 'https://images.unsplash.com/photo-1603665302220-c4d3b9db436b?q=80&w=2070',
+                description: 'Known for its tiger population and historic fort, Ranthambore offers a blend of wildlife and heritage.',
+                duration: '2-3 days',
+                keySpecies: 'Tiger, Leopard',
+                area: '392 km²',
+                highlights: 'Ranthambore is a prime tiger-spotting destination, with its scenic lakes and ancient fort adding to the experience.',
+                features: ['Jeep Safari', 'Ranthambore Fort'],
+                thingsToDo: [
+                    'Jeep safari in core zones',
+                    'Visit Ranthambore Fort',
+                    'Wildlife photography',
+                    'Explore Surwal Lake',
+                    'Spot leopards in Bakaula'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Jaipur International Airport (160 km)' },
+                    { type: 'train', text: 'Sawai Madhopur Railway Station (10 km)' },
+                    { type: 'car', text: 'Well-connected by road' }
+                ]
+            },
+            'kaziranga': {
+                name: 'Kaziranga National Park, Assam',
+                image: 'https://images.unsplash.com/photo-1593697821152-8c15313125df?q=80&w=2070',
+                description: 'A UNESCO World Heritage Site, Kaziranga is home to the one-horned rhinoceros and diverse wildlife.',
+                duration: '2-3 days',
+                keySpecies: 'Rhino, Elephant',
+                area: '430 km²',
+                highlights: 'Kaziranga’s vast grasslands and wetlands make it a haven for rhinos, elephants, and migratory birds.',
+                features: ['Jeep Safari', 'Elephant Safari'],
+                thingsToDo: [
+                    'Elephant safari in Mihimukh',
+                    'Jeep safari in Kohora',
+                    'Bird watching at Burapahar',
+                    'Visit Kakochang Waterfall',
+                    'Explore tea gardens'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Jorhat Airport (100 km)' },
+                    { type: 'train', text: 'Furkating Railway Station (80 km)' },
+                    { type: 'car', text: 'Well-connected by road' }
+                ]
+            },
+            'bandhavgarh': {
+                name: 'Bandhavgarh National Park, Madhya Pradesh',
+                image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070',
+                description: 'Famous for its high density of tigers and ancient fort ruins, Bandhavgarh is a wildlife enthusiast’s paradise.',
+                duration: '2-3 days',
+                keySpecies: 'Tiger, Leopard',
+                area: '450 km²',
+                highlights: 'Bandhavgarh offers frequent tiger sightings and a rich history with its ancient fort and caves.',
+                features: ['Jeep Safari', 'Wildlife Photography'],
+                thingsToDo: [
+                    'Jeep safari in Tala zone',
+                    'Visit Bandhavgarh Fort',
+                    'Wildlife photography',
+                    'Explore Bamera Dam',
+                    'Visit Shesh Shaiya statue'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Jabalpur Airport (190 km)' },
+                    { type: 'train', text: 'Umaria Railway Station (35 km)' },
+                    { type: 'car', text: 'Well-connected by road' }
+                ]
+            },
+            'sundarbans': {
+                name: 'Sundarbans National Park, West Bengal',
+                image: 'https://images.unsplash.com/photo-1515473787929-0be4e7cd3616?q=80&w=2070',
+                description: 'A UNESCO site, Sundarbans is known for its mangrove forests and elusive Royal Bengal tigers.',
+                duration: '3-4 days',
+                keySpecies: 'Tiger, Crocodile',
+                area: '1330 km²',
+                highlights: 'Sundarbans offers a unique boat safari experience through its mangrove channels, home to rare wildlife.',
+                features: ['Boat Safari', 'Mangroves'],
+                thingsToDo: [
+                    'Boat safari in core area',
+                    'Visit Sajnekhali Watchtower',
+                    'Spot crocodiles at Sudhanyakhali',
+                    'Explore Netidhopani',
+                    'Bird watching at Dobanki'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Netaji Subhas Chandra Bose Airport, Kolkata (120 km)' },
+                    { type: 'train', text: 'Canning Railway Station (50 km)' },
+                    { type: 'car', text: 'Drive to Godkhali, the entry point' }
+                ]
+            },
+            'periyar': {
+                name: 'Periyar National Park, Kerala',
+                image: 'https://images.unsplash.com/photo-1597078737119-7f76ee897dc1?q=80&w=2070',
+                description: 'A lush reserve known for elephants, tigers, and scenic boat safaris on Periyar Lake.',
+                duration: '2-3 days',
+                keySpecies: 'Elephant, Tiger',
+                area: '925 km²',
+                highlights: 'Periyar’s boat safaris and lush forests offer a serene yet thrilling wildlife experience.',
+                features: ['Boat Safari', 'Nature Walks'],
+                thingsToDo: [
+                    'Boat safari on Periyar Lake',
+                    'Nature walk in the forest',
+                    'Spot elephants at Gavi',
+                    'Visit Mangala Devi Temple',
+                    'Explore spice plantations'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Cochin International Airport (140 km)' },
+                    { type: 'train', text: 'Kottayam Railway Station (110 km)' },
+                    { type: 'car', text: 'Drive to Thekkady' }
+                ]
+            },
+            'kanha': {
+                name: 'Kanha National Park, Madhya Pradesh',
+                image: 'https://images.unsplash.com/photo-1605351354358-53d4b24f68e5?q=80&w=2070',
+                description: 'Inspiration for The Jungle Book, Kanha is known for its tigers and barasingha deer.',
+                duration: '2-3 days',
+                keySpecies: 'Tiger, Barasingha',
+                area: '940 km²',
+                highlights: 'Kanha’s lush meadows and dense forests make it a prime destination for tiger and deer sightings.',
+                features: ['Jeep Safari', 'Wildlife Photography'],
+                thingsToDo: [
+                    'Jeep safari in Kanha zone',
+                    'Spot barasingha in meadows',
+                    'Wildlife photography',
+                    'Visit Bamni Dadar viewpoint',
+                    'Explore Kanha Museum'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Jabalpur Airport (160 km)' },
+                    { type: 'train', text: 'Gondia Railway Station (130 km)' },
+                    { type: 'car', text: 'Well-connected by road' }
+                ]
+            },
+            'gir': {
+                name: 'Gir National Park, Gujarat',
+                image: 'https://images.unsplash.com/photo-1621330396168-6121ced03db8?q=80&w=2070',
+                description: 'The last refuge of the Asiatic lion, Gir offers unique safari experiences in a dry deciduous forest.',
+                duration: '2-3 days',
+                keySpecies: 'Asiatic Lion',
+                area: '1412 km²',
+                highlights: 'Gir is the only place in the world to see Asiatic lions in the wild, with a rich ecosystem.',
+                features: ['Jeep Safari', 'Wildlife Photography'],
+                thingsToDo: [
+                    'Jeep safari in Gir forest',
+                    'Spot Asiatic lions',
+                    'Wildlife photography',
+                    'Visit Devalia Safari Park',
+                    'Explore Kamleshwar Dam'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Rajkot Airport (160 km)' },
+                    { type: 'train', text: 'Junagadh Railway Station (80 km)' },
+                    { type: 'car', text: 'Drive to Sasan Gir' }
+                ]
+            },
+            'keoladeo': {
+                name: 'Keoladeo National Park, Rajasthan',
+                image: 'https://images.unsplash.com/photo-1516306584366-1b98397e1f33?q=80&w=2070',
+                description: 'A UNESCO site, Keoladeo is renowned for its migratory birds and wetlands, ideal for bird watching.',
+                duration: '1-2 days',
+                keySpecies: 'Migratory Birds',
+                area: '29 km²',
+                highlights: 'Keoladeo is a birdwatcher’s paradise, hosting over 370 bird species, including Siberian cranes.',
+                features: ['Cycle Safari', 'Bird Watching'],
+                thingsToDo: [
+                    'Cycle safari through wetlands',
+                    'Bird watching with guides',
+                    'Photography of migratory birds',
+                    'Visit Keoladeo Temple',
+                    'Explore Bharatpur city'
+                ],
+                howToReach: [
+                    { type: 'plane', text: 'Agra Airport (55 km)' },
+                    { type: 'train', text: 'Bharatpur Railway Station (5 km)' },
+                    { type: 'car', text: 'Well-connected by road' }
+                ]
+            }
+        };
+
+        // Function to open safari modal
+        function openSafariModal(safariId) {
+            const safari = safaris[safariId];
+            if (!safari) return;
+
+            const modal = document.getElementById('safariModal');
+            const modalTitle = modal.querySelector('.modal-title');
+            const modalImage = modal.querySelector('.safari-image');
+            const modalName = modal.querySelector('.safari-name');
+            const modalDescription = modal.querySelector('.safari-description');
+            const modalDuration = modal.querySelector('.duration');
+            const modalKeySpecies = modal.querySelector('.key-species');
+            const modalArea = modal.querySelector('.area');
+            const modalHighlights = modal.querySelector('.safari-highlights');
+            const modalFeatures = modal.querySelector('.safari-features');
+            const modalThingsToDo = modal.querySelector('.things-to-do');
+            const modalHowToReach = modal.querySelector('.how-to-reach');
+
+            modalTitle.textContent = safari.name;
+            modalImage.src = safari.image;
+            modalImage.alt = safari.name;
+            modalName.textContent = safari.name;
+            modalDescription.textContent = safari.description;
+            modalDuration.textContent = `Duration: ${safari.duration}`;
+            modalKeySpecies.textContent = `Key Species: ${safari.keySpecies}`;
+            modalArea.textContent = `Area: ${safari.area}`;
+            modalHighlights.textContent = safari.highlights;
+
+            modalFeatures.innerHTML = safari.features.map(feature => 
+                `<span class="card-features"><i class="fas fa-check"></i> ${feature}</span>`
+            ).join('');
+
+            modalThingsToDo.innerHTML = safari.thingsToDo.map(thing => 
+                `<li><i class="fas fa-check-circle"></i> ${thing}</li>`
+            ).join('');
+
+            modalHowToReach.innerHTML = safari.howToReach.map(option => 
+                `<div class="transport-option">
+                    <i class="fas fa-${option.type}"></i>
+                    <span>${option.text}</span>
+                </div>`
+            ).join('');
+
+            const modalInstance = new bootstrap.Modal(modal);
+            modalInstance.show();
+        }
+
+        // Add click event listeners to all Learn More buttons
+        document.querySelectorAll('.safari-card .btn-primary').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const safariId = this.closest('.safari-card').dataset.safari;
+                openSafariModal(safariId);
+            });
+        });
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a.nav-link').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                window.scrollTo({
+                    top: targetElement.offsetTop - 70,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+{% endblock %}

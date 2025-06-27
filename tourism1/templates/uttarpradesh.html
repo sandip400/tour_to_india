@@ -1,0 +1,2719 @@
+{% extends "base.html" %}
+{% block content %}
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> -->
+  {% load static %}
+  <style>
+    .wb {
+      font-size: 10vw;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+      border-spacing: 0;
+      border: 1px solid #ddd;
+    }
+
+    td,
+    th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+      font-size: 1.5vw;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+
+    .trip {
+      text-align: center;
+      font-weight: 900;
+      background: orangered;
+      padding: 20px;
+      border-radius: 20px;
+      width: 60%;
+    }
+
+    p,
+    li,
+    .text {
+      font-size: 1.5vw;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-weight: 600;
+    }
+
+    h4 {
+      font-weight: 900;
+    }
+
+    img {
+      border-radius: 10px;
+      display: block;
+      margin: auto;
+    }
+
+    @media screen and (max-width: 850px) {
+
+      p,
+      li,
+      .text,
+      td,
+      th {
+        font-size: 2vw;
+        ;
+      }
+
+    }
+
+    @media screen and (max-width: 500px) {
+
+      p,
+      li,
+      .text,
+      td,
+      th {
+        font-size: 4.5vw;
+        ;
+      }
+
+    }
+
+    .box:nth-of-type(odd) {
+      background: #f3b37185;
+      padding: 10px;
+    }
+
+    .weather-container {
+            border-radius: 15px;
+            background: #f0fdf4;
+            padding: 15px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .weather-card {
+            text-align: center;
+            border-radius: 10px;
+            padding: 10px;
+            background: white;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+        .aqi {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            color: white;
+        }
+        .aqi-bad { background: purple; }
+        .aqi-moderate { background: orange; }
+        .aqi-good { background: green; }
+        .best-time {
+            background: #d1fae5;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 15px;
+            color: green;
+        }
+        .wet {
+            max-width: 50px;
+        }
+        .trip {
+          font-size: 18px;
+          padding: 10px 20px;
+          cursor: pointer;
+          background-color:rgb(231, 36, 36);
+          color: white;
+          border: none;
+          border-radius: 5px;
+      }
+      .modal {
+          display: none;
+          position: fixed;
+          z-index: 1;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0,0,0,0.5);
+      }
+      .modal-content {
+          background-color: #fff;
+          margin: 10% auto;
+          padding: 20px;
+          border-radius: 10px;
+          width: 40%;
+          box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+          text-align: center;
+      }
+      .close {
+          color: #aaa;
+          float: right;
+          font-size: 28px;
+          font-weight: bold;
+          cursor: pointer;
+      }
+      .trip-options {
+          display: flex;
+          justify-content: center;
+          gap: 20px;
+          margin-top: 20px;
+      }
+      .trip-options a {
+          display: block;
+          width: 120px;
+          padding: 10px;
+          background-color: #28a745;
+          color: white;
+          text-decoration: none;
+          border-radius: 5px;
+      }
+  </style>
+</head>
+
+<body>
+
+
+  <!-- <h2>Carousel Example</h2> -->
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+      <li data-target="#myCarousel" data-slide-to="4"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+
+      <div class="item active">
+        <img src="https://plus.unsplash.com/premium_photo-1661885523029-fc960a2bb4f3?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Taj Mahal" style="width:100%; height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Taj Mahal</h3>
+          <p>We love the magnificent architecture and history!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="https://plus.unsplash.com/premium_photo-1697730304380-2ed1c7aea373?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Varanasi" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Varanasi Ghats</h3>
+          <p>The spiritual heart of India!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="https://plus.unsplash.com/premium_photo-1697730410005-1d916de26345?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Bara Imambara" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Bara Imambara</h3>
+          <p>A marvel of Awadhi architecture!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="{% static 'ram1.jpg'%}" alt="Ayodhya" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Ayodhya</h3>
+          <p>The ancient city of Lord Ram!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="https://images.unsplash.com/photo-1661096143891-82d6d72700fc?q=80&w=1973&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Mathura" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Mathura</h3>
+          <p>The birthplace of Lord Krishna!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+  <div class="container">
+    <br><br>
+    <h1 class="wb"> UTTAR PRADESH</h1><br>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <img src="{% static 'upmap.jpg'%}" alt="" style="height:700px; width: -webkit-fill-available;">
+
+        </div>
+        <div class="col-sm-6">
+          <h1> Uttar Pradesh: The Cultural & Historical Heartland of India</h1>
+          <p class="text">Uttar Pradesh is a diverse and vibrant state in northern India, known for its rich history,
+            cultural heritage, literature, festivals, art, and architectural wonders. It is home to ancient cities, religious sites,
+            and is a key center for politics, economy, and education.</p>
+
+          <ul>
+            <li><b>Location --</b> Northern India</li>
+            <li><b>Capital --</b> Lucknow</li>
+            <li><b>Official Language --</b> Hindi</li>
+            <li><b>Area --</b> 243,290 sq. km</li>
+            <li><b>Population --</b> ~230 million (Most populous state in India)</li>
+            <li><b>Borders --</b> Uttarakhand, Himachal Pradesh, Haryana, Delhi, Rajasthan, Madhya Pradesh, Chhattisgarh, Jharkhand, Bihar & International border with Nepal</li>
+            <li><b>Major Rivers --</b> Ganga, Yamuna, Gomti, Ramganga, Ghaghra</li>
+            <li><b>Major Festivals --</b> Diwali, Holi, Dussehra, Eid, Ram Navami, Janmashtami, Mahashivratri, Ganga Dussehra</li>
+            <li><b>State Animal --</b> Swamp Deer</li>
+            <li><b>State Flower --</b> Palash (Flame of the Forest)</li>
+            <li><b>State Tree --</b> Ashoka Tree</li>
+            <li><b>State Bird --</b> Sarus Crane</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <br>
+    <hr>
+    <div>
+      <h1>📌 Divisions & Districts of Uttar Pradesh</h1>
+      <br>
+      <div style="overflow-x:auto;">
+        <table>
+          <tr>
+            <th>Division</th>
+            <th>Districts</th>
+            <th>Key Highlights</th>
+          </tr>
+          <tr>
+            <td>Lucknow Division</td>
+            <td>1. Lucknow 2. Hardoi 3. Lakhimpur Kheri 4. Sitapur 5. Raebareli 6. Unnao</td>
+            <td>Lucknow (State Capital), Nawabi Architecture, Chikankari Embroidery</td>
+          </tr>
+          <tr>
+            <td>Kanpur Division</td>
+            <td>7. Kanpur Nagar 8. Kanpur Dehat 9. Etawah 10. Farrukhabad 11. Auraiya 12. Kannauj</td>
+            <td>Industrial Hub, Leather Industry, Perfume Industry (Kannauj)</td>
+          </tr>
+          <tr>
+            <td>Agra Division</td>
+            <td>13. Agra 14. Firozabad 15. Mainpuri 16. Mathura</td>
+            <td>Taj Mahal, Glass Industry, Krishna Janmabhoomi</td>
+          </tr>
+          <tr>
+            <td>Meerut Division</td>
+            <td>17. Meerut 18. Baghpat 19. Bulandshahr 20. Gautam Buddha Nagar 21. Ghaziabad 22. Hapur</td>
+            <td>IT Hub, Educational Centers, Industrial Areas</td>
+          </tr>
+          <tr>
+            <td>Varanasi Division</td>
+            <td>23. Varanasi 24. Chandauli 25. Ghazipur 26. Jaunpur</td>
+            <td>Spiritual Capital, Ghats, Banarasi Silk, Ancient University</td>
+          </tr>
+          <tr>
+            <td>Ayodhya Division</td>
+            <td>27. Ayodhya 28. Ambedkar Nagar 29. Barabanki 30. Sultanpur 31. Amethi</td>
+            <td>Ram Janmabhoomi, Religious Tourism, Historical Sites</td>
+          </tr>
+          <tr>
+            <td>Gorakhpur Division</td>
+            <td>32. Gorakhpur 33. Deoria 34. Kushinagar 35. Maharajganj</td>
+            <td>Gorakhnath Temple, Buddhist Circuit, Indo-Nepal Border Trade</td>
+          </tr>
+          <tr>
+            <td>Prayagraj Division</td>
+            <td>36. Prayagraj 37. Fatehpur 38. Kaushambi 39. Pratapgarh</td>
+            <td>Triveni Sangam, Kumbh Mela, High Court</td>
+          </tr>
+          <tr>
+            <td>Aligarh Division</td>
+            <td>40. Aligarh 41. Etah 42. Hathras 43. Kasganj</td>
+            <td>Aligarh Muslim University, Lock Industry</td>
+          </tr>
+          <tr>
+            <td>Jhansi Division</td>
+            <td>44. Jhansi 45. Jalaun 46. Lalitpur</td>
+            <td>Jhansi Fort, Rani Lakshmibai Legacy, Bundelkhand Region</td>
+          </tr>
+          <tr>
+            <td>Bareilly Division</td>
+            <td>47. Bareilly 48. Badaun 49. Pilibhit 50. Shahjahanpur</td>
+            <td>Zari Work, Surma Industry, Pilibhit Tiger Reserve</td>
+          </tr>
+          <tr>
+            <td>Moradabad Division</td>
+            <td>51. Moradabad 52. Amroha 53. Bijnor 54. Rampur 55. Sambhal</td>
+            <td>Brass Industry, Handicrafts, Musical Instruments</td>
+          </tr>
+          <tr>
+            <td>Saharanpur Division</td>
+            <td>56. Saharanpur 57. Muzaffarnagar 58. Shamli</td>
+            <td>Woodcraft, Sugar Industry, Agricultural Belt</td>
+          </tr>
+          <tr>
+            <td>Azamgarh Division</td>
+            <td>59. Azamgarh 60. Ballia 61. Mau</td>
+            <td>Educational Hub, Handloom Industry</td>
+          </tr>
+          <tr>
+            <td>Devipatan Division</td>
+            <td>62. Gonda 63. Bahraich 64. Balrampur 65. Shravasti</td>
+            <td>Buddhist Sites, Wildlife Sanctuaries, Indo-Nepal Border</td>
+          </tr>
+          <tr>
+            <td>Basti Division</td>
+            <td>66. Basti 67. Sant Kabir Nagar 68. Siddharthnagar</td>
+            <td>Buddhist Circuit, Agricultural Region</td>
+          </tr>
+          <tr>
+            <td>Mirzapur Division</td>
+            <td>69. Mirzapur 70. Bhadohi 71. Sonbhadra</td>
+            <td>Carpet Industry, Vindhya Mountains, Mineral Resources</td>
+          </tr>
+          <tr>
+            <td>Chitrakoot Division</td>
+            <td>72. Banda 73. Chitrakoot 74. Hamirpur 75. Mahoba</td>
+            <td>Religious Tourism, Bundelkhand Region, Historical Forts</td>
+          </tr>
+        </table>
+      </div>
+      <br><br>
+      <h1>🔹 Major Highlights of Some Key Districts</h1><br><br>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <ul>
+              <li><b>Lucknow --</b> Capital of Uttar Pradesh, known for Nawabi culture, cuisine, and architecture.</li>
+              <li><b>Varanasi --</b> One of the world's oldest continuously inhabited cities, spiritual capital of India.</li>
+              <li><b>Agra --</b> Home to the Taj Mahal, Agra Fort, and Fatehpur Sikri.</li>
+              <li><b>Mathura & Vrindavan --</b> Birthplace of Lord Krishna and associated with his childhood.</li>
+              <li><b>Ayodhya --</b> Birthplace of Lord Ram and site of the newly constructed Ram Temple.</li>
+              <li><b>Prayagraj (Allahabad) --</b> Known for Triveni Sangam and Kumbh Mela, the world's largest religious gathering.</li>
+              <li><b>Kanpur --</b> Industrial hub, known as the "Manchester of India".</li>
+              <li><b>Jhansi --</b> Historical city associated with Rani Lakshmibai and the 1857 revolt.</li>
+              <li><b>Gorakhpur --</b> Religious center with the famous Gorakhnath Temple.</li>
+            </ul>
+          </div>
+          <div class="col-sm-6">
+            <img src="{% static 'upmap.jpg'%}" alt="" style="height:450px;width: -webkit-fill-available;">
+
+          </div>
+        </div>
+      </div>
+    </div><br><br>
+    <div class="container">
+      <div class="weather-container">
+          <h4 class="text-center"><strong>Weather in Uttar Pradesh</strong></h4>
+          <div class="row">
+              <!-- January -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Jan</h6>
+                      <p>7/23°C</p>
+                      <span class="aqi aqi-bad">AQI 220</span>
+                  </div>
+              </div>
+              <!-- February -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Feb</h6>
+                      <p>10/27°C</p>
+                      <span class="aqi aqi-moderate">AQI 150</span>
+                  </div>
+              </div>
+              <!-- March -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Mar</h6>
+                      <p>15/33°C</p>
+                      <span class="aqi aqi-moderate">AQI 120</span>
+                  </div>
+              </div>
+              <!-- April -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Apr</h6>
+                      <p>21/38°C</p>
+                      <span class="aqi aqi-moderate">AQI 110</span>
+                  </div>
+              </div>
+              <!-- May -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>May</h6>
+                      <p>25/42°C</p>
+                      <span class="aqi aqi-moderate">AQI 100</span>
+                  </div>
+              </div>
+              <!-- June -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Jun</h6>
+                      <p>27/41°C</p>
+                      <span class="aqi aqi-good">AQI 80</span>
+                  </div>
+              </div>
+              <!-- July -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="rain.png" alt="rain">
+                      <h6>Jul</h6>
+                      <p>26/35°C</p>
+                      <span class="aqi aqi-good">AQI 55</span>
+                  </div>
+              </div>
+              <!-- August -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Aug</h6>
+                      <p>26/33°C</p>
+                      <span class="aqi aqi-good">AQI 65</span>
+                  </div>
+              </div>
+              <!-- September -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Sep</h6>
+                      <p>24/34°C</p>
+                      <span class="aqi aqi-good">AQI 60</span>
+                  </div>
+              </div>
+              <!-- October -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Oct</h6>
+                      <p>19/33°C</p>
+                      <span class="aqi aqi-moderate">AQI 75</span>
+                  </div>
+              </div>
+              <!-- November -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Nov</h6>
+                      <p>13/29°C</p>
+                      <span class="aqi aqi-moderate">AQI 95</span>
+                  </div>
+              </div>
+              <!-- December -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Dec</h6>
+                      <p>8/24°C</p>
+                      <span class="aqi aqi-bad">AQI 180</span>
+                  </div>
+              </div>
+          </div>
+          <div class="text-center">
+              <div class="best-time">🏆 Best time to visit: October - March</div>
+          </div>
+      </div>
+    </div>
+    
+
+    <br><br>
+    <button class="trip" id="openModal">Let's go on a trip</button>
+    
+    <div id="tripModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Select Your Trip</h2>
+            <button type="button" class="btn btn-warning" style="margin-bottom: 8px;color:black; border-radius: 5px;" onclick="location.href='{% url 'uttarpradesh_7days' %}'" >7 days trip</button><br>
+            <button type="button" class="btn btn-warning" style="margin-bottom: 8px;color:black; border-radius: 5px;" onclick="location.href='{% url 'uttarpradesh_12days' %}'" >12 days trip</button>
+        </div>
+    </div>
+    
+    <script>
+        var modal = document.getElementById("tripModal");
+        var btn = document.getElementById("openModal");
+        var span = document.getElementsByClassName("close")[0];
+        
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+        
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+        
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+    <div class="container">
+      <ul class="nav nav-tabs">
+        <li class="nav-item"><a data-toggle="tab" href="#wbculture"> Culture</a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbtradition "> Tradition</a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbfestivals"> Festivals </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbfood"> Foods </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbhistory"> History </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbartacraft"> Art and Craft </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbseason"> Season to Visit </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbtourist"> Tourist Spots </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbwild"> Wildlife & Crops </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbedu"> Institutions </a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="wbculture" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Culture of Uttar Pradesh</h1>
+          <p class="text">Uttar Pradesh has a rich and diverse culture, shaped by its history, literature, art, music,
+            festivals, and traditions. Here's an overview of some key aspects of its culture:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Language</h3>
+                  <ul>
+                    <li>Hindi is the official language of Uttar Pradesh, with various dialects like Awadhi, Braj, Bundeli, and Bhojpuri spoken across different regions. These dialects have rich literary traditions and are integral to the cultural identity of the state.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="hindi.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>2. Literature</h3>
+                  <ul>
+                    <li>Uttar Pradesh has a rich literary heritage with notable contributions from poets and writers like Kabir, Tulsidas, Surdas, Malik Muhammad Jayasi, and Premchand.</li>
+                    <li>The Ramcharitmanas by Tulsidas, written in Awadhi, is one of the most significant works in Hindi literature.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="up-literature.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div><br>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="up-art.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Art and Craft</h3>
+                  <ul>
+                    <li>The state is known for its diverse range of art forms, including Chikankari embroidery from Lucknow, Zardozi work, terracotta pottery, and brass work from Moradabad.</li>
+                    <li>Traditional textiles like Banarasi silk sarees from Varanasi are world-renowned for their intricate designs and gold threadwork.</li>
+                  </ul>
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="up-music.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>4. Music</h3>
+                  <ul>
+                    <li>Classical music traditions like Hindustani classical music flourish in cities like Varanasi and Lucknow.</li>
+                    <li>Folk music forms such as Kajri, Chaiti, Birha, and Rasiya are popular in different regions.</li>
+                    <li>Nautanki, a traditional musical theater form, originated in Uttar Pradesh.</li>
+                    <li>The Banaras Gharana is a prominent school of Hindustani classical music.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Dance</h3>
+                  <ul>
+                    <li>Kathak, one of India's eight classical dance forms, originated in Uttar Pradesh with the Lucknow Gharana being particularly renowned.</li>
+                    <li>Folk dances like Raslila of Mathura-Vrindavan, Charkula, and Pai Danda are integral to cultural celebrations.</li>
+                    <li>Nautanki combines elements of dance, music, and theater in a unique performance style.</li>
+                  </ul>
+                  <h3>6. Cuisine</h3>
+                  <ul>
+                    <li>Uttar Pradesh cuisine is diverse, with Awadhi cuisine from Lucknow known for its rich flavors, kebabs, and biryanis.</li>
+                    <li>Banaras (Varanasi) is famous for its street food, especially kachoris, chaats, and sweets like malaiyo.</li>
+                    <li>The state is known for its variety of breads like roomali roti, sheermal, and baati.</li>
+                    <li>Famous dishes include Lucknowi biryani, galouti kebab, kakori kebab, and tundey kebab.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="kathak.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="up-cinema.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>7. Theatre and Cinema</h3>
+                  <ul>
+                    <li><b>Theatre:</b> Uttar Pradesh has a rich tradition of folk theater forms like Nautanki, Ramlila, and Raslila that continue to be performed across the state.</li>
+                    <li><b>Cinema:</b> The state has contributed significantly to Indian cinema with many actors, directors, and musicians hailing from UP.</li>
+                    <li>Film City in Noida is an important center for film and television production.</li>
+                  </ul>
+                  <h3>8. Architecture</h3>
+                  <ul>
+                    <li>Uttar Pradesh's architectural style blends Mughal, Indo-Islamic, colonial, and Hindu influences. Notable structures include the Taj Mahal, Agra Fort, Fatehpur Sikri, Bara Imambara, and numerous temples in Varanasi.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="up-religion.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>9. Religious Diversity</h3>
+                  <ul>
+                    <li>The state is home to a variety of religions, with Hinduism, Islam, Buddhism, Jainism, and Sikhism having significant presence. This diversity is reflected in the state's festivals, rituals, and cultural practices.</li>
+                    <li>Important religious sites include Ayodhya, Mathura, Varanasi, Prayagraj, and Sarnath, making UP a major center for religious tourism.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>10. Folk Traditions</h3>
+                  <ul>
+                    <li>Uttar Pradesh is famous for its rich folk traditions, including storytelling forms like Kissa-Goi and Qissa-Khwani.</li>
+                    <li>The Ramlila performances of Ramnagar (Varanasi) are UNESCO-recognized intangible cultural heritage.</li>
+
+                  </ul>
+                  <h3>11. Philosophy</h3>
+                  <ul>
+                    <li>The state has been a center for philosophical thought with contributions from figures like Kabir, whose dohas (couplets) continue to influence Indian philosophy.</li>
+                    <li>Varanasi has been a center for learning and philosophical discourse for centuries.</li>
+
+                  </ul>
+                  <h3>12. Handicrafts</h3>
+                  <ul>
+                    <li>Uttar Pradesh is known for its handicrafts such as Chikankari embroidery, Zardozi, Brassware from Moradabad, Glassware from Firozabad, and Carpets from Bhadohi.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="up-philosophy.jpg" alt="" style="height:300px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br><br>
+
+          <p>Uttar Pradesh's culture is deeply rooted in its history, and it continues to evolve while maintaining a close
+            connection to its heritage. It's a region where modernity and tradition coexist beautifully!</p><br><br>
+        </div>
+        <div id="wbtradition" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Tradition of Uttar Pradesh</h1>
+          <p>Uttar Pradesh has a rich and diverse tradition deeply rooted in its history, culture, and social practices.
+            Here's an overview of some key traditional aspects of the state:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Clothing Tradition</h3>
+                  <h4>Men</h4>
+                  <ul>
+                    <li><b>Dhoti and Kurta:</b> Traditional UP men wear white or cream-colored dhoti with a kurta,
+                      especially during religious ceremonies, weddings, and festivals.</li>
+                    <li><b>Sherwani and Churidar:</b> Worn for special occasions, especially in Lucknow and Awadh region.</li>
+                  </ul>
+                  <h4>Women</h4>
+                  <ul>
+                    <li><b>Saree:</b> UP women traditionally wear sarees like Banarasi silk, which are famous worldwide for their gold and silver brocade or zari work.</li>
+                    <li><b>Salwar Kameez:</b> Popular everyday wear, often with Chikankari embroidery from Lucknow.</li>
+                    <li><b>Lehenga Choli:</b> Worn during festivals and weddings, especially in western UP.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="up-clothing.jpg" alt="" style="height:250px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>2. Wedding Traditions</h3>
+                  <ul>
+                    <li><b>Tilak:</b> A pre-wedding ceremony where the groom's family visits the bride's home with gifts.</li>
+                    <li><b>Mehndi:</b> Intricate henna designs are applied to the bride's hands and feet.</li>
+                    <li><b>Sangeet:</b> A musical celebration where families gather to sing and dance.</li>
+                    <li><b>Jaimala:</b> The exchange of garlands between bride and groom.</li>
+                    <li><b>Saptapadi:</b> The couple takes seven rounds around the sacred fire, making vows with each round.</li>
+                    <li><b>Vidaai:</b> An emotional ceremony where the bride leaves her parents' home.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="up-wedding.jpg" alt="" style="height:250px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="up-dance.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Music & Dance Traditions</h3>
+                  <ul>
+                    <li><b>Kathak:</b> Classical dance form that originated in UP, with the Lucknow Gharana being particularly famous.</li>
+                    <li><b>Raslila:</b> Folk dance depicting the life of Lord Krishna, popular in Mathura and Vrindavan.</li>
+                    <li><b>Nautanki:</b> Traditional musical theater form with roots in UP.</li>
+                    <li><b>Kajri:</b> Folk songs sung during the monsoon season, especially in eastern UP.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="up-social.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+
+                  <h3>4. Social & Religious Traditions</h3>
+                  <ul>
+                    <li><b>Ganga Aarti:</b> Daily ritual performed at the ghats of Varanasi, where priests offer prayers to the River Ganges.</li>
+                    <li><b>Kumbh Mela:</b> The world's largest religious gathering held in Prayagraj every 12 years.</li>
+                    <li><b>Ramlila:</b> Dramatic reenactment of the Ramayana, with the Ramnagar Ramlila being particularly famous.</li>
+                    <li><b>Baithak:</b> Social gatherings where people discuss literature, music, and politics.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Architectural & Handicraft Traditions</h3>
+                  <ul>
+                    <li><b>Mughal Architecture:</b> Exemplified by the Taj Mahal, Agra Fort, and Fatehpur Sikri.</li>
+                    <li><b>Nawabi Architecture:</b> Seen in structures like Bara Imambara and Chota Imambara in Lucknow.</li>
+                    <li><b>Chikankari:</b> Delicate hand embroidery on cotton or muslin fabric, originating from Lucknow.</li>
+                    <li><b>Zardozi:</b> Intricate embroidery using gold and silver threads, popular in Varanasi and Lucknow.</li>
+                    <li><b>Brass Work:</b> Moradabad is famous for its brass handicrafts.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="up-architecture.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>6. Sports & Games</h3>
+                  <ul>
+                    <li><b>Kabaddi:</b> Traditional contact sport popular in rural areas.</li>
+                    <li><b>Kho-Kho:</b> Traditional Indian game played widely across the state.</li>
+                    <li><b>Pehlwani:</b> Traditional wrestling practiced in akharas (wrestling pits).</li>
+                    <li><b>Cricket:</b> Though not traditional, it has become immensely popular across the state.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="up-sports.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br><br>
+          <p>Uttar Pradesh's traditions beautifully combine history, art, food, music, and festivals, making it one of the
+            most culturally vibrant states in India.</p><br><br>
+        </div>
+        <div id="wbfestivals" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Festivals of Uttar Pradesh</h1>
+          <p>Uttar Pradesh is known for its vibrant and diverse festivals, which reflect its rich cultural heritage,
+            religious harmony, and artistic traditions. Here's a list of some of the major festivals celebrated in the
+            state:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Diwali (Festival of Lights)</h3>
+                  <ul>
+                    <li>One of the most significant festivals celebrated across Uttar Pradesh with great enthusiasm.</li>
+                    <li>Ayodhya hosts a special "Deepotsav" where thousands of earthen lamps are lit along the Saryu River.</li>
+                    <li>Homes are decorated with rangoli, diyas (oil lamps), and electric lights.</li>
+                    <li>People exchange gifts, sweets, and visit family and friends.</li>
+                  </ul>
+                  <p><b>📍 Time: October - November</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="up-diwali.jpg" alt="" style="height:230px;width: 200px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="up-holi.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Holi (Festival of Colors)</h3>
+                  <ul>
+                    <li>Celebrated with special fervor in Mathura and Vrindavan, the land of Lord Krishna.</li>
+                    <li>Lathmar Holi in Barsana is famous, where women playfully beat men with sticks.</li>
+                    <li>People throw colored powders and water on each other, sing, dance, and enjoy festive foods.</li>
+                    <li>The festival marks the arrival of spring and the triumph of good over evil.</li>
+                  </ul>
+                  <p><b>📍 Time: February - March</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Kumbh Mela</h3>
+                  <ul>
+                    <li>The world's largest religious gathering, held every 12 years at Prayagraj (Allahabad).</li>
+                    <li>Millions of pilgrims gather to bathe at the Triveni Sangam, the confluence of the Ganga, Yamuna, and mythical Saraswati rivers.</li>
+                    <li>Ardh Kumbh is held every 6 years, and Maha Kumbh every 144 years.</li>
+                    <li>The festival includes religious discussions, devotional singing, mass feeding of the poor, and religious assemblies.</li>
+                  </ul>
+                  <p><b>📍 Time: Dates determined by astrological calculations</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="up-kumbh.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="up-janmashtami.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Janmashtami</h3>
+                  <ul>
+                    <li>Celebrates the birth of Lord Krishna with grand festivities in Mathura and Vrindavan.</li>
+                    <li>Temples are decorated, devotional songs are sung, and "Dahi Handi" competitions are held.</li>
+                    <li>Raslila performances depict scenes from Krishna's life.</li>
+                    <li>Devotees fast until midnight, the believed time of Krishna's birth.</li>
+                  </ul>
+                  <p><b>📍 Time: August - September</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Ram Navami</h3>
+                  <ul>
+                    <li>Celebrates the birth of Lord Ram with special significance in Ayodhya, his birthplace.</li>
+                    <li>Temples are decorated, and continuous recitation of the Ramcharitmanas takes place.</li>
+                    <li>Processions with tableaux depicting scenes from the Ramayana are taken out.</li>
+                  </ul>
+                  <p><b>📍 Time: March - April</b></p>
+                  <h3>6. Dussehra (Vijayadashami)</h3>
+                  <ul>
+                    <li>Celebrates the victory of Lord Ram over the demon king Ravana.</li>
+                    <li>Ramlila performances culminate on this day with the burning of large effigies of Ravana, Kumbhakarna, and Meghnad.</li>
+                    <li>The Ramlila of Ramnagar near Varanasi is particularly famous and continues for a month.</li>
+                  </ul>
+                  <p><b>📍 Time: September - October</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="up-dussehra.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="up-eid.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>7. Eid-ul-Fitr & Eid-ul-Adha</h3>
+                  <ul>
+                    <li>Major Islamic festivals celebrated with great enthusiasm, especially in Lucknow, Aligarh, and other cities with significant Muslim populations.</li>
+                    <li>Special prayers are offered at mosques, followed by feasts and family gatherings.</li>
+                    <li>Traditional Awadhi cuisine is prepared, and people exchange gifts and sweets.</li>
+                  </ul>
+                  <p><b>📍 Time: Based on Islamic Calendar</b></p>
+                  <h3>8. Mahashivratri</h3>
+                  <ul>
+                    <li>Dedicated to Lord Shiva, celebrated with special fervor in Varanasi and at important Shiva temples across the state.</li>
+                    <li>Devotees fast, offer prayers, and perform abhishekam (ritual bathing of the Shiva lingam).</li>
+                    <li>Night-long vigils with devotional singing are common.</li>
+                  </ul>
+                  <p><b>📍 Time: February - March</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>9. Ganga Dussehra</h3>
+                  <ul>
+                    <li>Celebrates the descent of the Ganges River from heaven to earth.</li>
+                    <li>Pilgrims take a holy dip in the Ganges, especially at Varanasi, Prayagraj, and Haridwar.</li>
+                    <li>Temples along the riverbanks are decorated, and special aarti ceremonies are performed.</li>
+                  </ul>
+                  <p><b>📍 Time: May - June</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="up-ganga.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="up-buddha.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>10. Buddha Purnima</h3>
+                  <ul>
+                    <li>Celebrates the birth, enlightenment, and death of Gautama Buddha.</li>
+                    <li>Special significance in Sarnath near Varanasi, where Buddha gave his first sermon.</li>
+                    <li>Buddhist temples are decorated, prayers are offered, and charitable activities are organized.</li>
+                  </ul>
+                  <p><b>📍 Time: April - May</b></p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>11. Lucknow Mahotsav</h3>
+                  <ul>
+                    <li>A ten-day cultural festival showcasing the art, craft, culture, and cuisine of Lucknow and Uttar Pradesh.</li>
+                    <li>Features classical music and dance performances, crafts exhibitions, food stalls, and literary events.</li>
+                  </ul>
+                  <p><b>📍 Time: November - December</b></p>
+
+                  <h3>12. Taj Mahotsav</h3>
+                  <ul>
+                    <li>Annual 10-day cultural festival held in Agra to showcase the arts, crafts, culture, and cuisine of Uttar Pradesh.</li>
+                    <li>Features folk music, classical dance performances, and handicraft exhibitions.</li>
+                  </ul>
+                  <p><b>📍 Time: February</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="up-taj-mahotsav.jpg" alt="" style="height:200px;width: 230px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="up-chhath.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>13. Chhath Puja</h3>
+                  <ul>
+                    <li>An ancient Hindu festival dedicated to the Sun God and Chhathi Maiya.</li>
+                    <li>Particularly popular in eastern Uttar Pradesh, especially in areas bordering Bihar.</li>
+                    <li>Devotees fast and offer prayers to the setting and rising sun while standing in water.</li>
+                  </ul>
+                  <p><b>📍 Time: October - November</b></p>
+                  <h3>14. Ganga Mahotsav</h3>
+                  <ul>
+                    <li>A five-day cultural festival held in Varanasi celebrating the River Ganges.</li>
+                    <li>Features classical music and dance performances, boat races, and a grand aarti ceremony.</li>
+                  </ul>
+                  <p><b>📍 Time: November</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Uttar Pradesh's festivals are a blend of religious, cultural, and artistic celebrations, making the state one
+            of the most festive regions in India! 🎉</p><br><br>
+        </div>
+        <div id="wbfood" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Foods of Uttar Pradesh</h1>
+          <p>Uttar Pradesh has a rich and diverse culinary tradition that blends flavors from different regions. The cuisine is known for its aromatic spices, rich gravies, and variety of breads. Here's a look at some of the most iconic foods of Uttar Pradesh:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Awadhi Cuisine (Lucknow)</h3>
+                  <ul>
+                    <li><b>Biryani:</b> Lucknowi biryani is known for its subtle flavors, aromatic spices, and the unique "dum" cooking style.</li>
+                    <li><b>Kebabs:</b> Lucknow is famous for its melt-in-the-mouth kebabs, especially Galouti Kebab, Kakori Kebab, and Tunde Kebab.</li>
+                    <li><b>Korma:</b> Rich, creamy curry made with yogurt, cream, and aromatic spices.</li>
+                  </ul>
+                  <h3>2. Breads of UP</h3>
+                  <ul>
+                    <li><b>Roomali Roti:</b> Paper-thin bread, folded like a handkerchief.</li>
+                    <li><b>Sheermal:</b> Saffron-flavored flatbread, a specialty of Lucknow.</li>
+                    <li><b>Baati:</b> Hard, unleavened bread eaten with dal, popular in Bundelkhand region.</li>
+                    <li><b>Warqi Paratha:</b> Multi-layered flaky bread.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="up-awadhi.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="up-veg.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Famous UP Dishes</h3>
+                  <h4>Vegetarian Specialties</h4>
+                  <ul>
+                    <li><b>Aloo Kachori:</b> Deep-fried bread stuffed with spiced potatoes, served with chutney.</li>
+                    <li><b>Banarasi Tamatar Chaat:</b> Tangy tomato-based street food from Varanasi.</li>
+                    <li><b>Matar ka Nimona:</b> A thick pea curry, popular in eastern UP.</li>
+                    <li><b>Kadhi Chawal:</b> Yogurt-based curry with pakoras, served with rice.</li>
+                  </ul>
+                  <h4>Non-Vegetarian Delicacies</h4>
+                  <ul>
+                    <li><b>Nihari:</b> Slow-cooked meat stew traditionally eaten for breakfast.</li>
+                    <li><b>Rogan Josh:</b> Aromatic lamb curry with a rich red gravy.</li>
+                    <li><b>Pasanda:</b> Tender meat cooked in a rich, creamy gravy.</li>
+                    <li><b>Qorma:</b> Meat cooked with yogurt, cream, and spices.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="up-meat.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h4>Rice Dishes</h4>
+                  <ul>
+                    <li><b>Lucknowi Biryani:</b> Fragrant rice cooked with meat, saffron, and spices.</li>
+                    <li><b>Tahiri:</b> Vegetarian biryani popular in western UP.</li>
+                    <li><b>Zarda:</b> Sweet rice dish flavored with saffron, nuts, and dried fruits.</li>
+                  </ul>
+                  <h4>Dal & Accompaniments</h4>
+                  <ul>
+                    <li><b>Arhar Dal:</b> Yellow lentil preparation, a staple across UP.</li>
+                    <li><b>Bhindi ka Salan:</b> Okra cooked in a tangy gravy.</li>
+                    <li><b>Baingan Bharta:</b> Smoked eggplant mash with spices.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>4. Sweets & Desserts</h3>
+                  <ul>
+                    <li><b>Petha:</b> Translucent soft candy made from ash gourd, a specialty of Agra.</li>
+                    <li><b>Jalebi:</b> Deep-fried sweet soaked in sugar syrup, especially famous from Varanasi.</li>
+                    <li><b>Malaiyo:</b> A winter specialty from Varanasi, made with milk foam, saffron, and nuts.</li>
+                    <li><b>Imarti:</b> Similar to jalebi but with a different shape and texture.</li>
+                    <li><b>Rabri:</b> Thickened sweetened milk with layers of malai (cream).</li>
+                    <li><b>Kulfi:</b> Traditional Indian ice cream, with Mathura's kulfi being particularly famous.</li>
+                  </ul>
+
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="up-sweets.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="up-chaat.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>5. Street Food of Uttar Pradesh</h3>
+                  <ul>
+                    <li><b>Chaat:</b> Various forms like Aloo Tikki, Papri Chaat, and Dahi Bhalla are popular across UP.</li>
+                    <li><b>Kachori:</b> Deep-fried pastry filled with spiced lentils or peas, especially famous in Varanasi.</li>
+                    <li><b>Samosa:</b> Triangular pastry filled with spiced potatoes, a ubiquitous snack.</li>
+                    <li><b>Tikki:</b> Spiced potato patties served with chutneys.</li>
+                    <li><b>Lassi:</b> Sweetened yogurt drink, with Banaras ki Lassi being particularly famous.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>6. Famous Drinks</h3>
+                  <ul>
+                    <li><b>Thandai:</b> A cooling milk-based drink flavored with nuts, spices, and sometimes bhang (cannabis), especially popular during Holi.</li>
+                    <li><b>Lassi:</b> Sweet or salted yogurt-based drink, with Banaras ki Lassi being particularly famous.</li>
+                    <li><b>Sharbat:</b> Fruit-based sweet drinks popular during summer.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="up-drinks.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Regional Specialties</h3>
+                  <ul>
+                    <li><b>Banaras (Varanasi):</b> Famous for its kachoris, chaats, lassi, and malaiyo.</li>
+                    <li><b>Lucknow:</b> Known for Awadhi cuisine, kebabs, biryani, and korma.</li>
+                    <li><b>Agra:</b> Famous for petha, dalmoth, and bedai (a type of kachori).</li>
+                    <li><b>Mathura:</b> Known for pedas, milk sweets, and chaat.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="up-regional.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Uttar Pradesh's cuisine is a mix of rich flavors, delicate spices, and iconic street foods, making it one of
+            the most delicious regional cuisines in India! 🍛🍖🍬</p><br><br>
+        </div>
+        <div id="wbhistory" class="tab-pane fade in active" style="background-color: white;">
+          <h1>History of Uttar Pradesh</h1>
+          <p>Uttar Pradesh has a rich and diverse history that spans ancient civilizations, medieval kingdoms, British
+            colonial rule, and the modern era. The region has played a significant role in India's political, cultural,
+            and intellectual history.</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Ancient Period (Before 6th Century CE)</h3>
+                  <ul>
+                    <li><b>Prehistoric Era:</b> Archaeological evidence suggests human habitation in the Gangetic plains dating back to 85,000 years.</li>
+                    <li><b>Vedic Period (1500 BCE - 600 BCE):</b> The region was known as "Aryavarta" or "Madhyadesha" (Middle Country) and was the center of Vedic civilization.</li>
+                    <li><b>Mahajanapadas (600 BCE - 325 BCE):</b> The region contained several powerful kingdoms like Kashi (Varanasi), Kosala, and Panchala.</li>
+                    <li><b>Maurya Empire (321 BCE - 185 BCE):</b> Emperor Ashoka's rule brought Buddhism to prominence in the region.</li>
+                    <li><b>Gupta Empire (320 CE - 550 CE):</b> Considered the "Golden Age" of India, with advancements in science, art, literature, and mathematics.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="up-ancient.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="up-medieval.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Medieval Period (6th - 18th Century)</h3>
+                  <h4>Harsha's Empire (606 CE - 647 CE):</h4>
+                  <ul>
+                    <li>King Harshavardhana ruled from Kannauj, making it a center of culture and learning.</li>
+                    <li>Chinese traveler Xuanzang visited during this period and documented the prosperity of the region.</li>
+                  </ul>
+                  <h4>Delhi Sultanate (1206 CE - 1526 CE):</h4>
+                  <ul>
+                    <li>Islamic rule began with Qutb-ud-din Aibak establishing the Delhi Sultanate.</li>
+                    <li>The region saw the blending of Hindu and Islamic cultures, architecture, and arts.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="up-mughal.jpg" alt="" style="height:220px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h4>Mughal Empire (1526 CE - 1857 CE):</h4>
+                  <ul>
+                    <li>Babur defeated Ibrahim Lodi at the First Battle of Panipat in 1526, establishing Mughal rule.</li>
+                    <li>Akbar built Fatehpur Sikri near Agra as his capital.</li>
+                    <li>Shah Jahan built the Taj Mahal in Agra as a mausoleum for his wife Mumtaz Mahal.</li>
+                    <li>The region flourished as a center of art, architecture, and culture.</li>
+                  </ul>
+                  <h4>Nawabs of Awadh (1722 CE - 1856 CE):</h4>
+                  <ul>
+                    <li>As Mughal power declined, the Nawabs of Awadh (Oudh) established a semi-independent state.</li>
+                    <li>Lucknow became a cultural center known for its cuisine, music, dance, and poetry.</li>
+                    <li>The Nawabs were patrons of arts and architecture, building structures like the Bara Imambara.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. British Colonial Period (1757 CE - 1947 CE)</h3>
+                  <ul>
+                    <li><b>East India Company Rule:</b> The British gradually expanded their control over the region.</li>
+                    <li><b>Annexation of Awadh (1856):</b> The British annexed the Kingdom of Awadh, citing misgovernance.</li>
+                    <li><b>Revolt of 1857:</b> The first major uprising against British rule began in Meerut and spread to other parts of the region.</li>
+                    <li><b>United Provinces:</b> In 1902, the North-Western Provinces and Oudh were renamed the United Provinces of Agra and Oudh.</li>
+                    <li><b>Freedom Movement:</b> The region played a crucial role in India's freedom struggle, with leaders like Motilal Nehru, Jawaharlal Nehru, and Gobind Ballabh Pant.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="up-british.jpg" alt="" style="height:200px;width: 250px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="up-revolt.jpg" alt="" style="height:230px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h2>4. Revolt of 1857 - The First War of Independence</h3>
+                    <ul>
+                      <li><b>Outbreak:</b> The revolt began in Meerut on May 10, 1857, when Indian soldiers (sepoys) rebelled against the British East India Company.</li>
+                      <li><b>Key Leaders:</b> Rani Lakshmibai of Jhansi, Tantia Tope, Nana Sahib, and Begum Hazrat Mahal of Awadh led the rebellion in different parts of the region.</li>
+                      <li><b>Major Centers:</b> Lucknow, Kanpur, Jhansi, and Meerut were major centers of the revolt.</li>
+                      <li><b>Aftermath:</b> The revolt was suppressed by 1858, and the British Crown took direct control of India from the East India Company.</li>
+                    </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="up-freedom.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>5. Freedom Movement in UP</h3>
+                  <ul>
+                    <li><b>Non-Cooperation Movement (1920-1922):</b> The region actively participated in Gandhi's call for non-cooperation with the British.</li>
+                    <li><b>Civil Disobedience Movement (1930):</b> Salt Satyagraha and other forms of civil disobedience were widely observed.</li>
+                    <li><b>Quit India Movement (1942):</b> The region saw intense anti-British activities during this final phase of the freedom struggle.</li>
+                    <li><b>Key Leaders:</b> Motilal Nehru, Jawaharlal Nehru, Gobind Ballabh Pant, Rafi Ahmad Kidwai, and Lal Bahadur Shastri were prominent leaders from the region.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>6. Post-Independence (1947 - Present)</h3>
+                  <h4>Formation of Uttar Pradesh</h4>
+                  <ul>
+                    <li>After independence, the United Provinces were renamed "Uttar Pradesh" on January 24, 1950.</li>
+                    <li>It became India's most populous state and a key political center.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="up-modern.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h4>Political Developments</h4>
+                  <ul>
+                    <li><b>Early Years:</b> Congress dominated politics in the early decades after independence.</li>
+                    <li><b>1990s Onwards:</b> Rise of regional parties like Samajwadi Party and Bahujan Samaj Party.</li>
+                    <li><b>2000:</b> Uttaranchal (now Uttarakhand) was carved out of Uttar Pradesh.</li>
+                    <li><b>Recent Years:</b> The state continues to play a crucial role in national politics, often determining the outcome of general elections due to its large number of parliamentary seats.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="up-politics.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Present-Day Uttar Pradesh</h3>
+                  <ul>
+                    <li><b>Cultural Heritage:</b> The state continues to be a repository of India's rich cultural heritage.</li>
+                    <li><b>Economic Growth:</b> Focus on industrialization, agriculture, and service sectors.</li>
+                    <li><b>Tourism:</b> Home to major tourist attractions like the Taj Mahal, Varanasi ghats, and Buddhist sites.</li>
+                    <li><b>Challenges:</b> Addressing issues of population growth, economic development, and social equality.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="up-present.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Uttar Pradesh has witnessed ancient empires, Islamic rule, British colonization, revolutions, and modern
+            political transformations. It remains a center of culture, education, and politics in India. 🚩📜</p>
+          <br><br>
+        </div>
+        <div id="wbartacraft" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Art & Craft of Uttar Pradesh 🎨🖌️</h1>
+          <p>Uttar Pradesh has a rich artistic heritage, blending traditional craftsmanship with cultural influences from
+            Hindu, Mughal, and colonial periods. UP artisans are known for their intricate craftsmanship,
+            storytelling through art, and diverse materials like textiles, metal, wood, and clay.</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Textile Crafts 🧵</h3>
+                  <h4>🔸 Chikankari Embroidery</h4>
+                  <ul>
+                    <li><b>Origin:</b> Lucknow</li>
+                    <li><b>Features:</b> Delicate white thread embroidery on fine cotton or muslin fabric.</li>
+                    <li><b>Techniques:</b> Uses over 36 different stitches to create intricate floral and geometric patterns.</li>
+                  </ul>
+                  <h4>🔸 Zardozi Embroidery</h4>
+                  <ul>
+                    <li><b>Origin:</b> Varanasi, Lucknow</li>
+                    <li><b>Features:</b> Luxurious embroidery using gold and silver threads, sequins, beads, and precious stones.</li>
+                    <li><b>Used in:</b> Royal garments, wedding attire, and home decor.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="up-chikankari.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="up-banarasi.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Silk Weaving 🧶</h3>
+                  <h4>🔸 Banarasi Silk</h4>
+                  <ul>
+                    <li><b>Origin:</b> Varanasi (Banaras)</li>
+                    <li><b>Features:</b> Rich silk sarees with intricate gold and silver brocade (zari) work.</li>
+                    <li><b>Designs:</b> Floral, paisley, and geometric patterns inspired by Mughal motifs.</li>
+                    <li><b>Types:</b> Katan, Organza, Georgette, and Shattir.</li>
+                  </ul>
+                  <h4>🔸 Tanchoi Silk</h4>
+                  <ul>
+                    <li><b>Origin:</b> Varanasi</li>
+                    <li><b>Features:</b> Woven with three or more colored threads, creating a multi-colored effect.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Metal Crafts 🔨</h3>
+                  <h4>🔸 Moradabad Brassware</h4>
+                  <ul>
+                    <li><b>Origin:</b> Moradabad (known as the "Brass City")</li>
+                    <li><b>Features:</b> Intricate engraving, embossing, and inlay work on brass items.</li>
+                    <li><b>Products:</b> Decorative items, utensils, religious artifacts, and furniture.</li>
+                  </ul>
+                  <h4>🔸 Aligarh Locks</h4>
+                  <ul>
+                    <li><b>Origin:</b> Aligarh</li>
+                    <li><b>Features:</b> Traditional and modern lock-making, known for quality and craftsmanship.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="up-brass.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="up-glass.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Glass & Pottery Crafts 🏺</h3>
+                  <h4>🔸 Firozabad Glassware</h4>
+                  <ul>
+                    <li><b>Origin:</b> Firozabad (known as the "Glass City")</li>
+                    <li><b>Features:</b> Hand-blown and molded glass items in vibrant colors.</li>
+                    <li><b>Products:</b> Bangles, chandeliers, vases, and decorative items.</li>
+                  </ul>
+                  <h4>🔸 Khurja Pottery</h4>
+                  <ul>
+                    <li><b>Origin:</b> Khurja, Bulandshahr</li>
+                    <li><b>Features:</b> Blue glazed pottery with intricate designs.</li>
+                    <li><b>Products:</b> Tableware, decorative items, and tiles.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Wood Crafts 🪵</h3>
+                  <ul>
+                    <li><b>Saharanpur Wood Carving:</b> Intricate carving on sheesham and teak wood, creating furniture, screens, and decorative items.</li>
+                    <li><b>Inlay Work:</b> Precision inlaying of different woods, metals, or mother-of-pearl to create intricate patterns.</li>
+                  </ul>
+                  <h3>6. Carpet Making 🧶</h3>
+                  <ul>
+                    <li><b>Bhadohi-Mirzapur Carpets:</b> Hand-knotted carpets with Persian and Mughal-inspired designs.</li>
+                    <li><b>Features:</b> Made using wool, silk, and cotton with intricate patterns and vibrant colors.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="up-wood.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="up-marble.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>7. Stone Crafts 🪨</h3>
+                  <ul>
+                    <li><b>Agra Marble Inlay:</b> Intricate inlay work on marble, as seen in the Taj Mahal.</li>
+                    <li><b>Chunar Stone Carving:</b> Carving on sandstone from Chunar, used in architectural elements.</li>
+                  </ul>
+                  <h3>8. Perfume Making 🌹</h3>
+                  <ul>
+                    <li><b>Kannauj Attar:</b> Traditional perfume making using the ancient method of distillation.</li>
+                    <li><b>Features:</b> Natural fragrances extracted from flowers, herbs, and spices.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>9. Leather Crafts 🧳</h3>
+                  <ul>
+                    <li><b>Kanpur Leather Work:</b> Known for high-quality leather products including footwear, bags, and accessories.</li>
+                    <li><b>Agra Footwear:</b> Traditional and modern shoe-making with intricate designs.</li>
+                  </ul>
+                  <h3>10. Terracotta & Clay Art 🏺</h3>
+                  <ul>
+                    <li><b>Gorakhpur Terracotta:</b> Clay sculptures and decorative items with distinctive reddish-brown color.</li>
+                    <li><b>Nizamabad Black Pottery:</b> Unique black pottery with silver inlay work.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="up-leather.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>📌 Summary: UP's Art & Craft Forms</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Art Form</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Chikankari Embroidery</td>
+                <td>Lucknow</td>
+                <td>Delicate white thread embroidery on cotton</td>
+              </tr>
+              <tr>
+                <td>Banarasi Silk</td>
+                <td>Varanasi</td>
+                <td>Gold and silver brocade work on silk sarees</td>
+              </tr>
+              <tr>
+                <td>Zardozi Embroidery</td>
+                <td>Varanasi, Lucknow</td>
+                <td>Gold and silver thread embroidery</td>
+              </tr>
+              <tr>
+                <td>Brass Work</td>
+                <td>Moradabad</td>
+                <td>Intricate engraving and embossing on brass</td>
+              </tr>
+              <tr>
+                <td>Glassware</td>
+                <td>Firozabad</td>
+                <td>Colorful glass bangles and decorative items</td>
+              </tr>
+              <tr>
+                <td>Carpet Making</td>
+                <td>Bhadohi, Mirzapur</td>
+                <td>Hand-knotted carpets with intricate designs</td>
+              </tr>
+              <tr>
+                <td>Wood Carving</td>
+                <td>Saharanpur</td>
+                <td>Intricate carving on sheesham and teak wood</td>
+              </tr>
+              <tr>
+                <td>Marble Inlay</td>
+                <td>Agra</td>
+                <td>Pietra dura work as seen in the Taj Mahal</td>
+              </tr>
+              <tr>
+                <td>Leather Work</td>
+                <td>Kanpur, Agra</td>
+                <td>High-quality leather products and footwear</td>
+              </tr>
+              <tr>
+                <td>Perfume Making</td>
+                <td>Kannauj</td>
+                <td>Traditional attar using ancient distillation methods</td>
+              </tr>
+              <tr>
+                <td>Pottery</td>
+                <td>Khurja, Nizamabad</td>
+                <td>Blue glazed pottery and black pottery</td>
+              </tr>
+              <tr>
+                <td>Lock Making</td>
+                <td>Aligarh</td>
+                <td>Traditional and modern locks</td>
+              </tr>
+            </table>
+          </div>
+          <br><br>
+          <p>Uttar Pradesh's art and crafts are a blend of history, culture, and traditional skills, passed down through
+            generations. Whether it's the elegant Banarasi sarees, intricate Chikankari embroidery, or the delicate marble inlay work of Agra, UP's artisans continue to preserve and innovate their heritage. 🎭✨</p>
+          <br><br>
+        </div>
+        <div id="wbseason" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Seasons to visit Uttar Pradesh 🌧️☀️ </h1>
+          <p>Uttar Pradesh experiences a diverse climate with distinct seasons, each offering a unique experience for travelers. The state's geographical diversity, from the Gangetic plains to the Vindhya hills, creates varied weather conditions across regions.</p>
+
+          <br><br>
+
+          <h2> Season-wise Breakdown for Visiting Uttar Pradesh</h2>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🌸 Spring (February - March)</h3>
+                  <ul>
+                    <li>Pleasant weather with temperatures ranging from 15°C to 30°C.</li>
+                    <li>Perfect time to visit Agra, Lucknow, and Varanasi for sightseeing.</li>
+                    <li>Holi celebrations in Mathura and Vrindavan are spectacular during this season.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="up-spring.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="up-summer.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>☀️ Summer (April – June)</h3>
+                  <ul>
+                    <li>Hot and dry with temperatures often exceeding 40°C, especially in May and June.</li>
+                    <li>Early mornings and evenings are best for sightseeing.</li>
+                    <li>Hill stations like Mirzapur and wildlife sanctuaries in the Terai region can be visited.</li>
+                    <li>Summer festivals like Ganga Dussehra are celebrated during this time.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🌧️ Monsoon (July - September)</h3>
+                  <ul>
+                    <li>Moderate to heavy rainfall across the state, bringing relief from the summer heat.</li>
+                    <li>The landscape turns lush green, making it visually appealing.</li>
+                    <li>Humidity levels are high, and some areas may experience flooding.</li>
+                    <li>Festivals like Teej and Janmashtami are celebrated during this season.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="up-monsoon.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="up-autumn.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🍁 Autumn (October - November)</h3>
+                  <ul>
+                    <li>Pleasant weather with temperatures ranging from 15°C to 30°C.</li>
+                    <li>One of the best seasons to visit Uttar Pradesh for sightseeing and outdoor activities.</li>
+                    <li>Major festivals like Dussehra, Diwali, and Dev Deepawali are celebrated during this time.</li>
+                    <li>Perfect for visiting Ayodhya, Varanasi, and other religious sites.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>❄️ Winter (December - January)</h3>
+                  <ul>
+                    <li>Cool to cold weather with temperatures ranging from 5°C to 25°C.</li>
+                    <li>Foggy mornings are common, especially in December and January.</li>
+                    <li>Ideal for visiting historical monuments, as the weather is comfortable for exploration.</li>
+                    <li>Cultural events like Lucknow Mahotsav and Taj Mahotsav are held during this season.</li>
+                    <li>The Kumbh Mela in Prayagraj is held during winter months in its cycle years.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="up-winter.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>📌 Summary: Best Time to Visit Different Places in Uttar Pradesh</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Region</th>
+                <th>Best Season</th>
+                <th>Recommended Months</th>
+                <th>Why Visit?</th>
+              </tr>
+              <tr>
+                <td>Agra (Taj Mahal, Agra Fort)</td>
+                <td>Winter, Autumn</td>
+                <td>October - March</td>
+                <td>Pleasant weather for sightseeing, clear skies for photography</td>
+              </tr>
+              <tr>
+                <td>Varanasi (Ghats, Temples)</td>
+                <td>Winter, Autumn</td>
+                <td>October - March</td>
+                <td>Comfortable weather for exploring ghats, Dev Deepawali in November</td>
+              </tr>
+              <tr>
+                <td>Lucknow (Nawabi Architecture)</td>
+                <td>Winter, Autumn</td>
+                <td>October - March</td>
+                <td>Pleasant weather, Lucknow Mahotsav in November-December</td>
+              </tr>
+              <tr>
+                <td>Mathura & Vrindavan</td>
+                <td>Spring, Winter</td>
+                <td>February - March, October - January</td>
+                <td>Holi celebrations in spring, pleasant weather in winter</td>
+              </tr>
+              <tr>
+                <td>Ayodhya</td>
+                <td>Autumn, Winter</td>
+                <td>October - March</td>
+                <td>Deepotsav during Diwali, comfortable weather for temple visits</td>
+              </tr>
+              <tr>
+                <td>Prayagraj (Allahabad)</td>
+                <td>Winter</td>
+                <td>December - February</td>
+                <td>Kumbh/Ardh Kumbh Mela (in cycle years), Magh Mela</td>
+              </tr>
+              <tr>
+                <td>Dudhwa National Park</td>
+                <td>Winter</td>
+                <td>November - May</td>
+                <td>Best time for wildlife spotting, park is closed during monsoon</td>
+              </tr>
+              <tr>
+                <td>Jhansi & Bundelkhand</td>
+                <td>Winter, Autumn</td>
+                <td>October - March</td>
+                <td>Comfortable weather for exploring forts and historical sites</td>
+              </tr>
+              <tr>
+                <td>Sarnath (Buddhist Site)</td>
+                <td>Winter, Autumn</td>
+                <td>October - March</td>
+                <td>Pleasant weather for exploring archaeological sites</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="container">
+            <div class="row">
+              <h1 style=" text-align: center;">📌 Summary: When to Visit Uttar Pradesh</h1><br>
+              <ul>
+                <li><b>For cultural experiences & festivals:</b> October - March (Diwali, Holi, Dev Deepawali, Kumbh Mela)</li>
+                <li><b>For historical monuments & sightseeing:</b> October - March (Taj Mahal, Agra Fort, Lucknow's Imambaras)</li>
+                <li><b>For spiritual journeys:</b> Year-round, but October - March is most comfortable (Varanasi, Ayodhya, Mathura)</li>
+                <li><b>For wildlife enthusiasts:</b> November - May (Dudhwa National Park, Chambal Wildlife Sanctuary)</li>
+                <li><b>For experiencing Holi:</b> February - March (especially in Mathura and Vrindavan)</li>
+              </ul>
+
+            </div>
+          </div>
+          <br><br>
+        </div>
+        <div id="wbtourist" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Tourist Spots of Uttar Pradesh 🏛️🕌</h1>
+          <p>Uttar Pradesh is a diverse state with ancient cities, historical monuments, religious sites, wildlife sanctuaries, and cultural hubs. Here's a categorized list of the best tourist places in Uttar Pradesh:</p>
+
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. World Heritage Sites 🏛️</h3>
+                  <ul>
+                    <li><b>Taj Mahal (Agra) -</b> The iconic white marble mausoleum built by Emperor Shah Jahan for his wife Mumtaz Mahal.</li>
+                    <li><b>Agra Fort -</b> A massive red sandstone fort complex housing palaces, audience halls, and mosques.</li>
+                    <li><b>Fatehpur Sikri -</b> A 16th-century city built by Emperor Akbar, featuring Buland Darwaza, Jama Masjid, and Panch Mahal.</li>
+                    <li><b>Sarnath -</b> Where Buddha delivered his first sermon, featuring the Dhamek Stupa and Ashoka Pillar.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="up-taj.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="up-varanasi.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Religious & Spiritual Destinations 🕉️</h3>
+                  <ul>
+                    <li><b>Varanasi -</b> One of the world's oldest continuously inhabited cities, with ghats along the Ganges River, Kashi Vishwanath Temple, and evening Ganga Aarti.</li>
+                    <li><b>Ayodhya -</b> Birthplace of Lord Ram, featuring Ram Janmabhoomi Temple, Hanuman Garhi, and Kanak Bhawan.</li>
+                    <li><b>Mathura & Vrindavan -</b> Associated with Lord Krishna's birth and childhood, with temples like Banke Bihari, ISKCON, and Krishna Janmasthan.</li>
+                    <li><b>Prayagraj (Allahabad) -</b> The confluence of three rivers (Triveni Sangam), site of Kumbh Mela, and Anand Bhavan.</li>
+                    <li><b>Kushinagar -</b> Where Buddha attained Mahaparinirvana, featuring the Mahaparinirvana Temple and Ramabhar Stupa.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Historical & Architectural Marvels 🏰</h3>
+                  <ul>
+                    <li><b>Lucknow -</b> Known for Nawabi architecture like Bara Imambara, Chota Imambara, Rumi Darwaza, and Residency.</li>
+                    <li><b>Jhansi -</b> Famous for Jhansi Fort, Rani Mahal, and its association with Rani Lakshmibai.</li>
+                    <li><b>Sarnath -</b> Archaeological site with Buddhist stupas, monasteries, and the Ashoka Pillar.</li>
+                    <li><b>Chunar Fort -</b> Ancient fort overlooking the Ganges with historical significance from various dynasties.</li>
+                    <li><b>Kalinjar Fort -</b> Ancient hill fort in Banda district with temples and rock-cut sculptures.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="up-imambara.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="up-dudhwa.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Wildlife & Nature Destinations 🌳🐯</h3>
+                  <ul>
+                    <li><b>Dudhwa National Park -</b> Home to tigers, leopards, rhinoceros, and diverse bird species.</li>
+                    <li><b>Chambal Wildlife Sanctuary -</b> Known for gharials, gangetic dolphins, and migratory birds.</li>
+                    <li><b>Pilibhit Tiger Reserve -</b> Rich biodiversity with tigers, elephants, and various deer species.</li>
+                    <li><b>Nawabganj Bird Sanctuary -</b> Wetland habitat for resident and migratory birds.</li>
+                    <li><b>Chandraprabha Wildlife Sanctuary -</b> Known for its scenic beauty, waterfalls, and wildlife.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Cultural & Heritage Cities 🏙️</h3>
+                  <ul>
+                    <li><b>Lucknow -</b> Known for its Nawabi culture, cuisine, and Chikankari embroidery.</li>
+                    <li><b>Varanasi -</b> Cultural capital with ancient traditions, music, and spiritual practices.</li>
+                    <li><b>Agra -</b> Beyond the Taj Mahal, known for marble craftsmanship and Mughal heritage.</li>
+                    <li><b>Kanpur -</b> Industrial city with colonial architecture and leather crafts.</li>
+                    <li><b>Aligarh -</b> Known for Aligarh Muslim University and traditional lock industry.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="up-lucknow.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="up-vindhyachal.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>6. Hill Stations & Natural Attractions 🏔️</h3>
+                  <ul>
+                    <li><b>Vindhyachal -</b> Sacred hills with the Vindhyavasini Temple and natural beauty.</li>
+                    <li><b>Chitrakoot -</b> Forested hills associated with Lord Ram's exile period.</li>
+                    <li><b>Mirzapur -</b> Scenic landscapes with waterfalls like Windham Falls and Siddhnath Ki Dari.</li>
+                    <li><b>Bithoor -</b> Picturesque town on the banks of the Ganges with historical significance.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Craft & Shopping Destinations 🛍️</h3>
+                  <ul>
+                    <li><b>Varanasi -</b> Famous for Banarasi silk sarees and brocades.</li>
+                    <li><b>Lucknow -</b> Known for Chikankari embroidery and traditional crafts.</li>
+                    <li><b>Moradabad -</b> The "Brass City" famous for brass handicrafts.</li>
+                    <li><b>Firozabad -</b> Known as the "Glass City" for its glassware and bangles.</li>
+                    <li><b>Bhadohi -</b> Famous for hand-knotted carpets and rugs.</li>
+                    <li><b>Kannauj -</b> Traditional perfume (attar) making center.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="up-crafts.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br><br>
+
+        </div>
+        <div id="wbwild" class="tab-pane fade in active" style="background-color: white;">
+          <h1> Wildlife & Crops of Uttar Pradesh 🌿</h1>
+          <p>Uttar Pradesh has diverse wildlife and a rich agricultural landscape due to its varied geography, from the Gangetic plains to the Vindhya hills and Terai region.</p>
+
+          <br>
+          <h2>Wildlife of Uttar Pradesh </h2>
+          <p>Uttar Pradesh has several national parks and wildlife sanctuaries, preserving its diverse flora and fauna.</p>
+
+          <br>
+          <h2>🔹 Major National Parks & Wildlife Sanctuaries</h2>
+          <div>
+            <table>
+              <tr>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Dudhwa National Park</td>
+                <td>Lakhimpur Kheri</td>
+                <td>Tigers 🐅, One-Horned Rhinoceros 🦏, Swamp Deer, Elephants 🐘</td>
+              </tr>
+              <tr>
+                <td>Pilibhit Tiger Reserve</td>
+                <td>Pilibhit</td>
+                <td>Tigers, Leopards 🐆, Elephants, Rich Avian Fauna</td>
+              </tr>
+              <tr>
+                <td>National Chambal Sanctuary</td>
+                <td>Etawah, Agra</td>
+                <td>Gharials 🐊, Gangetic Dolphins 🐬, Turtles 🐢</td>
+              </tr>
+              <tr>
+                <td>Katarniaghat Wildlife Sanctuary</td>
+                <td>Bahraich</td>
+                <td>Tigers, Gharials, Gangetic Dolphins, Swamp Deer</td>
+              </tr>
+              <tr>
+                <td>Okhla Bird Sanctuary</td>
+                <td>Noida</td>
+                <td>Migratory Birds 🦢, Wetland Ecosystem</td>
+              </tr>
+              <tr>
+                <td>Soor Sarovar Bird Sanctuary</td>
+                <td>Agra</td>
+                <td>Pythons, Migratory Birds, Turtles</td>
+              </tr>
+              <tr>
+                <td>Nawabganj Bird Sanctuary</td>
+                <td>Unnao</td>
+                <td>Migratory Birds, Wetland Habitat</td>
+              </tr>
+            </table>
+          </div>
+          <bt><br></bt>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3> 🔹 Notable Wildlife in Uttar Pradesh</h3>
+                <ul>
+                  <li><b>Mammals:</b> Swamp Deer (State Animal), Tigers, Leopards, Sloth Bears, Elephants, Rhinos.</li>
+                  <li><b>Birds:</b> Sarus Crane (State Bird), Peacocks, Kingfishers, Hornbills, Vultures.</li>
+                  <li><b>Reptiles:</b> Gharials, Mugger Crocodiles, Indian Python, Monitor Lizards.</li>
+                  <li><b>Aquatic Life:</b> Gangetic Dolphins, Various Fish Species, Turtles.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="up-wildlife.jpg" alt="" style="height:200px;width: 200px;">
+
+              </div>
+
+            </div>
+          </div>
+          <hr><br>
+          <h2>🌾 Agriculture & Major Crops in Uttar Pradesh </h2>
+          <p>Uttar Pradesh is often called the "breadbasket of India" due to its extensive agricultural production, contributing significantly to the country's food security.</p>
+
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Key Agricultural Features</h3>
+                <ul>
+                  <li>Largest producer of wheat, sugarcane, and potatoes in India.</li>
+                  <li><b>Fertile Land:</b> The Gangetic plain provides rich alluvial soil ideal for agriculture.</li>
+                  <li><b>Irrigation:</b> Extensive network of canals, tubewells, and rivers support farming.</li>
+                  <li><b>Agricultural Zones:</b> Western UP (more developed), Central UP, Eastern UP, and Bundelkhand (less developed).</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="up-agriculture.jpg" alt="" style="height:200px;width: 220px;">
+
+              </div>
+            </div>
+          </div>
+          <h2>🔹 Major Crops of Uttar Pradesh</h2>
+          <div>
+            <table>
+              <tr>
+                <th>Category</th>
+                <th>Crops</th>
+              </tr>
+              <tr>
+                <td>Cereals</td>
+                <td>Wheat 🌾, Rice 🍚, Maize 🌽, Barley, Jowar, Bajra</td>
+              </tr>
+              <tr>
+                <td>Cash Crops</td>
+                <td>Sugarcane 🍭, Cotton 🧶, Tobacco</td>
+              </tr>
+              <tr>
+                <td>Pulses</td>
+                <td>Gram, Arhar, Moong, Urad, Masoor</td>
+              </tr>
+              <tr>
+                <td>Vegetables</td>
+                <td>Potato 🥔 (largest producer in India), Tomato 🍅, Onion 🧅, Cauliflower, Peas</td>
+              </tr>
+              <tr>
+                <td>Fruits</td>
+                <td>Mango 🥭 (especially Dasheri from Malihabad), Guava, Banana 🍌, Papaya, Watermelon 🍉</td>
+              </tr>
+              <tr>
+                <td>Oilseeds</td>
+                <td>Mustard, Groundnut 🥜, Sesame, Linseed</td>
+              </tr>
+              <tr>
+                <td>Spices</td>
+                <td>Coriander, Turmeric, Chili 🌶️, Garlic 🧄</td>
+              </tr>
+              <tr>
+                <td>Flowers</td>
+                <td>Marigold, Rose 🌹, Gladiolus (Floriculture is growing in Western UP)</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Special Agricultural Products</h3>
+                <ul>
+                  <li>Sugarcane Belt (Western UP) - Major sugar production region.</li>
+                  <li>Basmati Rice from Western UP - Premium aromatic rice.</li>
+                  <li>Dasheri Mangoes from Malihabad - Famous variety exported worldwide.</li>
+                  <li>Mentha (Mint) Oil - UP is India's largest producer of mint oil.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="up-sugarcane.jpg" alt="" style="height:200px;width: 200px;">
+
+              </div>
+            </div>
+          </div><br>
+          <hr>
+          <div class="box" style=" background: #f3b37185;padding: 10px;">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3> Agricultural Challenges & Modern Trends 🌾</h3>
+                  <ul>
+                    <li><b>Water Management:</b> Declining water table in Western UP due to intensive farming.</li>
+                    <li><b>Crop Diversification:</b> Efforts to move beyond wheat-rice rotation.</li>
+                    <li><b>Organic Farming:</b> Growing trend, especially in areas near Lucknow and Varanasi.</li>
+                    <li><b>Food Processing:</b> Emerging sector with government support.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="up-modern-farming.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Uttar Pradesh is a paradise for both nature lovers and agricultural enthusiasts. It has diverse wildlife sanctuaries and fertile farmlands that support a wide range of crops and contribute significantly to India's food security.</p>
+          <br><br>
+        </div>
+        <div id="wbedu" class="tab-pane fade in active" style="background-color: white;">
+          <h1>🎓 Education & Institutions in Uttar Pradesh</h1>
+          <p>Uttar Pradesh has a rich educational heritage with some of India's oldest and most prestigious universities, research institutions, and schools. It has played a crucial role in shaping India's educational landscape and continues to be a major hub for higher education, science, technology, and literature.</p>
+
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>📌 Education System in Uttar Pradesh</h3>
+                  <ul>
+                    <li><b>School Education:</b> Follows UP Board (UPMSP), CBSE, ICSE, and Madrasa Boards.</li>
+                    <li><b>Higher Education:</b> Managed by UGC, AICTE, and state universities.</li>
+                    <li><b>Major Fields:</b> Engineering, Medical, Science, Arts, Commerce, Law, Agriculture, and Management.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="up-education.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>🏛️ Top Universities & Institutions </h2>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Central Universities</h3>
+                <ol>
+                  <li><b>Banaras Hindu University (BHU), Varanasi -</b> One of Asia's largest residential universities, founded by Pandit Madan Mohan Malaviya in 1916.</li>
+                  <li><b>Aligarh Muslim University (AMU), Aligarh -</b> A premier institution founded by Sir Syed Ahmad Khan, known for its diverse academic programs.</li>
+                  <li><b>University of Allahabad, Prayagraj -</b> One of India's oldest universities, established in 1887, known as the "Oxford of the East."</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="up-bhu.jpg" alt="" style="height:200px;width: 230px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 State Universities</h3>
+                <ol>
+                  <li><b>Lucknow University -</b> Established in 1921, known for arts, science, and law programs.</li>
+                  <li><b>Chhatrapati Shahu Ji Maharaj University, Kanpur -</b> Major university serving the industrial hub of Kanpur.</li>
+                  <li><b>Dr. Ram Manohar Lohia Avadh University, Ayodhya -</b> Serves eastern UP with diverse academic programs.</li>
+                  <li><b>Chaudhary Charan Singh University, Meerut -</b> Major university in western UP.</li>
+                  <li><b>Dr. B.R. Ambedkar University, Agra -</b> Formerly Agra University, one of the oldest in UP.</li>
+                  <li><b>Deen Dayal Upadhyay Gorakhpur University -</b> Serves the eastern region of UP.</li>
+                  <li><b>Mahatma Jyotiba Phule Rohilkhand University, Bareilly -</b> Major university in the Rohilkhand region.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="up-lucknow-university.jpg" alt="" style="height:200px;width: 230px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>University</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Banaras Hindu University (BHU)</td>
+                <td>Varanasi</td>
+                <td>Comprehensive university with strengths in engineering, medicine, science, and Sanskrit studies.</td>
+              </tr>
+              <tr>
+                <td>Aligarh Muslim University (AMU)</td>
+                <td>Aligarh</td>
+                <td>Known for engineering, medicine, law, and Islamic studies.</td>
+              </tr>
+              <tr>
+                <td>University of Allahabad</td>
+                <td>Prayagraj</td>
+                <td>Strong in humanities, social sciences, and law.</td>
+              </tr>
+              <tr>
+                <td>Lucknow University</td>
+                <td>Lucknow</td>
+                <td>Known for arts, science, and law programs.</td>
+              </tr>
+              <tr>
+                <td>King George's Medical University</td>
+                <td>Lucknow</td>
+                <td>Premier medical institution in northern India.</td>
+              </tr>
+              <tr>
+                <td>IIT Kanpur</td>
+                <td>Kanpur</td>
+                <td>One of India's top engineering and technology institutes.</td>
+              </tr>
+              <tr>
+                <td>IIM Lucknow</td>
+                <td>Lucknow</td>
+                <td>Premier management institute.</td>
+              </tr>
+              <tr>
+                <td>Sanjay Gandhi Postgraduate Institute of Medical Sciences</td>
+                <td>Lucknow</td>
+                <td>Super-specialty medical institute.</td>
+              </tr>
+              <tr>
+                <td>Dr. Ram Manohar Lohia National Law University</td>
+                <td>Lucknow</td>
+                <td>Premier law university in UP.</td>
+              </tr>
+            </table>
+          </div>
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="up-iit.jpg" alt="" style="height:200px;width: 240px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🔹 IITs, IIMs & Other Premier Institutes</h3>
+                  <ol>
+                    <li><b>IIT Kanpur -</b> One of India's oldest and most prestigious IITs, known for engineering and research.</li>
+                    <li><b>IIM Lucknow -</b> Premier management institute, consistently ranked among India's top business schools.</li>
+                    <li><b>IIIT Allahabad -</b> Specializes in information technology and related fields.</li>
+                    <li><b>National Institute of Technology (MNNIT), Allahabad -</b> Premier engineering institute.</li>
+                    <li><b>Harcourt Butler Technical University, Kanpur -</b> One of India's oldest technical institutions.</li>
+                  </ol>
+                </div>
+
+                <br><br>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Institute</th>
+                <th>Location</th>
+                <th>Specialization</th>
+              </tr>
+              <tr>
+                <td>IIT Kanpur</td>
+                <td>Kanpur</td>
+                <td>Engineering, technology, and research.</td>
+              </tr>
+              <tr>
+                <td>MNNIT Allahabad</td>
+                <td>Prayagraj</td>
+                <td>Engineering and technology education.</td>
+              </tr>
+              <tr>
+                <td>IIIT Allahabad</td>
+                <td>Prayagraj</td>
+                <td>Information technology and computer science.</td>
+              </tr>
+              <tr>
+                <td>Harcourt Butler Technical University</td>
+                <td>Kanpur</td>
+                <td>Engineering and technical education.</td>
+              </tr>
+              <tr>
+                <td>Bundelkhand Institute of Engineering & Technology</td>
+                <td>Jhansi</td>
+                <td>Engineering education in the Bundelkhand region.</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🔹 Medical Colleges</h3>
+                  <ol>
+                    <li><b>King George's Medical University, Lucknow -</b> One of India's oldest and most prestigious medical institutions.</li>
+                    <li><b>Institute of Medical Sciences, BHU, Varanasi -</b> Part of BHU, offering comprehensive medical education.</li>
+                    <li><b>Jawaharlal Nehru Medical College, AMU, Aligarh -</b> Premier medical college affiliated with AMU.</li>
+                    <li><b>Sanjay Gandhi Postgraduate Institute of Medical Sciences, Lucknow -</b> Super-specialty medical institute.</li>
+                    <li><b>GSVM Medical College, Kanpur -</b> One of the oldest medical colleges in UP.</li>
+                  </ol>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="up-kgmu.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Medical College</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>King George's Medical University</td>
+                <td>Lucknow</td>
+                <td>One of India's oldest medical colleges, established in 1911.</td>
+              </tr>
+              <tr>
+                <td>Institute of Medical Sciences, BHU</td>
+                <td>Varanasi</td>
+                <td>Comprehensive medical education and research.</td>
+              </tr>
+              <tr>
+                <td>Jawaharlal Nehru Medical College, AMU</td>
+                <td>Aligarh</td>
+                <td>Premier medical education and healthcare.</td>
+              </tr>
+              <tr>
+                <td>SGPGIMS</td>
+                <td>Lucknow</td>
+                <td>Super-specialty medical care and research.</td>
+              </tr>
+              <tr>
+                <td>GSVM Medical College</td>
+                <td>Kanpur</td>
+                <td>One of UP's oldest medical institutions.</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="up-law.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🔹 Law, Agriculture, & Other Institutes</h3>
+                  <ul>
+                    <li><b>Dr. Ram Manohar Lohia National Law University, Lucknow -</b> Premier law university in UP.</li>
+                    <li><b>Chandra Shekhar Azad University of Agriculture and Technology, Kanpur -</b> Leading agricultural university.</li>
+                    <li><b>Narendra Dev University of Agriculture and Technology, Ayodhya -</b> Focuses on agricultural education and research.</li>
+                    <li><b>Indian Institute of Sugarcane Research, Lucknow -</b> Specialized research in sugarcane cultivation.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Institute</th>
+                <th>Location</th>
+                <th>Specialization</th>
+              </tr>
+              <tr>
+                <td>Dr. Ram Manohar Lohia National Law University</td>
+                <td>Lucknow</td>
+                <td>Legal education and research.</td>
+              </tr>
+              <tr>
+                <td>Chandra Shekhar Azad University of Agriculture and Technology</td>
+                <td>Kanpur</td>
+                <td>Agricultural education and research.</td>
+              </tr>
+              <tr>
+                <td>Narendra Dev University of Agriculture and Technology</td>
+                <td>Ayodhya</td>
+                <td>Agricultural sciences and technology.</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <h2>🏫 School Education in Uttar Pradesh </h2>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Major School Boards</h3>
+                <ol>
+                  <li><b>UP Board (UPMSP) -</b> One of the largest educational boards in the world, conducting High School (10th) and Intermediate (12th) exams.</li>
+                  <li><b>CBSE & ICSE -</b> National boards with numerous affiliated schools across the state.</li>
+                  <li><b>UP Madrasa Board -</b> Regulates Islamic education in the state.</li>
+                  <li><b>Kendriya Vidyalayas & Navodaya Vidyalayas -</b> Central government schools known for quality education.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="up-school.jpg" alt="" style="height:200px;width: 200px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-4">
+                <img src="up-famous-school.jpg" alt="" style="height:200px;width: 230px;">
+
+              </div>
+              <div class="col-sm-8">
+
+                <h3>🔹 Famous Schools in Uttar Pradesh</h3>
+                <ol>
+                  <li><b>La Martiniere College, Lucknow -</b> Historic institution founded in 1845, known for its heritage and quality education.</li>
+                  <li><b>City Montessori School, Lucknow -</b> World's largest school by enrollment, with multiple campuses.</li>
+                  <li><b>St. Joseph's College, Allahabad -</b> Prestigious institution known for academic excellence.</li>
+                  <li><b>Delhi Public School (various cities) -</b> Network of quality CBSE schools across UP.</li>
+                  <li><b>Colvin Taluqdars' College, Lucknow -</b> Historic institution established in 1889.</li>
+                  <li><b>St. Francis' College, Lucknow -</b> Well-known for its academic standards.</li>
+                </ol>
+
+              </div>
+
+            </div>
+          </div>
+          <div class="box">
+            <h2>🔬 Research & Technological Advancements</h2>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <p>Uttar Pradesh is home to several pioneering research institutions in science, technology, and medical fields:</p>
+                  <ol>
+                    <li><b>Central Drug Research Institute (CDRI), Lucknow -</b> Premier research institute for drug discovery and development.</li>
+                    <li><b>National Botanical Research Institute (NBRI), Lucknow -</b> Plant research and conservation.</li>
+                    <li><b>Indian Institute of Toxicology Research, Lucknow -</b> Research on environmental toxicology and food safety.</li>
+                    <li><b>Central Institute of Medicinal and Aromatic Plants (CIMAP), Lucknow -</b> Research on medicinal plants.</li>
+                  </ol>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="up-research.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <h2>📚 Other Notable Institutions</h2>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <ol>
+                    <li><b>Uttar Pradesh Technical University, Lucknow -</b> Oversees technical education across the state.</li>
+                    <li><b>National Sugar Institute, Kanpur -</b> Specialized in sugar technology and research.</li>
+                    <li><b>Indian Institute of Carpet Technology, Bhadohi -</b> Specialized in carpet manufacturing technology.</li>
+                    <li><b>Footwear Design & Development Institute, Noida -</b> Specialized in footwear design and technology.</li>
+                    <li><b>Central Institute of Psychiatry, Ranchi -</b> Premier mental health institution.</li>
+                  </ol>
+                </div>
+                <div class="col-sm-4">
+                  <img src="up-other-institutions.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Uttar Pradesh continues to be one of India's top educational hubs, producing leaders, scholars, scientists,
+            and entrepreneurs. Whether in engineering, medicine, law, arts, or business, the state offers world-class
+            institutions.</p>
+        </div>
+        <br><br>
+
+      </div>
+
+
+    </div>
+  </div>
+  </div>
+
+{% endblock %}

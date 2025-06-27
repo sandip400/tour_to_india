@@ -1,0 +1,2617 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Gujarat</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> -->
+  <style>
+    .wb {
+      font-size: 10vw;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+      border-spacing: 0;
+      border: 1px solid #ddd;
+    }
+
+    td,
+    th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+      font-size: 1.5vw;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+
+    .trip {
+      text-align: center;
+      font-weight: 900;
+      background: orangered;
+      padding: 20px;
+      border-radius: 20px;
+      width: 60%;
+    }
+
+    p,
+    li,
+    .text {
+      font-size: 1.5vw;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-weight: 600;
+    }
+
+    h4 {
+      font-weight: 900;
+    }
+
+    img {
+      border-radius: 10px;
+      display: block;
+      margin: auto;
+    }
+
+    @media screen and (max-width: 850px) {
+
+      p,
+      li,
+      .text,
+      td,
+      th {
+        font-size: 2vw;
+        ;
+      }
+
+    }
+
+    @media screen and (max-width: 500px) {
+
+      p,
+      li,
+      .text,
+      td,
+      th {
+        font-size: 4.5vw;
+        ;
+      }
+
+    }
+
+    .box:nth-of-type(odd) {
+      background: #f3b37185;
+      padding: 10px;
+    }
+
+    .weather-container {
+            border-radius: 15px;
+            background: #f0fdf4;
+            padding: 15px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .weather-card {
+            text-align: center;
+            border-radius: 10px;
+            padding: 10px;
+            background: white;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+        .aqi {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            color: white;
+        }
+        .aqi-bad { background: purple; }
+        .aqi-moderate { background: orange; }
+        .aqi-good { background: green; }
+        .best-time {
+            background: #d1fae5;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 15px;
+            color: green;
+        }
+        .wet {
+            max-width: 50px;
+        }
+        
+        .trip {
+          font-size: 18px;
+          padding: 10px 20px;
+          cursor: pointer;
+          background-color:rgb(231, 36, 36);
+          color: white;
+          border: none;
+          border-radius: 5px;
+      }
+      .modal {
+          display: none;
+          position: fixed;
+          z-index: 1;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0,0,0,0.5);
+      }
+      .modal-content {
+          background-color: #fff;
+          margin: 10% auto;
+          padding: 20px;
+          border-radius: 10px;
+          width: 40%;
+          box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+          text-align: center;
+      }
+      .close {
+          color: #aaa;
+          float: right;
+          font-size: 28px;
+          font-weight: bold;
+          cursor: pointer;
+      }
+      .trip-options {
+          display: flex;
+          justify-content: center;
+          gap: 20px;
+          margin-top: 20px;
+      }
+      .trip-options a {
+          display: block;
+          width: 120px;
+          padding: 10px;
+          background-color: #28a745;
+          color: white;
+          text-decoration: none;
+          border-radius: 5px;
+      }
+  </style>
+</head>
+
+<body>
+
+
+  <!-- <h2>Carousel Example</h2> -->
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+      <li data-target="#myCarousel" data-slide-to="4"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+
+      <div class="item active">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c2/Statue_of_Unity_in_2018.jpg" alt="Statue of Unity" style="width:100%; height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Statue of Unity</h3>
+          <p>World's tallest statue and a tribute to Sardar Vallabhbhai Patel!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/32/Sabarmati_Ashram_Ahmedabad.jpg" alt="Sabarmati Ashram" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Sabarmati Ashram</h3>
+          <p>The historic home of Mahatma Gandhi during India's freedom struggle!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Rann_of_Kutch.jpg" alt="Rann of Kutch" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Rann of Kutch</h3>
+          <p>The magnificent white salt desert under the moonlight!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Somnath_Temple.jpg" alt="Somnath Temple" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Somnath Temple</h3>
+          <p>One of the twelve Jyotirlingas of Lord Shiva!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Gir_National_Park_Gujarat.jpg" alt="Gir National Park" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Gir National Park</h3>
+          <p>The last abode of the Asiatic Lions!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+  <div class="container">
+    <br><br>
+    <h1 class="wb"> GUJARAT</h1><br>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/1/17/Gujarat_district_map.png" alt="" style="height:700px; width: -webkit-fill-available;">
+
+        </div>
+        <div class="col-sm-6">
+          <h1> Gujarat: The Land of Legends and Lions</h1>
+          <p class="text">Gujarat is a vibrant and diverse state in western India, known for its rich cultural heritage, entrepreneurial spirit, historical significance, and unique wildlife. From the vast salt deserts of Kutch to the lush forests of Gir, Gujarat offers a wide range of experiences for visitors.</p>
+
+          <ul>
+            <li><b>Location --</b> Western India</li>
+            <li><b>Capital --</b> Gandhinagar</li>
+            <li><b>Largest City --</b> Ahmedabad</li>
+            <li><b>Official Language --</b> Gujarati</li>
+            <li><b>Area --</b> 196,024 sq. km</li>
+            <li><b>Population --</b> ~70 million</li>
+            <li><b>Borders --</b> Rajasthan (North), Madhya Pradesh (East), Maharashtra (South), Arabian Sea (West), Pakistan (Northwest)</li>
+            <li><b>Major Rivers --</b> Narmada, Sabarmati, Tapi, Mahi</li>
+            <li><b>Major Festivals --</b> Navratri, Uttarayan (Kite Festival), Diwali, Janmashtami, Rann Utsav</li>
+            <li><b>State Animal --</b> Asiatic Lion</li>
+            <li><b>State Flower --</b> Marigold</li>
+            <li><b>State Tree --</b> Banyan</li>
+            <li><b>State Bird --</b> Greater Flamingo</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <br>
+    <hr>
+    <div>
+      <h1>📌 Divisions & Districts of Gujarat</h1>
+      <br>
+      <div style="overflow-x:auto;">
+        <table>
+          <tr>
+            <th>Division</th>
+            <th>Districts</th>
+            <th>Key Highlights</th>
+          </tr>
+          <tr>
+            <td>Ahmedabad</td>
+            <td>Ahmedabad, Anand, Kheda, Mahisagar, Panchmahal, Dahod, Aravalli</td>
+            <td>Sabarmati Ashram, Kankaria Lake, Science City, Adalaj Stepwell, Lothal</td>
+          </tr>
+          <tr>
+            <td>Vadodara</td>
+            <td>Vadodara, Chhota Udaipur, Bharuch, Narmada, Surat, Tapi, Dang, Navsari, Valsad</td>
+            <td>Laxmi Vilas Palace, Statue of Unity, Sardar Sarovar Dam, Dumas Beach</td>
+          </tr>
+          <tr>
+            <td>Rajkot</td>
+            <td>Rajkot, Morbi, Surendranagar, Botad, Jamnagar, Devbhumi Dwarka, Porbandar, Junagadh, Gir Somnath, Amreli</td>
+            <td>Gir National Park, Somnath Temple, Dwarkadhish Temple, Junagadh Fort</td>
+          </tr>
+          <tr>
+            <td>Kutch</td>
+            <td>Kutch, Banaskantha, Patan, Mehsana, Sabarkantha, Gandhinagar</td>
+            <td>Rann of Kutch, Dholavira, Modhera Sun Temple, Rani ki Vav</td>
+          </tr>
+        </table>
+      </div>
+      <br><br>
+      <h1>🔹 Major Highlights of Some Key Districts</h1><br><br>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <ul>
+              <li><b>Ahmedabad --</b> Largest city, UNESCO World Heritage City, textile hub.</li>
+              <li><b>Gandhinagar --</b> Capital city, planned city with modern infrastructure.</li>
+              <li><b>Kutch --</b> Home to the White Rann, traditional handicrafts, and tribal cultures.</li>
+              <li><b>Surat --</b> Diamond cutting and polishing center, textile industry.</li>
+              <li><b>Vadodara --</b> Cultural capital with palaces, museums, and educational institutions.</li>
+              <li><b>Junagadh --</b> Historical city with Asiatic lions, ancient Buddhist caves.</li>
+              <li><b>Jamnagar --</b> Coastal city known for brass work, marine national park.</li>
+              <li><b>Rajkot --</b> Industrial center, birthplace of Mahatma Gandhi.</li>
+              <li><b>Bhavnagar --</b> Port city with Victorian architecture and shipbuilding history.</li>
+            </ul>
+          </div>
+          <div class="col-sm-6">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/1/17/Gujarat_district_map.png" alt="" style="height:450px;width: -webkit-fill-available;">
+
+          </div>
+        </div>
+      </div>
+    </div><br><br>
+    <div class="container">
+      <div class="weather-container">
+          <h4 class="text-center"><strong>Weather in Gujarat</strong></h4>
+          <div class="row">
+              <!-- January -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Jan</h6>
+                      <p>12/28°C</p>
+                      <span class="aqi aqi-moderate">AQI 120</span>
+                  </div>
+              </div>
+              <!-- February -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Feb</h6>
+                      <p>14/31°C</p>
+                      <span class="aqi aqi-moderate">AQI 110</span>
+                  </div>
+              </div>
+              <!-- March -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Mar</h6>
+                      <p>19/35°C</p>
+                      <span class="aqi aqi-moderate">AQI 105</span>
+                  </div>
+              </div>
+              <!-- April -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Apr</h6>
+                      <p>24/39°C</p>
+                      <span class="aqi aqi-moderate">AQI 100</span>
+                  </div>
+              </div>
+              <!-- May -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>May</h6>
+                      <p>27/41°C</p>
+                      <span class="aqi aqi-moderate">AQI 95</span>
+                  </div>
+              </div>
+              <!-- June -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Jun</h6>
+                      <p>27/38°C</p>
+                      <span class="aqi aqi-good">AQI 80</span>
+                  </div>
+              </div>
+              <!-- July -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="rain.png" alt="rain">
+                      <h6>Jul</h6>
+                      <p>26/33°C</p>
+                      <span class="aqi aqi-good">AQI 70</span>
+                  </div>
+              </div>
+              <!-- August -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Aug</h6>
+                      <p>25/32°C</p>
+                      <span class="aqi aqi-good">AQI 75</span>
+                  </div>
+              </div>
+              <!-- September -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Sep</h6>
+                      <p>24/33°C</p>
+                      <span class="aqi aqi-good">AQI 80</span>
+                  </div>
+              </div>
+              <!-- October -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Oct</h6>
+                      <p>21/35°C</p>
+                      <span class="aqi aqi-moderate">AQI 90</span>
+                  </div>
+              </div>
+              <!-- November -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Nov</h6>
+                      <p>16/32°C</p>
+                      <span class="aqi aqi-moderate">AQI 100</span>
+                  </div>
+              </div>
+              <!-- December -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Dec</h6>
+                      <p>13/29°C</p>
+                      <span class="aqi aqi-moderate">AQI 115</span>
+                  </div>
+              </div>
+          </div>
+          <div class="text-center">
+              <div class="best-time">🏆 Best time to visit: October - March</div>
+          </div>
+      </div>
+    </div>
+    
+
+    <br><br>
+    <button class="trip" id="openModal">Let's go on a trip</button>
+    
+    <div id="tripModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Select Your Trip</h2>
+            <button type="button" class="btn btn-warning" style="margin-bottom: 8px;color:black; border-radius: 5px;" onclick="location.href='{% url 'gujarat_7days' %}'" >7 days trip</button><br>
+            <button type="button" class="btn btn-warning" style="margin-bottom: 8px;color:black; border-radius: 5px;" onclick="location.href='{% url 'gujarat_12days' %}'" >12 days trip</button>
+        </div>
+    </div>
+    
+    <script>
+        var modal = document.getElementById("tripModal");
+        var btn = document.getElementById("openModal");
+        var span = document.getElementsByClassName("close")[0];
+        
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+        
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+        
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script><br><br>
+    <div class="container">
+      <ul class="nav nav-tabs">
+        <li class="nav-item"><a data-toggle="tab" href="#wbculture"> Culture</a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbtradition "> Tradition</a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbfestivals"> Festivals </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbfood"> Foods </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbhistory"> History </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbartacraft"> Art and Craft </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbseason"> Season to Visit </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbtourist"> Tourist Spots </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbwild"> Wildlife & Crops </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbedu"> Institutions </a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="wbculture" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Culture of Gujarat</h1>
+          <p class="text">Gujarat has a rich and diverse culture, shaped by its history, geography, trade connections, and various influences over centuries. The state's culture is a vibrant blend of traditions, arts, music, dance, festivals, and cuisine. Here's an overview of some key aspects of its culture:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Language</h3>
+                  <ul>
+                    <li>Gujarati is the official language and a major part of the cultural identity of Gujarat. It has a rich literary heritage dating back to the 12th century. Other languages spoken include Hindi, Kutchi, and various tribal dialects.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Gujarati_Script.svg/800px-Gujarati_Script.svg.png" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>2. Literature</h3>
+                  <ul>
+                    <li>Gujarat has a rich literary tradition with notable poets and writers like Narsinh Mehta, Premanand, Dalpatram, and Narmad. Modern Gujarati literature flourished with authors like K.M. Munshi, Umashankar Joshi, and Pannalal Patel.</li>
+                    <li>The state has contributed significantly to Indian philosophy and spiritual literature through figures like Dayanand Saraswati and Mahatma Gandhi.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Narsinh_Mehta.jpg/800px-Narsinh_Mehta.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div><br>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Patola_Saree.jpg/800px-Patola_Saree.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Art and Craft</h3>
+                  <ul>
+                    <li>Gujarat is famous for its diverse handicrafts including Bandhani (tie-dye textiles), Patola (double ikat weaving), Kutch embroidery, mirror work, block printing, and Rogan art.</li>
+                    <li>The state is known for its intricate woodcarving, brass work, pottery, beadwork, and lacquer work.</li>
+                  </ul>
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Garba_dance_Gujarat.jpg/800px-Garba_dance_Gujarat.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>4. Music and Dance</h3>
+                  <ul>
+                    <li>Garba and Dandiya Raas are the most famous folk dances of Gujarat, performed during Navratri festival.</li>
+                    <li>Other traditional dance forms include Tippani, Bhavai (folk theater), Padhar, and Siddi Dhamal.</li>
+                    <li>Folk music traditions include Dayro (community singing), Bhajan (devotional songs), and Sugam Sangeet.</li>
+                    <li>Traditional musical instruments like the manjira, ektaro, and ravan hattho are integral to Gujarati folk music.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Architecture</h3>
+                  <ul>
+                    <li>Gujarat has a rich architectural heritage with step wells (vavs) like Rani ki Vav and Adalaj Stepwell.</li>
+                    <li>The state is home to magnificent temples like Somnath, Dwarkadhish, and the Sun Temple at Modhera.</li>
+                    <li>Indo-Islamic architecture is evident in structures like Jama Masjid in Ahmedabad and Champaner-Pavagadh Archaeological Park.</li>
+                  </ul>
+                  <h3>6. Cuisine</h3>
+                  <ul>
+                    <li>Gujarati cuisine is predominantly vegetarian, known for its unique blend of sweet, salty, and spicy flavors.</li>
+                    <li>Famous dishes include Dhokla, Khandvi, Thepla, Undhiyu, and Fafda-Jalebi.</li>
+                    <li>The traditional Gujarati thali offers a complete meal with various dishes, farsan (snacks), and sweets.</li>
+                    <li>Kathiyawadi and Kutchi cuisines are distinct regional variations with their own specialties.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Rani_ki_vav_Patan_Gujarat.jpg/800px-Rani_ki_vav_Patan_Gujarat.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Ahmedabad_Heritage_Walk.jpg/800px-Ahmedabad_Heritage_Walk.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>7. Heritage and Traditions</h3>
+                  <ul>
+                    <li>Gujarat's old cities like Ahmedabad (a UNESCO World Heritage City) feature unique architectural elements like pols (traditional neighborhoods) and havelis.</li>
+                    <li>The state has a strong tradition of community living with institutions like Mahajan (merchant guilds) and Panch (village councils).</li>
+                  </ul>
+                  <h3>8. Religious Diversity</h3>
+                  <ul>
+                    <li>Gujarat has a diverse religious landscape with Hinduism, Jainism, Islam, and other faiths coexisting for centuries.</li>
+                    <li>The state is an important center for Jainism with magnificent temple complexes at Palitana and Girnar.</li>
+                    <li>Swaminarayan Hinduism has a strong presence with grand temples like Akshardham.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Uttarayan_kite_festival.jpg/800px-Uttarayan_kite_festival.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>9. Festivals</h3>
+                  <ul>
+                    <li>Navratri is celebrated with great enthusiasm through nine nights of Garba and Dandiya Raas.</li>
+                    <li>Uttarayan (Kite Festival) transforms the skies into a colorful spectacle every January.</li>
+                    <li>Other important festivals include Diwali, Holi, Janmashtami, and the Rann Utsav in Kutch.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>10. Entrepreneurial Spirit</h3>
+                  <ul>
+                    <li>Gujaratis are known for their business acumen and entrepreneurial spirit, with a long history of trade and commerce.</li>
+                    <li>The state has produced many of India's leading industrialists and business families.</li>
+                    <li>This commercial tradition has influenced social structures, festivals, and even religious practices.</li>
+                  </ul>
+                  <h3>11. Tribal Cultures</h3>
+                  <ul>
+                    <li>Gujarat has significant tribal populations like Bhils, Rabaris, Kolis, and Siddi communities, each with their distinct cultural traditions.</li>
+                    <li>Tribal arts, crafts  each with their distinct cultural traditions.</li>
+                    <li>Tribal arts, crafts, music, and dance forms add to the cultural diversity of Gujarat.</li>
+                    <li>The Rann Utsav showcases the vibrant tribal heritage of the Kutch region.</li>
+                  </ul>
+                  <h3>12. Influence of Mahatma Gandhi</h3>
+                  <ul>
+                    <li>Gujarat's culture has been deeply influenced by Mahatma Gandhi, who was born in Porbandar.</li>
+                    <li>Principles of non-violence, simplicity, and self-reliance are embedded in the state's cultural ethos.</li>
+                    <li>The Sabarmati Ashram in Ahmedabad remains a symbol of Gandhian values and India's freedom struggle.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Sabarmati_Ashram_in_Ahmedabad.jpg/800px-Sabarmati_Ashram_in_Ahmedabad.jpg" alt="" style="height:300px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br><br>
+
+          <p>Gujarat's culture is a vibrant tapestry of traditions, arts, spirituality, and commerce that continues to evolve while maintaining strong connections to its rich heritage. The state's unique blend of ancient traditions and modern innovations makes it a culturally fascinating region of India!</p><br><br>
+        </div>
+        <div id="wbtradition" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Tradition of Gujarat</h1>
+          <p>Gujarat has a rich and diverse tradition deeply rooted in its history, culture, and social practices. Here's an overview of some key traditional aspects of the state:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Clothing Tradition</h3>
+                  <h4>Men</h4>
+                  <ul>
+                    <li><b>Kediyu:</b> Traditional short jacket worn with a dhoti or churidar.</li>
+                    <li><b>Chorno:</b> A dhoti-like lower garment worn by Gujarati men.</li>
+                    <li><b>Pagdi:</b> Traditional turban that varies in style across different regions.</li>
+                  </ul>
+                  <h4>Women</h4>
+                  <ul>
+                    <li><b>Chaniya Choli:</b> Colorful three-piece attire consisting of a flared skirt, blouse, and dupatta.</li>
+                    <li><b>Ghagra:</b> Traditional embroidered skirt worn with a choli (blouse).</li>
+                    <li><b>Abha:</b> A backless blouse worn by women in Saurashtra region.</li>
+                    <li><b>Patola Saree:</b> Double ikat woven silk saree, a specialty of Patan.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Traditional_Gujarati_attire.jpg/800px-Traditional_Gujarati_attire.jpg" alt="" style="height:250px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>2. Wedding Traditions</h3>
+                  <ul>
+                    <li><b>Gol Dhana (Engagement):</b> The formal engagement ceremony where coriander seeds and jaggery are distributed.</li>
+                    <li><b>Pithi Ceremony:</b> Yellow turmeric paste is applied to the bride and groom for skin purification.</li>
+                    <li><b>Mameru:</b> The maternal uncle brings gifts for the bride including clothes, jewelry, and sweets.</li>
+                    <li><b>Garba:</b> Traditional dance performed during pre-wedding celebrations.</li>
+                    <li><b>Jaan:</b> The groom's procession arrives at the wedding venue with music and dancing.</li>
+                    <li><b>Aeki Beki:</b> A post-wedding game where the couple searches for a ring in a pot of colored water.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Gujarati_wedding.jpg/800px-Gujarati_wedding.jpg" alt="" style="height:250px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Garba_dance_Gujarat.jpg/800px-Garba_dance_Gujarat.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Music & Dance Traditions</h3>
+                  <ul>
+                    <li><b>Garba:</b> A circular dance form performed during Navratri, dedicated to Goddess Durga.</li>
+                    <li><b>Dandiya Raas:</b> A rhythmic dance performed with decorated sticks, especially during Navratri.</li>
+                    <li><b>Tippani:</b> A folk dance performed by women while doing construction work.</li>
+                    <li><b>Bhavai:</b> Traditional theater form combining dance, music, and drama.</li>
+                    <li><b>Dayro:</b> A form of community singing where people gather to listen to folk tales and songs.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Uttarayan_kite_festival.jpg/800px-Uttarayan_kite_festival.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+
+                  <h3>4. Social & Religious Traditions</h3>
+                  <ul>
+                    <li><b>Uttarayan:</b> The kite festival celebrated on January 14th, marking the transition of the sun into Capricorn.</li>
+                    <li><b>Sharad Purnima:</b> People enjoy garba under the full moon and consume milk and rice flakes.</li>
+                    <li><b>Pols:</b> Traditional housing clusters in old cities with common areas for community interaction.</li>
+                    <li><b>Jal Jeelani:</b> A water conservation ritual performed in drought-prone areas.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Architectural & Handicraft Traditions</h3>
+                  <ul>
+                    <li><b>Step Wells (Vavs):</b> Intricately carved water storage structures like Rani ki Vav and Adalaj Stepwell.</li>
+                    <li><b>Haveli Architecture:</b> Traditional mansions with courtyards, ornate facades, and wooden carvings.</li>
+                    <li><b>Bandhani:</b> Traditional tie-dye textile art with intricate patterns.</li>
+                    <li><b>Patola:</b> Double ikat silk weaving, a specialty of Patan.</li>
+                    <li><b>Rogan Art:</b> Painting on fabric using thick brightly colored paint made from castor oil.</li>
+                    <li><b>Kutch Embroidery:</b> Vibrant needlework with mirrors, beads, and colorful threads.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Rani_ki_vav_Patan_Gujarat.jpg/800px-Rani_ki_vav_Patan_Gujarat.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>6. Business & Trade Traditions</h3>
+                  <ul>
+                    <li><b>Vaniya Culture:</b> Strong tradition of business and entrepreneurship among Gujarati communities.</li>
+                    <li><b>Mahajan System:</b> Traditional guild of merchants that regulated trade practices.</li>
+                    <li><b>Chopda Pujan:</b> Ritual worship of account books during Diwali, marking the beginning of the new financial year.</li>
+                    <li><b>Maritime Trade:</b> Ancient tradition of seafaring and international commerce through ports like Lothal and Mandvi.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Chopda_Pujan_Gujarat.jpg/800px-Chopda_Pujan_Gujarat.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br><br>
+          <p>Gujarat's traditions beautifully combine spirituality, art, commerce, and community living, creating a unique cultural identity that has evolved over centuries while preserving its core values and practices.</p><br><br>
+        </div>
+        <div id="wbfestivals" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Festivals of Gujarat</h1>
+          <p>Gujarat is known for its vibrant and diverse festivals, which reflect its rich cultural heritage, religious harmony, and unique traditions. Here's a list of some of the major festivals celebrated in the state:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Navratri (Nine Nights Festival)</h3>
+                  <ul>
+                    <li>The most significant festival of Gujarat, celebrated with nine nights of Garba and Dandiya Raas dance.</li>
+                    <li>People dress in colorful traditional attire and dance in circles around a lamp or image of Goddess Durga.</li>
+                    <li>Major cities like Vadodara, Ahmedabad, and Surat host large-scale Garba events with professional singers.</li>
+                    <li>The festival culminates with Dussehra, celebrating the victory of good over evil.</li>
+                  </ul>
+                  <p><b>📍 Time: September-October (Ashwin month)</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Garba_dance_Gujarat.jpg/800px-Garba_dance_Gujarat.jpg" alt="" style="height:230px;width: 200px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Uttarayan_kite_festival.jpg/800px-Uttarayan_kite_festival.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Uttarayan (International Kite Festival)</h3>
+                  <ul>
+                    <li>A vibrant kite flying festival celebrated on January 14th, marking the transition of the sun into Capricorn.</li>
+                    <li>The skies of Gujarat are filled with colorful kites of various shapes and sizes.</li>
+                    <li>People engage in kite-fighting competitions with specially prepared kite strings coated with glass powder.</li>
+                    <li>Traditional foods like Undhiyu, Jalebi, and Chikki are prepared during this festival.</li>
+                  </ul>
+                  <p><b>📍 Time: January 14-15</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Rann Utsav</h3>
+                  <ul>
+                    <li>A three-month long festival celebrating the culture and traditions of Kutch region.</li>
+                    <li>Held against the backdrop of the white salt desert (Rann of Kutch) under the full moon.</li>
+                    <li>Features folk dances, music, handicrafts, and cuisine of the region.</li>
+                    <li>Visitors can stay in traditional Bhungas (circular mud houses) and experience local hospitality.</li>
+                  </ul>
+                  <p><b>📍 Time: November to February</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Rann_of_Kutch.jpg/800px-Rann_of_Kutch.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Janmashtami_celebration_in_Gujarat.jpg/800px-Janmashtami_celebration_in_Gujarat.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Janmashtami</h3>
+                  <ul>
+                    <li>Celebrates the birth of Lord Krishna with great enthusiasm, especially in Dwarka, one of the four main pilgrimage sites for Hindus.</li>
+                    <li>The Dahi Handi competition, where young men form human pyramids to break a pot of curd hung high above the ground, is a major attraction.</li>
+                    <li>Temples are decorated, bhajans are sung, and Krishna's idols are adorned with new clothes and jewelry.</li>
+                  </ul>
+                  <p><b>📍 Time: August-September</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Diwali</h3>
+                  <ul>
+                    <li>The festival of lights is celebrated with great enthusiasm across Gujarat.</li>
+                    <li>Homes and businesses are decorated with diyas (oil lamps), rangoli, and fairy lights.</li>
+                    <li>In Gujarat, Diwali marks the beginning of the new financial year for businesses.</li>
+                    <li>Chopda Pujan (worship of account books) is a unique Gujarati tradition during this festival.</li>
+                  </ul>
+                  <p><b>📍 Time: October-November</b></p>
+                  <h3>6. Tarnetar Fair</h3>
+                  <ul>
+                    <li>A vibrant matrimonial fair held at the Trinetreshwar Temple in Tarnetar.</li>
+                    <li>Young men wear colorful embroidered umbrellas to attract potential brides.</li>
+                    <li>Features folk dances, music, and handicrafts of the Saurashtra region.</li>
+                  </ul>
+                  <p><b>📍 Time: August-September</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Tarnetar_Fair_Gujarat.jpg/800px-Tarnetar_Fair_Gujarat.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Modhera_Dance_Festival.jpg/800px-Modhera_Dance_Festival.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>7. Modhera Dance Festival</h3>
+                  <ul>
+                    <li>A three-day classical dance festival held at the historic Sun Temple in Modhera.</li>
+                    <li>Features performances by renowned dancers from across India.</li>
+                    <li>The ancient temple provides a magnificent backdrop for the performances.</li>
+                  </ul>
+                  <p><b>📍 Time: January (third weekend)</b></p>
+                  <h3>8. Sharad Purnima</h3>
+                  <ul>
+                    <li>Celebrated on the full moon night of the Hindu month of Ashwin.</li>
+                    <li>People perform Garba under the moonlight and consume milk and rice flakes (poha) that are kept under the moonlight.</li>
+                    <li>It is believed that the moon's rays on this night have healing properties.</li>
+                  </ul>
+                  <p><b>📍 Time: October-November</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>9. Holi</h3>
+                  <ul>
+                    <li>The festival of colors is celebrated with great enthusiasm, especially in Vadodara and Ahmedabad.</li>
+                    <li>In some parts of Gujarat, a bonfire called Holika Dahan is lit the night before Holi.</li>
+                    <li>People play with colors, water guns, and enjoy traditional sweets like Gujiya and Malpua.</li>
+                  </ul>
+                  <p><b>📍 Time: March</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Holi_celebration_in_Gujarat.jpg/800px-Holi_celebration_in_Gujarat.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Somnath_Temple.jpg/800px-Somnath_Temple.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>10. Mahashivratri</h3>
+                  <ul>
+                    <li>Celebrated with great devotion at the Somnath Temple, one of the twelve Jyotirlingas of Lord Shiva.</li>
+                    <li>Devotees observe fasting, perform special pujas, and participate in night-long vigils.</li>
+                    <li>The Bhavnath Fair near Junagadh is a major attraction during this festival.</li>
+                  </ul>
+                  <p><b>📍 Time: February-March</b></p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>11. Kite Festival (International)</h3>
+                  <ul>
+                    <li>An extension of Uttarayan, this international event attracts kite flyers from around the world.</li>
+                    <li>Held in Ahmedabad, it showcases innovative kite designs and flying techniques.</li>
+                    <li>Night flying with illuminated kites is a special attraction.</li>
+                  </ul>
+                  <p><b>📍 Time: January 14</b></p>
+
+                  <h3>12. Bhadra Purnima</h3>
+                  <ul>
+                    <li>A significant festival for the Kutch region, especially the Rabari community.</li>
+                    <li>People visit the Mata no Madh temple to seek blessings from Goddess Ashapura.</li>
+                    <li>Features traditional folk dances and music.</li>
+                  </ul>
+                  <p><b>📍 Time: August-September</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Mata_no_Madh_Temple.jpg/800px-Mata_no_Madh_Temple.jpg" alt="" style="height:200px;width: 230px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Ambaji_Temple_Gujarat.jpg/800px-Ambaji_Temple_Gujarat.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>13. Ambaji Fair</h3>
+                  <ul>
+                    <li>A major pilgrimage fair held at the Ambaji Temple during the full moon of Bhadrapad month.</li>
+                    <li>Thousands of devotees walk to the temple from different parts of Gujarat and Rajasthan.</li>
+                    <li>The fair features cultural performances, handicraft stalls, and religious rituals.</li>
+                  </ul>
+                  <p><b>📍 Time: August-September</b></p>
+                  <h3>14. Vautha Fair</h3>
+                  <ul>
+                    <li>One of Gujarat's largest animal fairs, held at the confluence of seven rivers near Vautha village.</li>
+                    <li>Trading of cattle, camels, and other livestock takes place during this fair.</li>
+                    <li>Cultural performances and handicraft stalls add to the festive atmosphere.</li>
+                  </ul>
+                  <p><b>📍 Time: November (after Diwali)</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Gujarat's festivals are a vibrant reflection of its rich cultural heritage, religious diversity, and community spirit. These celebrations not only preserve traditional arts and customs but also promote tourism and cultural exchange! 🎉</p><br><br>
+        </div>
+        <div id="wbfood" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Foods of Gujarat</h1>
+          <p>Gujarati cuisine is known for its distinctive blend of sweet, salty, and spicy flavors. It is predominantly vegetarian, reflecting the influence of Jainism and Hinduism in the region. The cuisine varies across different regions of Gujarat, each with its own specialties. Here's a look at some of the most iconic foods of Gujarat:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Staple Food of Gujarat</h3>
+                  <ul>
+                    <li><b>Rotli (Roti):</b> Thin, soft flatbread made from wheat flour, a staple in most Gujarati meals.</li>
+                    <li><b>Bhaat (Rice):</b> Plain steamed rice, often served with dal or kadhi.</li>
+                    <li><b>Khichdi:</b> A comforting one-pot meal made with rice and lentils, often served with kadhi.</li>
+                  </ul>
+                  <h3>2. Traditional Gujarati Thali</h3>
+                  <ul>
+                    <li><b>Components:</b> A complete meal served on a large plate with small bowls containing various dishes.</li>
+                    <li><b>Typical items:</b> Rotli, rice, dal, kadhi, shaak (vegetable dish), farsan (snack), pickle, papad, and sweet dish.</li>
+                    <li><b>Unique feature:</b> The balance of sweet, salty, and spicy flavors in a single meal.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Gujarati_Thali.jpg/800px-Gujarati_Thali.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Dhokla.jpg/800px-Dhokla.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Famous Gujarati Snacks (Farsan)</h3>
+                  <ul>
+                    <li><b>Dhokla:</b> Steamed savory cake made from fermented rice and chickpea flour, tempered with mustard seeds and curry leaves.</li>
+                    <li><b>Khandvi:</b> Thin, yellow rolls made from gram flour and buttermilk, seasoned with mustard seeds and coconut.</li>
+                    <li><b>Fafda:</b> Crispy, deep-fried snack made from gram flour and spices, often served with fried green chilies and papaya chutney.</li>
+                    <li><b>Gathiya:</b> Deep-fried snack made from gram flour, popular during festivals and as a tea-time snack.</li>
+                    <li><b>Khakhra:</b> Thin, crispy crackers made from wheat flour and spices, a popular travel snack.</li>
+                    <li><b>Thepla:</b> Spiced flatbread made with fenugreek leaves and various flours, known for its long shelf life.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Undhiyu.jpg/800px-Undhiyu.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Main Dishes</h3>
+                  <ul>
+                    <li><b>Undhiyu:</b> A mixed vegetable dish made with winter vegetables, cooked in earthen pots, especially popular during Uttarayan.</li>
+                    <li><b>Dal Dhokli:</b> Wheat flour dumplings cooked in a spiced lentil soup, a one-pot comfort meal.</li>
+                    <li><b>Gujarati Kadhi:</b> A sweet and sour yogurt-based curry with gram flour, unlike the spicier versions from other regions.</li>
+                    <li><b>Ringan no Olo:</b> Roasted eggplant mash with spices, a specialty of Saurashtra region.</li>
+                    <li><b>Sev Tameta nu Shaak:</b> Tomato curry topped with crispy sev (thin noodles made from gram flour).</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Gujarati Sweets & Desserts</h3>
+                  <ul>
+                    <li><b>Mohanthal:</b> A fudge-like sweet made from gram flour, ghee, and sugar.</li>
+                    <li><b>Basundi:</b> Thickened, sweetened milk flavored with cardamom and nuts.</li>
+                    <li><b>Shrikhand:</b> Strained yogurt sweetened with sugar and flavored with saffron and cardamom.</li>
+                    <li><b>Sukhdi:</b> A healthy sweet made from wheat flour, jaggery, and ghee.</li>
+                    <li><b>Ghari:</b> A flaky, sweet pastry filled with a sweet mixture, a specialty of Surat.</li>
+                    <li><b>Jalebi-Fafda:</b> A popular breakfast combination, especially on weekends.</li>
+                  </ul>
+
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Mohanthal.jpg/800px-Mohanthal.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Dabeli.jpg/800px-Dabeli.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>6. Street Food of Gujarat</h3>
+                  <ul>
+                    <li><b>Dabeli:</b> Spiced potato filling in a bun, topped with pomegranate, sev, and chutneys, a specialty of Kutch region.</li>
+                    <li><b>Pav Bhaji:</b> Spiced vegetable mash served with buttered buns, popular in urban areas.</li>
+                    <li><b>Khichu:</b> A steamed rice flour snack, seasoned with cumin and black pepper, popular during monsoon.</li>
+                    <li><b>Locho:</b> A soft, steamed snack made from gram flour, a specialty of Surat.</li>
+                    <li><b>Ponk:</b> Tender sorghum grains, available only in winter, served with various spices and lemon.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Beverages</h3>
+                  <ul>
+                    <li><b>Chaas:</b> Spiced buttermilk, a cooling summer drink.</li>
+                    <li><b>Fajeto:</b> A sweet and sour mango kadhi, popular during summer.</li>
+                    <li><b>Sharbat:</b> Sweet, flavored drinks made with various fruits and herbs.</li>
+                    <li><b>Masala Chai:</b> Spiced tea, an essential part of Gujarati hospitality.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Chaas_Buttermilk.jpg/800px-Chaas_Buttermilk.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>8. Regional Specialties</h3>
+                  <ul>
+                    <li><b>Kathiyawadi Cuisine:</b> Spicier than typical Gujarati food, with dishes like Sev Tameta, Lasaniya Batata, and Bharela Ringan.</li>
+                    <li><b>Kutchi Cuisine:</b> Influenced by the arid climate, featuring dishes like Kutchi Dabeli, Pakwan Dal, and Kutchi Khichdi.</li>
+                    <li><b>Surti Cuisine:</b> Known for Surti Ghari, Locho, and Surti Undhiyu.</li>
+                    <li><b>Amdavadi Cuisine:</b> Famous for street foods like Khakhra, Handvo, and Dhokla.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Kathiyawadi_Thali.jpg/800px-Kathiyawadi_Thali.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Gujarati cuisine is a delightful exploration of flavors, textures, and cooking techniques that reflect the state's cultural diversity, agricultural abundance, and historical influences. The emphasis on vegetarian food, balanced flavors, and seasonal ingredients makes it one of India's most distinctive regional cuisines! 🍛🍲🍬</p><br><br>
+        </div>
+        <div id="wbhistory" class="tab-pane fade in active" style="background-color: white;">
+          <h1>History of Gujarat</h1>
+          <p>Gujarat has a rich and diverse history that spans ancient civilizations, medieval kingdoms, colonial rule, and the modern era. The region has played a significant role in India's political, cultural, and economic history.</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Ancient Gujarat (Before 7th Century CE)</h3>
+                  <ul>
+                    <li><b>Indus Valley Civilization (2500-1700 BCE):</b> Gujarat was home to major Harappan sites like Lothal, Dholavira, and Gola Dhoro, which were important trading centers.</li>
+                    <li><b>Maurya Empire (322-185 BCE):</b> Emperor Ashoka's rock edicts found in Junagadh indicate the region was part of the Mauryan Empire.</li>
+                    <li><b>Kshatrapa and Gupta Period (1st-5th Century CE):</b> Western Kshatrapas ruled Gujarat before it became part of the Gupta Empire under Chandragupta II.</li>
+                    <li><b>Maitraka Dynasty (475-767 CE):</b> Established their capital at Vallabhi, which became a major center of learning with a renowned Buddhist university.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Lothal_Dockyard.jpg/800px-Lothal_Dockyard.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Somnath_Temple.jpg/800px-Somnath_Temple.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Medieval Gujarat (7th - 16th Century)</h3>
+                  <h4>Solanki Dynasty (942-1244 CE):</h4>
+                  <ul>
+                    <li>Also known as the Chalukyas of Gujarat, they established their capital at Anhilwara Patan.</li>
+                    <li>Under rulers like Bhima I and Siddhraj Jayasinh, Gujarat witnessed cultural and architectural flourishing.</li>
+                    <li>The magnificent Sun Temple at Modhera and Rani ki Vav (stepwell) were built during this period.</li>
+                  </ul>
+                  <h4>Vaghela Dynasty (1244-1304 CE):</h4>
+                  <ul>
+                    <li>The last Hindu rulers of Gujarat before the Muslim conquest.</li>
+                    <li>Their rule ended when Alauddin Khilji's forces invaded Gujarat.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Ahmad_Shah%27s_Mosque_Ahmedabad.jpg/800px-Ahmad_Shah%27s_Mosque_Ahmedabad.jpg" alt="" style="height:220px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h4>Gujarat Sultanate (1407-1573 CE):</h4>
+                  <ul>
+                    <li>Ahmad Shah I founded Ahmedabad in 1411 and made it his capital.</li>
+                    <li>The sultanate reached its peak under Mahmud Begada, who expanded its territories.</li>
+                    <li>This period saw the development of Indo-Islamic architecture and the growth of trade.</li>
+                  </ul>
+                  <h4>Mughal Rule (1573-1758 CE):</h4>
+                  <ul>
+                    <li>Akbar conquered Gujarat in 1573, integrating it into the Mughal Empire.</li>
+                    <li>Gujarat became a major center for textile production and international trade.</li>
+                    <li>The region's prosperity attracted European trading companies like the Portuguese, Dutch, and British.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Maratha Influence and British Colonial Period (18th - 20th Century)</h3>
+                  <ul>
+                    <li><b>Maratha Rule (1758-1820s):</b> The Marathas under Damaji Gaekwad and later the Peshwas controlled much of Gujarat.</li>
+                    <li><b>British East India Company (1818-1857):</b> The British gradually established control over different parts of Gujarat through treaties with local rulers.</li>
+                    <li><b>British Raj (1858-1947):</b> After the 1857 Revolt, Gujarat came under direct British rule, with princely states like Baroda, Kutch, and Junagadh maintaining nominal independence.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Laxmi_Vilas_Palace.jpg/800px-Laxmi_Vilas_Palace.jpg" alt="" style="height:200px;width: 250px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Sabarmati_Ashram_in_Ahmedabad.jpg/800px-Sabarmati_Ashram_in_Ahmedabad.jpg" alt="" style="height:230px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h2>4. Freedom Movement and Gandhian Era</h3>
+                    <h3>Role in India's Freedom Struggle</h3>
+                    <ul>
+                      <li>Gujarat played a pivotal role in India's independence movement, being the birthplace of Mahatma Gandhi.</li>
+                      <li>The Sabarmati Ashram in Ahmedabad became the center of Gandhi's non-violent resistance against British rule.</li>
+                      <li>Major movements like the Salt Satyagraha (which began with the Dandi March in 1930) and the Quit India Movement had strong support in Gujarat.</li>
+                    </ul>
+                    <h3>Prominent Freedom Fighters from Gujarat</h3>
+                    <ul>
+                      <li>Mahatma Gandhi, born in Porbandar, led India's freedom struggle with his principles of non-violence and truth.</li>
+                      <li>Sardar Vallabhbhai Patel, known as the "Iron Man of India," played a crucial role in uniting the princely states after independence.</li>
+                      <li>Other notable figures include Dadabhai Naoroji, Morarji Desai, and K.M. Munshi.</li>
+                    </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Statue_of_Unity_in_2018.jpg/800px-Statue_of_Unity_in_2018.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>Post-Independence Developments</h3>
+                  <ul>
+                    <li><b>Bombay State (1947-1960):</b> After independence, Gujarat was part of Bombay State, which included present-day Maharashtra and parts of Karnataka.</li>
+                    <li><b>Formation of Gujarat State (1960):</b> On May 1, 1960, Gujarat was separated from Maharashtra on linguistic grounds, with Ahmedabad as its first capital.</li>
+                    <li><b>New Capital (1970):</b> Gandhinagar was established as the new capital of Gujarat.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Modern Gujarat (Post-1960)</h3>
+                  <h4>Economic Development</h4>
+                  <ul>
+                    <li>Gujarat has emerged as one of India's most industrialized and economically developed states.</li>
+                    <li>The state has focused on sectors like petrochemicals, textiles, pharmaceuticals, and diamond processing.</li>
+                    <li>Major industrial centers include Ahmedabad, Surat, Vadodara, and Rajkot.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/GIFT_City_Gujarat.jpg/800px-GIFT_City_Gujarat.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h4>Challenges and Achievements</h4>
+                  <ul>
+                    <li><b>Natural Disasters:</b> The state has faced major challenges like the 1979 Morbi dam failure, the 1998 cyclone, the 2001 Bhuj earthquake, and periodic droughts.</li>
+                    <li><b>Social Issues:</b> Gujarat has experienced communal tensions, most notably the 2002 riots.</li>
+                    <li><b>Development Model:</b> The "Gujarat Model" of development has gained national attention for its focus on infrastructure, business-friendly policies, and governance reforms.</li>
+                    <li><b>Notable Projects:</b> The Sardar Sarovar Dam, GIFT City, and the Statue of Unity (world's tallest statue) are major development projects in modern Gujarat.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Sardar_Sarovar_Dam.jpg/800px-Sardar_Sarovar_Dam.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>6. Political History</h3>
+                  <ul>
+                    <li><b>Early Leaders:</b> Jivraj Mehta was the first Chief Minister of Gujarat, followed by Balwantrai Mehta.</li>
+                    <li><b>Political Landscape:</b> Gujarat has been primarily dominated by two national parties - the Indian National Congress and the Bharatiya Janata Party.</li>
+                    <li><b>Notable Chief Ministers:</b> Chimanbhai Patel, Madhavsinh Solanki, Keshubhai Patel, Narendra Modi (who later became Prime Minister of India), and Anandiben Patel have been influential leaders.</li>
+                    <li><b>Recent Developments:</b> Gujarat continues to be a politically significant state in India's federal structure.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Gujarat_Vidhan_Sabha.jpg/800px-Gujarat_Vidhan_Sabha.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Gujarat's history is a fascinating tapestry of ancient civilizations, medieval kingdoms, colonial influences, and modern development. From the ancient port of Lothal to the modern GIFT City, the state has continuously evolved while maintaining its distinct cultural identity and entrepreneurial spirit. 🚩📜</p>
+          <br><br>
+        </div>
+        <div id="wbartacraft" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Art & Craft of Gujarat 🎨🖌️</h1>
+          <p>Gujarat has a rich artistic heritage, with diverse handicrafts that reflect the state's cultural diversity, historical influences, and regional variations. Gujarati artisans are known for their intricate craftsmanship, vibrant colors, and traditional techniques passed down through generations.</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Textile Arts 🧵</h3>
+                  <h4>🔸 Bandhani (Tie and Dye)</h4>
+                  <ul>
+                    <li><b>Origin:</b> Jamnagar, Kutch, and Saurashtra regions.</li>
+                    <li><b>Technique:</b> Fabric is tied tightly with thread at several points to create patterns and then dyed.</li>
+                    <li><b>Products:</b> Sarees, dupattas, turbans, and dress materials.</li>
+                  </ul>
+                  <h4>🔸 Patola</h4>
+                  <ul>
+                    <li><b>Origin:</b> Patan, North Gujarat.</li>
+                    <li><b>Technique:</b> Double ikat weaving where both warp and weft threads are tie-dyed before weaving.</li>
+                    <li><b>Significance:</b> One of the most complex and time-consuming textile arts, taking months to create a single saree.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Patola_Saree.jpg/800px-Patola_Saree.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Kutch_Embroidery.jpg/800px-Kutch_Embroidery.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Embroidery Traditions 🪡</h3>
+                  <h4>🔸 Kutch Embroidery</h4>
+                  <ul>
+                    <li><b>Origin:</b> Kutch region, practiced by communities like Rabari, Ahir, Jat, and Mutwa.</li>
+                    <li><b>Features:</b> Vibrant colors, mirror work, intricate stitches, and geometric patterns.</li>
+                    <li><b>Variations:</b> Each community has its distinct style, motifs, and color preferences.</li>
+                  </ul>
+                  <h4>🔸 Suf Embroidery</h4>
+                  <ul>
+                    <li><b>Origin:</b> Kutch region, primarily by the Sodha Rajput community.</li>
+                    <li><b>Technique:</b> Counted thread embroidery creating geometric patterns, often triangular.</li>
+                  </ul>
+                  <h4>🔸 Aari Work</h4>
+                  <ul>
+                    <li><b>Origin:</b> Saurashtra region.</li>
+                    <li><b>Technique:</b> Chain stitch embroidery done with a hooked needle, often featuring floral motifs.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Block Printing 🖼️</h3>
+                  <ul>
+                    <li><b>Origin:</b> Primarily in Ahmedabad, Jetpur, and Rajkot.</li>
+                    <li><b>Technique:</b> Hand-carved wooden blocks are used to stamp patterns on fabric using natural dyes.</li>
+                    <li><b>Styles:</b> Ajrakh (geometric patterns), Bagh print, and Dabu (mud resist printing).</li>
+                    <li><b>Products:</b> Sarees, bed covers, curtains, and dress materials.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Block_printing_in_Gujarat.jpg/800px-Block_printing_in_Gujarat.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Rogan_Art_Gujarat.jpg/800px-Rogan_Art_Gujarat.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Rogan Art 🎨</h3>
+                  <ul>
+                    <li><b>Origin:</b> Kutch region, practiced by the Khatri community.</li>
+                    <li><b>Technique:</b> Painting on fabric using thick, brightly colored paint made from castor oil.</li>
+                    <li><b>Uniqueness:</b> The artist uses a stylus to create intricate designs without touching the fabric directly.</li>
+                    <li><b>Recognition:</b> Prime Minister Narendra Modi gifted a Rogan art piece to US President Barack Obama in 2014.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Pottery and Terracotta 🏺</h3>
+                  <ul>
+                    <li><b>Khavda Pottery:</b> Distinctive black and white pottery from Kutch, featuring geometric designs.</li>
+                    <li><b>Terracotta Work:</b> Clay figurines, toys, and decorative items, especially from Gokharva in Kutch.</li>
+                    <li><b>Matka (Earthen Pot):</b> Traditional water storage pots with regional variations in design.</li>
+                  </ul>
+                  <h3>6. Metalwork 🔨</h3>
+                  <ul>
+                    <li><b>Kutch Bell Metal:</b> Decorative items made by the Luhar (blacksmith) community.</li>
+                    <li><b>Copper and Brass Work:</b> Utensils, decorative items, and religious artifacts.</li>
+                    <li><b>Silver Jewelry:</b> Intricate designs by communities like the Rabaris and Ahirs.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Khavda_Pottery.jpg/800px-Khavda_Pottery.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Wooden_carved_door_Gujarat.jpg/800px-Wooden_carved_door_Gujarat.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>7. Woodwork and Lacquer 🪵</h3>
+                  <ul>
+                    <li><b>Wood Carving:</b> Intricate designs on doors, windows, and furniture, especially in old havelis.</li>
+                    <li><b>Lacquer Work:</b> Colorful lacquered items like toys, boxes, and utensils from Kutch and Saurashtra.</li>
+                    <li><b>Sankheda Furniture:</b> Lacquered furniture with distinctive red and gold patterns from Sankheda town.</li>
+                  </ul>
+                  <h3>8. Beadwork and Mirror Work 💎</h3>
+                  <ul>
+                    <li><b>Moti Bharat (Beadwork):</b> Intricate designs created with tiny beads on fabric.</li>
+                    <li><b>Abhla (Mirror Work):</b> Small mirrors stitched onto fabric, creating reflective patterns.</li>
+                    <li><b>Products:</b> Wall hangings, garments, bags, and decorative items.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>9. Leather Craft 🧳</h3>
+                  <ul>
+                    <li><b>Origin:</b> Primarily in Kutch region by the Meghwal community.</li>
+                    <li><b>Products:</b> Footwear, bags, belts, and decorative items with embroidery and mirror work.</li>
+                    <li><b>Technique:</b> Vegetable-tanned leather with traditional embroidery and embellishments.</li>
+                  </ul>
+                  <h3>10. Tribal Arts 🏹</h3>
+                  <ul>
+                    <li><b>Pithora Paintings:</b> Ritual wall paintings by Rathwa and Bhil tribes, depicting their mythology.</li>
+                    <li><b>Warli Art:</b> Simple white paintings on mud walls by tribal communities in South Gujarat.</li>
+                    <li><b>Tribal Jewelry:</b> Distinctive silver and bead jewelry by communities like Rabari and Bhil.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Pithora_Painting_Gujarat.jpg/800px-Pithora_Painting_Gujarat.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>📌 Summary: Gujarat's Art & Craft Forms</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Art Form</th>
+                <th>Region</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Bandhani</td>
+                <td>Jamnagar, Kutch, Saurashtra</td>
+                <td>Tie and dye technique, vibrant colors</td>
+              </tr>
+              <tr>
+                <td>Patola</td>
+                <td>Patan</td>
+                <td>Double ikat weaving, geometric patterns</td>
+              </tr>
+              <tr>
+                <td>Kutch Embroidery</td>
+                <td>Kutch</td>
+                <td>Mirror work, vibrant colors, tribal motifs</td>
+              </tr>
+              <tr>
+                <td>Block Printing</td>
+                <td>Ahmedabad, Jetpur, Rajkot</td>
+                <td>Hand-carved wooden blocks, natural dyes</td>
+              </tr>
+              <tr>
+                <td>Rogan Art</td>
+                <td>Kutch (Nirona village)</td>
+                <td>Castor oil-based painting, intricate designs</td>
+              </tr>
+              <tr>
+                <td>Pottery</td>
+                <td>Khavda, Gokharva</td>
+                <td>Black and white designs, traditional techniques</td>
+              </tr>
+              <tr>
+                <td>Metalwork</td>
+                <td>Throughout Gujarat</td>
+                <td>Bell metal, copper, brass, and silver crafts</td>
+              </tr>
+              <tr>
+                <td>Woodwork</td>
+                <td>Sankheda, Ahmedabad</td>
+                <td>Lacquered furniture, carved doors</td>
+              </tr>
+              <tr>
+                <td>Leather Craft</td>
+                <td>Kutch</td>
+                <td>Embroidered footwear, bags, decorative items</td>
+              </tr>
+              <tr>
+                <td>Tribal Arts</td>
+                <td>Eastern and Southern Gujarat</td>
+                <td>Pithora paintings, Warli art, tribal jewelry</td>
+              </tr>
+            </table>
+          </div>
+          <br><br>
+          <p>Gujarat's arts and crafts are a vibrant reflection of its cultural diversity, historical influences, and artistic traditions. These crafts not only serve as a source of livelihood for thousands of artisans but also play a crucial role in preserving the state's cultural heritage. Despite modernization, these traditional art forms continue to thrive, adapting to contemporary tastes while maintaining their authentic essence. 🎭✨</p>
+          <br><br>
+        </div>
+        <div id="wbseason" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Seasons to visit Gujarat 🌧️☀️ </h1>
+          <p>Gujarat experiences diverse climatic conditions across its regions, from the arid deserts of Kutch to the coastal areas along the Arabian Sea. The best time to visit depends on your interests, the regions you plan to explore, and your tolerance for different weather conditions.</p>
+
+          <br><br>
+
+          <h2> Season-wise Breakdown for Visiting Gujarat</h2>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>❄️ Winter (November - February)</h3>
+                  <ul>
+                    <li>The most pleasant season to visit Gujarat with cool, dry weather.</li>
+                    <li>Daytime temperatures range from 15-30°C (59-86°F), making it ideal for sightseeing and outdoor activities.</li>
+                    <li>Perfect time for visiting the Rann of Kutch, especially during the Rann Utsav festival (November-February).</li>
+                    <li>Ideal for wildlife enthusiasts as animals are more active and visible in Gir National Park.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Rann_of_Kutch.jpg/800px-Rann_of_Kutch.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Uttarayan_kite_festival.jpg/800px-Uttarayan_kite_festival.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🌸 Spring (March - April)</h3>
+                  <ul>
+                    <li>Temperatures begin to rise but remain manageable in most parts.</li>
+                    <li>Good time to visit before the intense summer heat sets in.</li>
+                    <li>Perfect for exploring cities like Ahmedabad, Vadodara, and Rajkot.</li>
+                    <li>The Holi festival (March) is celebrated with great enthusiasm across the state.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>☀️ Summer (May - June)</h3>
+                  <ul>
+                    <li>Extremely hot and dry with temperatures often exceeding 40°C (104°F).</li>
+                    <li>Not recommended for general tourism, especially in inland areas.</li>
+                    <li>Coastal areas like Diu, Dwarka, and Somnath are relatively more comfortable.</li>
+                    <li>Some hill stations like Saputara offer relief from the heat.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Somnath_Temple.jpg/800px-Somnath_Temple.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Monsoon_in_Gujarat.jpg/800px-Monsoon_in_Gujarat.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🌧️ Monsoon (July - September)</h3>
+                  <ul>
+                    <li>Moderate to heavy rainfall across the state, with coastal areas receiving more precipitation.</li>
+                    <li>The landscape turns lush green, especially in South Gujarat and the Saurashtra region.</li>
+                    <li>Good time to visit waterfalls like Zarwani and Gira.</li>
+                    <li>Some areas might face flooding and transportation disruptions.</li>
+                    <li>The Janmashtami festival (August-September) is celebrated with great enthusiasm.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🍁 Post-Monsoon/Autumn (October)</h3>
+                  <ul>
+                    <li>Pleasant weather with receding rainfall and moderate temperatures.</li>
+                    <li>The landscape remains green and fresh after the monsoon.</li>
+                    <li>Navratri (September-October), Gujarat's biggest festival, is celebrated during this time.</li>
+                    <li>Good time for wildlife safaris as the vegetation is lush and animals are active.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Garba_dance_Gujarat.jpg/800px-Garba_dance_Gujarat.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>📌 Summary: Best Time to Visit Different Places in Gujarat</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Region</th>
+                <th>Best Season</th>
+                <th>Recommended Months</th>
+                <th>Why Visit?</th>
+              </tr>
+              <tr>
+                <td>Rann of Kutch</td>
+                <td>Winter</td>
+                <td>November - February</td>
+                <td>Rann Utsav, white salt desert, full moon nights, tribal crafts</td>
+              </tr>
+              <tr>
+                <td>Ahmedabad & Central Gujarat</td>
+                <td>Winter, Post-Monsoon</td>
+                <td>October - March</td>
+                <td>Heritage walks, museums, temples, step wells</td>
+              </tr>
+              <tr>
+                <td>Gir National Park</td>
+                <td>Winter, Post-Monsoon</td>
+                <td>October - May</td>
+                <td>Asiatic lions, wildlife safaris, bird watching</td>
+              </tr>
+              <tr>
+                <td>Somnath, Dwarka & Coastal Areas</td>
+                <td>Winter, Post-Monsoon</td>
+                <td>October - March</td>
+                <td>Temples, beaches, marine national park</td>
+              </tr>
+              <tr>
+                <td>Saputara (Hill Station)</td>
+                <td>Monsoon, Post-Monsoon</td>
+                <td>July - October</td>
+                <td>Lush greenery, waterfalls, cool climate</td>
+              </tr>
+              <tr>
+                <td>Vadodara & Champaner</td>
+                <td>Winter, Post-Monsoon</td>
+                <td>October - March</td>
+                <td>Palaces, archaeological sites, museums</td>
+              </tr>
+              <tr>
+                <td>Saurashtra Region</td>
+                <td>Winter</td>
+                <td>November - February</td>
+                <td>Junagadh Fort, Girnar Hills, temples</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="container">
+            <div class="row">
+              <h1 style=" text-align: center;">📌 Summary: When to Visit Gujarat</h1><br>
+              <ul>
+                <li><b>For general tourism:</b> November - February (winter season with pleasant weather)</li>
+                <li><b>For festivals:</b> September-October (Navratri), January (Uttarayan), November-February (Rann Utsav)</li>
+                <li><b>For wildlife:</b> October - May (Gir National Park and other wildlife sanctuaries)</li>
+                <li><b>For budget travel:</b> July - September (monsoon season with fewer tourists)</li>
+                <li><b>For coastal areas:</b> October - March (pleasant weather for beach activities)</li>
+              </ul>
+
+            </div>
+          </div>
+          <br><br>
+        </div>
+        <div id="wbtourist" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Tourist Spots of Gujarat 🏰🏝️</h1>
+          <p>Gujarat offers a diverse range of tourist attractions, from ancient temples and historic cities to wildlife sanctuaries and pristine beaches. Here's a categorized list of the best tourist places in Gujarat:</p>
+
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Heritage & Historical Sites 🏛️</h3>
+                  <ul>
+                    <li><b>Ahmedabad -</b> India's first UNESCO World Heritage City with Sidi Saiyyed Mosque, Sabarmati Ashram, Adalaj Stepwell, and Jama Masjid.</li>
+                    <li><b>Champaner-Pavagadh Archaeological Park -</b> UNESCO World Heritage Site with ancient forts, mosques, and temples.</li>
+                    <li><b>Lothal -</b> Ancient Indus Valley Civilization site with one of the world's oldest dockyard.</li>
+                    <li><b>Dholavira -</b> Another major Harappan site in the Rann of Kutch.</li>
+                    <li><b>Rani ki Vav (Queen's Stepwell) -</b> UNESCO World Heritage Site in Patan with intricate carvings.</li>
+                    <li><b>Modhera Sun Temple -</b> 11th-century temple dedicated to the Sun God with magnificent architecture.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Rani_ki_vav_Patan_Gujarat.jpg/800px-Rani_ki_vav_Patan_Gujarat.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Somnath_Temple.jpg/800px-Somnath_Temple.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Religious & Spiritual Destinations ⛩️</h3>
+                  <ul>
+                    <li><b>Somnath Temple -</b> One of the twelve Jyotirlingas of Lord Shiva, located on the Arabian Sea coast.</li>
+                    <li><b>Dwarkadish Temple -</b> Ancient temple in Dwarka, believed to be the kingdom of Lord Krishna.</li>
+                    <li><b>Akshardham Temple (Gandhinagar) -</b> Magnificent pink sandstone temple complex with beautiful gardens and exhibitions.</li>
+                    <li><b>Palitana Temples -</b> The world's largest temple complex with 863 Jain temples atop Shatrunjaya Hill.</li>
+                    <li><b>Ambaji Temple -</b> One of the 51 Shakti Peethas, a major pilgrimage site.</li>
+                    <li><b>Girnar Hills -</b> Sacred mountain with Jain and Hindu temples, requiring a climb of over 10,000 steps.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Wildlife & Nature Destinations 🌳🦁</h3>
+                  <ul>
+                    <li><b>Gir National Park -</b> The last abode of the Asiatic Lion, offering wildlife safaris.</li>
+                    <li><b>Marine National Park (Jamnagar) -</b> India's first marine sanctuary with coral reefs and marine life.</li>
+                    <li><b>Wild Ass Sanctuary (Little Rann of Kutch) -</b> Home to the endangered Indian Wild Ass.</li>
+                    <li><b>Blackbuck National Park (Velavadar) -</b> Known for blackbucks, wolves, and numerous bird species.</li>
+                    <li><b>Saputara -</b> Gujarat's only hill station, offering cool climate and scenic beauty.</li>
+                    <li><b>Zarwani Waterfall -</b> Located in the Shoolpaneshwar Wildlife Sanctuary, especially beautiful during monsoon.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Gir_National_Park_Gujarat.jpg/800px-Gir_National_Park_Gujarat.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Rann_of_Kutch.jpg/800px-Rann_of_Kutch.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Unique Landscapes 🏜️</h3>
+                  <ul>
+                    <li><b>Great Rann of Kutch -</b> One of the world's largest salt deserts, especially beautiful during full moon nights.</li>
+                    <li><b>Little Rann of Kutch -</b> Unique ecosystem that transforms from desert to wetland during monsoon.</li>
+                    <li><b>Mandvi Beach -</b> Clean beach with water sports and the nearby Vijay Vilas Palace.</li>
+                    <li><b>Diu Island -</b> Former Portuguese colony with beaches, forts, and churches (Union Territory adjacent to Gujarat).</li>
+                    <li><b>Bhuj -</b> Gateway to Kutch with palaces, museums, and traditional crafts.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Modern Attractions 🏙️</h3>
+                  <ul>
+                    <li><b>Statue of Unity (Kevadia) -</b> World's tallest statue (182m) of Sardar Vallabhbhai Patel with a viewing gallery.</li>
+                    <li><b>Sabarmati Riverfront (Ahmedabad) -</b> Beautifully developed riverfront with parks, markets, and recreational facilities.</li>
+                    <li><b>Science City (Ahmedabad) -</b> One of India's largest science centers with interactive exhibits and an IMAX theater.</li>
+                    <li><b>Kankaria Lake (Ahmedabad) -</b> Recreational area with a zoo, toy train, water rides, and balloon safari.</li>
+                    <li><b>GIFT City (Gandhinagar) -</b> India's first operational smart city and international financial services center.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Statue_of_Unity_in_2018.jpg/800px-Statue_of_Unity_in_2018.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Laxmi_Vilas_Palace.jpg/800px-Laxmi_Vilas_Palace.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>6. Palaces & Museums 🏰</h3>
+                  <ul>
+                    <li><b>Laxmi Vilas Palace (Vadodara) -</b> One of India's largest private residences, four times the size of Buckingham Palace.</li>
+                    <li><b>Aina Mahal & Prag Mahal (Bhuj) -</b> Historic palaces with unique architecture and museums.</li>
+                    <li><b>Calico Museum of Textiles (Ahmedabad) -</b> One of the world's finest textile museums.</li>
+                    <li><b>Maharaja Fateh Singh Museum (Vadodara) -</b> Houses a collection of Raja Ravi Varma paintings and other artworks.</li>
+                    <li><b>Sardar Vallabhbhai Patel National Memorial (Ahmedabad) -</b> Museum dedicated to India's "Iron Man" in the historic Moti Shahi Mahal.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Cultural & Craft Villages 🧶</h3>
+                  <ul>
+                    <li><b>Kutch Handicraft Villages -</b> Villages like Bhujodi, Nirona, and Ajrakhpur known for traditional crafts like Rogan art, Bandhani, and block printing.</li>
+                    <li><b>Gandhinagar Crafts Village -</b> Showcases Gujarat's diverse handicrafts and cultural performances.</li>
+                    <li><b>Adalaj Ni Vav -</b> 15th-century step well with intricate carvings and five stories.</li>
+                    <li><b>Patola House (Patan) -</b> Showcases the art of Patola silk weaving, practiced by the Salvi family for generations.</li>
+                    <li><b>Living and Learning Design Centre (Ajrakhpur) -</b> Museum dedicated to the textile traditions of Kutch.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Kutch_Embroidery.jpg/800px-Kutch_Embroidery.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br><br>
+
+        </div>
+        <div id="wbwild" class="tab-pane fade in active" style="background-color: white;">
+          <h1> Wildlife & Crops of Gujarat 🌿</h1>
+          <p>Gujarat has diverse ecosystems ranging from arid deserts to lush forests and coastal areas, supporting a variety of wildlife. The state is also known for its agricultural productivity despite having varied climatic conditions.</p>
+
+          <br>
+          <h2>Wildlife of Gujarat </h2>
+          <p>Gujarat is home to several unique wildlife species and has established numerous protected areas to conserve its biodiversity.</p>
+
+          <br>
+          <h2>🔹 Major National Parks & Wildlife Sanctuaries</h2>
+          <div>
+            <table>
+              <tr>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Gir National Park</td>
+                <td>Junagadh District</td>
+                <td>Asiatic Lions 🦁 (Last natural habitat in the world), Leopards, Sambar Deer</td>
+              </tr>
+              <tr>
+                <td>Wild Ass Sanctuary</td>
+                <td>Little Rann of Kutch</td>
+                <td>Indian Wild Ass 🦓 (Khur), Flamingos, Desert Fox</td>
+              </tr>
+              <tr>
+                <td>Marine National Park</td>
+                <td>Gulf of Kutch</td>
+                <td>Coral Reefs, Marine Life, Mangroves, Sea Turtles 🐢</td>
+              </tr>
+              <tr>
+                <td>Blackbuck National Park</td>
+                <td>Velavadar, Bhavnagar</td>
+                <td>Blackbuck Antelope, Wolves, Harriers</td>
+              </tr>
+              <tr>
+                <td>Vansda National Park</td>
+                <td>Navsari District</td>
+                <td>Leopards, Giant Squirrels, Rich Biodiversity</td>
+              </tr>
+              <tr>
+                <td>Nalsarovar Bird Sanctuary</td>
+                <td>Ahmedabad-Surendranagar</td>
+                <td>Migratory Birds, Wetland Ecosystem</td>
+              </tr>
+              <tr>
+                <td>Shoolpaneshwar Wildlife Sanctuary</td>
+                <td>Narmada District</td>
+                <td>Sloth Bears, Leopards, Giant Squirrels</td>
+              </tr>
+            </table>
+          </div>
+          <bt><br></bt>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3> 🔹 Notable Wildlife in Gujarat</h3>
+                <ul>
+                  <li><b>Mammals:</b> Asiatic Lion (State Animal), Indian Wild Ass, Blackbuck, Chinkara, Desert Fox, Indian Wolf, Leopard.</li>
+                  <li><b>Birds:</b> Greater Flamingo (State Bird), Lesser Flamingo, Pelicans, Cranes, Harriers, Great Indian Bustard.</li>
+                  <li><b>Reptiles:</b> Marsh Crocodile, Sea Turtles, Desert Monitor Lizard, Various Snake Species.</li>
+                  <li><b>Marine Life:</b> Whale Shark, Dugong, Dolphins, Coral Reefs, Various Fish Species.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Gir_National_Park_Gujarat.jpg/800px-Gir_National_Park_Gujarat.jpg" alt="" style="height:200px;width: 200px;">
+
+              </div>
+
+            </div>
+          </div>
+          <hr><br>
+          <h2>🌾 Agriculture & Major Crops in Gujarat </h2>
+          <p>Gujarat is one of India's leading agricultural states, with diverse farming practices adapted to its varied climate and soil conditions.</p>
+
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Key Agricultural Features</h3>
+                <ul>
+                  <li>Leading producer of Cotton, Groundnut, Dates, and Castor in India.</li>
+                  <li><b>Diverse Agriculture:</b> From arid farming in Kutch to intensive farming in South Gujarat.</li>
+                  <li><b>Irrigation:</b> Sardar Sarovar Project on Narmada River has transformed agriculture in many regions.</li>
+                  <li><b>Agricultural Innovation:</b> Pioneer in micro-irrigation, organic farming, and agricultural exports.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Sardar_Sarovar_Dam.jpg/800px-Sardar_Sarovar_Dam.jpg" alt="" style="height:200px;width: 220px;">
+
+              </div>
+            </div>
+          </div>
+          <h2>🔹 Major Crops of Gujarat</h2>
+          <div>
+            <table>
+              <tr>
+                <th>Category</th>
+                <th>Crops</th>
+              </tr>
+              <tr>
+                <td>Cash Crops</td>
+                <td>Cotton 🧶 (White Gold of Gujarat), Groundnut 🥜, Tobacco, Castor, Cumin</td>
+              </tr>
+              <tr>
+                <td>Food Grains</td>
+                <td>Wheat 🌾, Rice 🍚, Jowar, Bajra, Maize 🌽</td>
+              </tr>
+              <tr>
+                <td>Pulses</td>
+                <td>Tur (Pigeon Pea), Gram, Moong (Green Gram), Urad (Black Gram)</td>
+              </tr>
+              <tr>
+                <td>Oilseeds</td>
+                <td>Groundnut, Castor, Mustard, Sesame, Soybean</td>
+              </tr>
+              <tr>
+                <td>Fruits</td>
+                <td>Mango 🥭 (Kesar variety), Banana 🍌, Sapota (Chikoo), Dates, Pomegranate</td>
+              </tr>
+              <tr>
+                <td>Vegetables</td>
+                <td>Potato 🥔, Onion, Tomato 🍅, Brinjal, Okra</td>
+              </tr>
+              <tr>
+                <td>Spices</td>
+                <td>Cumin (Jeera), Fennel (Saunf), Fenugreek (Methi), Coriander, Garlic 🧄</td>
+              </tr>
+              <tr>
+                <td>Other Commercial Crops</td>
+                <td>Sugarcane, Tobacco, Isabgol (Psyllium Husk)</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Special Agricultural Products</h3>
+                <ul>
+                  <li>Kesar Mango from Junagadh (GI tagged).</li>
+                  <li>Kutchi Dates from the arid regions of Kutch.</li>
+                  <li>Banaskantha Potato known for its quality and taste.</li>
+                  <li>Jeera (Cumin) from North Gujarat, especially Unjha market.</li>
+                  <li>Isabgol (Psyllium Husk) - Gujarat produces over 80% of the world's supply.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Kesar_Mango.jpg/800px-Kesar_Mango.jpg" alt="" style="height:200px;width: 200px;">
+
+              </div>
+            </div>
+          </div><br>
+          <hr>
+          <div class="box" style=" background: #f3b37185;padding: 10px;">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3> Sustainable Agriculture & Modern Trends 🌾</h3>
+                  <ul>
+                    <li><b>Micro-Irrigation:</b> Gujarat is a leader in drip and sprinkler irrigation systems.</li>
+                    <li><b>Organic Farming:</b> Growing trend, especially in Kutch and Saurashtra regions.</li>
+                    <li><b>Dairy Industry:</b> Gujarat is home to Amul, one of the world's largest dairy cooperatives.</li>
+                    <li><b>Agricultural Exports:</b> Major exporter of groundnuts, cotton, cumin, and isabgol.</li>
+                    <li><b>Climate-Resilient Agriculture:</b> Developing farming practices adapted to drought and salinity.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Amul_dairy.jpg/800px-Amul_dairy.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Gujarat's wildlife and agricultural landscape reflect the state's diverse geography and climate. From the majestic Asiatic lions of Gir to the fertile cotton fields of Saurashtra, the state showcases remarkable biodiversity and agricultural productivity. Conservation efforts for endangered species and sustainable farming practices are helping preserve this natural heritage for future generations.</p>
+          <br><br>
+        </div>
+        <div id="wbedu" class="tab-pane fade in active" style="background-color: white;">
+          <h1>🎓 Education & Institutions in Gujarat</h1>
+          <p>Gujarat has a rich educational heritage and has made significant strides in developing its educational infrastructure. The state is home to prestigious institutions across various disciplines and has been focusing on innovation and skill development.</p>
+
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>📌 Education System in Gujarat</h3>
+                  <ul>
+                    <li><b>School Education:</b> Follows Gujarat Secondary and Higher Secondary Education Board (GSEB), CBSE, and ICSE boards.</li>
+                    <li><b>Higher Education:</b> Managed by state universities, central universities, and private institutions.</li>
+                    <li><b>Technical Education:</b> Strong focus on engineering, pharmacy, and management education.</li>
+                    <li><b>Literacy Rate:</b> Around 79%, with ongoing efforts to improve educational access in rural areas.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Gujarat_Vidyapith.jpg/800px-Gujarat_Vidyapith.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>🏛️ Top Universities & Institutions </h2>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 General Universities</h3>
+                <ol>
+                  <li><b>Gujarat University (Ahmedabad) -</b> One of the oldest universities in the state, offering diverse programs in arts, science, commerce, and more.</li>
+                  <li><b>Maharaja Sayajirao University of Baroda (Vadodara) -</b> Renowned for its Faculty of Fine Arts, Performing Arts, and various academic disciplines.</li>
+                  <li><b>Sardar Patel University (Vallabh Vidyanagar) -</b> Known for research and academic excellence in science and humanities.</li>
+                  <li><b>Saurashtra University (Rajkot) -</b> Serving the Saurashtra region with diverse academic programs.</li>
+                  <li><b>Hemchandracharya North Gujarat University (Patan) -</b> Catering to the educational needs of North Gujarat.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/MS_University_Baroda.jpg/800px-MS_University_Baroda.jpg" alt="" style="height:200px;width: 230px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Technical & Research Institutions</h3>
+                <ol>
+                  <li><b>Indian Institute of Technology (IIT Gandhinagar) -</b> Premier engineering institute known for innovative curriculum and research.</li>
+                  <li><b>Indian Institute of Management (IIM Ahmedabad) -</b> One of India's top business schools, globally recognized for management education.</li>
+                  <li><b>National Institute of Design (NID Ahmedabad) -</b> India's premier design institute offering programs in various design disciplines.</li>
+                  <li><b>Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT) -</b> Specializing in ICT education and research.</li>
+                  <li><b>Institute of Rural Management Anand (IRMA) -</b> Focused on rural management and development.</li>
+                  <li><b>Physical Research Laboratory (PRL) -</b> Premier research institute in space and allied sciences.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/IIM_Ahmedabad_Logo.svg/800px-IIM_Ahmedabad_Logo.svg.png" alt="" style="height:200px;width: 230px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Institution</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>IIM Ahmedabad</td>
+                <td>Ahmedabad</td>
+                <td>Top-ranked business school, iconic architecture by Louis Kahn</td>
+              </tr>
+              <tr>
+                <td>IIT Gandhinagar</td>
+                <td>Gandhinagar</td>
+                <td>Research-focused engineering education, interdisciplinary approach</td>
+              </tr>
+              <tr>
+                <td>NID Ahmedabad</td>
+                <td>Ahmedabad</td>
+                <td>Design education, industry collaborations</td>
+              </tr>
+              <tr>
+                <td>CEPT University</td>
+                <td>Ahmedabad</td>
+                <td>Architecture, Planning, and Design education</td>
+              </tr>
+              <tr>
+                <td>Gujarat National Law University</td>
+                <td>Gandhinagar</td>
+                <td>Legal education and research</td>
+              </tr>
+              <tr>
+                <td>Nirma University</td>
+                <td>Ahmedabad</td>
+                <td>Private university with strong industry connections</td>
+              </tr>
+              <tr>
+                <td>Gujarat Technological University</td>
+                <td>Ahmedabad</td>
+                <td>Largest technical university in Gujarat</td>
+              </tr>
+              <tr>
+                <td>Gujarat Vidyapith</td>
+                <td>Ahmedabad</td>
+                <td>Founded by Mahatma Gandhi, focus on Gandhian values</td>
+              </tr>
+              <tr>
+                <td>IRMA</td>
+                <td>Anand</td>
+                <td>Rural management education, cooperative sector</td>
+              </tr>
+            </table>
+          </div>
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/AIIMS_Rajkot.jpg/800px-AIIMS_Rajkot.jpg" alt="" style="height:200px;width: 240px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🔹 Medical & Healthcare Institutions</h3>
+                  <ol>
+                    <li><b>AIIMS Rajkot -</b> One of India's premier medical institutes being established in Gujarat.</li>
+                    <li><b>B.J. Medical College (Ahmedabad) -</b> One of the oldest and most prestigious medical colleges in Gujarat.</li>
+                    <li><b>Government Medical College (Surat) -</b> Major medical education center in South Gujarat.</li>
+                    <li><b>PDU Medical College (Rajkot) -</b> Serving the Saurashtra region with quality medical education.</li>
+                    <li><b>Gujarat Cancer & Research Institute -</b> Specialized in cancer treatment and research.</li>
+                    <li><b>U.N. Mehta Institute of Cardiology -</b> Premier cardiac care and education center.</li>
+                  </ol>
+                </div>
+
+                <br><br>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Medical Institution</th>
+                <th>Location</th>
+                <th>Specialization</th>
+              </tr>
+              <tr>
+                <td>AIIMS Rajkot</td>
+                <td>Rajkot</td>
+                <td>Comprehensive medical education and tertiary care</td>
+              </tr>
+              <tr>
+                <td>B.J. Medical College</td>
+                <td>Ahmedabad</td>
+                <td>Associated with Civil Hospital, one of Asia's largest hospitals</td>
+              </tr>
+              <tr>
+                <td>NHL Municipal Medical College</td>
+                <td>Ahmedabad</td>
+                <td>Affiliated with SVP Hospital</td>
+              </tr>
+              <tr>
+                <td>Government Medical College</td>
+                <td>Surat</td>
+                <td>Major medical education center in South Gujarat</td>
+              </tr>
+              <tr>
+                <td>PDU Medical College</td>
+                <td>Rajkot</td>
+                <td>Serving Saurashtra region</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🔹 Law & Management Institutions</h3>
+                  <ol>
+                    <li><b>Gujarat National Law University (GNLU) -</b> Premier legal education institution in Gandhinagar.</li>
+                    <li><b>Institute of Law, Nirma University -</b> Known for quality legal education and research.</li>
+                    <li><b>MICA (Mudra Institute of Communications, Ahmedabad) -</b> Specialized in strategic marketing and communication.</li>
+                    <li><b>Entrepreneurship Development Institute of India (EDI) -</b> Focused on entrepreneurship education and research.</li>
+                    <li><b>Ahmedabad University -</b> Private university with strong focus on liberal education and interdisciplinary learning.</li>
+                  </ol>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/GNLU_Campus.jpg/800px-GNLU_Campus.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Institution</th>
+                <th>Location</th>
+                <th>Specialization</th>
+              </tr>
+              <tr>
+                <td>Gujarat National Law University</td>
+                <td>Gandhinagar</td>
+                <td>Legal education, moot courts, research</td>
+              </tr>
+              <tr>
+                <td>MICA</td>
+                <td>Ahmedabad</td>
+                <td>Strategic marketing and communication</td>
+              </tr>
+              <tr>
+                <td>EDI</td>
+                <td>Gandhinagar</td>
+                <td>Entrepreneurship development and research</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/NID_Ahmedabad.jpg/800px-NID_Ahmedabad.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🔹 Art, Design & Cultural Institutions</h3>
+                  <ul>
+                    <li><b>National Institute of Design (NID) -</b> India's premier design institute in Ahmedabad.</li>
+                    <li><b>Faculty of Fine Arts, MSU Baroda -</b> One of India's most prestigious art schools.</li>
+                    <li><b>Centre for Environmental Planning and Technology (CEPT) University -</b> Known for architecture and planning education.</li>
+                    <li><b>Kadamb Center for Dance -</b> Founded by renowned dancer Kumudini Lakhia for classical dance training.</li>
+                    <li><b>Darpana Academy of Performing Arts -</b> Founded by Mrinalini Sarabhai for dance, drama, and music.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Institution</th>
+                <th>Location</th>
+                <th>Specialization</th>
+              </tr>
+              <tr>
+                <td>National Institute of Design</td>
+                <td>Ahmedabad</td>
+                <td>Design education across various disciplines</td>
+              </tr>
+              <tr>
+                <td>Faculty of Fine Arts, MSU</td>
+                <td>Vadodara</td>
+                <td>Fine arts education and exhibitions</td>
+              </tr>
+              <tr>
+                <td>CEPT University</td>
+                <td>Ahmedabad</td>
+                <td>Architecture, planning, and design</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <h2>🏫 School Education in Gujarat </h2>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Major School Boards</h3>
+                <ol>
+                  <li><b>Gujarat Secondary and Higher Secondary Education Board (GSEB) -</b> State board conducting SSC (10th) and HSC (12th) exams.</li>
+                  <li><b>Central Board of Secondary Education (CBSE) -</b> National board with numerous affiliated schools in Gujarat.</li>
+                  <li><b>Indian Certificate of Secondary Education (ICSE) -</b> Several prestigious schools follow this curriculum.</li>
+                  <li><b>International Baccalaureate (IB) & Cambridge (IGCSE) -</b> Some elite schools offer these international curricula.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Gujarat_school.jpg/800px-Gujarat_school.jpg" alt="" style="height:200px;width: 200px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Riverside_School_Ahmedabad.jpg/800px-Riverside_School_Ahmedabad.jpg" alt="" style="height:200px;width: 230px;">
+
+              </div>
+              <div class="col-sm-8">
+
+                <h3>🔹 Notable Schools in Gujarat</h3>
+                <ol>
+                  <li><b>Riverside School (Ahmedabad) -</b> Founded by Kiran Bir Sethi, known for its innovative "Design for Change" approach.</li>
+                  <li><b>Anand Niketan School (Ahmedabad) -</b> One of the oldest and most prestigious schools in Gujarat.</li>
+                  <li><b>Delhi Public School (Various locations) -</b> Network of quality CBSE schools across Gujarat.</li>
+                  <li><b>Navrachana School (Vadodara) -</b> Known for holistic education and academic excellence.</li>
+                  <li><b>Rajkumar College (Rajkot) -</b> Historic institution established in 1868 for the princes of Kathiawar.</li>
+                  <li><b>Shreyas Foundation Schools (Ahmedabad) -</b> Known for child-centric education based on progressive principles.</li>
+                </ol>
+
+              </div>
+
+            </div>
+          </div>
+          <div class="box">
+            <h2>🔬 Research & Innovation Institutions</h2>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <p>Gujarat hosts several specialized research institutions:</p>
+                  <ol>
+                    <li><b>Physical Research Laboratory (PRL) -</b> Founded by Dr. Vikram Sarabhai, focused on space science research.</li>
+                    <li><b>Institute for Plasma Research (IPR) -</b> Leading research in plasma physics and nuclear fusion.</li>
+                    <li><b>ISRO Space Applications Centre (SAC) -</b> Major center for developing satellite communication and remote sensing technologies.</li>
+                    <li><b>Gujarat Biotechnology Research Centre -</b> Advanced research in biotechnology and life sciences.</li>
+                    <li><b>Central Salt and Marine Chemicals Research Institute (CSMCRI) -</b> Research on salt and marine chemicals.</li>
+                  </ol>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Physical_Research_Laboratory.jpg/800px-Physical_Research_Laboratory.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <h2>📚 Educational Initiatives & Developments</h2>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <ol>
+                    <li><b>Knowledge Consortium of Gujarat (KCG) -</b> Umbrella organization to enhance quality of higher education.</li>
+                    <li><b>Gujarat Educational Research and Training (GCERT) -</b> Focuses on school education quality improvement.</li>
+                    <li><b>GIFT City Educational Initiatives -</b> Attracting international universities to set up campuses in Gujarat.</li>
+                    <li><b>Digital Education -</b> Gujarat has been at the forefront of implementing technology in education.</li>
+                    <li><b>Skill Development -</b> Focus on vocational training and industry-relevant skills through various initiatives.</li>
+                  </ol>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/GIFT_City_Gujarat.jpg/800px-GIFT_City_Gujarat.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Gujarat's educational landscape reflects its focus on innovation, entrepreneurship, and holistic development. From traditional universities to specialized research institutions, the state offers diverse educational opportunities while preserving its cultural heritage and embracing modern advancements.</p>
+        </div>
+        <br><br>
+
+      </div>
+
+
+    </div>
+  </div>
+  </div>
+</body>
+
+</html>

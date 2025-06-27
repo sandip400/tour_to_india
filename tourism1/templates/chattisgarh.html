@@ -1,0 +1,2660 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Chhattisgarh</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> -->
+  <style>
+    .wb {
+      font-size: 8vw;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+      border-spacing: 0;
+      border: 1px solid #ddd;
+    }
+
+    td,
+    th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+      font-size: 1.5vw;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+
+    .trip {
+      text-align: center;
+      font-weight: 900;
+      background: orangered;
+      padding: 20px;
+      border-radius: 20px;
+      width: 60%;
+    }
+
+    p,
+    li,
+    .text {
+      font-size: 1.5vw;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-weight: 600;
+    }
+
+    h4 {
+      font-weight: 900;
+    }
+
+    img {
+      border-radius: 10px;
+      display: block;
+      margin: auto;
+    }
+
+    @media screen and (max-width: 850px) {
+
+      p,
+      li,
+      .text,
+      td,
+      th {
+        font-size: 2vw;
+        ;
+      }
+
+    }
+
+    @media screen and (max-width: 500px) {
+
+      p,
+      li,
+      .text,
+      td,
+      th {
+        font-size: 4.5vw;
+        ;
+      }
+
+    }
+
+    .box:nth-of-type(odd) {
+      background: #f3b37185;
+      padding: 10px;
+    }
+    /* .box:nth-of-type(even) {
+      background: #f3b37185;
+      padding: 10px;
+    } */
+    .weather-container {
+            border-radius: 15px;
+            background: #f0fdf4;
+            padding: 15px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .weather-card {
+            text-align: center;
+            border-radius: 10px;
+            padding: 10px;
+            background: white;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+        .aqi {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            color: white;
+        }
+        .aqi-bad { background: purple; }
+        .aqi-moderate { background: orange; }
+        .aqi-good { background: green; }
+        .best-time {
+            background: #d1fae5;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 15px;
+            color: green;
+        }
+        .wet {
+            max-width: 50px;
+        }
+        
+        .trip {
+          font-size: 18px;
+          padding: 10px 20px;
+          cursor: pointer;
+          background-color:rgb(231, 36, 36);
+          color: white;
+          border: none;
+          border-radius: 5px;
+      }
+      .modal {
+          display: none;
+          position: fixed;
+          z-index: 1;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0,0,0,0.5);
+      }
+      .modal-content {
+          background-color: #fff;
+          margin: 10% auto;
+          padding: 20px;
+          border-radius: 10px;
+          width: 40%;
+          box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+          text-align: center;
+      }
+      .close {
+          color: #aaa;
+          float: right;
+          font-size: 28px;
+          font-weight: bold;
+          cursor: pointer;
+      }
+      .trip-options {
+          display: flex;
+          justify-content: center;
+          gap: 20px;
+          margin-top: 20px;
+      }
+      .trip-options a {
+          display: block;
+          width: 120px;
+          padding: 10px;
+          background-color: #28a745;
+          color: white;
+          text-decoration: none;
+          border-radius: 5px;
+      }
+  </style>
+</head>
+
+<body>
+
+
+  <!-- <h2>Carousel Example</h2> -->
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+      <li data-target="#myCarousel" data-slide-to="4"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+
+      <div class="item active">
+        <img src="/placeholder.svg?height=500&width=1200" alt="Chitrakote Falls" style="width:100%; height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Chitrakote Falls</h3>
+          <p>We love the majestic waterfalls and natural beauty!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="/placeholder.svg?height=500&width=1200" alt="Bastar" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Bastar Palace</h3>
+          <p>The amazing architecture and tribal history!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="/placeholder.svg?height=500&width=1200" alt="Sirpur" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Sirpur Temples</h3>
+          <p>Ancient archaeological wonders!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="/placeholder.svg?height=500&width=1200" alt="Barnawapara" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Barnawapara Wildlife Sanctuary</h3>
+          <p>We love the wildlife!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="/placeholder.svg?height=500&width=1200" alt="Tribal Art" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Tribal Art</h3>
+          <p>We love the vibrant tribal culture!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+  <div class="container">
+    <br><br>
+    <h1 class="wb">CHHATTISGARH</h1><br>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <img src="/placeholder.svg?height=700&width=500" alt="Chhattisgarh Map" style="height:700px; width: -webkit-fill-available;">
+
+        </div>
+        <div class="col-sm-6">
+          <h1>Chhattisgarh: The Tribal & Mineral Heart of India</h1>
+          <p class="text">Chhattisgarh is a diverse and vibrant state in central India, known for its rich tribal heritage, 
+            dense forests, mineral resources, waterfalls, ancient temples, and traditional arts. It is a key center for 
+            mining, steel production, and tribal culture.</p>
+
+          <ul>
+            <li><b>Location --</b> Central India</li>
+            <li><b>Capital --</b> Raipur</li>
+            <li><b>Official Language --</b> Chhattisgarhi, Hindi</li>
+            <li><b>Area --</b> 135,192 sq. km</li>
+            <li><b>Population --</b> ~29 million (17th most populous state in India)</li>
+            <li><b>Borders --</b> Madhya Pradesh, Maharashtra, Telangana, Andhra Pradesh, Odisha, Jharkhand, Uttar Pradesh</li>
+            <li><b>Major Rivers --</b> Mahanadi, Indravati, Sheonath, Hasdo, Rihand</li>
+            <li><b>Major Festivals --</b> Bastar Dussehra, Hareli, Pola, Madai, Goncha, Navakhana, Diwali, Teeja</li>
+            <li><b>State Animal --</b> Wild Buffalo</li>
+            <li><b>State Flower --</b> Rhynchosia (Kessari)</li>
+            <li><b>State Tree --</b> Sal Tree</li>
+            <li><b>State Bird --</b> Hill Myna</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <br>
+    <hr>
+    <div>
+      <h1>📌 Divisions & Districts of Chhattisgarh</h1>
+      <br>
+      <div style="overflow-x:auto;">
+        <table>
+          <tr>
+            <th>Division</th>
+            <th>Districts</th>
+            <th>Key Highlights</th>
+          </tr>
+          <tr>
+            <td>Raipur Division</td>
+            <td>1. Raipur 2. Balodabazar-Bhatapara 3. Gariaband 4. Mahasamund 5. Dhamtari</td>
+            <td>State Capital, Industrial Hub, Rice Bowl of India, Sirpur Archaeological Site</td>
+          </tr>
+          <tr>
+            <td>Durg Division</td>
+            <td>6. Durg 7. Balod 8. Bemetara 9. Rajnandgaon 10. Kabirdham</td>
+            <td>Bhilai Steel Plant, Bhoramdeo Temple, Industrial Centers</td>
+          </tr>
+          <tr>
+            <td>Bilaspur Division</td>
+            <td>11. Bilaspur 12. Mungeli 13. Korba 14. Janjgir-Champa 15. Raigarh 16. Gaurela-Pendra-Marwahi</td>
+            <td>Power Hub, Coal Mines, Achanakmar Tiger Reserve, NTPC</td>
+          </tr>
+          <tr>
+            <td>Surguja Division</td>
+            <td>17. Surguja 18. Surajpur 19. Balrampur 20. Korea 21. Jashpur</td>
+            <td>Tribal Culture, Mainpat Plateau, Waterfalls, Forests</td>
+          </tr>
+          <tr>
+            <td>Bastar Division</td>
+            <td>22. Bastar 23. Kondagaon 24. Kanker 25. Narayanpur 26. Dantewada 27. Sukma 28. Bijapur</td>
+            <td>Tribal Art, Chitrakote Falls, Kanger Valley National Park, Iron Ore Mines</td>
+          </tr>
+
+        </table>
+      </div>
+      <br><br>
+      <h1>🔹 Major Highlights of Some Key Districts</h1><br><br>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <ul>
+              <li><b>Raipur --</b> Capital of Chhattisgarh, commercial & economic hub.</li>
+              <li><b>Bastar --</b> Famous for its tribal culture, Chitrakote Falls, and 75-day Dussehra festival.</li>
+              <li><b>Bilaspur --</b> Commercial center with Achanakmar Tiger Reserve and Ratanpur fort.</li>
+              <li><b>Durg-Bhilai --</b> Industrial area with one of Asia's largest steel plants.</li>
+              <li><b>Korba --</b> Power hub of Chhattisgarh with thermal power plants and coal mines.</li>
+              <li><b>Surguja --</b> Known for waterfalls, tribal culture, and Mainpat (Mini Shimla).</li>
+              <li><b>Rajnandgaon --</b> Historical city with Bhoramdeo Temple (Khajuraho of Chhattisgarh).</li>
+              <li><b>Jashpur --</b> Known as "Nagpur of Chhattisgarh" for its orange cultivation.</li>
+              <li><b>Dantewada --</b> Rich in iron ore deposits and tribal heritage.</li>
+            </ul>
+          </div>
+          <div class="col-sm-6">
+            <img src="/placeholder.svg?height=450&width=500" alt="Chhattisgarh Map" style="height:450px;width: -webkit-fill-available;">
+
+          </div>
+        </div>
+      </div>
+    </div><br><br>
+    <div class="container">
+      <div class="weather-container">
+          <h4 class="text-center"><strong>Weather in Chhattisgarh</strong></h4>
+          <div class="row">
+              <!-- January -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Jan</h6>
+                      <p>10/28°C</p>
+                      <span class="aqi aqi-moderate">AQI 120</span>
+                  </div>
+              </div>
+              <!-- February -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Feb</h6>
+                      <p>14/32°C</p>
+                      <span class="aqi aqi-moderate">AQI 110</span>
+                  </div>
+              </div>
+              <!-- March -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Mar</h6>
+                      <p>18/36°C</p>
+                      <span class="aqi aqi-moderate">AQI 105</span>
+                  </div>
+              </div>
+              <!-- April -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Apr</h6>
+                      <p>23/40°C</p>
+                      <span class="aqi aqi-moderate">AQI 100</span>
+                  </div>
+              </div>
+              <!-- May -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>May</h6>
+                      <p>27/42°C</p>
+                      <span class="aqi aqi-moderate">AQI 90</span>
+                  </div>
+              </div>
+              <!-- June -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Jun</h6>
+                      <p>27/38°C</p>
+                      <span class="aqi aqi-good">AQI 70</span>
+                  </div>
+              </div>
+              <!-- July -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="rain.png" alt="rain">
+                      <h6>Jul</h6>
+                      <p>24/32°C</p>
+                      <span class="aqi aqi-good">AQI 50</span>
+                  </div>
+              </div>
+              <!-- August -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Aug</h6>
+                      <p>24/31°C</p>
+                      <span class="aqi aqi-good">AQI 60</span>
+                  </div>
+              </div>
+              <!-- September -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Sep</h6>
+                      <p>24/32°C</p>
+                      <span class="aqi aqi-good">AQI 55</span>
+                  </div>
+              </div>
+              <!-- October -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Oct</h6>
+                      <p>20/33°C</p>
+                      <span class="aqi aqi-good">AQI 65</span>
+                  </div>
+              </div>
+              <!-- November -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Nov</h6>
+                      <p>15/30°C</p>
+                      <span class="aqi aqi-moderate">AQI 80</span>
+                  </div>
+              </div>
+              <!-- December -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Dec</h6>
+                      <p>12/28°C</p>
+                      <span class="aqi aqi-moderate">AQI 95</span>
+                  </div>
+              </div>
+          </div>
+          <div class="text-center">
+              <div class="best-time">🏆 Best time to visit: October - March</div>
+          </div>
+      </div>
+    </div>
+    
+
+    <br><br>
+    <button class="trip" id="openModal">Let's go on a trip</button>
+    
+    <div id="tripModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Select Your Trip</h2>
+            <button type="button" class="btn btn-warning" style="margin-bottom: 8px;color:black; border-radius: 5px;" onclick="location.href='{% url 'chattisgarh_7days' %}'" >7 days trip</button><br>
+            <button type="button" class="btn btn-warning" style="margin-bottom: 8px;color:black; border-radius: 5px;" onclick="location.href='{% url 'chattisgarh_12days' %}'" >12 days trip</button>
+        </div>
+    </div>
+    
+    <script>
+        var modal = document.getElementById("tripModal");
+        var btn = document.getElementById("openModal");
+        var span = document.getElementsByClassName("close")[0];
+        
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+        
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+        
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script><br><br>
+    <div class="container">
+      <ul class="nav nav-tabs">
+        <li class="nav-item"><a data-toggle="tab" href="#wbculture"> Culture</a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbtradition "> Tradition</a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbfestivals"> Festivals </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbfood"> Foods </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbhistory"> History </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbartacraft"> Art and Craft </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbseason"> Season to Visit </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbtourist"> Tourist Spots </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbwild"> Wildlife & Crops </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbedu"> Institutions </a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="wbculture" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Culture of Chhattisgarh</h1>
+          <p class="text">Chhattisgarh has a rich and diverse culture, shaped by its tribal heritage, history, folk arts, music, festivals, and traditions. Here's an overview of some key aspects of its culture:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Language</h3>
+                  <ul>
+                    <li>Chhattisgarhi is the main language spoken in the state, along with Hindi which is the official language. Various tribal communities also speak their own dialects like Gondi, Halbi, Bhatri, Sargujia, and Korwa.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Chhattisgarhi Language" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>2. Literature</h3>
+                  <ul>
+                    <li>Chhattisgarh has a rich oral tradition of folk tales, songs, and proverbs that have been passed down through generations.</li>
+                    <li>Modern Chhattisgarhi literature includes works by writers like Smt. Vinita Shukla, Dr. Sanjay Alung, and Vidyabhushan Shukla.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Chhattisgarhi Literature" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div><br>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Tribal Art" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Art and Craft</h3>
+                  <ul>
+                    <li>The state is known for its diverse range of tribal arts and crafts, including Godna art (tattoo art), Dhokra (bell metal craft), Sisal craft, bamboo craft, and wood carving.</li>
+                    <li>Traditional paintings like Pithora and Lippan art are unique to the tribal communities of the region.</li>
+                  </ul>
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Tribal Music" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>4. Music</h3>
+                  <ul>
+                    <li>Tribal folk music is an integral part of Chhattisgarhi culture, with distinctive styles like Panthi, Raut Nacha, and Pandwani.</li>
+                    <li>Traditional musical instruments include mandar, nagara, dhol, bansuri, and dafli.</li>
+                    <li>Pandwani, a unique musical narration of tales from the Mahabharata, is famous worldwide, with artists like Teejan Bai gaining international recognition.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Dance</h3>
+                  <ul>
+                    <li>Chhattisgarh is famous for its vibrant folk dances like Panthi, Raut Nacha, Karma, Saila, and Suwa dance.</li>
+                    <li>Each tribal community has its own distinctive dance forms performed during festivals and special occasions.</li>
+                    <li>Gaur Maria dance of the Bastar region is particularly famous for its energetic movements and colorful costumes.</li>
+                  </ul>
+                  <h3>6. Cuisine</h3>
+                  <ul>
+                    <li>Chhattisgarhi cuisine is simple yet flavorful, with rice being the staple food.</li>
+                    <li>Popular dishes include Chila (rice pancake), Farra (steamed rice dumplings), Muthia, and Angakar Roti.</li>
+                    <li>Tribal cuisines feature unique ingredients like red ants chutney (Chaprah), bamboo shoots, and forest produce.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Tribal Dance" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Tribal Theater" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>7. Theatre and Performing Arts</h3>
+                  <ul>
+                    <li>Nacha, a traditional theater form, combines elements of dance, music, and drama.</li>
+                    <li>Gammat, Ramleela, and Kaksar are popular theatrical performances in rural areas.</li>
+                  </ul>
+                  <h3>8. Architecture</h3>
+                  <ul>
+                    <li>Chhattisgarh's architectural style blends tribal, Hindu, and Jain influences. Notable structures include ancient temples of Sirpur, Bhoramdeo Temple (known as Khajuraho of Chhattisgarh), and Bastar Palace.</li>
+                    <li>Traditional tribal houses with mud walls, thatched roofs, and colorful paintings are distinctive features of rural Chhattisgarh.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Tribal Religion" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>9. Religious Diversity</h3>
+                  <ul>
+                    <li>The state is home to a variety of religions, with Hinduism, tribal faiths, Buddhism, Jainism, and Christianity having significant presence. This diversity is reflected in the state's festivals, rituals, and cultural practices.</li>
+                    <li>Tribal communities practice nature worship and ancestor reverence, with sacred groves (Devgudis) being important spiritual sites.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>10. Folk Traditions</h3>
+                  <ul>
+                    <li>Chhattisgarh is famous for its rich folk traditions, including Panthi, Soowa, Karma, and Gaur Maria dances.</li>
+                    <li>Bastar Dussehra, a unique 75-day celebration, is one of the longest festivals in the world.</li>
+                  </ul>
+                  <h3>11. Tribal Philosophy</h3>
+                  <ul>
+                    <li>Tribal communities in Chhattisgarh have a deep connection with nature and believe in sustainable living.</li>
+                    <li>The concept of community living and sharing resources is central to tribal philosophy.</li>
+                  </ul>
+                  <h3>12. Handicrafts</h3>
+                  <ul>
+                    <li>Chhattisgarh is known for its handicrafts such as Dhokra (bell metal craft), bamboo craft, wood carving, terracotta, and iron craft.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=300&width=200" alt="Tribal Philosophy" style="height:300px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br><br>
+
+          <p>Chhattisgarh's culture is deeply rooted in its tribal heritage, and it continues to evolve while maintaining a close connection to nature and traditional values. It's a region where ancient traditions and modern influences coexist beautifully!</p><br><br>
+        </div>
+        <div id="wbtradition" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Tradition of Chhattisgarh</h1>
+          <p>Chhattisgarh has a rich and diverse tradition deeply rooted in its tribal history, culture, and social practices. Here's an overview of some key traditional aspects of the state:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Clothing Tradition</h3>
+                  <h4>Men</h4>
+                  <ul>
+                    <li><b>Dhoti and Kurta:</b> Traditional Chhattisgarhi men wear dhoti with a kurta, especially during religious ceremonies, weddings, and festivals.</li>
+                    <li><b>Headgear:</b> Colorful turbans or pagris are worn for special occasions.</li>
+                  </ul>
+                  <h4>Women</h4>
+                  <ul>
+                    <li><b>Lugda:</b> Traditional saree worn by tribal women, often in bright colors with distinctive borders.</li>
+                    <li><b>Ornaments:</b> Heavy silver jewelry including neck pieces, anklets, and bangles are worn by tribal women.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=250&width=200" alt="Traditional Clothing" style="height:250px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>2. Wedding Traditions</h3>
+                  <ul>
+                    <li><b>Mama Ghar:</b> The bride stays at her maternal uncle's house before the wedding.</li>
+                    <li><b>Chherta:</b> A ritual where the groom's family visits the bride's home with gifts.</li>
+                    <li><b>Maur Bandhai:</b> The tying of a sacred thread on the groom's forehead.</li>
+                    <li><b>Kohbar:</b> A special room decorated for the newlyweds with tribal art.</li>
+                    <li><b>Mamer:</b> Post-wedding gifts given by the bride's maternal uncle.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=250&width=200" alt="Traditional Wedding" style="height:250px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Traditional Dance" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Music & Dance Traditions</h3>
+                  <ul>
+                    <li><b>Pandwani:</b> A unique form of musical storytelling based on tales from the Mahabharata.</li>
+                    <li><b>Raut Nacha:</b> A traditional dance performed by the Yadav community to celebrate the life of Lord Krishna.</li>
+                    <li><b>Panthi:</b> A devotional dance form of the Satnami community.</li>
+                    <li><b>Karma:</b> A tribal dance performed during the Karma festival to worship the Karam tree.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Social Traditions" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+
+                  <h3>4. Social & Religious Traditions</h3>
+                  <ul>
+                    <li><b>Ghotul:</b> A traditional tribal institution for youth where they learn social skills, music, and dance.</li>
+                    <li><b>Devgudi:</b> Sacred groves where tribal communities worship their deities.</li>
+                    <li><b>Hareli:</b> Agricultural festival marking the beginning of the farming season, celebrated by worshipping farming tools.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Architectural & Handicraft Traditions</h3>
+                  <ul>
+                    <li><b>Dhokra Art:</b> Ancient bell metal craft using the lost-wax technique.</li>
+                    <li><b>Godna Art:</b> Traditional tattoo art that has now evolved into paintings.</li>
+                    <li><b>Bamboo Craft:</b> Intricate items made from bamboo for daily use and decoration.</li>
+                    <li><b>Tribal Paintings:</b> Distinctive styles like Pithora and Lippan that depict tribal life and mythology.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Traditional Architecture" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>6. Sports & Games</h3>
+                  <ul>
+                    <li><b>Gedi Race:</b> A traditional sport where participants run while balancing on a bamboo stick.</li>
+                    <li><b>Bhaura:</b> A game played with wooden spinning tops.</li>
+                    <li><b>Langdi:</b> A hopping game played by children and adults alike.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Traditional Sports" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br><br>
+          <p>Chhattisgarh's traditions beautifully combine tribal heritage, art, food, music, and festivals, making it one of the most culturally authentic states in India.</p><br><br>
+        </div>
+        <div id="wbfestivals" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Festivals of Chhattisgarh</h1>
+          <p>Chhattisgarh is known for its vibrant and diverse festivals, which reflect its rich tribal heritage, agricultural traditions, and religious harmony. Here's a list of some of the major festivals celebrated in the state:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Bastar Dussehra (Biggest Tribal Festival)</h3>
+                  <ul>
+                    <li>Unlike the traditional 10-day Dussehra, Bastar Dussehra is celebrated for 75 days, making it one of the longest festivals in the world.</li>
+                    <li>It's not about Lord Rama's victory but honors the local deity Danteshwari Mai.</li>
+                    <li>Features unique rituals like Jatra (chariot procession), Kachan Jatra, and Muria Darbar.</li>
+                    <li>Tribal communities from across Bastar participate in colorful processions and rituals.</li>
+                  </ul>
+                  <p><b>📍 Time: July - October (Culminates on Vijayadashami)</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=230&width=200" alt="Bastar Dussehra" style="height:230px;width: 200px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Hareli Festival" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Hareli</h3>
+                  <ul>
+                    <li>An agricultural festival marking the beginning of the farming season.</li>
+                    <li>Farmers worship their agricultural tools and cattle.</li>
+                    <li>Young people plant trees and participate in folk dances.</li>
+                  </ul>
+                  <p><b>📍 Time: July - August (Shravan month)</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Pola Festival</h3>
+                  <ul>
+                    <li>Dedicated to bullocks and oxen, who are decorated, worshipped, and given rest from farm work.</li>
+                    <li>Bullock races and processions are organized in villages.</li>
+                    <li>Special dishes like Chila, Farra, and sweets are prepared.</li>
+                  </ul>
+                  <p><b>📍 Time: August - September</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Pola Festival" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Navakhana Festival" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Navakhana</h3>
+                  <ul>
+                    <li>Harvest festival where people offer the first grains of the season to their deities before consuming them.</li>
+                    <li>Community feasts are organized with newly harvested crops.</li>
+                    <li>Folk dances and music performances are held in villages.</li>
+                  </ul>
+                  <p><b>📍 Time: September - October</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Madai Festival</h3>
+                  <ul>
+                    <li>A tribal festival celebrated across Bastar region in honor of various tribal deities.</li>
+                    <li>Features colorful processions, animal sacrifices, and tribal dances.</li>
+                    <li>Different villages celebrate Madai on different days throughout the winter season.</li>
+                  </ul>
+                  <p><b>📍 Time: December - March</b></p>
+                  <h3>6. Goncha Festival</h3>
+                  <ul>
+                    <li>Celebrated by the Gond tribe to honor their ancestors and deities.</li>
+                    <li>Involves ritual dances, music, and community feasts.</li>
+                  </ul>
+                  <p><b>📍 Time: February - March</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Madai Festival" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Karma Festival" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>7. Karma Festival</h3>
+                  <ul>
+                    <li>Celebrated by tribal communities to worship the Karam tree, which symbolizes prosperity and good harvest.</li>
+                    <li>Young men and women perform the Karma dance around the Karam tree branch.</li>
+                  </ul>
+                  <p><b>📍 Time: August - September</b></p>
+                  <h3>8. Teeja</h3>
+                  <ul>
+                    <li>A festival for women who pray for the well-being of their husbands.</li>
+                    <li>Women wear new clothes, apply mehndi, and sing traditional songs.</li>
+                  </ul>
+                  <p><b>📍 Time: August</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>9. Champaran Mela</h3>
+                  <ul>
+                    <li>A fair held at Champaran, the birthplace of Saint Vallabhacharya, founder of the Vallabh sect.</li>
+                    <li>Devotees from across India gather to participate in religious discourses and rituals.</li>
+                  </ul>
+                  <p><b>📍 Time: February - March</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Champaran Mela" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Rajim Kumbh Mela" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>10. Rajim Kumbh Mela</h3>
+                  <ul>
+                    <li>A month-long religious fair held at the confluence of three rivers - Mahanadi, Pairi, and Sondur.</li>
+                    <li>Thousands of devotees take a holy dip and participate in religious ceremonies.</li>
+                    <li>Cultural programs, handicraft exhibitions, and folk performances are organized.</li>
+                  </ul>
+                  <p><b>📍 Time: February (Magha month)</b></p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>11. Bhoramdeo Festival</h3>
+                  <ul>
+                    <li>Celebrated at the Bhoramdeo Temple, known as the "Khajuraho of Chhattisgarh."</li>
+                    <li>Features cultural performances, crafts fair, and religious ceremonies.</li>
+                  </ul>
+                  <p><b>📍 Time: February - March</b></p>
+
+                  <h3>12. Mainpat Mahotsav</h3>
+                  <ul>
+                    <li>A winter festival celebrated at Mainpat, known as the "Mini Shimla" of Chhattisgarh.</li>
+                    <li>Showcases the culture and traditions of the Tibetan community settled there.</li>
+                  </ul>
+                  <p><b>📍 Time: December - January</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Bhoramdeo Festival" style="height:200px;width: 230px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Lokotsav" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>13. Lokotsav</h3>
+                  <ul>
+                    <li>A state-sponsored folk festival that showcases the rich cultural heritage of Chhattisgarh.</li>
+                    <li>Features folk dances, music, handicrafts, and tribal art exhibitions.</li>
+                  </ul>
+                  <p><b>📍 Time: January</b></p>
+                  <h3>14. National Tribal Dance Festival</h3>
+                  <ul>
+                    <li>A major event where tribal dance troupes from across India and abroad participate.</li>
+                    <li>Celebrates the rich tribal heritage and promotes cultural exchange.</li>
+                  </ul>
+                  <p><b>📍 Time: December</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Chhattisgarh's festivals are a blend of tribal, agricultural, and religious celebrations, making the state one of the most culturally authentic regions in India! 🎉</p><br><br>
+        </div>
+        <div id="wbfood" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Foods of Chhattisgarh</h1>
+          <p>Chhattisgarh has a rich and diverse culinary tradition that blends tribal flavors with regional influences. Chhattisgarhi cuisine is known for its simplicity, use of local ingredients, and distinctive preparation methods. Here's a look at some of the most iconic foods of Chhattisgarh:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Staple Food of Chhattisgarh</h3>
+                  <ul>
+                    <li><b>Rice:</b> The main staple food, with over 20,000 varieties of rice traditionally grown in the state.</li>
+                    <li><b>Basi:</b> Leftover rice soaked in water overnight, eaten for breakfast with salt, onion, and chili.</li>
+                  </ul>
+                  <h3>2. Chhattisgarhi Breads</h3>
+                  <ul>
+                    <li><b>Chila:</b> Savory pancakes made from rice flour or gram flour.</li>
+                    <li><b>Angakar Roti:</b> Thick bread made from rice flour, cooked on hot coals.</li>
+                    <li><b>Paan Roti:</b> Rice flour bread cooked on sal leaves, giving it a unique flavor.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=220" alt="Chhattisgarhi Rice" style="height:200px;width: 220px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=220" alt="Chhattisgarhi Vegetarian Dishes" style="height:200px;width: 220px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Famous Chhattisgarhi Dishes</h3>
+                  <h4>Vegetarian Dishes</h4>
+                  <ul>
+                    <li><b>Farra:</b> Steamed rice dumplings filled with spiced gram flour, often served with chutney.</li>
+                    <li><b>Muthia:</b> Steamed dumplings made from rice flour and vegetables.</li>
+                    <li><b>Dubki Kadhi:</b> A yogurt-based curry with gram flour dumplings.</li>
+                    <li><b>Thethari:</b> A spicy dish made from rice flour and buttermilk.</li>
+                    <li><b>Aamat:</b> A sweet and sour curry made with vegetables and mango.</li>
+                  </ul>
+                  <h4>Non-Vegetarian Dishes</h4>
+                  <ul>
+                    <li><b>Mahua Chicken:</b> Chicken cooked with mahua flowers, giving it a unique sweet flavor.</li>
+                    <li><b>Chaprah:</b> A chutney made from red ants, considered a delicacy in tribal areas.</li>
+                    <li><b>Bafauri:</b> Steamed gram flour dumplings with meat.</li>
+                    <li><b>Jhurka:</b> A spicy meat curry popular in rural areas.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=220" alt="Tribal Dishes" style="height:200px;width: 220px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h4>Tribal Specialties</h4>
+                  <ul>
+                    <li><b>Bamboo Shoot Curry:</b> A delicacy made from tender bamboo shoots.</li>
+                    <li><b>Lal Bhaji:</b> A dish made from red amaranth leaves.</li>
+                    <li><b>Bohar Bhaji:</b> Wild mushrooms cooked with minimal spices.</li>
+                  </ul>
+                  <h4>Dal & Accompaniments</h4>
+                  <ul>
+                    <li><b>Bori:</b> Sun-dried lentil dumplings used in curries and soups.</li>
+                    <li><b>Dehati Dal:</b> A simple preparation of local lentils with minimal spices.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>4. Chhattisgarhi Sweets</h3>
+                  <ul>
+                    <li><b>Khurmi:</b> Deep-fried sweet made from wheat flour and jaggery.</li>
+                    <li><b>Bidiya:</b> Sweet dumplings made from rice flour and filled with chana dal and jaggery.</li>
+                    <li><b>Kusli:</b> Deep-fried sweet spirals made from rice flour.</li>
+                    <li><b>Gulgula:</b> Sweet fritters made from wheat flour and jaggery.</li>
+                    <li><b>Tikhur Barfi:</b> A sweet made from tikhur (a medicinal root) starch.</li>
+                  </ul>
+
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=220" alt="Chhattisgarhi Sweets" style="height:200px;width: 220px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Street Food" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>5. Street Food of Chhattisgarh</h3>
+                  <ul>
+                    <li><b>Chila:</b> Rice or gram flour pancakes served with chutney.</li>
+                    <li><b>Bara:</b> Spicy lentil fritters, a popular snack.</li>
+                    <li><b>Bhajia:</b> Vegetable fritters made with gram flour batter.</li>
+                    <li><b>Sabudana Khichdi:</b> A savory dish made from tapioca pearls.</li>
+                    <li><b>Poha:</b> Flattened rice cooked with spices and peanuts.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>6. Famous Drinks</h3>
+                  <ul>
+                    <li><b>Mahua:</b> A traditional alcoholic beverage made from mahua flowers.</li>
+                    <li><b>Sulfi:</b> A local drink extracted from the sap of the sulfi palm.</li>
+                    <li><b>Kosna:</b> A refreshing drink made from rice water.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Traditional Drinks" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Special Festival Foods</h3>
+                  <ul>
+                    <li><b>Chousela:</b> A special dish made during Hareli festival, consisting of rice, curd, and jaggery.</li>
+                    <li><b>Dehati Bada:</b> Spicy lentil fritters prepared during festivals.</li>
+                    <li><b>Arsa:</b> Sweet deep-fried discs made from rice flour and jaggery, prepared during celebrations.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Festival Foods" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Chhattisgarh's cuisine is a mix of simple flavors, tribal influences, and agricultural abundance, making it one of the most authentic regional cuisines in India! 🍛🍚🍯</p><br><br>
+        </div>
+        <div id="wbhistory" class="tab-pane fade in active" style="background-color: white;">
+          <h1>History of Chhattisgarh</h1>
+          <p>Chhattisgarh has a rich and diverse history that spans ancient civilizations, medieval kingdoms, British colonial rule, and the modern era. The region has played a significant role in India's cultural, political, and economic history.</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Ancient Chhattisgarh (Before 4th Century CE)</h3>
+                  <ul>
+                    <li><b>Prehistoric Period:</b> Rock paintings in Singhanpur and Kabra Pahad indicate human settlement dating back to 10,000 BCE.</li>
+                    <li><b>Dakshina Kosala:</b> The region was known as "Dakshina Kosala" in ancient texts like the Ramayana and Mahabharata.</li>
+                    <li><b>Maurya & Gupta Influence:</b> The region was part of the Maurya Empire and later the Gupta Empire, with Buddhist influences evident in sites like Sirpur.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Ancient Chhattisgarh" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Kalchuri Dynasty" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Medieval Chhattisgarh (4th - 18th Century)</h3>
+                  <h4>Sarabhpurias & Nala Dynasty (4th - 7th Century):</h4>
+                  <ul>
+                    <li>The Sarabhpurias ruled from Sirpur, which became a major center of Buddhism and Hinduism.</li>
+                    <li>Archaeological excavations at Sirpur have revealed temples, monasteries, and a unique blend of religious architecture.</li>
+                  </ul>
+                  <h4>Kalchuri Dynasty (10th - 12th Century):</h4>
+                  <ul>
+                    <li>The Kalchuris ruled from Ratanpur and Raipur, building numerous temples and water bodies.</li>
+                    <li>The famous Bhoramdeo Temple (known as "Khajuraho of Chhattisgarh") was built during this period.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=220&width=200" alt="Maratha Rule" style="height:220px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h4>Haihaya Dynasty (14th - 18th Century):</h4>
+                  <ul>
+                    <li>The Haihayas ruled from Ratanpur and divided their kingdom into 18 garhs (forts), giving the region its name "Chhattisgarh" (36 forts).</li>
+                    <li>This period saw the development of unique cultural traditions and architectural styles.</li>
+                  </ul>
+                  <h4>Maratha Rule (18th Century):</h4>
+                  <ul>
+                    <li>The Marathas conquered the region in 1741 and ruled until the British took control.</li>
+                    <li>They introduced administrative reforms and built several forts and temples.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. British Colonial Period (1818 - 1947)</h3>
+                  <ul>
+                    <li>The British East India Company took control of the region in 1818.</li>
+                    <li>Chhattisgarh was made part of the Central Provinces and Berar in 1861.</li>
+                    <li>The region saw several tribal revolts against British rule, including the Halba Rebellion (1774-79) and the Bhumkal Rebellion (1910).</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=250" alt="British Colonial Period" style="height:200px;width: 250px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=230&width=200" alt="Tribal Revolts" style="height:230px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h2>4. Tribal Revolts & Freedom Struggle</h3>
+                    <h3>Major Tribal Uprisings</h3>
+                    <ul>
+                      <li><b>Halba Rebellion (1774-79):</b> Led by Halba tribals against the Marathas and later the British.</li>
+                      <li><b>Bhumkal Rebellion (1910):</b> A major uprising in Bastar led by Gunda Dhur against British exploitation.</li>
+                      <li><b>Jungle Satyagraha (1930s):</b> Tribal protests against forest laws that restricted their traditional rights.</li>
+                    </ul>
+                    <h3>Freedom Movement</h3>
+                    <ul>
+                      <li>The region actively participated in the Indian freedom movement with leaders like Thakur Pyarelal Singh and Minimata.</li>
+                      <li>The Jungle Satyagraha merged with the broader Civil Disobedience Movement led by Mahatma Gandhi.</li>
+                    </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Post-Independence" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>5. Post-Independence Period (1947 - 2000)</h3>
+                  <ul>
+                    <li>After independence, Chhattisgarh became part of Madhya Pradesh.</li>
+                    <li>The region saw industrial development with the establishment of Bhilai Steel Plant in 1955.</li>
+                    <li>Demand for a separate state grew stronger in the 1970s and 1980s.</li>
+                    <li>The Chhattisgarh Rajya Nirman Manch led by Chandulal Chandrakar spearheaded the movement for statehood.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=230&width=200" alt="Formation of Chhattisgarh" style="height:230px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>6. Formation of Chhattisgarh State (2000)</h3>
+                  <ul>
+                    <li>Chhattisgarh was officially formed on November 1, 2000, as the 26th state of India.</li>
+                    <li>Raipur was designated as the capital city.</li>
+                    <li>Ajit Jogi became the first Chief Minister of the new state.</li>
+                    <li>The state was created to address the distinct cultural identity and developmental needs of the region.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Modern Chhattisgarh (2000 - Present)</h3>
+                  <h4>Development & Challenges</h4>
+                  <ul>
+                    <li>The state has focused on industrial development, particularly in mining, steel, and power sectors.</li>
+                    <li>Chhattisgarh has emerged as a power hub and is known as the "Rice Bowl of India."</li>
+                    <li>The state has faced challenges related to Naxalism, tribal welfare, and balanced development.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Modern Chhattisgarh" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h4>Recent Developments</h4>
+                  <ul>
+                    <li>Focus on eco-tourism, tribal welfare, and sustainable development.</li>
+                    <li>Initiatives to preserve tribal culture and heritage.</li>
+                    <li>Development of Naya Raipur (now Atal Nagar) as a planned city and new administrative capital.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Naya Raipur" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>8. Archaeological Heritage</h3>
+                  <ul>
+                    <li><b>Sirpur:</b> A major archaeological site with Buddhist and Hindu monuments dating back to the 5th-8th centuries.</li>
+                    <li><b>Malhar:</b> Ancient temple complex with inscriptions from the Kalchuri period.</li>
+                    <li><b>Bhoramdeo Temple:</b> 11th-century temple known for its intricate erotic sculptures.</li>
+                    <li><b>Rock Paintings:</b> Prehistoric rock art at Singhanpur, Kabra Pahad, and Gotitola.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Archaeological Heritage" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Chhattisgarh has witnessed ancient civilizations, tribal kingdoms, colonial rule, freedom struggles, and modern development. It remains a center of tribal culture, mineral resources, and industrial growth in India. 🚩📜</p>
+          <br><br>
+        </div>
+        <div id="wbartacraft" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Art & Craft of Chhattisgarh 🎨🖌️</h1>
+          <p>Chhattisgarh has a rich artistic heritage, deeply rooted in tribal traditions and cultural practices. The state's art forms are characterized by their simplicity, use of natural materials, and connection to daily life and spiritual beliefs.</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Dhokra Metal Craft 🏺</h3>
+                  <ul>
+                    <li><b>Origin:</b> Ancient bell metal craft practiced by the Ghadwa community.</li>
+                    <li><b>Technique:</b> Lost-wax casting method (5,000-year-old technique).</li>
+                    <li><b>Products:</b> Figurines, jewelry, lamps, tribal deities, animals, and decorative items.</li>
+                    <li><b>Where?</b> Bastar region, particularly in Kondagaon and Narayanpur.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Dhokra Art" style="height:200px;width: 230px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Godna Art" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Godna Art (Tattoo Art) 🖌️</h3>
+                  <ul>
+                    <li><b>Origin:</b> Traditional tattoo art of tribal communities.</li>
+                    <li><b>Evolution:</b> From body tattoos to paintings on cloth, paper, and walls.</li>
+                    <li><b>Motifs:</b> Geometric patterns, flora, fauna, and tribal symbols.</li>
+                    <li><b>Significance:</b> Originally had spiritual and medicinal significance; now preserved as a decorative art form.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Wrought Iron Craft 🔨</h3>
+                  <ul>
+                    <li><b>Origin:</b> Traditional craft of the Lohar community.</li>
+                    <li><b>Products:</b> Decorative items, lamps, candle stands, furniture, and tribal figures.</li>
+                    <li><b>Where?</b> Bastar region, particularly in Kondagaon.</li>
+                    <li><b>Uniqueness:</b> Combines functionality with artistic expression.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Wrought Iron Craft" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Bamboo Craft" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Bamboo & Cane Craft 🌳</h3>
+                  <ul>
+                    <li><b>Origin:</b> Traditional craft of tribal communities living in forest areas.</li>
+                    <li><b>Products:</b> Baskets, mats, storage containers, fishing tools, musical instruments, and decorative items.</li>
+                    <li><b>Where?</b> Bastar, Surguja, and Bilaspur regions.</li>
+                    <li><b>Significance:</b> Integral to daily life in tribal communities.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Terracotta & Pottery 🏺</h3>
+                  <ul>
+                    <li><b>Origin:</b> Ancient craft practiced by the Kumhar community.</li>
+                    <li><b>Products:</b> Pots, figurines, lamps, and ritual objects.</li>
+                    <li><b>Where?</b> Across the state, with distinctive styles in different regions.</li>
+                    <li><b>Uniqueness:</b> Often decorated with tribal motifs and natural colors.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Terracotta Craft" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Tribal Paintings" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>6. Tribal Paintings 🎨</h3>
+                  <h4>🔸 Pithora Paintings</h4>
+                  <ul>
+                    <li><b>Origin:</b> Traditional wall paintings of the Rathwa and Bhilala tribes.</li>
+                    <li><b>Themes:</b> Mythological stories, tribal life, and nature.</li>
+                    <li><b>Colors:</b> Natural pigments derived from plants, stones, and clay.</li>
+                  </ul>
+                  <h4>🔸 Lippan Art</h4>
+                  <ul>
+                    <li><b>Technique:</b> Mud and mirror work on walls.</li>
+                    <li><b>Purpose:</b> Originally for insulation and decoration of homes.</li>
+                    <li><b>Motifs:</b> Geometric patterns and tribal symbols.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Sisal Craft 🧵</h3>
+                  <ul>
+                    <li><b>Material:</b> Fibers extracted from the sisal plant.</li>
+                    <li><b>Products:</b> Bags, mats, wall hangings, and decorative items.</li>
+                    <li><b>Where?</b> Bastar and Dantewada regions.</li>
+                    <li><b>Uniqueness:</b> Eco-friendly craft that provides livelihood to tribal women.</li>
+                  </ul>
+                  <h3>8. Wood Carving 🪓</h3>
+                  <ul>
+                    <li><b>Origin:</b> Ancient craft practiced by tribal communities.</li>
+                    <li><b>Products:</b> Masks, figurines, doors, furniture, and ritual objects.</li>
+                    <li><b>Where?</b> Bastar, Surguja, and Kanker regions.</li>
+                    <li><b>Wood Types:</b> Sal, teak, and other local varieties.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Sisal Craft" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Tribal Jewelry" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>9. Tribal Jewelry 💍</h3>
+                  <ul>
+                    <li><b>Materials:</b> Silver, brass, beads, seeds, and natural fibers.</li>
+                    <li><b>Products:</b> Necklaces, earrings, anklets, and headgear.</li>
+                    <li><b>Where?</b> Across tribal regions, with distinctive styles in different communities.</li>
+                    <li><b>Significance:</b> Often has cultural and spiritual importance beyond decoration.</li>
+                  </ul>
+                  <h3>10. Kosa Silk Weaving 🧵</h3>
+                  <ul>
+                    <li><b>Origin:</b> Traditional silk weaving practiced in the Bilaspur region.</li>
+                    <li><b>Products:</b> Sarees, stoles, and fabric with distinctive patterns.</li>
+                    <li><b>Uniqueness:</b> Uses wild silk from Kosa cocoons, known for its natural golden sheen.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>11. Stone Craft 🗿</h3>
+                  <ul>
+                    <li><b>Origin:</b> Ancient craft with evidence in archaeological sites like Sirpur.</li>
+                    <li><b>Products:</b> Sculptures, decorative items, and household objects.</li>
+                    <li><b>Where?</b> Raipur, Bilaspur, and Janjgir-Champa regions.</li>
+                    <li><b>Significance:</b> Continues the tradition of ancient temple sculptures.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Stone Craft" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>📌 Summary: Chhattisgarh's Art & Craft Forms</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Art Form</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Dhokra Metal Craft</td>
+                <td>Bastar, Kondagaon</td>
+                <td>Bell metal figurines using lost-wax technique</td>
+              </tr>
+              <tr>
+                <td>Godna Art</td>
+                <td>Surguja, Bastar</td>
+                <td>Traditional tattoo art transformed into paintings</td>
+              </tr>
+              <tr>
+                <td>Wrought Iron Craft</td>
+                <td>Bastar, Kondagaon</td>
+                <td>Decorative and functional iron items</td>
+              </tr>
+              <tr>
+                <td>Bamboo & Cane Craft</td>
+                <td>Bastar, Surguja</td>
+                <td>Baskets, mats, and household items</td>
+              </tr>
+              <tr>
+                <td>Terracotta & Pottery</td>
+                <td>Across the state</td>
+                <td>Clay pots, figurines with tribal motifs</td>
+              </tr>
+              <tr>
+                <td>Tribal Paintings</td>
+                <td>Surguja, Bastar</td>
+                <td>Pithora and Lippan art with natural colors</td>
+              </tr>
+              <tr>
+                <td>Sisal Craft</td>
+                <td>Bastar, Dantewada</td>
+                <td>Eco-friendly products from sisal fibers</td>
+              </tr>
+              <tr>
+                <td>Wood Carving</td>
+                <td>Bastar, Surguja</td>
+                <td>Masks, figurines, and furniture</td>
+              </tr>
+              <tr>
+                <td>Tribal Jewelry</td>
+                <td>Across tribal regions</td>
+                <td>Distinctive ornaments with cultural significance</td>
+              </tr>
+              <tr>
+                <td>Kosa Silk Weaving</td>
+                <td>Bilaspur, Janjgir-Champa</td>
+                <td>Wild silk fabric with natural golden sheen</td>
+              </tr>
+              <tr>
+                <td>Stone Craft</td>
+                <td>Raipur, Bilaspur</td>
+                <td>Sculptures and decorative items</td>
+              </tr>
+            </table>
+          </div>
+          <br><br>
+          <p>Chhattisgarh's art and crafts are a blend of tribal heritage, cultural traditions, and artistic innovation. Whether it's the intricate Dhokra figurines, vibrant Godna paintings, or the golden sheen of Kosa silk, the state's artisans continue to preserve and evolve their ancient crafts. 🎭✨</p>
+          <br><br>
+        </div>
+        <div id="wbseason" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Seasons to visit Chhattisgarh 🌧️☀️ </h1>
+          <p>Chhattisgarh has a tropical climate with distinct seasons that influence the best times to visit different parts of the state. The region's natural beauty, waterfalls, and cultural experiences vary significantly with the changing seasons.</p>
+
+          <br><br>
+
+          <h2> Season-wise Breakdown for Visiting Chhattisgarh</h2>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🌸 Spring (March - April)</h3>
+                  <ul>
+                    <li>Good time to visit Bastar and Dantewada for tribal festivals and cultural experiences.</li>
+                    <li>Ideal for exploring archaeological sites like Sirpur and Bhoramdeo Temple.</li>
+                    <li>The Rajim Kumbh Mela is held during this season (February-March).</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Spring in Chhattisgarh" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Summer in Chhattisgarh" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>☀️ Summer (May – June)</h3>
+                  <ul>
+                    <li>Best avoided due to extreme heat, with temperatures reaching up to 45°C.</li>
+                    <li>If visiting, stick to hill stations like Mainpat and Chaiturgarh.</li>
+                    <li>Early mornings and evenings are best for sightseeing if you must visit.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🌧️ Monsoon (July - September)</h3>
+                  <ul>
+                    <li>Excellent time to visit waterfalls like Chitrakote, Tirathgarh, and Amrit Dhara.</li>
+                    <li>The state turns lush green, offering spectacular landscapes.</li>
+                    <li>Tribal festivals like Hareli and Pola are celebrated during this season.</li>
+                    <li>Some remote areas may have accessibility issues due to heavy rainfall.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Monsoon in Chhattisgarh" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Autumn in Chhattisgarh" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🍁 Autumn (October - November)</h3>
+                  <ul>
+                    <li>One of the best seasons to visit Chhattisgarh with pleasant weather.</li>
+                    <li>Perfect time for Bastar Dussehra, one of the longest festivals in the world.</li>
+                    <li>Ideal for wildlife safaris in Kanger Valley National Park and Achanakmar Tiger Reserve.</li>
+                    <li>Good time to explore tribal villages and markets.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>❄️ Winter (December - February)</h3>
+                  <ul>
+                    <li>The most comfortable season for exploring the state with temperatures between 10-25°C.</li>
+                    <li>Perfect for city tours in Raipur, Bilaspur, and Jagdalpur.</li>
+                    <li>Ideal for wildlife safaris and bird watching.</li>
+                    <li>The National Tribal Dance Festival is held in December.</li>
+                    <li>Mainpat (Mini Shimla) experiences cool temperatures and occasional frost.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Winter in Chhattisgarh" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>📌 Summary: Best Time to Visit Different Places in Chhattisgarh</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Region</th>
+                <th>Best Season</th>
+                <th>Recommended Months</th>
+                <th>Why Visit?</th>
+              </tr>
+              <tr>
+                <td>Raipur & Bilaspur (Urban Centers)</td>
+                <td>Winter, Autumn</td>
+                <td>October - February</td>
+                <td>Pleasant weather, city tours, shopping, museums</td>
+              </tr>
+              <tr>
+                <td>Bastar Region (Jagdalpur, Dantewada, Kondagaon)</td>
+                <td>Autumn, Winter, Monsoon</td>
+                <td>July - February</td>
+                <td>Tribal culture, waterfalls, Bastar Dussehra, handicrafts</td>
+              </tr>
+              <tr>
+                <td>Chitrakote & Tirathgarh Waterfalls</td>
+                <td>Monsoon, Post-Monsoon</td>
+                <td>July - October</td>
+                <td>Waterfalls at their full glory, lush green surroundings</td>
+              </tr>
+              <tr>
+                <td>Mainpat (Mini Shimla)</td>
+                <td>Winter, Spring</td>
+                <td>November - March</td>
+                <td>Cool climate, Tibetan settlements, scenic plateaus</td>
+              </tr>
+              <tr>
+                <td>Sirpur Archaeological Site</td>
+                <td>Winter, Autumn</td>
+                <td>October - February</td>
+                <td>Ancient temples, Buddhist monasteries, archaeological excavations</td>
+              </tr>
+              <tr>
+                <td>Bhoramdeo Temple</td>
+                <td>Winter, Autumn</td>
+                <td>October - February</td>
+                <td>Ancient temple architecture, "Khajuraho of Chhattisgarh"</td>
+              </tr>
+              <tr>
+                <td>Wildlife Sanctuaries (Achanakmar, Barnawapara, Kanger Valley)</td>
+                <td>Winter, Autumn</td>
+                <td>October - March</td>
+                <td>Wildlife spotting, bird watching, nature trails</td>
+              </tr>
+              <tr>
+                <td>Tribal Villages & Markets</td>
+                <td>Winter, Autumn</td>
+                <td>October - February</td>
+                <td>Cultural experiences, handicrafts, tribal life</td>
+              </tr>
+              <tr>
+                <td>Surguja Region (Ambikapur, Mainpat)</td>
+                <td>Winter, Spring</td>
+                <td>November - March</td>
+                <td>Hill stations, waterfalls, tribal culture</td>
+              </tr>
+
+            </table>
+          </div><br><br>
+          <div class="container">
+            <div class="row">
+              <h1 style=" text-align: center;">📌 Summary: When to Visit Chhattisgarh</h1><br>
+              <ul>
+                <li><b>For tribal festivals & cultural experiences:</b> October - February (Bastar Dussehra, National Tribal Dance Festival)</li>
+                <li><b>For waterfalls & natural beauty:</b> July - October (Chitrakote, Tirathgarh, Amrit Dhara)</li>
+                <li><b>For wildlife & forests:</b> October - March (Achanakmar, Barnawapara, Kanger Valley)</li>
+                <li><b>For archaeological sites & temples:</b> October - February (Sirpur, Bhoramdeo, Malhar)</li>
+                <li><b>For hill stations:</b> November - March (Mainpat, Chai  Malhar)</li>
+                <li><b>For hill stations:</b> November - March (Mainpat, Chaiturgarh, Jashpur)</li>
+                <li><b>For city tours & urban experiences:</b> October - February (Raipur, Bilaspur, Bhilai)</li>
+              </ul>
+
+            </div>
+          </div>
+          <br><br>
+        </div>
+        <div id="wbtourist" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Tourist Spots of Chhattisgarh 🏖️🏔️</h1>
+          <p>Chhattisgarh is a diverse state with waterfalls, forests, tribal areas, heritage sites, and cultural hubs. Here's a categorized list of the best tourist places in Chhattisgarh:</p>
+
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Waterfalls & Natural Wonders 🏞️</h3>
+                  <ul>
+                    <li><b>Chitrakote Falls -</b> India's widest waterfall (Niagara of India), horseshoe-shaped falls on Indravati River</li>
+                    <li><b>Tirathgarh Falls -</b> Multi-tiered waterfall with natural swimming pools</li>
+                    <li><b>Amrit Dhara Waterfall -</b> Scenic falls in Koriya district</li>
+                    <li><b>Kanger Valley National Park -</b> Limestone caves, waterfalls, and pristine forests</li>
+                    <li><b>Mainpat -</b> Known as "Mini Shimla," a plateau with scenic beauty and Tibetan settlements</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Chitrakote Falls" style="height:200px;width: 230px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Sirpur" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Heritage & Archaeological Sites 🏛️</h3>
+                  <ul>
+                    <li><b>Sirpur -</b> Ancient archaeological site with Buddhist and Hindu monuments dating back to 5th-8th centuries.</li>
+                    <li><b>Bhoramdeo Temple -</b> 11th-century temple known as "Khajuraho of Chhattisgarh" for its erotic sculptures.</li>
+                    <li><b>Bastar Palace -</b> Historical palace in Jagdalpur showcasing royal heritage.</li>
+                    <li><b>Malhar -</b> Ancient temple complex with inscriptions from the Kalchuri period.</li>
+                    <li><b>Ratanpur Fort -</b> Historical fort with ancient temples and a sacred lake.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Wildlife & Nature Destinations 🌳🐯</h3>
+                  <ul>
+                    <li><b>Achanakmar Tiger Reserve -</b> Dense forests, tigers, leopards, and diverse flora.</li>
+                    <li><b>Barnawapara Wildlife Sanctuary -</b> Home to wild buffalo, leopards, and over 150 bird species.</li>
+                    <li><b>Kanger Valley National Park -</b> Biodiversity hotspot with unique caves and waterfalls.</li>
+                    <li><b>Sitanadi Wildlife Sanctuary -</b> Rich biodiversity along the Sitanadi River.</li>
+                    <li><b>Gomarda Wildlife Sanctuary -</b> Known for sloth bears and diverse bird species.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Achanakmar Tiger Reserve" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Tribal Culture" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Tribal Culture & Craft Centers 🏺</h3>
+                  <ul>
+                    <li><b>Bastar Tribal Museum -</b> Showcases the rich tribal heritage of the region.</li>
+                    <li><b>Purkhauti Muktangan -</b> Open-air museum in Raipur displaying tribal art and culture.</li>
+                    <li><b>Kondagaon Art & Craft Center -</b> Famous for Dhokra (bell metal) art and iron craft.</li>
+                    <li><b>Narayanpur Handicraft Market -</b> Traditional tribal crafts and artifacts.</li>
+                    <li><b>Tribal villages of Abujhmad -</b> One of the most pristine tribal regions in India.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Religious Destinations ⛩️</h3>
+                  <ul>
+                    <li><b>Danteshwari Temple (Dantewada) -</b> One of the 52 Shakti Peethas, dedicated to Goddess Danteshwari.</li>
+                    <li><b>Dongargarh (Rajrajeshwari Temple) -</b> Hill temple accessed by 1,000 steps or ropeway.</li>
+                    <li><b>Champaran -</b> Birthplace of Saint Vallabhacharya, with a significant temple complex.</li>
+                    <li><b>Rajim -</b> Temple town at the confluence of three rivers, known as "Prayag of Chhattisgarh."</li>
+                    <li><b>Mahamaya Temple (Ratanpur) -</b> Ancient temple dedicated to Goddess Mahamaya.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Danteshwari Temple" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Chaiturgarh" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>6. Adventure & Offbeat Destinations 🎢🚵</h3>
+                  <ul>
+                    <li><b>Chaiturgarh -</b> Hill station with trekking opportunities and panoramic views.</li>
+                    <li><b>Kutumsar Cave -</b> One of India's longest natural caves with unique blind fish species.</li>
+                    <li><b>Kailash Gufa -</b> Limestone cave with natural Shiva lingam formations.</li>
+                    <li><b>Girodhpuri -</b> Birthplace of Guru Ghasidas, founder of the Satnami sect.</li>
+                    <li><b>Jashpur -</b> Known as "Nagpur of Chhattisgarh" for its orange cultivation and waterfalls.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Urban Attractions 🏙️</h3>
+                  <ul>
+                    <li><b>Raipur -</b> State capital with Purkhauti Muktangan, Mahant Ghasidas Memorial Museum, and Nandan Van Zoo.</li>
+                    <li><b>Naya Raipur (Atal Nagar) -</b> Planned city with Jungle Safari, Central Park, and modern architecture.</li>
+                    <li><b>Bilaspur -</b> Commercial center with Arpa River, Achanakmar Tiger Reserve, and Ratanpur Fort nearby.</li>
+                    <li><b>Bhilai -</b> Industrial city with Maitri Garden, Bhilai Steel Plant, and Japanese Garden.</li>
+                    <li><b>Durg -</b> Twin city of Bhilai with historical sites and cultural attractions.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Naya Raipur" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br><br>
+
+        </div>
+        <div id="wbwild" class="tab-pane fade in active" style="background-color: white;">
+          <h1> Wildlife & Crops of Chhattisgarh 🌿</h1>
+          <p>Chhattisgarh has diverse wildlife and a rich agricultural landscape due to its varied geography, from dense forests to fertile plains along the Mahanadi basin.</p>
+
+          <br>
+          <h2>Wildlife of Chhattisgarh </h2>
+          <p>Chhattisgarh has 3 national parks, 11 wildlife sanctuaries, and 1 biosphere reserve, making it one of India's richest states in terms of forest cover and biodiversity.</p>
+
+          <br>
+          <h2>🔹 Major National Parks & Wildlife Sanctuaries</h2>
+          <div>
+            <table>
+              <tr>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Achanakmar Tiger Reserve</td>
+                <td>Bilaspur</td>
+                <td>Tigers 🐅, Leopards 🐆, Diverse Flora</td>
+              </tr>
+              <tr>
+                <td>Kanger Valley National Park</td>
+                <td>Bastar</td>
+                <td>Limestone Caves, Blind Fish, Waterfalls</td>
+              </tr>
+              <tr>
+                <td>Guru Ghasidas National Park</td>
+                <td>Koriya</td>
+                <td>Tigers, Sloth Bears, Diverse Bird Species</td>
+              </tr>
+              <tr>
+                <td>Barnawapara Wildlife Sanctuary</td>
+                <td>Mahasamund</td>
+                <td>Wild Buffalo 🐃, Leopards, Chital</td>
+              </tr>
+              <tr>
+                <td>Sitanadi Wildlife Sanctuary</td>
+                <td>Dhamtari</td>
+                <td>Flying Squirrels, Sambhar Deer, Peacocks 🦚</td>
+              </tr>
+              <tr>
+                <td>Udanti-Sitanadi Tiger Reserve</td>
+                <td>Gariaband</td>
+                <td>Wild Buffalo (State Animal), Tigers</td>
+              </tr>
+              <tr>
+                <td>Gomarda Wildlife Sanctuary</td>
+                <td>Raigarh</td>
+                <td>Sloth Bears 🐻, Leopards, Diverse Birds</td>
+              </tr>
+            </table>
+          </div>
+          <bt><br></bt>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3> 🔹 Other Notable Wildlife in Chhattisgarh</h3>
+                <ul>
+                  <li><b>Mammals:</b> Wild Buffalo (State Animal), Tigers, Leopards, Sloth Bears, Gaur (Indian Bison), Sambhar, Chital.</li>
+                  <li><b>Birds: </b>Hill Myna (State Bird), Peacocks, Parrots, Egrets, Herons, Kingfishers.</li>
+                  <li><b>Reptiles:</b> Pythons, Cobras, Monitor Lizards, Crocodiles in some river systems.</li>
+                  <li><b>Unique Species:</b> Blind fish in Kutumsar Cave, Flying squirrels in Sitanadi.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=200" alt="Wild Buffalo" style="height:200px;width: 200px;">
+
+              </div>
+
+            </div>
+          </div>
+          <hr><br>
+          <h2>🌾 Agriculture & Major Crops in Chhattisgarh </h2>
+          <p>Chhattisgarh is known as the "Rice Bowl of India," with agriculture being the primary occupation for about 80% of the rural population.</p>
+
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Key Agricultural Features</h3>
+                <ul>
+                  <li>One of India's largest producers of Rice, with over 20,000 varieties traditionally grown.</li>
+                  <li><b>Fertile Land:</b> Thanks to the Mahanadi River basin and its tributaries.</li>
+                  <li><b>Climate:</b> Supports both Kharif & Rabi crops.</li>
+                  <li><b>Irrigation:</b> Mahanadi, Indravati, and Sheonath rivers support farming.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=220" alt="Rice Fields" style="height:200px;width: 220px;">
+
+              </div>
+            </div>
+          </div>
+          <h2>🔹 Major Crops of Chhattisgarh</h2>
+          <div>
+            <table>
+              <tr>
+                <th>Category</th>
+                <th>Crops</th>
+              </tr>
+              <tr>
+                <td>Cereals</td>
+                <td>Rice 🍚 (main crop), Wheat 🌾, Maize 🌽, Millets (Kodo, Kutki)</td>
+              </tr>
+              <tr>
+                <td>Cash Crops</td>
+                <td>Sugarcane, Cotton, Oilseeds</td>
+              </tr>
+              <tr>
+                <td>Pulses</td>
+                <td>Gram, Arhar (Pigeon Pea), Urad, Moong</td>
+              </tr>
+              <tr>
+                <td>Vegetables</td>
+                <td>Potato 🥔, Tomato 🍅, Brinjal, Okra, Leafy Vegetables</td>
+              </tr>
+              <tr>
+                <td>Fruits</td>
+                <td>Mango 🥭, Banana 🍌, Papaya, Oranges 🍊 (in Jashpur), Guava</td>
+              </tr>
+              <tr>
+                <td>Oilseeds</td>
+                <td>Groundnut, Mustard, Soybean, Sunflower 🌻, Sesame</td>
+              </tr>
+              <tr>
+                <td>Spices</td>
+                <td>Turmeric, Ginger, Chili 🌶️, Coriander</td>
+              </tr>
+              <tr>
+                <td>Medicinal Plants</td>
+                <td>Tikhur, Kalmegh, Sarpagandha, Ashwagandha</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Special Agricultural Products</h3>
+                <ul>
+                  <li>Aromatic Rice Varieties (Dubraj, Vishnubhog, Jeeraphool).</li>
+                  <li>Kosa Silk (from silkworms reared on sal trees).</li>
+                  <li>Tikhur (medicinal root used in traditional remedies).</li>
+                  <li>Mahua Flowers (used in food, beverages, and medicines).</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=200" alt="Aromatic Rice" style="height:200px;width: 200px;">
+
+              </div>
+            </div>
+          </div><br>
+          <hr>
+          <div class="box" style=" background: #f3b37185;padding: 10px;">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3> Sustainable Agriculture & Modern Trends 🌾</h3>
+                  <ul>
+                    <li><b>Organic Farming:</b> Growing in tribal areas with traditional methods.</li>
+                    <li><b>Integrated Farming:</b> Combining agriculture with fisheries and animal husbandry.</li>
+                    <li><b>Minor Forest Produce:</b> Collection of tendu leaves, sal seeds, mahua flowers, and medicinal plants.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Sustainable Farming" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Chhattisgarh is a paradise for both nature lovers and agricultural enthusiasts. It has rich wildlife sanctuaries, dense forests, and fertile farmlands that support a diverse ecosystem and economy.</p>
+          <br><br>
+        </div>
+        <div id="wbedu" class="tab-pane fade in active" style="background-color: white;">
+          <h1>🎓 Education & Institutions in Chhattisgarh</h1>
+          <p>Chhattisgarh has made significant strides in education since its formation in 2000. The state has established several universities, technical institutions, and research centers to cater to the educational needs of its population.</p>
+
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>📌 Education System in Chhattisgarh</h3>
+                  <ul>
+                    <li><b>School Education:</b> Follows CGBSE (Chhattisgarh Board of Secondary Education), CBSE, and ICSE boards.</li>
+                    <li><b>Higher Education:</b> Managed by UGC, AICTE, and state universities.</li>
+                    <li><b>Major Fields:</b> Engineering, Medical, Science, Arts, Commerce, Law, Agriculture, and Management.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="CGBSE" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>🏛️ Top Universities & Institutions </h2>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Central Universities</h3>
+                <ol>
+                  <li><b>Guru Ghasidas Vishwavidyalaya (Central University) -</b> Established in 1983, offers diverse courses in science, arts, and engineering.</li>
+                  <li><b>Indira Gandhi Krishi Vishwavidyalaya -</b> Premier agricultural university focusing on research and education in agriculture.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=230" alt="Guru Ghasidas Vishwavidyalaya" style="height:200px;width: 230px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 State Universities</h3>
+                <ol>
+                  <li><b>Pandit Ravishankar Shukla University -</b> Oldest university in the state, established in 1964.</li>
+                  <li><b>Chhattisgarh Swami Vivekanand Technical University -</b> Technical university overseeing engineering education.</li>
+                  <li><b>Hidayatullah National Law University -</b> Premier law institution in central India.</li>
+                  <li><b>Ayush University of Chhattisgarh -</b> Specializes in Ayurveda, Yoga, Unani, Siddha, and Homeopathy.</li>
+                  <li><b>Bastar University -</b> Focuses on tribal studies and regional development.</li>
+                  <li><b>Sarguja University -</b> Serves the educational needs of northern Chhattisgarh.</li>
+                  <li><b>Bilaspur University -</b> Established to cater to the Bilaspur region.</li>
+                  <li><b>Durg University -</b> Serves the educational needs of Durg and surrounding areas.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=230" alt="Pandit Ravishankar Shukla University" style="height:200px;width: 230px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>University</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Pandit Ravishankar Shukla University</td>
+                <td>Raipur</td>
+                <td>Oldest university in the state, diverse academic programs.</td>
+              </tr>
+              <tr>
+                <td>Guru Ghasidas Vishwavidyalaya</td>
+                <td>Bilaspur</td>
+                <td>Central university with strong research focus.</td>
+              </tr>
+              <tr>
+                <td>Hidayatullah National Law University</td>
+                <td>Raipur</td>
+                <td>Premier legal education institution.</td>
+              </tr>
+              <tr>
+                <td>Indira Gandhi Krishi Vishwavidyalaya</td>
+                <td>Raipur</td>
+                <td>Agricultural research and education.</td>
+              </tr>
+              <tr>
+                <td>Chhattisgarh Swami Vivekanand Technical University</td>
+                <td>Bhilai</td>
+                <td>Technical education and engineering.</td>
+              </tr>
+              <tr>
+                <td>NIT Raipur</td>
+                <td>Raipur</td>
+                <td>Premier engineering institution.</td>
+              </tr>
+              <tr>
+                <td>IIM Raipur</td>
+                <td>Raipur</td>
+                <td>Management education and research.</td>
+              </tr>
+              <tr>
+                <td>AIIMS Raipur</td>
+                <td>Raipur</td>
+                <td>Medical education and healthcare.</td>
+              </tr>
+              <tr>
+                <td>Bastar University</td>
+                <td>Jagdalpur</td>
+                <td>Focus on tribal studies and regional development.</td>
+              </tr>
+            </table>
+          </div>
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=240" alt="NIT Raipur" style="height:200px;width: 240px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🔹 Premier Institutes</h3>
+                  <ol>
+                    <li><b>National Institute of Technology (NIT) Raipur -</b> Established in 1956, one of the oldest technical institutions in India.</li>
+                    <li><b>Indian Institute of Management (IIM) Raipur -</b> Premier management institution established in 2010.</li>
+                    <li><b>All India Institute of Medical Sciences (AIIMS) Raipur -</b> Premier medical institution established in 2012.</li>
+                    <li><b>Indian Institute of Information Technology (IIIT) Naya Raipur -</b> Focuses on IT education and research.</li>
+                    <li><b>National Institute of Technology (NIT) Raipur -</b> Established in 1956, one of the oldest technical institutions in India.</li>
+                  </ol>
+                </div>
+
+                <br><br>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Institute</th>
+                <th>Location</th>
+                <th>Specialization</th>
+              </tr>
+              <tr>
+                <td>NIT Raipur</td>
+                <td>Raipur</td>
+                <td>Engineering and technology education.</td>
+              </tr>
+              <tr>
+                <td>Government Engineering College</td>
+                <td>Bilaspur</td>
+                <td>Technical education with focus on regional needs.</td>
+              </tr>
+              <tr>
+                <td>Bhilai Institute of Technology</td>
+                <td>Durg</td>
+                <td>Private engineering college with industry connections.</td>
+              </tr>
+              <tr>
+                <td>Rungta College of Engineering & Technology</td>
+                <td>Bhilai</td>
+                <td>Private engineering institution with multiple specializations.</td>
+              </tr>
+              <tr>
+                <td>Shri Shankaracharya Technical Campus</td>
+                <td>Bhilai</td>
+                <td>Technical education with focus on industry readiness.</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🔹 Medical Colleges</h3>
+                  <ol>
+                    <li><b>All India Institute of Medical Sciences (AIIMS) Raipur -</b> Premier medical institution with advanced healthcare facilities.</li>
+                    <li><b>Pt. Jawaharlal Nehru Memorial Medical College -</b> Oldest medical college in the state.</li>
+                    <li><b>Chhattisgarh Institute of Medical Sciences (CIMS) -</b> Government medical college in Bilaspur.</li>
+                    <li><b>Government Medical College, Rajnandgaon -</b> Established to serve the western region of the state.</li>
+                  </ol>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="AIIMS Raipur" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Medical College</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>AIIMS Raipur</td>
+                <td>Raipur</td>
+                <td>Premier medical education and healthcare.</td>
+              </tr>
+              <tr>
+                <td>Pt. Jawaharlal Nehru Memorial Medical College</td>
+                <td>Raipur</td>
+                <td>Oldest medical college in the state.</td>
+              </tr>
+              <tr>
+                <td>Chhattisgarh Institute of Medical Sciences</td>
+                <td>Bilaspur</td>
+                <td>Government medical college serving central Chhattisgarh.</td>
+              </tr>
+              <tr>
+                <td>Government Medical College</td>
+                <td>Rajnandgaon</td>
+                <td>Medical education in western Chhattisgarh.</td>
+              </tr>
+              <tr>
+                <td>Late Shri Baliram Kashyap Memorial Medical College</td>
+                <td>Jagdalpur</td>
+                <td>Medical education in tribal Bastar region.</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="HNLU" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🔹 Law, Agriculture, & Other Institutes</h3>
+                  <ul>
+                    <li><b>Hidayatullah National Law University (HNLU) -</b> Premier law university established in 2003.</li>
+                    <li><b>Indira Gandhi Krishi Vishwavidyalaya -</b> Agricultural university focusing on research and education in agriculture.</li>
+                    <li><b>Kushabhau Thakre University of Journalism -</b> Specializes in journalism and mass communication.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Institute</th>
+                <th>Location</th>
+                <th>Specialization</th>
+              </tr>
+              <tr>
+                <td>Hidayatullah National Law University</td>
+                <td>Raipur</td>
+                <td>Premier legal education institution in central India.</td>
+              </tr>
+              <tr>
+                <td>Indira Gandhi Krishi Vishwavidyalaya</td>
+                <td>Raipur</td>
+                <td>Agricultural research and education.</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <h2>🏫 School Education in Chhattisgarh </h2>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Major School Boards</h3>
+                <ol>
+                  <li><b>CGBSE (Chhattisgarh Board of Secondary Education) -</b> State board conducting 10th and 12th examinations.</li>
+                  <li><b>CBSE (Central Board of Secondary Education) -</b> National board with several affiliated schools in urban areas.</li>
+                  <li><b>ICSE (Indian Certificate of Secondary Education) -</b> Select schools following this curriculum.</li>
+                  <li><b>Kendriya Vidyalaya & Navodaya Vidyalaya -</b> Central government schools with quality education.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=200" alt="CGBSE" style="height:200px;width: 200px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=230" alt="DPS Raipur" style="height:200px;width: 230px;">
+
+              </div>
+              <div class="col-sm-8">
+
+                <h3>🔹 Notable Schools in Chhattisgarh</h3>
+                <ol>
+                  <li><b>Delhi Public School -</b> Branches in Raipur, Bhilai, and other cities.</li>
+                  <li><b>Kendriya Vidyalaya -</b> Multiple branches across the state.</li>
+                  <li><b>Jawahar Navodaya Vidyalaya -</b> Residential schools in various districts.</li>
+                  <li><b>Holy Cross School -</b> Reputed missionary schools in major cities.</li>
+                  <li><b>Bharat Mata Higher Secondary School -</b> One of the oldest schools in Raipur.</li>
+                  <li><b>Krishna Public School -</b> Network of schools across the state.</li>
+                </ol>
+
+              </div>
+
+            </div>
+          </div>
+          <div class="box">
+            <h2>🔬 Research & Development</h2>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <p>Chhattisgarh has several research institutions focusing on regional development and industry:</p>
+                  <ol>
+                    <li><b>Central Institute of Mining and Fuel Research (CIMFR) -</b> Research in mining technology.</li>
+                    <li><b>National Institute of Technology (NIT) Raipur -</b> Research in engineering and technology.</li>
+                    <li><b>State Forest Research Institute -</b> Research on forest conservation and development.</li>
+                  </ol>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Research Institute" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <h2>📚 Other Notable Institutions</h2>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <ol>
+                    <li><b>Kushabhau Thakre University of Journalism -</b> Specializes in journalism and mass communication. 📰</li>
+                    <li><b>Indira Kala Sangeet Vishwavidyalaya -</b> Focuses on music and performing arts. 🎵</li>
+                    <li><b>Pt. Sundarlal Sharma Open University -</b> Distance education for remote areas.</li>
+                    <li><b>Chhattisgarh Ayush University -</b> Traditional medicine education and research.</li>
+                    <li><b>National Institute of Fashion Technology (NIFT) Raipur -</b> Fashion design and technology.</li>
+                    <li><b>Tribal Research and Training Institute -</b> Research on tribal culture and development.</li>
+                  </ol>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Journalism University" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Chhattisgarh has made significant progress in establishing educational institutions since its formation in 2000. The state continues to focus on expanding educational opportunities, particularly in tribal and rural areas, to ensure inclusive development.</p>
+        </div>
+        <br><br>
+
+      </div>
+
+
+    </div>
+  </div>
+  </div>
+</body>
+
+</html>

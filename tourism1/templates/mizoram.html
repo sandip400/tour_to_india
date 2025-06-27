@@ -1,0 +1,2643 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Mizoram</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> -->
+  <style>
+    .wb {
+      font-size: 10vw;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+      border-spacing: 0;
+      border: 1px solid #ddd;
+    }
+
+    td,
+    th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+      font-size: 1.5vw;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+
+    .trip {
+      text-align: center;
+      font-weight: 900;
+      background: orangered;
+      padding: 20px;
+      border-radius: 20px;
+      width: 60%;
+    }
+
+    p,
+    li,
+    .text {
+      font-size: 1.5vw;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-weight: 600;
+    }
+
+    h4 {
+      font-weight: 900;
+    }
+
+    img {
+      border-radius: 10px;
+      display: block;
+      margin: auto;
+    }
+
+    @media screen and (max-width: 850px) {
+
+      p,
+      li,
+      .text,
+      td,
+      th {
+        font-size: 2vw;
+        ;
+      }
+
+    }
+
+    @media screen and (max-width: 500px) {
+
+      p,
+      li,
+      .text,
+      td,
+      th {
+        font-size: 4.5vw;
+        ;
+      }
+
+    }
+
+    .box:nth-of-type(odd) {
+      background: #f3b37185;
+      padding: 10px;
+    }
+
+    .weather-container {
+            border-radius: 15px;
+            background: #f0fdf4;
+            padding: 15px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .weather-card {
+            text-align: center;
+            border-radius: 10px;
+            padding: 10px;
+            background: white;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+        .aqi {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            color: white;
+        }
+        .aqi-bad { background: purple; }
+        .aqi-moderate { background: orange; }
+        .aqi-good { background: green; }
+        .best-time {
+            background: #d1fae5;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 15px;
+            color: green;
+        }
+        .wet {
+            max-width: 50px;
+        }
+        
+        .trip {
+          font-size: 18px;
+          padding: 10px 20px;
+          cursor: pointer;
+          background-color:rgb(231, 36, 36);
+          color: white;
+          border: none;
+          border-radius: 5px;
+      }
+      .modal {
+          display: none;
+          position: fixed;
+          z-index: 1;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0,0,0,0.5);
+      }
+      .modal-content {
+          background-color: #fff;
+          margin: 10% auto;
+          padding: 20px;
+          border-radius: 10px;
+          width: 40%;
+          box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+          text-align: center;
+      }
+      .close {
+          color: #aaa;
+          float: right;
+          font-size: 28px;
+          font-weight: bold;
+          cursor: pointer;
+      }
+      .trip-options {
+          display: flex;
+          justify-content: center;
+          gap: 20px;
+          margin-top: 20px;
+      }
+      .trip-options a {
+          display: block;
+          width: 120px;
+          padding: 10px;
+          background-color: #28a745;
+          color: white;
+          text-decoration: none;
+          border-radius: 5px;
+      }
+  </style>
+</head>
+
+<body>
+
+
+  <!-- <h2>Carousel Example</h2> -->
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+      <li data-target="#myCarousel" data-slide-to="4"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+
+      <div class="item active">
+        <img src="darjeeling wlp.jpg" alt="Aizawl" style="width:100%; height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Aizawl</h3>
+          <p>We love the hills and scenic beauty!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="victoria wlp.jpg" alt="Reiek" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Reiek Peak</h3>
+          <p>The amazing natural landscape and views!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="howrah bridge wlp.jpg" alt="Vantawng Falls" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Vantawng Falls</h3>
+          <p>A magnificent waterfall!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="Digha wlp2.png" alt="Phawngpui" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Phawngpui (Blue Mountain)</h3>
+          <p>We love the mountains!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="teegarden wlp.jpg" alt="Bamboo Forest" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Bamboo Forest</h3>
+          <p>We love the lush bamboo forests!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+  <div class="container">
+    <br><br>
+    <h1 class="wb"> MIZORAM</h1><br>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <img src="westbengal-map.jpg" alt="" style="height:700px; width: -webkit-fill-available;">
+
+        </div>
+        <div class="col-sm-6">
+          <h1> Mizoram: The Land of the Highlanders</h1>
+          <p class="text">Mizoram is a mountainous state in northeastern India, known for its stunning landscapes, vibrant culture, traditional music, festivals, bamboo handicrafts, and natural beauty. It is one of the most peaceful states in the Northeast and a hub for unique tribal culture and traditions.</p>
+
+          <ul>
+            <li><b>Location --</b> Northeastern India</li>
+            <li><b>Capital --</b> Aizawl</li>
+            <li><b>Official Language --</b> Mizo, English</li>
+            <li><b>Area --</b> 21,081 sq. km</li>
+            <li><b>Population --</b> ~1.2 million (2nd least populous state in India)</li>
+            <li><b>Borders --</b> Assam, Manipur, Tripura & International borders with Bangladesh, Myanmar</li>
+            <li><b>Major Rivers --</b> Tlawng, Tuirial, Tuivawl, Tut, Tuichang</li>
+            <li><b>Major Festivals --</b> Chapchar Kut, Mim Kut, Pawl Kut, Christmas, Thalfavang Kut</li>
+            <li><b>State Animal --</b> Serow (Saza)</li>
+            <li><b>State Flower --</b> Red Vanda (Senhri)</li>
+            <li><b>State Tree --</b> Indian Coral Tree (Fartuah)</li>
+            <li><b>State Bird --</b> Mrs. Hume's Pheasant (Vavu)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <br>
+    <hr>
+    <div>
+      <h1>📌 Districts of Mizoram</h1>
+      <br>
+      <div style="overflow-x:auto;">
+        <table>
+          <tr>
+            <th>District</th>
+            <th>Headquarters</th>
+            <th>Key Highlights</th>
+          </tr>
+          <tr>
+            <td>Aizawl</td>
+            <td>Aizawl</td>
+            <td>State Capital, Solomon's Temple, Mizoram State Museum, Durtlang Hills</td>
+          </tr>
+          <tr>
+            <td>Lunglei</td>
+            <td>Lunglei</td>
+            <td>Second largest city, Saikuti Hall, Khawnglung Wildlife Sanctuary</td>
+          </tr>
+          <tr>
+            <td>Champhai</td>
+            <td>Champhai</td>
+            <td>Border town with Myanmar, Rih Dil Lake, Murlen National Park</td>
+          </tr>
+          <tr>
+            <td>Kolasib</td>
+            <td>Kolasib</td>
+            <td>Gateway to Mizoram from Assam, Thenzawl, Paddy fields</td>
+          </tr>
+          <tr>
+            <td>Serchhip</td>
+            <td>Serchhip</td>
+            <td>Vantawng Falls, Hmuifang Mountain, Adventure tourism</td>
+          </tr>
+          <tr>
+            <td>Lawngtlai</td>
+            <td>Lawngtlai</td>
+            <td>Blue Mountain (Phawngpui), Palak Lake, Chakma culture</td>
+          </tr>
+          <tr>
+            <td>Siaha</td>
+            <td>Siaha</td>
+            <td>Mara tribal culture, Pala Lake, Eco-tourism</td>
+          </tr>
+          <tr>
+            <td>Mamit</td>
+            <td>Mamit</td>
+            <td>Dampa Tiger Reserve, Bamboo forests, Tribal villages</td>
+          </tr>
+          <tr>
+            <td>Khawzawl</td>
+            <td>Khawzawl</td>
+            <td>Traditional Mizo villages, Handicrafts, Cultural heritage</td>
+          </tr>
+          <tr>
+            <td>Saitual</td>
+            <td>Saitual</td>
+            <td>Scenic landscapes, Traditional agriculture, Rural tourism</td>
+          </tr>
+          <tr>
+            <td>Hnahthial</td>
+            <td>Hnahthial</td>
+            <td>Coal mining, Natural caves, Tribal heritage</td>
+          </tr>
+        </table>
+      </div>
+      <br><br>
+      <h1>🔹 Major Highlights of Some Key Districts</h1><br><br>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <ul>
+              <li><b>Aizawl --</b> Capital of Mizoram, cultural & economic hub.</li>
+              <li><b>Lunglei --</b> Second largest city, known for its scenic beauty and cultural heritage.</li>
+              <li><b>Champhai --</b> Border town with Myanmar, known for its vineyards and Rih Dil Lake.</li>
+              <li><b>Lawngtlai --</b> Home to the Blue Mountain (Phawngpui) and Palak Lake, the largest natural lake in Mizoram.</li>
+              <li><b>Kolasib --</b> Gateway to Mizoram from Assam, known for its agricultural produce.</li>
+              <li><b>Serchhip --</b> Famous for Vantawng Falls, the highest waterfall in Mizoram.</li>
+              <li><b>Mamit --</b> Home to Dampa Tiger Reserve, the largest wildlife sanctuary in Mizoram.</li>
+              <li><b>Siaha --</b> Known for Mara tribal culture and traditional practices.</li>
+              <li><b>Khawzawl, Saitual & Hnahthial --</b> Newer districts known for traditional villages and natural beauty.</li>
+            </ul>
+          </div>
+          <div class="col-sm-6">
+            <img src="westbengal-map.jpg" alt="" style="height:450px;width: -webkit-fill-available;">
+
+          </div>
+        </div>
+      </div>
+    </div><br><br>
+    <div class="container">
+      <div class="weather-container">
+          <h4 class="text-center"><strong>Weather in Mizoram</strong></h4>
+          <div class="row">
+              <!-- January -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Jan</h6>
+                      <p>10/20°C</p>
+                      <span class="aqi aqi-good">AQI 45</span>
+                  </div>
+              </div>
+              <!-- February -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Feb</h6>
+                      <p>12/22°C</p>
+                      <span class="aqi aqi-good">AQI 50</span>
+                  </div>
+              </div>
+              <!-- March -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Mar</h6>
+                      <p>15/25°C</p>
+                      <span class="aqi aqi-good">AQI 55</span>
+                  </div>
+              </div>
+              <!-- April -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Apr</h6>
+                      <p>18/27°C</p>
+                      <span class="aqi aqi-good">AQI 60</span>
+                  </div>
+              </div>
+              <!-- May -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>May</h6>
+                      <p>20/28°C</p>
+                      <span class="aqi aqi-good">AQI 65</span>
+                  </div>
+              </div>
+              <!-- June -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="rain.png" alt="rain">
+                      <h6>Jun</h6>
+                      <p>21/28°C</p>
+                      <span class="aqi aqi-good">AQI 40</span>
+                  </div>
+              </div>
+              <!-- July -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="rain.png" alt="rain">
+                      <h6>Jul</h6>
+                      <p>21/27°C</p>
+                      <span class="aqi aqi-good">AQI 35</span>
+                  </div>
+              </div>
+              <!-- August -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="rain.png" alt="rain">
+                      <h6>Aug</h6>
+                      <p>21/27°C</p>
+                      <span class="aqi aqi-good">AQI 38</span>
+                  </div>
+              </div>
+              <!-- September -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Sep</h6>
+                      <p>20/26°C</p>
+                      <span class="aqi aqi-good">AQI 42</span>
+                  </div>
+              </div>
+              <!-- October -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Oct</h6>
+                      <p>18/25°C</p>
+                      <span class="aqi aqi-good">AQI 45</span>
+                  </div>
+              </div>
+              <!-- November -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Nov</h6>
+                      <p>15/23°C</p>
+                      <span class="aqi aqi-good">AQI 48</span>
+                  </div>
+              </div>
+              <!-- December -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Dec</h6>
+                      <p>12/21°C</p>
+                      <span class="aqi aqi-good">AQI 46</span>
+                  </div>
+              </div>
+          </div>
+          <div class="text-center">
+              <div class="best-time">🏆 Best time to visit: October - March</div>
+          </div>
+      </div>
+    </div>
+    
+
+    <br><br>
+    <button class="trip" id="openModal">Let's go on a trip</button>
+    
+    <div id="tripModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Select Your Trip</h2>
+            <button type="button" class="btn btn-warning" style="margin-bottom: 8px;color:black; border-radius: 5px;" onclick="location.href='{% url 'mizoram_7days' %}'" >7 days trip</button><br>
+            <button type="button" class="btn btn-warning" style="margin-bottom: 8px;color:black; border-radius: 5px;" onclick="location.href='{% url 'mizoram_12days' %}'" >12 days trip</button>
+        </div>
+    </div>
+    
+    <script>
+        var modal = document.getElementById("tripModal");
+        var btn = document.getElementById("openModal");
+        var span = document.getElementsByClassName("close")[0];
+        
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+        
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+        
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script><br><br>
+    <div class="container">
+      <ul class="nav nav-tabs">
+        <li class="nav-item"><a data-toggle="tab" href="#wbculture"> Culture</a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbtradition "> Tradition</a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbfestivals"> Festivals </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbfood"> Foods </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbhistory"> History </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbartacraft"> Art and Craft </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbseason"> Season to Visit </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbtourist"> Tourist Spots </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbwild"> Wildlife & Crops </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbedu"> Institutions </a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="wbculture" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Culture of Mizoram</h1>
+          <p class="text">Mizoram has a rich and vibrant culture, shaped by its tribal heritage, music, dance, festivals, and traditions. Here's an overview of some key aspects of its culture:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Language</h3>
+                  <ul>
+                    <li>Mizo is the official language and a major part of the cultural identity of Mizoram. English is also widely spoken and used as an official language. Other languages spoken include Lai, Mara, Hmar, and Paite, reflecting the diverse tribal communities in the state.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="bang.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>2. Literature</h3>
+                  <ul>
+                    <li>Mizo literature has a rich oral tradition that was later documented with the introduction of the Roman script by Christian missionaries in the late 19th century.</li>
+                    <li>Folk tales, songs, and poems form an important part of Mizo literary heritage, often reflecting the community's connection with nature and tribal values.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="lit.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div><br>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="art.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Art and Craft</h3>
+                  <ul>
+                    <li>Mizoram is known for its bamboo and cane handicrafts, including baskets, mats, furniture, and decorative items.</li>
+                    <li>Traditional Mizo textiles feature vibrant colors and intricate designs, with Puanchei (traditional Mizo wrap-around) being the most famous.</li>
+                  </ul>
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="music.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>4. Music</h3>
+                  <ul>
+                    <li>Music is an integral part of Mizo culture, with traditional instruments like the drum (khuang), gong (dar), and bamboo flutes (rawchhem, tumphit).</li>
+                    <li>Mizo folk songs include chanting (bawh hla), love songs (lengzem zai), and funeral songs (thinlung zai).</li>
+                    <li>Modern Mizo music blends traditional elements with contemporary styles, with gospel music being particularly popular.</li>
+                    <li>Community singing is a significant cultural practice, especially during festivals and social gatherings.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Dance</h3>
+                  <ul>
+                    <li>Cheraw (Bamboo Dance) is the most famous traditional dance of Mizoram, involving dancers stepping between rhythmically moving bamboo poles.</li>
+                    <li>Other traditional dances include Khuallam (dance of welcome), Chailam (dance of victory), and Solakia (dance depicting hunting scenes).</li>
+                    <li>These dances are performed during festivals like Chapchar Kut and other cultural celebrations.</li>
+                  </ul>
+                  <h3>6. Cuisine</h3>
+                  <ul>
+                    <li>Mizo cuisine is simple yet flavorful, with rice as the staple food accompanied by meat and vegetable dishes.</li>
+                    <li>Bamboo shoots, fermented soybean, and local herbs are common ingredients in Mizo cooking.</li>
+                    <li>Popular dishes include Bai (vegetable stew), Vawksa Rep (smoked pork), and Sawhchiar (meat cooked with rice).</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="chau.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="theater.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>7. Theatre and Cinema</h3>
+                  <ul>
+                    <li>Modern Mizo cinema is emerging, with local filmmakers producing movies in the Mizo language.</li>
+                    <li>Traditional storytelling and community performances remain important cultural expressions.</li>
+                  </ul>
+                  <h3>8. Architecture</h3>
+                  <ul>
+                    <li>Traditional Mizo houses (Zawlbuk) were communal dormitories for young men, serving as educational institutions.</li>
+                    <li>Modern Mizo architecture blends traditional elements with contemporary designs, often adapted to the hilly terrain.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="religion.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>9. Religious Practices</h3>
+                  <ul>
+                    <li>Christianity is the predominant religion in Mizoram, with over 87% of the population being Christian, primarily Presbyterian, Baptist, and Catholic.</li>
+                    <li>Traditional pre-Christian beliefs and practices still influence cultural ceremonies and festivals.</li>
+                    <li>Small minorities practice Buddhism, Hinduism, and other faiths.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>10. Social Structure</h3>
+                  <ul>
+                    <li>Mizo society is traditionally organized around the concept of 'Tlawmngaihna,' a code of ethics emphasizing selflessness, hospitality, and community service.</li>
+                    <li>The family unit is strong, with extended families often living together or in close proximity.</li>
+                  </ul>
+                  <h3>11. Festivals</h3>
+                  <ul>
+                    <li>Chapchar Kut is the most important traditional festival, celebrated after the clearing of jungles for jhum cultivation.</li>
+                    <li>Other festivals include Mim Kut (harvest festival), Pawl Kut (winter festival), and Thalfavang Kut (autumn festival).</li>
+                    <li>Christmas is celebrated with great enthusiasm throughout the state.</li>
+                  </ul>
+                  <h3>12. Handicrafts</h3>
+                  <ul>
+                    <li>Mizoram is known for its bamboo and cane crafts, textiles with intricate designs, and traditional jewelry made from beads and silver.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="phi.jpg" alt="" style="height:300px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br><br>
+
+          <p>Mizoram's culture is deeply rooted in its tribal heritage and community values, while also embracing modernity and Christianity. The state's unique blend of traditional practices and contemporary influences creates a vibrant cultural landscape that continues to evolve while maintaining its distinct identity.</p><br><br>
+        </div>
+        <div id="wbtradition" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Tradition of Mizoram</h1>
+          <p>Mizoram has a rich and diverse tradition deeply rooted in its tribal history, culture, and social practices. Here's an overview of some key traditional aspects of the state:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Clothing Tradition</h3>
+                  <h4>Men</h4>
+                  <ul>
+                    <li><b>Puanchei:</b> Traditional Mizo men wear a wrap-around cloth with colorful stripes, especially during festivals and ceremonies.</li>
+                    <li><b>Tawlhloh Puan:</b> A ceremonial cloth worn during special occasions.</li>
+                  </ul>
+                  <h4>Women</h4>
+                  <ul>
+                    <li><b>Puanchei:</b> Mizo women traditionally wear this vibrant wrap-around skirt with horizontal stripes in various colors.</li>
+                    <li><b>Kawrchei:</b> A traditional blouse worn with the Puanchei.</li>
+                    <li><b>Vakiria:</b> Traditional jewelry made of beads and silver worn by Mizo women.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="cloth.jpg" alt="" style="height:250px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>2. Wedding Traditions</h3>
+                  <ul>
+                    <li><b>Nupui Lawm:</b> Traditional Mizo wedding ceremony where the bride is escorted to the groom's house.</li>
+                    <li><b>Thuam:</b> Exchange of gifts between the bride and groom's families.</li>
+                    <li><b>Palai:</b> Mediators who negotiate between the families during marriage arrangements.</li>
+                    <li><b>Sechhun:</b> A feast hosted by the groom's family to welcome the bride.</li>
+                    <li><b>Lumtui:</b> A traditional wedding song sung during the ceremony.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="wedding.jpg" alt="" style="height:250px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="dance.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Music & Dance Traditions</h3>
+                  <ul>
+                    <li><b>Cheraw:</b> The famous bamboo dance of Mizoram, performed during festivals and celebrations.</li>
+                    <li><b>Khuallam:</b> A traditional welcome dance performed for honored guests.</li>
+                    <li><b>Solakia:</b> A dance depicting hunting scenes and warrior traditions.</li>
+                    <li><b>Chawnglaizawn:</b> Traditional music played during funerals and somber occasions.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="book.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+
+                  <h3>4. Social & Religious Traditions</h3>
+                  <ul>
+                    <li><b>Tlawmngaihna:</b> A code of ethics emphasizing selflessness, hospitality, and community service.</li>
+                    <li><b>Zawlbuk:</b> Traditional bachelor dormitories where young men learned community values and skills.</li>
+                    <li><b>Jhum Cultivation:</b> Traditional slash-and-burn agriculture practiced in the hills.</li>
+                    <li><b>Zangena:</b> Community assistance during times of crisis or celebration.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Architectural & Handicraft Traditions</h3>
+                  <ul>
+                    <li><b>Bamboo Crafts:</b> Mizoram is famous for its intricate bamboo baskets, mats, and furniture.</li>
+                    <li><b>Puan Weaving:</b> Traditional textile weaving with distinctive patterns and colors.</li>
+                    <li><b>Tuibur:</b> Traditional tobacco water pipes made from bamboo.</li>
+                    <li><b>Hmaram:</b> Traditional Mizo houses built on stilts to adapt to the hilly terrain.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="arch.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>6. Sports & Games</h3>
+                  <ul>
+                    <li><b>Football:</b> The most popular sport in Mizoram, with many players in national leagues.</li>
+                    <li><b>Inbuan:</b> Traditional Mizo wrestling performed on a raised platform.</li>
+                    <li><b>Insuknawr:</b> A traditional game involving pushing a wooden peg into the ground.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="foot1.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br><br>
+          <p>Mizoram's traditions beautifully combine tribal heritage, community values, and artistic expressions, making it one of the most culturally unique states in India.</p><br><br>
+        </div>
+        <div id="wbfestivals" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Festivals of Mizoram</h1>
+          <p>Mizoram is known for its vibrant and colorful festivals, which reflect its rich cultural heritage, tribal traditions, and community spirit. Here's a list of some of the major festivals celebrated in the state:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Chapchar Kut (Spring Festival)</h3>
+                  <ul>
+                    <li>The most significant festival of Mizoram, celebrated after the clearing of jungles for jhum cultivation.</li>
+                    <li>Features traditional dances like Cheraw (bamboo dance), music performances, and cultural competitions.</li>
+                    <li>People wear colorful traditional attire and participate in community feasts.</li>
+                    <li>Modern celebrations include fashion shows, beauty pageants, and music concerts.</li>
+                  </ul>
+                  <p><b>📍 Time: February - March</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="durga1.jpg" alt="" style="height:230px;width: 200px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="kali.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Mim Kut (Harvest Festival)</h3>
+                  <ul>
+                    <li>A harvest festival celebrated after the maize crop is harvested.</li>
+                    <li>Offerings are made to honor the departed souls of family members.</li>
+                    <li>Features traditional dances, music, and community feasts.</li>
+                  </ul>
+                  <p><b>📍 Time: August - September</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Pawl Kut (Winter Festival)</h3>
+                  <ul>
+                    <li>A harvest thanksgiving festival celebrated after the rice crop is harvested.</li>
+                    <li>People express gratitude for a successful harvest with feasts and celebrations.</li>
+                    <li>Traditional games, dances, and music performances are organized.</li>
+                  </ul>
+                  <p><b>📍 Time: December - January</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="poila.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="saras.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Thalfavang Kut (Autumn Festival)</h3>
+                  <ul>
+                    <li>A festival celebrating the completion of the most labor-intensive part of the agricultural cycle.</li>
+                    <li>Features traditional dances, music, and community gatherings.</li>
+                    <li>Showcases Mizo cultural heritage and traditional practices.</li>
+                  </ul>
+                  <p><b>📍 Time: October - November</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Christmas</h3>
+                  <ul>
+                    <li>With over 87% of the population being Christian, Christmas is one of the biggest celebrations in Mizoram.</li>
+                    <li>Churches are decorated, and carol singing groups go from house to house.</li>
+                    <li>Community feasts, gift exchanges, and special church services are organized.</li>
+                  </ul>
+                  <p><b>📍 Time: December 25</b></p>
+                  <h3>6. New Year Celebrations</h3>
+                  <ul>
+                    <li>Celebrated with great enthusiasm throughout the state.</li>
+                    <li>Features music concerts, community prayers, and special church services.</li>
+                  </ul>
+                  <p><b>📍 Time: December 31 - January 1</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="roth.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="bhai.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>7. Kut Festival</h3>
+                  <ul>
+                    <li>A cultural festival organized by the government to promote Mizo traditions.</li>
+                    <li>Features traditional dances, music, handicrafts, and food.</li>
+                    <li>Competitions in various cultural activities are held.</li>
+                  </ul>
+                  <p><b>📍 Time: Various times throughout the year</b></p>
+                  <h3>8. Missionary Day</h3>
+                  <ul>
+                    <li>Commemorates the arrival of Christian missionaries in Mizoram.</li>
+                    <li>Special church services and community gatherings are organized.</li>
+                  </ul>
+                  <p><b>📍 Time: January 11</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>9. Anthurium Festival</h3>
+                  <ul>
+                    <li>A festival celebrating the anthurium flower, which is widely cultivated in Mizoram.</li>
+                    <li>Features flower exhibitions, cultural performances, and food festivals.</li>
+                    <li>Promotes tourism and showcases the state's natural beauty.</li>
+                  </ul>
+                  <p><b>📍 Time: September - October</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="nabanna.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="alla.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>10. Mizo National Day</h3>
+                  <ul>
+                    <li>Commemorates the declaration of Mizoram's independence on October 28, 1961.</li>
+                    <li>Features cultural programs, parades, and patriotic events.</li>
+                    <li>Celebrates Mizo identity and heritage.</li>
+                  </ul>
+                  <p><b>📍 Time: October 28</b></p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>11. Cheraw Festival</h3>
+                  <ul>
+                    <li>A festival dedicated to the famous bamboo dance of Mizoram.</li>
+                    <li>Features competitions and performances of the Cheraw dance.</li>
+                    <li>Promotes Mizo cultural heritage and traditional dance forms.</li>
+                  </ul>
+                  <p><b>📍 Time: Various times throughout the year</b></p>
+
+                  <h3>12. Easter</h3>
+                  <ul>
+                    <li>An important Christian festival celebrated with special church services.</li>
+                    <li>Community gatherings and feasts are organized.</li>
+                  </ul>
+                  <p><b>📍 Time: March - April (varies each year)</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="chris.jpg" alt="" style="height:200px;width: 230px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="biswa.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>13. Mizoram State Day</h3>
+                  <ul>
+                    <li>Celebrates the formation of Mizoram as a full-fledged state on February 20, 1987.</li>
+                    <li>Features cultural programs, parades, and official ceremonies.</li>
+                  </ul>
+                  <p><b>📍 Time: February 20</b></p>
+                  <h3>14. Zofa Festival</h3>
+                  <ul>
+                    <li>A youth festival celebrating Mizo culture and traditions.</li>
+                    <li>Features music, dance, and various cultural competitions.</li>
+                  </ul>
+                  <p><b>📍 Time: Various times throughout the year</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Mizoram's festivals are a vibrant blend of traditional tribal celebrations, Christian observances, and modern cultural events, making the state a colorful and festive destination throughout the year! 🎉</p><br><br>
+        </div>
+        <div id="wbfood" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Foods of Mizoram</h1>
+          <p>Mizoram has a unique and flavorful cuisine that reflects its tribal heritage and geographical location. Mizo cuisine is simple yet delicious, with a focus on locally available ingredients and traditional cooking methods. Here's a look at some of the most iconic foods of Mizoram:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Staple Food of Mizoram</h3>
+                  <ul>
+                    <li><b>Rice:</b> The main staple food, served with various meat and vegetable dishes.</li>
+                    <li><b>Mizo Bai:</b> A popular vegetable stew made with various local greens, bamboo shoots, and pork.</li>
+                  </ul>
+                  <h3>2. Traditional Cooking Methods</h3>
+                  <ul>
+                    <li><b>Smoking:</b> Meat is often smoked over a fire to preserve it and add flavor.</li>
+                    <li><b>Fermentation:</b> Many Mizo dishes use fermented soybeans and vegetables.</li>
+                    <li><b>Bamboo Cooking:</b> Food is sometimes cooked inside bamboo tubes over an open fire.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="staple.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="veg.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Famous Mizo Dishes</h3>
+                  <h4>Meat Dishes</h4>
+                  <ul>
+                    <li><b>Vawksa Rep:</b> Smoked pork, a delicacy in Mizo cuisine.</li>
+                    <li><b>Sawhchiar:</b> A dish made with rice and meat cooked together.</li>
+                    <li><b>Arsa Rep:</b> Smoked chicken, often served with rice.</li>
+                    <li><b>Sarep:</b> Dried meat preserved for consumption during lean periods.</li>
+                  </ul>
+                  <h4>Vegetarian Dishes</h4>
+                  <ul>
+                    <li><b>Bai:</b> A vegetable stew made with mustard leaves, bamboo shoots, and other local greens.</li>
+                    <li><b>Behlawi:</b> A dish made with sticky rice and local herbs.</li>
+                    <li><b>Koat Pitha:</b> Rice cakes steamed in banana leaves.</li>
+                    <li><b>Chingal:</b> A dish made with taro leaves and stems.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="meat.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h4>Fish Dishes</h4>
+                  <ul>
+                    <li><b>Sangha Rep:</b> Smoked fish, often served with rice.</li>
+                    <li><b>Sangha Bai:</b> Fish stew with vegetables and local herbs.</li>
+                  </ul>
+                  <h4>Condiments & Accompaniments</h4>
+                  <ul>
+                    <li><b>Bekang:</b> Fermented soybean, used as a condiment in many dishes.</li>
+                    <li><b>Hmarcha Rawt:</b> A spicy chili chutney that accompanies most meals.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>4. Mizo Snacks & Desserts</h3>
+                  <ul>
+                    <li><b>Chhangban:</b> Rice bread, a popular snack in Mizoram.</li>
+                    <li><b>Sanpiau:</b> Rice porridge served with fish sauce and herbs.</li>
+                    <li><b>Koat Pitha:</b> Sweet rice cakes steamed in banana leaves.</li>
+                    <li><b>Chhangkual:</b> Rice flour pancakes, often served with honey or jaggery.</li>
+                  </ul>
+
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="rosso.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="phuchka.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>5. Street Food of Mizoram</h3>
+                  <ul>
+                    <li><b>Sanpiau:</b> Rice porridge served with fish sauce and herbs, a popular street food.</li>
+                    <li><b>Chow:</b> Mizo-style noodles influenced by Chinese cuisine.</li>
+                    <li><b>Momos:</b> Steamed or fried dumplings filled with meat or vegetables.</li>
+                    <li><b>Vawksa Kan:</b> Pork meatballs, often served as a snack.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>6. Beverages</h3>
+                  <ul>
+                    <li><b>Zu:</b> Traditional rice beer, consumed during festivals and special occasions.</li>
+                    <li><b>Zawlaidi:</b> A sweet, non-alcoholic drink made from local fruits.</li>
+                    <li><b>Tuibur:</b> Tobacco-infused water, traditionally consumed by Mizo people.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="tea.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Special Festival Foods</h3>
+                  <ul>
+                    <li><b>Chhangban:</b> Rice bread prepared during festivals like Chapchar Kut.</li>
+                    <li><b>Sarep:</b> Dried meat prepared for consumption during festivals and special occasions.</li>
+                    <li><b>Zu:</b> Rice beer brewed specially for festivals and celebrations.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="pithe.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Mizoram's cuisine is a reflection of its tribal heritage, geographical location, and agricultural practices. The use of locally available ingredients, traditional cooking methods, and unique flavors makes Mizo cuisine a delightful culinary experience! 🍛🍖🌶️</p><br><br>
+        </div>
+        <div id="wbhistory" class="tab-pane fade in active" style="background-color: white;">
+          <h1>History of Mizoram</h1>
+          <p>Mizoram has a rich and complex history that spans ancient tribal migrations, colonial rule, insurgency, and finally statehood. The region has played a significant role in India's northeastern frontier and has a unique cultural and political identity.</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Early History (Before 18th Century)</h3>
+                  <ul>
+                    <li><b>Tribal Origins:</b> The Mizos (meaning "highlanders") are believed to have migrated from China's Yunnan province to the present-day Mizoram between the 16th and 18th centuries.</li>
+                    <li><b>Clan System:</b> Mizo society was organized into various clans and villages, each headed by a chief (Lal).</li>
+                    <li><b>Zawlbuk System:</b> Traditional bachelor dormitories served as educational institutions for young men.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="maurya.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="pala.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. British Colonial Period (1840s - 1947)</h3>
+                  <h4>Initial Contact (1840s - 1880s):</h4>
+                  <ul>
+                    <li>British tea planters and administrators began to enter the Lushai Hills (now Mizoram) in the 1840s.</li>
+                    <li>Mizo chiefs resisted British encroachment, leading to conflicts.</li>
+                  </ul>
+                  <h4>Formal Annexation (1890s):</h4>
+                  <ul>
+                    <li>The British formally annexed the Lushai Hills in 1895, making it part of Assam province.</li>
+                    <li>The region was administered as the Lushai Hills District.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="delhi.png" alt="" style="height:220px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h4>Christian Missionaries (1890s - 1940s):</h4>
+                  <ul>
+                    <li>Welsh missionaries arrived in the late 19th century, introducing Christianity and the Roman script.</li>
+                    <li>By the mid-20th century, a majority of Mizos had converted to Christianity.</li>
+                    <li>Missionaries established schools and hospitals, significantly impacting Mizo society.</li>
+                  </ul>
+                  <h4>World War II Impact:</h4>
+                  <ul>
+                    <li>The region saw action during World War II as Japanese forces approached India's northeastern frontier.</li>
+                    <li>Many Mizos served in the British Indian Army during the war.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Post-Independence Period (1947 - 1966)</h3>
+                  <ul>
+                    <li>After India's independence in 1947, the Lushai Hills became part of Assam state.</li>
+                    <li>In 1954, the region was renamed the Mizo Hills District.</li>
+                    <li>The Mizo Union, formed in 1946, initially advocated for integration with India.</li>
+                    <li>A severe famine (Mautam) in 1959 led to discontent due to perceived inadequate relief from the Assam government.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="mughal.jpg" alt="" style="height:200px;width: 250px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="plassey.jpg" alt="" style="height:230px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h2>4. Insurgency Period (1966 - 1986)</h3>
+                    <h3>Mizo National Front (MNF) Uprising</h3>
+                    <ul>
+                      <li>Led by Laldenga, the MNF declared independence from India on March 1, 1966.</li>
+                      <li>The Indian government responded with military action, including controversial air strikes.</li>
+                      <li>The region was designated a Union Territory in 1972, separating it from Assam.</li>
+                    </ul>
+                    <h3>Peace Process</h3>
+                    <ul>
+                      <li>Peace talks began in the late 1970s between the Indian government and MNF leaders.</li>
+                      <li>The Mizoram Peace Accord was signed on June 30, 1986, ending the insurgency.</li>
+                    </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="rammohan.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>Statehood and Peace</h3>
+                  <ul>
+                    <li><b>Statehood (1987):</b></li>
+                    <ul>
+                      <li>Mizoram became the 23rd state of India on February 20, 1987.</li>
+                      <li>Laldenga became the first Chief Minister of the state.</li>
+                      <li>The MNF transformed from an insurgent group to a political party.</li>
+                    </ul>
+                    <li><b>Post-Statehood Developments:</b></li>
+                    <ul>
+                      <li>Mizoram has emerged as one of the most peaceful states in Northeast India.</li>
+                      <li>The state has achieved high literacy rates and human development indicators.</li>
+                      <li>Border issues with neighboring states and countries remain challenges.</li>
+                    </ul>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="netaji.jpg" alt="" style="height:230px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <ul>
+                    <li><b>Political Landscape:</b></li>
+                    <ul>
+                      <li>The MNF and Congress have been the dominant political parties in the state.</li>
+                      <li>The state has seen relatively stable governance compared to other northeastern states.</li>
+                      <li>Mizoram has maintained its unique cultural identity while integrating with the Indian mainstream.</li>
+                    </ul>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Modern Mizoram (1987 - Present)</h3>
+                  <h4>Economic Development</h4>
+                  <ul>
+                    <li>The state has focused on agriculture, horticulture, and bamboo cultivation.</li>
+                    <li>Tourism has emerged as a growing sector in the state's economy.</li>
+                    <li>The New Land Use Policy (NLUP) was implemented to move away from traditional jhum cultivation.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="part.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h4>Social Developments</h4>
+                  <ul>
+                    <li>Mizoram has achieved one of the highest literacy rates in India (91.3% as per 2011 census).</li>
+                    <li>The state has a strong civil society and community-based organizations.</li>
+                    <li>The Young Mizo Association (YMA) plays a significant role in social welfare and community development.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="part1.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>6. Present-Day Mizoram</h3>
+                  <ul>
+                    <li><b>Cultural Hub:</b> Mizoram is known for its vibrant music, dance, and festivals.</li>
+                    <li><b>Economic Growth:</b> Agriculture, handicrafts, tourism, and service sectors are key economic drivers.</li>
+                    <li><b>Tourist Attractions:</b> Phawngpui (Blue Mountain), Vantawng Falls, Reiek Peak, Dampa Tiger Reserve, and more.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="present.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Mizoram's history is a journey from tribal chiefdoms to British colonization, insurgency, and finally peaceful integration with India. Today, it stands as a model of peace and development in Northeast India, maintaining its unique cultural identity while embracing modernity. 🚩📜</p>
+          <br><br>
+        </div>
+        <div id="wbartacraft" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Art & Craft of Mizoram 🎨🖌️</h1>
+          <p>Mizoram has a rich artistic heritage, deeply rooted in its tribal traditions and cultural practices. Mizo artisans are known for their skillful craftsmanship, particularly in bamboo and cane work, textiles, and woodcarving. Here's an overview of the diverse art and craft forms of Mizoram:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Bamboo & Cane Craft 🏺</h3>
+                  <h4>🔸 Bamboo Baskets & Containers</h4>
+                  <ul>
+                    <li><b>Famous for:</b> Intricate weaving patterns and functional designs.</li>
+                    <li><b>Where?</b> Throughout Mizoram, especially in rural areas.</li>
+                    <li><b>Used in:</b> Daily life for storage, carrying, and as decorative items.</li>
+                  </ul>
+                  <h4>🔸 Cane Furniture</h4>
+                  <ul>
+                    <li><b>Products:</b> Chairs, tables, stools, and decorative items made from cane.</li>
+                    <li><b>Technique:</b> Traditional weaving methods passed down through generations.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="tera.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="textile.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Textile & Weaving 🧵</h3>
+                  <h4>🔸 Puanchei</h4>
+                  <ul>
+                    <li><b>Origin:</b> Traditional Mizo textile.</li>
+                    <li><b>Features:</b> Colorful horizontal stripes with intricate designs, worn as a wrap-around skirt.</li>
+                  </ul>
+                  <h4>🔸 Puan Designs</h4>
+                  <ul>
+                    <li><b>Ngotekherh:</b> A ceremonial cloth with diamond patterns.</li>
+                    <li><b>Tawlhlohpuan:</b> A cloth with intricate designs, traditionally worn by warriors.</li>
+                    <li><b>Hmaram:</b> A cloth with simple stripes, used for everyday wear.</li>
+                  </ul>
+                  <h4>🔸 Weaving Techniques</h4>
+                  <ul>
+                    <li><b>Backstrap Loom:</b> Traditional method used by Mizo women.</li>
+                    <li><b>Natural Dyes:</b> Derived from plants, barks, and roots.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Woodcarving 🏺</h3>
+                  <ul>
+                    <li><b>Origin:</b> Traditional skill practiced by Mizo men.</li>
+                    <li><b>Products:</b> Decorative items, household utensils, and ceremonial objects.</li>
+                    <li><b>Designs:</b> Often feature animal motifs, geometric patterns, and tribal symbols.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="dokra.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="gomira.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Musical Instruments 🌳</h3>
+                  <h4>🔸 Traditional Instruments</h4>
+                  <ul>
+                    <li><b>Khuang:</b> A drum made from hollowed wood and animal hide.</li>
+                    <li><b>Darbu:</b> A bamboo flute used in traditional music.</li>
+                    <li><b>Rawchhem:</b> A wind instrument made from bamboo.</li>
+                  </ul>
+                  <h4>🔸 Craftsmanship</h4>
+                  <ul>
+                    <li><b>Materials:</b> Primarily bamboo, wood, and animal hide.</li>
+                    <li><b>Techniques:</b> Traditional methods of hollowing, carving, and tuning.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Jewelry & Ornaments 🎨</h3>
+                  <ul>
+                    <li><b>Origin:</b> Traditional Mizo adornments.</li>
+                    <li><b>Materials:</b> Beads, silver, brass, and natural materials like seeds and shells.</li>
+                    <li><b>Types:</b> Necklaces, earrings, bracelets, and headgear for special occasions.</li>
+                  </ul>
+                  <h3>6. Pottery 🧸</h3>
+                  <ul>
+                    <li><b>Traditional Use:</b> For cooking, storage, and ceremonial purposes.</li>
+                    <li><b>Technique:</b> Hand-molded and fired using traditional methods.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="potochitra.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="kalighat.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>7. Bamboo Shoot Art 🖌️</h3>
+                  <ul>
+                    <li><b>Origin:</b> Unique to Mizoram and other northeastern states.</li>
+                    <li><b>Features:</b> Decorative items made from bamboo shoots and stems.</li>
+                  </ul>
+                  <h3>8. Traditional Headgear 🐚</h3>
+                  <ul>
+                    <li><b>Vakiria:</b> Traditional Mizo headgear made with beads and feathers.</li>
+                    <li><b>Significance:</b> Often worn during traditional dances and ceremonies.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>9. Contemporary Art Forms 🌾</h3>
+                  <h4>🔸 Modern Adaptations</h4>
+                  <ul>
+                    <li>Contemporary artists are blending traditional Mizo motifs with modern art forms.</li>
+                    <li>Fusion crafts combining traditional techniques with modern designs.</li>
+                  </ul>
+                  <h4>🔸 Painting & Sculpture</h4>
+                  <ul>
+                    <li><b>Themes:</b> Often depict Mizo life, landscapes, and cultural practices.</li>
+                    <li><b>Materials:</b> Both traditional and modern mediums are used.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="jute.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>📌 Summary: Mizoram's Art & Craft Forms</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Art Form</th>
+                <th>Materials</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Bamboo & Cane Craft</td>
+                <td>Bamboo, Cane</td>
+                <td>Baskets, Furniture, Decorative Items</td>
+              </tr>
+              <tr>
+                <td>Textile Weaving</td>
+                <td>Cotton, Natural Dyes</td>
+                <td>Puanchei, Ngotekherh, Tawlhlohpuan</td>
+              </tr>
+              <tr>
+                <td>Woodcarving</td>
+                <td>Local Wood</td>
+                <td>Decorative Items, Utensils</td>
+              </tr>
+              <tr>
+                <td>Musical Instruments</td>
+                <td>Bamboo, Wood, Animal Hide</td>
+                <td>Khuang, Darbu, Rawchhem</td>
+              </tr>
+              <tr>
+                <td>Jewelry & Ornaments</td>
+                <td>Beads, Silver, Brass</td>
+                <td>Traditional Adornments</td>
+              </tr>
+              <tr>
+                <td>Pottery</td>
+                <td>Clay, Natural Materials</td>
+                <td>Cooking Utensils, Storage Containers</td>
+              </tr>
+              <tr>
+                <td>Bamboo Shoot Art</td>
+                <td>Bamboo Shoots</td>
+                <td>Decorative Items</td>
+              </tr>
+              <tr>
+                <td>Traditional Headgear</td>
+                <td>Beads, Feathers</td>
+                <td>Vakiria, Ceremonial Headgear</td>
+              </tr>
+              <tr>
+                <td>Contemporary Art</td>
+                <td>Various</td>
+                <td>Modern Adaptations of Traditional Motifs</td>
+              </tr>
+            </table>
+          </div>
+          <br><br>
+          <p>Mizoram's art and crafts are a reflection of its tribal heritage, natural resources, and cultural values. The skillful craftsmanship of Mizo artisans continues to preserve traditional techniques while adapting to contemporary tastes and markets. 🎭✨</p>
+          <br><br>
+        </div>
+        <div id="wbseason" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Seasons to visit Mizoram 🌧️☀️ </h1>
+          <p>Mizoram, with its mountainous terrain and subtropical climate, offers different experiences throughout the year. The state's weather is influenced by its elevation, with cooler temperatures in the hills and warmer conditions in the valleys.</p>
+
+          <br><br>
+
+          <h2> Season-wise Breakdown for Visiting Mizoram</h2>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🌸 Spring (March - April)</h3>
+                  <ul>
+                    <li>Pleasant weather with temperatures ranging from 15°C to 25°C.</li>
+                    <li>Chapchar Kut, the most important festival of Mizoram, is celebrated during this season.</li>
+                    <li>Ideal for visiting Aizawl, Champhai, and other major towns.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="spring.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="summer.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>☀️ Summer (May – June)</h3>
+                  <ul>
+                    <li>Temperatures range from 20°C to 30°C, with higher humidity.</li>
+                    <li>Pre-monsoon showers begin in late May.</li>
+                    <li>Good for visiting Reiek Peak, Phawngpui (Blue Mountain), and other natural attractions.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🌧️ Monsoon (July - September)</h3>
+                  <ul>
+                    <li>Heavy rainfall throughout the state, with occasional landslides.</li>
+                    <li>Lush green landscapes and flowing waterfalls make for beautiful scenery.</li>
+                    <li>Not ideal for tourism due to transportation difficulties and limited outdoor activities.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="rain.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="autmn.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🍁 Autumn (October - November)</h3>
+                  <ul>
+                    <li>Pleasant weather with temperatures ranging from 15°C to 25°C.</li>
+                    <li>Clear skies offer excellent views of the surrounding mountains.</li>
+                    <li>Ideal for trekking, photography, and outdoor activities.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>❄️ Winter (December - February)</h3>
+                  <ul>
+                    <li>Cool and dry weather with temperatures ranging from 10°C to 20°C.</li>
+                    <li>Christmas and New Year celebrations are major attractions.</li>
+                    <li>Perfect for exploring Aizawl, visiting wildlife sanctuaries, and experiencing local culture.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="winter.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>📌 Summary: Best Time to Visit Different Places in Mizoram</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Region</th>
+                <th>Best Season</th>
+                <th>Recommended Months</th>
+                <th>Why Visit?</th>
+              </tr>
+              <tr>
+                <td>Aizawl</td>
+                <td>Winter, Spring, Autumn</td>
+                <td>October - April</td>
+                <td>Pleasant weather, cultural attractions, shopping, local cuisine</td>
+              </tr>
+              <tr>
+                <td>Champhai</td>
+                <td>Winter, Spring</td>
+                <td>October - April</td>
+                <td>Vineyards, border town with Myanmar, Rih Dil Lake</td>
+              </tr>
+              <tr>
+                <td>Phawngpui (Blue Mountain)</td>
+                <td>Autumn, Winter</td>
+                <td>October - February</td>
+                <td>Trekking, bird watching, panoramic views</td>
+              </tr>
+              <tr>
+                <td>Reiek Peak</td>
+                <td>Winter, Spring</td>
+                <td>October - April</td>
+                <td>Trekking, traditional Mizo villages, scenic views</td>
+              </tr>
+              <tr>
+                <td>Dampa Tiger Reserve</td>
+                <td>Winter</td>
+                <td>November - February</td>
+                <td>Wildlife spotting, bird watching, nature trails</td>
+              </tr>
+              <tr>
+                <td>Vantawng Falls</td>
+                <td>Monsoon, Post-Monsoon</td>
+                <td>August - October</td>
+                <td>Impressive waterfall at its full glory</td>
+              </tr>
+              <tr>
+                <td>Murlen National Park</td>
+                <td>Winter, Spring</td>
+                <td>October - April</td>
+                <td>Biodiversity, virgin forests, rare wildlife</td>
+              </tr>
+              <tr>
+                <td>Palak Lake</td>
+                <td>Winter, Spring</td>
+                <td>October - April</td>
+                <td>Largest natural lake in Mizoram, boating, fishing</td>
+              </tr>
+              <tr>
+                <td>Lunglei</td>
+                <td>Winter, Spring</td>
+                <td>October - April</td>
+                <td>Second largest city, cultural heritage, scenic beauty</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="container">
+            <div class="row">
+              <h1 style=" text-align: center;">📌 Summary: When to Visit Mizoram</h1><br>
+              <ul>
+                <li><b>For festivals & cultural experiences:</b> February - March (Chapchar Kut), December (Christmas)</li>
+                <li><b>For trekking & outdoor activities:</b> October - April (Phawngpui, Reiek Peak)</li>
+                <li><b>For wildlife & nature:</b> October - April (Dampa Tiger Reserve, Murlen National Park)</li>
+                <li><b>For waterfalls & lush landscapes:</b> August - October (post-monsoon)</li>
+                <li><b>For comfortable sightseeing:</b> October - April (Aizawl, Champhai, Lunglei)</li>
+              </ul>
+
+            </div>
+          </div>
+          <br><br>
+        </div>
+        <div id="wbtourist" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Tourist Spots of Mizoram 🏖️🏔️</h1>
+          <p>Mizoram, with its rolling hills, lush valleys, and vibrant culture, offers a unique travel experience for those seeking natural beauty and cultural immersion. Here's a categorized list of the best tourist places in Mizoram:</p>
+
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Mountain & Hill Destinations 🏔️</h3>
+                  <ul>
+                    <li><b>Phawngpui (Blue Mountain) -</b> Highest peak in Mizoram, offering panoramic views and trekking opportunities</li>
+                    <li><b>Reiek Peak -</b> Famous for its stunning views, traditional Mizo village, and trekking trails</li>
+                    <li><b>Hmuifang -</b> Hill station with lush forests and adventure activities</li>
+                    <li><b>Thenzawl -</b> Picturesque hill station known for its deer park and golf course</li>
+                    <li><b>Lunglei -</b> Second largest city with beautiful hills and valleys</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="darj.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="biswagate.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Cultural & Heritage Destinations 🏛️</h3>
+                  <ul>
+                    <li><b>Aizawl -</b> State capital with Solomon's Temple, Mizoram State Museum, and vibrant markets</li>
+                    <li><b>Champhai -</b> Border town with Myanmar, known for its vineyards and cultural heritage</li>
+                    <li><b>Falkawn Village -</b> Model village showcasing traditional Mizo life and architecture</li>
+                    <li><b>Serchhip -</b> Known for its cultural heritage and traditional practices</li>
+                    <li><b>Siaha -</b> Home to the Mara tribe with unique cultural traditions</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Wildlife & Nature Destinations 🌳🐯</h3>
+                  <ul>
+                    <li><b>Dampa Tiger Reserve -</b> Largest wildlife sanctuary in Mizoram with diverse flora and fauna</li>
+                    <li><b>Murlen National Park -</b> Virgin forests often compared to the Amazon, home to rare wildlife</li>
+                    <li><b>Ngengpui Wildlife Sanctuary -</b> Rich biodiversity with tropical forests</li>
+                    <li><b>Khawnglung Wildlife Sanctuary -</b> Home to various species of birds and animals</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="sundar.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="digha.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Lakes & Waterfalls 🏖️</h3>
+                  <ul>
+                    <li><b>Palak Lake -</b> Largest natural lake in Mizoram, surrounded by lush forests</li>
+                    <li><b>Rih Dil -</b> Mystical lake on the Myanmar border with cultural significance</li>
+                    <li><b>Vantawng Falls -</b> Highest waterfall in Mizoram with impressive cascades</li>
+                    <li><b>Tuirihiau Falls -</b> Beautiful waterfall near Lunglei</li>
+                    <li><b>Tam Dil (Lake) -</b> Heart-shaped lake with boating facilities</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Religious Destinations ⛩️</h3>
+                  <ul>
+                    <li><b>Solomon's Temple (Aizawl) -</b> Impressive church with beautiful architecture</li>
+                    <li><b>Presbyterian Church (Aizawl) -</b> Historic church with cultural significance</li>
+                    <li><b>Baptist Church of Mizoram -</b> Important religious center</li>
+                    <li><b>Holy Trinity Church (Champhai) -</b> Beautiful church with stunning views</li>
+                    <li><b>Lairam Jesus Christ Baptist Church (Aizawl) -</b> Architectural marvel</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="dak.png" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="ajhills.png" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>6. Adventure & Offbeat Destinations 🎢🚵</h3>
+                  <ul>
+                    <li><b>Phawngpui Trek -</b> Challenging trek to the Blue Mountain peak</li>
+                    <li><b>Durtlang Hills -</b> Popular for paragliding and adventure sports</li>
+                    <li><b>Tamdil Lake -</b> Offers boating and water sports</li>
+                    <li><b>Hmuifang Adventure Park -</b> Zipline, rock climbing, and other activities</li>
+                    <li><b>Saiha -</b> Remote district with untouched natural beauty</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Markets & Shopping Destinations 🍛🛍️</h3>
+                  <ul>
+                    <li><b>Bara Bazar (Aizawl) -</b> Main market with local handicrafts, textiles, and souvenirs</li>
+                    <li><b>Millennium Center (Aizawl) -</b> Modern shopping complex with various stores</li>
+                    <li><b>Zote Bazar -</b> Border market with unique items from Myanmar</li>
+                    <li><b>Champhai Market -</b> Known for local wines and handicrafts</li>
+                    <li><b>Thenzawl Handloom Center -</b> Famous for traditional Mizo textiles and puans</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="kumar.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br><br>
+
+        </div>
+        <div id="wbwild" class="tab-pane fade in active" style="background-color: white;">
+          <h1> Wildlife & Crops of Mizoram 🌿</h1>
+          <p>Mizoram has rich biodiversity and a unique agricultural landscape due to its varied topography, from hills to valleys, and its subtropical climate.</p>
+
+          <br>
+          <h2>Wildlife of Mizoram </h2>
+          <p>Mizoram has several national parks and wildlife sanctuaries, making it a haven for biodiversity in Northeast India.</p>
+
+          <br>
+          <h2>🔹 Major National Parks & Wildlife Sanctuaries</h2>
+          <div>
+            <table>
+              <tr>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Dampa Tiger Reserve</td>
+                <td>Mamit District</td>
+                <td>Tigers 🐅, Clouded Leopards, Elephants 🐘, Diverse Bird Species</td>
+              </tr>
+              <tr>
+                <td>Murlen National Park</td>
+                <td>Champhai District</td>
+                <td>Virgin Forests, Hoolock Gibbons, Serow, Rare Birds</td>
+              </tr>
+              <tr>
+                <td>Phawngpui National Park (Blue Mountain)</td>
+                <td>Lawngtlai District</td>
+                <td>Rare Orchids, Blyth's Tragopan, Unique Flora</td>
+              </tr>
+              <tr>
+                <td>Ngengpui Wildlife Sanctuary</td>
+                <td>Lawngtlai District</td>
+                <td>Tropical Forests, Diverse Wildlife, Rare Plants</td>
+              </tr>
+              <tr>
+                <td>Khawnglung Wildlife Sanctuary</td>
+                <td>Lunglei District</td>
+                <td>Barking Deer, Wild Boar, Various Bird Species</td>
+              </tr>
+              <tr>
+                <td>Lengteng Wildlife Sanctuary</td>
+                <td>Champhai District</td>
+                <td>Serow, Goral, Himalayan Black Bear</td>
+              </tr>
+              <tr>
+                <td>Tawi Wildlife Sanctuary</td>
+                <td>Aizawl District</td>
+                <td>Primates, Deer, Diverse Bird Species</td>
+              </tr>
+            </table>
+          </div>
+          <bt><br></bt>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3> 🔹 Notable Wildlife in Mizoram</h3>
+                <ul>
+                  <li><b>Mammals:</b> Serow (State Animal), Hoolock Gibbon, Clouded Leopard, Himalayan Black Bear, Slow Loris.</li>
+                  <li><b>Birds:</b> Mrs. Hume's Pheasant (State Bird), Blyth's Tragopan, Great Hornbill, Hill Myna.</li>
+                  <li><b>Reptiles:</b> King Cobra, Python, Various Lizard Species.</li>
+                  <li><b>Amphibians:</b> Tree Frogs, Toads, Salamanders.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="ele.jpg" alt="" style="height:200px;width: 200px;">
+
+              </div>
+
+            </div>
+          </div>
+          <hr><br>
+          <h2>🌾 Agriculture & Major Crops in Mizoram </h2>
+          <p>Mizoram's agriculture is characterized by jhum (slash-and-burn) cultivation in the hills and terrace farming in the valleys. The state is moving towards more sustainable agricultural practices.</p>
+
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Key Agricultural Features</h3>
+                <ul>
+                  <li>Jhum cultivation is gradually being replaced by permanent farming under the New Land Use Policy (NLUP).</li>
+                  <li><b>Horticulture:</b> Growing sector with focus on fruits, vegetables, and spices.</li>
+                  <li><b>Climate:</b> Suitable for subtropical and temperate crops.</li>
+                  <li><b>Irrigation:</b> Mainly rain-fed agriculture with some terraced fields.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="jutep.jpg" alt="" style="height:200px;width: 220px;">
+
+              </div>
+            </div>
+          </div>
+          <h2>🔹 Major Crops of Mizoram</h2>
+          <div>
+            <table>
+              <tr>
+                <th>Category</th>
+                <th>Crops</th>
+              </tr>
+              <tr>
+                <td>Cereals</td>
+                <td>Rice 🍚, Maize 🌽, Millet</td>
+              </tr>
+              <tr>
+                <td>Cash Crops</td>
+                <td>Ginger, Turmeric, Coffee ☕, Tea 🍵, Sugarcane</td>
+              </tr>
+              <tr>
+                <td>Pulses</td>
+                <td>Soybean, Black Gram, Green Gram</td>
+              </tr>
+              <tr>
+                <td>Vegetables</td>
+                <td>Cabbage, Broccoli, Carrot 🥕, Pumpkin 🎃, Beans, Chili 🌶️</td>
+              </tr>
+              <tr>
+                <td>Fruits</td>
+                <td>Banana 🍌, Pineapple 🍍, Orange 🍊, Passion Fruit, Dragon Fruit, Kiwi</td>
+              </tr>
+              <tr>
+                <td>Oilseeds</td>
+                <td>Mustard, Sesame</td>
+              </tr>
+              <tr>
+                <td>Spices</td>
+                <td>Ginger, Turmeric, Chili 🌶️, Black Pepper</td>
+              </tr>
+              <tr>
+                <td>Flowers</td>
+                <td>Anthurium, Bird of Paradise, Orchids 🌸</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Special Agricultural Products</h3>
+                <ul>
+                  <li>Anthurium Flowers 🌺 (Mizoram is India's largest producer).</li>
+                  <li>Bird's Eye Chili (One of the hottest chili varieties).</li>
+                  <li>Passion Fruit (High-quality produce exported to other states).</li>
+                  <li>Bamboo (Used for food, construction, and handicrafts).</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="mango.jpg" alt="" style="height:200px;width: 200px;">
+
+              </div>
+            </div>
+          </div><br>
+          <hr>
+          <div class="box" style=" background: #f3b37185;padding: 10px;">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3> Sustainable Agriculture & Modern Trends 🌾</h3>
+                  <ul>
+                    <li><b>New Land Use Policy (NLUP):</b> Government initiative to move away from jhum cultivation.</li>
+                    <li><b>Organic Farming:</b> Growing trend with focus on chemical-free produce.</li>
+                    <li><b>Horticulture Mission:</b> Promoting fruit and vegetable cultivation for economic development.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="teag.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Mizoram's biodiversity and agricultural practices reflect its unique geographical and climatic conditions. The state is working towards conservation of its wildlife while promoting sustainable agricultural development.</p>
+          <br><br>
+        </div>
+        <div id="wbedu" class="tab-pane fade in active" style="background-color: white;">
+          <h1>🎓 Education & Institutions in Mizoram</h1>
+          <p>Mizoram has made significant strides in education, boasting one of the highest literacy rates in India (91.3% as per the 2011 census). The state's educational system blends modern academics with traditional values, creating a unique learning environment.</p>
+
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>📌 Education System in Mizoram</h3>
+                  <ul>
+                    <li><b>School Education:</b> Follows MBSE (Mizoram Board of School Education), CBSE, and ICSE boards.</li>
+                    <li><b>Higher Education:</b> Managed by UGC, AICTE, and state universities.</li>
+                    <li><b>Major Fields:</b> Arts, Science, Commerce, Engineering, Medicine, Agriculture, and Theology.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="wbbse.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>🏛️ Top Universities & Institutions </h2>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Central Universities</h3>
+                <ol>
+                  <li><b>Mizoram University (Aizawl) -</b> A central university offering various undergraduate, postgraduate, and doctoral programs.</li>
+                  <li><b>National Institute of Technology (NIT) Mizoram -</b> Premier engineering institution located in Aizawl.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="visva.jpg" alt="" style="height:200px;width: 230px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 State Universities & Colleges</h3>
+                <ol>
+                  <li><b>Pachhunga University College -</b> One of the oldest and most prestigious colleges in Mizoram.</li>
+                  <li><b>Government Zirtiri Residential Science College -</b> Focused on science education.</li>
+                  <li><b>Government Aizawl College -</b> Offers various undergraduate programs.</li>
+                  <li><b>Government Champhai College -</b> Important educational institution in eastern Mizoram.</li>
+                  <li><b>Government Lunglei College -</b> Major college in southern Mizoram.</li>
+                  <li><b>Government Saiha College -</b> Serves the educational needs of the Mara autonomous district.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="jadav.png" alt="" style="height:200px;width: 230px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Institution</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Mizoram University</td>
+                <td>Aizawl</td>
+                <td>Central university offering diverse programs in arts, science, commerce, and management.</td>
+              </tr>
+              <tr>
+                <td>NIT Mizoram</td>
+                <td>Aizawl</td>
+                <td>Engineering education and research.</td>
+              </tr>
+              <tr>
+                <td>Pachhunga University College</td>
+                <td>Aizawl</td>
+                <td>Oldest college in Mizoram with strong academic reputation.</td>
+              </tr>
+              <tr>
+                <td>ICFAI University</td>
+                <td>Aizawl</td>
+                <td>Private university focusing on management and professional courses.</td>
+              </tr>
+              <tr>
+                <td>College of Veterinary Sciences & Animal Husbandry</td>
+                <td>Selesih, Aizawl</td>
+                <td>Veterinary education and research.</td>
+              </tr>
+              <tr>
+                <td>Mizoram College of Nursing</td>
+                <td>Aizawl</td>
+                <td>Nursing education and healthcare training.</td>
+              </tr>
+              <tr>
+                <td>Regional Institute of Paramedical and Nursing Sciences</td>
+                <td>Aizawl</td>
+                <td>Medical and paramedical education.</td>
+              </tr>
+              <tr>
+                <td>Government Zirtiri Residential Science College</td>
+                <td>Aizawl</td>
+                <td>Science education and research.</td>
+              </tr>
+              <tr>
+                <td>Mizoram Law College</td>
+                <td>Aizawl</td>
+                <td>Legal education and training.</td>
+              </tr>
+            </table>
+          </div>
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="iitkgp.jpg" alt="" style="height:200px;width: 240px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🔹 Technical & Professional Institutions</h3>
+                  <ol>
+                    <li><b>National Institute of Technology (NIT) Mizoram -</b> Premier engineering institution.</li>
+                    <li><b>Mizoram Polytechnic -</b> Offers diploma courses in various engineering disciplines.</li>
+                    <li><b>Regional Institute of Paramedical and Nursing Sciences (RIPANS) -</b> Focuses on healthcare education.</li>
+                    <li><b>College of Veterinary Sciences & Animal Husbandry -</b> Only veterinary college in the state.</li>
+                    <li><b>Mizoram College of Nursing -</b> Premier nursing education institution.</li>
+                  </ol>
+                </div>
+
+                <br><br>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Technical Institution</th>
+                <th>Location</th>
+                <th>Specialization</th>
+              </tr>
+              <tr>
+                <td>NIT Mizoram</td>
+                <td>Aizawl</td>
+                <td>Engineering education in various disciplines.</td>
+              </tr>
+              <tr>
+                <td>Mizoram Polytechnic</td>
+                <td>Lunglei</td>
+                <td>Diploma courses in engineering and technology.</td>
+              </tr>
+              <tr>
+                <td>Industrial Training Institute (ITI)</td>
+                <td>Aizawl</td>
+                <td>Vocational training in various trades.</td>
+              </tr>
+              <tr>
+                <td>Mizoram Engineering College</td>
+                <td>Aizawl</td>
+                <td>Engineering education with focus on local needs.</td>
+              </tr>
+              <tr>
+                <td>NIELIT Aizawl</td>
+                <td>Aizawl</td>
+                <td>Information technology and electronics training.</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🔹 Medical Institutions</h3>
+                  <ol>
+                    <li><b>Zoram Medical College -</b> The first and only medical college in Mizoram.</li>
+                    <li><b>Regional Institute of Paramedical and Nursing Sciences (RIPANS) -</b> Offers various healthcare programs.</li>
+                    <li><b>Mizoram College of Nursing -</b> Premier nursing education institution.</li>
+                    <li><b>State Referral Hospital -</b> Teaching hospital associated with Zoram Medical College.</li>
+                  </ol>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="calmed.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Medical Institution</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Zoram Medical College</td>
+                <td>Falkawn, Aizawl</td>
+                <td>Only medical college in Mizoram, offering MBBS program.</td>
+              </tr>
+              <tr>
+                <td>Regional Institute of Paramedical and Nursing Sciences</td>
+                <td>Aizawl</td>
+                <td>Paramedical and nursing education.</td>
+              </tr>
+              <tr>
+                <td>Mizoram College of Nursing</td>
+                <td>Aizawl</td>
+                <td>Nursing education and training.</td>
+              </tr>
+              <tr>
+                <td>State Referral Hospital</td>
+                <td>Falkawn, Aizawl</td>
+                <td>Teaching hospital with modern facilities.</td>
+              </tr>
+              <tr>
+                <td>Civil Hospital</td>
+                <td>Aizawl</td>
+                <td>Major government hospital with training facilities.</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="bckv.svg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🔹 Law, Agriculture, & Other Institutes</h3>
+                  <ul>
+                    <li><b>Mizoram Law College -</b> Premier law education institution in the state.</li>
+                    <li><b>College of Horticulture and Forestry -</b> Focuses on agricultural and forestry education.</li>
+                    <li><b>Mizoram Institute of Music -</b> Specialized in music education.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Institute</th>
+                <th>Location</th>
+                <th>Specialization</th>
+              </tr>
+              <tr>
+                <td>Mizoram Law College</td>
+                <td>Aizawl</td>
+                <td>Legal education and training.</td>
+              </tr>
+              <tr>
+                <td>College of Horticulture and Forestry</td>
+                <td>Thenzawl</td>
+                <td>Agricultural and forestry education.</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <h2>🏫 School Education in Mizoram </h2>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Major School Boards</h3>
+                <ol>
+                  <li><b>Mizoram Board of School Education (MBSE) -</b> State board conducting HSLC (10th) and HSSLC (12th) exams.</li>
+                  <li><b>Central Board of Secondary Education (CBSE) -</b> National board with several affiliated schools in Mizoram.</li>
+                  <li><b>Indian Certificate of Secondary Education (ICSE) -</b> Some private schools follow this curriculum.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="cbse.jpg" alt="" style="height:200px;width: 200px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-4">
+                <img src="apsbkp.jpg" alt="" style="height:200px;width: 230px;">
+
+              </div>
+              <div class="col-sm-8">
+
+                <h3>🔹 Notable Schools in Mizoram</h3>
+                <ol>
+                  <li><b>Synod Higher Secondary School (Aizawl) -</b> One of the oldest and most prestigious schools.</li>
+                  <li><b>St. Paul's Higher Secondary School -</b> Well-known for academic excellence.</li>
+                  <li><b>Kendriya Vidyalaya (Aizawl) -</b> CBSE-affiliated central government school.</li>
+                  <li><b>Jawahar Navodaya Vidyalaya -</b> Residential school for talented students from rural areas.</li>
+                  <li><b>St. Joseph Higher Secondary School -</b> Reputed Catholic institution.</li>
+                  <li><b>Government Mizo High School -</b> Historic institution with cultural significance.</li>
+                </ol>
+
+              </div>
+
+            </div>
+          </div>
+          <div class="box">
+            <h2>🔬 Research & Development</h2>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <p>Mizoram has several research institutions focusing on regional development and local issues:</p>
+                  <ol>
+                    <li><b>ICAR Research Complex for NEH Region, Mizoram Centre -</b> Agricultural research.</li>
+                    <li><b>Directorate of Science & Technology, Government of Mizoram -</b> Scientific research and development.</li>
+                    <li><b>Mizoram Science, Technology & Innovation Council -</b> Promoting scientific temper and innovation.</li>
+                  </ol>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="csir.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <h2>📚 Other Notable Institutions</h2>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <ol>
+                    <li><b>Mizoram Institute of Music -</b> Specialized in music education. 🎵</li>
+                    <li><b>Mizoram Hindi Training College -</b> Promoting Hindi language education.</li>
+                    <li><b>Mizoram English Language Teaching Institute -</b> Focused on English language skills.</li>
+                    <li><b>Mizoram State Council of Educational Research and Training -</b> Teacher training and curriculum development.</li>
+                    <li><b>Tribal Research Institute -</b> Research on tribal culture and heritage.</li>
+                    <li><b>Mizoram Institute of Comprehensive Education -</b> Holistic educational approach.</li>
+                  </ol>
+                </div>
+                <div class="col-sm-4">
+                  <img src="Marine.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Mizoram has made remarkable progress in education, with a focus on quality and accessibility. The state's high literacy rate reflects its commitment to educational development, blending traditional values with modern knowledge systems.</p>
+        </div>
+        <br><br>
+
+      </div>
+
+
+    </div>
+  </div>
+  </div>
+</body>
+
+</html>

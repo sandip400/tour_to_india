@@ -1,0 +1,2608 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Odisha</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> -->
+  <style>
+    .wb {
+      font-size: 10vw;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+      border-spacing: 0;
+      border: 1px solid #ddd;
+    }
+
+    td,
+    th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+      font-size: 1.5vw;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+
+    .trip {
+      text-align: center;
+      font-weight: 900;
+      background: orangered;
+      padding: 20px;
+      border-radius: 20px;
+      width: 60%;
+    }
+
+    p,
+    li,
+    .text {
+      font-size: 1.5vw;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-weight: 600;
+    }
+
+    h4 {
+      font-weight: 900;
+    }
+
+    img {
+      border-radius: 10px;
+      display: block;
+      margin: auto;
+    }
+
+    @media screen and (max-width: 850px) {
+
+      p,
+      li,
+      .text,
+      td,
+      th {
+        font-size: 2vw;
+        ;
+      }
+
+    }
+
+    @media screen and (max-width: 500px) {
+
+      p,
+      li,
+      .text,
+      td,
+      th {
+        font-size: 4.5vw;
+        ;
+      }
+
+    }
+
+    .box:nth-of-type(odd) {
+      background: #f3b37185;
+      padding: 10px;
+    }
+
+    .weather-container {
+            border-radius: 15px;
+            background: #f0fdf4;
+            padding: 15px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .weather-card {
+            text-align: center;
+            border-radius: 10px;
+            padding: 10px;
+            background: white;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+        .aqi {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            color: white;
+        }
+        .aqi-bad { background: purple; }
+        .aqi-moderate { background: orange; }
+        .aqi-good { background: green; }
+        .best-time {
+            background: #d1fae5;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 15px;
+            color: green;
+        }
+        .wet {
+            max-width: 50px;
+        }
+        
+        .trip {
+          font-size: 18px;
+          padding: 10px 20px;
+          cursor: pointer;
+          background-color:rgb(231, 36, 36);
+          color: white;
+          border: none;
+          border-radius: 5px;
+      }
+      .modal {
+          display: none;
+          position: fixed;
+          z-index: 1;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0,0,0,0.5);
+      }
+      .modal-content {
+          background-color: #fff;
+          margin: 10% auto;
+          padding: 20px;
+          border-radius: 10px;
+          width: 40%;
+          box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+          text-align: center;
+      }
+      .close {
+          color: #aaa;
+          float: right;
+          font-size: 28px;
+          font-weight: bold;
+          cursor: pointer;
+      }
+      .trip-options {
+          display: flex;
+          justify-content: center;
+          gap: 20px;
+          margin-top: 20px;
+      }
+      .trip-options a {
+          display: block;
+          width: 120px;
+          padding: 10px;
+          background-color: #28a745;
+          color: white;
+          text-decoration: none;
+          border-radius: 5px;
+      }
+  </style>
+</head>
+
+<body>
+
+
+  <!-- <h2>Carousel Example</h2> -->
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+      <li data-target="#myCarousel" data-slide-to="4"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+
+      <div class="item active">
+        <img src="/placeholder.svg?height=500&width=1000" alt="Konark Sun Temple" style="width:100%; height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Konark Sun Temple</h3>
+          <p>We love the magnificent architecture and history!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="/placeholder.svg?height=500&width=1000" alt="Puri Jagannath Temple" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Puri Jagannath Temple</h3>
+          <p>The spiritual heart of Odisha!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="/placeholder.svg?height=500&width=1000" alt="Chilika Lake" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Chilika Lake</h3>
+          <p>Asia's largest brackish water lagoon!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="/placeholder.svg?height=500&width=1000" alt="Puri Beach" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Puri Beach</h3>
+          <p>We love the golden sands!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="/placeholder.svg?height=500&width=1000" alt="Tribal Culture" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Tribal Culture</h3>
+          <p>We love the rich tribal heritage!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+  <div class="container">
+    <br><br>
+    <h1 class="wb">ODISHA</h1><br>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <img src="/placeholder.svg?height=700&width=500" alt="Odisha Map" style="height:700px; width: -webkit-fill-available;">
+
+        </div>
+        <div class="col-sm-6">
+          <h1>Odisha: The Soul of Incredible India</h1>
+          <p class="text">Odisha (formerly Orissa) is a diverse and vibrant state in eastern India, known for its rich history, ancient temples, tribal culture, natural beauty, arts and crafts, and delicious cuisine. It is home to some of India's most magnificent temples and pristine beaches.</p>
+
+          <ul>
+            <li><b>Location --</b> Eastern India</li>
+            <li><b>Capital --</b> Bhubaneswar</li>
+            <li><b>Official Language --</b> Odia</li>
+            <li><b>Area --</b> 155,707 sq. km</li>
+            <li><b>Population --</b> ~45 million</li>
+            <li><b>Borders --</b> West Bengal, Jharkhand, Chhattisgarh, Andhra Pradesh & Bay of Bengal</li>
+            <li><b>Major Rivers --</b> Mahanadi, Brahmani, Baitarani, Subarnarekha</li>
+            <li><b>Major Festivals --</b> Rath Yatra, Durga Puja, Nuakhai, Konark Dance Festival, Dola Purnima</li>
+            <li><b>State Animal --</b> Sambar Deer</li>
+            <li><b>State Flower --</b> Ashoka</li>
+            <li><b>State Tree --</b> Indian Fig Tree</li>
+            <li><b>State Bird --</b> Indian Roller (Blue Jay)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <br>
+    <hr>
+    <div>
+      <h1>📌 Divisions & Districts of Odisha</h1>
+      <br>
+      <div style="overflow-x:auto;">
+        <table>
+          <tr>
+            <th>Division</th>
+            <th>Districts</th>
+            <th>Key Highlights</th>
+          </tr>
+          <tr>
+            <td>Northern Division</td>
+            <td>1. Mayurbhanj 2. Keonjhar 3. Sundargarh 4. Balasore 5. Bhadrak</td>
+            <td>Simlipal National Park, Tribal Culture, Steel Industry, Beaches</td>
+          </tr>
+          <tr>
+            <td>Central Division</td>
+            <td>6. Cuttack 7. Jajpur 8. Kendrapara 9. Jagatsinghpur 10. Dhenkanal 11. Angul</td>
+            <td>Cuttack Silver Filigree, Bhitarkanika National Park, Industrial Hub</td>
+          </tr>
+          <tr>
+            <td>Southern Division</td>
+            <td>12. Ganjam 13. Gajapati 14. Kandhamal 15. Boudh 16. Rayagada 17. Koraput 18. Malkangiri 19. Nabarangpur</td>
+            <td>Chilika Lake, Tribal Culture, Coffee Plantations, Silk Production</td>
+          </tr>
+          <tr>
+            <td>Western Division</td>
+            <td>20. Sambalpur 21. Bargarh 22. Jharsuguda 23. Deogarh 24. Sonepur 25. Bolangir 26. Nuapada</td>
+            <td>Hirakud Dam, Handloom Industry, Sambalpuri Sarees, Mining</td>
+          </tr>
+          <tr>
+            <td>Eastern Division</td>
+            <td>27. Khordha 28. Puri 29. Nayagarh 30. Kalahandi</td>
+            <td>Bhubaneswar (Capital), Puri Jagannath Temple, Konark Sun Temple</td>
+          </tr>
+        </table>
+      </div>
+      <br><br>
+      <h1>🔹 Major Highlights of Some Key Districts</h1><br><br>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <ul>
+              <li><b>Khordha --</b> Capital Bhubaneswar, known as the "Temple City of India".</li>
+              <li><b>Puri --</b> Famous for Jagannath Temple, Rath Yatra, and beautiful beaches.</li>
+              <li><b>Cuttack --</b> Silver filigree work, Barabati Fort, and maritime trade history.</li>
+              <li><b>Mayurbhanj --</b> Home to Simlipal National Park and rich tribal culture.</li>
+              <li><b>Koraput --</b> Known for coffee plantations and tribal heritage.</li>
+              <li><b>Sambalpur --</b> Famous for Hirakud Dam and Sambalpuri textiles.</li>
+              <li><b>Ganjam --</b> Home to Chilika Lake, Asia's largest brackish water lagoon.</li>
+              <li><b>Sundargarh --</b> Steel industry hub and hockey talent center.</li>
+              <li><b>Kendrapara --</b> Known for Bhitarkanika National Park and mangrove forests.</li>
+            </ul>
+          </div>
+          <div class="col-sm-6">
+            <img src="/placeholder.svg?height=450&width=500" alt="Odisha Map" style="height:450px;width: -webkit-fill-available;">
+
+          </div>
+        </div>
+      </div>
+    </div><br><br>
+    <div class="container">
+      <div class="weather-container">
+          <h4 class="text-center"><strong>Weather in Odisha</strong></h4>
+          <div class="row">
+              <!-- January -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Jan</h6>
+                      <p>15/28°C</p>
+                      <span class="aqi aqi-moderate">AQI 120</span>
+                  </div>
+              </div>
+              <!-- February -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Feb</h6>
+                      <p>18/32°C</p>
+                      <span class="aqi aqi-moderate">AQI 110</span>
+                  </div>
+              </div>
+              <!-- March -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Mar</h6>
+                      <p>22/36°C</p>
+                      <span class="aqi aqi-moderate">AQI 105</span>
+                  </div>
+              </div>
+              <!-- April -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Apr</h6>
+                      <p>25/38°C</p>
+                      <span class="aqi aqi-moderate">AQI 100</span>
+                  </div>
+              </div>
+              <!-- May -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>May</h6>
+                      <p>27/40°C</p>
+                      <span class="aqi aqi-moderate">AQI 95</span>
+                  </div>
+              </div>
+              <!-- June -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Jun</h6>
+                      <p>27/38°C</p>
+                      <span class="aqi aqi-good">AQI 80</span>
+                  </div>
+              </div>
+              <!-- July -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="rain.png" alt="rain">
+                      <h6>Jul</h6>
+                      <p>26/32°C</p>
+                      <span class="aqi aqi-good">AQI 60</span>
+                  </div>
+              </div>
+              <!-- August -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Aug</h6>
+                      <p>26/32°C</p>
+                      <span class="aqi aqi-good">AQI 65</span>
+                  </div>
+              </div>
+              <!-- September -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Sep</h6>
+                      <p>25/33°C</p>
+                      <span class="aqi aqi-good">AQI 70</span>
+                  </div>
+              </div>
+              <!-- October -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Oct</h6>
+                      <p>22/32°C</p>
+                      <span class="aqi aqi-good">AQI 75</span>
+                  </div>
+              </div>
+              <!-- November -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Nov</h6>
+                      <p>18/30°C</p>
+                      <span class="aqi aqi-moderate">AQI 85</span>
+                  </div>
+              </div>
+              <!-- December -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Dec</h6>
+                      <p>15/28°C</p>
+                      <span class="aqi aqi-moderate">AQI 95</span>
+                  </div>
+              </div>
+          </div>
+          <div class="text-center">
+              <div class="best-time">🏆 Best time to visit: October - March</div>
+          </div>
+      </div>
+    </div>
+    
+
+    <br><br>
+    <button class="trip" id="openModal">Let's go on a trip</button>
+    
+    <div id="tripModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Select Your Trip</h2>
+            <button type="button" class="btn btn-warning" style="margin-bottom: 8px;color:black; border-radius: 5px;" onclick="location.href='{% url 'odisha_7days' %}'" >7 days trip</button><br>
+            <button type="button" class="btn btn-warning" style="margin-bottom: 8px;color:black; border-radius: 5px;" onclick="location.href='{% url 'odisha_12days' %}'" >12 days trip</button>
+        </div>
+    </div>
+    
+    <script>
+        var modal = document.getElementById("tripModal");
+        var btn = document.getElementById("openModal");
+        var span = document.getElementsByClassName("close")[0];
+        
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+        
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+        
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script><br><br>
+    <div class="container">
+      <ul class="nav nav-tabs">
+        <li class="nav-item"><a data-toggle="tab" href="#odculture"> Culture</a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#odtradition"> Tradition</a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#odfestivals"> Festivals </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#odfood"> Foods </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#odhistory"> History </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#odartcraft"> Art and Craft </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#odseason"> Season to Visit </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#odtourist"> Tourist Spots </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#odwild"> Wildlife & Crops </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#odedu"> Institutions </a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="odculture" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Culture of Odisha</h1>
+          <p class="text">Odisha has a rich and diverse culture, shaped by its history, literature, art, music, dance, festivals, and traditions. Here's an overview of some key aspects of its culture:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Language</h3>
+                  <ul>
+                    <li>Odia is the official language and a major part of the cultural identity of Odisha. It's one of the six classical languages of India with a literary tradition of over 2000 years. The language has evolved from Sanskrit and has a rich literary heritage.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Odia Language" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>2. Literature</h3>
+                  <ul>
+                    <li>Odisha has a renowned literary tradition dating back to ancient times. The Sarala Mahabharata by Sarala Das is one of the earliest works in Odia literature.</li>
+                    <li>Modern Odia literature has been enriched by writers like Fakir Mohan Senapati, Gopabandhu Das, and Manoj Das.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Odia Literature" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div><br>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Odisha Art" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Art and Craft</h3>
+                  <ul>
+                    <li>Odisha is famous for its Pattachitra (cloth-based scroll paintings), palm leaf engravings, stone carvings, and silver filigree work.</li>
+                    <li>The state is also known for its handloom textiles, particularly the Sambalpuri sarees with their distinctive ikat patterns.</li>
+                  </ul>
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Odisha Music" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>4. Music</h3>
+                  <ul>
+                    <li>Odissi music is a classical form with ancient roots, characterized by its emphasis on devotional themes.</li>
+                    <li>Folk music traditions include Pala, Daskathia, and Ghumura, often performed during festivals and social gatherings.</li>
+                    <li>Traditional instruments like the mardala (drum), pakhawaj, and veena are integral to Odisha's musical heritage.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Dance</h3>
+                  <ul>
+                    <li>Odissi is one of the eight classical dance forms of India, known for its fluid movements, expressive gestures, and intricate footwork.</li>
+                    <li>Folk dances include Gotipua (performed by young boys dressed as girls), Chhau (a martial dance form), and Sambalpuri folk dance.</li>
+                  </ul>
+                  <h3>6. Cuisine</h3>
+                  <ul>
+                    <li>Odia cuisine is known for its subtle flavors, minimal use of oil, and emphasis on local ingredients.</li>
+                    <li>Rice is the staple food, often accompanied by fish, lentils, and vegetables.</li>
+                    <li>Famous dishes include Dalma (lentils with vegetables), Pakhala (fermented rice), and various seafood preparations.</li>
+                    <li>Sweets like Rasagola, Chhena Poda, and Chhena Jhili are popular desserts.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Odissi Dance" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Odisha Temples" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>7. Architecture</h3>
+                  <ul>
+                    <li>Odisha is renowned for its temple architecture, known as the Kalinga style, characterized by intricate carvings and towering spires.</li>
+                    <li>The Sun Temple at Konark, Jagannath Temple in Puri, and Lingaraj Temple in Bhubaneswar are masterpieces of this architectural tradition.</li>
+                  </ul>
+                  <h3>8. Religious Diversity</h3>
+                  <ul>
+                    <li>Hinduism is the predominant religion, with the Jagannath cult being central to Odia religious life.</li>
+                    <li>Buddhism once flourished in ancient Odisha, with sites like Ratnagiri, Udayagiri, and Lalitgiri preserving this heritage.</li>
+                    <li>The state also has significant Muslim, Christian, and tribal religious practices.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Odisha Tribal Culture" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>9. Tribal Culture</h3>
+                  <ul>
+                    <li>Odisha is home to 62 different tribal communities, each with their unique customs, languages, and artistic traditions.</li>
+                    <li>Major tribes include the Santhal, Kondh, Gond, Saora, and Bonda, who maintain their distinct cultural identities.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>10. Festivals</h3>
+                  <ul>
+                    <li>Rath Yatra (Chariot Festival) in Puri is one of the most famous festivals, drawing millions of devotees annually.</li>
+                    <li>Other important festivals include Nuakhai (harvest festival), Durga Puja, Raja Parba (celebrating womanhood), and Konark Dance Festival.</li>
+                  </ul>
+                  <h3>11. Handicrafts</h3>
+                  <ul>
+                    <li>Odisha is famous for its handicrafts such as appliqué work from Pipili, brass and bell metal crafts from Kantilo, and stone carvings from Konark and Puri.</li>
+                    <li>The state's handloom industry produces exquisite textiles like Sambalpuri, Bomkai, and Kotpad sarees.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=300&width=200" alt="Rath Yatra" style="height:300px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br><br>
+
+          <p>Odisha's culture is deeply rooted in its history, and it continues to evolve while maintaining a close connection to its heritage. It's a region where spirituality, art, and tradition blend harmoniously to create a unique cultural identity!</p><br><br>
+        </div>
+        <div id="odtradition" class="tab-pane fade" style="background-color: white;">
+          <h1>Tradition of Odisha</h1>
+          <p>Odisha has a rich and diverse tradition deeply rooted in its history, culture, and social practices. Here's an overview of some key traditional aspects of the state:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Clothing Tradition</h3>
+                  <h4>Men</h4>
+                  <ul>
+                    <li><b>Dhoti and Kurta:</b> Traditional Odia men wear dhoti with a kurta, especially during religious ceremonies, weddings, and festivals.</li>
+                    <li><b>Gamcha:</b> A traditional cotton tow  weddings, and festivals.</li>
+                    <li><b>Gamcha:</b> A traditional cotton towel worn around the neck or head, often used in daily life and during festivals.</li>
+                  </ul>
+                  <h4>Women</h4>
+                  <ul>
+                    <li><b>Saree:</b> Odia women traditionally wear sarees like Sambalpuri, Bomkai, Kotpad, and Habaspuri. These sarees are known for their distinctive ikat patterns and tribal motifs.</li>
+                    <li><b>Filigree Jewelry:</b> Silver filigree ornaments are traditionally worn by Odia women, especially during festivals and weddings.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=250&width=200" alt="Odia Traditional Clothing" style="height:250px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>2. Wedding Traditions</h3>
+                  <ul>
+                    <li><b>Bahaghara:</b> The main wedding ceremony, which includes various rituals like Jayee Anukolo (auspicious beginning) and Kanyadaan (giving away the bride).</li>
+                    <li><b>Danda Nata:</b> A pre-wedding ritual where the groom's party dances to the bride's house.</li>
+                    <li><b>Mangan:</b> The formal engagement ceremony where gifts are exchanged between families.</li>
+                    <li><b>Ganthi Chheda:</b> The tying of the wedding knot, symbolizing the union of the bride and groom.</li>
+                    <li><b>Chauthi:</b> A post-wedding ceremony held on the fourth day after marriage.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=250&width=200" alt="Odia Wedding" style="height:250px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Odissi Dance" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Music & Dance Traditions</h3>
+                  <ul>
+                    <li><b>Odissi:</b> One of India's oldest classical dance forms, characterized by fluid movements and intricate gestures.</li>
+                    <li><b>Gotipua:</b> A traditional dance performed by young boys dressed as girls, considered a precursor to Odissi.</li>
+                    <li><b>Chhau:</b> A semi-classical dance form with martial arts elements, popular in western Odisha.</li>
+                    <li><b>Pala:</b> A traditional form of storytelling through music and dance.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Jagannath Culture" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+
+                  <h3>4. Social & Religious Traditions</h3>
+                  <ul>
+                    <li><b>Jagannath Culture:</b> The worship of Lord Jagannath is central to Odia religious life, with the Rath Yatra being the most significant festival.</li>
+                    <li><b>Puja Rituals:</b> Daily worship in Odia households includes offering flowers, incense, and food to deities.</li>
+                    <li><b>Nuakhai:</b> An agricultural festival celebrating the harvest of new rice, especially important in western Odisha.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Architectural & Handicraft Traditions</h3>
+                  <ul>
+                    <li><b>Kalinga Architecture:</b> The distinctive temple architecture style of Odisha, characterized by intricate carvings and towering spires.</li>
+                    <li><b>Pattachitra:</b> Traditional cloth-based scroll paintings depicting mythological narratives.</li>
+                    <li><b>Palm Leaf Engravings:</b> Intricate designs carved on dried palm leaves, often illustrating religious texts.</li>
+                    <li><b>Appliqué Work:</b> Colorful fabric decorations from Pipili, used in temple decorations and household items.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Konark Temple Architecture" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>6. Sports & Games</h3>
+                  <ul>
+                    <li><b>Hockey:</b> Odisha is known as the cradle of Indian hockey, producing many national players.</li>
+                    <li><b>Kabaddi & Kho-Kho:</b> Traditional rural games played widely across the state.</li>
+                    <li><b>Boat Racing:</b> A traditional sport in coastal areas, especially during festivals.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Hockey in Odisha" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br><br>
+          <p>Odisha's traditions beautifully combine spirituality, art, food, music, and festivals, making it one of the most culturally vibrant states in India.</p><br><br>
+        </div>
+        <div id="odfestivals" class="tab-pane fade" style="background-color: white;">
+          <h1>Festivals of Odisha</h1>
+          <p>Odisha is known for its vibrant and diverse festivals, which reflect its rich cultural heritage, religious harmony, and artistic traditions. Here's a list of some of the major festivals celebrated in the state:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Rath Yatra (Biggest Festival of Odisha)</h3>
+                  <ul>
+                    <li>The most significant festival of Odisha, celebrated with grand processions of Lord Jagannath, Lord Balabhadra, and Devi Subhadra on massive wooden chariots.</li>
+                    <li>The festival takes place in Puri and attracts millions of devotees from around the world.</li>
+                    <li>The deities travel from the main temple to Gundicha Temple and stay there for nine days before returning.</li>
+                    <li>The pulling of the chariots by devotees is considered highly auspicious.</li>
+                  </ul>
+                  <p><b>📍 Time: June - July (Ashadha month)</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=230&width=200" alt="Rath Yatra" style="height:230px;width: 200px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Nuakhai Festival" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Nuakhai</h3>
+                  <ul>
+                    <li>An agricultural festival celebrating the harvest of new rice, primarily observed in western Odisha.</li>
+                    <li>Families gather to offer the first crop to the deity and then share the new rice among themselves.</li>
+                    <li>The festival strengthens family bonds and community relationships.</li>
+                  </ul>
+                  <p><b>📍 Time: August - September</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Raja Parba</h3>
+                  <ul>
+                    <li>A three-day festival celebrating womanhood and the fertility of the earth.</li>
+                    <li>Young girls and women wear new clothes, apply alta (red dye) on their feet, and enjoy swinging on decorated rope swings.</li>
+                    <li>Agricultural activities are suspended during this period as Mother Earth is believed to be menstruating.</li>
+                  </ul>
+                  <p><b>📍 Time: June</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Raja Parba" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Konark Dance Festival" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Konark Dance Festival</h3>
+                  <ul>
+                    <li>A five-day cultural extravaganza held against the backdrop of the magnificent Sun Temple at Konark.</li>
+                    <li>Features classical dance performances by renowned artists from across India.</li>
+                    <li>Celebrates India's rich dance traditions, particularly Odissi, Bharatanatyam, Kathak, and Manipuri.</li>
+                  </ul>
+                  <p><b>📍 Time: December</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Durga Puja</h3>
+                  <ul>
+                    <li>Celebrated with great enthusiasm across Odisha, particularly in Cuttack, known for its unique silver filigree work on the idols.</li>
+                    <li>The festival honors Goddess Durga's victory over the demon Mahishasura.</li>
+                    <li>Features elaborate pandals, cultural performances, and community feasts.</li>
+                  </ul>
+                  <p><b>📍 Time: September - October</b></p>
+                  <h3>6. Dola Purnima</h3>
+                  <ul>
+                    <li>A spring festival where idols of Radha and Krishna are placed on decorated swings (dolas) and carried in procession.</li>
+                    <li>People play with colors, similar to Holi, making it a vibrant celebration.</li>
+                  </ul>
+                  <p><b>📍 Time: March</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Durga Puja in Cuttack" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Kartik Purnima" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>7. Kartik Purnima</h3>
+                  <ul>
+                    <li>Commemorates the maritime glory of ancient Odisha when merchants sailed to distant lands like Bali, Java, and Sumatra.</li>
+                    <li>People float miniature boats made of colored paper, banana stems, or thermocol in water bodies.</li>
+                  </ul>
+                  <p><b>📍 Time: November</b></p>
+                  <h3>8. Makar Sankranti</h3>
+                  <ul>
+                    <li>Marks the transition of the sun into Capricorn, celebrated with ritual baths, kite flying, and special dishes.</li>
+                    <li>In coastal areas, people prepare Makara Chaula (a sweet dish made with newly harvested rice, jaggery, and coconut).</li>
+                  </ul>
+                  <p><b>📍 Time: January</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>9. Dhanu Jatra</h3>
+                  <ul>
+                    <li>The world's largest open-air theater festival, held in Bargarh, western Odisha.</li>
+                    <li>Recreates the story of Krishna and Kansa, with the entire town transforming into a stage.</li>
+                    <li>Lasts for 11 days and involves thousands of performers.</li>
+                  </ul>
+                  <p><b>📍 Time: December - January</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Dhanu Jatra" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Tribal Festivals" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>10. Tribal Festivals</h3>
+                  <ul>
+                    <li>Odisha's diverse tribal communities celebrate various festivals throughout the year.</li>
+                    <li>Parab (celebrated by the Koraput tribes), Chaitra Parab (by the Bonda tribe), and Ghanta Parab (by the Kondh tribe) are significant tribal festivals.</li>
+                    <li>These celebrations feature traditional music, dance, and rituals specific to each tribe.</li>
+                  </ul>
+                  <p><b>📍 Time: Various times throughout the year</b></p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>11. Chandan Yatra</h3>
+                  <ul>
+                    <li>A 42-day water festival dedicated to Lord Jagannath, where the representative idols of the deities are taken out in procession on decorated boats in the Narendra Tank in Puri.</li>
+                    <li>The deities are smeared with sandalwood paste to keep them cool during summer.</li>
+                  </ul>
+                  <p><b>📍 Time: April - May</b></p>
+
+                  <h3>12. Bali Jatra</h3>
+                  <ul>
+                    <li>One of the largest trade festivals in eastern India, held on the banks of the Mahanadi River in Cuttack.</li>
+                    <li>Commemorates the ancient maritime trade links of Odisha with Southeast Asian countries.</li>
+                    <li>Features a massive fair with hundreds of stalls selling handicrafts, textiles, and food.</li>
+                  </ul>
+                  <p><b>📍 Time: November</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Bali Jatra" style="height:200px;width: 230px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Pana Sankranti" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>13. Pana Sankranti (Odia New Year)</h3>
+                  <ul>
+                    <li>Marks the beginning of the Odia New Year, celebrated by offering a sweet drink called 'pana' to Lord Jagannath.</li>
+                    <li>People also distribute pana (a sweet beverage made with fruits, jaggery, and spices) to quench thirst during the summer.</li>
+                  </ul>
+                  <p><b>📍 Time: April</b></p>
+                  <h3>14. Sitala Sasthi</h3>
+                  <ul>
+                    <li>Celebrates the marriage of Lord Shiva and Goddess Parvati, particularly popular in western Odisha.</li>
+                    <li>Features elaborate processions with decorated floats depicting mythological scenes.</li>
+                  </ul>
+                  <p><b>📍 Time: May - June</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Odisha's festivals are a blend of religious, cultural, and artistic celebrations, making the state one of the most festive regions in India! 🎉</p><br><br>
+        </div>
+        <div id="odfood" class="tab-pane fade" style="background-color: white;">
+          <h1>Foods of Odisha</h1>
+          <p>Odisha has a rich and diverse culinary tradition that blends flavors from different regions. Odia cuisine is known for its subtle flavors, minimal use of oil, and emphasis on local ingredients. Here's a look at some of the most iconic foods of Odisha:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Staple Food of Odisha</h3>
+                  <ul>
+                    <li><b>Rice:</b> The most important staple food, served with various curries, dalma, and fish preparations.</li>
+                    <li><b>Pakhala:</b> Fermented rice soaked in water, eaten with fried fish, vegetables, and curd, especially during summer.</li>
+                  </ul>
+                  <h3>2. Traditional Breads</h3>
+                  <ul>
+                    <li><b>Pitha:</b> Rice-based pancakes or dumplings, available in various forms like Enduri Pitha, Chakuli Pitha, and Poda Pitha.</li>
+                    <li><b>Manda:</b> Steamed rice dumplings filled with coconut and jaggery.</li>
+                    <li><b>Kakara:</b> Deep-fried sweet dumplings made from rice flour and filled with coconut and jaggery.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=220" alt="Pakhala" style="height:200px;width: 220px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=220" alt="Dalma" style="height:200px;width: 220px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Famous Odia Dishes</h3>
+                  <h4>Fish & Seafood</h4>
+                  <ul>
+                    <li><b>Machha Besara:</b> Fish cooked in mustard paste, a popular dish in coastal Odisha.</li>
+                    <li><b>Chungdi Malai:</b> Prawns cooked in coconut milk, a delicacy from coastal regions.</li>
+                    <li><b>Machha Jhola:</b> Fish curry with minimal spices, a staple in Odia households.</li>
+                    <li><b>Khainga Machha:</b> Small fish fried with spices, popular as a side dish.</li>
+                  </ul>
+                  <h4>Vegetarian Dishes</h4>
+                  <ul>
+                    <li><b>Dalma:</b> A signature dish made with lentils and vegetables, often served with rice.</li>
+                    <li><b>Santula:</b> A mixed vegetable curry lightly spiced and steamed.</li>
+                    <li><b>Saga Bhaja:</b> Stir-fried leafy greens, a nutritious side dish.</li>
+                    <li><b>Besara:</b> Vegetables cooked in mustard paste, a tangy and flavorful dish.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=220" alt="Mutton Curry" style="height:200px;width: 220px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h4>Meat Dishes</h4>
+                  <ul>
+                    <li><b>Mansha Tarkari:</b> A spicy mutton curry popular throughout the state.</li>
+                    <li><b>Kukuda Mansha:</b> Chicken curry prepared with minimal spices but full of flavor.</li>
+                    <li><b>Desi Kukuda Jhola:</b> Country chicken curry, a specialty in rural areas.</li>
+                  </ul>
+                  <h4>Dal & Accompaniments</h4>
+                  <ul>
+                    <li><b>Dali:</b> Simple yellow dal tempered with cumin, garlic, and dried red chilies.</li>
+                    <li><b>Badi Chura:</b> Crushed dried lentil dumplings, often mixed with vegetables.</li>
+                    <li><b>Khatta:</b> Tangy side dishes made with fruits like tomatoes or berries.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>4. Odia Sweets (Mitha)</h3>
+                  <ul>
+                    <li><b>Rasagola:</b> Soft, spongy, syrup-soaked cheese balls, claimed to have originated in Odisha.</li>
+                    <li><b>Chhena Poda:</b> A caramelized cheese dessert, considered the signature sweet of Odisha.</li>
+                    <li><b>Chhena Jhili:</b> Elongated cheese sweets soaked in sugar syrup.</li>
+                    <li><b>Khaja:</b> Layered pastry deep-fried and soaked in sugar syrup.</li>
+                    <li><b>Arisa Pitha:</b> Deep-fried rice flour cakes with jaggery.</li>
+                    <li><b>Malpua:</b> Sweet pancakes dipped in sugar syrup, often served during festivals.</li>
+                  </ul>
+
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=220" alt="Rasagola" style="height:200px;width: 220px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Street Food" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>5. Street Food of Odisha</h3>
+                  <ul>
+                    <li><b>Ghuguni:</b> Yellow peas curry served with puffed rice or bread, a popular street snack.</li>
+                    <li><b>Dahibara Aludum:</b> Lentil dumplings served with potato curry and yogurt, a famous street food from Cuttack.</li>
+                    <li><b>Bara:</b> Lentil fritters, often served with green chutney.</li>
+                    <li><b>Chaat:</b> Various savory snacks topped with yogurt, chutneys, and spices.</li>
+                    <li><b>Mudhi Mansa:</b> Puffed rice mixed with spicy mutton curry, a specialty from western Odisha.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>6. Famous Drinks</h3>
+                  <ul>
+                    <li><b>Pana:</b> A sweet and tangy drink made with fruits, jaggery, and spices, especially popular during Pana Sankranti.</li>
+                    <li><b>Bela Pana:</b> A cooling summer drink made with wood apple, jaggery, and spices.</li>
+                    <li><b>Torani:</b> Fermented rice water, often flavored with lemon and salt.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Pana" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Special Festival Foods</h3>
+                  <ul>
+                    <li><b>Prasad:</b> Temple offerings like Khechudi (rice and lentil dish) and Kanika (sweet rice) from the Jagannath Temple.</li>
+                    <li><b>Enduri Pitha:</b> Steamed rice cakes filled with coconut and jaggery, prepared during Prathamastami.</li>
+                    <li><b>Manda Pitha:</b> Rice dumplings filled with coconut and jaggery, made during Raja Parba.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Enduri Pitha" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Odisha's cuisine is a delightful blend of flavors, textures, and aromas, reflecting the state's rich cultural heritage and natural abundance. From the famous temple food of Puri to the tribal delicacies of the western highlands, Odia food offers a unique culinary experience! 🍛🐟🍬</p><br><br>
+        </div>
+        <div id="odhistory" class="tab-pane fade" style="background-color: white;">
+          <h1>History of Odisha</h1>
+          <p>Odisha has a rich and diverse history that spans ancient civilizations, powerful kingdoms, colonial rule, and the modern era. The region has played a significant role in India's political, cultural, and religious history.</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Ancient Odisha (Before 3rd Century BCE)</h3>
+                  <ul>
+                    <li><b>Prehistoric Period:</b> Archaeological evidence suggests human settlement in Odisha dating back to the Paleolithic and Mesolithic periods.</li>
+                    <li><b>Kalinga:</b> Ancient Odisha was known as Kalinga, mentioned in texts like the Mahabharata and Buddhist literature.</li>
+                    <li><b>Early Kingdoms:</b> The region was ruled by various dynasties including the Nandas and Mauryas.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Ancient Odisha" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Kalinga War" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Kalinga War & Mauryan Rule (261 BCE)</h3>
+                  <ul>
+                    <li>Emperor Ashoka of the Maurya Dynasty invaded Kalinga in 261 BCE.</li>
+                    <li>The bloodshed and suffering of the Kalinga War deeply affected Ashoka, leading to his conversion to Buddhism.</li>
+                    <li>Ashoka's rock edicts at Dhauli near Bhubaneswar bear testimony to his remorse and subsequent commitment to dharma (righteousness).</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=220&width=200" alt="Eastern Ganga Dynasty" style="height:220px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8  style="height:220px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>3. Medieval Odisha (3rd - 16th Century)</h3>
+                  <ul>
+                    <li><b>Eastern Ganga Dynasty (7th - 15th Century):</b> The most powerful and longest-ruling dynasty of Odisha, responsible for building the magnificent temples of Bhubaneswar, Puri, and Konark.</li>
+                    <li><b>Konark Sun Temple:</b> Built by King Narasimhadeva I in the 13th century, it represents the pinnacle of Kalinga architecture.</li>
+                    <li><b>Jagannath Culture:</b> The worship of Lord Jagannath became central to Odia identity during this period.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>4. Gajapati Empire (14th - 16th Century)</h3>
+                  <ul>
+                    <li>The Gajapati kings, particularly Kapilendra Deva and his son Purushottama Deva, expanded the kingdom to include parts of present-day Andhra Pradesh, West Bengal, and Chhattisgarh.</li>
+                    <li>This period saw significant cultural and literary developments, including the composition of the Odia Mahabharata by Sarala Das.</li>
+                    <li>Maritime trade flourished, with links to Southeast Asian kingdoms.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=250" alt="Gajapati Empire" style="height:200px;width: 250px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=230&width=200" alt="Mughal Period" style="height:230px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>5. Mughal and Maratha Influence (16th - 18th Century)</h3>
+                  <ul>
+                    <li>The region came under Mughal influence during Akbar's reign, though direct control was limited.</li>
+                    <li>The Marathas ruled parts of Odisha from 1751 to 1803, collecting revenue but allowing local chiefs to maintain control.</li>
+                    <li>This period saw political fragmentation but continued cultural development.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>6. British Colonial Rule (1803 - 1947)</h3>
+                  <ul>
+                    <li>The British East India Company took control of Odisha in 1803, defeating the Marathas.</li>
+                    <li>The Great Famine of 1866 (Na'anka Durbhikshya) devastated the region, killing nearly a million people.</li>
+                    <li>Odisha was administered as part of the Bengal Presidency until 1912, then as part of Bihar and Orissa Province.</li>
+                    <li>The movement for a separate linguistic province gained momentum in the early 20th century.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="British Colonial Period" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Freedom Movement" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>7. Freedom Movement & Formation of Odisha</h3>
+                  <ul>
+                    <li><b>Linguistic Movement:</b> Leaders like Madhusudan Das, Gopabandhu Das, and Fakir Mohan Senapati advocated for a separate Odia-speaking province.</li>
+                    <li><b>Formation of Odisha:</b> On April 1, 1936, Odisha became India's first state formed on a linguistic basis.</li>
+                    <li><b>Freedom Struggle:</b> Odisha actively participated in India's independence movement, with notable contributions from leaders like Gopabandhu Das, Harekrushna Mahatab, and Rama Devi.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>8. Post-Independence Odisha (1947 - Present)</h3>
+                  <h4>Early Statehood</h4>
+                  <ul>
+                    <li>Harekrushna Mahatab became the first Chief Minister of Odisha after independence.</li>
+                    <li>The state faced challenges of poverty, natural disasters, and underdevelopment.</li>
+                    <li>The merger of princely states into Odisha was completed by 1949.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Modern Odisha" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h4>Modern Developments</h4>
+                  <ul>
+                    <li><b>Industrial Growth:</b> Development of industries in sectors like steel, aluminum, and power.</li>
+                    <li><b>Natural Disasters:</b> The Super Cyclone of 1999 and Cyclone Fani in 2019 caused significant damage but also led to improved disaster management systems.</li>
+                    <li><b>Economic Transformation:</b> From being known as one of India's poorest states, Odisha has made significant strides in poverty reduction and economic growth in recent decades.</li>
+                    <li><b>Sports Development:</b> Emerged as a major center for hockey, hosting international tournaments and sponsoring the national team.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Industrial Odisha" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>9. Present-Day Odisha</h3>
+                  <ul>
+                    <li><b>Cultural Heritage:</b> Recognized globally for its ancient temples, classical dance, and rich tribal culture.</li>
+                    <li><b>Economic Growth:</b> Emerging as a significant player in minerals, manufacturing, and IT sectors.</li>
+                    <li><b>Tourism:</b> Growing tourism industry centered around temples, beaches, wildlife sanctuaries, and tribal culture.</li>
+                    <li><b>Challenges:</b> Continues to address issues of tribal development, natural disaster management, and balanced regional growth.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Modern Bhubaneswar" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Odisha's history is a fascinating journey from ancient Kalinga to a modern Indian state, marked by cultural richness, architectural marvels, and resilience in the face of challenges. It continues to preserve its unique heritage while embracing development and progress. 🚩📜</p>
+          <br><br>
+        </div>
+        <div id="odartcraft" class="tab-pane fade" style="background-color: white;">
+          <h1>Art & Craft of Odisha 🎨🖌️</h1>
+          <p>Odisha has a rich artistic heritage, blending traditional craftsmanship with cultural influences from Hindu, Buddhist, and tribal traditions. Odishan artisans are known for their intricate craftsmanship, storytelling through art, and diverse materials like stone, wood, textiles, and metals.</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Stone Carving & Temple Architecture 🏺</h3>
+                  <h4>🔸 Kalinga Architecture</h4>
+                  <ul>
+                    <li><b>Famous for:</b> Intricate stone carvings, towering spires (rekha deul), and detailed sculptures.</li>
+                    <li><b>Where?</b> Bhubaneswar, Puri, and Konark.</li>
+                    <li><b>Examples:</b> Sun Temple at Konark, Jagannath Temple in Puri, and Lingaraj Temple in Bhubaneswar.</li>
+                  </ul>
+                  <h4>🔸 Stone Crafts</h4>
+                  <ul>
+                    <li><b>Stone Sculptures:</b> Intricate carvings depicting deities, dancers, musicians, and everyday scenes.</li>
+                    <li><b>Modern Applications:</b> Contemporary artists create decorative items, garden sculptures, and architectural elements.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Konark Temple Carving" style="height:200px;width: 230px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Sambalpuri Saree" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Textile & Weaving 🧵</h3>
+                  <h4>🔸 Sambalpuri Ikat</h4>
+                  <ul>
+                    <li><b>Origin:</b> Western Odisha, particularly Sambalpur and Bargarh.</li>
+                    <li><b>Features:</b> Distinctive tie-and-dye technique where threads are dyed before weaving, creating blurred patterns.</li>
+                    <li><b>Motifs:</b> Traditional designs include conch shells, flowers, wheels, and animals.</li>
+                  </ul>
+                  <h4>🔸 Other Traditional Textiles</h4>
+                  <ul>
+                    <li><b>Bomkai Sarees:</b> From Ganjam district, featuring geometric patterns and tribal motifs.</li>
+                    <li><b>Kotpad Textiles:</b> Natural dyed fabrics from tribal areas, using only organic colors.</li>
+                    <li><b>Habaspuri:</b> Cotton fabrics with fish and flower motifs from western Odisha.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Pattachitra Painting 🎨</h3>
+                  <ul>
+                    <li><b>Origin:</b> Traditional cloth-based scroll painting from Puri and Raghurajpur.</li>
+                    <li><b>Process:</b> Canvas prepared with tamarind seed paste and chalk, painted with natural colors.</li>
+                    <li><b>Themes:</b> Primarily depicts stories of Lord Jagannath and scenes from Hindu mythology.</li>
+                    <li><b>Style:</b> Characterized by bold outlines, decorative borders, and vibrant colors.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Pattachitra" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Palm Leaf Engraving" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Palm Leaf Engraving (Tala Pattachitra) 🌿</h3>
+                  <ul>
+                    <li><b>Origin:</b> Ancient tradition dating back over 1000 years.</li>
+                    <li><b>Process:</b> Dried palm leaves are cut, processed, and etched with a stylus, then rubbed with ink.</li>
+                    <li><b>Content:</b> Religious texts, epics, and decorative art.</li>
+                    <li><b>Modern Applications:</b> Bookmarks, wall hangings, and decorative items.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Silver Filigree (Tarakasi) 🥈</h3>
+                  <ul>
+                    <li><b>Origin:</b> Cuttack, dating back to the 18th century.</li>
+                    <li><b>Technique:</b> Intricate designs created by twisting fine silver wires.</li>
+                    <li><b>Products:</b> Jewelry, decorative items, religious artifacts, and ceremonial crowns for deities.</li>
+                    <li><b>Uniqueness:</b> Known for its delicacy and intricacy, with some pieces containing thousands of individual wire components.</li>
+                  </ul>
+                  <h3>6. Appliqué Work (Chandua) 🧵</h3>
+                  <ul>
+                    <li><b>Famous in:</b> Pipili, near Puri.</li>
+                    <li><b>Technique:</b> Colorful fabric patches stitched onto a base cloth to create designs.</li>
+                    <li><b>Products:</b> Canopies, umbrellas, bags, lampshades, and decorative items.</li>
+                    <li><b>Traditional Use:</b> Creating canopies for Jagannath Temple rituals.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Silver Filigree" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Tribal Art" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>7. Tribal Art & Crafts 🏺</h3>
+                  <ul>
+                    <li><b>Dokra Metal Casting:</b> Ancient lost-wax technique used by tribal communities to create brass figurines.</li>
+                    <li><b>Saura Paintings:</b> Ritual wall paintings by the Saura tribe, featuring geometric human figures and nature motifs.</li>
+                    <li><b>Tribal Jewelry:</b> Distinctive ornaments made from metals, beads, and natural materials.</li>
+                  </ul>
+                  <h3>8. Wood Crafts 🌳</h3>
+                  <ul>
+                    <li><b>Location:</b> Puri and surrounding areas.</li>
+                    <li><b>Products:</b> Wooden toys, decorative items, and religious artifacts.</li>
+                    <li><b>Famous Items:</b> Wooden replicas of Jagannath, Balabhadra, and Subhadra.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>9. Stone & Terracotta Pottery 🏺</h3>
+                  <h4>🔸 Stone Pottery</h4>
+                  <ul>
+                    <li><b>Origin:</b> Khiching in Mayurbhanj district.</li>
+                    <li><b>Material:</b> Soft stone carved into utensils and decorative items.</li>
+                  </ul>
+                  <h4>🔸 Terracotta Crafts</h4>
+                  <ul>
+                    <li><b>Centers:</b> Balasore and Mayurbhanj.</li>
+                    <li><b>Products:</b> Pottery, figurines, toys, and ritual objects.</li>
+                    <li><b>Technique:</b> Hand-molded and wheel-thrown, often with intricate surface decorations.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Terracotta Craft" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>📌 Summary: Odisha's Art & Craft Forms</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Art Form</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Stone Carving</td>
+                <td>Bhubaneswar, Puri, Konark</td>
+                <td>Temple Architecture, Sculptures</td>
+              </tr>
+              <tr>
+                <td>Pattachitra</td>
+                <td>Raghurajpur, Puri</td>
+                <td>Cloth Scroll Paintings</td>
+              </tr>
+              <tr>
+                <td>Palm Leaf Engraving</td>
+                <td>Puri, Bhubaneswar</td>
+                <td>Intricate Etchings on Palm Leaves</td>
+              </tr>
+              <tr>
+                <td>Sambalpuri Ikat</td>
+                <td>Sambalpur, Bargarh</td>
+                <td>Tie-and-Dye Textiles</td>
+              </tr>
+              <tr>
+                <td>Silver Filigree</td>
+                <td>Cuttack</td>
+                <td>Intricate Silver Wire Work</td>
+              </tr>
+              <tr>
+                <td>Appliqué Work</td>
+                <td>Pipili</td>
+                <td>Colorful Patchwork Textiles</td>
+              </tr>
+              <tr>
+                <td>Dokra Metal Casting</td>
+                <td>Tribal Areas</td>
+                <td>Lost-Wax Bronze Casting</td>
+              </tr>
+              <tr>
+                <td>Saura Paintings</td>
+                <td>Tribal Areas of Southern Odisha</td>
+                <td>Ritual Wall Paintings</td>
+              </tr>
+              <tr>
+                <td>Wood Crafts</td>
+                <td>Puri</td>
+                <td>Wooden Toys, Religious Figures</td>
+              </tr>
+              <tr>
+                <td>Stone Pottery</td>
+                <td>Khiching, Mayurbhanj</td>
+                <td>Utensils and Decorative Items</td>
+              </tr>
+            </table>
+          </div>
+          <br><br>
+          <p>Odisha's art and crafts are a testament to the state's rich cultural heritage and the skill of its artisans. These traditional crafts not only preserve ancient techniques but also provide livelihoods to thousands of craftspeople across the state. Whether it's the intricate stone carvings of Konark, the vibrant Pattachitra paintings, or the delicate silver filigree work, Odisha's artistic traditions continue to captivate and inspire. 🎭✨</p>
+          <br><br>
+        </div>
+        <div id="odseason" class="tab-pane fade" style="background-color: white;">
+          <h1>Seasons to visit Odisha 🌧️☀️ </h1>
+          <p>Odisha has a tropical climate with distinct seasons, each offering a unique experience for visitors. The state's diverse geography, from coastal beaches to forested hills, means that weather conditions can vary across regions.</p>
+
+          <br><br>
+
+          <h2> Season-wise Breakdown for Visiting Odisha</h2>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🌸 Spring (February - March)</h3>
+                  <ul>
+                    <li>Pleasant weather with temperatures ranging from 15°C to 30°C.</li>
+                    <li>Ideal time to visit temples, wildlife sanctuaries, and tribal areas.</li>
+                    <li>Dola Purnima festival brings vibrant celebrations across the state.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Spring in Odisha" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Summer in Odisha" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>☀️ Summer (April – June)</h3>
+                  <ul>
+                    <li>Hot and humid with temperatures often exceeding 40°C in inland areas.</li>
+                    <li>Coastal areas like Puri and Gopalpur offer some relief with sea breezes.</li>
+                    <li>Good time to visit hill stations like Daringbadi (known as "Kashmir of Odisha").</li>
+                    <li>Raja Parba festival in June celebrates womanhood and earth's fertility.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🌧️ Monsoon (July - September)</h3>
+                  <ul>
+                    <li>Heavy rainfall across the state, with coastal areas receiving the most precipitation.</li>
+                    <li>Lush green landscapes make for beautiful scenery, especially in Western Odisha.</li>
+                    <li>Not ideal for beach activities but good for experiencing the cultural aspects.</li>
+                    <li>Nuakhai harvest festival in Western Odisha is celebrated during this season.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Monsoon in Odisha" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Autumn in Odisha" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🍁 Autumn (October - November)</h3>
+                  <ul>
+                    <li>One of the best seasons to visit Odisha with pleasant temperatures and clear skies.</li>
+                    <li>Perfect for exploring temples, beaches, and wildlife sanctuaries.</li>
+                    <li>Durga Puja and Diwali celebrations add cultural vibrancy.</li>
+                    <li>Bali Jatra, one of Asia's largest trade festivals, is held in Cuttack in November.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>❄️ Winter (December - January)</h3>
+                  <ul>
+                    <li>Mild and pleasant with temperatures ranging from 10°C to 25°C.</li>
+                    <li>Ideal time for beach vacations in Puri, Gopalpur, and Chandipur.</li>
+                    <li>Perfect weather for wildlife safaris in Simlipal and Bhitarkanika.</li>
+                    <li>Konark Dance Festival and International Sand Art Festival attract art enthusiasts.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Winter in Odisha" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>📌 Summary: Best Time to Visit Different Places in Odisha</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Region</th>
+                <th>Best Season</th>
+                <th>Recommended Months</th>
+                <th>Why Visit?</th>
+              </tr>
+              <tr>
+                <td>Bhubaneswar (Temple City)</td>
+                <td>Winter, Spring</td>
+                <td>October - March</td>
+                <td>Pleasant weather for temple exploration, cultural events</td>
+              </tr>
+              <tr>
+                <td>Puri (Beach & Temple)</td>
+                <td>Winter, Spring</td>
+                <td>October - March</td>
+                <td>Perfect beach weather, Jagannath Temple, seafood</td>
+              </tr>
+              <tr>
+                <td>Konark (Sun Temple)</td>
+                <td>Winter</td>
+                <td>December - February</td>
+                <td>Pleasant weather, Dance Festival, Sand Art Festival</td>
+              </tr>
+              <tr>
+                <td>Chilika Lake</td>
+                <td>Winter</td>
+                <td>November - February</td>
+                <td>Migratory birds, dolphin watching, boat rides</td>
+              </tr>
+              <tr>
+                <td>Simlipal National Park</td>
+                <td>Winter, Spring</td>
+                <td>November - March</td>
+                <td>Wildlife viewing, comfortable safari conditions</td>
+              </tr>
+              <tr>
+                <td>Bhitarkanika National Park</td>
+                <td>Winter</td>
+                <td>December - February</td>
+                <td>Crocodile nesting season, bird watching</td>
+              </tr>
+              <tr>
+                <td>Daringbadi (Hill Station)</td>
+                <td>Winter</td>
+                <td>December - January</td>
+                <td>Cool climate, occasional frost, coffee plantations</td>
+              </tr>
+              <tr>
+                <td>Tribal Areas (Koraput, Rayagada)</td>
+                <td>Winter, Spring</td>
+                <td>November - March</td>
+                <td>Tribal markets, comfortable weather for exploration</td>
+              </tr>
+              <tr>
+                <td>Western Odisha (Sambalpur, Hirakud)</td>
+                <td>Winter, Post-Monsoon</td>
+                <td>October - February</td>
+                <td>Hirakud Dam, textile centers, tribal culture</td>
+              </tr>
+
+            </table>
+          </div><br><br>
+          <div class="container">
+            <div class="row">
+              <h1 style=" text-align: center;">📌 Summary: When to Visit Odisha</h1><br>
+              <ul>
+                <li><b>For temples & cultural experiences:</b> October - March (Konark Dance Festival, Bali Jatra, Puri Rath Yatra)</li>
+                <li><b>For beaches & coastal areas:</b> November - February (Puri, Gopalpur, Chandipur)</li>
+                <li><b>For wildlife & nature:</b> November - March (Simlipal, Bhitarkanika, Chilika)</li>
+                <li><b>For tribal culture:</b> November - March (Koraput, Rayagada, Mayurbhanj)</li>
+                <li><b>For hill stations:</b> December - February (Daringbadi, Mahendragiri)</li>
+              </ul>
+
+            </div>
+          </div>
+          <br><br>
+        </div>
+        <div id="odtourist" class="tab-pane fade" style="background-color: white;">
+          <h1>Tourist Spots of Odisha 🏖️🏔️</h1>
+          <p>Odisha is a diverse state with ancient temples, pristine beaches, wildlife sanctuaries, tribal heritage, and cultural hubs. Here's a categorized list of the best tourist places in Odisha:</p>
+
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Temple & Heritage Destinations 🏛️</h3>
+                  <ul>
+                    <li><b>Bhubaneswar (Temple City) -</b> Lingaraj Temple, Mukteshwar Temple, Rajarani Temple, Udayagiri and Khandagiri Caves</li>
+                    <li>  Mukteshwar Temple, Rajarani Temple, Udayagiri and Khandagiri Caves</li>
+                    <li><b>Puri -</b> Jagannath Temple, Gundicha Temple, Lokanath Temple, Swargadwar Beach</li>
+                    <li><b>Konark -</b> Sun Temple (UNESCO World Heritage Site), Archaeological Museum, Chandrabhaga Beach</li>
+                    <li><b>Cuttack -</b> Barabati Fort, Cuttack Chandi Temple, Silver Filigree Work</li>
+                    <li><b>Buddhist Circuit -</b> Ratnagiri, Udayagiri, and Lalitgiri (Diamond Triangle) with ancient monasteries and stupas</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Konark Sun Temple" style="height:200px;width: 230px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Puri Beach" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Beach Destinations 🏖️</h3>
+                  <ul>
+                    <li><b>Puri Beach -</b> Popular pilgrimage and tourist destination with golden sands.</li>
+                    <li><b>Chandipur Beach -</b> Famous for its unique "disappearing sea" phenomenon where the water recedes up to 5 km during low tide.</li>
+                    <li><b>Gopalpur-on-Sea -</b> Serene beach resort town with colonial charm.</li>
+                    <li><b>Astaranga Beach -</b> Known for spectacular sunsets (the name means "colorful sunset").</li>
+                    <li><b>Talasari Beach -</b> Pristine and less crowded beach near the West Bengal border.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Wildlife & Nature Destinations 🌳🐯</h3>
+                  <ul>
+                    <li><b>Chilika Lake -</b> Asia's largest brackish water lagoon, home to Irrawaddy dolphins and migratory birds.</li>
+                    <li><b>Bhitarkanika National Park -</b> Second largest mangrove ecosystem in India, famous for saltwater crocodiles.</li>
+                    <li><b>Simlipal National Park -</b> Tiger reserve with rich biodiversity, waterfalls, and tribal villages.</li>
+                    <li><b>Satkosia Tiger Reserve -</b> Gorge sanctuary with diverse wildlife and the Mahanadi River flowing through it.</li>
+                    <li><b>Hirakud Dam -</b> Longest earthen dam in the world, offering boating and bird watching.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Chilika Lake" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Daringbadi" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Hill Stations & Mountain Destinations 🏔️</h3>
+                  <ul>
+                    <li><b>Daringbadi -</b> Known as the "Kashmir of Odisha," famous for coffee plantations and occasional snowfall.</li>
+                    <li><b>Mahendragiri -</b> Second highest mountain peak in Odisha with ancient temples and panoramic views.</li>
+                    <li><b>Deomali -</b> Highest peak in Odisha located in Koraput district, offering trekking opportunities.</li>
+                    <li><b>Gandhamardan Hills -</b> Known for medicinal plants, waterfalls, and Buddhist ruins.</li>
+                    <li><b>Belghar -</b> Tribal settlement in Kandhamal district with rich biodiversity and cultural experiences.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Tribal & Cultural Destinations 🏺</h3>
+                  <ul>
+                    <li><b>Koraput -</b> Home to diverse tribal communities, terraced valleys, and coffee plantations.</li>
+                    <li><b>Rayagada -</b> Known for the Dongria Kondh tribe and weekly tribal markets (haats).</li>
+                    <li><b>Mayurbhanj -</b> Famous for Chhau dance, tribal heritage, and Simlipal National Park.</li>
+                    <li><b>Raghurajpur -</b> Heritage crafts village known for Pattachitra paintings and Gotipua dance.</li>
+                    <li><b>Pipili -</b> Famous for appliqué work and colorful handicrafts.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Tribal Culture" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=230" alt="Taptapani Hot Springs" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>6. Unique & Offbeat Destinations 🎢</h3>
+                  <ul>
+                    <li><b>Taptapani -</b> Natural hot sulfur springs with therapeutic properties.</li>
+                    <li><b>Chandaka Elephant Sanctuary -</b> Wildlife reserve near Bhubaneswar with elephant safaris.</li>
+                    <li><b>Nandankanan Zoological Park -</b> Famous for white tigers and successful breeding programs.</li>
+                    <li><b>Dhauli Peace Pagoda -</b> Buddhist stupa marking the site of the historic Kalinga War.</li>
+                    <li><b>Bonda Hills -</b> Home to one of India's most primitive tribes, the Bonda people.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Religious & Spiritual Destinations ⛩️</h3>
+                  <ul>
+                    <li><b>Jagannath Temple, Puri -</b> One of the Char Dham pilgrimage sites for Hindus.</li>
+                    <li><b>Lingaraj Temple, Bhubaneswar -</b> Ancient Shiva temple with impressive architecture.</li>
+                    <li><b>Maa Tarini Temple, Ghatgaon -</b> Important Shakti Peetha and pilgrimage site.</li>
+                    <li><b>Samaleswari Temple, Sambalpur -</b> Ancient temple dedicated to Goddess Samaleswari.</li>
+                    <li><b>Buddhist Diamond Triangle -</b> Ratnagiri, Udayagiri, and Lalitgiri with ancient Buddhist monasteries.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Jagannath Temple" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br><br>
+
+        </div>
+        <div id="odwild" class="tab-pane fade" style="background-color: white;">
+          <h1> Wildlife & Crops of Odisha 🌿</h1>
+          <p>Odisha has diverse wildlife and a rich agricultural landscape due to its varied geography, from the Eastern Ghats to the coastal plains and mangrove forests.</p>
+
+          <br>
+          <h2>Wildlife of Odisha </h2>
+          <p>Odisha has 2 national parks, 18 wildlife sanctuaries, and 1 biosphere reserve, making it one of India's important biodiversity hotspots.</p>
+
+          <br>
+          <h2>🔹 Major National Parks & Wildlife Sanctuaries</h2>
+          <div>
+            <table>
+              <tr>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Simlipal National Park</td>
+                <td>Mayurbhanj</td>
+                <td>Tigers 🐅, Elephants 🐘, Orchids, Waterfalls</td>
+              </tr>
+              <tr>
+                <td>Bhitarkanika National Park</td>
+                <td>Kendrapara</td>
+                <td>Saltwater Crocodiles 🐊, Mangroves, Olive Ridley Turtles 🐢</td>
+              </tr>
+              <tr>
+                <td>Chilika Lake (Nalabana Bird Sanctuary)</td>
+                <td>Puri, Khordha, Ganjam</td>
+                <td>Irrawaddy Dolphins 🐬, Migratory Birds 🦢, Brackish Water Ecosystem</td>
+              </tr>
+              <tr>
+                <td>Satkosia Tiger Reserve</td>
+                <td>Angul</td>
+                <td>Tigers, Gharials, Mahanadi Gorge</td>
+              </tr>
+              <tr>
+                <td>Nandankanan Zoological Park</td>
+                <td>Bhubaneswar</td>
+                <td>White Tigers, Botanical Garden, Safari</td>
+              </tr>
+              <tr>
+                <td>Chandaka-Dampara Wildlife Sanctuary</td>
+                <td>Bhubaneswar</td>
+                <td>Elephants, Deer 🦌, Bird Species</td>
+              </tr>
+              <tr>
+                <td>Gahirmatha Marine Sanctuary</td>
+                <td>Kendrapara</td>
+                <td>World's Largest Olive Ridley Turtle Nesting Site</td>
+              </tr>
+            </table>
+          </div>
+          <bt><br></bt>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3> 🔹 Other Notable Wildlife in Odisha</h3>
+                <ul>
+                  <li><b>Mammals:</b> Sambar Deer (State Animal), Elephants, Leopards, Sloth Bears, Wild Boars, Gaur.</li>
+                  <li><b>Birds:</b> Indian Roller (State Bird), Flamingos, Pelicans, Painted Storks, Kingfishers.</li>
+                  <li><b>Reptiles:</b> Saltwater Crocodiles, Gharials, King Cobras, Monitor Lizards.</li>
+                  <li><b>Marine Life:</b> Olive Ridley Turtles, Irrawaddy Dolphins, Horseshoe Crabs.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=200" alt="Olive Ridley Turtles" style="height:200px;width: 200px;">
+
+              </div>
+
+            </div>
+          </div>
+          <hr><br>
+          <h2>🌾 Agriculture & Major Crops in Odisha </h2>
+          <p>Odisha is primarily an agricultural state with about 70% of its population dependent on agriculture for livelihood. The state produces a variety of cereals, pulses, vegetables, fruits, and spices.</p>
+
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Key Agricultural Features</h3>
+                <ul>
+                  <li>Major producer of Rice, Pulses, Oilseeds, and Vegetables in India.</li>
+                  <li><b>Fertile Land:</b> Thanks to the Mahanadi Delta & Eastern Ghats.</li>
+                  <li><b>Climate:</b> Supports both Kharif & Rabi crops.</li>
+                  <li><b>Irrigation:</b> Mahanadi, Brahmani, and Baitarani rivers support farming.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=220" alt="Rice Cultivation" style="height:200px;width: 220px;">
+
+              </div>
+            </div>
+          </div>
+          <h2>🔹 Major Crops of Odisha</h2>
+          <div>
+            <table>
+              <tr>
+                <th>Category</th>
+                <th>Crops</th>
+              </tr>
+              <tr>
+                <td>Cereals</td>
+                <td>Rice 🍚, Wheat 🌾, Maize 🌽, Ragi</td>
+              </tr>
+              <tr>
+                <td>Cash Crops</td>
+                <td>Sugarcane, Cotton, Jute, Turmeric</td>
+              </tr>
+              <tr>
+                <td>Pulses</td>
+                <td>Black Gram, Green Gram, Horse Gram, Pigeon Pea</td>
+              </tr>
+              <tr>
+                <td>Vegetables</td>
+                <td>Potato 🥔, Brinjal, Tomato 🍅, Okra, Pumpkin</td>
+              </tr>
+              <tr>
+                <td>Fruits</td>
+                <td>Mango 🥭, Banana 🍌, Coconut 🥥, Papaya, Jackfruit</td>
+              </tr>
+              <tr>
+                <td>Oilseeds</td>
+                <td>Groundnut, Mustard, Sesame, Sunflower 🌻</td>
+              </tr>
+              <tr>
+                <td>Spices</td>
+                <td>Turmeric, Ginger, Chili 🌶️, Black Pepper</td>
+              </tr>
+              <tr>
+                <td>Flowers</td>
+                <td>Marigold, Jasmine 🌼, Rose 🌹 (Used in temple offerings)</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Special Agricultural Products</h3>
+                <ul>
+                  <li>Koraput Coffee (Emerging specialty coffee from tribal areas).</li>
+                  <li>Kalajeera Rice (Aromatic black rice from Jeypore).</li>
+                  <li>Kandhamal Turmeric (GI-tagged for its high curcumin content).</li>
+                  <li>Ganjam Kewda (Essential oil used in perfumery).</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=200" alt="Turmeric Cultivation" style="height:200px;width: 200px;">
+
+              </div>
+            </div>
+          </div><br>
+          <hr>
+          <div class="box" style=" background: #f3b37185;padding: 10px;">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3> Sustainable Agriculture & Modern Trends 🌾</h3>
+                  <ul>
+                    <li><b>Organic Farming:</b> Growing in tribal areas of Koraput, Kandhamal, and Mayurbhanj.</li>
+                    <li><b>Integrated Farming:</b> Combining agriculture with fisheries and livestock.</li>
+                    <li><b>Aquaculture & Fisheries:</b> Odisha is a major producer of freshwater and brackish water fish 🐟, especially from Chilika Lake.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Organic Farming" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Odisha is a paradise for both nature lovers and agricultural enthusiasts. It has rich wildlife sanctuaries, pristine beaches, and fertile farmlands that support a diverse ecosystem and economy.</p>
+          <br><br>
+        </div>
+        <div id="odedu" class="tab-pane fade" style="background-color: white;">
+          <h1>🎓 Education & Institutions in Odisha</h1>
+          <p>Odisha has a growing educational landscape with a mix of traditional and modern institutions. The state has made significant strides in higher education, technical training, and research in recent decades.</p>
+
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>📌 Education System in Odisha</h3>
+                  <ul>
+                    <li><b>School Education:</b> Follows BSE (Board of Secondary Education) and CHSE (Council of Higher Secondary Education) Odisha, along with CBSE and ICSE boards.</li>
+                    <li><b>Higher Education:</b> Managed by UGC, AICTE, and state universities.</li>
+                    <li><b>Major Fields:</b> Engineering, Medical, Science, Arts, Commerce, Law, Agriculture, and Management.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="BSE Odisha" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>🏛️ Top Universities & Institutions </h2>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Central Universities</h3>
+                <ol>
+                  <li><b>National Institute of Science Education and Research (NISER) -</b> Premier research institution focusing on basic sciences.</li>
+                  <li><b>Central University of Odisha -</b> Located in Koraput, offering diverse programs in humanities, sciences, and management.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=230" alt="NISER" style="height:200px;width: 230px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 State Universities</h3>
+                <ol>
+                  <li><b>Utkal University -</b> Established in 1943, one of the oldest universities in eastern India.</li>
+                  <li><b>Sambalpur University -</b> Major university serving western Odisha.</li>
+                  <li><b>Berhampur University -</b> Serving southern Odisha with diverse academic programs.</li>
+                  <li><b>Ravenshaw University -</b> One of the oldest educational institutions in Odisha, upgraded to university status in 2006.</li>
+                  <li><b>Odisha University of Agriculture and Technology (OUAT) -</b> Leading agricultural education and research.</li>
+                  <li><b>Utkal University of Culture -</b> Specialized in Odishan art, culture, and heritage studies.</li>
+                  <li><b>Shri Jagannath Sanskrit University -</b> Focused on Sanskrit education and traditional knowledge systems.</li>
+                  <li><b>Fakir Mohan University -</b> Named after the renowned Odia writer Fakir Mohan Senapati.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=230" alt="Utkal University" style="height:200px;width: 230px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>University</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Utkal University</td>
+                <td>Bhubaneswar</td>
+                <td>Oldest university in Odisha, strong in arts, science, and commerce.</td>
+              </tr>
+              <tr>
+                <td>Ravenshaw University</td>
+                <td>Cuttack</td>
+                <td>Historic institution with rich heritage, strong in liberal arts and sciences.</td>
+              </tr>
+              <tr>
+                <td>Sambalpur University</td>
+                <td>Sambalpur</td>
+                <td>Serving western Odisha, known for tribal studies and regional development.</td>
+              </tr>
+              <tr>
+                <td>NISER</td>
+                <td>Bhubaneswar</td>
+                <td>Research-focused institution for basic sciences.</td>
+              </tr>
+              <tr>
+                <td>IIT Bhubaneswar</td>
+                <td>Bhubaneswar</td>
+                <td>Premier engineering and technology institution.</td>
+              </tr>
+              <tr>
+                <td>NIT Rourkela</td>
+                <td>Rourkela</td>
+                <td>One of India's top NITs, strong in engineering and metallurgy.</td>
+              </tr>
+              <tr>
+                <td>AIIMS Bhubaneswar</td>
+                <td>Bhubaneswar</td>
+                <td>Premier medical institution with advanced healthcare facilities.</td>
+              </tr>
+              <tr>
+                <td>OUAT</td>
+                <td>Bhubaneswar</td>
+                <td>Agricultural education, research, and extension services.</td>
+              </tr>
+              <tr>
+                <td>XIMB</td>
+                <td>Bhubaneswar</td>
+                <td>Top-ranked business school in eastern India.</td>
+              </tr>
+            </table>
+          </div>
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=240" alt="IIT Bhubaneswar" style="height:200px;width: 240px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🔹 IITs, NITs & Other Premier Institutes</h3>
+                  <ol>
+                    <li><b>IIT Bhubaneswar -</b> Established in 2008, offering undergraduate and postgraduate programs in engineering and technology.</li>
+                    <li><b>NIT Rourkela -</b> One of India's premier technical institutions, known for engineering and research.</li>
+                    <li><b>AIIMS Bhubaneswar -</b> Premier medical institution offering quality healthcare and medical education.</li>
+                    <li><b>Indian Institute of Management (IIM) Sambalpur -</b> Established in 2015, offering management education.</li>
+                    <li><b>Xavier Institute of Management (XIMB) -</b> Leading business school in eastern India.</li>
+                  </ol>
+                </div>
+
+                <br><br>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Institute</th>
+                <th>Location</th>
+                <th>Specialization</th>
+              </tr>
+              <tr>
+                <td>IIT Bhubaneswar</td>
+                <td>Bhubaneswar</td>
+                <td>Engineering, Technology, and Research.</td>
+              </tr>
+              <tr>
+                <td>NIT Rourkela</td>
+                <td>Rourkela</td>
+                <td>Engineering, Metallurgy, and Computer Science.</td>
+              </tr>
+              <tr>
+                <td>IIIT Bhubaneswar</td>
+                <td>Bhubaneswar</td>
+                <td>Information Technology and Computer Science.</td>
+              </tr>
+              <tr>
+                <td>College of Engineering and Technology</td>
+                <td>Bhubaneswar</td>
+                <td>Engineering and Technical Education.</td>
+              </tr>
+              <tr>
+                <td>KIIT University</td>
+                <td>Bhubaneswar</td>
+                <td>Multi-disciplinary private university with strong engineering programs.</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🔹 Medical Colleges</h3>
+                  <ol>
+                    <li><b>SCB Medical College -</b> Established in 1944, one of the oldest and most prestigious medical colleges in eastern India.</li>
+                    <li><b>MKCG Medical College -</b> Serving southern Odisha with quality medical education and healthcare.</li>
+                    <li><b>VIMSAR (Veer Surendra Sai Institute of Medical Sciences and Research) -</b> Major medical institution in western Odisha.</li>
+                    <li><b>AIIMS Bhubaneswar -</b> Premier medical institution with advanced facilities.</li>
+                  </ol>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="SCB Medical College" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Medical College</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>SCB Medical College</td>
+                <td>Cuttack</td>
+                <td>Oldest medical college in Odisha, comprehensive healthcare.</td>
+              </tr>
+              <tr>
+                <td>MKCG Medical College</td>
+                <td>Berhampur</td>
+                <td>Serving southern Odisha, quality medical education.</td>
+              </tr>
+              <tr>
+                <td>VIMSAR</td>
+                <td>Burla, Sambalpur</td>
+                <td>Major healthcare institution in western Odisha.</td>
+              </tr>
+              <tr>
+                <td>AIIMS Bhubaneswar</td>
+                <td>Bhubaneswar</td>
+                <td>Advanced medical research and education.</td>
+              </tr>
+              <tr>
+                <td>SUM Hospital</td>
+                <td>Bhubaneswar</td>
+                <td>Private medical college with modern facilities.</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="NLUO" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🔹 Law, Agriculture, & Other Institutes</h3>
+                  <ul>
+                    <li><b>National Law University Odisha (NLUO) -</b> Premier law university offering undergraduate and postgraduate legal education.</li>
+                    <li><b>Odisha University of Agriculture and Technology (OUAT) -</b> Leading agricultural education and research in the state.</li>
+                    <li><b>Institute of Physics -</b> Advanced research center for theoretical and experimental physics.</li>
+                    <li><b>Institute of Life Sciences -</b> Biotechnology research institution focusing on infectious diseases and plant biotechnology.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Institute</th>
+                <th>Location</th>
+                <th>Specialization</th>
+              </tr>
+              <tr>
+                <td>National Law University Odisha</td>
+                <td>Cuttack</td>
+                <td>Legal education and research.</td>
+              </tr>
+              <tr>
+                <td>Madhusudan Law College</td>
+                <td>Cuttack</td>
+                <td>One of the oldest law colleges in eastern India.</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <h2>🏫 School Education in Odisha </h2>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Major School Boards</h3>
+                <ol>
+                  <li><b>BSE (Board of Secondary Education) -</b> Conducts High School Certificate (10th) examinations.</li>
+                  <li><b>CHSE (Council of Higher Secondary Education) -</b> Conducts Higher Secondary (12th) examinations.</li>
+                  <li><b>CBSE & ICSE -</b> National boards with schools across the state.</li>
+                  <li><b>Odisha Adarsha Vidyalaya -</b> State-run model schools providing quality education in rural areas.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=200" alt="CBSE" style="height:200px;width: 200px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-4">
+                <img src="/placeholder.svg?height=200&width=230" alt="DM School" style="height:200px;width: 230px;">
+
+              </div>
+              <div class="col-sm-8">
+
+                <h3>🔹 Famous Schools in Odisha</h3>
+                <ol>
+                  <li><b>DM School, Bhubaneswar -</b> One of the oldest and most prestigious schools in the state.</li>
+                  <li><b>Stewart School, Cuttack -</b> Historic institution established during the colonial era.</li>
+                  <li><b>DAV Public Schools -</b> Network of quality schools across the state.</li>
+                  <li><b>Sainik School, Bhubaneswar -</b> Premier residential school preparing students for defense services.</li>
+                  <li><b>KIIT International School -</b> Modern school with international curriculum.</li>
+                  <li><b>Mothers' Public School -</b> Leading educational institution in Bhubaneswar.</li>
+                </ol>
+
+              </div>
+
+            </div>
+          </div>
+          <div class="box">
+            <h2>🔬 Research & Technological Advancements</h2>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <p>Odisha is home to several research institutions focusing on various fields:</p>
+                  <ol>
+                    <li><b>Institute of Physics -</b> Advanced research in theoretical and experimental physics.</li>
+                    <li><b>Institute of Life Sciences -</b> Biotechnology research with focus on infectious diseases.</li>
+                    <li><b>Institute of Minerals and Materials Technology -</b> Research in minerals processing and materials engineering.</li>
+                    <li><b>Central Rice Research Institute -</b> Premier research institution for rice cultivation.</li>
+                  </ol>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="Institute of Physics" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <h2>📚 Other Notable Institutions</h2>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <ol>
+                    <li><b>Kalinga Institute of Industrial Technology (KIIT) -</b> Private university known for engineering, management, and law. 🏛️</li>
+                    <li><b>Siksha 'O' Anusandhan University -</b> Multi-disciplinary institution with strong medical and engineering programs.</li>
+                    <li><b>Centurion University -</b> Known for skill-based education and rural development.</li>
+                    <li><b>Kalinga Institute of Social Sciences (KISS) -</b> World's largest residential tribal institution.</li>
+                    <li><b>Utkal University of Culture -</b> Specialized in Odishan art, music, and cultural studies.</li>
+                    <li><b>Central University of Odisha -</b> Located in tribal-dominated Koraput district.</li>
+                  </ol>
+                </div>
+                <div class="col-sm-4">
+                  <img src="/placeholder.svg?height=200&width=200" alt="KIIT University" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Odisha's educational landscape has evolved significantly in recent decades, with a growing number of institutions offering quality education across various disciplines. The state continues to focus on expanding educational opportunities, particularly in rural and tribal areas, while also establishing centers of excellence in research and innovation.</p>
+        </div>
+        <br><br>
+
+      </div>
+
+
+    </div>
+  </div>
+  </div>
+</body>
+
+</html>

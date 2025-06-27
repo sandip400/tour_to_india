@@ -1,0 +1,2023 @@
+{% extends "base.html" %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <!-- Lightbox CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
+    <!-- Custom CSS -->
+    <style>
+	/* Import a custom font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+:root {
+  --primary-color: #ff7722;
+  --secondary-color: #1e90ff;
+  --accent-color: #ffeb3b;
+  --background-color: #f9f9f9;
+  --card-bg: #ffffff;
+  --overlay-bg: rgba(0, 0, 0, 0.5);
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Preloader */
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--background-color);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.5s ease;
+  animation: fadeIn 1.5s ease-in-out forwards 2s;
+}
+
+.loader {
+  text-align: center;
+  animation: rotateSoft 1.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes rotateSoft {
+  from { transform: rotate(-180deg); opacity: 0; }
+  to { transform: rotate(0); opacity: 1; }
+}
+
+/* Beach Theme Specific Styles with Boat Animation */
+.beach-bg {
+  background: linear-gradient(135deg, #87ceeb, #1e90ff);
+  position: relative;
+  overflow: hidden;
+}
+
+.beach-bg::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 15px;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23f5deb3" fill-opacity="1" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,261.3C960,256,1056,224,1152,197.3C1248,171,1344,149,1392,138.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+  background-size: cover;
+  background-repeat: no-repeat;
+  animation: scaleUp 5s ease-in-out infinite;
+}
+
+.about-hero .about-banner img {
+  height: 120vh;
+  object-fit: cover;
+  animation: boatMove 4s ease-in-out infinite;
+}
+
+@keyframes boatMove {
+  0% { transform: translateX(0) translateY(0); }
+  25% { transform: translateX(-10px) translateY(-5px); }
+  50% { transform: translateX(10px) translateY(0); }
+  75% { transform: translateX(-10px) translateY(5px); }
+  100% { transform: translateX(0) translateY(0); }
+}
+
+.sand-bg {
+  background-color: #f5deb3;
+  position: relative;
+  overflow: hidden;
+}
+
+.sand-bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 15px;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="1" d="M0,96L48,106.7C96,117,192,139,288,138.7C384,139,480,117,576,96C672,75,768,53,864,58.7C960,64,1056,96,1152,122.7C1248,149,1344,171,1392,181.3L1440,192L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path></svg>');
+  background-size: cover;
+  background-repeat: no-repeat;
+  animation: slideIn 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes scaleUp {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes slideIn {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+  100% { transform: translateY(0); }
+}
+
+/* Text Shadow and Glow Effect */
+.text-shadow {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.counter-section .counter-number,
+.counter-section .counter-text {
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 5px #ff7722, 0 0 10px #ff7722, 0 0 15px #ff7722;
+    color: #ff7722;
+  }
+  to {
+    text-shadow: 0 0 10px #ff7722, 0 0 20px #ff7722, 0 0 30px #ff7722;
+    color: #ff7722;
+  }
+}
+
+/* Hero Section with Video */
+.about-hero {
+  position: relative;
+  height: 120vh;
+  overflow: hidden;
+  animation: flipSoft 1.5s ease-in-out;
+}
+
+.overlay {
+  background: var(--overlay-bg);
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.divider {
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+  animation: bounceGentle 1.5s ease-in-out infinite;
+}
+
+@keyframes flipSoft {
+  from { transform: perspective(400px) rotateX(20deg); opacity: 0; }
+  to { transform: perspective(400px) rotateX(0); opacity: 1; }
+}
+
+@keyframes bounceGentle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* About Section */
+.about-image-container {
+  position: relative;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.experience-badge {
+  position: absolute;
+  bottom: -25px;
+  right: -25px;
+  width: 150px;
+  height: 150px;
+  background: var(--primary-color);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  animation: jelloSoft 2s ease-in-out infinite;
+}
+
+.experience-badge .number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1;
+  animation: scaleUp 2s ease-in-out infinite;
+}
+
+.experience-badge .text {
+  font-size: 0.8rem;
+  text-align: center;
+  animation: slideIn 2s ease-in-out infinite;
+}
+
+@keyframes jelloSoft {
+  0%, 100% { transform: scale(1); }
+  25% { transform: scale(1.05) rotate(-2deg); }
+  50% { transform: scale(1.05) rotate(2deg); }
+  75% { transform: scale(1.05) rotate(-2deg); }
+}
+
+/* Counter Section with Glow */
+.counter-section {
+  background: #F5E8C7;
+  position: relative;
+  overflow: hidden;
+  animation: rollSoft 1.5s ease-in-out;
+}
+
+.counter-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,261.3C960,256,1056,224,1152,197.3C1248,171,1344,149,1392,138.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0.2;
+  animation: fadeIn 2s ease-in-out;
+}
+
+.counter-item {
+  padding: 20px;
+  transition: all 0.3s ease;
+  animation: bounceGentle 1.5s ease-in-out;
+}
+
+.counter-item:hover {
+  transform: translateY(-10px);
+  animation: jelloSoft 0.5s ease-in-out;
+}
+
+/* Timeline Section */
+.timeline {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.timeline::after {
+  content: "";
+  position: absolute;
+  width: 6px;
+  background-color: var(--primary-color);
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  margin-left: -3px;
+  border-radius: 3px;
+  animation: scaleUp 3s ease-in-out infinite;
+}
+
+.timeline-item {
+  padding: 10px 40px;
+  position: relative;
+  width: 50%;
+  box-sizing: border-box;
+  margin-bottom: 30px;
+  animation: slideIn 1.5s ease-in-out;
+}
+
+.timeline-item:nth-child(odd) {
+  left: 0;
+}
+
+.timeline-item:nth-child(even) {
+  left: 50%;
+}
+
+.timeline-dot {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  right: -12.5px;
+  background-color: white;
+  border: 4px solid var(--primary-color);
+  top: 15px;
+  border-radius: 50%;
+  z-index: 1;
+  animation: bounceGentle 2s ease-in-out infinite;
+}
+
+.timeline-item:nth-child(even) .timeline-dot {
+  left: -12.5px;
+}
+
+.timeline-content {
+  padding: 20px 30px;
+  background-color: var(--card-bg);
+  position: relative;
+  border-radius: 6px;
+  box-shadow: 0 5px 15px var(--shadow-color);
+  transition: all 0.3s ease;
+  animation: flipSoft 1.5s ease-in-out;
+}
+
+.timeline-content:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px var(--shadow-color);
+  animation: bounceGentle 0.5s ease-in-out;
+}
+
+.timeline-content h3 {
+  color: var(--primary-color);
+  font-weight: 600;
+  margin-bottom: 10px;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+/* New Animations for Bottom Half */
+@keyframes wavePulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.03);
+    opacity: 0.95;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes floatSoft {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes shineGlint {
+  0% {
+    background-position: -200%;
+  }
+  50% {
+    background-position: 200%;
+  }
+  100% {
+    background-position: -200%;
+  }
+}
+
+@keyframes swayGentle {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(1deg);
+  }
+  75% {
+    transform: rotate(-1deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+/* Destination Cards */
+.destination-card {
+  position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px var(--shadow-color);
+  height: 300px;
+  transition: all 0.3s ease;
+  animation: slideIn 1.5s ease-in-out, wavePulse 2s ease-in-out infinite;
+}
+
+.destination-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.5s ease;
+  animation: rotateSoft 2s ease-in-out;
+}
+
+.destination-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  padding: 20px;
+  color: white;
+  transform: translateY(0);
+  transition: all 0.3s ease;
+  animation: fadeIn 1.5s ease-in-out, swayGentle 3s ease-in-out infinite;
+}
+
+.destination-card:hover img {
+  transform: scale(1.1);
+}
+
+.destination-card:hover .destination-overlay {
+  transform: translateY(-10px);
+  animation: bounceGentle 0.5s ease-in-out;
+}
+
+.destination-overlay h3 {
+  margin-bottom: 5px;
+  font-weight: 600;
+  animation: jelloSoft 1.5s ease-in-out;
+}
+
+.destination-overlay p {
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+  opacity: 0.8;
+  animation: slideIn 1.5s ease-in-out;
+}
+
+/* Popular Destinations Section */
+.popular-destinations {
+  background: #FFE4D6;
+  padding: 40px 0;
+  text-align: center;
+}
+
+.popular-destinations h2 {
+  color: var(--primary-color);
+  margin-bottom: 20px;
+  animation: fadeIn 1.5s ease-in-out;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.5),
+    transparent
+  );
+  background-size: 200%;
+  animation: shineGlint 3s linear infinite;
+}
+
+.popular-destinations p {
+  color: #333;
+  margin-bottom: 30px;
+  animation: slideIn 1.5s ease-in-out;
+}
+
+/* Add Sundarbans Photo */
+#destinations .swiper-slide:nth-child(4) .destination-card img {
+  background-image: url('https://images.unsplash.com/photo-1580741186434-c5e9ca5099f2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+  background-size: cover;
+  background-position: center;
+}
+
+/* Team Member Styles */
+.team-member {
+  transition: all 0.3s ease;
+  animation: rollSoft 1.5s ease-in-out;
+}
+
+.team-member:hover {
+  transform: translateY(-10px);
+  animation: bounceGentle 0.5s ease-in-out;
+}
+
+.member-img {
+  width: 150px;
+  height: 150px;
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.3s ease;
+  animation: floatSoft 2.5s ease-in-out infinite;
+}
+
+.member-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.3s ease;
+  animation: rotateSoft 2s ease-in-out;
+}
+
+.member-social {
+  position: absolute;
+  bottom: -40px;
+  left: 0;
+  right: 0;
+  padding: 10px 0;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.member-social a {
+  color: white;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  animation: bounceGentle 1.5s ease-in-out;
+}
+
+.member-social a:hover {
+  color: var(--primary-color);
+  transform: scale(1.2);
+  animation: wavePulse 1s ease-in-out infinite;
+}
+
+.team-member:hover .member-social {
+  bottom: 0;
+}
+
+.team-member:hover .member-img img {
+  transform: scale(1.1);
+}
+
+/* Service Cards */
+.service-card {
+  background-color: var(--card-bg);
+  border-radius: 15px;
+  box-shadow: 0 5px 15px var(--shadow-color);
+  transition: all 0.3s ease;
+  animation: flipSoft 1.5s ease-in-out;
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px var(--shadow-color);
+  animation: bounceGentle 0.5s ease-in-out, swayGentle 2s ease-in-out infinite;
+}
+
+.service-icon {
+  color: var(--primary-color);
+  transition: all 0.3s ease;
+  animation: floatSoft 2s ease-in-out infinite;
+}
+
+/* Mission & Vision Cards */
+.mission-card,
+.vision-card {
+  background-color: var(--card-bg);
+  border-radius: 15px;
+  box-shadow: 0 5px 15px var(--shadow-color);
+  transition: all 0.3s ease;
+  animation: slideIn 1.5s ease-in-out, wavePulse 2.5s ease-in-out infinite;
+}
+
+.mission-card:hover,
+.vision-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px var(--shadow-color);
+  animation: bounceGentle 0.5s ease-in-out;
+}
+
+.mission-icon,
+.vision-icon {
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  background-color: rgba(255, 119, 34, 0.1);
+  border-radius: 50%;
+  color: var(--primary-color);
+  position: relative;
+  animation: floatSoft 2s ease-in-out infinite;
+}
+
+.mission-icon::after,
+.vision-icon::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(255, 255, 255, 0.5),
+    transparent
+  );
+  background-size: 200%;
+  animation: shineGlint 2.5s linear infinite;
+  border-radius: 50%;
+}
+
+/* Testimonial Cards */
+.testimonial-card {
+  background-color: var(--card-bg);
+  border-radius: 15px;
+  box-shadow: 0 5px 15px var(--shadow-color);
+  transition: all 0.3s ease;
+  height: 100%;
+  animation: rollSoft 1.5s ease-in-out, swayGentle 3s ease-in-out infinite;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px var(--shadow-color);
+  animation: jelloSoft 0.5s ease-in-out;
+}
+
+.testimonial-author img {
+  height: 60px;
+  width: 60px;
+  object-fit: cover;
+  animation: floatSoft 2.5s ease-in-out infinite;
+}
+
+/* Contact Card */
+.contact-card {
+  background-color: var(--card-bg);
+  border-radius: 15px;
+  box-shadow: 0 5px 15px var(--shadow-color);
+  animation: flipSoft 1.5s ease-in-out, wavePulse 2s ease-in-out infinite;
+}
+
+.contact-info {
+  transition: all 0.3s ease;
+  animation: slideIn 1.5s ease-in-out;
+  position: relative;
+}
+
+.contact-info:hover {
+  transform: translateY(-5px);
+  animation: bounceGentle 0.5s ease-in-out;
+}
+
+.contact-info span {
+  display: inline-block;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.5),
+    transparent
+  );
+  background-size: 200%;
+  animation: shineGlint 3s linear infinite;
+}
+
+/* CTA Section */
+.cta-section {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("https://images.unsplash.com/photo-1596895111956-bf1cf0599ce5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  animation: fadeIn 1.5s ease-in-out, swayGentle 4s ease-in-out infinite;
+}
+
+.cta-section .btn {
+  background: var(--primary-color);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  display: inline-block;
+  transition: all 0.3s ease;
+  background: linear-gradient(
+    90deg,
+    var(--primary-color),
+    var(--accent-color),
+    var(--primary-color)
+  );
+  background-size: 200%;
+  animation: shineGlint 2s linear infinite;
+}
+
+.cta-section .btn:hover {
+  transform: translateY(-5px);
+  animation: bounceGentle 0.5s ease-in-out;
+}
+
+/* Divider */
+.divider {
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+}
+
+/* Accordion Styling */
+.accordion-button:not(.collapsed) {
+  background-color: rgba(255, 119, 34, 0.1);
+  color: var(--primary-color);
+  box-shadow: none;
+  animation: fadeIn 1.5s ease-in-out, wavePulse 2s ease-in-out infinite;
+}
+
+.accordion-button:focus {
+  box-shadow: none;
+  border-color: rgba(255, 119, 34, 0.25);
+  animation: floatSoft 1.5s ease-in-out infinite;
+}
+
+.accordion-button::after {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ff7722'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+  animation: bounceGentle 2s ease-in-out infinite;
+}
+
+/* Responsive Styles */
+@media (max-width: 991px) {
+  .about-hero {
+    height: 70vh;
+    animation: flipSoft 1.5s ease-in-out;
+  }
+
+  .timeline::after {
+    left: 31px;
+  }
+
+  .timeline-item {
+    width: 100%;
+    padding-left: 70px;
+    padding-right: 25px;
+  }
+
+  .timeline-item:nth-child(even) {
+    left: 0;
+  }
+
+  .timeline-item:nth-child(odd) .timeline-dot,
+  .timeline-item:nth-child(even) .timeline-dot {
+    left: 18px;
+  }
+
+  .member-img {
+    width: 120px;
+    height: 120px;
+    animation: floatSoft 2.5s ease-in-out infinite;
+  }
+
+  .experience-badge {
+    width: 100px;
+    height: 100px;
+    bottom: -20px;
+    right: -20px;
+  }
+
+  .experience-badge .number {
+    font-size: 2rem;
+  }
+
+  .experience-badge .text {
+    font-size: 0.7rem;
+  }
+
+  .destination-card {
+    animation: slideIn 1.5s ease-in-out;
+  }
+
+  .service-card:hover {
+    animation: bounceGentle 0.5s ease-in-out;
+  }
+
+  .mission-card,
+  .vision-card {
+    animation: slideIn 1.5s ease-in-out;
+  }
+
+  .testimonial-card {
+    animation: rollSoft 1.5s ease-in-out;
+  }
+
+  .contact-card {
+    animation: flipSoft 1.5s ease-in-out;
+  }
+
+  .cta-section {
+    animation: fadeIn 1.5s ease-in-out;
+  }
+}
+
+@media (max-width: 767px) {
+  .about-hero {
+    height: 50vh;
+  }
+
+  .counter-item {
+    margin-bottom: 30px;
+    animation: bounceGentle 1.5s ease-in-out;
+  }
+
+  .member-img {
+    width: 100px;
+    height: 100px;
+    animation: none;
+  }
+
+  .experience-badge {
+    width: 80px;
+    height: 80px;
+    bottom: -15px;
+    right: -15px;
+  }
+
+  .experience-badge .number {
+    font-size: 1.5rem;
+  }
+
+  .experience-badge .text {
+    font-size: 0.6rem;
+  }
+
+  .member-social a:hover {
+    animation: none;
+  }
+
+  .mission-icon,
+  .vision-icon {
+    animation: none;
+  }
+
+  .testimonial-author img {
+    animation: none;
+  }
+
+  .accordion-button:not(.collapsed) {
+    animation: fadeIn 1.5s ease-in-out;
+  }
+
+  .accordion-button:focus {
+    animation: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .about-hero {
+    height: 40vh;
+  }
+
+  .member-img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .hero-content h1 {
+    font-size: 2rem;
+    animation: fadeIn 1.5s ease-in-out;
+  }
+
+  .hero-content h2 {
+    font-size: 1.2rem;
+  }
+
+  .timeline-item {
+    padding-left: 50px;
+  }
+
+  .timeline::after {
+    left: 21px;
+  }
+
+  .timeline-item:nth-child(odd) .timeline-dot,
+  .timeline-item:nth-child(even) .timeline-dot {
+    left: 8px;
+  }
+
+  .popular-destinations h2 {
+    animation: fadeIn 1.5s ease-in-out;
+  }
+
+  .destination-overlay {
+    animation: fadeIn 1.5s ease-in-out;
+  }
+
+  .contact-info span {
+    animation: none;
+  }
+
+  .cta-section .btn {
+    animation: none;
+  }
+}
+	</style>
+	
+</head>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mt-2">Loading Amazing Experiences...</p>
+        </div>
+    </div>
+
+    <!-- Hero Section with Video Background -->
+    <section class="about-hero" id="about-hero">
+        <div class="container-fluid p-0">
+            <div class="about-banner position-relative">
+                <img src="https://images.unsplash.com/photo-1596895111956-bf1cf0599ce5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="w-100" alt="Beach Tourism">
+                <div class="overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center">
+                    <div class="text-center text-white animate__animated animate__fadeIn">
+                        <h1 class="display-3 fw-bold mb-4">ABOUT US</h1>
+                        <div class="divider mx-auto mb-4"></div>
+                        <h2 class="mb-5">Turning Your Journeys into Priceless Memories</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
+                    <div class="position-relative about-image-container">
+                        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt=" Tourism" class="img-fluid rounded-3 shadow-lg">
+                        <div class="experience-badge">
+                            <span class="number">10</span>
+                            <span class="text">Years of Experience</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <h2 class="display-5 fw-bold mb-4">Tourism</h2>
+                    <p class="lead mb-4">To provide cherished experiences by sharing India's diverse and vibrant beauty, rich culture, historical landmarks, and natural wonders.</p>
+                    <p class="mb-4">India, a land of incredible diversity, offers a tapestry of experiences that captivate the soul. From the snow-capped Himalayas to the sun-kissed beaches of Goa, from the architectural marvels of the Taj Mahal to the spiritual ghats of Varanasi, our country presents an unparalleled journey through time, culture, and natural beauty.</p>
+                    <p>At Tourism, we are passionate about showcasing the authentic essence of India, creating personalized travel experiences that leave lasting impressions and foster a deeper understanding of our rich heritage.</p>
+                    <div class="mt-4">
+                        <a href="#services" class="btn btn-primary me-3">Our Services</a>
+                        <a href="#contact" class="btn btn-outline-primary">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Counter Section -->
+    <section id="counter" class="py-5 counter-section text-white">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-3 mb-4 mb-md-0" data-aos="fade-up">
+                    <div class="counter-item">
+                        <i class="fas fa-users fa-3x mb-3"></i>
+                        <h2 class="counter-number" data-count="15000">0</h2>
+                        <p class="counter-text">Happy Travelers</p>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4 mb-md-0" data-aos="fade-up" data-aos-delay="100">
+                    <div class="counter-item">
+                        <i class="fas fa-map-marked-alt fa-3x mb-3"></i>
+                        <h2 class="counter-number" data-count="500">0</h2>
+                        <p class="counter-text">Destinations</p>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4 mb-md-0" data-aos="fade-up" data-aos-delay="200">
+                    <div class="counter-item">
+                        <i class="fas fa-route fa-3x mb-3"></i>
+                        <h2 class="counter-number" data-count="1200">0</h2>
+                        <p class="counter-text">Tours Completed</p>
+                    </div>
+                </div>
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="300">
+                    <div class="counter-item">
+                        <i class="fas fa-award fa-3x mb-3"></i>
+                        <h2 class="counter-number" data-count="25">0</h2>
+                        <p class="counter-text">Awards Won</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <!-- Destinations Gallery -->
+    <section id="destinations" class="py-5 beach-bg">
+        <div class="container">
+            <div class="section-title text-center mb-5" data-aos="fade-up">
+                <h2 class="display-5 fw-bold text-white">Popular Destinations</h2>
+                <div class="divider mx-auto mb-4"></div>
+                <p class="lead text-white">Explore the breathtaking places we can take you</p>
+            </div>
+            <div class="swiper destinationSwiper" data-aos="fade-up">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="destination-card">
+                            <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Taj Mahal" class="img-fluid">
+                            <div class="destination-overlay">
+                                <h3>Taj Mahal</h3>
+                                <p>Agra, Uttar Pradesh</p>
+                                <a href="#" class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#bookingModal">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="destination-card">
+                            <img src="https://images.unsplash.com/photo-1477587458883-47145ed94245?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Darjeeling" class="img-fluid">
+                            <div class="destination-overlay">
+                                <h3>Darjeeling</h3>
+                                <p>West Bengal</p>
+                                <a href="#" class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#bookingModal">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="destination-card">
+                            <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Goa Beaches" class="img-fluid">
+                            <div class="destination-overlay">
+                                <h3>Goa Beaches</h3>
+                                <p>Goa</p>
+                                <a href="#" class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#bookingModal">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="swiper-slide">
+                        <div class="destination-card">
+                            <img src="https://images.unsplash.com/photo-1566552881560-0be862a7c445?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Victoria Memorial" class="img-fluid">
+                            <div class="destination-overlay">
+                                <h3>Victoria Memorial</h3>
+                                <p>Kolkata, West Bengal</p>
+                                <a href="#" class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#bookingModal">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="destination-card">
+                            <img src="https://images.unsplash.com/photo-1514222134-b57cbb8ce073?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Varanasi Ghats" class="img-fluid">
+                            <div class="destination-overlay">
+                                <h3>Varanasi Ghats</h3>
+                                <p>Uttar Pradesh</p>
+                                <a href="#" class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#bookingModal">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="display-5 fw-bold">Our Services</h2>
+                <div class="divider mx-auto mb-4"></div>
+                <p class="lead">Discover the diverse experiences we offer across incredible India</p>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-card text-center p-4 h-100">
+                        <div class="service-icon mb-3">
+                            <i class="fas fa-hiking fa-3x"></i>
+                        </div>
+                        <h4 class="fw-bold">Adventure Tours</h4>
+                        <p>From trekking in the Himalayas to white-water rafting in Rishikesh, experience the thrill of India's diverse landscapes.</p>
+                        <a href="#" class="btn btn-sm btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#serviceModal" data-service="Adventure Tours">Learn More</a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-card text-center p-4 h-100">
+                        <div class="service-icon mb-3">
+                            <i class="fas fa-umbrella-beach fa-3x"></i>
+                        </div>
+                        <h4 class="fw-bold">Beach Getaways</h4>
+                        <p>Relax on the pristine beaches of Goa, Andaman, and the coastal regions of West Bengal with our curated beach packages.</p>
+                        <a href="#" class="btn btn-sm btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#serviceModal" data-service="Beach Getaways">Learn More</a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-card text-center p-4 h-100">
+                        <div class="service-icon mb-3">
+                            <i class="fas fa-users fa-3x"></i>
+                        </div>
+                        <h4 class="fw-bold">Family Tours</h4>
+                        <p>Create lasting memories with carefully curated family-friendly tours, activities, and accommodations across India.</p>
+                        <a href="#" class="btn btn-sm btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#serviceModal" data-service="Family Tours">Learn More</a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="service-card text-center p-4 h-100">
+                        <div class="service-icon mb-3">
+                            <i class="fas fa-landmark fa-3x"></i>
+                        </div>
+                        <h4 class="fw-bold">Cultural Experiences</h4>
+                        <p>Immerse yourself in India's rich cultural heritage with guided tours to historical sites, temples, and local communities.</p>
+                        <a href="#" class="btn btn-sm btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#serviceModal" data-service="Cultural Experiences">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="py-5 beach-bg">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="display-5 fw-bold text-white">Our Team</h2>
+                <div class="divider mx-auto mb-4"></div>
+                <p class="lead text-white">Meet the passionate experts behind your unforgettable adventures</p>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-lg-2 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="team-member text-center">
+                        <div class="member-img mb-3">
+                            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/sagnik.jpg-UCWEccC0BxbZDowllblQKMVuxyEKYY.jpeg" alt="SAGNIK PAUL" class="img-fluid rounded-circle border border-3 border-white shadow-sm">
+                            <div class="member-social">
+                                <a href="https://www.instagram.com/_sagnik.paul_/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                <a href="https://www.instagram.com/_sagnik.paul_/" target="_blank"><i class="fab fa-instagram"></i></a>
+                                <a href="https://www.linkedin.com/in/sagnik-paul-5323392a6?trk=people-search-result" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                        <h5 class="text-white">SAGNIK PAUL</h5>
+                        <p class="text-white-50">Founder</p>
+                        <button class="btn btn-sm btn-light mt-2" data-bs-toggle="modal" data-bs-target="#teamModal" data-name="SAGNIK PAUL" data-role="Founder" data-bio="With over 10 years in the tourism industry, Sagnik founded Tourism with a vision to showcase the authentic beauty of India to the world. His expertise in cultural tourism has earned him numerous accolades.">Read Bio</button>
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-2 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="team-member text-center">
+                        <div class="member-img mb-3">
+                            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/manasij%202.jpg-1aukNfQlazDukJnzXyCaIFV55iM6s5.jpeg" alt="MANASIJ DE" class="img-fluid rounded-circle border border-3 border-white shadow-sm">
+                            <div class="member-social">
+                                <a href="https://www.facebook.com/share/1ZmBkUHaTC/?mibextid=qi2Omg" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                <a href="https://www.instagram.com/manasijde?igsh=MTljMHMxZ3ZxbHU5cw==" target="_blank"><i class="fab fa-instagram"></i></a>
+                                <a href="https://www.linkedin.com/in/manasij-de-184a29330/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                        <h5 class="text-white">MANASIJ DE</h5>
+                        <p class="text-white-50">Co-Founder</p>
+                        <button class="btn btn-sm btn-light mt-2" data-bs-toggle="modal" data-bs-target="#teamModal" data-name="MANASIJ DE" data-role="Co-Founder" data-bio="Manasij brings his passion for adventure tourism and sustainable travel practices to the company. As a co-founder, he has personally explored every corner of India and specializes in creating unique, off-the-beaten-path experiences.">Read Bio</button>
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-2 mb-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="team-member text-center">
+                        <div class="member-img mb-3">
+                            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/naha%202.jpg-YZrYJYUvBiunJEnMhr8jHjKrlobTMz.jpeg" alt="NAHA MONDAL" class="img-fluid rounded-circle border border-3 border-white shadow-sm">
+                            <div class="member-social">
+                                <a href="https://www.facebook.com/share/15DCqG8gkP/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                <a href="https://www.instagram.com/naha_mondal?igsh=MWg3YTE4a3kxY3VnYw==" target="_blank"><i class="fab fa-instagram"></i></a>
+                                <a href="https://www.linkedin.com/in/naha-mondal-949265305" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                        <h5 class="text-white">NAHA MONDAL</h5>
+                        <p class="text-white-50">UI/UX Designer</p>
+                        <button class="btn btn-sm btn-light mt-2" data-bs-toggle="modal" data-bs-target="#teamModal" data-name="NAHA MONDAL" data-role="Co-Founder" data-bio="Naha is our cultural tourism specialist and UI/UX Designer with deep knowledge of India's diverse traditions and heritage. She has a talent for creating immersive experiences that connect travelers with local communities and authentic cultural practices.">Read Bio</button>
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-2 mb-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="team-member text-center">
+                        <div class="member-img mb-3">
+                            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/sandip.jpg-MkpOJ0gDIbWSK8QhWltS84zagHQNZq.jpeg" alt="SANDIP DUTTA" class="img-fluid rounded-circle border border-3 border-white shadow-sm">
+                            <div class="member-social">
+                                <a href="https://www.facebook.com/share/15HBCydZoX/?mibextid=qi2Omg" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                <a href="https://www.instagram.com/sandip.dutta.15?igsh=MW15dTdrcjg1MmdyNA==" target="_blank"><i class="fab fa-instagram"></i></a>
+                                <a href="https://www.linkedin.com/in/sandip-dutta-2ab695304/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                        <h5 class="text-white">SANDIP DUTTA</h5>
+                        <p class="text-white-50">Tech Expert</p>
+                        <button class="btn btn-sm btn-light mt-2" data-bs-toggle="modal" data-bs-target="#teamModal" data-name="SANDIP DUTTA" data-role="Co-Founder" data-bio="As a co-founder, Sandip brings exceptional organizational skills and attention to detail to ensure that every tour runs smoothly from start to finish. He specializes in logistics and has a knack for solving problems before they arise.">Read Bio</button>
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-2 mb-4" data-aos="fade-up" data-aos-delay="500">
+                    <div class="team-member text-center">
+                        <div class="member-img mb-3">
+                            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/souvik%20das.jpg-gpav34PGX6qcav2APvAbkF2ypsN2e4.jpeg" alt="SOUVIK DAS" class="img-fluid rounded-circle border border-3 border-white shadow-sm">
+                            <div class="member-social">
+                                <a href="https://www.facebook.com/profile.php?id=100091332879234" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                <a href="https://www.instagram.com/_v_i_i_k_/" target="_blank"><i class="fab fa-instagram"></i></a>
+                                <a href="https://www.linkedin.com/in/souvik-das-8546711aa/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                        <h5 class="text-white">SOUVIK DAS</h5>
+                        <p class="text-white-50">Marketing</p>
+                        <button class="btn btn-sm btn-light mt-2" data-bs-toggle="modal" data-bs-target="#teamModal" data-name="SOUVIK DAS" data-role="Marketing" data-bio="Souvik is our digital marketing guru who has helped put Tourism on the map. With his innovative strategies and deep understanding of travel trends, he ensures our unique experiences reach the right audience.">Read Bio</button>
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-2 mb-4" data-aos="fade-up" data-aos-delay="600">
+                    <div class="team-member text-center">
+                        <div class="member-img mb-3">
+                            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/srijan.jpg-8GZAjqvfwcflDMnNMzjuArLuNqR7SD.jpeg" alt="SRIJAN DAS" class="img-fluid rounded-circle border border-3 border-white shadow-sm">
+                            <div class="member-social">
+                                <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                <a href="https://www.instagram.com/s.r.i.j.a.n98?utm_source=qr&igsh=MTE0eDUxdHRqNDF5Nw==" target="_blank"><i class="fab fa-instagram"></i></a>
+                                <a href="https://www.linkedin.com/in/srijan-das-1658a1358" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                        <h5 class="text-white">SRIJAN DAS</h5>
+                        <p class="text-white-50">Travel Expert</p>
+                        <button class="btn btn-sm btn-light mt-2" data-bs-toggle="modal" data-bs-target="#teamModal" data-name="SRIJAN DAS" data-role="Travel Expert" data-bio="Srijan leads our customer support team with his warm personality and dedication to client satisfaction. He ensures that every traveler receives personalized attention and prompt assistance throughout their journey.">Read Bio</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Vision Section -->
+    <section id="mission-vision" class="py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 mb-4 mb-md-0" data-aos="fade-right">
+                    <div class="mission-card p-4 h-100">
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="mission-icon me-3">
+                                <i class="fas fa-bullseye fa-2x text-primary"></i>
+                            </div>
+                            <h2 class="display-6 fw-bold mb-0">Our Mission</h2>
+                        </div>
+                        <div class="divider mb-4"></div>
+                        <p class="lead">To provide unforgettable travel experiences in India, by ensuring a seamless, enjoyable and deeper understanding of India's heritage nationwide.</p>
+                        <p>We strive to showcase the authentic essence of India through carefully crafted itineraries that balance popular attractions with hidden gems, allowing travelers to connect with local communities and traditions while ensuring responsible tourism practices.</p>
+                    </div>
+                </div>
+                <div class="col-md-6" data-aos="fade-left">
+                    <div class="vision-card p-4 h-100">
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="vision-icon me-3">
+                                <i class="fas fa-eye fa-2x text-primary"></i>
+                            </div>
+                            <h2 class="display-6 fw-bold mb-0">Our Vision</h2>
+                        </div>
+                        <div class="divider mb-4"></div>
+                        <p class="lead">To be India's leading travel company, inspiring exploration and promoting cultural understanding through exceptional service.</p>
+                        <p>We aspire to be recognized globally as the premier gateway to India's diverse experiences, setting new standards in sustainable tourism while preserving and celebrating the country's rich cultural heritage and natural beauty for generations to come.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-5 sand-bg">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="display-5 fw-bold">Frequently Asked Questions</h2>
+                <div class="divider mx-auto mb-4"></div>
+                <p class="lead">Find answers to common questions about our tours and services</p>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8" data-aos="fade-up">
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item mb-3 border-0 rounded shadow-sm">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    What types of tours do you offer?
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    We offer a wide range of tours including cultural experiences, adventure tours, beach getaways, family packages, wildlife safaris, spiritual journeys, culinary tours, and customized private tours. Our experiences cover all major destinations across India, from the Himalayas to the beaches of Goa and everything in between.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item mb-3 border-0 rounded shadow-sm">
+                            <h2 class="accordion-header" id="headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    How far in advance should I book my tour?
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    We recommend booking at least 2-3 months in advance, especially for peak season travel (October to March). This ensures availability of preferred accommodations and activities. For festival periods like Diwali, Holi, or Christmas, booking 4-6 months ahead is advisable. However, we also accommodate last-minute bookings subject to availability.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item mb-3 border-0 rounded shadow-sm">
+                            <h2 class="accordion-header" id="headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    Can you arrange customized tours?
+                                </button>
+                            </h2>
+                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Customized tours are our specialty. We work closely with you to understand your interests, preferences, and travel style to create a personalized itinerary. Whether you're interested in specific cultural experiences, adventure activities, or want to explore off-the-beaten-path destinations, our team can design the perfect tour for you.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item mb-3 border-0 rounded shadow-sm">
+                            <h2 class="accordion-header" id="headingFour">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    What is your cancellation policy?
+                                </button>
+                            </h2>
+                            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Our standard cancellation policy offers a full refund for cancellations made 30 days or more before the tour start date. Cancellations made 15-29 days before departure receive a 75% refund, while those made 7-14 days prior receive a 50% refund. Unfortunately, cancellations less than 7 days before the tour start date are non-refundable. We also offer flexible booking options and travel insurance for additional peace of mind.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item border-0 rounded shadow-sm">
+                            <h2 class="accordion-header" id="headingFive">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                    Do you provide guides who speak languages other than English?
+                                </button>
+                            </h2>
+                            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Yes, we provide multilingual guides for many major languages including Bengali, Hindi, Malayalam, Marathi, Sanskrit, Tamil, Telugu. Please request your language preference at the time of booking, and we'll do our best to accommodate your needs. There may be an additional charge for certain language guides depending on availability.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="display-5 fw-bold">What Our Clients Say</h2>
+                <div class="divider mx-auto mb-4"></div>
+                <p class="lead">Hear from travelers who experienced the magic of India with us</p>
+            </div>
+            <div class="swiper testimonialSwiper" data-aos="fade-up">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="testimonial-card p-4">
+                            <div class="testimonial-rating mb-3">
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                            </div>
+                            <div class="testimonial-content mb-4">
+                                <p class="fst-italic">"Our family trip to West Bengal was absolutely magical! The team took care of every detail, from luxury accommodations to knowledgeable guides who brought the history to life. The children especially loved the wildlife safari in Sundarbans."</p>
+                            </div>
+                            <div class="testimonial-author d-flex align-items-center">
+                                <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Testimonial Author" class="rounded-circle me-3" width="60">
+                                <div>
+                                    <h5 class="mb-0">Sarah Johnson</h5>
+                                    <p class="text-muted mb-0">Delhi, India</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="testimonial-card p-4">
+                            <div class="testimonial-rating mb-3">
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                            </div>
+                            <div class="testimonial-content mb-4">
+                                <p class="fst-italic">"As a solo traveler, safety was my primary concern. The team not only ensured I felt secure throughout my journey but also connected me with local experiences I would never have found on my own. The cooking class in a Bengali home was a highlight!"</p>
+                            </div>
+                            <div class="testimonial-author d-flex align-items-center">
+                                <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Testimonial Author" class="rounded-circle me-3" width="60">
+                                <div>
+                                    <h5 class="mb-0">David Chen</h5>
+                                    <p class="text-muted mb-0">Canada</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="testimonial-card p-4">
+                            <div class="testimonial-rating mb-3">
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                            </div>
+                            <div class="testimonial-content mb-4">
+                                <p class="fst-italic">"The spiritual journey through Varanasi and Rishikesh was life-changing. The team's attention to detail and respect for these sacred places made our experience authentic and deeply meaningful. I'll never forget the Ganga Aarti ceremony at sunset."</p>
+                            </div>
+                            <div class="testimonial-author d-flex align-items-center">
+                                <img src="https://randomuser.me/api/portraits/women/46.jpg" alt="Testimonial Author" class="rounded-circle me-3" width="60">
+                                <div>
+                                    <h5 class="mb-0">Maria Rodriguez</h5>
+                                    <p class="text-muted mb-0">Spain</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="testimonial-card p-4">
+                            <div class="testimonial-rating mb-3">
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star-half-alt text-warning"></i>
+                            </div>
+                            <div class="testimonial-content mb-4">
+                                <p class="fst-italic">"We booked a 2-week tour of North India and were blown away by the professionalism and knowledge of our guides. The historical context they provided at each site enriched our understanding of India's complex heritage. Highly recommended!"</p>
+                            </div>
+                            <div class="testimonial-author d-flex align-items-center">
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Testimonial Author" class="rounded-circle me-3" width="60">
+                                <div>
+                                    <h5 class="mb-0">James Wilson</h5>
+                                    <p class="text-muted mb-0">United Kingdom</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+            <div class="text-center mt-4">
+                <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#feedbackModal">
+                    Share Your Experience <i class="fas fa-plus ms-2"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section with Map -->
+    <section id="contact" class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="display-5 fw-bold">Contact Us</h2>
+                <div class="divider mx-auto mb-4"></div>
+                <p class="lead">Ready to start your Indian adventure? Get in touch with our travel experts</p>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
+                    <div class="contact-card p-4 h-100">
+                        <div class="row mb-4">
+                            <div class="col-md-4 mb-3 mb-md-0">
+                                <div class="contact-info text-center">
+                                    <i class="fas fa-map-marker-alt fa-2x mb-3 text-primary"></i>
+                                    <h5>Our Location</h5>
+                                    <p class="mb-0">West Bengal, Kolkata</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3 mb-md-0">
+                                <div class="contact-info text-center">
+                                    <i class="fas fa-envelope fa-2x mb-3 text-primary"></i>
+                                    <h5>Email Us</h5>
+                                    <p class="mb-0">teamlagan202327@gmail.com</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="contact-info text-center">
+                                    <i class="fas fa-phone fa-2x mb-3 text-primary"></i>
+                                    <h5>Call Us</h5>
+                                    <p class="mb-0">+91 9123091051</p>
+                                </div>
+                            </div>
+                        </div>
+                        <form id="contactForm">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <input type="text" class="form-control" id="contactName" placeholder="Your Name" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <input type="email" class="form-control" id="contactEmail" placeholder="Your Email" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" id="contactSubject" placeholder="Subject" required>
+                            </div>
+                            <div class="mb-3">
+                                <textarea class="form-control" id="contactMessage" rows="5" placeholder="Your Message" required></textarea>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary btn-lg px-5">Send Message</button>
+                            </div>
+                        </form>
+                        <div class="alert alert-success mt-3 d-none" id="contactSuccess">
+                            Your message has been sent successfully! We'll get back to you soon.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="map-container h-100">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d471220.5631094339!2d88.04952462644971!3d22.675752066467977!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f882db4908f667%3A0x43e330e68f6c2cbc!2sKolkata%2C%20West%20Bengal!5e0!3m2!1sen!2sin!4v1649320215561!5m2!1sen!2sin" width="100%" height="100%" style="border:0; border-radius: 15px; min-height: 400px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="cta" class="py-5 cta-section text-white text-center">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8" data-aos="fade-up">
+                    <h2 class="display-4 fw-bold mb-4">Ready for an Unforgettable Journey?</h2>
+                    <p class="lead mb-4">Let us help you discover the magic of India with our expertly crafted tours and experiences.</p>
+                    <button class="btn btn-light btn-lg px-5 me-3 mb-3 mb-md-0" data-bs-toggle="modal" data-bs-target="#bookingModal">Book a Tour Now</button>
+                    <a href="#contact" class="btn btn-outline-light btn-lg px-5">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Feedback Modal -->
+    <div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="feedbackModalLabel">Share Your Experience</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="feedbackForm">
+                        <div class="mb-3">
+                            <label for="feedbackName" class="form-label">Your Name</label>
+                            <input type="text" class="form-control" id="feedbackName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="feedbackLocation" class="form-label">Your Location</label>
+                            <input type="text" class="form-control" id="feedbackLocation" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="feedbackText" class="form-label">Your Feedback</label>
+                            <textarea class="form-control" id="feedbackText" rows="4" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="rating" class="form-label">Rating</label>
+                            <div class="rating">
+                                <i class="far fa-star" data-rating="1"></i>
+                                <i class="far fa-star" data-rating="2"></i>
+                                <i class="far fa-star" data-rating="3"></i>
+                                <i class="far fa-star" data-rating="4"></i>
+                                <i class="far fa-star" data-rating="5"></i>
+                            </div>
+                            <input type="hidden" id="rating" value="0">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="submitFeedback">Submit Feedback</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Team Member Modal -->
+    <div class="modal fade" id="teamModal" tabindex="-1" aria-labelledby="teamModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="teamModalLabel">Team Member</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center mb-4">
+                        <h3 id="teamMemberName"></h3>
+                        <p class="text-muted" id="teamMemberRole"></p>
+                    </div>
+                    <p id="teamMemberBio"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Service Modal -->
+    <div class="modal fade" id="serviceModal" tabindex="-1" aria-labelledby="serviceModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="serviceModalLabel">Service Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="adventureTours" class="service-details d-none">
+                        <h3>Adventure Tours</h3>
+                        <p>Our adventure tours are designed for thrill-seekers and nature enthusiasts who want to experience India's diverse landscapes in an active way.</p>
+                        <h5>Popular Adventure Activities:</h5>
+                        <ul>
+                            <li>Trekking in the Himalayas (Uttarakhand, Himachal Pradesh, Sikkim)</li>
+                            <li>White-water rafting on the Ganges in Rishikesh</li>
+                            <li>Rock climbing in Hampi, Karnataka</li>
+                            <li>Paragliding in Bir Billing, Himachal Pradesh</li>
+                            <li>Scuba diving in the Andaman Islands</li>
+                            <li>Jungle safaris in national parks across India</li>
+                        </ul>
+                        <p>All our adventure tours are led by certified guides with extensive experience and safety training. Equipment is regularly inspected and maintained to international standards.</p>
+                    </div>
+                    <div id="beachGetaways" class="service-details d-none">
+                        <h3>Beach Getaways</h3>
+                        <p>India's extensive coastline offers some of the most beautiful beaches in the world, perfect for relaxation, water sports, and cultural experiences.</p>
+                        <h5>Popular Beach Destinations:</h5>
+                        <ul>
+                            <li>Goa - Famous for its vibrant beach culture and Portuguese heritage</li>
+                            <li>Andaman & Nicobar Islands - Pristine beaches with world-class diving</li>
+                            <li>Kerala - Serene beaches with Ayurvedic wellness options</li>
+                            <li>Pondicherry - French colonial charm with beautiful promenades</li>
+                            <li>Digha & Mandarmani - West Bengal's popular beach destinations</li>
+                        </ul>
+                        <p>Our beach packages include accommodations ranging from luxury resorts to boutique beach huts, water activities, cultural excursions, and plenty of time to relax and enjoy the sun and sand.</p>
+                    </div>
+                    <div id="familyTours" class="service-details d-none">
+                        <h3>Family Tours</h3>
+                        <p>Our family-friendly tours are carefully designed to engage travelers of all ages, with activities and experiences that create lasting memories for everyone.</p>
+                        <h5>Family Tour Features:</h5>
+                        <ul>
+                            <li>Child-friendly accommodations with family rooms or connecting options</li>
+                            <li>Engaging activities for different age groups</li>
+                            <li>Educational experiences that are fun and interactive</li>
+                            <li>Slower-paced itineraries with plenty of downtime</li>
+                            <li>Kid-friendly meal options and dining experiences</li>
+                            <li>Special attention to safety and comfort for young travelers</li>
+                        </ul>
+                        <p>Popular family destinations include wildlife sanctuaries, beach resorts, hill stations, and historical sites with interactive elements. Our guides are experienced in working with children and making history and culture come alive for young minds.</p>
+                    </div>
+                    <div id="culturalExperiences" class="service-details d-none">
+                        <h3>Cultural Experiences</h3>
+                        <p>India's rich cultural heritage offers endless opportunities for immersive experiences that connect travelers with authentic traditions, arts, and ways of life.</p>
+                        <h5>Cultural Experience Highlights:</h5>
+                        <ul>
+                            <li>Heritage walks through ancient cities and historical sites</li>
+                            <li>Cooking classes featuring regional cuisines</li>
+                            <li>Traditional art and craft workshops</li>
+                            <li>Festival celebrations and religious ceremonies</li>
+                            <li>Homestays with local families</li>
+                            <li>Classical music and dance performances</li>
+                        </ul>
+                        <p>Our cultural tours are led by knowledgeable guides who provide context and insights into India's diverse traditions. We emphasize respectful cultural exchange and supporting local communities through sustainable tourism practices.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bookingModal">Book This Service</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking Modal -->
+    <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="bookingModalLabel">Book Your Tour</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="bookingForm">
+                        <div class="mb-3">
+                            <label for="bookingName" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="bookingName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="bookingEmail" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="bookingEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="bookingPhone" class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" id="bookingPhone" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="bookingDestination" class="form-label">Destination</label>
+                            <select class="form-select" id="bookingDestination" required>
+                                <option value="" selected disabled>Select a destination</option>
+                                <option value="West Bengal">West Bengal</option>
+                                <option value="Goa">Goa</option>
+                                <option value="Rajasthan">Rajasthan</option>
+                                <option value="Kerala">Kerala</option>
+                                <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                <option value="Andaman Islands">Andaman Islands</option>
+                                <option value="Other">Other (specify in notes)</option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="bookingDate" class="form-label">Preferred Date</label>
+                                <input type="date" class="form-control" id="bookingDate" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="bookingDuration" class="form-label">Duration (Days)</label>
+                                <input type="number" class="form-control" id="bookingDuration" min="1" max="30" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="bookingPeople" class="form-label">Number of People</label>
+                            <input type="number" class="form-control" id="bookingPeople" min="1" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="bookingNotes" class="form-label">Special Requests/Notes</label>
+                            <textarea class="form-control" id="bookingNotes" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="submitBooking">Submit Booking Request</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="successModalLabel">Success!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <i class="fas fa-check-circle text-success fa-4x mb-3"></i>
+                    <h4 id="successMessage">Your request has been submitted successfully!</h4>
+                    <p>We'll get back to you shortly.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Lightbox JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+    <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script>
+        // Preloader
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            preloader.style.opacity = '0';
+            setTimeout(function() {
+                preloader.style.display = 'none';
+            }, 500);
+        });
+
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+
+        // Initialize Swiper for Destinations
+        const destinationSwiper = new Swiper('.destinationSwiper', {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            loop: true,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            breakpoints: {
+                640: {
+                    slidesPerView: 2,
+                },
+                992: {
+                    slidesPerView: 3,
+                }
+            }
+        });
+
+        // Initialize Swiper for Testimonials
+        const testimonialSwiper = new Swiper('.testimonialSwiper', {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            loop: true,
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            breakpoints: {
+                768: {
+                    slidesPerView: 2,
+                },
+                1200: {
+                    slidesPerView: 3,
+                }
+            }
+        });
+
+        // Counter Animation
+        function animateCounter() {
+            const counters = document.querySelectorAll('.counter-number');
+            const speed = 200;
+
+            counters.forEach(counter => {
+                const animate = () => {
+                    const value = +counter.getAttribute('data-count');
+                    const data = +counter.innerText;
+                    const time = value / speed;
+                    
+                    if (data < value) {
+                        counter.innerText = Math.ceil(data + time);
+                        setTimeout(animate, 1);
+                    } else {
+                        counter.innerText = value;
+                    }
+                }
+                animate();
+            });
+        }
+
+        // Start counter animation when element is in viewport
+        const counterSection = document.querySelector('.counter-section');
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                animateCounter();
+                observer.disconnect();
+            }
+        });
+        observer.observe(counterSection);
+
+        // Back to Top Button
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.querySelector('.back-to-top').style.display = "block";
+            } else {
+                document.querySelector('.back-to-top').style.display = "none";
+            }
+
+            // Navbar shrink on scroll
+            if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+                document.querySelector('.navbar').classList.add('scrolled');
+            } else {
+                document.querySelector('.navbar').classList.remove('scrolled');
+            }
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                if (this.getAttribute('href') !== '#') {
+                    e.preventDefault();
+                    
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Back to top button click event
+        document.querySelector('.back-to-top').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        });
+
+        // Theme Toggle Functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        // Load saved theme from localStorage
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        body.setAttribute('data-theme', savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+
+        // Star Rating System
+        const stars = document.querySelectorAll('.rating i');
+        const ratingInput = document.getElementById('rating');
+
+        stars.forEach(star => {
+            star.addEventListener('mouseover', function() {
+                const rating = this.getAttribute('data-rating');
+                highlightStars(rating);
+            });
+
+            star.addEventListener('mouseout', function() {
+                const currentRating = ratingInput.value;
+                highlightStars(currentRating);
+            });
+
+            star.addEventListener('click', function() {
+                const rating = this.getAttribute('data-rating');
+                ratingInput.value = rating;
+                highlightStars(rating);
+            });
+        });
+
+        function highlightStars(rating) {
+            stars.forEach(star => {
+                const starRating = star.getAttribute('data-rating');
+                if (starRating <= rating) {
+                    star.classList.remove('far');
+                    star.classList.add('fas');
+                } else {
+                    star.classList.remove('fas');
+                    star.classList.add('far');
+                }
+            });
+        }
+
+        // Team Member Modal
+        const teamModal = document.getElementById('teamModal');
+        teamModal.addEventListener('show.bs.modal', function (event) {
+            const button = event.relatedTarget;
+            const name = button.getAttribute('data-name');
+            const role = button.getAttribute('data-role');
+            const bio = button.getAttribute('data-bio');
+            
+            document.getElementById('teamMemberName').textContent = name;
+            document.getElementById('teamMemberRole').textContent = role;
+            document.getElementById('teamMemberBio').textContent = bio;
+        });
+
+        // Service Modal
+        const serviceModal = document.getElementById('serviceModal');
+        serviceModal.addEventListener('show.bs.modal', function (event) {
+            const button = event.relatedTarget;
+            const service = button.getAttribute('data-service');
+            
+            // Hide all service details
+            document.querySelectorAll('.service-details').forEach(el => {
+                el.classList.add('d-none');
+            });
+            
+            // Show the selected service details
+            if (service === 'Adventure Tours') {
+                document.getElementById('adventureTours').classList.remove('d-none');
+            } else if (service === 'Beach Getaways') {
+                document.getElementById('beachGetaways').classList.remove('d-none');
+            } else if (service === 'Family Tours') {
+                document.getElementById('familyTours').classList.remove('d-none');
+            } else if (service === 'Cultural Experiences') {
+                document.getElementById('culturalExperiences').classList.remove('d-none');
+            }
+        });
+
+        // Form Submissions
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('contactSuccess').classList.remove('d-none');
+            setTimeout(() => {
+                document.getElementById('contactSuccess').classList.add('d-none');
+                this.reset();
+            }, 3000);
+        });
+
+        document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('newsletterSuccess').classList.remove('d-none');
+            setTimeout(() => {
+                document.getElementById('newsletterSuccess').classList.add('d-none');
+                this.reset();
+            }, 3000);
+        });
+
+        document.getElementById('submitFeedback').addEventListener('click', function() {
+            const form = document.getElementById('feedbackForm');
+            if (form.checkValidity()) {
+                const modal = bootstrap.Modal.getInstance(document.getElementById('feedbackModal'));
+                modal.hide();
+                
+                const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+                document.getElementById('successMessage').textContent = 'Thank you for sharing your experience!';
+                successModal.show();
+                
+                form.reset();
+                ratingInput.value = 0;
+                highlightStars(0);
+            } else {
+                form.reportValidity();
+            }
+        });
+
+        document.getElementById('submitBooking').addEventListener('click', function() {
+            const form = document.getElementById('bookingForm');
+            if (form.checkValidity()) {
+                const modal = bootstrap.Modal.getInstance(document.getElementById('bookingModal'));
+                modal.hide();
+                
+                const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+                document.getElementById('successMessage').textContent = 'Your booking request has been submitted!';
+                successModal.show();
+                
+                form.reset();
+            } else {
+                form.reportValidity();
+            }
+        });
+    </script>
+    {% endblock %}

@@ -1,0 +1,2632 @@
+{% extends "base.html" %}
+{% block content %}
+<head>
+  {% load static %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> -->
+  <style>
+    .wb {
+      font-size: 10vw;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+      border-spacing: 0;
+      border: 1px solid #ddd;
+    }
+
+    td,
+    th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+      font-size: 1.5vw;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+
+    .trip {
+      text-align: center;
+      font-weight: 900;
+      background: orangered;
+      padding: 20px;
+      border-radius: 20px;
+      width: 60%;
+    }
+
+    p,
+    li,
+    .text {
+      font-size: 1.5vw;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-weight: 600;
+    }
+
+    h4 {
+      font-weight: 900;
+    }
+
+    img {
+      border-radius: 10px;
+      display: block;
+      margin: auto;
+    }
+
+    @media screen and (max-width: 850px) {
+
+      p,
+      li,
+      .text,
+      td,
+      th {
+        font-size: 2vw;
+        ;
+      }
+
+    }
+
+    @media screen and (max-width: 500px) {
+
+      p,
+      li,
+      .text,
+      td,
+      th {
+        font-size: 4.5vw;
+        ;
+      }
+
+    }
+
+    .box:nth-of-type(odd) {
+      background: #f3b37185;
+      padding: 10px;
+    }
+
+    .weather-container {
+            border-radius: 15px;
+            background: #f0fdf4;
+            padding: 15px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .weather-card {
+            text-align: center;
+            border-radius: 10px;
+            padding: 10px;
+            background: white;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+        .aqi {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            color: white;
+        }
+        .aqi-bad { background: purple; }
+        .aqi-moderate { background: orange; }
+        .aqi-good { background: green; }
+        .best-time {
+            background: #d1fae5;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 15px;
+            color: green;
+        }
+        .wet {
+            max-width: 50px;
+        }
+        
+        .trip {
+          font-size: 18px;
+          padding: 10px 20px;
+          cursor: pointer;
+          background-color:rgb(231, 36, 36);
+          color: white;
+          border: none;
+          border-radius: 5px;
+      }
+      .modal {
+          display: none;
+          position: fixed;
+          z-index: 1;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0,0,0,0.5);
+      }
+      .modal-content {
+          background-color: #fff;
+          margin: 10% auto;
+          padding: 20px;
+          border-radius: 10px;
+          width: 40%;
+          box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+          text-align: center;
+      }
+      .close {
+          color: #aaa;
+          float: right;
+          font-size: 28px;
+          font-weight: bold;
+          cursor: pointer;
+      }
+      .trip-options {
+          display: flex;
+          justify-content: center;
+          gap: 20px;
+          margin-top: 20px;
+      }
+      .trip-options a {
+          display: block;
+          width: 120px;
+          padding: 10px;
+          background-color: #28a745;
+          color: white;
+          text-decoration: none;
+          border-radius: 5px;
+      }
+  </style>
+</head>
+
+
+
+  <!-- <h2>Carousel Example</h2> -->
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+      <li data-target="#myCarousel" data-slide-to="4"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+
+      <div class="item active">
+        <img src="https://images.unsplash.com/photo-1582477795644-d2b3348c0e75?q=80&w=2060&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Gateway of India" style="width:100%; height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Gateway of India</h3>
+          <p>The iconic monument of Mumbai!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="https://plus.unsplash.com/premium_photo-1697729588019-20a1f5a325d1?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Ajanta Caves" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Ajanta Caves</h3>
+          <p>Ancient Buddhist rock-cut cave monuments!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="https://images.unsplash.com/photo-1601961405399-801fb1f34581?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="CST Mumbai" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">CST Mumbai</h3>
+          <p>A UNESCO World Heritage Site!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="https://plus.unsplash.com/premium_photo-1691031429919-2273f9603be6?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Mahabaleshwar" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Mahabaleshwar</h3>
+          <p>Famous for strawberries and scenic beauty!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="https://plus.unsplash.com/premium_photo-1697730367686-227c2b07d279?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Ellora Caves" style="width:100%;height: 50vw;">
+        <div class="carousel-caption">
+          <h3 style="font-size: 5vw;">Ellora Caves</h3>
+          <p>Ancient rock-cut temples with amazing architecture!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+  <div class="container">
+    <br><br>
+    <h1 class="wb">MAHARASHTRA</h1><br>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <img src="{% static 'mahamap.jpg'%}" alt="" style="height:700px; width: -webkit-fill-available;">
+
+        </div>
+        <div class="col-sm-6">
+          <h1>Maharashtra: The Land of Warriors & Cultural Heritage</h1>
+          <p class="text">Maharashtra is a diverse and vibrant state in western India, known for its rich history, cultural heritage, literature, festivals, art, and natural beauty. It is a major center for industry, finance, and entertainment, and home to India's financial capital, Mumbai.</p>
+
+          <ul>
+            <li><b>Location --</b> Western India</li>
+            <li><b>Capital --</b> Mumbai</li>
+            <li><b>Official Language --</b> Marathi</li>
+            <li><b>Area --</b> 307,713 sq. km</li>
+            <li><b>Population --</b> ~123 million (2nd most populous state in India)</li>
+            <li><b>Borders --</b> Gujarat, Madhya Pradesh, Chhattisgarh, Telangana, Karnataka, Goa & International border with the Union Territory of Dadra and Nagar Haveli and Daman and Diu</li>
+            <li><b>Major Rivers --</b> Godavari, Krishna, Tapi, Narmada, Wardha</li>
+            <li><b>Major Festivals --</b> Ganesh Chaturthi, Diwali, Gudi Padwa, Holi, Nag Panchami, Makar Sankranti</li>
+            <li><b>State Animal --</b> Indian Giant Squirrel</li>
+            <li><b>State Flower --</b> Jarul (Pride of India)</li>
+            <li><b>State Tree --</b> Mango Tree</li>
+            <li><b>State Bird --</b> Yellow-footed Green Pigeon</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <br>
+    <hr>
+    <div>
+      <h1>📌 Divisions & Districts of Maharashtra</h1>
+      <br>
+      <div style="overflow-x:auto;">
+        <table>
+          <tr>
+            <th>Division</th>
+            <th>Districts</th>
+            <th>Key Highlights</th>
+          </tr>
+          <tr>
+            <td>Konkan Division</td>
+            <td>1. Mumbai City 2. Mumbai Suburban 3. Thane 4. Palghar 5. Raigad 6. Ratnagiri 7. Sindhudurg</td>
+            <td>Financial Capital, Beaches, Ports, Alphonso Mangoes</td>
+          </tr>
+          <tr>
+            <td>Pune Division</td>
+            <td>8. Pune 9. Satara 10. Sangli 11. Solapur 12. Kolhapur</td>
+            <td>IT Hub, Educational Center, Sugar Belt, Historical Forts</td>
+          </tr>
+          <tr>
+            <td>Nashik Division</td>
+            <td>13. Nashik 14. Ahmednagar 15. Dhule 16. Jalgaon 17. Nandurbar</td>
+            <td>Wine Capital, Religious Sites, Agriculture</td>
+          </tr>
+          <tr>
+            <td>Aurangabad Division</td>
+            <td>18. Aurangabad 19. Jalna 20. Parbhani 21. Hingoli 22. Beed 23. Nanded 24. Osmanabad 25. Latur</td>
+            <td>Ajanta-Ellora Caves, Historical Monuments, Cotton Production</td>
+          </tr>
+          <tr>
+            <td>Amravati Division</td>
+            <td>26. Amravati 27. Akola 28. Buldhana 29. Yavatmal 30. Washim</td>
+            <td>Cotton, Melghat Tiger Reserve, Agriculture</td>
+          </tr>
+          <tr>
+            <td>Nagpur Division</td>
+            <td>31. Nagpur 32. Wardha 33. Bhandara 34. Gondia 35. Chandrapur 36. Gadchiroli</td>
+            <td>Orange City, Tadoba Tiger Reserve, Mining, Forests</td>
+          </tr>
+        </table>
+      </div>
+      <br><br>
+      <h1>🔹 Major Highlights of Some Key Districts</h1><br><br>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <ul>
+              <li><b>Mumbai --</b> Financial capital of India, Bollywood, and commercial hub.</li>
+              <li><b>Pune --</b> Educational hub, IT center, and cultural capital of Maharashtra.</li>
+              <li><b>Nagpur --</b> Winter capital, known as "Orange City" and geographical center of India.</li>
+              <li><b>Aurangabad --</b> Tourism hub with UNESCO sites Ajanta and Ellora Caves.</li>
+              <li><b>Nashik --</b> Wine capital, religious center with Kumbh Mela every 12 years.</li>
+              <li><b>Kolhapur --</b> Known for Mahalaxmi Temple, Kolhapuri chappal, and cuisine.</li>
+              <li><b>Ratnagiri & Sindhudurg --</b> Coastal districts famous for Alphonso mangoes and beaches.</li>
+              <li><b>Chandrapur --</b> Home to Tadoba Andhari Tiger Reserve.</li>
+              <li><b>Satara --</b> Hill stations of Mahabaleshwar and Panchgani, strawberry cultivation.</li>
+            </ul>
+          </div>
+          <div class="col-sm-6">
+            <img src="{% static 'mahamap.jpg'%}" alt="" style="height:450px;width: -webkit-fill-available;">
+
+          </div>
+        </div>
+      </div>
+    </div><br><br>
+    <div class="container">
+      <div class="weather-container">
+          <h4 class="text-center"><strong>Weather in Maharashtra</strong></h4>
+          <div class="row">
+              <!-- January -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Jan</h6>
+                      <p>12/28°C</p>
+                      <span class="aqi aqi-moderate">AQI 150</span>
+                  </div>
+              </div>
+              <!-- February -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Feb</h6>
+                      <p>14/30°C</p>
+                      <span class="aqi aqi-moderate">AQI 120</span>
+                  </div>
+              </div>
+              <!-- March -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Mar</h6>
+                      <p>18/33°C</p>
+                      <span class="aqi aqi-moderate">AQI 110</span>
+                  </div>
+              </div>
+              <!-- April -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Apr</h6>
+                      <p>22/35°C</p>
+                      <span class="aqi aqi-moderate">AQI 105</span>
+                  </div>
+              </div>
+              <!-- May -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>May</h6>
+                      <p>25/36°C</p>
+                      <span class="aqi aqi-moderate">AQI 100</span>
+                  </div>
+              </div>
+              <!-- June -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Jun</h6>
+                      <p>25/33°C</p>
+                      <span class="aqi aqi-good">AQI 80</span>
+                  </div>
+              </div>
+              <!-- July -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="rain.png" alt="rain">
+                      <h6>Jul</h6>
+                      <p>24/30°C</p>
+                      <span class="aqi aqi-good">AQI 50</span>
+                  </div>
+              </div>
+              <!-- August -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Aug</h6>
+                      <p>24/30°C</p>
+                      <span class="aqi aqi-good">AQI 65</span>
+                  </div>
+              </div>
+              <!-- September -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sunrain.png" alt="sunrain">
+                      <h6>Sep</h6>
+                      <p>23/31°C</p>
+                      <span class="aqi aqi-good">AQI 55</span>
+                  </div>
+              </div>
+              <!-- October -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Oct</h6>
+                      <p>21/33°C</p>
+                      <span class="aqi aqi-good">AQI 70</span>
+                  </div>
+              </div>
+              <!-- November -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Nov</h6>
+                      <p>18/32°C</p>
+                      <span class="aqi aqi-moderate">AQI 85</span>
+                  </div>
+              </div>
+              <!-- December -->
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                  <div class="weather-card">
+                      <img class="wet" src="sun.png" alt="sun">
+                      <h6>Dec</h6>
+                      <p>14/30°C</p>
+                      <span class="aqi aqi-moderate">AQI 95</span>
+                  </div>
+              </div>
+          </div>
+          <div class="text-center">
+              <div class="best-time">🏆 Best time to visit: October - March</div>
+          </div>
+      </div>
+    </div>
+    
+
+    <br><br>
+    <button class="trip" id="openModal">Let's go on a trip</button>
+    
+    <div id="tripModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Select Your Trip</h2>
+            <button type="button" class="btn btn-warning" style="margin-bottom: 8px;color:black; border-radius: 5px;" onclick="location.href='{% url 'maharashtra_7days' %}'" >7 days trip</button><br>
+            <button type="button" class="btn btn-warning" style="margin-bottom: 8px;color:black; border-radius: 5px;" onclick="location.href='{% url 'maharashtra_12days' %}'" >12 days trip</button>
+        </div>
+    </div>
+    
+    <script>
+        var modal = document.getElementById("tripModal");
+        var btn = document.getElementById("openModal");
+        var span = document.getElementsByClassName("close")[0];
+        
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+        
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+        
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script><br><br>
+    <div class="container">
+      <ul class="nav nav-tabs">
+        <li class="nav-item"><a data-toggle="tab" href="#wbculture"> Culture</a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbtradition "> Tradition</a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbfestivals"> Festivals </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbfood"> Foods </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbhistory"> History </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbartacraft"> Art and Craft </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbseason"> Season to Visit </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbtourist"> Tourist Spots </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbwild"> Wildlife & Crops </a></li>
+        <li class="nav-item"><a data-toggle="tab" href="#wbedu"> Institutions </a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="wbculture" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Culture of Maharashtra</h1>
+          <p class="text">Maharashtra has a rich and diverse culture, shaped by its history, literature, art, music, festivals, and traditions. Here's an overview of some key aspects of its culture:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Language</h3>
+                  <ul>
+                    <li>Marathi is the official language and a major part of the cultural identity of Maharashtra. It has a rich literary heritage with famous writers like P.L. Deshpande, V.S. Khandekar, and Kusumagraj. Marathi is spoken by the majority of the population and has a deep connection to the state's cultural identity.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/f/f0/Marathi_Calligraphy.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>2. Literature</h3>
+                  <ul>
+                    <li>Maharashtra has a rich literary tradition dating back to the 13th century with saint-poets like Dnyaneshwar and Tukaram.</li>
+                    <li>Modern Marathi literature includes works by B.S. Mardhekar, P.L. Deshpande, V.S. Khandekar (first Jnanpith Award winner in Marathi), and Vishnu Sakharam Khandekar.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/e/e3/Dnyaneshwari.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div><br>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Warli_Painting.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Art and Craft</h3>
+                  <ul>
+                    <li>Warli paintings, originating from the tribal communities of Thane district, feature geometric patterns and depictions of daily life.</li>
+                    <li>Paithani sarees from Aurangabad are known for their unique weaving style and gold borders.</li>
+                  </ul>
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/e/e3/Lavani_Performance.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>4. Music</h3>
+                  <ul>
+                    <li>Natya Sangeet, a form of classical music associated with Marathi theater, is unique to Maharashtra.</li>
+                    <li>Bhavgeet (light classical songs) and Abhang (devotional poetry) are popular musical forms.</li>
+                    <li>Folk music includes Lavani, Powada, and Bharud, each with distinct styles and themes.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Dance</h3>
+                  <ul>
+                    <li>Lavani is a traditional dance form performed to the beats of dholki, featuring fast rhythmic movements.</li>
+                    <li>Tamasha is a folk theater form that combines singing, dancing, and acting.</li>
+                    <li>Koli dance, performed by the fishing communities, celebrates their connection to the sea.</li>
+                  </ul>
+                  <h3>6. Cuisine</h3>
+                  <ul>
+                    <li>Maharashtrian cuisine varies by region, from coastal seafood dishes to spicy Kolhapuri cuisine.</li>
+                    <li>Staples include vada pav, pav bhaji, puran poli, modak, and misal pav.</li>
+                    <li>The cuisine uses distinctive spice blends like goda masala and kokum for sourness.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/5/5d/Lavani_dancers_at_Raj_Bhavan%2C_Maharashtra.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Mumbai_03-2016_30_Chhatrapati_Shivaji_Terminus.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>7. Theatre and Cinema</h3>
+                  <ul>
+                    <li>Marathi theater has a rich tradition dating back to the 19th century, with playwrights like Vijay Tendulkar.</li>
+                    <li>Marathi cinema, one of India's oldest film industries, has produced acclaimed directors like V. Shantaram and Dada Kondke.</li>
+                  </ul>
+                  <h3>8. Architecture</h3>
+                  <ul>
+                    <li>Maharashtra's architectural style includes ancient cave temples (Ajanta, Ellora), medieval forts (Raigad, Shivneri), colonial buildings (CST Mumbai), and modern structures.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/b/bd/Siddhivinayak_Temple.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>9. Religious Diversity</h3>
+                  <ul>
+                    <li>The state is home to various religions, with Hinduism being predominant, followed by Islam, Buddhism, Jainism, and Christianity. This diversity is reflected in festivals, temples, mosques, and cultural practices throughout the state.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>10. Folk Traditions</h3>
+                  <ul>
+                    <li>Tamasha, a traditional folk theater, combines music, dance, and drama.</li>
+                    <li>Gondhal, a religious performance art, is performed to please the goddess Tulja Bhavani.</li>
+
+                  </ul>
+                  <h3>11. Philosophy</h3>
+                  <ul>
+                    <li>Maharashtra has been influenced by various philosophical movements, including the Bhakti movement led by saints like Dnyaneshwar and Tukaram, and social reformers like Jyotirao Phule and B.R. Ambedkar.</li>
+
+                  </ul>
+                  <h3>12. Handicrafts</h3>
+                  <ul>
+                    <li>Maharashtra is known for handicrafts such as Kolhapuri chappals (leather footwear), Bidriware (metal handicrafts), and Himroo shawls from Aurangabad.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Statue_of_Jyotirao_Phule.jpg" alt="" style="height:300px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br><br>
+
+          <p>Maharashtra's culture is deeply rooted in its history, and it continues to evolve while maintaining a close connection to its heritage. It's a region where modernity and tradition coexist beautifully!</p><br><br>
+        </div>  It's a region where modernity and tradition coexist beautifully!</p><br><br>
+        </div>
+        <div id="wbtradition" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Tradition of Maharashtra</h1>
+          <p>Maharashtra has a rich and diverse tradition deeply rooted in its history, culture, and social practices. Here's an overview of some key traditional aspects of the state:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Clothing Tradition</h3>
+                  <h4>Men</h4>
+                  <ul>
+                    <li><b>Dhoti and Kurta:</b> Traditional Maharashtrian men wear white or cream-colored dhoti with a kurta, especially during religious ceremonies, weddings, and festivals.</li>
+                    <li><b>Pheta:</b> The traditional turban worn for special occasions and ceremonies.</li>
+                  </ul>
+                  <h4>Women</h4>
+                  <ul>
+                    <li><b>Nauvari Saree:</b> The traditional nine-yard saree draped in a unique style that allows freedom of movement.</li>
+                    <li><b>Paithani:</b> Luxurious silk sarees with intricate gold borders and peacock motifs, traditionally worn for special occasions.</li>
+                    <li><b>Nath:</b> The traditional nose ring worn by married women, especially during ceremonies.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/c/c9/Maharashtrian_Wedding_Couple.jpg" alt="" style="height:250px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>2. Wedding Traditions</h3>
+                  <ul>
+                    <li><b>Sakhar Puda:</b> The engagement ceremony where sugar crystals are exchanged as a symbol of sweet beginnings.</li>
+                    <li><b>Halad:</b> The turmeric ceremony where the bride and groom are applied with turmeric paste for glowing skin.</li>
+                    <li><b>Muhurtamedha:</b> The main wedding ceremony performed according to Vedic rituals.</li>
+                    <li><b>Mangalashtak:</b> Eight auspicious verses recited during the wedding ceremony.</li>
+                    <li><b>Kanyadan:</b> The ritual where the bride's parents give away their daughter to the groom.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/d/d2/Maharashtrian_Hindu_Wedding_Rituals.jpg" alt="" style="height:250px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/e/e3/Lavani_Performance.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Music & Dance Traditions</h3>
+                  <ul>
+                    <li><b>Lavani:</b> A traditional dance form performed to the beats of dholki, featuring fast rhythmic movements and expressions.</li>
+                    <li><b>Powada:</b> Ballads that narrate stories of brave warriors, especially Chhatrapati Shivaji Maharaj.</li>
+                    <li><b>Bharud:</b> A devotional folk art form that conveys spiritual and social messages.</li>
+                    <li><b>Gondhal:</b> A religious performance art conducted to please the goddess Tulja Bhavani.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Wari_procession.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+
+                  <h3>4. Social & Religious Traditions</h3>
+                  <ul>
+                    <li><b>Wari:</b> The annual pilgrimage to Pandharpur, where devotees walk hundreds of kilometers to visit Lord Vitthal's temple.</li>
+                    <li><b>Bhajan and Kirtan:</b> Devotional singing sessions that are an integral part of religious gatherings.</li>
+                    <li><b>Ganesh Chaturthi:</b> The grand celebration of Lord Ganesha's birthday, with elaborate decorations and processions.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Architectural & Handicraft Traditions</h3>
+                  <ul>
+                    <li><b>Wada Architecture:</b> Traditional Maharashtrian houses with central courtyards, wooden pillars, and intricate carvings.</li>
+                    <li><b>Warli Painting:</b> Tribal art form using basic geometric shapes to depict daily life and nature.</li>
+                    <li><b>Kolhapuri Chappals:</b> Handcrafted leather footwear known for durability and unique design.</li>
+                    <li><b>Paithani Weaving:</b> Ancient weaving technique producing luxurious silk sarees with gold borders.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Warli_Painting.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>6. Sports & Games</h3>
+                  <ul>
+                    <li><b>Kho Kho:</b> A traditional tag sport played throughout Maharashtra.</li>
+                    <li><b>Kabaddi:</b> A contact sport with strong roots in rural Maharashtra.</li>
+                    <li><b>Mallakhamb:</b> An ancient sport involving gymnastic poses on a wooden pole or rope.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Mallakhamb_Performance.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br><br>
+          <p>Maharashtra's traditions beautifully combine history, art, food, music, and festivals, making it one of the most culturally vibrant states in India.</p><br><br>
+        </div>
+        <div id="wbfestivals" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Festivals of Maharashtra</h1>
+          <p>Maharashtra is known for its vibrant and diverse festivals, which reflect its rich cultural heritage, religious harmony, and artistic traditions. Here's a list of some of the major festivals celebrated in the state:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Ganesh Chaturthi (Biggest Festival of Maharashtra)</h3>
+                  <ul>
+                    <li>The most significant festival, celebrated with grand idols, artistic pandals, cultural performances, and processions.</li>
+                    <li>The festival lasts 10 days, with families bringing Lord Ganesha idols home and community celebrations in public pandals.</li>
+                    <li>Modak (sweet dumplings) are the traditional offering to Lord Ganesha.</li>
+                    <li>Huge Visarjan (immersion) processions take place on the last day.</li>
+                  </ul>
+                  <p><b>📍 Time: August - September</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Ganesh_Chaturthi_in_Mumbai.jpg" alt="" style="height:230px;width: 200px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Wari_procession.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Pandharpur Wari</h3>
+                  <ul>
+                    <li>An annual pilgrimage to Pandharpur, where devotees (warkaris) walk hundreds of kilometers to visit Lord Vitthal's temple.</li>
+                    <li>The procession includes singing abhangs (devotional songs) and carrying the padukas (footwear) of saints Dnyaneshwar and Tukaram.</li>
+                    <li>One of the oldest and largest religious processions in Maharashtra.</li>
+                  </ul>
+                  <p><b>📍 Time: June - July (Ashadhi Ekadashi)</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Gudi Padwa (Maharashtrian New Year)</h3>
+                  <ul>
+                    <li>Marks the beginning of the new year according to the lunar calendar.</li>
+                    <li>Families hoist a gudi (a bamboo stick with silk cloth, neem leaves, and a copper pot) outside their homes.</li>
+                    <li>Special meals include puran poli (sweet flatbread) and shrikhand (sweetened yogurt).</li>
+                  </ul>
+                  <p><b>📍 Time: March - April</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/d/d2/Gudi_Padwa_Celebration.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Diwali_Celebration_in_Maharashtra.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Diwali</h3>
+                  <ul>
+                    <li>The festival of lights celebrated with oil lamps, rangoli (colorful floor designs), and fireworks.</li>
+                    <li>Lakshmi Puja is performed to invite prosperity and wealth.</li>
+                    <li>Traditional sweets like chakli, karanji, and anarse are prepared.</li>
+                  </ul>
+                  <p><b>📍 Time: October - November</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Nag Panchami</h3>
+                  <ul>
+                    <li>A festival dedicated to snake worship, where milk and flowers are offered to snake deities.</li>
+                    <li>Women draw snake images with rangoli and pray for the well-being of their families.</li>
+                  </ul>
+                  <p><b>📍 Time: July - August</b></p>
+                  <h3>6. Shivaji Jayanti</h3>
+                  <ul>
+                    <li>Celebration of the birth anniversary of Chhatrapati Shivaji Maharaj, the founder of the Maratha Empire.</li>
+                    <li>Processions, cultural programs, and speeches highlight Shivaji's valor and administrative skills.</li>
+                  </ul>
+                  <p><b>📍 Time: February 19</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/Shivaji_Maharaj_Statue.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Holi_Celebration_in_Maharashtra.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>7. Holi</h3>
+                  <ul>
+                    <li>The festival of colors celebrated with gulal (colored powder), water guns, and bonfires.</li>
+                    <li>In Maharashtra, it's often combined with Rangapanchami, celebrated five days after Holi.</li>
+                  </ul>
+                  <p><b>📍 Time: February - March</b></p>
+                  <h3>8. Makar Sankranti</h3>
+                  <ul>
+                    <li>Harvest festival marking the transition of the sun into Capricorn.</li>
+                    <li>People exchange til-gul (sesame and jaggery sweets) and fly kites.</li>
+                  </ul>
+                  <p><b>📍 Time: January 14</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>9. Pola</h3>
+                  <ul>
+                    <li>A festival dedicated to bullocks, celebrated mainly in rural Maharashtra.</li>
+                    <li>Farmers decorate their bullocks with ornaments and take them out in processions.</li>
+                    <li>Special pujas are performed to honor the animals that help in agriculture.</li>
+                  </ul>
+                  <p><b>📍 Time: August</b></p>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/Pola_Festival_in_Maharashtra.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/f/f5/Eid_Celebration_in_Maharashtra.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>10. Eid-ul-Fitr & Eid-ul-Adha</h3>
+                  <ul>
+                    <li>Celebrated by the Muslim community across Maharashtra, especially in cities like Mumbai, Aurangabad, and Malegaon.</li>
+                    <li>Special feasts include Biryani, Sheer Khurma, and various sweets.</li>
+                    <li>Prayers are held at mosques, followed by community gatherings.</li>
+                  </ul>
+                  <p><b>📍 Time: Based on Islamic Calendar</b></p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3>11. Narali Purnima</h3>
+                  <ul>
+                    <li>A festival celebrated by the fishing communities, marking the end of the monsoon fishing ban.</li>
+                    <li>Coconuts (naral) are offered to the sea god, seeking protection for fishermen.</li>
+                  </ul>
+                  <p><b>📍 Time: August</b></p>
+
+                  <h3>12. Christmas</h3>
+                  <ul>
+                    <li>Celebrated by the Christian community, with midnight mass at churches like St. Thomas Cathedral in Mumbai.</li>
+                    <li>Homes are decorated with Christmas trees and stars, and special feasts are prepared.</li>
+                  </ul>
+                  <p><b>📍 Time: December 25</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/c/c2/Christmas_Celebration_in_Maharashtra.jpg" alt="" style="height:200px;width: 230px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Ellora_Festival.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h3>13. Ellora-Ajanta Festival</h3>
+                  <ul>
+                    <li>A cultural festival held against the backdrop of the ancient Ellora and Ajanta Caves.</li>
+                    <li>Features classical music, dance performances, and art exhibitions.</li>
+                  </ul>
+                  <p><b>📍 Time: November - December</b></p>
+                  <h3>14. Banganga Festival</h3>
+                  <ul>
+                    <li>A music festival held at the historic Banganga Tank in Mumbai.</li>
+                    <li>Features classical music performances by renowned artists.</li>
+                  </ul>
+                  <p><b>📍 Time: January</b></p>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Maharashtra's festivals are a blend of religious, cultural, and artistic celebrations, making the state one of the most festive regions in India! 🎉</p><br><br>
+        </div>
+        <div id="wbfood" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Foods of Maharashtra</h1>
+          <p>Maharashtra has a rich and diverse culinary tradition that varies by region. Maharashtrian cuisine is known for its bold flavors, use of peanuts, kokum, and a balance of spicy, sweet, and tangy tastes. Here's a look at some of the most iconic foods of Maharashtra:</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Staple Food of Maharashtra</h3>
+                  <ul>
+                    <li><b>Bhakri-Bhaji:</b> Millet flatbread served with vegetable curry, common in rural areas.</li>
+                    <li><b>Rice and Dal:</b> A simple meal of steamed rice with toor dal (varan) and ghee.</li>
+                  </ul>
+                  <h3>2. Maharashtrian Breads</h3>
+                  <ul>
+                    <li><b>Bhakri:</b> Flatbread made from jowar (sorghum), bajra (pearl millet), or rice flour.</li>
+                    <li><b>Thalipeeth:</b> Multi-grain savory pancake made with a special flour mix (bhajani).</li>
+                    <li><b>Puran Poli:</b> Sweet flatbread stuffed with a mixture of jaggery and chana dal.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Puran_Poli.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Vada_Pav.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>3. Famous Maharashtrian Dishes</h3>
+                  <h4>Street Food</h4>
+                  <ul>
+                    <li><b>Vada Pav:</b> Mumbai's iconic street food - a spicy potato fritter in a bun with chutneys.</li>
+                    <li><b>Pav Bhaji:</b> Mashed vegetables in a spicy gravy, served with buttered bread rolls.</li>
+                    <li><b>Misal Pav:</b> Spicy sprouted bean curry topped with farsan (crunchy mix), served with bread.</li>
+                    <li><b>Bhel Puri:</b> A savory snack made with puffed rice, vegetables, and tangy chutneys.</li>
+                  </ul>
+                  <h4>Vegetarian Dishes</h4>
+                  <ul>
+                    <li><b>Pithla Bhakri:</b> Gram flour curry served with millet flatbread.</li>
+                    <li><b>Matki Usal:</b> Sprouted moth beans curry with a spicy gravy.</li>
+                    <li><b>Bharli Vangi:</b> Stuffed eggplant with a peanut-coconut filling.</li>
+                    <li><b>Zunka:</b> A dry dish made with gram flour and spices.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Bombil_Fry.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h4>Non-Vegetarian Dishes</h4>
+                  <ul>
+                    <li><b>Bombil Fry:</b> Crispy fried Bombay duck fish, a coastal specialty.</li>
+                    <li><b>Kolhapuri Tambda Rassa:</b> Spicy red mutton curry from Kolhapur.</li>
+                    <li><b>Malvani Fish Curry:</b> Coconut-based fish curry from the Konkan coast.</li>
+                    <li><b>Kombdi Vade:</b> Chicken curry served with deep-fried bread, popular in the Konkan region.</li>
+                  </ul>
+                  <h4>Dal & Accompaniments</h4>
+                  <ul>
+                    <li><b>Amti:</b> Tangy toor dal with kokum and goda masala.</li>
+                    <li><b>Koshimbir:</b> Fresh salad with yogurt dressing, often made with cucumber or carrot.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>4. Maharashtrian Sweets</h3>
+                  <ul>
+                    <li><b>Modak:</b> Steamed rice flour dumplings filled with coconut and jaggery, Lord Ganesha's favorite.</li>
+                    <li><b>Puran Poli:</b> Sweet flatbread stuffed with chana dal and jaggery.</li>
+                    <li><b>Shrikhand:</b> Strained yogurt sweetened with sugar and flavored with saffron and cardamom.</li>
+                    <li><b>Basundi:</b> Thickened milk dessert with nuts and saffron.</li>
+                    <li><b>Amba Barfi:</b> Mango-flavored fudge, popular during summer.</li>
+                  </ul>
+
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/Modak.jpg" alt="" style="height:200px;width: 220px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Vada_Pav.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>5. Street Food of Maharashtra</h3>
+                  <ul>
+                    <li><b>Vada Pav:</b> Mumbai's iconic street food - a spicy potato fritter in a bun with chutneys.</li>
+                    <li><b>Pav Bhaji:</b> Mashed vegetables in a spicy gravy, served with buttered bread rolls.</li>
+                    <li><b>Misal Pav:</b> Spicy sprouted bean curry topped with farsan, served with bread.</li>
+                    <li><b>Bhel Puri:</b> A savory snack made with puffed rice, vegetables, and tangy chutneys.</li>
+                    <li><b>Ragda Pattice:</b> Potato patties topped with white pea curry and chutneys.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>6. Famous Drinks</h3>
+                  <ul>
+                    <li><b>Solkadhi:</b> A pink-colored digestive drink made with coconut milk and kokum.</li>
+                    <li><b>Piyush:</b> A sweet beverage made by mixing shrikhand and buttermilk.</li>
+                    <li><b>Kairi Panha:</b> A summer cooler made from raw mango pulp, jaggery, and spices.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/f/f1/Solkadhi.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Special Festival Foods</h3>
+                  <ul>
+                    <li><b>Modak:</b> Sweet dumplings made during Ganesh Chaturthi.</li>
+                    <li><b>Puran Poli:</b> Sweet flatbread prepared during Holi and Gudi Padwa.</li>
+                    <li><b>Til-Gul:</b> Sesame and jaggery sweets exchanged during Makar Sankranti.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Puran_Poli.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Maharashtra's cuisine is a delightful mix of flavors, textures, and regional specialties, making it one of the most diverse and delicious regional cuisines in India! 🍛🍲🍬</p><br><br>
+        </div>
+        <div id="wbhistory" class="tab-pane fade in active" style="background-color: white;">
+          <h1>History of Maharashtra</h1>
+          <p>Maharashtra has a rich and diverse history that spans ancient civilizations, medieval kingdoms, Maratha Empire, British colonial rule, and the modern era. The region has played a significant role in India's political, cultural, and intellectual history.</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Ancient Maharashtra (Before 6th Century CE)</h3>
+                  <ul>
+                    <li><b>Prehistoric Period:</b> Archaeological evidence from sites like Inamgaon shows early settlements dating back to 1600 BCE.</li>
+                    <li><b>Maurya Empire (321 BCE - 185 BCE):</b> Emperor Ashoka's rock edicts at Sopara and Kandhar indicate Mauryan rule.</li>
+                    <li><b>Satavahana Dynasty (230 BCE - 220 CE):</b> First major rulers of Maharashtra who promoted trade, Buddhism, and built cave temples at Ajanta.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Ajanta_caves_entrance.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/c/cd/Ellora_cave16_001.jpg" alt="" style="height:200px;width: 200  alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h4>Vakataka Dynasty (250 CE - 500 CE):</h4>
+                  <ul>
+                    <li>Patrons of art and architecture who contributed to the Ajanta Cave paintings.</li>
+                    <li>Established strong administrative systems and promoted Sanskrit literature.</li>
+                  </ul>
+                  <h4>Chalukya Dynasty (543 CE - 753 CE):</h4>
+                  <ul>
+                    <li>Built rock-cut temples at Ellora and established a strong maritime presence.</li>
+                    <li>Promoted arts, literature, and religious tolerance.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/Rashtrakuta_Empire.png" alt="" style="height:220px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+                  <h4>Rashtrakuta Dynasty (753 CE - 982 CE):</h4>
+                  <ul>
+                    <li>Created the magnificent Kailasa Temple at Ellora, carved from a single rock.</li>
+                    <li>Established a vast empire with strong trade networks.</li>
+                  </ul>
+                  <h4>Yadava Dynasty (1189 CE - 1310 CE):</h4>
+                  <ul>
+                    <li>Last major Hindu dynasty before Islamic rule, with capital at Devagiri (Daulatabad).</li>
+                    <li>Promoted Marathi language and literature, and built temples.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Medieval Period (1300 CE - 1674 CE)</h3>
+                  <ul>
+                    <li><b>Delhi Sultanate (1310 CE - 1526 CE):</b> Alauddin Khilji conquered the Yadavas, bringing Maharashtra under Islamic rule.</li>
+                    <li><b>Bahmani Sultanate (1347 CE - 1527 CE):</b> Established when Hasan Gangu declared independence from Delhi Sultanate.</li>
+                    <li><b>Ahmednagar, Bijapur, and Golconda Sultanates (1527 CE - 1686 CE):</b> Emerged after the disintegration of the Bahmani Sultanate.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/d/d1/Daulatabad_Fort.jpg" alt="" style="height:200px;width: 250px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Shivaji_British_Museum.jpg" alt="" style="height:230px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h2>4. Maratha Empire (1674 CE - 1818 CE)</h3>
+                    <h3>Rise of Shivaji Maharaj</h3>
+                    <ul>
+                      <li>Chhatrapati Shivaji Maharaj (1630-1680) established the Maratha Empire, challenging Mughal dominance.</li>
+                      <li>Coronation at Raigad in 1674 marked the official beginning of the Maratha Empire.</li>
+                    </ul>
+                    <h3>Expansion and Peshwa Rule</h3>
+                    <ul>
+                      <li>After Shivaji's death, his son Sambhaji and later Rajaram continued the struggle.</li>
+                      <li>Under the Peshwas (prime ministers), especially Bajirao I, the Maratha Empire expanded to its greatest extent.</li>
+                    </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/Maratha_Empire.png" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>Maratha Confederacy</h3>
+                  <ul>
+                    <li>The empire evolved into a confederacy with semi-autonomous Maratha states under:</li>
+                    <ul>
+                      <li>Gaekwads of Baroda</li>
+                      <li>Holkars of Indore</li>
+                      <li>Scindias of Gwalior</li>
+                      <li>Bhonsles of Nagpur</li>
+                    </ul>
+                  </ul>
+                  <h3>Decline of the Maratha Empire</h3>
+                  <ul>
+                    <li>The Third Battle of Panipat (1761) against Ahmad Shah Abdali weakened the Marathas.</li>
+                    <li>The Anglo-Maratha Wars (1775-1818) led to the defeat of the Marathas by the British East India Company.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. British Colonial Rule (1818 - 1947)</h3>
+                  <h4>Establishment of British Rule</h4>
+                  <ul>
+                    <li>After the Third Anglo-Maratha War (1817-1818), the British established direct control over most of Maharashtra.</li>
+                    <li>The region became part of the Bombay Presidency, one of the major administrative divisions of British India.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Mumbai_03-2016_30_Chhatrapati_Shivaji_Terminus.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h4>Social and Political Movements</h4>
+                  <ul>
+                    <li><b>Social Reform Movements:</b></li>
+                    <ul>
+                      <li>Mahatma Jyotirao Phule founded the Satyashodhak Samaj (1873) to fight against caste discrimination.</li>
+                      <li>Dr. B.R. Ambedkar led the Dalit movement and drafted India's constitution.</li>
+                    </ul>
+                    <li><b>Freedom Struggle:</b></li>
+                    <ul>
+                      <li>Bal Gangadhar Tilak popularized the Ganesh Chaturthi festival as a means of nationalist mobilization.</li>
+                      <li>Vinayak Damodar Savarkar, a revolutionary freedom fighter, was imprisoned in the Cellular Jail.</li>
+                    </ul>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Statue_of_Jyotirao_Phule.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>6. Post-Independence (1947 - Present)</h3>
+                  <h4>Formation of Maharashtra State</h4>
+                  <ul>
+                    <li>After independence, the Bombay State was created, including present-day Maharashtra and Gujarat.</li>
+                    <li>The Samyukta Maharashtra Movement demanded a separate state for Marathi-speaking regions.</li>
+                    <li>On May 1, 1960, Maharashtra was formed as a separate state with Bombay (Mumbai) as its capital.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Samyukta_Maharashtra_movement.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h4>Modern Maharashtra</h4>
+                  <ul>
+                    <li><b>Economic Growth:</b> Mumbai emerged as India's financial capital and home to Bollywood.</li>
+                    <li><b>Industrial Development:</b> Pune, Nashik, and Aurangabad developed as major industrial centers.</li>
+                    <li><b>Agricultural Progress:</b> Maharashtra became a leading producer of sugarcane, cotton, and horticulture crops.</li>
+                    <li><b>Political Landscape:</b> The state has seen governments led by Congress, Shiv Sena, BJP, and NCP.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/3/36/Mumbai_skyline_at_night.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Present-Day Maharashtra</h3>
+                  <ul>
+                    <li><b>Economic Powerhouse:</b> Maharashtra contributes about 15% of India's GDP and is the most industrialized state.</li>
+                    <li><b>Cultural Hub:</b> Home to Bollywood, Marathi theater, and a vibrant arts scene.</li>
+                    <li><b>Tourist Attractions:</b> Ajanta-Ellora Caves, Gateway of India, hill stations like Mahabaleshwar, and beaches along the Konkan coast.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/3/36/Gateway_of_India_at_Night.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Maharashtra has witnessed ancient empires, Islamic rule, the rise of the Maratha Empire, British colonization, and modern development. It remains a center of culture, education, industry, and politics in India. 🚩📜</p>
+          <br><br>
+        </div>
+        <div id="wbartacraft" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Art & Craft of Maharashtra 🎨🖌️</h1>
+          <p>Maharashtra has a rich artistic heritage, blending traditional craftsmanship with cultural influences from various periods. Maharashtrian artisans are known for their intricate craftsmanship, storytelling through art, and diverse materials like clay, wood, metal, and textiles.</p>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Warli Art 🖌️</h3>
+                  <h4>🔸 Warli Paintings</h4>
+                  <ul>
+                    <li><b>Origin:</b> Tribal communities of Thane and Palghar districts.</li>
+                    <li><b>Style:</b> Simple white geometric patterns on earthy backgrounds, depicting daily life, nature, and rituals.</li>
+                    <li><b>Materials:</b> Traditionally made with rice paste on mud walls, now adapted to canvas and paper.</li>
+                  </ul>
+                  <h4>🔸 Significance</h4>
+                  <ul>
+                    <li>One of the oldest art forms in India, dating back to 10th century CE.</li>
+                    <li>Recognized globally as a unique tribal art style.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Warli_Painting.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Paithani_Saree.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Textile & Weaving 🧵</h3>
+                  <h4>🔸 Paithani Sarees</h4>
+                  <ul>
+                    <li><b>Origin:</b> Paithan, Aurangabad district.</li>
+                    <li><b>Features:</b> Hand-woven silk sarees with gold zari borders and peacock motifs.</li>
+                    <li><b>Technique:</b> Uses a unique tapestry technique where the design is woven simultaneously with the fabric.</li>
+                  </ul>
+                  <h4>🔸 Himroo Textiles</h4>
+                  <ul>
+                    <li><b>Origin:</b> Aurangabad, introduced during the Mughal era.</li>
+                    <li><b>Features:</b> Blend of silk and cotton with Persian-inspired designs.</li>
+                    <li><b>Products:</b> Shawls, bedspreads, and dress materials.</li>
+                  </ul>
+                  <h4>🔸 Narayan Peth Sarees</h4>
+                  <ul>
+                    <li><b>Origin:</b> Narayan Peth area in Pune.</li>
+                    <li><b>Features:</b> Cotton sarees with distinctive borders and small buttis (motifs).</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Leather Craft 🥾</h3>
+                  <h4>🔸 Kolhapuri Chappals</h4>
+                  <ul>
+                    <li><b>Origin:</b> Kolhapur district.</li>
+                    <li><b>Features:</b> Handcrafted leather footwear known for durability and distinctive design.</li>
+                    <li><b>Process:</b> Made from vegetable-tanned leather using traditional techniques passed down through generations.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/7/79/Kolhapuri_Chappal.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/d/d8/Bidriware.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Metal Craft 🏺</h3>
+                  <h4>🔸 Bidriware</h4>
+                  <ul>
+                    <li><b>Origin:</b> Aurangabad, influenced by the Deccan sultanates.</li>
+                    <li><b>Technique:</b> Blackened alloy of zinc and copper inlaid with silver or brass.</li>
+                    <li><b>Products:</b> Vases, jewelry boxes, and decorative items.</li>
+                  </ul>
+                  <h4>🔸 Tambat Craft (Copperware)</h4>
+                  <ul>
+                    <li><b>Origin:</b> Tambat Ali in Pune.</li>
+                    <li><b>Products:</b> Handcrafted copper vessels with distinctive hammered patterns.</li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Pottery & Clay Craft 🏺</h3>
+                  <ul>
+                    <li><b>Ganjifa Cards:</b> Hand-painted circular playing cards made in Sawantwadi.</li>
+                    <li><b>Terracotta Pottery:</b> Traditional clay pottery from rural Maharashtra, often decorated with simple patterns.</li>
+                  </ul>
+                  <h3>6. Wooden Craft 🌳</h3>
+                  <ul>
+                    <li><b>Sawantwadi Wooden Toys:</b> Brightly painted wooden toys and figurines from Sawantwadi in Sindhudurg district.</li>
+                    <li><b>Pinguli Puppets:</b> Traditional wooden puppets used in storytelling.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/e/e6/Sawantwadi_Wooden_Toys.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Ajanta_caves_entrance.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>7. Cave Paintings & Rock Art 🖌️</h3>
+                  <ul>
+                    <li><b>Ajanta Cave Paintings:</b> Ancient Buddhist paintings dating from 2nd century BCE to 6th century CE.</li>
+                    <li><b>Features:</b> Depictions of Jataka tales, Buddha's life, and everyday scenes using natural pigments.</li>
+                    <li><b>Significance:</b> UNESCO World Heritage Site, showcasing one of the finest examples of ancient Indian art.</li>
+                  </ul>
+                  <h3>8. Paper Craft 📄</h3>
+                  <ul>
+                    <li><b>Lokta Paper Art:</b> Handmade paper crafts from the Konkan region.</li>
+                    <li><b>Products:</b> Decorative items, stationery, and gift boxes.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>9. Jewelry Making 💍</h3>
+                  <h4>🔸 Traditional Maharashtrian Jewelry</h4>
+                  <ul>
+                    <li><b>Thushi:</b> Choker-style necklace made of small gold beads.</li>
+                    <li><b>Nath:</b> Elaborate nose ring worn by married women.</li>
+                    <li><b>Kolhapuri Saaj:</b> Multi-layered gold necklace with intricate designs.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/f/f8/Maharashtrian_Traditional_Jewelry.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>📌 Summary: Maharashtra's Art & Craft Forms</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Art Form</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Warli Art</td>
+                <td>Thane, Palghar</td>
+                <td>Geometric White Patterns on Earthy Background</td>
+              </tr>
+              <tr>
+                <td>Paithani Sarees</td>
+                <td>Paithan, Aurangabad</td>
+                <td>Gold Zari Borders, Peacock Motifs</td>
+              </tr>
+              <tr>
+                <td>Kolhapuri Chappals</td>
+                <td>Kolhapur</td>
+                <td>Handcrafted Leather Footwear</td>
+              </tr>
+              <tr>
+                <td>Bidriware</td>
+                <td>Aurangabad</td>
+                <td>Silver Inlay on Blackened Metal</td>
+              </tr>
+              <tr>
+                <td>Tambat Craft</td>
+                <td>Pune</td>
+                <td>Hammered Copper Vessels</td>
+              </tr>
+              <tr>
+                <td>Sawantwadi Wooden Toys</td>
+                <td>Sindhudurg</td>
+                <td>Brightly Colored Wooden Figurines</td>
+              </tr>
+              <tr>
+                <td>Himroo Textiles</td>
+                <td>Aurangabad</td>
+                <td>Silk-Cotton Blend with Persian Designs</td>
+              </tr>
+              <tr>
+                <td>Ajanta Cave Paintings</td>
+                <td>Aurangabad</td>
+                <td>Ancient Buddhist Art</td>
+              </tr>
+              <tr>
+                <td>Ganjifa Cards</td>
+                <td>Sawantwadi</td>
+                <td>Hand-painted Circular Playing Cards</td>
+              </tr>
+              <tr>
+                <td>Maharashtrian Jewelry</td>
+                <td>Throughout Maharashtra</td>
+                <td>Thushi, Nath, Kolhapuri Saaj</td>
+              </tr>
+            </table>
+          </div>
+          <br><br>
+          <p>Maharashtra's art and crafts are a blend of history, culture, and traditional skills, passed down through generations. Whether it's the tribal Warli paintings, luxurious Paithani sarees, or the ancient cave art of Ajanta, Maharashtra's artisans continue to preserve and innovate their heritage. 🎭✨</p>
+          <br><br>
+        </div>
+        <div id="wbseason" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Seasons to visit Maharashtra 🌧️☀️ </h1>
+          <p>Maharashtra has diverse geography, from coastal areas to plateaus and mountains, resulting in varied climate conditions across the state. Here's a guide to the best seasons to visit different parts of Maharashtra.</p>
+
+          <br><br>
+
+          <h2> Season-wise Breakdown for Visiting Maharashtra</h2>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🌸 Spring (February - March)</h3>
+                  <ul>
+                    <li>Pleasant weather throughout Maharashtra with temperatures between 15-30°C.</li>
+                    <li>Ideal for visiting Mumbai, Pune, Aurangabad, and the Konkan coast.</li>
+                    <li>Perfect time for exploring Ajanta-Ellora Caves and historical sites.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Ajanta_caves_entrance.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Mahabaleshwar_Strawberry.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>☀️ Summer (April – June)</h3>
+                  <ul>
+                    <li>Hot and dry in most parts, with temperatures reaching 35-45°C in inland areas.</li>
+                    <li>Hill stations like Mahabaleshwar, Panchgani, and Matheran are ideal for escaping the heat.</li>
+                    <li>Coastal areas like Alibaug and Ganpatipule offer relief with sea breezes.</li>
+                    <li>Alphonso mango season makes summer special in the Konkan region.</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🌧️ Monsoon (June - September)</h3>
+                  <ul>
+                    <li>Heavy rainfall, especially in the Western Ghats and Konkan coast.</li>
+                    <li>Lush green landscapes make the Western Ghats spectacularly beautiful.</li>
+                    <li>Waterfalls in Bhandardara, Malshej Ghat, and Tamhini Ghat are at their best.</li>
+                    <li>Avoid coastal areas due to rough seas and potential flooding.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/d/d8/Bhandardara_Waterfall.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Ganesh_Chaturthi_in_Mumbai.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🍁 Autumn (October - November)</h3>
+                  <ul>
+                    <li>Best season for visiting most parts of Maharashtra with pleasant temperatures.</li>
+                    <li>Ideal for Mumbai sightseeing, Pune, and Aurangabad.</li>
+                    <li>Ganesh Chaturthi (if it falls in this period) makes it a culturally rich time to visit.</li>
+                    <li>Perfect weather for trekking in the Western Ghats.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>❄️ Winter (December - January)</h3>
+                  <ul>
+                    <li>Cool and dry weather with temperatures between 10-28°C.</li>
+                    <li>Excellent time for wildlife safaris in Tadoba and Navegaon National Parks.</li>
+                    <li>Perfect for exploring historical sites and cities.</li>
+                    <li>Coastal areas enjoy mild temperatures, ideal for beach activities.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/f/f1/Tiger_at_Tadoba_Andhari_Tiger_Reserve.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>📌 Summary: Best Time to Visit Different Places in Maharashtra</h2>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Region</th>
+                <th>Best Season</th>
+                <th>Recommended Months</th>
+                <th>Why Visit?</th>
+              </tr>
+              <tr>
+                <td>Mumbai</td>
+                <td>Winter, Spring, Autumn</td>
+                <td>October - March</td>
+                <td>Pleasant weather, cultural events, historical sites</td>
+              </tr>
+              <tr>
+                <td>Pune</td>
+                <td>Winter, Spring, Autumn</td>
+                <td>October - March</td>
+                <td>Comfortable climate, historical forts, cultural experiences</td>
+              </tr>
+              <tr>
+                <td>Aurangabad (Ajanta-Ellora)</td>
+                <td>Winter, Spring, Autumn</td>
+                <td>October - March</td>
+                <td>Ideal weather for exploring caves and monuments</td>
+              </tr>
+              <tr>
+                <td>Hill Stations (Mahabaleshwar, Panchgani, Matheran)</td>
+                <td>Summer, Winter</td>
+                <td>April - June, October - February</td>
+                <td>Escape from heat, strawberry farms, scenic viewpoints</td>
+              </tr>
+              <tr>
+                <td>Konkan Coast (Alibaug, Ganpatipule, Tarkarli)</td>
+                <td>Winter, Spring</td>
+                <td>November - March</td>
+                <td>Beach activities, seafood, water sports</td>
+              </tr>
+              <tr>
+                <td>Western Ghats (Lonavala, Khandala, Bhandardara)</td>
+                <td>Monsoon, Autumn</td>
+                <td>June - September, October - November</td>
+                <td>Waterfalls, lush greenery, trekking opportunities</td>
+              </tr>
+              <tr>
+                <td>Vidarbha (Nagpur, Tadoba)</td>
+                <td>Winter</td>
+                <td>October - February</td>
+                <td>Wildlife safaris, tiger spotting, comfortable weather</td>
+              </tr>
+              <tr>
+                <td>Marathwada (Aurangabad, Nanded)</td>
+                <td>Winter, Spring</td>
+                <td>October - March</td>
+                <td>Historical sites, religious places, pleasant climate</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="container">
+            <div class="row">
+              <h1 style=" text-align: center;">📌 Summary: When to Visit Maharashtra</h1><br>
+              <ul>
+                <li><b>For cultural experiences & festivals:</b> August - September (Ganesh Chaturthi), February - March (Shivaji Jayanti, Holi)</li>
+                <li><b>For hill stations:</b> April - June, October - February (Mahabaleshwar, Matheran, Panchgani)</li>
+                <li><b>For wildlife & national parks:</b> October - March (Tadoba, Navegaon)</li>
+                <li><b>For beaches & coastal areas:</b> November - February (Alibaug, Ganpatipule, Tarkarli)</li>
+                <li><b>For historical sites & monuments:</b> October - March (Ajanta-Ellora, Forts)</li>
+              </ul>
+
+            </div>
+          </div>
+          <br><br>
+        </div>
+        <div id="wbtourist" class="tab-pane fade in active" style="background-color: white;">
+          <h1>Tourist Spots of Maharashtra 🏖️🏔️</h1>
+          <p>Maharashtra is a diverse state with beaches, mountains, forests, heritage sites, and cultural hubs. Here's a categorized list of the best tourist places in Maharashtra:</p>
+
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>1. Hill Stations & Mountain Destinations 🏔️</h3>
+                  <ul>
+                    <li><b>Mahabaleshwar -</b> Strawberry farms, Venna Lake, Arthur's Seat, Lingmala Waterfall</li>
+                    <li><b>Panchgani -</b> Table Land, Sydney Point, Mapro Garden</li>
+                    <li><b>Matheran -</b> Asia's only automobile-free hill station, Echo Point, Charlotte Lake</li>
+                    <li><b>Lonavala & Khandala -</b> Bhushi Dam, Tiger's Leap, Karla Caves</li>
+                    <li><b>Amboli -</b> Lush green hill station in the Sahyadri range, waterfalls</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Mahabaleshwar_Strawberry.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/3/36/Gateway_of_India_at_Night.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>2. Heritage & Cultural Destinations 🏛️</h3>
+                  <ul>
+                    <li><b>Mumbai -</b> Gateway of India, Marine Drive, Elephanta Caves, CST Station, Haji Ali Dargah</li>
+                    <li><b>Pune -</b> Aga Khan Palace, Shaniwar Wada, Sinhagad Fort, Osho Ashram</li>
+                    <li><b>Aurangabad -</b> Ajanta & Ellora Caves (UNESCO sites), Bibi Ka Maqbara, Daulatabad Fort</li>
+                    <li><b>Nashik -</b> Trimbakeshwar Temple, Panchavati, Sula Vineyards</li>
+                    <li><b>Kolhapur -</b> Mahalaxmi Temple, New Palace, Rankala Lake</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>3. Wildlife & Nature Destinations 🌳🐯</h3>
+                  <ul>
+                    <li><b>Tadoba Andhari Tiger Reserve -</b> Maharashtra's oldest and largest national park, home to tigers</li>
+                    <li><b>Navegaon National Park -</b> Bird sanctuary and wildlife reserve</li>
+                    <li><b>Melghat Tiger Reserve -</b> Rich biodiversity in the Satpura range</li>
+                    <li><b>Bhandardara -</b> Scenic lake, Arthur Lake, Randha Falls</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/f/f1/Tiger_at_Tadoba_Andhari_Tiger_Reserve.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Alibaug_Beach.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>4. Beach Destinations 🏖️</h3>
+                  <ul>
+                    <li><b>Alibaug -</b> Popular weekend getaway from Mumbai, Kolaba Fort</li>
+                    <li><b>Ganpatipule -</b> Clean beaches, Ganpati Temple</li>
+                    <li><b>Tarkarli -</b> Crystal clear waters, scuba diving, snorkeling</li>
+                    <li><b>Diveagar -</b> Pristine beach, Suvarna Ganesh Temple</li>
+                    <li><b>Harihareshwar -</b> Temple town with beautiful beaches</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>5. Religious Destinations ⛩️</h3>
+                  <ul>
+                    <li><b>Shirdi -</b> Sai Baba Temple, one of India's most visited pilgrimage sites</li>
+                    <li><b>Pandharpur -</b> Vitthal Temple, destination of the annual Wari pilgrimage</li>
+                    <li><b>Trimbakeshwar -</b> One of the 12 Jyotirlingas of Lord Shiva</li>
+                    <li><b>Kolhapur -</b> Mahalaxmi Temple, one of the Shakti Peethas</li>
+                    <li><b>Jejuri -</b> Khandoba Temple, famous for the turmeric festival</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/b/bd/Siddhivinayak_Temple.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/d/d1/Daulatabad_Fort.jpg" alt="" style="height:200px;width: 230px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>6. Forts & Historical Sites 🏰</h3>
+                  <ul>
+                    <li><b>Raigad Fort -</b> Capital of Chhatrapati Shivaji Maharaj's kingdom</li>
+                    <li><b>Sindhudurg Fort -</b> Sea fort built by Shivaji Maharaj</li>
+                    <li><b>Pratapgad Fort -</b> Site of the famous battle between Shivaji and Afzal Khan</li>
+                    <li><b>Daulatabad Fort -</b> Ancient fort with ingenious defense systems</li>
+                    <li><b>Shivneri Fort -</b> Birthplace of Chhatrapati Shivaji Maharaj</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>7. Food & Shopping Hotspots 🍛🛍️</h3>
+                  <ul>
+                    <li><b>Colaba Causeway, Mumbai -</b> Street shopping, cafes, and restaurants</li>
+                    <li><b>Mahatma Phule Market, Mumbai -</b> Historic market for fresh produce and spices</li>
+                    <li><b>Fashion Street, Mumbai -</b> Budget shopping for clothes and accessories</li>
+                    <li><b>Laxmi Road, Pune -</b> Traditional shopping for sarees and jewelry</li>
+                    <li><b>Khau Galli, Mumbai -</b> Street food paradise with vada pav, pav bhaji, and more</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Vada_Pav.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br><br>
+
+        </div>
+        <div id="wbwild" class="tab-pane fade in active" style="background-color: white;">
+          <h1> Wildlife & Crops of Maharashtra 🌿</h1>
+          <p>Maharashtra has diverse wildlife and a rich agricultural landscape due to its varied geography, from the Western Ghats to the Deccan Plateau and the Konkan coast.</p>
+
+          <br>
+          <h2>Wildlife of Maharashtra </h2>
+          <p>Maharashtra has 6 national parks and 49 wildlife sanctuaries, making it one of India's most biodiverse states.</p>
+
+          <br>
+          <h2>🔹 Major National Parks & Wildlife Sanctuaries</h2>
+          <div>
+            <table>
+              <tr>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Tadoba Andhari Tiger Reserve</td>
+                <td>Chandrapur</td>
+                <td>Tigers 🐅, Leopards, Sloth Bears, Gaur</td>
+              </tr>
+              <tr>
+                <td>Melghat Tiger Reserve</td>
+                <td>Amravati</td>
+                <td>Tigers, Indian Bison, Sambhar Deer</td>
+              </tr>
+              <tr>
+                <td>Navegaon National Park</td>
+                <td>Gondia</td>
+                <td>Birds, Deer, Wild Boars</td>
+              </tr>
+              <tr>
+                <td>Pench National Park</td>
+                <td>Nagpur</td>
+                <td>Tigers, Leopards, Wild Dogs</td>
+              </tr>
+              <tr>
+                <td>Sanjay Gandhi National Park</td>
+                <td>Mumbai</td>
+                <td>Leopards, Kanheri Caves, Urban Wildlife</td>
+              </tr>
+              <tr>
+                <td>Radhanagari Wildlife Sanctuary</td>
+                <td>Kolhapur</td>
+                <td>Indian Bison (Gaur), Barking Deer</td>
+              </tr>
+              <tr>
+                <td>Bhimashankar Wildlife Sanctuary</td>
+                <td>Pune</td>
+                <td>Indian Giant Squirrel (State Animal), Sacred Groves</td>
+              </tr>
+            </table>
+          </div>
+          <bt><br></bt>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3> 🔹 Other Notable Wildlife in Maharashtra</h3>
+                <ul>
+                  <li><b>Mammals:</b> Indian Giant Squirrel (State Animal), Leopards, Sloth Bears, Sambar Deer, Nilgai.</li>
+                  <li><b>Birds:</b> Yellow-footed Green Pigeon (State Bird), Great Indian Bustard, Flamingos, Hornbills.</li>
+                  <li><b>Reptiles:</b> Indian Rock Python, Marsh Crocodile, Russell's Viper.</li>
+                  <li><b>Marine Life:</b> Dolphins, Olive Ridley Turtles (nesting sites in Konkan).</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/f1/Tiger_at_Tadoba_Andhari_Tiger_Reserve.jpg" alt="" style="height:200px;width: 200px;">
+
+              </div>
+
+            </div>
+          </div>
+          <hr><br>
+          <h2>🌾 Agriculture & Major Crops in Maharashtra </h2>
+          <p>Maharashtra is one of India's leading agricultural states, producing a variety of cereals, pulses, fruits, and cash crops.</p>
+
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Key Agricultural Features</h3>
+                <ul>
+                  <li>Largest producer of Sugarcane, Cotton, Grapes, Onions, and Alphonso Mangoes in India.</li>
+                  <li><b>Diverse Agro-Climatic Zones:</b> From rain-fed Western Ghats to drought-prone Marathwada.</li>
+                  <li><b>Irrigation:</b> Krishna, Godavari, and Tapi rivers support farming.</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Mahabaleshwar_Strawberry.jpg" alt="" style="height:200px;width: 220px;">
+
+              </div>
+            </div>
+          </div>
+          <h2>🔹 Major Crops of Maharashtra</h2>
+          <div>
+            <table>
+              <tr>
+                <th>Category</th>
+                <th>Crops</th>
+              </tr>
+              <tr>
+                <td>Cereals</td>
+                <td>Jowar (Sorghum), Bajra (Pearl Millet), Rice 🍚, Wheat 🌾</td>
+              </tr>
+              <tr>
+                <td>Cash Crops</td>
+                <td>Sugarcane, Cotton, Tobacco, Turmeric</td>
+              </tr>
+              <tr>
+                <td>Pulses</td>
+                <td>Tur (Pigeon Pea), Gram, Moong Dal</td>
+              </tr>
+              <tr>
+                <td>Vegetables</td>
+                <td>Onions 🧅, Tomatoes 🍅, Brinjal, Okra, Potatoes 🥔</td>
+              </tr>
+              <tr>
+                <td>Fruits</td>
+                <td>Alphonso Mangoes 🥭, Grapes 🍇, Oranges 🍊 (Nagpur), Strawberries 🍓 (Mahabaleshwar), Bananas 🍌</td>
+              </tr>
+              <tr>
+                <td>Oilseeds</td>
+                <td>Groundnut, Sunflower 🌻, Soybean</td>
+              </tr>
+              <tr>
+                <td>Spices</td>
+                <td>Turmeric, Chillies 🌶️, Coriander</td>
+              </tr>
+              <tr>
+                <td>Flowers</td>
+                <td>Roses 🌹, Marigold, Jasmine 🌼 (For festivals and export)</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Special Agricultural Products</h3>
+                <ul>
+                  <li>Alphonso Mangoes 🥭 (Ratnagiri & Sindhudurg - GI tagged).</li>
+                  <li>Nashik Grapes 🍇 (Wine production and table grapes).</li>
+                  <li>Nagpur Oranges 🍊 (Famous for sweetness and quality).</li>
+                  <li>Mahabaleshwar Strawberries 🍓 (Hill station specialty).</li>
+                </ul>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Alphonso_Mango.jpg" alt="" style="height:200px;width: 200px;">
+
+              </div>
+            </div>
+          </div><br>
+          <hr>
+          <div class="box" style=" background: #f3b37185;padding: 10px;">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3> Sustainable Agriculture & Modern Trends 🌾</h3>
+                  <ul>
+                    <li><b>Organic Farming:</b> Growing in Nashik, Pune, and Konkan regions.</li>
+                    <li><b>Drip Irrigation:</b> Maharashtra is a pioneer in water conservation techniques.</li>
+                    <li><b>Horticulture:</b> Maharashtra is India's leading state in fruit production and export.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Nashik_Vineyards.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Maharashtra is a paradise for both nature lovers and agricultural enthusiasts. It has rich wildlife sanctuaries, lush vineyards, and fertile farmlands that support a diverse ecosystem and economy.</p>
+          <br><br>
+        </div>
+        <div id="wbedu" class="tab-pane fade in active" style="background-color: white;">
+          <h1>🎓 Education & Institutions in Maharashtra</h1>
+          <p>Maharashtra has a rich educational heritage with some of India's oldest and most prestigious universities, research institutions, and schools. It remains a major hub for higher education, science, technology, and literature.</p>
+
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>📌 Education System in Maharashtra</h3>
+                  <ul>
+                    <li><b>School Education:</b> Follows Maharashtra State Board, CBSE, ICSE, and IB curricula.</li>
+                    <li><b>Higher Education:</b> Managed by UGC, AICTE, and state universities.</li>
+                    <li><b>Major Fields:</b> Engineering, Medical, Science, Arts, Commerce, Law, Agriculture, and Management.</li>
+                  </ul>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Maharashtra_State_Board_of_Secondary_and_Higher_Secondary_Education.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <h2>🏛️ Top Universities & Institutions </h2>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Central Universities</h3>
+                <ol>
+                  <li><b>University of Mumbai -</b> One of India's oldest universities, established in 1857.</li>
+                  <li><b>Savitribai Phule Pune University -</b> Founded in 1949, known for research and academic excellence.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Mumbai_University.jpg" alt="" style="height:200px;width: 230px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 State Universities</h3>
+                <ol>
+                  <li><b>University of Mumbai -</b> One of India's oldest and most prestigious universities.</li>
+                  <li><b>Savitribai Phule Pune University -</b> Ranked among India's best for research and academics.</li>
+                  <li><b>Dr. Babasaheb Ambedkar Marathwada University -</b> Major university in Aurangabad.</li>
+                  <li><b>Rashtrasant Tukadoji Maharaj Nagpur University -</b> Leading university in Vidarbha region.</li>
+                  <li><b>Shivaji University -</b> Major university in Kolhapur.</li>
+                  <li><b>Sant Gadge Baba Amravati University -</b> Serves the Amravati region.</li>
+                  <li><b>SNDT Women's University -</b> First women's university in India.</li>
+                  <li><b>Dr. Babasaheb Ambedkar Technological University -</b> Technical university in Lonere.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Savitribai_Phule_Pune_University.jpg" alt="" style="height:200px;width: 230px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>University</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>University of Mumbai</td>
+                <td>Mumbai</td>
+                <td>One of the oldest universities in India (1857), top-ranked for research & humanities.</td>
+              </tr>
+              <tr>
+                <td>Savitribai Phule Pune University</td>
+                <td>Pune</td>
+                <td>Research, Science, Humanities, and Management.</td>
+              </tr>
+              <tr>
+                <td>IIT Bombay</td>
+                <td>Mumbai</td>
+                <td>Premier engineering institute, ranked among the top in India.</td>
+              </tr>
+              <tr>
+                <td>TISS (Tata Institute of Social Sciences)</td>
+                <td>Mumbai</td>
+                <td>Social Sciences, Social Work, and Public Policy.</td>
+              </tr>
+              <tr>
+                <td>IISER Pune</td>
+                <td>Pune</td>
+                <td>Research in Basic Sciences.</td>
+              </tr>
+              <tr>
+                <td>IIM Nagpur</td>
+                <td>Nagpur</td>
+                <td>Management Education.</td>
+              </tr>
+              <tr>
+                <td>FTII (Film and Television Institute of India)</td>
+                <td>Pune</td>
+                <td>Film Making, Acting, and Media Studies.</td>
+              </tr>
+              <tr>
+                <td>SNDT Women's University</td>
+                <td>Mumbai</td>
+                <td>First women's university in India.</td>
+              </tr>
+              <tr>
+                <td>ICT (Institute of Chemical Technology)</td>
+                <td>Mumbai</td>
+                <td>Chemical Engineering and Technology.</td>
+              </tr>
+            </table>
+          </div>
+          <br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/en/d/d7/IIT_Bombay_Logo.svg" alt="" style="height:200px;width: 240px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🔹 IITs, IIMs & Other Premier Institutes</h3>
+                  <ol>
+                    <li><b>IIT Bombay -</b> One of India's top engineering institutes, established in 1958.</li>
+                    <li><b>IIM Nagpur -</b> Leading management institute.</li>
+                    <li><b>TISS (Tata Institute of Social Sciences) -</b> Premier institute for social sciences and social work.</li>
+                    <li><b>FTII (Film and Television Institute of India) -</b> India's leading film school in Pune.</li>
+                    <li><b>IISER Pune -</b> Research-focused institute for basic sciences.</li>
+                  </ol>
+                </div>
+
+                <br><br>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Institute</th>
+                <th>Location</th>
+                <th>Specialization</th>
+              </tr>
+              <tr>
+                <td>IIT Bombay</td>
+                <td>Mumbai</td>
+                <td>Engineering, Technology, and Research.</td>
+              </tr>
+              <tr>
+                <td>COEP (College of Engineering, Pune)</td>
+                <td>Pune</td>
+                <td>One of the oldest engineering colleges in Asia (est. 1854).</td>
+              </tr>
+              <tr>
+                <td>VJTI (Veermata Jijabai Technological Institute)</td>
+                <td>Mumbai</td>
+                <td>Engineering and Technology (est. 1887).</td>
+              </tr>
+              <tr>
+                <td>ICT (Institute of Chemical Technology)</td>
+                <td>Mumbai</td>
+                <td>Chemical Engineering and Technology.</td>
+              </tr>
+              <tr>
+                <td>MIT Pune</td>
+                <td>Pune</td>
+                <td>Engineering, Design, and Management.</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+
+                  <h3>🔹 Medical Colleges</h3>
+                  <ol>
+                    <li><b>Grant Medical College & Sir JJ Hospital -</b> One of India's oldest medical colleges (est. 1845).</li>
+                    <li><b>KEM Hospital & Seth GS Medical College -</b> Premier medical institution in Mumbai.</li>
+                    <li><b>BJ Medical College -</b> Leading medical college in Pune.</li>
+                    <li><b>AIIMS Nagpur -</b> New addition to India's premier medical institutes.</li>
+                  </ol>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/5/5d/Grant_Medical_College.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Medical College</th>
+                <th>Location</th>
+                <th>Famous For</th>
+              </tr>
+              <tr>
+                <td>Grant Medical College & Sir JJ Hospital</td>
+                <td>Mumbai</td>
+                <td>One of the oldest medical colleges in India (1845).</td>
+              </tr>
+              <tr>
+                <td>KEM Hospital & Seth GS Medical College</td>
+                <td>Mumbai</td>
+                <td>Research, Clinical Excellence, and Medical Education.</td>
+              </tr>
+              <tr>
+                <td>BJ Medical College</td>
+                <td>Pune</td>
+                <td>Medical Education and Research.</td>
+              </tr>
+              <tr>
+                <td>AIIMS Nagpur</td>
+                <td>Nagpur</td>
+                <td>New premier medical institute.</td>
+              </tr>
+              <tr>
+                <td>Government Medical College, Nagpur</td>
+                <td>Nagpur</td>
+                <td>Oldest medical college in Vidarbha region.</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <div class="box">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/National_Law_University%2C_Mumbai.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+                <div class="col-sm-8">
+
+                  <h3>🔹 Law, Agriculture, & Other Institutes</h3>
+                  <ul>
+                    <li><b>ILS Law College, Pune -</b> One of India's premier law institutions, established in 1924.</li>
+                    <li><b>Government Law College, Mumbai -</b> Oldest law school in Asia, established in 1855.</li>
+                    <li><b>Maharashtra National Law University, Mumbai -</b> New generation national law university.</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Institute</th>
+                <th>Location</th>
+                <th>Specialization</th>
+              </tr>
+              <tr>
+                <td>ILS Law College</td>
+                <td>Pune</td>
+                <td>One of India's top law colleges with rich heritage.</td>
+              </tr>
+              <tr>
+                <td>Government Law College</td>
+                <td>Mumbai</td>
+                <td>Asia's oldest law school (est. 1855).</td>
+              </tr>
+            </table>
+          </div><br><br>
+          <h2>🏫 School Education in Maharashtra </h2>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+
+                <h3>🔹 Major School Boards</h3>
+                <ol>
+                  <li><b>Maharashtra State Board of Secondary & Higher Secondary Education -</b> Conducts SSC (10th) and HSC (12th) exams.</li>
+                  <li><b>CBSE & ICSE -</b> National boards with many schools across Maharashtra.</li>
+                  <li><b>International Baccalaureate (IB) & Cambridge (IGCSE) -</b> International curricula offered by select schools.</li>
+                </ol>
+
+              </div>
+              <div class="col-sm-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Maharashtra_State_Board_of_Secondary_and_Higher_Secondary_Education.jpg" alt="" style="height:200px;width: 200px;">
+
+              </div>
+            </div>
+          </div><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Cathedral_and_John_Connon_School.jpg" alt="" style="height:200px;width: 230px;">
+
+              </div>
+              <div class="col-sm-8">
+
+                <h3>🔹 Famous Schools in Maharashtra</h3>
+                <ol>
+                  <li><b>The Cathedral & John Connon School (Mumbai) -</b> One of India's oldest and most prestigious schools.</li>
+                  <li><b>Bombay Scottish School -</b> Historic school with excellent academic record.</li>
+                  <li><b>St. Mary's School (Pune) -</b> Leading school with rich heritage.</li>
+                  <li><b>The Bishop's School (Pune) -</b> Historic institution known for discipline and academics.</li>
+                  <li><b>Jnana Prabodhini (Pune) -</b> Known for its unique approach to gifted education.</li>
+                  <li><b>Bhavan's College -</b> Network of quality schools across Maharashtra.</li>
+                </ol>
+
+              </div>
+
+            </div>
+          </div>
+          <div class="box">
+            <h2>🔬 Research & Technological Advancements</h2>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <p>Maharashtra is home to pioneering research institutions in science, technology, and medical fields:</p>
+                  <ol>
+                    <li><b>BARC (Bhabha Atomic Research Centre) -</b> India's premier nuclear research facility.</li>
+                    <li><b>TIFR (Tata Institute of Fundamental Research) -</b> Leading research in mathematics and physics.</li>
+                    <li><b>NCL (National Chemical Laboratory) -</b> Advanced research in chemistry and chemical engineering.</li>
+                  </ol>
+
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/TIFR_Mumbai.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="box">
+            <h2>📚 Other Notable Institutions</h2>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <ol>
+                    <li><b>FTII (Film and Television Institute of India) -</b> India's premier film school. 🎥</li>
+                    <li><b>NIFT Mumbai -</b> Leading fashion design institute.</li>
+                    <li><b>NITIE Mumbai -</b> Specializes in industrial engineering and management.</li>
+                    <li><b>IISER Pune -</b> Research-focused institute for basic sciences.</li>
+                    <li><b>CDAC Pune -</b> Advanced computing research and development.</li>
+                    <li><b>IUCAA Pune -</b> Research in astronomy and astrophysics.</li>
+                  </ol>
+                </div>
+                <div class="col-sm-4">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/FTII_Pune.jpg" alt="" style="height:200px;width: 200px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <p>Maharashtra continues to be one of India's top educational hubs, producing leaders, scholars, scientists, and entrepreneurs. Whether in engineering, medicine, law, arts, or business, the state offers world-class institutions.</p>
+        </div>
+        <br><br>
+
+      </div>
+
+
+    </div>
+  </div>
+  </div>
+
+  {% endblock %}

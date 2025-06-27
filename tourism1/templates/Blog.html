@@ -1,0 +1,976 @@
+{% extends "base.html" %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Custom CSS -->
+    <style>
+        .bo {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        .header-section {
+            text-align: center;
+            padding: 40px 20px;
+            background: #4ddde8;
+        }
+        .header-section h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: #333;
+        }
+        .header-section p {
+            font-size: 1.1rem;
+            color: #666;
+        }
+        .blog-section {
+            padding: 40px 20px;
+        }
+        .blog-card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            background: #fff;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeInUp 0.5s ease-out;
+            animation-fill-mode: both;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .blog-card:nth-child(1) { animation-delay: 0.1s; }
+        .blog-card:nth-child(2) { animation-delay: 0.2s; }
+        .blog-card:nth-child(3) { animation-delay: 0.3s; }
+        .blog-card:nth-child(4) { animation-delay: 0.4s; }
+        .blog-card:nth-child(5) { animation-delay: 0.5s; }
+        .blog-card:nth-child(6) { animation-delay: 0.6s; }
+        .blog-card:nth-child(7) { animation-delay: 0.7s; }
+        .blog-card:nth-child(8) { animation-delay: 0.8s; }
+        .blog-card:nth-child(9) { animation-delay: 0.9s; }
+        .blog-card:nth-child(10) { animation-delay: 1.0s; }
+        .blog-card:nth-child(11) { animation-delay: 1.1s; }
+        .blog-card:nth-child(12) { animation-delay: 1.2s; }
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        .blog-card img {
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .blog-card:hover img {
+            transform: scale(1.05);
+        }
+        .blog-card .card-body {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .blog-card .card-meta {
+            font-size: 0.9rem;
+            color: #999;
+            margin-bottom: 10px;
+        }
+        .blog-card .card-meta i {
+            margin-right: 5px;
+        }
+        .blog-card .card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: #333;
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
+        }
+        .blog-card:hover .card-title {
+            color: #007bff;
+        }
+        .blog-card .card-text {
+            color: #555;
+            font-size: 0.95rem;
+            flex-grow: 1;
+        }
+        .blog-card .btn {
+            color: #007bff;
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .blog-card .btn:hover {
+            color: #0056b3;
+        }
+        .modal-content {
+            border-radius: 15px;
+            border: none;
+            animation: fadeInUp 0.3s ease-out;
+        }
+        .modal-header {
+            background: linear-gradient(90deg, #007bff, #00c4b4);
+            color: white;
+            border-radius: 15px 15px 0 0;
+        }
+        .modal-body img {
+            border-radius: 10px;
+            max-height: 300px;
+            object-fit: cover;
+        }
+        .modal-body h3 {
+            font-family: 'Playfair Display', serif;
+            color: #333;
+        }
+        .modal-body h4 {
+            color: #007bff;
+            margin-top: 20px;
+        }
+        .modal-body p {
+            color: #555;
+        }
+        .modal-body .info-item {
+            margin-bottom: 10px;
+        }
+        .modal-body .info-item i {
+            margin-right: 8px;
+            color: #007bff;
+        }
+        .modal-body ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .modal-body ul li {
+            margin-bottom: 10px;
+        }
+        .modal-body ul li i {
+            margin-right: 8px;
+            color: #007bff;
+        }
+        .add-blog-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: #28a745;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 100;
+            transition: background-color 0.3s ease;
+        }
+        .add-blog-btn:hover {
+            background-color: #218838;
+        }
+        .form-label {
+            font-weight: 500;
+            color: #333;
+        }
+        .form-control {
+            border-radius: 10px;
+            border: 1px solid #ced4da;
+            padding: 10px;
+        }
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+        }
+        #blogImagePreview {
+            margin-top: 10px;
+            max-width: 200px;
+            border-radius: 10px;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<div class="bo">
+    
+    <!-- Header Section -->
+    <section class="header-section">
+        <br><br><br>
+        <h1>Travel Blog</h1>
+        <p>Insights, tips, and stories to inspire your Indian adventures</p>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="blog-section">
+        <div class="container">
+            <div class="row" id="blogContainer">
+                <!-- Blog Card 1 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card blog-card" data-blog="travel-tips">
+                        <img src="https://images.unsplash.com/photo-1554877173-9e70c51d332b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Travel Tips">
+                        <div class="card-body">
+                            <div class="card-meta">
+                                <i class="far fa-calendar-alt"></i> March 15, 2023
+                                <i class="far fa-user ml-2"></i> Admin
+                            </div>
+                            <h5 class="card-title">10 Essential Tips for First-Time Travelers to India</h5>
+                            <p class="card-text">Navigate India like a pro with these insider tips on transportation, accommodation, food safety, and cultural etiquette.</p>
+                            <a href="#" class="btn mt-auto">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog Card 2 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card blog-card" data-blog="festivals">
+                        <img src="https://images.unsplash.com/photo-1667572737639-0aa4f798ff98?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Festivals">
+                        <div class="card-body">
+                            <div class="card-meta">
+                                <i class="far fa-calendar-alt"></i> February 28, 2023
+                                <i class="far fa-user ml-2"></i> Admin
+                            </div>
+                            <h5 class="card-title">Ultimate Guide to India's Colorful Festivals</h5>
+                            <p class="card-text">Plan your trip around India's vibrant festivals like Diwali, Holi, Pongal, and Durga Puja for an authentic cultural experience.</p>
+                            <a href="#" class="btn mt-auto">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog Card 3 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card blog-card" data-blog="food-journey">
+                        <img src="https://images.unsplash.com/photo-1678781416302-d59ed9ed46d0?q=80&w=1920&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Food Journey">
+                        <div class="card-body">
+                            <div class="card-meta">
+                                <i class="far fa-calendar-alt"></i> January 10, 2023
+                                <i class="far fa-user ml-2"></i> Admin
+                            </div>
+                            <h5 class="card-title">A Foodie's Journey Through India's Regional Cuisines</h5>
+                            <p class="card-text">Embark on a culinary adventure across India, exploring the diverse flavors, spices, and cooking techniques of each region.</p>
+                            <a href="#" class="btn mt-auto">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog Card 4 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card blog-card" data-blog="taj-mahal">
+                        <img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?q=80&w=2070" class="card-img-top" alt="Taj Mahal">
+                        <div class="card-body">
+                            <div class="card-meta">
+                                <i class="far fa-calendar-alt"></i> April 1, 2023
+                                <i class="far fa-user ml-2"></i> Admin
+                            </div>
+                            <h5 class="card-title">Exploring the Taj Mahal: A Timeless Wonder</h5>
+                            <p class="card-text">Discover the history, architecture, and tips for visiting the iconic Taj Mahal in Agra, a UNESCO World Heritage Site.</p>
+                            <a href="#" class="btn mt-auto">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog Card 5 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card blog-card" data-blog="varanasi-spirituality">
+                        <img src="https://images.unsplash.com/photo-1585116938581-9d993839191c?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Varanasi">
+                        <div class="card-body">
+                            <div class="card-meta">
+                                <i class="far fa-calendar-alt"></i> May 12, 2023
+                                <i class="far fa-user ml-2"></i> Admin
+                            </div>
+                            <h5 class="card-title">Spiritual Varanasi: A Journey to the Ganges</h5>
+                            <p class="card-text">Experience the spiritual essence of Varanasi with its sacred Ganga Aarti, ancient ghats, and timeless traditions.</p>
+                            <a href="#" class="btn mt-auto">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog Card 6 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card blog-card" data-blog="jaipur-heritage">
+                        <img src="https://images.unsplash.com/photo-1603262110263-fb0112e7cc33?q=80&w=2071" class="card-img-top" alt="Jaipur">
+                        <div class="card-body">
+                            <div class="card-meta">
+                                <i class="far fa-calendar-alt"></i> June 5, 2023
+                                <i class="far fa-user ml-2"></i> Admin
+                            </div>
+                            <h5 class="card-title">Jaipur: Unraveling the Pink City's Royal Heritage</h5>
+                            <p class="card-text">Dive into the rich history of Jaipur, exploring its palaces, forts, and vibrant markets filled with culture.</p>
+                            <a href="#" class="btn mt-auto">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog Card 7 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card blog-card" data-blog="kerala-backwaters">
+                        <img src="https://images.unsplash.com/photo-1593693397690-362cb9666fc2?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Kerala Backwaters">
+                        <div class="card-body">
+                            <div class="card-meta">
+                                <i class="far fa-calendar-alt"></i> July 20, 2023
+                                <i class="far fa-user ml-2"></i> Admin
+                            </div>
+                            <h5 class="card-title">Sailing Through Kerala's Enchanting Backwaters</h5>
+                            <p class="card-text">A serene journey through Kerala's backwaters, with houseboat stays, lush greenery, and local cuisine.</p>
+                            <a href="#" class="btn mt-auto">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog Card 8 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card blog-card" data-blog="hampi-ruins">
+                        <img src="https://images.unsplash.com/photo-1600100397608-f010f423b971?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Hampi Ruins">
+                        <div class="card-body">
+                            <div class="card-meta">
+                                <i class="far fa-calendar-alt"></i> August 15, 2023
+                                <i class="far fa-user ml-2"></i> Admin
+                            </div>
+                            <h5 class="card-title">Hampi: Exploring the Ruins of a Forgotten Empire</h5>
+                            <p class="card-text">Step back in time as you explore the ancient ruins of Hampi, a UNESCO World Heritage Site with stunning architecture.</p>
+                            <a href="#" class="btn mt-auto">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog Card 9 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card blog-card" data-blog="amritsar-culture">
+                        <img src="https://images.unsplash.com/photo-1583821017783-4333717df070?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Amritsar">
+                        <div class="card-body">
+                            <div class="card-meta">
+                                <i class="far fa-calendar-alt"></i> September 10, 2023
+                                <i class="far fa-user ml-2"></i> Admin
+                            </div>
+                            <h5 class="card-title">Amritsar: A Cultural Odyssey at the Golden Temple</h5>
+                            <p class="card-text">Discover the spiritual and cultural heart of Amritsar, from the Golden Temple to the Wagah Border Ceremony.</p>
+                            <a href="#" class="btn mt-auto">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog Card 10 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card blog-card" data-blog="madurai-temples">
+                        <img src="https://plus.unsplash.com/premium_photo-1697730433023-c5fcff0506ee?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Madurai Temples">
+                        <div class="card-body">
+                            <div class="card-meta">
+                                <i class="far fa-calendar-alt"></i> October 5, 2023
+                                <i class="far fa-user ml-2"></i> Admin
+                            </div>
+                            <h5 class="card-title">Madurai: The City of Temples and Traditions</h5>
+                            <p class="card-text">Explore the ancient city of Madurai, known for the Meenakshi Amman Temple and its rich Dravidian heritage.</p>
+                            <a href="#" class="btn mt-auto">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog Card 11 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card blog-card" data-blog="kolkata-arts">
+                        <img src="https://images.unsplash.com/photo-1597220397294-0d95abb2031c?q=80&w=1974" class="card-img-top" alt="Kolkata Arts">
+                        <div class="card-body">
+                            <div class="card-meta">
+                                <i class="far fa-calendar-alt"></i> November 1, 2023
+                                <i class="far fa-user ml-2"></i> Admin
+                            </div>
+                            <h5 class="card-title">Kolkata: A Hub of Art, Literature, and Culture</h5>
+                            <p class="card-text">Immerse yourself in Kolkata's vibrant arts scene, colonial architecture, and literary heritage.</p>
+                            <a href="#" class="btn mt-auto">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog Card 12 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card blog-card" data-blog="mysore-palace">
+                        <img src="https://images.unsplash.com/photo-1590766940554-634a7ed41450?q=80&w=1998" class="card-img-top" alt="Mysore Palace">
+                        <div class="card-body">
+                            <div class="card-meta">
+                                <i class="far fa-calendar-alt"></i> December 15, 2023
+                                <i class="far fa-user ml-2"></i> Admin
+                            </div>
+                            <h5 class="card-title">Mysore: The Grandeur of the Palace and Dasara</h5>
+                            <p class="card-text">Experience the royal charm of Mysore, from its opulent palace to the grand Dasara festival celebrations.</p>
+                            <a href="#" class="btn mt-auto">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Modal -->
+    <div class="modal fade" id="blogModal" tabindex="-1" aria-labelledby="blogModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="blogModalLabel">Blog Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="blog-detail-content">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <img src="" alt="" class="img-fluid blog-image">
+                            </div>
+                            <div class="col-md-6">
+                                <h3 class="blog-name"></h3>
+                                <p class="blog-description"></p>
+                                <div class="blog-info">
+                                    <div class="info-item">
+                                        <i class="far fa-calendar-alt"></i>
+                                        <span class="publish-date"></span>
+                                    </div>
+                                    <div class="info-item">
+                                        <i class="far fa-user"></i>
+                                        <span class="author"></span>
+                                    </div>
+                                    <div class="info-item">
+                                        <i class="fas fa-book"></i>
+                                        <span class="subject"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <h4>Introduction</h4>
+                                <p class="blog-introduction"></p>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <h4>Key Highlights</h4>
+                                <p class="blog-highlights"></p>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <h4>Key Points</h4>
+                                <ul class="key-points"></ul>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <h4>Travel Tips</h4>
+                                <ul class="travel-tips"></ul>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <h4>Conclusion</h4>
+                                <p class="blog-conclusion"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Blog Modal -->
+    <div class="modal fade" id="addBlogModal" tabindex="-1" aria-labelledby="addBlogModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addBlogModalLabel">Add New Blog</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addBlogForm">
+                        <div class="mb-3">
+                            <label for="blogTitle" class="form-label">Blog Title</label>
+                            <input type="text" class="form-control" id="blogTitle" placeholder="Enter blog title" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="blogSubject" class="form-label">Blog Subject</label>
+                            <input type="text" class="form-control" id="blogSubject" placeholder="Enter blog subject" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="blogImage" class="form-label">Upload Image</label>
+                            <input type="file" class="form-control" id="blogImage" accept="image/*" required>
+                            <img id="blogImagePreview" src="" alt="Image Preview" style="display: none;">
+                        </div>
+                        <div class="mb-3">
+                            <label for="blogContent" class="form-label">Blog Content</label>
+                            <textarea class="form-control" id="blogContent" rows="4" placeholder="Enter blog description" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Blog Button -->
+    <div class="add-blog-btn" data-bs-toggle="modal" data-bs-target="#addBlogModal">
+        <i class="fas fa-plus"></i>
+    </div>
+
+</div>
+    
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Blog data
+        const blogs = {
+            'travel-tips': {
+                name: '10 Essential Tips for First-Time Travelers to India',
+                image: 'https://images.unsplash.com/photo-1564507592333-c60657eea523?q=80&w=2070',
+                description: 'Navigate India like a pro with these insider tips on transportation, accommodation, food safety, and cultural etiquette.',
+                publishDate: 'March 15, 2023',
+                author: 'Admin',
+                subject: 'Travel Tips',
+                introduction: 'Traveling to India for the first time can be an exhilarating yet challenging experience. The country’s vibrant culture, bustling cities, and diverse landscapes make it a unique destination. However, the sheer scale of India can be overwhelming for first-time visitors. This blog provides 10 essential tips to help you navigate India with confidence, covering transportation, accommodation, food safety, and cultural etiquette.',
+                highlights: 'From navigating chaotic traffic to respecting local customs, these tips will ensure a smooth and enjoyable journey. Learn how to travel safely, eat wisely, and immerse yourself in India’s rich culture without feeling overwhelmed.',
+                keyPoints: [
+                    'Plan your transportation: Use trains for long distances and autorickshaws for short trips.',
+                    'Book accommodations in advance, especially during peak seasons.',
+                    'Stay cautious with food: Opt for bottled water and avoid street food if you have a sensitive stomach.',
+                    'Dress appropriately to respect local culture, especially at religious sites.',
+                    'Learn basic Hindi phrases to communicate with locals.'
+                ],
+                travelTips: [
+                    'Carry a small first-aid kit and hand sanitizer.',
+                    'Always negotiate fares with autorickshaw drivers.',
+                    'Keep a photocopy of your passport and visa.',
+                    'Avoid traveling alone at night in unfamiliar areas.',
+                    'Use apps like Google Maps for navigation.'
+                ],
+                conclusion: 'With these tips, your first trip to India can be a memorable and hassle-free experience. Embrace the chaos, soak in the culture, and enjoy the journey!'
+            },
+            'festivals': {
+                name: 'Ultimate Guide to India\'s Colorful Festivals',
+                image: 'https://images.unsplash.com/photo-1592292058790-6cc9b9f7e8f3?q=80&w=2070',
+                description: 'Plan your trip around India\'s vibrant festivals like Diwali, Holi, Pongal, and Durga Puja for an authentic cultural experience.',
+                publishDate: 'February 28, 2023',
+                author: 'Admin',
+                subject: 'Festivals',
+                introduction: 'India is a land of festivals, where every season brings a new celebration filled with color, music, and joy. From the lights of Diwali to the colors of Holi, these festivals offer a deep dive into India’s cultural heritage. This guide helps you plan your trip around some of India’s most vibrant festivals, ensuring an authentic and unforgettable experience.',
+                highlights: 'Discover the significance of Diwali, Holi, Pongal, and Durga Puja, along with the best places to experience them. Learn about the traditions, foods, and rituals that make these festivals so special, and get practical tips for participating as a traveler.',
+                keyPoints: [
+                    'Diwali: Festival of Lights, best experienced in Jaipur or Varanasi.',
+                    'Holi: Festival of Colors, celebrated vibrantly in Mathura and Vrindavan.',
+                    'Pongal: Harvest festival, most authentic in Tamil Nadu.',
+                    'Durga Puja: Major festival in Kolkata, known for grand pandals and celebrations.',
+                    'Book accommodations early as festivals attract large crowds.'
+                ],
+                travelTips: [
+                    'Dress in traditional attire to blend in during festivals.',
+                    'Carry earplugs for noisy celebrations like Diwali.',
+                    'Be prepared for crowded public transport during festival times.',
+                    'Respect local customs, especially during religious rituals.',
+                    'Capture the moments but avoid using flash photography in sacred spaces.'
+                ],
+                conclusion: 'India’s festivals are a celebration of life and culture. By planning your trip around these events, you’ll experience the heart and soul of the country in its most vibrant form.'
+            },
+            'food-journey': {
+                name: 'A Foodie\'s Journey Through India\'s Regional Cuisines',
+                image: 'https://images.unsplash.com/photo-1606492033469-c6c9e75d77a2?q=80&w=2070',
+                description: 'Embark on a culinary adventure across India, exploring the diverse flavors, spices, and cooking techniques of each region.',
+                publishDate: 'January 10, 2023',
+                author: 'Admin',
+                subject: 'Food',
+                introduction: 'India’s culinary landscape is as diverse as its culture, with each region offering a unique palette of flavors, spices, and cooking techniques. From the fiery curries of the north to the coconut-infused dishes of the south, this blog takes you on a foodie’s journey through India’s regional cuisines, highlighting must-try dishes and where to find them.',
+                highlights: 'Explore the rich flavors of North Indian curries, South Indian dosas, East Indian sweets, and West Indian seafood. Learn about the spices that define Indian cuisine, the regional cooking techniques, and the best places to savor authentic dishes.',
+                keyPoints: [
+                    'North India: Try butter chicken and naan in Delhi.',
+                    'South India: Savor dosas and idlis in Chennai.',
+                    'East India: Don’t miss Bengali sweets like rasgulla in Kolkata.',
+                    'West India: Enjoy seafood and pav bhaji in Mumbai.',
+                    'Be prepared for spice levels and ask for milder flavors if needed.'
+                ],
+                travelTips: [
+                    'Always ask for recommendations from locals for the best food joints.',
+                    'Carry antacids if you’re trying spicy dishes for the first time.',
+                    'Look for restaurants with good hygiene ratings.',
+                    'Try regional thalis for a taste of multiple dishes in one meal.',
+                    'Pair your meals with local beverages like lassi or coconut water.'
+                ],
+                conclusion: 'India’s regional cuisines offer a feast for the senses. Whether you’re a spice lover or prefer milder flavors, there’s something for every palate in this culinary journey.'
+            },
+            'taj-mahal': {
+                name: 'Exploring the Taj Mahal: A Timeless Wonder',
+                image: 'https://images.unsplash.com/photo-1564507592333-c60657eea523?q=80&w=2070',
+                description: 'Discover the history, architecture, and tips for visiting the iconic Taj Mahal in Agra, a UNESCO World Heritage Site.',
+                publishDate: 'April 1, 2023',
+                author: 'Admin',
+                subject: 'Monuments',
+                introduction: 'The Taj Mahal, a stunning white marble mausoleum in Agra, is one of the most iconic landmarks in the world. Built by Emperor Shah Jahan in memory of his wife Mumtaz Mahal, this UNESCO World Heritage Site is a testament to love and architectural brilliance. This blog explores the history, architecture, and practical tips for visiting the Taj Mahal.',
+                highlights: 'Learn about the Mughal architecture that makes the Taj Mahal a masterpiece, its historical significance, and the best times to visit for an unforgettable experience. Discover how to capture the perfect photo and what to expect during your visit.',
+                keyPoints: [
+                    'Built between 1632 and 1653 by Emperor Shah Jahan.',
+                    'A UNESCO World Heritage Site and one of the Seven Wonders of the World.',
+                    'Known for its symmetrical design and white marble structure.',
+                    'Best viewed at sunrise for a magical experience.',
+                    'The Taj Museum offers insights into its history.'
+                ],
+                travelTips: [
+                    'Visit early in the morning to avoid crowds.',
+                    'Wear comfortable shoes as you’ll need to remove them inside.',
+                    'Hire a licensed guide for a detailed tour.',
+                    'Bring a hat and sunscreen for protection from the sun.',
+                    'Photography is allowed, but drones are prohibited.'
+                ],
+                conclusion: 'The Taj Mahal is more than just a monument; it’s a symbol of eternal love and architectural genius. A visit here will leave you in awe of its beauty and history.'
+            },
+            'varanasi-spirituality': {
+                name: 'Spiritual Varanasi: A Journey to the Ganges',
+                image: 'https://images.unsplash.com/photo-1592292058790-6cc9b9f7e8f3?q=80&w=2070',
+                description: 'Experience the spiritual essence of Varanasi with its sacred Ganga Aarti, ancient ghats, and timeless traditions.',
+                publishDate: 'May 12, 2023',
+                author: 'Admin',
+                subject: 'Spirituality',
+                introduction: 'Varanasi, one of the oldest living cities in the world, is the spiritual heart of India. Known as Kashi, it is a place where life and death converge on the banks of the sacred Ganges River. This blog takes you on a journey through Varanasi’s spiritual essence, from the mesmerizing Ganga Aarti to its ancient ghats and temples.',
+                highlights: 'Discover the spiritual significance of Varanasi, the rituals that define its daily life, and the best ways to experience its sacred traditions. Learn about the ghats, temples, and the Ganga Aarti ceremony that draws thousands of visitors every day.',
+                keyPoints: [
+                    'Varanasi is over 3,000 years old, mentioned in ancient texts like the Rigveda.',
+                    'The Ganga Aarti at Dashashwamedh Ghat is a must-see evening ritual.',
+                    'Visit the Kashi Vishwanath Temple, one of the holiest Shiva temples.',
+                    'Explore the ghats like Manikarnika and Assi for a glimpse of local life.',
+                    'Take a sunrise boat ride on the Ganges for a serene experience.'
+                ],
+                travelTips: [
+                    'Dress modestly when visiting temples and ghats.',
+                    'Hire a local guide to understand the significance of each ghat.',
+                    'Be respectful during cremation ceremonies at Manikarnika Ghat.',
+                    'Bargain for boat ride prices to get a fair deal.',
+                    'Visit Sarnath, a nearby Buddhist site, for a day trip.'
+                ],
+                conclusion: 'Varanasi is a city that touches the soul. Its spiritual energy, ancient traditions, and the sacred Ganges make it a destination like no other.'
+            },
+            'jaipur-heritage': {
+                name: 'Jaipur: Unraveling the Pink City\'s Royal Heritage',
+                image: 'https://images.unsplash.com/photo-1603262110263-fb0112e7cc33?q=80&w=2071',
+                description: 'Dive into the rich history of Jaipur, exploring its palaces, forts, and vibrant markets filled with culture.',
+                publishDate: 'June 5, 2023',
+                author: 'Admin',
+                subject: 'Heritage',
+                introduction: 'Jaipur, known as the Pink City, is a vibrant blend of royal heritage and modern charm. Founded in 1727 by Maharaja Sawai Jai Singh II, the city is famous for its magnificent palaces, forts, and bustling markets. This blog delves into Jaipur’s rich history, architectural marvels, and cultural experiences that make it a must-visit destination.',
+                highlights: 'Explore the grandeur of Amber Fort, the elegance of City Palace, and the unique architecture of Hawa Mahal. Learn about Jaipur’s royal history, its vibrant markets, and the best local dishes to try during your visit.',
+                keyPoints: [
+                    'Amber Fort is a stunning example of Rajput architecture.',
+                    'Hawa Mahal, or Palace of Winds, has 953 windows for ventilation.',
+                    'City Palace houses a museum with royal artifacts.',
+                    'Shop for handicrafts and jewelry at Johari Bazaar.',
+                    'Try local dishes like dal baati churma and ghevar.'
+                ],
+                travelTips: [
+                    'Visit Amber Fort early to avoid the heat and crowds.',
+                    'Wear sunglasses and a hat while exploring outdoor sites.',
+                    'Hire a guide to learn about the history of each palace.',
+                    'Bargain at markets to get the best deals on souvenirs.',
+                    'Attend a cultural show at Chokhi Dhani for an authentic Rajasthani experience.'
+                ],
+                conclusion: 'Jaipur’s royal heritage and vibrant culture make it a captivating destination. From its palaces to its markets, the Pink City offers a glimpse into India’s regal past.'
+            },
+            'kerala-backwaters': {
+                name: 'Sailing Through Kerala\'s Enchanting Backwaters',
+                image: 'https://images.unsplash.com/photo-1593691399852-7f2db15ae48e?q=80&w=2070',
+                description: 'A serene journey through Kerala\'s backwaters, with houseboat stays, lush greenery, and local cuisine.',
+                publishDate: 'July 20, 2023',
+                author: 'Admin',
+                subject: 'Nature',
+                introduction: 'Kerala, often called God’s Own Country, is renowned for its serene backwaters—a network of canals, rivers, and lakes fringed by lush greenery. A houseboat journey through these backwaters offers a tranquil escape, blending natural beauty with cultural experiences. This blog guides you through the magic of Kerala’s backwaters, from Alleppey to Kumarakom.',
+                highlights: 'Experience the peace of a houseboat stay, savor authentic Kerala cuisine, and witness the beauty of paddy fields and coconut groves. Learn about the best routes, what to pack, and how to make the most of your backwater journey.',
+                keyPoints: [
+                    'Alleppey (Alappuzha) is the most popular backwater destination.',
+                    'Houseboats offer a unique stay with modern amenities.',
+                    'Kumarakom is ideal for birdwatching at the Kumarakom Bird Sanctuary.',
+                    'Try Kerala dishes like karimeen fry and appam with stew.',
+                    'The backwaters are best explored between September and March.'
+                ],
+                travelTips: [
+                    'Book your houseboat in advance, especially during peak season.',
+                    'Pack light clothing and insect repellent.',
+                    'Opt for a houseboat with an upper deck for better views.',
+                    'Ask for a stop at a local village to experience rural life.',
+                    'Carry a camera to capture the stunning landscapes.'
+                ],
+                conclusion: 'Kerala’s backwaters offer a serene and unforgettable experience. Whether you’re seeking relaxation or cultural immersion, this journey will leave you refreshed and inspired.'
+            },
+            'hampi-ruins': {
+                name: 'Hampi: Exploring the Ruins of a Forgotten Empire',
+                image: 'https://images.unsplash.com/photo-1593691399852-7f2db15ae48e?q=80&w=2070',
+                description: 'Step back in time as you explore the ancient ruins of Hampi, a UNESCO World Heritage Site with stunning architecture.',
+                publishDate: 'August 15, 2023',
+                author: 'Admin',
+                subject: 'History',
+                introduction: 'Hampi, a UNESCO World Heritage Site in Karnataka, was once the thriving capital of the Vijayanagar Empire. Today, its ruins tell the story of a forgotten empire, with ancient temples, palaces, and bazaars scattered across a surreal landscape. This blog takes you through Hampi’s historical significance, key sites, and tips for exploring this archaeological wonder.',
+                highlights: 'Discover the architectural marvels of Virupaksha Temple, the Stone Chariot at Vittala Temple, and the panoramic views from Matanga Hill. Learn about the history of the Vijayanagar Empire and how to navigate Hampi’s sprawling ruins.',
+                keyPoints: [
+                    'Hampi was the capital of the Vijayanagar Empire from the 14th to 16th centuries.',
+                    'Virupaksha Temple is a functioning temple and a UNESCO site.',
+                    'The Stone Chariot at Vittala Temple is an iconic structure.',
+                    'Matanga Hill offers the best sunrise views over Hampi.',
+                    'Hampi Bazaar is a historic market area now popular with tourists.'
+                ],
+                travelTips: [
+                    'Rent a bicycle to explore the sprawling ruins at your own pace.',
+                    'Wear sturdy shoes as the terrain can be rocky.',
+                    'Visit the Archaeological Museum for historical context.',
+                    'Stay hydrated and carry a hat for sun protection.',
+                    'Attend the Hampi Festival in November for cultural performances.'
+                ],
+                conclusion: 'Hampi’s ruins are a window into India’s past, offering a blend of history, architecture, and natural beauty. Exploring this ancient site is like stepping into a different era.'
+            },
+            'amritsar-culture': {
+                name: 'Amritsar: A Cultural Odyssey at the Golden Temple',
+                image: 'https://images.unsplash.com/photo-1587407736932-f189fe97c630?q=80&w=2070',
+                description: 'Discover the spiritual and cultural heart of Amritsar, from the Golden Temple to the Wagah Border Ceremony.',
+                publishDate: 'September 10, 2023',
+                author: 'Admin',
+                subject: 'Culture',
+                introduction: 'Amritsar, in the heart of Punjab, is a city that embodies Sikh culture and history. The Golden Temple, its most iconic landmark, is the holiest shrine in Sikhism, attracting millions of devotees and tourists alike. This blog explores Amritsar’s cultural highlights, including the Golden Temple, the Wagah Border Ceremony, and its culinary delights.',
+                highlights: 'Experience the serenity of the Golden Temple, the patriotic fervor of the Wagah Border Ceremony, and the historical significance of Jallianwala Bagh. Learn about Sikh traditions, the community kitchen (langar), and the best Amritsari dishes to try.',
+                keyPoints: [
+                    'The Golden Temple, built in 1577, is the holiest Sikh shrine.',
+                    'The langar at the Golden Temple serves free meals to thousands daily.',
+                    'The Wagah Border Ceremony is a daily military ritual at the India-Pakistan border.',
+                    'Jallianwala Bagh commemorates the 1919 massacre by British forces.',
+                    'Amritsari kulcha and lassi are must-try local dishes.'
+                ],
+                travelTips: [
+                    'Cover your head and remove shoes before entering the Golden Temple.',
+                    'Volunteer at the langar for a humbling experience.',
+                    'Arrive early at Wagah Border to get a good viewing spot.',
+                    'Visit the Partition Museum to learn about India’s history.',
+                    'Stay in a heritage hotel for an authentic Punjabi experience.'
+                ],
+                conclusion: 'Amritsar is a city that blends spirituality, history, and culture seamlessly. A visit here will leave you with a deeper appreciation for Sikh traditions and India’s vibrant heritage.'
+            },
+            'madurai-temples': {
+                name: 'Madurai: The City of Temples and Traditions',
+                image: 'https://images.unsplash.com/photo-1571142843669-7e6e6d302f55?q=80&w=2070',
+                description: 'Explore the ancient city of Madurai, known for the Meenakshi Amman Temple and its rich Dravidian heritage.',
+                publishDate: 'October 5, 2023',
+                author: 'Admin',
+                subject: 'Temples',
+                introduction: 'Madurai, one of the oldest cities in India, is a cultural and spiritual hub in Tamil Nadu. Known as the ‘City of Temples,’ it is home to the magnificent Meenakshi Amman Temple, a masterpiece of Dravidian architecture. This blog explores Madurai’s ancient temples, traditions, and the vibrant local life that makes it a unique destination.',
+                highlights: 'Discover the architectural brilliance of Meenakshi Amman Temple, the historical significance of Thirumalai Nayak Palace, and the local flavors of Madurai. Learn about the city’s festivals, street food, and how to experience its rich cultural heritage.',
+                keyPoints: [
+                    'Meenakshi Amman Temple is famous for its towering gopurams and intricate carvings.',
+                    'Madurai is over 2,500 years old, ruled by the Pandyas and Nayaks.',
+                    'Thirumalai Nayak Palace showcases Indo-Saracenic architecture.',
+                    'The city is known for its jasmine flowers and silk sarees.',
+                    'Try jiggartanda, a local dessert, and paruthi paal for a unique taste.'
+                ],
+                travelTips: [
+                    'Visit the temple during the evening aarti for a spiritual experience.',
+                    'Wear comfortable footwear as you’ll be walking barefoot in temples.',
+                    'Explore the local markets for traditional handicrafts.',
+                    'Attend the Chithirai Festival in April for cultural festivities.',
+                    'Visit the Gandhi Memorial Museum for historical insights.'
+                ],
+                conclusion: 'Madurai’s temples and traditions offer a glimpse into Tamil Nadu’s rich heritage. This ancient city is a perfect blend of spirituality, history, and local charm.'
+            },
+            'kolkata-arts': {
+                name: 'Kolkata: A Hub of Art, Literature, and Culture',
+                image: 'https://images.unsplash.com/photo-1597220397294-0d95abb2031c?q=80&w=1974',
+                description: 'Immerse yourself in Kolkata\'s vibrant arts scene, colonial architecture, and literary heritage.',
+                publishDate: 'November 1, 2023',
+                author: 'Admin',
+                subject: 'Arts',
+                introduction: 'Kolkata, often called the cultural capital of India, is a city that thrives on art, literature, and history. From its colonial architecture to its literary legacy, Kolkata offers a rich tapestry of experiences for travelers. This blog explores the city’s artistic heritage, iconic landmarks, and the vibrant Durga Puja celebrations.',
+                highlights: 'Discover the literary legacy of Rabindranath Tagore, the colonial charm of Victoria Memorial, and the artistic fervor of Durga Puja. Learn about Kolkata’s street food, cultural festivals, and the best places to experience its vibrant arts scene.',
+                keyPoints: [
+                    'Victoria Memorial is a stunning example of colonial architecture.',
+                    'Kolkata is the birthplace of modern Indian literature, led by Tagore.',
+                    'Durga Puja is the city’s biggest festival, celebrated with grand pandals.',
+                    'Howrah Bridge is an iconic landmark and engineering marvel.',
+                    'Try Bengali dishes like macher jhol and sandesh.'
+                ],
+                travelTips: [
+                    'Visit Kumartuli to see artisans crafting Durga idols.',
+                    'Explore the Indian Museum, one of the oldest museums in the world.',
+                    'Take a tram ride for a nostalgic experience.',
+                    'Visit during Durga Puja (October) for the best cultural experience.',
+                    'Walk along the Hooghly River for scenic views.'
+                ],
+                conclusion: 'Kolkata’s blend of art, literature, and culture makes it a city that inspires. Whether you’re an art lover or a history buff, Kolkata has something to offer everyone.'
+            },
+            'mysore-palace': {
+                name: 'Mysore: The Grandeur of the Palace and Dasara',
+                image: 'https://images.unsplash.com/photo-1590766940554-634a7ed41450?q=80&w=1998',
+                description: 'Experience the royal charm of Mysore, from its opulent palace to the grand Dasara festival celebrations.',
+                publishDate: 'December 15, 2023',
+                author: 'Admin',
+                subject: 'Royalty',
+                introduction: 'Mysore, a city in Karnataka, is synonymous with royalty and tradition. The Mysore Palace, with its opulent interiors, and the grand Dasara festival are the highlights of this cultural hub. This blog takes you through Mysore’s royal heritage, from its palace to its festivals, and offers tips for an enriching visit.',
+                highlights: 'Explore the architectural splendor of Mysore Palace, the vibrant celebrations of Dasara, and the city’s silk and sandalwood markets. Learn about the Wodeyar dynasty, the best time to visit, and how to experience Mysore’s royal charm.',
+                keyPoints: [
+                    'Mysore Palace is one of the grandest palaces in India, built in 1912.',
+                    'Dasara is a 10-day festival celebrated with a grand procession.',
+                    'The city is famous for its silk sarees and sandalwood products.',
+                    'Chamundi Hills offers panoramic views and a historic temple.',
+                    'Brindavan Gardens is known for its musical fountain show.'
+                ],
+                travelTips: [
+                    'Visit the palace on Sundays or during Dasara for the light show.',
+                    'Attend the Dasara procession to see the royal elephant parade.',
+                    'Shop for authentic Mysore silk at government emporiums.',
+                    'Visit the Mysore Zoo, one of the oldest in India.',
+                    'Try Mysore pak, a famous local sweet.'
+                ],
+                conclusion: 'Mysore’s royal grandeur and cultural traditions make it a gem in South India. A visit during Dasara will leave you mesmerized by its festive spirit and heritage.'
+            }
+        };
+
+        // Function to open blog modal
+        function openBlogModal(blogId) {
+            const blog = blogs[blogId];
+            if (!blog) return;
+
+            const modal = document.getElementById('blogModal');
+            const modalTitle = modal.querySelector('.modal-title');
+            const modalImage = modal.querySelector('.blog-image');
+            const modalName = modal.querySelector('.blog-name');
+            const modalDescription = modal.querySelector('.blog-description');
+            const modalPublishDate = modal.querySelector('.publish-date');
+            const modalAuthor = modal.querySelector('.author');
+            const modalSubject = modal.querySelector('.subject');
+            const modalIntroduction = modal.querySelector('.blog-introduction');
+            const modalHighlights = modal.querySelector('.blog-highlights');
+            const modalKeyPoints = modal.querySelector('.key-points');
+            const modalTravelTips = modal.querySelector('.travel-tips');
+            const modalConclusion = modal.querySelector('.blog-conclusion');
+
+            modalTitle.textContent = blog.name;
+            modalImage.src = blog.image;
+            modalImage.alt = blog.name;
+            modalName.textContent = blog.name;
+            modalDescription.textContent = blog.description;
+            modalPublishDate.textContent = blog.publishDate;
+            modalAuthor.textContent = blog.author;
+            modalSubject.textContent = blog.subject;
+            modalIntroduction.textContent = blog.introduction;
+            modalHighlights.textContent = blog.highlights;
+            modalKeyPoints.innerHTML = blog.keyPoints.map(point => 
+                `<li><i class="fas fa-check-circle"></i> ${point}</li>`
+            ).join('');
+            modalTravelTips.innerHTML = blog.travelTips.map(tip => 
+                `<li><i class="fas fa-check-circle"></i> ${tip}</li>`
+            ).join('');
+            modalConclusion.textContent = blog.conclusion;
+
+            const modalInstance = new bootstrap.Modal(modal);
+            modalInstance.show();
+        }
+
+        // Add click event listeners to all Read More buttons
+        function addClickListeners() {
+            document.querySelectorAll('.blog-card .btn').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const blogId = this.closest('.blog-card').dataset.blog;
+                    openBlogModal(blogId);
+                });
+            });
+        }
+
+        addClickListeners();
+
+        // Handle image preview for add blog modal
+        document.getElementById('blogImage').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById('blogImagePreview');
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Handle form submission for adding a new blog
+        document.getElementById('addBlogForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const title = document.getElementById('blogTitle').value;
+            const subject = document.getElementById('blogSubject').value;
+            const imageFile = document.getElementById('blogImage').files[0];
+            const description = document.getElementById('blogContent').value;
+
+            if (!title || !subject || !imageFile || !description) {
+                alert('Please fill in all fields.');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const imageUrl = e.target.result;
+                const blogId = 'blog-' + Date.now(); // Unique ID for the new blog
+
+                // Add new blog to the blogs object
+                blogs[blogId] = {
+                    name: title,
+                    image: imageUrl,
+                    description: description,
+                    publishDate: new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
+                    author: 'User',
+                    subject: subject,
+                    introduction: `This blog, ${title}, dives into the fascinating world of ${subject.toLowerCase()}. Whether you're a seasoned traveler or a curious explorer, this guide offers insights and tips to enhance your journey.`,
+                    highlights: `Explore key aspects of ${subject.toLowerCase()} through this user-submitted blog. Learn about unique experiences, practical advice, and personal anecdotes that make this topic so captivating.`,
+                    keyPoints: [
+                        `Discover the essence of ${subject.toLowerCase()}.`,
+                        `Learn practical tips for your journey.`,
+                        `Understand the cultural significance of this topic.`,
+                        `Find inspiration for your next adventure.`,
+                        `Connect with the author’s personal experiences.`
+                    ],
+                    travelTips: [
+                        'Always research local customs before traveling.',
+                        'Pack according to the climate and activities.',
+                        'Engage with locals for authentic experiences.',
+                        'Keep a journal to document your journey.',
+                        'Stay open to unexpected adventures.'
+                    ],
+                    conclusion: `Exploring ${subject.toLowerCase()} through this blog offers a fresh perspective on travel. Let this guide inspire your next adventure and deepen your appreciation for India’s diverse culture.`
+                };
+
+                // Create new blog card
+                const blogContainer = document.getElementById('blogContainer');
+                const newBlogCard = document.createElement('div');
+                newBlogCard.className = 'col-md-4 mb-4';
+                newBlogCard.innerHTML = `
+                    <div class="card blog-card" data-blog="${blogId}">
+                        <img src="${imageUrl}" class="card-img-top" alt="${title}">
+                        <div class="card-body">
+                            <div class="card-meta">
+                                <i class="far fa-calendar-alt"></i> ${blogs[blogId].publishDate}
+                                <i class="far fa-user ml-2"></i> ${blogs[blogId].author}
+                            </div>
+                            <h5 class="card-title">${title}</h5>
+                            <p class="card-text">${description}</p>
+                            <a href="#" class="btn mt-auto">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                `;
+                blogContainer.appendChild(newBlogCard);
+
+                // Re-attach click listeners to include the new blog
+                addClickListeners();
+
+                // Close the modal and reset the form
+                const addBlogModal = bootstrap.Modal.getInstance(document.getElementById('addBlogModal'));
+                addBlogModal.hide();
+                document.getElementById('addBlogForm').reset();
+                document.getElementById('blogImagePreview').style.display = 'none';
+            };
+            reader.readAsDataURL(imageFile);
+        });
+    </script>
+{% endblock %}
