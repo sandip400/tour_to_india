@@ -151,19 +151,10 @@ urlpatterns = [
 
     path('about/', about, name="about"),
     path('contact/', contact, name="contact"),
-    path('mylocation/', mylocation, name="mylocation"),
     
     
     path('recom/',recom, name='recom'),
-    path('arvr/',arvr, name='arvr'),
     path('signup/',signup, name='signup'),
-    
-    path('bookings/',bookings, name='bookings'),
-    path('bookbus/',bookbus, name='bookbus'),
-    path('bookcab/',bookcab, name='bookcab'),
-    path('bookflights/',bookflights, name='bookflights'),
-    path('bookhotels/',bookhotels, name='bookhotels'),
-    path('booktrain/',booktrain, name='booktrain'),
 
     path('culture/',culture, name='culture'),
     path('adventure_tourism/',adventure_tourism, name='adventure_tourism'),
@@ -177,10 +168,7 @@ urlpatterns = [
 
     path('Blog/',Blog, name='Blog'),
     path('Gallery/',Gallery, name='Gallery'),
-    path('shopping/',shopping, name='shopping'),
     path('weather/',weather, name='weather'),
-    path('AI_trip/',AI_trip, name='AI_trip'),
-    path('crimenew/',crimenew, name='crimenew'),
     path('guidenew/',guidenew, name='guidenew'),
     path('seasonvisit/',seasonvisit, name='seasonvisit'),
     path('guideprofile/',guideprofile, name='guideprofile'),

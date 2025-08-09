@@ -637,31 +637,13 @@
                     </li> 
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'AI_trip' %}">AI trip</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'crimenew' %}">CrimeRepo</a>
-                    </li> 
-                    <li class="nav-item">
                         <a class="nav-link" href="{% url 'seasonvisit' %}">Season Visit</a>
                     </li>
 
-                    {% comment %} <li class="nav-item">
-                        <a class="nav-link" href="{% url 'arvr' %}">AR/VR</a>
-                    </li> {% endcomment %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'guidenew' %}">Guide</a>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'mylocation' %}">GPS</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'bookings' %}">Booking</a>
-                    </li>
-                    {% comment %} <li class="nav-item">
-                        <a class="nav-link" href="{% url 'shopping' %}">Shopping</a>
-                    </li>  {% endcomment %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'about' %}">About</a>
                     </li>
@@ -704,9 +686,9 @@
                     <h5>Explore</h5>
                     <ul class="footer-links">
                         <li><a href="/">HOME</a></li>
-                        <li><a href="{% url 'arvr' %}">AR VR Experience</a></li>
+                        {% comment %} <li><a href="{% url 'arvr' %}">AR VR Experience</a></li>
                         <li><a href="{% url 'AI_trip' %}">AI TRIP PLANNER</a></li>
-                        <li><a href="{% url 'mylocation' %}">GPS TRACKING</a></li>
+                        <li><a href="{% url 'mylocation' %}">GPS TRACKING</a></li> {% endcomment %}
                         <li><a href="{% url 'allmap' %}">ALL MAPS</a></li>
                         <li><a href="{% url 'clickablemap' %}">CLICKABLE MAP</a></li>
                     </ul>
@@ -714,8 +696,8 @@
                 <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
                     <h5>Information</h5>
                     <ul class="footer-links">
-                        <li><a href="{% url 'bookings' %}">BOOKING</a></li>
-                        <li><a href="{% url 'shopping' %}">SHOPPING</a></li>
+                        {% comment %} <li><a href="{% url 'bookings' %}">BOOKING</a></li>
+                        <li><a href="{% url 'shopping' %}">SHOPPING</a></li> {% endcomment %}
                         <li><a href="{% url 'about' %}">ABOUT</a></li>
                         <li><a href="{% url 'Blog' %}">BLOG</a></li>
                         <li><a href="{% url 'Gallery' %}">GALLERY</a></li>
